@@ -12,7 +12,7 @@ const markets = [
   {
     icon: Factory,
     title: "End Users",
-    subtitle: "Mandated Adoption",
+    subtitle: "Push to Agencies",
     benefits: ["Cleaner invoices", "Faster dispute resolution", "Audit-ready proof"],
   },
   {

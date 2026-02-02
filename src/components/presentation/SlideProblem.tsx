@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { AlertTriangle, Users, Receipt, Clock, UserMinus, HelpCircle } from "lucide-react";
+import { AlertTriangle, Users, Receipt, Clock, HelpCircle } from "lucide-react";
 import Slide from "./Slide";
 
 const problemItems = [
@@ -7,7 +7,6 @@ const problemItems = [
   { icon: AlertTriangle, text: "Clients challenge invoices" },
   { icon: Receipt, text: "Agencies issue credit notes" },
   { icon: Clock, text: "Finance re-verifies data" },
-  { icon: UserMinus, text: "Recruiters absorb damage" },
   { icon: Users, text: "Workers disengage & churn" },
 ];
 
@@ -28,9 +27,8 @@ const SlideProblem = () => {
           </h2>
         </motion.div>
 
-        {/* Main content - simplified two column */}
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Left: Problem list */}
+        {/* Main content - single column, centered */}
+        <div className="max-w-2xl">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -52,36 +50,6 @@ const SlideProblem = () => {
                   <span className="text-base text-foreground font-medium">{item.text}</span>
                 </motion.div>
               ))}
-            </div>
-          </motion.div>
-
-          {/* Right: Quote and result */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-col justify-center h-full"
-          >
-            <div className="p-8 rounded-2xl bg-card border border-border card-glow">
-              <p className="text-xl md:text-2xl text-foreground font-medium italic leading-relaxed">
-                "What actually happened, and can we prove it?"
-              </p>
-              <div className="mt-6 pt-6 border-t border-border">
-                <p className="text-sm uppercase tracking-wider text-primary font-semibold mb-3">The Result</p>
-                <div className="flex flex-wrap gap-2">
-                  {["Margin leakage", "Cash delay", "Workforce attrition", "Erosion of trust"].map((item, i) => (
-                    <motion.span
-                      key={i}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.5 + i * 0.1 }}
-                      className="px-3 py-1.5 rounded-full bg-destructive/10 text-destructive text-sm font-medium"
-                    >
-                      {item}
-                    </motion.span>
-                  ))}
-                </div>
-              </div>
             </div>
           </motion.div>
         </div>

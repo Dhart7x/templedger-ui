@@ -25,7 +25,7 @@ const SlideCompetition = () => {
         >
           <span className="text-primary font-medium text-sm uppercase tracking-wider">Competitive Positioning</span>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-2">
-            Temp Ledger vs DW.I.G.H.T <span className="text-muted-foreground font-normal">(RPA)</span>
+            Temp Ledger vs D.W.I.G.H.T <span className="text-muted-foreground font-normal">(RPA)</span>
           </h2>
         </motion.div>
 
@@ -41,7 +41,7 @@ const SlideCompetition = () => {
               <TableRow className="border-border hover:bg-transparent">
                 <TableHead className="text-foreground font-semibold text-base w-[50%]">Capability</TableHead>
                 <TableHead className="text-center text-foreground font-semibold text-base w-[25%]">Temp Ledger</TableHead>
-                <TableHead className="text-center text-foreground font-semibold text-base w-[25%]">DW.I.G.H.T</TableHead>
+                <TableHead className="text-center text-foreground font-semibold text-base w-[25%]">D.W.I.G.H.T</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

@@ -2,12 +2,6 @@ import { motion } from "framer-motion";
 import { Shield, Link, CheckCircle2 } from "lucide-react";
 import Slide from "./Slide";
 
-const transformations = [
-  { from: "Pay queries", to: "Resolvable facts" },
-  { from: "Invoice disputes", to: "Auditable records" },
-  { from: "Credit notes", to: "Preventable events" },
-  { from: "Uncertainty", to: "Confidence-driven" },
-];
 
 const SlideSolution = () => {
   return (
@@ -54,20 +48,6 @@ const SlideSolution = () => {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-          className="grid grid-cols-4 gap-3"
-        >
-          {transformations.map((item, index) => (
-            <div key={index} className="text-center p-3 rounded-lg bg-card/50 border border-border">
-              <div className="text-xs text-muted-foreground line-through mb-1">{item.from}</div>
-              <div className="text-base text-muted-foreground/50">↓</div>
-              <div className="text-xs text-primary font-semibold">{item.to}</div>
-            </div>
-          ))}
-        </motion.div>
       </div>
     </Slide>
   );
