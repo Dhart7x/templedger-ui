@@ -1,52 +1,49 @@
 import { motion } from "framer-motion";
 import { Wallet, Scale, Database, TrendingUp } from "lucide-react";
+import Slide from "./Slide";
 
 const adjacentTo = [
   { icon: Wallet, label: "Payments" },
   { icon: Scale, label: "Audit & Compliance" },
-  { icon: Database, label: "Financial Data & Risk Systems" },
+  { icon: Database, label: "Financial Data" },
 ];
 
 const SlideExit = () => {
   return (
-    <section className="slide-section relative">
-      <div className="max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <span className="text-primary font-medium text-sm uppercase tracking-wider">Exit Profile</span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 mb-6">
-            Infrastructure-Grade Positioning
-          </h2>
-        </motion.div>
-
+    <Slide className="relative">
+      <div className="max-w-5xl mx-auto w-full text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-12"
+          transition={{ duration: 0.6 }}
+          className="mb-8"
         >
-          <h3 className="text-xl font-semibold mb-6 text-center text-muted-foreground">Adjacent to:</h3>
-          <div className="grid md:grid-cols-3 gap-6">
+          <span className="text-primary font-medium text-sm uppercase tracking-wider">Exit Profile</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2">
+            Infrastructure-Grade
+          </h2>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-8"
+        >
+          <h3 className="text-sm font-semibold mb-4 text-muted-foreground uppercase tracking-wider">Adjacent to:</h3>
+          <div className="grid md:grid-cols-3 gap-4 max-w-2xl mx-auto">
             {adjacentTo.map((item, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                className="p-6 rounded-xl bg-card border border-border text-center hover:border-primary/30 transition-all"
+                className="p-5 rounded-xl bg-card border border-border text-center hover:border-primary/30 transition-all"
               >
-                <div className="w-12 h-12 rounded-lg trust-gradient flex items-center justify-center mx-auto mb-4">
-                  <item.icon className="w-6 h-6 text-foreground" />
+                <div className="w-10 h-10 rounded-lg trust-gradient flex items-center justify-center mx-auto mb-3">
+                  <item.icon className="w-5 h-5 text-foreground" />
                 </div>
-                <span className="font-medium text-foreground">{item.label}</span>
-              </motion.div>
+                <span className="text-sm font-medium text-foreground">{item.label}</span>
+              </div>
             ))}
           </div>
         </motion.div>
@@ -55,21 +52,21 @@ const SlideExit = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="p-8 md:p-12 rounded-2xl bg-gradient-to-br from-card to-secondary/30 border border-border text-center"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="p-8 rounded-2xl bg-gradient-to-br from-card to-secondary/30 border border-border"
         >
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <TrendingUp className="w-8 h-8 text-accent" />
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <TrendingUp className="w-6 h-6 text-accent" />
           </div>
-          <div className="text-5xl md:text-6xl font-bold trust-gradient bg-clip-text text-transparent mb-4">
+          <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-3">
             8×–15× ARR
           </div>
-          <p className="text-muted-foreground text-lg">
-            Expected exit multiples, with upside if positioned as <span className="text-foreground">finance-grade labour integrity infrastructure</span> rather than staffing tech.
+          <p className="text-sm text-muted-foreground max-w-lg mx-auto">
+            Expected exit multiples, with upside as <span className="text-foreground">finance-grade labour integrity infrastructure</span>.
           </p>
         </motion.div>
       </div>
-    </section>
+    </Slide>
   );
 };
 
