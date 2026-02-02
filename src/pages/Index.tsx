@@ -12,19 +12,21 @@ import SlidePricing from "@/components/presentation/SlidePricing";
 import SlideDefensibility from "@/components/presentation/SlideDefensibility";
 import SlideExit from "@/components/presentation/SlideExit";
 import SlideConclusion from "@/components/presentation/SlideConclusion";
+import SlideDemo from "@/components/presentation/SlideDemo";
 
 const slides = [
   { id: 0, component: SlideHero },
   { id: 1, component: SlideProblem },
   { id: 2, component: SlideSolution },
-  { id: 3, component: SlideChain },
-  { id: 4, component: SlideAI },
-  { id: 5, component: SlideCompetition },
-  { id: 6, component: SlideGTM },
-  { id: 7, component: SlidePricing },
-  { id: 8, component: SlideDefensibility },
-  { id: 9, component: SlideExit },
-  { id: 10, component: SlideConclusion },
+  { id: 3, component: SlideDemo },
+  { id: 4, component: SlideChain },
+  { id: 5, component: SlideAI },
+  { id: 6, component: SlideCompetition },
+  { id: 7, component: SlideGTM },
+  { id: 8, component: SlidePricing },
+  { id: 9, component: SlideDefensibility },
+  { id: 10, component: SlideExit },
+  { id: 11, component: SlideConclusion },
 ];
 
 const Index = () => {
