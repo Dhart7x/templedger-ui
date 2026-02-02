@@ -6,6 +6,7 @@ import SlideProblem from "@/components/presentation/SlideProblem";
 import SlideSolution from "@/components/presentation/SlideSolution";
 import SlideChain from "@/components/presentation/SlideChain";
 import SlideAI from "@/components/presentation/SlideAI";
+import SlideCompetition from "@/components/presentation/SlideCompetition";
 import SlideGTM from "@/components/presentation/SlideGTM";
 import SlidePricing from "@/components/presentation/SlidePricing";
 import SlideDefensibility from "@/components/presentation/SlideDefensibility";
@@ -18,11 +19,12 @@ const slides = [
   { id: 2, component: SlideSolution },
   { id: 3, component: SlideChain },
   { id: 4, component: SlideAI },
-  { id: 5, component: SlideGTM },
-  { id: 6, component: SlidePricing },
-  { id: 7, component: SlideDefensibility },
-  { id: 8, component: SlideExit },
-  { id: 9, component: SlideConclusion },
+  { id: 5, component: SlideCompetition },
+  { id: 6, component: SlideGTM },
+  { id: 7, component: SlidePricing },
+  { id: 8, component: SlideDefensibility },
+  { id: 9, component: SlideExit },
+  { id: 10, component: SlideConclusion },
 ];
 
 const Index = () => {
