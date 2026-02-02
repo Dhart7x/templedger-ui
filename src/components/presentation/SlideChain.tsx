@@ -20,42 +20,36 @@ const chainSteps = [
 const SlideChain = () => {
   return (
     <Slide className="relative overflow-hidden">
-      <div className="max-w-6xl mx-auto w-full">
+      <div className="max-w-5xl mx-auto w-full">
         <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-8"
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-6"
         >
           <span className="text-primary font-medium text-sm uppercase tracking-wider">The Process</span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2 mb-2">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-2 mb-2">
             Verified Chain of Events
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base text-muted-foreground">
             Each step timestamped, attributed, immutably linked — shift to invoice.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-4 md:grid-cols-6 gap-3">
+        <div className="grid grid-cols-4 md:grid-cols-6 gap-2">
           {chainSteps.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="relative p-4 rounded-xl bg-card border border-border hover:border-primary/30 transition-all text-center"
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, delay: index * 0.04 }}
+              className="relative p-3 rounded-lg bg-card border border-border hover:border-primary/30 transition-all text-center"
             >
-              <div className="w-10 h-10 rounded-lg trust-gradient flex items-center justify-center mx-auto mb-2">
-                <item.icon className="w-5 h-5 text-foreground" />
+              <div className="w-8 h-8 rounded-md trust-gradient flex items-center justify-center mx-auto mb-1.5">
+                <item.icon className="w-4 h-4 text-foreground" />
               </div>
-              <div className="text-xs text-primary font-bold mb-1">{item.step}</div>
-              <div className="text-xs font-medium text-muted-foreground leading-tight">{item.title}</div>
-              
-              {index < chainSteps.length - 1 && index % 6 !== 5 && (
-                <div className="absolute top-1/2 -right-2 w-4 h-px bg-gradient-to-r from-primary/50 to-transparent hidden md:block" />
-              )}
+              <div className="text-xs text-primary font-bold mb-0.5">{item.step}</div>
+              <div className="text-[10px] font-medium text-muted-foreground leading-tight">{item.title}</div>
             </motion.div>
           ))}
         </div>
