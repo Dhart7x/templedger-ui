@@ -1,20 +1,6 @@
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-interface Client {
-  id: string;
-  name: string;
-  agencies: number;
-  status: "green" | "amber" | "red";
-}
-
-const clients: Client[] = [
-  { id: "1", name: "DO&CO", agencies: 3, status: "green" },
-  { id: "2", name: "DHL", agencies: 2, status: "green" },
-  { id: "3", name: "ID LOGISTICS", agencies: 4, status: "amber" },
-  { id: "4", name: "BOMBAY HALWA", agencies: 1, status: "green" },
-  { id: "5", name: "DSI FOODS", agencies: 2, status: "red" },
-];
+import { clients, type Client } from "./demoData";
 
 interface DemoClientsViewProps {
   onSelectClient: (client: Client) => void;
@@ -74,4 +60,3 @@ const DemoClientsView = ({ onSelectClient }: DemoClientsViewProps) => {
 };
 
 export default DemoClientsView;
-export type { Client };

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeft, Send, Download, Check, AlertTriangle, X } from "lucide-react";
+import { ArrowLeft, Send, Download, Check, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { Client } from "./DemoClientsView";
+import { type Client, workers as allWorkers, weekOptions } from "./demoData";
 
 interface Worker {
   id: string;
@@ -71,7 +71,7 @@ interface DemoClientDetailProps {
 
 const DemoClientDetail = ({ client, onBack, onSendAudit }: DemoClientDetailProps) => {
   const [selectedWorker, setSelectedWorker] = useState<Worker | null>(workers[2]);
-  const [selectedWeek, setSelectedWeek] = useState("week3");
+  const [selectedWeek, setSelectedWeek] = useState(weekOptions[2].value);
 
   const approvedCount = workers.filter((w) => w.status === "approved").length;
   const overrideCount = workers.filter((w) => w.status === "override").length;
@@ -101,9 +101,9 @@ const DemoClientDetail = ({ client, onBack, onSendAudit }: DemoClientDetailProps
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="bg-card border-border">
-              <SelectItem value="week1">Week ending 07 Apr 2026</SelectItem>
-              <SelectItem value="week2">Week ending 14 Apr 2026</SelectItem>
-              <SelectItem value="week3">Week ending 21 Apr 2026</SelectItem>
+              {weekOptions.map((w) => (
+                <SelectItem key={w.value} value={w.value}>{w.label}</SelectItem>
+              ))}
             </SelectContent>
           </Select>
           <Button variant="outline" size="sm" className="h-8 text-xs" onClick={onSendAudit}>

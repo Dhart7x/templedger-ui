@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
-import type { Client } from "./DemoClientsView";
+import type { Client } from "./demoData";
 
 interface DemoAuditModalProps {
   open: boolean;
