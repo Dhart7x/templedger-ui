@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import DemoSidebar from "./demo/DemoSidebar";
-import DemoClientsView, { type Client } from "./demo/DemoClientsView";
+import DemoClientsView from "./demo/DemoClientsView";
 import DemoClientDetail from "./demo/DemoClientDetail";
 import DemoAuditModal from "./demo/DemoAuditModal";
+import DemoAuditLogView from "./demo/DemoAuditLogView";
+import DemoExceptionsView from "./demo/DemoExceptionsView";
+import DemoReportsView from "./demo/DemoReportsView";
+import DemoSettingsView from "./demo/DemoSettingsView";
+import { type Client } from "./demo/demoData";
 
 const SlideDemo = () => {
   const [showDemo, setShowDemo] = useState(false);
@@ -27,6 +32,13 @@ const SlideDemo = () => {
     setShowDemo(false);
     setSelectedClient(null);
     setActiveView("clients");
+  };
+
+  const handleNavigateToWorker = (workerId: string, clientId: string) => {
+    // Navigate to clients view and select the relevant client
+    const client = { id: clientId, name: "", agencies: 0, status: "green" as const };
+    setActiveView("clients");
+    setSelectedClient(client);
   };
 
   if (!showDemo) {
@@ -56,6 +68,45 @@ const SlideDemo = () => {
     );
   }
 
+  const renderActiveView = () => {
+    switch (activeView) {
+      case "clients":
+        if (selectedClient) {
+          return (
+            <DemoClientDetail
+              client={selectedClient}
+              onBack={handleBack}
+              onSendAudit={handleSendAudit}
+            />
+          );
+        }
+        return <DemoClientsView onSelectClient={handleSelectClient} />;
+      
+      case "audit":
+        return <DemoAuditLogView onNavigateToWorker={handleNavigateToWorker} />;
+      
+      case "exceptions":
+        return <DemoExceptionsView />;
+      
+      case "reports":
+        return <DemoReportsView />;
+      
+      case "settings":
+        return <DemoSettingsView />;
+      
+      default:
+        return (
+          <div className="flex-1 flex items-center justify-center">
+            <div className="text-center">
+              <div className="text-muted-foreground text-sm mb-1">
+                {activeView.charAt(0).toUpperCase() + activeView.slice(1)} View
+              </div>
+            </div>
+          </div>
+        );
+    }
+  };
+
   return (
     <div className="w-full h-full flex flex-col bg-background">
       {/* Demo Header */}
@@ -83,37 +134,17 @@ const SlideDemo = () => {
         className="flex-1 flex overflow-hidden m-4 rounded-lg border border-border shadow-xl"
       >
         <DemoSidebar activeView={activeView} onViewChange={setActiveView} />
-        
-        {activeView === "clients" && !selectedClient && (
-          <DemoClientsView onSelectClient={handleSelectClient} />
-        )}
-        
-        {activeView === "clients" && selectedClient && (
-          <DemoClientDetail
-            client={selectedClient}
-            onBack={handleBack}
-            onSendAudit={handleSendAudit}
-          />
-        )}
-
-        {activeView !== "clients" && (
-          <div className="flex-1 flex items-center justify-center">
-            <div className="text-center">
-              <div className="text-muted-foreground text-sm mb-1">
-                {activeView.charAt(0).toUpperCase() + activeView.slice(1)} View
-              </div>
-              <div className="text-xs text-muted-foreground/60">
-                Click "Clients" to explore the demo
-              </div>
-            </div>
-          </div>
-        )}
+        {renderActiveView()}
       </motion.div>
 
       {/* Hint */}
       <div className="text-center pb-3">
         <span className="text-xs text-muted-foreground">
-          Click on clients and workers to explore the audit workflow
+          {activeView === "clients" && "Click on clients and workers to explore the audit workflow"}
+          {activeView === "audit" && "Click on events to view details and linked chain context"}
+          {activeView === "exceptions" && "Click on exceptions to open the resolution workflow"}
+          {activeView === "reports" && "Click on reports to view trends and drill-down data"}
+          {activeView === "settings" && "Configure users, rules, approvals, and integrations"}
         </span>
       </div>
 
