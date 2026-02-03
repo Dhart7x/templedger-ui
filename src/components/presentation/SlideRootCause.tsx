@@ -10,7 +10,7 @@ const problemItems = [
   },
   { 
     icon: Layers, 
-    title: "Data orchestration between departments is manual and error-prone",
+    title: "Data Orchestration between departments is manual and error prone",
     description: "HR, Payroll, Billing, Credit Control operate in silo."
   },
   { 
