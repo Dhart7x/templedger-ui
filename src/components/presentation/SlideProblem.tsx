@@ -14,12 +14,12 @@ const SlideProblem = () => {
   return (
     <Slide className="relative">
       <div className="max-w-5xl mx-auto w-full">
-        {/* Header */}
+        {/* Header - Centered at top */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-10"
+          className="text-center mb-8"
         >
           <span className="text-primary font-medium text-sm uppercase tracking-wider">The Problem</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2">
@@ -27,14 +27,14 @@ const SlideProblem = () => {
           </h2>
         </motion.div>
 
-        {/* Main content - single column, centered */}
-        <div className="max-w-2xl">
+        {/* Main content - centered */}
+        <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h3 className="text-lg font-semibold mb-6 text-foreground">Every week:</h3>
+            <h3 className="text-lg font-semibold mb-6 text-foreground text-center">Every week:</h3>
             <div className="space-y-3">
               {problemItems.map((item, index) => (
                 <motion.div
