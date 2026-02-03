@@ -21,7 +21,7 @@ const SlideProblem = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-8"
         >
-          <span className="text-primary font-medium text-sm uppercase tracking-wider">The Problem</span>
+          <span className="text-primary font-medium text-sm uppercase tracking-wider">The Symptoms</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2">
             Staffing Agencies Hate Fridays...
           </h2>
