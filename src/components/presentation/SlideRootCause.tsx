@@ -1,32 +1,22 @@
 import { motion } from "framer-motion";
-import { Database, Layers, ArrowRightLeft, CheckCircle, AlertCircle } from "lucide-react";
+import { Database, Layers, AlertCircle } from "lucide-react";
 import Slide from "./Slide";
 
 const problemItems = [
   { 
     icon: Database, 
-    title: "CRMs store data but don't execute",
-    description: "They record information, but don't control what happens next."
+    title: "CRMs store data — they don't execute",
+    description: "Information exists, but nothing enforces what must happen next."
   },
   { 
     icon: Layers, 
-    title: "Compliance, payroll, and billing operate in silos",
-    description: "Each function runs independently, with no enforced coordination."
-  },
-  { 
-    icon: ArrowRightLeft, 
-    title: "No enforced sequence from hours to pay to invoice",
-    description: "Events happen out of order, or without dependency."
-  },
-  { 
-    icon: CheckCircle, 
-    title: "Approvals are disconnected from downstream consequences",
-    description: "What gets approved isn't always what gets paid or billed."
+    title: "HR, Payroll, Billing, and Credit Control operate in silos",
+    description: "Each function runs independently, without coordination."
   },
   { 
     icon: AlertCircle, 
-    title: "Truth is reconstructed after failure",
-    description: "By the time someone checks, trust is already lost."
+    title: "Problems are discovered after the fact",
+    description: "Issues surface only when workers complain or invoices are challenged."
   },
 ];
 
