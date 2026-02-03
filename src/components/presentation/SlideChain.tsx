@@ -18,14 +18,14 @@ const chainSteps = [
 ];
 
 const bulletPoints = [
-  { action: "Eligibility is enforced first", detail: "A worker cannot be scheduled unless compliance and right-to-work checks are complete." },
-  { action: "Work cannot be approved unless it actually happened", detail: "Clock-in/out data must exist before hours can move forward." },
-  { action: "Client approval is a required gate", detail: "Hours cannot progress to payroll or billing without explicit approval." },
-  { action: "Pay and charge rates are validated automatically", detail: "Overtime, premiums, and exceptions are checked against agreed terms." },
-  { action: "Pay queries are resolved in-flow", detail: "Discrepancies are routed to the correct team and resolved with named human approval." },
-  { action: "Nothing is paid or billed until exceptions are closed", detail: "No silent fixes, no downstream surprises." },
-  { action: "Every decision is attributed and logged", detail: "Who approved what, when, and why — permanently." },
-  { action: "Invoices are issued with full backup by default", detail: "Approved hours, exceptions, and approvals travel together." },
+  "Eligibility first — no compliance, no scheduling",
+  "No hours, no approval",
+  "No approval, no pay or invoice",
+  "Rates checked automatically",
+  "Exceptions resolved before anything moves",
+  "Every decision logged",
+  "Invoices sent with full backup",
+  "Credit control workflow initiated",
 ];
 
 const SlideChain = () => {
@@ -64,25 +64,20 @@ const SlideChain = () => {
           ))}
         </motion.div>
 
-        {/* Bullet Points - Two columns on desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-2 max-w-5xl mx-auto">
+        {/* Bullet Points - Two columns */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 max-w-4xl mx-auto">
           {bulletPoints.map((point, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
-              className="flex items-start gap-2 p-1.5 md:p-2 rounded-lg bg-card/50 border border-border/50"
+              className="flex items-center gap-2 p-2 md:p-3 rounded-lg bg-card/50 border border-border/50"
             >
-              <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-primary mt-1.5 md:mt-2 flex-shrink-0" />
-              <div>
-                <span className="text-[10px] md:text-xs font-medium text-foreground leading-tight block">
-                  {point.action}
-                </span>
-                <span className="text-[8px] md:text-[10px] text-muted-foreground leading-tight hidden md:block">
-                  {point.detail}
-                </span>
-              </div>
+              <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+              <span className="text-[10px] md:text-xs font-medium text-foreground leading-tight">
+                {point}
+              </span>
             </motion.div>
           ))}
         </div>
