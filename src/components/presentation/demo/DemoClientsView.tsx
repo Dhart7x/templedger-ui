@@ -23,7 +23,7 @@ const DemoClientsView = ({ onSelectClient }: DemoClientsViewProps) => {
       <div className="bg-card border border-border rounded-lg overflow-hidden">
         <div className="grid grid-cols-[1fr,120px,180px,40px] gap-4 px-4 py-3 border-b border-border bg-muted/30 text-xs font-medium text-muted-foreground uppercase tracking-wide">
           <span>Client</span>
-          <span>Agencies</span>
+          <span>Temps</span>
           <span>Week Status</span>
           <span></span>
         </div>
@@ -34,7 +34,7 @@ const DemoClientsView = ({ onSelectClient }: DemoClientsViewProps) => {
             className="w-full grid grid-cols-[1fr,120px,180px,40px] gap-4 px-4 py-3 border-b border-border last:border-0 hover:bg-muted/50 transition-colors text-left items-center"
           >
             <span className="font-medium text-foreground">{client.name}</span>
-            <span className="text-sm text-muted-foreground">{client.agencies} active</span>
+            <span className="text-sm text-muted-foreground">{client.temps} deployed</span>
             <span
               className={cn(
                 "inline-flex items-center px-2 py-1 rounded text-xs font-medium w-fit",
