@@ -23,7 +23,7 @@ const SlideProblem = () => {
         >
           <span className="text-primary font-medium text-sm uppercase tracking-wider">The Problem</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2">
-            Temporary staffing fails <span className="text-muted-foreground">quietly.</span>
+            Staffing Agencies Hate Fridays...
           </h2>
         </motion.div>
 
