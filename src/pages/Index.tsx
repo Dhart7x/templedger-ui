@@ -2,7 +2,8 @@ import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Shield } from "lucide-react";
 import SlideHero from "@/components/presentation/SlideHero";
-import SlideProblem from "@/components/presentation/SlideProblem";
+import SlideSymptoms from "@/components/presentation/SlideProblem";
+import SlideRootCause from "@/components/presentation/SlideRootCause";
 import SlideSolution from "@/components/presentation/SlideSolution";
 import SlideChain from "@/components/presentation/SlideChain";
 import SlideAI from "@/components/presentation/SlideAI";
@@ -17,18 +18,19 @@ import SlideAsk from "@/components/presentation/SlideAsk";
 
 const slides = [
   { id: 0, component: SlideHero },
-  { id: 1, component: SlideProblem },
-  { id: 2, component: SlideSolution },
-  { id: 3, component: SlideChain },
-  { id: 4, component: SlideDemo },
-  { id: 5, component: SlideAI },
-  { id: 6, component: SlideCompetition },
-  { id: 7, component: SlideGTM },
-  { id: 8, component: SlidePricing },
-  { id: 9, component: SlideDefensibility },
-  { id: 10, component: SlideExit },
-  { id: 11, component: SlideAsk },
-  { id: 12, component: SlideConclusion },
+  { id: 1, component: SlideSymptoms },
+  { id: 2, component: SlideRootCause },
+  { id: 3, component: SlideSolution },
+  { id: 4, component: SlideChain },
+  { id: 5, component: SlideDemo },
+  { id: 6, component: SlideAI },
+  { id: 7, component: SlideCompetition },
+  { id: 8, component: SlideGTM },
+  { id: 9, component: SlidePricing },
+  { id: 10, component: SlideDefensibility },
+  { id: 11, component: SlideExit },
+  { id: 12, component: SlideAsk },
+  { id: 13, component: SlideConclusion },
 ];
 
 const Index = () => {
