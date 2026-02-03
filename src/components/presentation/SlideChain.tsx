@@ -3,216 +3,103 @@ import { UserCheck, FileCheck, FileSignature, CreditCard, Calendar, Clock, UserC
 import Slide from "./Slide";
 
 const chainSteps = [
-  { icon: UserCheck, title: "Candidate registered" },
-  { icon: FileCheck, title: "Right to work verified" },
-  { icon: FileSignature, title: "Contract accepted" },
-  { icon: CreditCard, title: "Bank details validated" },
-  { icon: Calendar, title: "Shift scheduled" },
-  { icon: Clock, title: "Clock-in/out recorded" },
-  { icon: UserCircle, title: "Manager approval" },
-  { icon: Calculator, title: "Overtime validated" },
-  { icon: CheckCircle, title: "Payroll approved" },
-  { icon: Wallet, title: "Pay executed" },
-  { icon: Percent, title: "Charge rate applied" },
-  { icon: FileText, title: "Invoice with provenance" },
+  { icon: UserCheck, title: "Registered" },
+  { icon: FileCheck, title: "Verified" },
+  { icon: FileSignature, title: "Contract" },
+  { icon: CreditCard, title: "Bank" },
+  { icon: Calendar, title: "Scheduled" },
+  { icon: Clock, title: "Clocked" },
+  { icon: UserCircle, title: "Approved" },
+  { icon: Calculator, title: "Validated" },
+  { icon: CheckCircle, title: "Payroll" },
+  { icon: Wallet, title: "Paid" },
+  { icon: Percent, title: "Charged" },
+  { icon: FileText, title: "Invoiced" },
+];
+
+const bulletPoints = [
+  { action: "Eligibility is enforced first", detail: "A worker cannot be scheduled unless compliance and right-to-work checks are complete." },
+  { action: "Work cannot be approved unless it actually happened", detail: "Clock-in/out data must exist before hours can move forward." },
+  { action: "Client approval is a required gate", detail: "Hours cannot progress to payroll or billing without explicit approval." },
+  { action: "Pay and charge rates are validated automatically", detail: "Overtime, premiums, and exceptions are checked against agreed terms." },
+  { action: "Pay queries are resolved in-flow", detail: "Discrepancies are routed to the correct team and resolved with named human approval." },
+  { action: "Nothing is paid or billed until exceptions are closed", detail: "No silent fixes, no downstream surprises." },
+  { action: "Every decision is attributed and logged", detail: "Who approved what, when, and why — permanently." },
+  { action: "Invoices are issued with full backup by default", detail: "Approved hours, exceptions, and approvals travel together." },
 ];
 
 const SlideChain = () => {
   return (
     <Slide className="relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.3 }}
-          transition={{ duration: 1 }}
-          className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent"
-        />
-      </div>
-
       <div className="max-w-6xl mx-auto w-full relative z-10">
-        {/* Header - Centered at top */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-4 md:mb-8"
+          className="text-center mb-2 md:mb-4"
         >
-          <span className="text-primary font-medium text-xs md:text-sm uppercase tracking-wider">The Process</span>
-          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mt-1 md:mt-2 mb-2 md:mb-3">
-            Verified Chain of Events
+          <span className="text-primary font-medium text-xs md:text-sm uppercase tracking-wider">How It Works</span>
+          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mt-1">
+            Controlled Execution
           </h2>
-          <p className="text-xs md:text-base text-muted-foreground max-w-xl mx-auto">
-            Each step executed, attributed, and immutably linked.
-          </p>
         </motion.div>
 
-        {/* Flowing timeline - Two rows */}
-        <div className="relative space-y-2 md:space-y-4">
-          {/* Row 1: Steps 1-6 */}
-          <div className="flex items-center justify-center flex-wrap md:flex-nowrap gap-1 md:gap-0">
-            {chainSteps.slice(0, 6).map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ 
-                  duration: 0.4, 
-                  delay: index * 0.1,
-                  type: "spring",
-                  stiffness: 100
-                }}
-                className="flex items-center"
-              >
-                {/* Step Card */}
-                <motion.div
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  className="relative flex flex-col items-center group"
-                >
-                  {/* Glow effect */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: [0.3, 0.6, 0.3] }}
-                    transition={{ 
-                      duration: 2, 
-                      repeat: Infinity, 
-                      delay: index * 0.15,
-                      ease: "easeInOut"
-                    }}
-                    className="absolute -inset-1 rounded-xl bg-primary/20 blur-md"
-                  />
-                  
-                  {/* Icon container */}
-                  <motion.div
-                    className="relative w-8 h-8 md:w-11 md:h-11 rounded-xl trust-gradient flex items-center justify-center shadow-lg shadow-primary/20 z-10"
-                  >
-                    <item.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
-                  </motion.div>
+        {/* Compact Chain - Single row */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="flex items-center justify-center gap-0.5 md:gap-1 mb-3 md:mb-6 overflow-x-auto py-1"
+        >
+          {chainSteps.map((item, index) => (
+            <div key={index} className="flex items-center">
+              <div className="w-5 h-5 md:w-7 md:h-7 rounded-md trust-gradient flex items-center justify-center shadow-sm">
+                <item.icon className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 text-foreground" />
+              </div>
+              {index < chainSteps.length - 1 && (
+                <ChevronRight className="w-2.5 h-2.5 md:w-3 md:h-3 text-primary/60 mx-0.5" />
+              )}
+            </div>
+          ))}
+        </motion.div>
 
-                  {/* Title */}
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: index * 0.1 + 0.3 }}
-                    className="mt-1 md:mt-2 text-[8px] md:text-[10px] font-medium text-center text-foreground leading-tight max-w-[50px] md:max-w-[70px]"
-                  >
-                    {item.title}
-                  </motion.p>
-                </motion.div>
-
-                {/* Arrow connector */}
-                {index < 5 && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.1 + 0.2 }}
-                    className="mx-0.5 md:mx-1 flex items-center"
-                  >
-                    <motion.div
-                      animate={{ x: [0, 3, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      <ChevronRight className="w-3 h-3 md:w-4 md:h-4 text-primary" />
-                    </motion.div>
-                  </motion.div>
-                )}
-              </motion.div>
-            ))}
-          </div>
-
-
-          {/* Row 2: Steps 7-12 */}
-          <div className="flex items-center justify-center flex-wrap md:flex-nowrap gap-1 md:gap-0">
-            {chainSteps.slice(6, 12).map((item, index) => (
-              <motion.div
-                key={index + 6}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ 
-                  duration: 0.4, 
-                  delay: 0.6 + index * 0.1,
-                  type: "spring",
-                  stiffness: 100
-                }}
-                className="flex items-center"
-              >
-                {/* Step Card */}
-                <motion.div
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  className="relative flex flex-col items-center group"
-                >
-                  {/* Glow effect */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: [0.3, 0.6, 0.3] }}
-                    transition={{ 
-                      duration: 2, 
-                      repeat: Infinity, 
-                      delay: (index + 6) * 0.15,
-                      ease: "easeInOut"
-                    }}
-                    className="absolute -inset-1 rounded-xl bg-primary/20 blur-md"
-                  />
-                  
-                  {/* Icon container */}
-                  <motion.div
-                    className="relative w-8 h-8 md:w-11 md:h-11 rounded-xl trust-gradient flex items-center justify-center shadow-lg shadow-primary/20 z-10"
-                  >
-                    <item.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
-                  </motion.div>
-
-                  {/* Title */}
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.6 + index * 0.1 + 0.3 }}
-                    className="mt-1 md:mt-2 text-[8px] md:text-[10px] font-medium text-center text-foreground leading-tight max-w-[50px] md:max-w-[70px]"
-                  >
-                    {item.title}
-                  </motion.p>
-                </motion.div>
-
-                {/* Arrow connector */}
-                {index < 5 && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.6 + index * 0.1 + 0.2 }}
-                    className="mx-0.5 md:mx-1 flex items-center"
-                  >
-                    <motion.div
-                      animate={{ x: [0, 3, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      <ChevronRight className="w-3 h-3 md:w-4 md:h-4 text-primary" />
-                    </motion.div>
-                  </motion.div>
-                )}
-              </motion.div>
-            ))}
-          </div>
+        {/* Bullet Points - Two columns on desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-2 max-w-5xl mx-auto">
+          {bulletPoints.map((point, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
+              className="flex items-start gap-2 p-1.5 md:p-2 rounded-lg bg-card/50 border border-border/50"
+            >
+              <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-primary mt-1.5 md:mt-2 flex-shrink-0" />
+              <div>
+                <span className="text-[10px] md:text-xs font-medium text-foreground leading-tight block">
+                  {point.action}
+                </span>
+                <span className="text-[8px] md:text-[10px] text-muted-foreground leading-tight hidden md:block">
+                  {point.detail}
+                </span>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Bottom tagline */}
+        {/* Bottom Line */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.3, duration: 0.5 }}
-          className="text-center mt-4 md:mt-12"
+          transition={{ delay: 0.8, duration: 0.5 }}
+          className="text-center mt-3 md:mt-6"
         >
-          <div className="inline-flex items-center gap-2 md:gap-3 px-3 md:px-5 py-1.5 md:py-2 rounded-full bg-card border border-border">
-            <motion.div 
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-accent" 
-            />
-            <span className="text-xs md:text-sm text-foreground font-medium">One immutable chain of truth</span>
-            <motion.div 
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-              className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary" 
-            />
-          </div>
+          <p className="text-xs md:text-base font-semibold text-foreground">
+            If a step isn't true, the next step can't happen.
+          </p>
+          <p className="text-[10px] md:text-sm text-muted-foreground mt-0.5 md:mt-1">
+            That's how pay queries and disputes are stopped — not managed.
+          </p>
         </motion.div>
       </div>
     </Slide>
