@@ -10,8 +10,8 @@ const problemItems = [
   },
   { 
     icon: Layers, 
-    title: "HR, Payroll, Billing, and Credit Control operate in silos",
-    description: "Each function runs independently, without coordination."
+    title: "Data orchestration between departments is manual and error-prone",
+    description: "HR, Payroll, Billing, Credit Control operate in silo."
   },
   { 
     icon: AlertCircle, 
