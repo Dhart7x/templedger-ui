@@ -34,24 +34,8 @@ const SlidePricing = () => {
         >
           <span className="text-primary font-medium text-sm uppercase tracking-wider">Pricing</span>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-2 mb-2">
-            Weekly Active Pricing — Built to Scale
+            Pricing Designed to Scale
           </h2>
-          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
-            Pricing is based on Weekly Active Workers, with built-in caps to prevent runaway costs.
-          </p>
-        </motion.div>
-
-        {/* Definition Callout */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="bg-muted/50 border border-border rounded-lg p-4 mb-6 max-w-xl mx-auto"
-        >
-          <div className="text-xs uppercase tracking-wider text-primary font-medium mb-1">Weekly Active Worker</div>
-          <p className="text-sm text-foreground">
-            Any worker paid through Temp Ledger in a given week. Each worker is billed once per week, with a hard monthly cap.
-          </p>
         </motion.div>
 
         <div className="max-w-2xl mx-auto space-y-5">
