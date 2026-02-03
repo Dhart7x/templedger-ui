@@ -14,7 +14,7 @@ export interface CreditControlDefaults {
 export interface Client {
   id: string;
   name: string;
-  agencies: number;
+  temps: number;
   status: "green" | "amber" | "red";
   creditControl?: CreditControlDefaults;
 }
@@ -112,7 +112,7 @@ export const clients: Client[] = [
   { 
     id: "1", 
     name: "DO&CO", 
-    agencies: 3, 
+    temps: 243, 
     status: "green",
     creditControl: {
       paymentTerms: 30,
@@ -126,7 +126,7 @@ export const clients: Client[] = [
   { 
     id: "2", 
     name: "DHL", 
-    agencies: 2, 
+    temps: 201, 
     status: "green",
     creditControl: {
       paymentTerms: 45,
@@ -142,7 +142,7 @@ export const clients: Client[] = [
   { 
     id: "3", 
     name: "ID LOGISTICS", 
-    agencies: 4, 
+    temps: 81, 
     status: "amber",
     creditControl: {
       paymentTerms: 30,
@@ -155,7 +155,7 @@ export const clients: Client[] = [
   { 
     id: "4", 
     name: "BOMBAY HALWA", 
-    agencies: 1, 
+    temps: 30, 
     status: "green",
     creditControl: {
       paymentTerms: 30,
@@ -168,7 +168,7 @@ export const clients: Client[] = [
   { 
     id: "5", 
     name: "DSI FOODS", 
-    agencies: 2, 
+    temps: 56, 
     status: "red",
     creditControl: {
       paymentTerms: 14,

@@ -36,7 +36,7 @@ const SlideDemo = () => {
 
   const handleNavigateToWorker = (workerId: string, clientId: string) => {
     // Navigate to clients view and select the relevant client
-    const client = { id: clientId, name: "", agencies: 0, status: "green" as const };
+    const client = { id: clientId, name: "", temps: 0, status: "green" as const };
     setActiveView("clients");
     setSelectedClient(client);
   };
