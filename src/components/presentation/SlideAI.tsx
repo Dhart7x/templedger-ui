@@ -17,17 +17,18 @@ const SlideAI = () => {
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto w-full">
+        {/* Header - Centered at top */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-6"
+          className="text-center mb-8"
         >
           <span className="text-accent font-medium text-sm uppercase tracking-wider">Intelligence</span>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-2 mb-2">
             How AI Is Applied
           </h2>
-          <p className="text-base text-muted-foreground">
+          <p className="text-base text-muted-foreground max-w-xl mx-auto">
             Reduce friction and risk, not replace human judgement.
           </p>
         </motion.div>

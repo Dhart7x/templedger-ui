@@ -8,8 +8,6 @@ const pricingModels = [
   { icon: BarChart3, title: "Risk Intelligence", price: "Premium", unit: "funder tier" },
 ];
 
-const benchmarks = ["Pay query handling", "Credit note leakage", "Verification cost", "Rehiring cost"];
-
 const SlidePricing = () => {
   return (
     <Slide className="relative overflow-hidden">
@@ -18,53 +16,38 @@ const SlidePricing = () => {
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto w-full">
+        {/* Header - Centered at top */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-6"
+          className="text-center mb-8"
         >
           <span className="text-primary font-medium text-sm uppercase tracking-wider">Pricing</span>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-2 mb-1">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-2 mb-2">
             Aligned to Cost Avoided
           </h2>
           <p className="text-base text-muted-foreground">Not features. Value.</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-4 mb-6">
+        <div className="grid md:grid-cols-3 gap-6">
           {pricingModels.map((model, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 + index * 0.1 }}
-              className="p-5 rounded-xl bg-card border border-border hover:border-primary/30 transition-all text-center"
+              className="p-6 rounded-xl bg-card border border-border hover:border-primary/30 transition-all text-center"
             >
-              <div className="w-10 h-10 rounded-lg trust-gradient flex items-center justify-center mx-auto mb-3">
-                <model.icon className="w-5 h-5 text-foreground" />
+              <div className="w-12 h-12 rounded-lg trust-gradient flex items-center justify-center mx-auto mb-4">
+                <model.icon className="w-6 h-6 text-foreground" />
               </div>
-              <h3 className="text-base font-semibold mb-1 text-foreground">{model.title}</h3>
-              <div className="text-xl font-bold text-primary mb-0.5">{model.price}</div>
-              <div className="text-xs text-muted-foreground">{model.unit}</div>
+              <h3 className="text-lg font-semibold mb-2 text-foreground">{model.title}</h3>
+              <div className="text-2xl font-bold text-primary mb-1">{model.price}</div>
+              <div className="text-sm text-muted-foreground">{model.unit}</div>
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-          className="p-4 rounded-xl bg-card/50 border border-border"
-        >
-          <h3 className="text-xs font-semibold mb-3 text-center text-muted-foreground uppercase tracking-wider">Benchmarks against:</h3>
-          <div className="grid grid-cols-4 gap-2">
-            {benchmarks.map((item, index) => (
-              <div key={index} className="p-2 rounded-md bg-secondary/50 border border-border text-center text-xs text-muted-foreground">
-                {item}
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </Slide>
   );
