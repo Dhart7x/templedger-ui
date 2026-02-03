@@ -37,16 +37,16 @@ const SlideGTM = () => {
           </h2>
         </motion.div>
 
-        {/* Two-row layout */}
+        {/* Main content */}
         <div className="space-y-4 md:space-y-6">
-          {/* Top row: Phases and Flywheel */}
-          <div className="flex items-center justify-center gap-4 md:gap-8">
-            {/* Phase 1 */}
+          {/* Top row: Phases far apart with Flywheel in center */}
+          <div className="flex items-center justify-between">
+            {/* Phase 1 - Far left */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3, delay: 0.1 }}
-              className="p-3 md:p-4 rounded-xl bg-card border border-border w-32 md:w-40"
+              className="p-3 md:p-4 rounded-xl bg-card border border-border w-28 md:w-36"
             >
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-6 h-6 rounded-lg bg-primary/20 flex items-center justify-center">
@@ -59,100 +59,70 @@ const SlideGTM = () => {
               </p>
             </motion.div>
 
-            {/* Circular Flywheel */}
+            {/* Circular Flywheel - Center */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="relative w-44 h-44 md:w-56 md:h-56 flex-shrink-0"
+              className="relative w-40 h-40 md:w-52 md:h-52 flex-shrink-0"
             >
-              {/* Outer rotating ring */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 rounded-full border-2 border-dashed border-primary/40"
-              />
-              
-              {/* Static circle track */}
-              <div className="absolute inset-4 md:inset-6 rounded-full border border-border" />
+              {/* Outer circle */}
+              <div className="absolute inset-0 rounded-full border-2 border-primary/30" />
               
               {/* Inner circle with label */}
-              <div className="absolute inset-8 md:inset-12 rounded-full bg-card border border-border flex items-center justify-center">
+              <div className="absolute inset-6 md:inset-8 rounded-full bg-card border border-border flex items-center justify-center">
                 <div className="text-center">
                   <p className="text-xs md:text-sm font-bold text-foreground">Adoption</p>
                   <p className="text-xs md:text-sm font-bold text-primary">Flywheel</p>
                 </div>
               </div>
 
-              {/* Top node - Agencies adopt */}
-              <motion.div
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 0 }}
-                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-primary text-primary-foreground shadow-lg"
-              >
+              {/* Top node - Agencies adopt (12 o'clock) */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-primary text-primary-foreground shadow-lg">
                 <span className="text-[9px] md:text-xs font-medium whitespace-nowrap">Agencies adopt</span>
-              </motion.div>
+              </div>
 
-              {/* Right node - Clients demand */}
-              <motion.div
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-accent text-accent-foreground shadow-lg"
-              >
+              {/* Bottom-right node - Clients demand (5 o'clock position) */}
+              <div className="absolute bottom-[15%] right-0 translate-x-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-accent text-accent-foreground shadow-lg">
                 <span className="text-[9px] md:text-xs font-medium whitespace-nowrap">Clients demand</span>
-              </motion.div>
+              </div>
 
-              {/* Bottom node - Lenders require */}
-              <motion.div
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-primary text-primary-foreground shadow-lg"
-              >
+              {/* Bottom-left node - Lenders require (7 o'clock position) */}
+              <div className="absolute bottom-[15%] left-0 -translate-x-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-accent text-accent-foreground shadow-lg">
                 <span className="text-[9px] md:text-xs font-medium whitespace-nowrap">Lenders require</span>
-              </motion.div>
-
-              {/* Left node - More adopt */}
-              <motion.div
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
-                className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-accent text-accent-foreground shadow-lg"
-              >
-                <span className="text-[9px] md:text-xs font-medium whitespace-nowrap">More adopt</span>
-              </motion.div>
+              </div>
 
               {/* Curved arrows using SVG */}
               <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-                {/* Top-right arrow */}
-                <path d="M 55 12 Q 75 15, 85 35" fill="none" stroke="hsl(var(--primary))" strokeWidth="0.8" strokeOpacity="0.5" markerEnd="url(#arrowhead)" />
-                {/* Right-bottom arrow */}
-                <path d="M 88 55 Q 85 75, 65 88" fill="none" stroke="hsl(var(--accent))" strokeWidth="0.8" strokeOpacity="0.5" markerEnd="url(#arrowhead)" />
-                {/* Bottom-left arrow */}
-                <path d="M 45 88 Q 25 85, 12 65" fill="none" stroke="hsl(var(--primary))" strokeWidth="0.8" strokeOpacity="0.5" markerEnd="url(#arrowhead)" />
-                {/* Left-top arrow */}
-                <path d="M 12 45 Q 15 25, 35 12" fill="none" stroke="hsl(var(--accent))" strokeWidth="0.8" strokeOpacity="0.5" markerEnd="url(#arrowhead)" />
-                <defs>
-                  <marker id="arrowhead" markerWidth="4" markerHeight="4" refX="2" refY="2" orient="auto">
-                    <polygon points="0 0, 4 2, 0 4" fill="hsl(var(--primary))" fillOpacity="0.5" />
-                  </marker>
-                </defs>
+                {/* Arrow from Agencies (top) to Clients (bottom-right) */}
+                <path d="M 58 8 Q 85 25, 90 55" fill="none" stroke="hsl(var(--primary))" strokeWidth="1.5" strokeOpacity="0.4" />
+                <polygon points="88,58 92,52 94,60" fill="hsl(var(--primary))" fillOpacity="0.4" />
+                
+                {/* Arrow from Clients (bottom-right) to Lenders (bottom-left) */}
+                <path d="M 80 75 Q 50 95, 20 75" fill="none" stroke="hsl(var(--accent))" strokeWidth="1.5" strokeOpacity="0.4" />
+                <polygon points="18,72 22,78 14,78" fill="hsl(var(--accent))" fillOpacity="0.4" />
+                
+                {/* Arrow from Lenders (bottom-left) back to Agencies (top) */}
+                <path d="M 10 55 Q 15 25, 42 8" fill="none" stroke="hsl(var(--primary))" strokeWidth="1.5" strokeOpacity="0.4" />
+                <polygon points="44,6 38,10 40,2" fill="hsl(var(--primary))" fillOpacity="0.4" />
               </svg>
             </motion.div>
 
-            {/* Phase 2 */}
+            {/* Phase 2 - Far right */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3, delay: 0.2 }}
-              className="p-3 md:p-4 rounded-xl bg-card border border-accent/50 w-32 md:w-40"
+              className="p-3 md:p-4 rounded-xl bg-card border border-accent/50 w-28 md:w-36"
             >
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-6 h-6 rounded-lg bg-accent/20 flex items-center justify-center">
                   <span className="text-xs font-bold text-accent">2</span>
                 </div>
-                <span className="text-xs md:text-sm font-semibold text-foreground">Force The Issue</span>
+                <span className="text-[10px] md:text-sm font-semibold text-foreground leading-tight">Force The Issue</span>
               </div>
               <p className="text-[10px] md:text-xs text-muted-foreground">
-                Clients & lenders push agencies to adopt
+                Clients & lenders push agencies
               </p>
             </motion.div>
           </div>
