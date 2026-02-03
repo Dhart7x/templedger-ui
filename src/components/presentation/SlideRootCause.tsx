@@ -15,7 +15,7 @@ const problemItems = [
   },
   { 
     icon: AlertCircle, 
-    title: "Problems are discovered after the fact",
+    title: "Problems are discovered retrospectively",
     description: "Issues surface only when workers complain or invoices are challenged."
   },
 ];
