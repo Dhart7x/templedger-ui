@@ -17,13 +17,6 @@ const includedFeatures = [
   "Credit control workflows",
 ];
 
-const whyThisWorks = [
-  "Weekly accuracy without runaway cost",
-  "Predictable monthly spend",
-  "Designed for agencies running thousands of temps",
-  "No per-run or per-exception fees",
-];
-
 const SlidePricing = () => {
   return (
     <Slide className="relative overflow-hidden">
@@ -61,10 +54,8 @@ const SlidePricing = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-[1fr,280px] gap-6">
-          {/* Left Column - Table and Included */}
-          <div className="space-y-5">
-            {/* Pricing Table */}
+        <div className="max-w-2xl mx-auto space-y-5">
+          {/* Pricing Table */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -94,17 +85,7 @@ const SlidePricing = () => {
               ))}
             </motion.div>
 
-            {/* Cap Note */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.3 }}
-              className="text-xs text-muted-foreground text-center"
-            >
-              Each worker is capped at 4 billable weeks per month.
-            </motion.p>
-
-            {/* What's Included */}
+          {/* What's Included */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -120,39 +101,8 @@ const SlidePricing = () => {
                   </div>
                 ))}
               </div>
-            </motion.div>
-          </div>
-
-          {/* Right Column - Why This Works */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4, delay: 0.4 }}
-            className="bg-primary/5 border border-primary/20 rounded-xl p-5 h-fit"
-          >
-            <h3 className="text-sm font-semibold text-foreground mb-4">Why This Works</h3>
-            <ul className="space-y-3">
-              {whyThisWorks.map((item, index) => (
-                <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
           </motion.div>
         </div>
-
-        {/* Bottom Takeaway */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.5 }}
-          className="text-center mt-6"
-        >
-          <p className="text-base md:text-lg font-semibold text-foreground">
-            You pay weekly — but never endlessly.
-          </p>
-        </motion.div>
       </div>
     </Slide>
   );
