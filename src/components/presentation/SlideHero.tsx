@@ -12,20 +12,10 @@ const SlideHero = () => {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 border border-border mb-6"
-        >
-          <Shield className="w-4 h-4 text-primary" />
-          <span className="text-sm font-medium text-muted-foreground">Post-Hire Orchestration for Temp Staffing</span>
-        </motion.div>
-
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.6 }}
           className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4"
         >
           <span className="text-foreground">Temp</span>
@@ -35,10 +25,10 @@ const SlideHero = () => {
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
           className="text-lg md:text-xl lg:text-2xl text-muted-foreground font-light max-w-2xl mx-auto mb-6"
         >
-          The Transaction Integrity Layer for Contingent Labour
+          Post-Hire Orchestration for Temp Staffing
         </motion.p>
 
         <motion.p
