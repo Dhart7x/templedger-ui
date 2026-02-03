@@ -25,7 +25,7 @@ const SlideAsk = () => {
         >
           <span className="text-primary font-medium text-sm uppercase tracking-wider">The Ask</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-3">
-            Staffing Agencies Hate Fridays...
+            Raising $5M Seed Round
           </h2>
         </motion.div>
 
