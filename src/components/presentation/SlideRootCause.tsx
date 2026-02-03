@@ -43,7 +43,7 @@ const SlideRootCause = () => {
         >
           <span className="text-primary font-medium text-sm uppercase tracking-wider">The Problem</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-2">
-            Why This Keeps Happening
+            The Root Cause
           </h2>
         </motion.div>
 
@@ -74,9 +74,9 @@ const SlideRootCause = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="text-center text-muted-foreground italic mt-8 text-base md:text-lg"
+            className="text-center text-muted-foreground mt-8 text-base md:text-lg"
           >
-            "When execution isn't controlled, everyone argues after the fact."
+            When execution isn't controlled, everyone argues after the fact.
           </motion.p>
         </div>
       </div>
