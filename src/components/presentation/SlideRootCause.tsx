@@ -31,8 +31,7 @@ const SlideRootCause = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-4 md:mb-8"
         >
-          <span className="text-primary font-medium text-xs md:text-sm uppercase tracking-wider">The Problem</span>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mt-1 md:mt-2">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold">
             The Root Cause
           </h2>
         </motion.div>
