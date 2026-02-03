@@ -19,7 +19,7 @@ const SlideHero = () => {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 border border-border mb-6"
         >
           <Shield className="w-4 h-4 text-primary" />
-          <span className="text-sm font-medium text-muted-foreground">Contingent Labour Transaction Integrity Platform</span>
+          <span className="text-sm font-medium text-muted-foreground">Post-Hire Orchestration for Temp Staffing</span>
         </motion.div>
 
         <motion.h1
