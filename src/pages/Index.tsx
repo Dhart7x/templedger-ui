@@ -6,6 +6,7 @@ import SlideSymptoms from "@/components/presentation/SlideProblem";
 import SlideRootCause from "@/components/presentation/SlideRootCause";
 import SlideSolution from "@/components/presentation/SlideSolution";
 import SlideChain from "@/components/presentation/SlideChain";
+import SlideTimeAttendance from "@/components/presentation/SlideTimeAttendance";
 import SlideAI from "@/components/presentation/SlideAI";
 import SlideCompetition from "@/components/presentation/SlideCompetition";
 import SlideGTM from "@/components/presentation/SlideGTM";
@@ -22,15 +23,16 @@ const slides = [
   { id: 2, component: SlideRootCause },
   { id: 3, component: SlideSolution },
   { id: 4, component: SlideChain },
-  { id: 5, component: SlideDemo },
-  { id: 6, component: SlideAI },
-  { id: 7, component: SlideCompetition },
-  { id: 8, component: SlideGTM },
-  { id: 9, component: SlidePricing },
-  { id: 10, component: SlideDefensibility },
-  { id: 11, component: SlideExit },
-  { id: 12, component: SlideAsk },
-  { id: 13, component: SlideConclusion },
+  { id: 5, component: SlideTimeAttendance },
+  { id: 6, component: SlideDemo },
+  { id: 7, component: SlideAI },
+  { id: 8, component: SlideCompetition },
+  { id: 9, component: SlideGTM },
+  { id: 10, component: SlidePricing },
+  { id: 11, component: SlideDefensibility },
+  { id: 12, component: SlideExit },
+  { id: 13, component: SlideAsk },
+  { id: 14, component: SlideConclusion },
 ];
 
 const Index = () => {
