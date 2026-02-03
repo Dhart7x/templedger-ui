@@ -43,7 +43,7 @@ const SlideChain = () => {
             Verified Chain of Events
           </h2>
           <p className="text-base text-muted-foreground max-w-xl mx-auto">
-            Each step timestamped, attributed, immutably linked — shift to invoice.
+            Each step executed, attributed, and immutably linked.
           </p>
         </motion.div>
 
@@ -120,21 +120,6 @@ const SlideChain = () => {
             ))}
           </div>
 
-          {/* Connecting arrow between rows */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="flex justify-end pr-8"
-          >
-            <motion.div
-              animate={{ y: [0, 3, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              className="w-8 h-8 rounded-full bg-card border border-primary/50 flex items-center justify-center"
-            >
-              <ChevronRight className="w-4 h-4 text-primary rotate-90" />
-            </motion.div>
-          </motion.div>
 
           {/* Row 2: Steps 7-12 */}
           <div className="flex items-center justify-center">
@@ -213,7 +198,7 @@ const SlideChain = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.3, duration: 0.5 }}
-          className="text-center mt-6"
+          className="text-center mt-12"
         >
           <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-card border border-border">
             <motion.div 

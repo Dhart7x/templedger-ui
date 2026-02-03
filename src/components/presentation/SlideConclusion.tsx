@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Shield } from "lucide-react";
 import Slide from "./Slide";
 
 const SlideConclusion = () => {
@@ -43,20 +42,6 @@ const SlideConclusion = () => {
           </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4, delay: 0.45 }}
-          className="inline-flex items-center gap-3"
-        >
-          <div className="w-12 h-12 rounded-xl trust-gradient flex items-center justify-center">
-            <Shield className="w-6 h-6 text-foreground" />
-          </div>
-          <div className="text-left">
-            <div className="text-xl font-bold text-foreground">Temp Ledger</div>
-            <div className="text-xs text-muted-foreground">Transaction Integrity Platform</div>
-          </div>
-        </motion.div>
       </div>
     </Slide>
   );
