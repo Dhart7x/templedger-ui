@@ -36,21 +36,21 @@ const SlideChain = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8"
+          className="text-center mb-4 md:mb-8"
         >
-          <span className="text-primary font-medium text-sm uppercase tracking-wider">The Process</span>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-2 mb-3">
+          <span className="text-primary font-medium text-xs md:text-sm uppercase tracking-wider">The Process</span>
+          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mt-1 md:mt-2 mb-2 md:mb-3">
             Verified Chain of Events
           </h2>
-          <p className="text-base text-muted-foreground max-w-xl mx-auto">
+          <p className="text-xs md:text-base text-muted-foreground max-w-xl mx-auto">
             Each step executed, attributed, and immutably linked.
           </p>
         </motion.div>
 
         {/* Flowing timeline - Two rows */}
-        <div className="relative space-y-4">
+        <div className="relative space-y-2 md:space-y-4">
           {/* Row 1: Steps 1-6 */}
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center flex-wrap md:flex-nowrap gap-1 md:gap-0">
             {chainSteps.slice(0, 6).map((item, index) => (
               <motion.div
                 key={index}
@@ -84,9 +84,9 @@ const SlideChain = () => {
                   
                   {/* Icon container */}
                   <motion.div
-                    className="relative w-11 h-11 rounded-xl trust-gradient flex items-center justify-center shadow-lg shadow-primary/20 z-10"
+                    className="relative w-8 h-8 md:w-11 md:h-11 rounded-xl trust-gradient flex items-center justify-center shadow-lg shadow-primary/20 z-10"
                   >
-                    <item.icon className="w-5 h-5 text-foreground" />
+                    <item.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
                   </motion.div>
 
                   {/* Title */}
@@ -94,7 +94,7 @@ const SlideChain = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: index * 0.1 + 0.3 }}
-                    className="mt-2 text-[10px] font-medium text-center text-foreground leading-tight max-w-[70px]"
+                    className="mt-1 md:mt-2 text-[8px] md:text-[10px] font-medium text-center text-foreground leading-tight max-w-[50px] md:max-w-[70px]"
                   >
                     {item.title}
                   </motion.p>
@@ -106,13 +106,13 @@ const SlideChain = () => {
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.1 + 0.2 }}
-                    className="mx-1 flex items-center"
+                    className="mx-0.5 md:mx-1 flex items-center"
                   >
                     <motion.div
                       animate={{ x: [0, 3, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                     >
-                      <ChevronRight className="w-4 h-4 text-primary" />
+                      <ChevronRight className="w-3 h-3 md:w-4 md:h-4 text-primary" />
                     </motion.div>
                   </motion.div>
                 )}
@@ -122,7 +122,7 @@ const SlideChain = () => {
 
 
           {/* Row 2: Steps 7-12 */}
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center flex-wrap md:flex-nowrap gap-1 md:gap-0">
             {chainSteps.slice(6, 12).map((item, index) => (
               <motion.div
                 key={index + 6}
@@ -156,9 +156,9 @@ const SlideChain = () => {
                   
                   {/* Icon container */}
                   <motion.div
-                    className="relative w-11 h-11 rounded-xl trust-gradient flex items-center justify-center shadow-lg shadow-primary/20 z-10"
+                    className="relative w-8 h-8 md:w-11 md:h-11 rounded-xl trust-gradient flex items-center justify-center shadow-lg shadow-primary/20 z-10"
                   >
-                    <item.icon className="w-5 h-5 text-foreground" />
+                    <item.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
                   </motion.div>
 
                   {/* Title */}
@@ -166,7 +166,7 @@ const SlideChain = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.6 + index * 0.1 + 0.3 }}
-                    className="mt-2 text-[10px] font-medium text-center text-foreground leading-tight max-w-[70px]"
+                    className="mt-1 md:mt-2 text-[8px] md:text-[10px] font-medium text-center text-foreground leading-tight max-w-[50px] md:max-w-[70px]"
                   >
                     {item.title}
                   </motion.p>
@@ -178,13 +178,13 @@ const SlideChain = () => {
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.6 + index * 0.1 + 0.2 }}
-                    className="mx-1 flex items-center"
+                    className="mx-0.5 md:mx-1 flex items-center"
                   >
                     <motion.div
                       animate={{ x: [0, 3, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                     >
-                      <ChevronRight className="w-4 h-4 text-primary" />
+                      <ChevronRight className="w-3 h-3 md:w-4 md:h-4 text-primary" />
                     </motion.div>
                   </motion.div>
                 )}
@@ -198,19 +198,19 @@ const SlideChain = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.3, duration: 0.5 }}
-          className="text-center mt-12"
+          className="text-center mt-4 md:mt-12"
         >
-          <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-card border border-border">
+          <div className="inline-flex items-center gap-2 md:gap-3 px-3 md:px-5 py-1.5 md:py-2 rounded-full bg-card border border-border">
             <motion.div 
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="w-2 h-2 rounded-full bg-accent" 
+              className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-accent" 
             />
-            <span className="text-sm text-foreground font-medium">One immutable chain of truth</span>
+            <span className="text-xs md:text-sm text-foreground font-medium">One immutable chain of truth</span>
             <motion.div 
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-              className="w-2 h-2 rounded-full bg-primary" 
+              className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary" 
             />
           </div>
         </motion.div>
