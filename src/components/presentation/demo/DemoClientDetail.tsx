@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeft, Send, Download, Check, AlertTriangle } from "lucide-react";
+import { ArrowLeft, Send, Download, Check, AlertTriangle, CreditCard, Edit2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,7 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { type Client, workers as allWorkers, weekOptions } from "./demoData";
+import { type Client, workers as allWorkers, weekOptions, exceptions } from "./demoData";
+import DemoInvoiceExportModal from "./DemoInvoiceExportModal";
 
 interface Worker {
   id: string;
@@ -63,6 +64,13 @@ const eventStatusConfig = {
   overridden: { icon: Check, className: "text-amber-400 bg-amber-500/20" },
 };
 
+const financeProviderLabels: Record<string, string> = {
+  ultimate: "Ultimate Finance",
+  bibby: "Bibby Financial Services",
+  hsbc: "HSBC Invoice Finance",
+  close: "Close Brothers Invoice Finance",
+};
+
 interface DemoClientDetailProps {
   client: Client;
   onBack: () => void;
@@ -72,12 +80,18 @@ interface DemoClientDetailProps {
 const DemoClientDetail = ({ client, onBack, onSendAudit }: DemoClientDetailProps) => {
   const [selectedWorker, setSelectedWorker] = useState<Worker | null>(workers[2]);
   const [selectedWeek, setSelectedWeek] = useState(weekOptions[2].value);
+  const [showExportModal, setShowExportModal] = useState(false);
 
   const approvedCount = workers.filter((w) => w.status === "approved").length;
   const overrideCount = workers.filter((w) => w.status === "override").length;
   const exceptionCount = workers.filter((w) => w.status === "exception").length;
   const approvedPercent = Math.round((approvedCount / workers.length) * 100);
   const overridePercent = Math.round((overrideCount / workers.length) * 100);
+
+  const hasExceptions = exceptionCount > 0;
+  const hasOverrides = overrideCount > 0;
+
+  const weekLabel = weekOptions.find(w => w.value === selectedWeek)?.label || selectedWeek;
 
   return (
     <div className="flex-1 flex flex-col bg-background">
@@ -91,7 +105,14 @@ const DemoClientDetail = ({ client, onBack, onSendAudit }: DemoClientDetailProps
             <ArrowLeft className="w-4 h-4 text-muted-foreground" />
           </button>
           <div>
-            <h1 className="text-lg font-semibold text-foreground">{client.name}</h1>
+            <div className="flex items-center gap-2">
+              <h1 className="text-lg font-semibold text-foreground">{client.name}</h1>
+              {client.creditControl?.configured ? (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Credit Control configured</span>
+              ) : (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400">Credit Control not configured</span>
+              )}
+            </div>
             <p className="text-xs text-muted-foreground">Weekly Audit Review</p>
           </div>
         </div>
@@ -110,9 +131,9 @@ const DemoClientDetail = ({ client, onBack, onSendAudit }: DemoClientDetailProps
             <Send className="w-3 h-3 mr-1.5" />
             Send audit pack
           </Button>
-          <Button variant="outline" size="sm" className="h-8 text-xs">
+          <Button size="sm" className="h-8 text-xs" onClick={() => setShowExportModal(true)}>
             <Download className="w-3 h-3 mr-1.5" />
-            Export backup
+            Export Invoice & Backups
           </Button>
         </div>
       </div>
@@ -148,6 +169,43 @@ const DemoClientDetail = ({ client, onBack, onSendAudit }: DemoClientDetailProps
                 </span>
               </button>
             ))}
+          </div>
+
+          {/* Credit Control Panel */}
+          <div className="p-3 border-t border-border mt-auto">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-1 text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                <CreditCard className="w-3 h-3" />
+                Credit Control
+              </div>
+              <button className="p-1 hover:bg-muted rounded">
+                <Edit2 className="w-3 h-3 text-muted-foreground" />
+              </button>
+            </div>
+            {client.creditControl?.configured ? (
+              <div className="space-y-1.5 text-xs">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Terms</span>
+                  <span className="text-foreground">{client.creditControl.paymentTerms} days</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Statements</span>
+                  <span className="text-foreground">{client.creditControl.sendStatements ? "On" : "Off"}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Finance Provider</span>
+                  <span className="text-foreground">
+                    {client.creditControl.copyFinanceProvider 
+                      ? financeProviderLabels[client.creditControl.financeProvider || ""] || "Yes"
+                      : "No"}
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div className="text-xs text-muted-foreground">
+                Configure credit control settings during invoice export
+              </div>
+            )}
           </div>
         </div>
 
@@ -284,6 +342,16 @@ const DemoClientDetail = ({ client, onBack, onSendAudit }: DemoClientDetailProps
           Mark week as invoice-ready
         </Button>
       </div>
+
+      {/* Invoice Export Modal */}
+      <DemoInvoiceExportModal
+        open={showExportModal}
+        onClose={() => setShowExportModal(false)}
+        client={client}
+        weekEnding={weekLabel}
+        hasExceptions={hasExceptions}
+        hasOverrides={hasOverrides}
+      />
     </div>
   );
 };

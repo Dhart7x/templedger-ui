@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeft, Download, FileText, TrendingUp, Clock, Users, AlertTriangle, ChevronRight, X } from "lucide-react";
+import { ArrowLeft, Download, FileText, TrendingUp, Clock, Users, AlertTriangle, ChevronRight, X, CreditCard, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/select";
 import { reportData, clients, exceptions } from "./demoData";
 
-type ReportType = "invoice" | "payroll" | "agency" | "throughput" | null;
+type ReportType = "invoice" | "payroll" | "agency" | "throughput" | "credit" | null;
 
 const reportCards = [
   {
@@ -45,6 +45,14 @@ const reportCards = [
     icon: Clock,
     kpi: reportData.processThroughput.shiftToApproval,
     subKpi: "shift → approval",
+  },
+  {
+    id: "credit" as ReportType,
+    title: "Credit Control Performance",
+    description: "Payment tracking, disputes, and finance provider usage",
+    icon: CreditCard,
+    kpi: `${reportData.creditControl.avgDaysToPay} days`,
+    subKpi: "avg to pay",
   },
 ];
 
@@ -112,72 +120,142 @@ const DemoReportsView = () => {
         {/* Content */}
         <div className={cn("flex-1 flex overflow-hidden", drilldownItem && "mr-80")}>
           <div className="flex-1 p-4 overflow-y-auto">
-            {/* Chart Area */}
-            <div className="bg-card border border-border rounded-lg p-4 mb-4">
-              <h3 className="text-sm font-medium text-foreground mb-4">Trend</h3>
-              <div className="h-40 flex items-end justify-around gap-4">
-                {reportData.invoiceReadiness.weeklyTrend.map((w, i) => (
-                  <div key={i} className="flex-1 flex flex-col items-center gap-2">
-                    <div
-                      className="w-full bg-primary/20 rounded-t relative"
-                      style={{ height: `${w.percent}%` }}
-                    >
-                      <div
-                        className="absolute bottom-0 left-0 right-0 bg-primary rounded-t transition-all"
-                        style={{ height: `${w.percent}%` }}
-                      />
-                    </div>
-                    <div className="text-xs text-muted-foreground">{w.week}</div>
-                    <div className="text-xs text-foreground font-medium">{w.percent}%</div>
+            {/* Credit Control Report Content */}
+            {selectedReport === "credit" ? (
+              <>
+                {/* KPI Cards */}
+                <div className="grid grid-cols-4 gap-3 mb-4">
+                  <div className="bg-card border border-border rounded-lg p-3">
+                    <div className="text-2xl font-bold text-foreground">{reportData.creditControl.avgDaysToPay}</div>
+                    <div className="text-xs text-muted-foreground">Avg days to pay</div>
                   </div>
-                ))}
-              </div>
-            </div>
+                  <div className="bg-card border border-border rounded-lg p-3">
+                    <div className="text-2xl font-bold text-foreground">{reportData.creditControl.invoiceDisputesCount}</div>
+                    <div className="text-xs text-muted-foreground">Invoice disputes</div>
+                  </div>
+                  <div className="bg-card border border-border rounded-lg p-3">
+                    <div className="text-2xl font-bold text-foreground">£{reportData.creditControl.creditNotesValue}</div>
+                    <div className="text-xs text-muted-foreground">Credit notes value</div>
+                  </div>
+                  <div className="bg-card border border-border rounded-lg p-3">
+                    <div className="text-2xl font-bold text-foreground">{reportData.creditControl.invoicesWithFinanceProvider}%</div>
+                    <div className="text-xs text-muted-foreground">With finance provider</div>
+                  </div>
+                </div>
 
-            {/* Data Table */}
-            <div className="bg-card border border-border rounded-lg overflow-hidden">
-              <div className="p-3 border-b border-border">
-                <h3 className="text-sm font-medium text-foreground">Detail by Week</h3>
-              </div>
-              <table className="w-full text-sm">
-                <thead className="bg-muted/30">
-                  <tr className="text-left text-xs text-muted-foreground uppercase tracking-wide">
-                    <th className="p-3">Week</th>
-                    <th className="p-3">Invoice Ready %</th>
-                    <th className="p-3">Disputes</th>
-                    <th className="p-3">Exceptions</th>
-                    <th className="p-3 w-10"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {reportData.invoiceReadiness.weeklyTrend.map((w, i) => (
-                    <tr
-                      key={i}
-                      onClick={() => setDrilldownItem(w.week)}
-                      className={cn(
-                        "border-b border-border hover:bg-muted/30 cursor-pointer transition-colors",
-                        drilldownItem === w.week && "bg-primary/5"
-                      )}
-                    >
-                      <td className="p-3 text-foreground">Week ending {w.week === "W13" ? "07 Apr" : w.week === "W14" ? "14 Apr" : "21 Apr"}</td>
-                      <td className="p-3">
-                        <div className="flex items-center gap-2">
-                          <div className="w-16 h-1.5 bg-muted rounded-full overflow-hidden">
-                            <div className="h-full bg-primary rounded-full" style={{ width: `${w.percent}%` }} />
-                          </div>
-                          <span className="text-foreground">{w.percent}%</span>
+                {/* Client Breakdown Table */}
+                <div className="bg-card border border-border rounded-lg overflow-hidden">
+                  <div className="p-3 border-b border-border">
+                    <h3 className="text-sm font-medium text-foreground">Credit Control by Client</h3>
+                  </div>
+                  <table className="w-full text-sm">
+                    <thead className="bg-muted/30">
+                      <tr className="text-left text-xs text-muted-foreground uppercase tracking-wide">
+                        <th className="p-3">Client</th>
+                        <th className="p-3">Terms</th>
+                        <th className="p-3">Statements</th>
+                        <th className="p-3">Finance Provider</th>
+                        <th className="p-3">Last Export</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {reportData.creditControl.clientBreakdown.map((client) => (
+                        <tr key={client.clientId} className="border-b border-border hover:bg-muted/30">
+                          <td className="p-3 text-foreground font-medium">{client.clientName}</td>
+                          <td className="p-3 text-foreground">{client.terms} days</td>
+                          <td className="p-3">
+                            {client.statementsOn ? (
+                              <span className="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">On</span>
+                            ) : (
+                              <span className="text-xs px-2 py-0.5 rounded bg-muted text-muted-foreground">Off</span>
+                            )}
+                          </td>
+                          <td className="p-3">
+                            {client.financeProviderCopied ? (
+                              <span className="text-xs px-2 py-0.5 rounded bg-primary/20 text-primary">Copied</span>
+                            ) : (
+                              <span className="text-xs text-muted-foreground">Not copied</span>
+                            )}
+                          </td>
+                          <td className="p-3 text-muted-foreground text-xs">
+                            {client.lastExport || "Never"}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            ) : (
+              <>
+                {/* Chart Area */}
+                <div className="bg-card border border-border rounded-lg p-4 mb-4">
+                  <h3 className="text-sm font-medium text-foreground mb-4">Trend</h3>
+                  <div className="h-40 flex items-end justify-around gap-4">
+                    {reportData.invoiceReadiness.weeklyTrend.map((w, i) => (
+                      <div key={i} className="flex-1 flex flex-col items-center gap-2">
+                        <div
+                          className="w-full bg-primary/20 rounded-t relative"
+                          style={{ height: `${w.percent}%` }}
+                        >
+                          <div
+                            className="absolute bottom-0 left-0 right-0 bg-primary rounded-t transition-all"
+                            style={{ height: `${w.percent}%` }}
+                          />
                         </div>
-                      </td>
-                      <td className="p-3 text-foreground">{w.disputes}</td>
-                      <td className="p-3 text-muted-foreground">{Math.floor(Math.random() * 5) + 1}</td>
-                      <td className="p-3">
-                        <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                        <div className="text-xs text-muted-foreground">{w.week}</div>
+                        <div className="text-xs text-foreground font-medium">{w.percent}%</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Data Table */}
+                <div className="bg-card border border-border rounded-lg overflow-hidden">
+                  <div className="p-3 border-b border-border">
+                    <h3 className="text-sm font-medium text-foreground">Detail by Week</h3>
+                  </div>
+                  <table className="w-full text-sm">
+                    <thead className="bg-muted/30">
+                      <tr className="text-left text-xs text-muted-foreground uppercase tracking-wide">
+                        <th className="p-3">Week</th>
+                        <th className="p-3">Invoice Ready %</th>
+                        <th className="p-3">Disputes</th>
+                        <th className="p-3">Exceptions</th>
+                        <th className="p-3 w-10"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {reportData.invoiceReadiness.weeklyTrend.map((w, i) => (
+                        <tr
+                          key={i}
+                          onClick={() => setDrilldownItem(w.week)}
+                          className={cn(
+                            "border-b border-border hover:bg-muted/30 cursor-pointer transition-colors",
+                            drilldownItem === w.week && "bg-primary/5"
+                          )}
+                        >
+                          <td className="p-3 text-foreground">Week ending {w.week === "W13" ? "07 Apr" : w.week === "W14" ? "14 Apr" : "21 Apr"}</td>
+                          <td className="p-3">
+                            <div className="flex items-center gap-2">
+                              <div className="w-16 h-1.5 bg-muted rounded-full overflow-hidden">
+                                <div className="h-full bg-primary rounded-full" style={{ width: `${w.percent}%` }} />
+                              </div>
+                              <span className="text-foreground">{w.percent}%</span>
+                            </div>
+                          </td>
+                          <td className="p-3 text-foreground">{w.disputes}</td>
+                          <td className="p-3 text-muted-foreground">{Math.floor(Math.random() * 5) + 1}</td>
+                          <td className="p-3">
+                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
@@ -224,7 +302,7 @@ const DemoReportsView = () => {
         <p className="text-sm text-muted-foreground">Executive and finance reporting</p>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         {reportCards.map((report) => (
           <button
             key={report.id}

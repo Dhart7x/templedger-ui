@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Users, Building2, BookOpen, CheckCircle, Plug, FileText, Bell, Plus, Edit2, Trash2 } from "lucide-react";
+import { Users, Building2, BookOpen, CheckCircle, Plug, FileText, Bell, Plus, Edit2, Trash2, CreditCard } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,6 +20,7 @@ const tabs = [
   { id: "approvals", label: "Approvals", icon: CheckCircle },
   { id: "integrations", label: "Integrations", icon: Plug },
   { id: "templates", label: "Audit Pack Templates", icon: FileText },
+  { id: "credit", label: "Credit Control", icon: CreditCard },
   { id: "notifications", label: "Notifications", icon: Bell },
 ];
 
@@ -386,6 +387,143 @@ const DemoSettingsView = () => {
           </div>
         );
 
+      case "credit":
+        return (
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-lg font-semibold text-foreground">Credit Control</h2>
+              <p className="text-sm text-muted-foreground">Configure credit control defaults and permissions</p>
+            </div>
+
+            <div className="space-y-4">
+              <div className="bg-card border border-border rounded-lg p-4">
+                <h3 className="text-sm font-medium text-foreground mb-3">Global Defaults</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs text-muted-foreground">Default payment terms</label>
+                    <Select defaultValue="30">
+                      <SelectTrigger className="w-full mt-1 h-8 text-sm bg-background">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-card border-border">
+                        <SelectItem value="7">7 days</SelectItem>
+                        <SelectItem value="14">14 days</SelectItem>
+                        <SelectItem value="30">30 days</SelectItem>
+                        <SelectItem value="45">45 days</SelectItem>
+                        <SelectItem value="60">60 days</SelectItem>
+                        <SelectItem value="90">90 days</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <label className="text-xs text-muted-foreground">Default statement day</label>
+                    <Select defaultValue="1">
+                      <SelectTrigger className="w-full mt-1 h-8 text-sm bg-background">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-card border-border">
+                        <SelectItem value="1">1st of month</SelectItem>
+                        <SelectItem value="15">15th of month</SelectItem>
+                        <SelectItem value="last">Last day of month</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                <div className="mt-4 space-y-2">
+                  <label className="flex items-center justify-between">
+                    <span className="text-sm text-foreground">Send monthly statements by default</span>
+                    <Switch />
+                  </label>
+                </div>
+              </div>
+
+              <div className="bg-card border border-border rounded-lg p-4">
+                <h3 className="text-sm font-medium text-foreground mb-3">Invoice Finance Providers</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
+                    <span className="text-sm text-foreground">Ultimate Finance</span>
+                    <button className="p-1 hover:bg-muted rounded"><Trash2 className="w-3 h-3 text-muted-foreground" /></button>
+                  </div>
+                  <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
+                    <span className="text-sm text-foreground">Bibby Financial Services</span>
+                    <button className="p-1 hover:bg-muted rounded"><Trash2 className="w-3 h-3 text-muted-foreground" /></button>
+                  </div>
+                  <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
+                    <span className="text-sm text-foreground">HSBC Invoice Finance</span>
+                    <button className="p-1 hover:bg-muted rounded"><Trash2 className="w-3 h-3 text-muted-foreground" /></button>
+                  </div>
+                  <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
+                    <span className="text-sm text-foreground">Close Brothers Invoice Finance</span>
+                    <button className="p-1 hover:bg-muted rounded"><Trash2 className="w-3 h-3 text-muted-foreground" /></button>
+                  </div>
+                  <Button variant="outline" size="sm" className="w-full mt-2">
+                    <Plus className="w-3 h-3 mr-1.5" />
+                    Add Provider
+                  </Button>
+                </div>
+              </div>
+
+              <div className="bg-card border border-border rounded-lg p-4">
+                <h3 className="text-sm font-medium text-foreground mb-3">Export Settings</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs text-muted-foreground">Default export method</label>
+                    <Select defaultValue="secure-link">
+                      <SelectTrigger className="w-full mt-1 h-8 text-sm bg-background">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-card border-border">
+                        <SelectItem value="secure-link">Secure Link</SelectItem>
+                        <SelectItem value="email-attachment">Email Attachment</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <label className="text-xs text-muted-foreground">Link expiry (days)</label>
+                    <Select defaultValue="14">
+                      <SelectTrigger className="w-full mt-1 h-8 text-sm bg-background">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-card border-border">
+                        <SelectItem value="7">7 days</SelectItem>
+                        <SelectItem value="14">14 days</SelectItem>
+                        <SelectItem value="30">30 days</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-card border border-border rounded-lg p-4">
+                <h3 className="text-sm font-medium text-foreground mb-3">Permissions</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
+                    <div>
+                      <div className="text-sm text-foreground">Edit credit control settings</div>
+                      <div className="text-xs text-muted-foreground">Admin, Finance</div>
+                    </div>
+                    <button className="p-1 hover:bg-muted rounded"><Edit2 className="w-3 h-3 text-muted-foreground" /></button>
+                  </div>
+                  <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
+                    <div>
+                      <div className="text-sm text-foreground">Export invoices</div>
+                      <div className="text-xs text-muted-foreground">Admin, Finance, Ops</div>
+                    </div>
+                    <button className="p-1 hover:bg-muted rounded"><Edit2 className="w-3 h-3 text-muted-foreground" /></button>
+                  </div>
+                  <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
+                    <div>
+                      <div className="text-sm text-foreground">Copy finance providers</div>
+                      <div className="text-xs text-muted-foreground">Admin, Finance</div>
+                    </div>
+                    <button className="p-1 hover:bg-muted rounded"><Edit2 className="w-3 h-3 text-muted-foreground" /></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
       case "notifications":
         return (
           <div className="space-y-6">
@@ -419,6 +557,20 @@ const DemoSettingsView = () => {
                   <label className="flex items-center justify-between">
                     <span className="text-sm text-foreground">Weekly invoice-ready notification</span>
                     <Switch defaultChecked />
+                  </label>
+                </div>
+              </div>
+
+              <div className="bg-card border border-border rounded-lg p-4">
+                <h3 className="text-sm font-medium text-foreground mb-3">Credit Control Alerts</h3>
+                <div className="space-y-2">
+                  <label className="flex items-center justify-between">
+                    <span className="text-sm text-foreground">Payment overdue reminders</span>
+                    <Switch defaultChecked />
+                  </label>
+                  <label className="flex items-center justify-between">
+                    <span className="text-sm text-foreground">Statement sent confirmation</span>
+                    <Switch />
                   </label>
                 </div>
               </div>
