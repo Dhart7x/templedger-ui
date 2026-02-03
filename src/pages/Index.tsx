@@ -114,20 +114,20 @@ const Index = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation arrows */}
+        {/* Navigation arrows - positioned at bottom on mobile to avoid text overlap */}
         <button
           onClick={prevSlide}
           disabled={currentSlide === 0}
-          className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-card/90 backdrop-blur border border-border hover:border-primary/50 hover:bg-card flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all z-10 group"
+          className="absolute left-4 md:left-6 bottom-16 md:bottom-auto md:top-1/2 md:-translate-y-1/2 w-10 h-10 md:w-14 md:h-14 rounded-full bg-card/90 backdrop-blur border border-border hover:border-primary/50 hover:bg-card flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all z-10 group"
         >
-          <ChevronLeft className="w-7 h-7 text-muted-foreground group-hover:text-foreground transition-colors" />
+          <ChevronLeft className="w-5 h-5 md:w-7 md:h-7 text-muted-foreground group-hover:text-foreground transition-colors" />
         </button>
         <button
           onClick={nextSlide}
           disabled={currentSlide === slides.length - 1}
-          className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-card/90 backdrop-blur border border-border hover:border-primary/50 hover:bg-card flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all z-10 group"
+          className="absolute right-4 md:right-6 bottom-16 md:bottom-auto md:top-1/2 md:-translate-y-1/2 w-10 h-10 md:w-14 md:h-14 rounded-full bg-card/90 backdrop-blur border border-border hover:border-primary/50 hover:bg-card flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all z-10 group"
         >
-          <ChevronRight className="w-7 h-7 text-muted-foreground group-hover:text-foreground transition-colors" />
+          <ChevronRight className="w-5 h-5 md:w-7 md:h-7 text-muted-foreground group-hover:text-foreground transition-colors" />
         </button>
 
         {/* Progress dots */}

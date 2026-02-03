@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Shield, Link, CheckCircle2 } from "lucide-react";
+import { Shield, Link, CheckCircle2, CreditCard } from "lucide-react";
 import Slide from "./Slide";
 
 
@@ -10,7 +10,7 @@ const SlideSolution = () => {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto w-full">
+      <div className="relative z-10 max-w-5xl mx-auto w-full px-4 md:px-0">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
@@ -26,11 +26,12 @@ const SlideSolution = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-4 mb-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {[
             { icon: Shield, title: "Immutable Records", desc: "Every transaction timestamped and permanently linked." },
             { icon: Link, title: "Verified Chain", desc: "Audit-grade certainty from hours to invoicing.", accent: true },
             { icon: CheckCircle2, title: "Provable Execution", desc: "Fragmented verification becomes auditable proof." },
+            { icon: CreditCard, title: "Credit Control", desc: "Invoice export with terms, statements & finance provider support." },
           ].map((item, index) => (
             <motion.div
               key={index}

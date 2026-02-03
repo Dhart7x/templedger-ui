@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, Filter, Download, FileText, Check, AlertTriangle, ChevronRight, X } from "lucide-react";
+import { Search, Filter, Download, FileText, Check, AlertTriangle, ChevronRight, X, CreditCard } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,6 +21,10 @@ const statusConfig = {
   verified: { icon: Check, className: "bg-emerald-500/20 text-emerald-400", label: "Verified" },
   flagged: { icon: AlertTriangle, className: "bg-amber-500/20 text-amber-400", label: "Flagged" },
   overridden: { icon: Check, className: "bg-amber-500/20 text-amber-400", label: "Overridden" },
+};
+
+const eventTypeConfig: Record<string, { className: string }> = {
+  "Invoice exported": { className: "bg-primary/20 text-primary" },
 };
 
 const DemoAuditLogView = ({ onNavigateToWorker }: DemoAuditLogViewProps) => {
@@ -136,6 +140,10 @@ const DemoAuditLogView = ({ onNavigateToWorker }: DemoAuditLogViewProps) => {
                 className="w-4 h-4"
               />
               Show only overridden
+            </label>
+            <label className="flex items-center gap-2 text-xs text-primary cursor-pointer">
+              <CreditCard className="w-3 h-3" />
+              Invoice exports only
             </label>
           </div>
         </div>
@@ -262,6 +270,41 @@ const DemoAuditLogView = ({ onNavigateToWorker }: DemoAuditLogViewProps) => {
                   <div>
                     <span className="text-muted-foreground">Reason: </span>
                     <span className="text-foreground">"{selectedEvent.resolution.reason}"</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {selectedEvent.invoiceExport && (
+              <div className="p-3 bg-primary/10 rounded-lg border border-primary/20">
+                <div className="text-xs text-primary font-medium mb-2 flex items-center gap-1">
+                  <CreditCard className="w-3 h-3" />
+                  Invoice Export Details
+                </div>
+                <div className="space-y-2 text-xs">
+                  <div>
+                    <span className="text-muted-foreground">Invoice Total: </span>
+                    <span className="text-foreground">£{selectedEvent.invoiceExport.invoiceTotal.toLocaleString()}</span>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Payment Terms: </span>
+                    <span className="text-foreground">{selectedEvent.invoiceExport.paymentTerms} days</span>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Recipients: </span>
+                    <span className="text-foreground">{selectedEvent.invoiceExport.recipients.join(", ")}</span>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Finance Provider: </span>
+                    <span className="text-foreground">
+                      {selectedEvent.invoiceExport.financeProviderCopied 
+                        ? `Copied (${selectedEvent.invoiceExport.financeProvider})` 
+                        : "Not copied"}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Method: </span>
+                    <span className="text-foreground capitalize">{selectedEvent.invoiceExport.exportMethod.replace("-", " ")}</span>
                   </div>
                 </div>
               </div>

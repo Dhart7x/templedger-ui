@@ -1,10 +1,22 @@
 // Shared demo data for all sections
 
+export interface CreditControlDefaults {
+  paymentTerms: number;
+  contactEmail1: string;
+  contactEmail2?: string;
+  sendStatements: boolean;
+  statementDay?: number;
+  copyFinanceProvider: boolean;
+  financeProvider?: string;
+  configured: boolean;
+}
+
 export interface Client {
   id: string;
   name: string;
   agencies: number;
   status: "green" | "amber" | "red";
+  creditControl?: CreditControlDefaults;
 }
 
 export interface Worker {
@@ -38,6 +50,15 @@ export interface AuditEvent {
   };
   linkedEvents?: string[];
   evidence?: string[];
+  // Credit control fields for invoice export events
+  invoiceExport?: {
+    invoiceTotal: number;
+    paymentTerms: number;
+    recipients: string[];
+    financeProviderCopied: boolean;
+    financeProvider?: string;
+    exportMethod: "secure-link" | "email-attachment";
+  };
 }
 
 export interface Exception {
@@ -70,12 +91,93 @@ export interface Exception {
   };
 }
 
+export interface InvoiceExportRecord {
+  id: string;
+  clientId: string;
+  clientName: string;
+  weekEnding: string;
+  invoiceTotal: number;
+  paymentTerms: number;
+  recipients: string[];
+  financeProviderCopied: boolean;
+  financeProvider?: string;
+  exportMethod: "secure-link" | "email-attachment";
+  exportedAt: string;
+  exportedBy: string;
+  paymentStatus: "Sent" | "Viewed" | "Due" | "Overdue" | "Paid";
+  dueDate: string;
+}
+
 export const clients: Client[] = [
-  { id: "1", name: "DO&CO", agencies: 3, status: "green" },
-  { id: "2", name: "DHL", agencies: 2, status: "green" },
-  { id: "3", name: "ID LOGISTICS", agencies: 4, status: "amber" },
-  { id: "4", name: "BOMBAY HALWA", agencies: 1, status: "green" },
-  { id: "5", name: "DSI FOODS", agencies: 2, status: "red" },
+  { 
+    id: "1", 
+    name: "DO&CO", 
+    agencies: 3, 
+    status: "green",
+    creditControl: {
+      paymentTerms: 30,
+      contactEmail1: "accounts@doco.com",
+      sendStatements: true,
+      statementDay: 1,
+      copyFinanceProvider: false,
+      configured: true,
+    }
+  },
+  { 
+    id: "2", 
+    name: "DHL", 
+    agencies: 2, 
+    status: "green",
+    creditControl: {
+      paymentTerms: 45,
+      contactEmail1: "ap@dhl.com",
+      contactEmail2: "finance@dhl.com",
+      sendStatements: true,
+      statementDay: 15,
+      copyFinanceProvider: true,
+      financeProvider: "ultimate",
+      configured: true,
+    }
+  },
+  { 
+    id: "3", 
+    name: "ID LOGISTICS", 
+    agencies: 4, 
+    status: "amber",
+    creditControl: {
+      paymentTerms: 30,
+      contactEmail1: "invoices@idlogistics.com",
+      sendStatements: false,
+      copyFinanceProvider: false,
+      configured: true,
+    }
+  },
+  { 
+    id: "4", 
+    name: "BOMBAY HALWA", 
+    agencies: 1, 
+    status: "green",
+    creditControl: {
+      paymentTerms: 30,
+      contactEmail1: "",
+      sendStatements: false,
+      copyFinanceProvider: false,
+      configured: false,
+    }
+  },
+  { 
+    id: "5", 
+    name: "DSI FOODS", 
+    agencies: 2, 
+    status: "red",
+    creditControl: {
+      paymentTerms: 14,
+      contactEmail1: "payments@dsifoods.com",
+      sendStatements: false,
+      copyFinanceProvider: false,
+      configured: true,
+    }
+  },
 ];
 
 export const workers: Worker[] = [
@@ -260,6 +362,55 @@ export const auditEvents: AuditEvent[] = [
       timestamp: "2026-04-06 09:00:00",
     },
   },
+  // Invoice export event for DHL with finance provider copied
+  {
+    id: "evt-011",
+    timestamp: "2026-04-07 14:30:00",
+    date: "07 Apr 2026",
+    clientId: "2",
+    clientName: "DHL",
+    weekEnding: "2026-04-07",
+    workerId: "",
+    workerName: "All Workers",
+    eventType: "Invoice exported",
+    status: "verified",
+    actor: "Agency Admin",
+    actorName: "Usman Iftikhar",
+    referenceId: "TL-2026-04-001244",
+    includedInAuditPack: true,
+    invoiceExport: {
+      invoiceTotal: 12450,
+      paymentTerms: 45,
+      recipients: ["ap@dhl.com", "finance@dhl.com"],
+      financeProviderCopied: true,
+      financeProvider: "Ultimate Finance",
+      exportMethod: "secure-link",
+    },
+  },
+  // Invoice export event for DO&CO without finance provider
+  {
+    id: "evt-012",
+    timestamp: "2026-04-07 15:00:00",
+    date: "07 Apr 2026",
+    clientId: "1",
+    clientName: "DO&CO",
+    weekEnding: "2026-04-07",
+    workerId: "",
+    workerName: "All Workers",
+    eventType: "Invoice exported",
+    status: "verified",
+    actor: "Agency Admin",
+    actorName: "Usman Iftikhar",
+    referenceId: "TL-2026-04-001245",
+    includedInAuditPack: true,
+    invoiceExport: {
+      invoiceTotal: 8920,
+      paymentTerms: 30,
+      recipients: ["accounts@doco.com"],
+      financeProviderCopied: false,
+      exportMethod: "secure-link",
+    },
+  },
 ];
 
 export const exceptions: Exception[] = [
@@ -390,6 +541,20 @@ export const reportData = {
     shiftToApproval: "18h",
     approvalToPayroll: "6h",
     payrollToInvoice: "2h",
+  },
+  creditControl: {
+    avgDaysToPay: 32,
+    invoiceDisputesCount: 3,
+    creditNotesCount: 2,
+    creditNotesValue: 1250,
+    invoicesWithFinanceProvider: 67,
+    clientBreakdown: [
+      { clientId: "1", clientName: "DO&CO", terms: 30, statementsOn: true, financeProviderCopied: false, lastExport: "2026-04-07" },
+      { clientId: "2", clientName: "DHL", terms: 45, statementsOn: true, financeProviderCopied: true, lastExport: "2026-04-07" },
+      { clientId: "3", clientName: "ID LOGISTICS", terms: 30, statementsOn: false, financeProviderCopied: false, lastExport: "2026-04-01" },
+      { clientId: "4", clientName: "BOMBAY HALWA", terms: 30, statementsOn: false, financeProviderCopied: false, lastExport: null },
+      { clientId: "5", clientName: "DSI FOODS", terms: 14, statementsOn: false, financeProviderCopied: false, lastExport: "2026-03-28" },
+    ],
   },
 };
 
