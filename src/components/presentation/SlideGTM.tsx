@@ -6,17 +6,17 @@ const stakeholders = [
   {
     icon: Building2,
     title: "Agencies",
-    benefits: ["Reduces pay queries", "Lowers attrition", "Cuts credit notes"],
+    benefits: ["Reduces pay queries", "Lowers attrition", "Cuts credit notes", "Shrinks verification cost"],
   },
   {
     icon: Factory,
     title: "Clients",
-    benefits: ["Cleaner invoices", "Faster disputes", "Audit-ready proof"],
+    benefits: ["Cleaner invoices", "Faster dispute resolution", "Audit-ready proof", "Reduces pay queries"],
   },
   {
     icon: Landmark,
     title: "Lenders",
-    benefits: ["No fraudulent invoices", "Reduces DSO", "Better invoice quality"],
+    benefits: ["Eradicates fraudulent invoices", "Reduces DSO", "Reduced dispute exposure", "Improved invoice quality"],
   },
 ];
 
@@ -29,7 +29,7 @@ const SlideGTM = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8 md:mb-12"
+          className="text-center mb-10 md:mb-14"
         >
           <span className="text-primary font-medium text-xs md:text-sm uppercase tracking-wider">Go-To-Market</span>
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mt-1">
