@@ -29,7 +29,7 @@ const SlideGTM = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-4 md:mb-6"
+          className="text-center mb-8 md:mb-12"
         >
           <span className="text-primary font-medium text-xs md:text-sm uppercase tracking-wider">Go-To-Market</span>
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mt-1">
