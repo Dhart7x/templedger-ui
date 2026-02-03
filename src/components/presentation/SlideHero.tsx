@@ -31,15 +31,6 @@ const SlideHero = () => {
           Post-Hire Orchestration for Temp Staffing
         </motion.p>
 
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-sm md:text-base text-muted-foreground/80 max-w-xl mx-auto leading-relaxed"
-        >
-          A system of record for contingent labour execution. Verifiable, immutable proof chain 
-          connecting worked hours to payroll and invoicing with audit-grade certainty.
-        </motion.p>
       </div>
     </Slide>
   );
