@@ -42,17 +42,6 @@ const SlideTLSolution = () => {
           <p className="text-sm md:text-lg text-muted-foreground mt-2">
             The Unified System of Truth for Temp Staffing
           </p>
-        </motion.div>
-
-        {/* Main description */}
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="text-center text-sm md:text-lg text-foreground font-medium mb-4 md:mb-6"
-        >
-          A verified execution chain for every worker.
-        </motion.p>
 
         {/* Ledger steps chain */}
         <motion.div
