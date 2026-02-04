@@ -20,19 +20,18 @@ const SlideDemo = () => {
   };
 
   const processSteps = [
-    { num: "01", text: "Labour users mandate Temp Ledger as the execution layer" },
-    { num: "02", text: "Agencies operate through a client-specific front end" },
-    { num: "03", text: "Worker data, shifts, and exceptions are handled there" },
-    { num: "04", text: "On-site Time & Attendance is deployed" },
-    { num: "05", text: "Attendance syncs directly into the execution ledger" },
+    "Agencies operate through a client-specific front end",
+    "Worker data, shifts, and exceptions are handled there",
+    "On-site Time & Attendance is deployed",
+    "Attendance syncs directly into system",
   ];
 
   const outputs = [
-    { icon: Eye, text: "One real-time operational view" },
-    { icon: Gauge, text: "Live status by department and location" },
-    { icon: BarChart3, text: "Fulfilment and exceptions across agencies" },
-    { icon: FileCheck, text: "Payroll and invoicing readiness before billing" },
-    { icon: Clock, text: "Objective, ledger-derived agency performance" },
+    "One real-time operational view",
+    "Live status by department and location",
+    "Fulfilment and exceptions across agencies",
+    "Payroll and invoicing readiness before billing",
+    "Objective, ledger-derived agency performance",
   ];
 
 
@@ -52,27 +51,28 @@ const SlideDemo = () => {
             How It Works
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 mb-4 md:mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mb-6 md:mb-8 max-w-4xl mx-auto">
             {/* Process Column */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="relative"
+              className="bg-card/60 border border-border rounded-xl p-4 md:p-6"
             >
-              <div className="absolute -left-2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary/50 to-transparent hidden md:block" />
-              <h3 className="text-[10px] md:text-xs font-bold text-primary uppercase tracking-widest mb-2 md:mb-4">Process</h3>
-              <div className="space-y-1 md:space-y-2">
+              <h3 className="text-xs md:text-sm font-bold text-primary mb-3 md:mb-4">Process</h3>
+              <div className="space-y-2 md:space-y-3">
                 {processSteps.map((step, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: 0.2 + index * 0.06 }}
-                    className="flex items-start gap-2 md:gap-3 group"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3, delay: 0.2 + index * 0.08 }}
+                    className="flex items-start gap-3"
                   >
-                    <span className="text-[10px] md:text-xs font-bold text-primary/60 mt-0.5 w-4 md:w-5 flex-shrink-0">{step.num}</span>
-                    <span className="text-[11px] md:text-sm text-foreground leading-tight">{step.text}</span>
+                    <div className="w-5 h-5 md:w-6 md:h-6 rounded-full trust-gradient flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-[9px] md:text-[10px] font-bold text-foreground">{index + 1}</span>
+                    </div>
+                    <span className="text-[11px] md:text-sm text-foreground leading-relaxed">{step}</span>
                   </motion.div>
                 ))}
               </div>
@@ -80,26 +80,23 @@ const SlideDemo = () => {
 
             {/* Output Column */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="relative"
+              className="bg-card/60 border border-border rounded-xl p-4 md:p-6"
             >
-              <div className="absolute -left-2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary/50 to-transparent hidden md:block" />
-              <h3 className="text-[10px] md:text-xs font-bold text-primary uppercase tracking-widest mb-2 md:mb-4">Output for Labour User</h3>
-              <div className="space-y-1.5 md:space-y-2.5">
+              <h3 className="text-xs md:text-sm font-bold text-primary mb-3 md:mb-4">Output for Labour User</h3>
+              <div className="space-y-2 md:space-y-3">
                 {outputs.map((item, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: 0.4 + index * 0.06 }}
-                    className="flex items-center gap-2 md:gap-3 group"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3, delay: 0.4 + index * 0.08 }}
+                    className="flex items-start gap-3"
                   >
-                    <div className="w-5 h-5 md:w-6 md:h-6 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                      <item.icon className="w-2.5 h-2.5 md:w-3 md:h-3 text-primary" />
-                    </div>
-                    <span className="text-[11px] md:text-sm text-foreground leading-tight">{item.text}</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-1.5 md:mt-2" />
+                    <span className="text-[11px] md:text-sm text-foreground leading-relaxed">{item}</span>
                   </motion.div>
                 ))}
               </div>
