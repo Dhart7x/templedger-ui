@@ -37,8 +37,11 @@ const SlideTLSolution = () => {
           className="text-center mb-4 md:mb-8"
         >
           <h2 className="text-lg md:text-3xl lg:text-4xl font-bold">
-            What the Ledger Is
+            Introducing Temp Ledger
           </h2>
+          <p className="text-sm md:text-lg text-muted-foreground mt-2">
+            The Unified System of Truth for Temp Staffing
+          </p>
         </motion.div>
 
         {/* Main description */}
