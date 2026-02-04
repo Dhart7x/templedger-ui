@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { AlertTriangle, CreditCard, FileText, Users, TrendingDown, Layers } from "lucide-react";
+import { AlertTriangle, CreditCard, FileText, Users, TrendingDown } from "lucide-react";
 import Slide from "./Slide";
 
 const rootCauses = [
@@ -13,8 +13,8 @@ const consequences = [
   { icon: CreditCard, text: "Pay queries" },
   { icon: FileText, text: "Invoice disputes" },
   { icon: AlertTriangle, text: "Compliance failures" },
-  { icon: TrendingDown, text: "Misreported / untrusted agency performance" },
-  { icon: Users, text: "Worker disengagement & attrition" },
+  { icon: TrendingDown, text: "Misreported performance" },
+  { icon: Users, text: "Worker attrition" },
 ];
 
 const SlideProblem = () => {
@@ -36,58 +36,57 @@ const SlideProblem = () => {
           </p>
         </motion.div>
 
-        {/* Two columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto mb-6 md:mb-8">
-          {/* Root causes */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <h3 className="text-xs md:text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">
-              The Reality
-            </h3>
-            <div className="space-y-2">
-              {rootCauses.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -15 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: 0.25 + index * 0.06 }}
-                  className="flex items-start gap-3 p-2.5 md:p-3 rounded-lg bg-card border border-border"
-                >
-                  <Layers className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" />
-                  <span className="text-xs md:text-sm text-foreground">{item}</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+        {/* The Reality - Vertical bullet points */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="max-w-2xl mx-auto mb-6 md:mb-8"
+        >
+          <h3 className="text-xs md:text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide text-center">
+            The Reality
+          </h3>
+          <div className="space-y-2">
+            {rootCauses.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -15 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.25 + index * 0.06 }}
+                className="flex items-center gap-3 p-2.5 md:p-3"
+              >
+                <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                <span className="text-sm md:text-base text-foreground">{item}</span>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
-          {/* Consequences */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <h3 className="text-xs md:text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide">
-              This Leads To
-            </h3>
-            <div className="space-y-2">
-              {consequences.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 15 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: 0.35 + index * 0.06 }}
-                  className="flex items-center gap-3 p-2.5 md:p-3 rounded-lg bg-destructive/5 border border-destructive/20"
-                >
-                  <item.icon className="w-4 h-4 text-destructive flex-shrink-0" />
-                  <span className="text-xs md:text-sm text-foreground">{item.text}</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
+        {/* This Leads To - Horizontal boxes */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="max-w-4xl mx-auto mb-6 md:mb-8"
+        >
+          <h3 className="text-xs md:text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide text-center">
+            This Leads To
+          </h3>
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3">
+            {consequences.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.5 + index * 0.06 }}
+                className="flex items-center gap-2 px-3 py-2 md:px-4 md:py-2.5 rounded-lg bg-destructive/10 border border-destructive/30"
+              >
+                <item.icon className="w-3.5 h-3.5 md:w-4 md:h-4 text-destructive flex-shrink-0" />
+                <span className="text-xs md:text-sm text-foreground font-medium">{item.text}</span>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Bottom line */}
         <motion.div
