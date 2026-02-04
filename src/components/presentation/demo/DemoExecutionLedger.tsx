@@ -10,15 +10,60 @@ import { Badge } from "@/components/ui/badge";
 
 // Mock data
 const departments = ["All Departments", "Warehouse", "Production", "Logistics"];
-const agencies = ["All Agencies", "Staffline", "Blue Arrow", "Adecco"];
+const agencies = ["All Agencies", "Staffline", "Blue Arrow", "Adecco", "Reed", "Manpower", "Hays"];
 const payPeriods = ["Week 5 (Jan 27 - Feb 2)", "Week 4 (Jan 20 - 26)", "Week 3 (Jan 13 - 19)"];
 
 const workers = [
+  // Warehouse workers
   { id: "W001", name: "James Wilson", department: "Warehouse", agency: "Staffline" },
-  { id: "W002", name: "Sarah Chen", department: "Production", agency: "Blue Arrow" },
-  { id: "W003", name: "Michael Brown", department: "Logistics", agency: "Adecco" },
   { id: "W004", name: "Emma Davis", department: "Warehouse", agency: "Staffline" },
+  { id: "W006", name: "Daniel Martinez", department: "Warehouse", agency: "Blue Arrow" },
+  { id: "W007", name: "Sophie Turner", department: "Warehouse", agency: "Adecco" },
+  { id: "W008", name: "Ryan O'Brien", department: "Warehouse", agency: "Reed" },
+  { id: "W009", name: "Olivia Johnson", department: "Warehouse", agency: "Manpower" },
+  { id: "W010", name: "Jack Thompson", department: "Warehouse", agency: "Hays" },
+  { id: "W011", name: "Chloe Anderson", department: "Warehouse", agency: "Staffline" },
+  { id: "W012", name: "Liam Patel", department: "Warehouse", agency: "Blue Arrow" },
+  { id: "W013", name: "Grace Murphy", department: "Warehouse", agency: "Reed" },
+  { id: "W014", name: "Nathan Clarke", department: "Warehouse", agency: "Manpower" },
+  { id: "W015", name: "Mia Robinson", department: "Warehouse", agency: "Hays" },
+  { id: "W016", name: "Oscar Bennett", department: "Warehouse", agency: "Adecco" },
+  { id: "W017", name: "Isla Cooper", department: "Warehouse", agency: "Staffline" },
+  
+  // Production workers
+  { id: "W002", name: "Sarah Chen", department: "Production", agency: "Blue Arrow" },
   { id: "W005", name: "Robert Taylor", department: "Production", agency: "Blue Arrow" },
+  { id: "W018", name: "Ethan Wright", department: "Production", agency: "Staffline" },
+  { id: "W019", name: "Ava Hughes", department: "Production", agency: "Adecco" },
+  { id: "W020", name: "Noah Mitchell", department: "Production", agency: "Reed" },
+  { id: "W021", name: "Isabella Scott", department: "Production", agency: "Manpower" },
+  { id: "W022", name: "George Harris", department: "Production", agency: "Hays" },
+  { id: "W023", name: "Amelia Foster", department: "Production", agency: "Staffline" },
+  { id: "W024", name: "Harry Morgan", department: "Production", agency: "Blue Arrow" },
+  { id: "W025", name: "Emily Richardson", department: "Production", agency: "Reed" },
+  { id: "W026", name: "Alfie Brooks", department: "Production", agency: "Manpower" },
+  { id: "W027", name: "Poppy Walker", department: "Production", agency: "Hays" },
+  { id: "W028", name: "Charlie Evans", department: "Production", agency: "Adecco" },
+  { id: "W029", name: "Jessica Green", department: "Production", agency: "Staffline" },
+  { id: "W030", name: "Thomas King", department: "Production", agency: "Reed" },
+  
+  // Logistics workers
+  { id: "W003", name: "Michael Brown", department: "Logistics", agency: "Adecco" },
+  { id: "W031", name: "Ella Baker", department: "Logistics", agency: "Staffline" },
+  { id: "W032", name: "William Adams", department: "Logistics", agency: "Blue Arrow" },
+  { id: "W033", name: "Ruby Nelson", department: "Logistics", agency: "Reed" },
+  { id: "W034", name: "Henry Carter", department: "Logistics", agency: "Manpower" },
+  { id: "W035", name: "Daisy Collins", department: "Logistics", agency: "Hays" },
+  { id: "W036", name: "Leo Phillips", department: "Logistics", agency: "Staffline" },
+  { id: "W037", name: "Freya Campbell", department: "Logistics", agency: "Adecco" },
+  { id: "W038", name: "Archie Stewart", department: "Logistics", agency: "Blue Arrow" },
+  { id: "W039", name: "Lily Sanchez", department: "Logistics", agency: "Reed" },
+  { id: "W040", name: "Max Turner", department: "Logistics", agency: "Manpower" },
+  { id: "W041", name: "Evie Parker", department: "Logistics", agency: "Hays" },
+  { id: "W042", name: "Finn Edwards", department: "Logistics", agency: "Staffline" },
+  { id: "W043", name: "Scarlett Morris", department: "Logistics", agency: "Blue Arrow" },
+  { id: "W044", name: "Sebastian Lee", department: "Logistics", agency: "Reed" },
+  { id: "W045", name: "Florence Ward", department: "Logistics", agency: "Manpower" },
 ];
 
 interface ExecutionStep {
