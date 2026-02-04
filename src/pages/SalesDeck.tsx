@@ -61,7 +61,9 @@ const SalesDeck = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [nextSlide, prevSlide, navigate]);
 
-  const CurrentSlideComponent = slides[currentSlide].component;
+  // Ensure currentSlide is within bounds
+  const safeCurrentSlide = Math.min(currentSlide, slides.length - 1);
+  const CurrentSlideComponent = slides[safeCurrentSlide]?.component || slides[0].component;
 
   const slideVariants = {
     enter: (direction: number) => ({
@@ -97,7 +99,7 @@ const SalesDeck = () => {
           </div>
         </div>
         <div className="text-xs text-muted-foreground">
-          {currentSlide + 1} / {slides.length}
+          {safeCurrentSlide + 1} / {slides.length}
         </div>
       </header>
 
@@ -105,7 +107,7 @@ const SalesDeck = () => {
       <main className="h-full w-full relative overflow-hidden">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
-            key={currentSlide}
+            key={safeCurrentSlide}
             custom={direction}
             variants={slideVariants}
             initial="enter"
@@ -144,7 +146,7 @@ const SalesDeck = () => {
                 setCurrentSlide(index);
               }}
               className={`w-2 h-2 rounded-full transition-all ${
-                currentSlide === index
+                safeCurrentSlide === index
                   ? "bg-primary w-6"
                   : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
               }`}
