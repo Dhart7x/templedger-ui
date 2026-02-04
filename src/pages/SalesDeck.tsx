@@ -91,21 +91,23 @@ const SalesDeck = () => {
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-background relative">
-      {/* Header */}
-      <header className="absolute top-0 left-0 right-0 z-20 px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => navigate("/")}
-            className="w-8 h-8 rounded-lg bg-card/80 border border-border hover:border-primary/50 flex items-center justify-center transition-colors"
-          >
-            <Home className="w-4 h-4 text-muted-foreground" />
-          </button>
-          <span className="font-semibold text-sm trust-gradient-text">Temp Ledger</span>
-        </div>
-        <div className="text-xs text-muted-foreground">
-          {safeCurrentSlide + 1} / {slides.length}
-        </div>
-      </header>
+      {/* Header - hidden when in demo */}
+      {!hideNavigation && (
+        <header className="absolute top-0 left-0 right-0 z-20 px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => navigate("/")}
+              className="w-8 h-8 rounded-lg bg-card/80 border border-border hover:border-primary/50 flex items-center justify-center transition-colors"
+            >
+              <Home className="w-4 h-4 text-muted-foreground" />
+            </button>
+            <span className="font-semibold text-sm trust-gradient-text">Temp Ledger</span>
+          </div>
+          <div className="text-xs text-muted-foreground">
+            {safeCurrentSlide + 1} / {slides.length}
+          </div>
+        </header>
+      )}
 
       {/* Main content */}
       <main className="h-full w-full relative overflow-hidden">

@@ -194,7 +194,7 @@ const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
     return (
       <div className="w-full h-full flex flex-col bg-background">
         {/* Back button */}
-        <div className="absolute top-20 left-6 z-30">
+        <div className="absolute top-6 left-6 z-30">
           <Button
             variant="outline"
             size="sm"
