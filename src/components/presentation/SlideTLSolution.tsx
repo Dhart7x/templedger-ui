@@ -42,6 +42,7 @@ const SlideTLSolution = () => {
           <p className="text-sm md:text-lg text-muted-foreground mt-2">
             The Unified System of Truth for Temp Staffing
           </p>
+        </motion.div>
 
         {/* Ledger steps chain */}
         <motion.div
