@@ -61,9 +61,9 @@ const SlideProblem = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="max-w-4xl mx-auto mb-6 md:mb-8"
+          className="max-w-4xl mx-auto mb-6 md:mb-10 lg:mb-12"
         >
-          <h3 className="text-sm md:text-base font-semibold text-foreground/70 mb-3 uppercase tracking-wide text-center">
+          <h3 className="text-sm md:text-base font-semibold text-foreground/70 mb-3 md:mb-4 uppercase tracking-wide text-center">
             This Leads To
           </h3>
           <div className="flex flex-wrap justify-center gap-2 md:gap-3">

@@ -43,9 +43,9 @@ const SlideIntermediation = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="max-w-xl mx-auto mb-3 md:mb-6"
+          className="max-w-xl mx-auto mb-3 md:mb-8 lg:mb-10"
         >
-          <div className="space-y-1 md:space-y-2">
+          <div className="space-y-1 md:space-y-3 lg:space-y-4">
             {realities.map((item, index) => (
               <motion.div
                 key={index}
