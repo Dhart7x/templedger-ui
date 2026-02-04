@@ -76,7 +76,7 @@ const SlideProblem = () => {
                 className="flex items-center gap-2 px-3 py-2 md:px-4 md:py-2.5 rounded-lg bg-destructive/10 border border-destructive/30"
               >
                 <item.icon className="w-3.5 h-3.5 md:w-4 md:h-4 text-destructive flex-shrink-0" />
-                <span className="text-xs md:text-sm text-foreground font-medium">{item.text}</span>
+                <span className="text-sm md:text-base text-foreground font-medium">{item.text}</span>
               </motion.div>
             ))}
           </div>

@@ -61,7 +61,7 @@ const SlidePerformance = () => {
                 >
                   <item.icon className="w-3 h-3 md:w-4 md:h-4 text-primary" />
                 </motion.div>
-                <span className="text-[10px] md:text-sm text-foreground font-medium leading-tight">{item.text}</span>
+                <span className="text-sm md:text-base text-foreground font-medium leading-tight">{item.text}</span>
               </motion.div>
             ))}
           </div>

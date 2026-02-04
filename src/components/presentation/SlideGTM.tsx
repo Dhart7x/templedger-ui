@@ -147,7 +147,7 @@ const SlideGTM = () => {
                   {item.benefits.map((benefit, bIndex) => (
                     <div key={bIndex} className="flex items-center gap-1.5">
                       <Check className="w-3 h-3 text-accent flex-shrink-0" />
-                      <span className="text-[10px] md:text-xs text-muted-foreground">{benefit}</span>
+                      <span className="text-sm md:text-base text-foreground">{benefit}</span>
                     </div>
                   ))}
                 </div>
