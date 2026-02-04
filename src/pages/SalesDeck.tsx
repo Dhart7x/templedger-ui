@@ -9,6 +9,7 @@ import SlideTLSolution from "@/components/presentation/SlideTLSolution";
 import SlideDemo from "@/components/presentation/SlideDemo";
 import SlideTimeAttendance from "@/components/presentation/SlideTimeAttendance";
 import SlidePerformance from "@/components/presentation/SlidePerformance";
+import SlideReactive from "@/components/presentation/SlideReactive";
 import SlideAdoption from "@/components/presentation/SlideAdoption";
 
 const slides = [
@@ -19,7 +20,8 @@ const slides = [
   { id: 4, component: SlideDemo },
   { id: 5, component: SlideTimeAttendance },
   { id: 6, component: SlidePerformance },
-  { id: 7, component: SlideAdoption },
+  { id: 7, component: SlideReactive },
+  { id: 8, component: SlideAdoption },
 ];
 
 const SalesDeck = () => {
