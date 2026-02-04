@@ -120,7 +120,11 @@ const SalesDeck = () => {
             transition={{ type: "tween", duration: 0.4, ease: "easeInOut" }}
             className="absolute inset-0"
           >
-            <CurrentSlideComponent />
+            {isOnDemoSlide ? (
+              <SlideDemo onDemoStateChange={setIsInDemo} />
+            ) : (
+              <CurrentSlideComponent />
+            )}
           </motion.div>
         </AnimatePresence>
 
