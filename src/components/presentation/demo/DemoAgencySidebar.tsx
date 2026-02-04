@@ -44,6 +44,9 @@ const DemoAgencySidebar = ({ activeView, onViewChange }: DemoAgencySidebarProps)
                   {item.id === "issues" && (
                     <span className="ml-auto text-xs bg-destructive/20 text-destructive px-1.5 py-0.5 rounded">4</span>
                   )}
+                  {item.id === "allocations" && (
+                    <span className="ml-auto text-xs bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded">5</span>
+                  )}
                 </button>
               </li>
             );

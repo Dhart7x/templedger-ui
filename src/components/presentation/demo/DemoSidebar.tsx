@@ -1,4 +1,4 @@
-import { Eye, Building2, Users, FileCheck, CalendarPlus, BookOpen } from "lucide-react";
+import { Eye, Building2, Users, FileCheck, CalendarPlus, BookOpen, ClipboardCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface DemoSidebarProps {
@@ -9,6 +9,7 @@ interface DemoSidebarProps {
 const navItems = [
   { id: "snapshot", label: "Live Snapshot", icon: Eye },
   { id: "departments", label: "Departments", icon: Building2 },
+  { id: "coverage", label: "Shift Coverage", icon: ClipboardCheck },
   { id: "agencies", label: "Agencies", icon: Users },
   { id: "ledger", label: "Execution Ledger", icon: BookOpen },
   { id: "payroll", label: "Payroll & Billing", icon: FileCheck },
