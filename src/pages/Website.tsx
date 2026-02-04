@@ -51,14 +51,14 @@ const Website = () => {
                 transition={{ duration: 1, delay: 0.6 }}
                 className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10"
               >
-                Agencies and labour users operate in different systems.{" "}
+                One system to manage all your labour providers.{" "}
                 <motion.span
                   initial={{ opacity: 0, filter: "blur(4px)" }}
                   animate={{ opacity: 1, filter: "blur(0px)" }}
                   transition={{ duration: 1.2, delay: 1 }}
                   className="text-foreground font-medium"
                 >
-                  Temp Ledger orchestrates them into one.
+                  From compliance to pay to invoice.
                 </motion.span>
               </motion.p>
               <motion.div
@@ -177,10 +177,10 @@ const Website = () => {
                 Ledger-Driven Orchestration
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-4">
-                Temp Ledger enforces a single execution ledger that every labour provider must operate through.
+                Temp Ledger is a single execution ledger that every labour provider must operate through.
               </p>
               <p className="text-foreground font-medium mb-12">
-                It doesn't replace systems. It orchestrates them.
+                One system. All suppliers. Complete control.
               </p>
             </motion.div>
 

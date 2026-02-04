@@ -1,8 +1,14 @@
 import { ReactNode, useState } from "react";
-import { Shield, Menu, X } from "lucide-react";
+import { Shield, Menu, X, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface WebsiteLayoutProps {
   children: ReactNode;
@@ -30,40 +36,54 @@ const WebsiteLayout = ({ children }: WebsiteLayoutProps) => {
     <div className="min-h-screen w-full bg-background relative">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between bg-background/90 backdrop-blur-md border-b border-border/50">
-        <button
-          onClick={() => navigate("/website")}
-          className="flex items-center gap-2 group"
-        >
-          <div className="w-8 h-8 rounded-lg trust-gradient flex items-center justify-center transition-transform group-hover:scale-105">
-            <Shield className="w-4 h-4 text-foreground" />
-          </div>
-          <span className="font-semibold text-foreground text-sm">Temp Ledger</span>
-        </button>
+        {/* Left side: Logo + Dropdown */}
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => navigate("/website")}
+            className="flex items-center gap-2 group"
+          >
+            <div className="w-8 h-8 rounded-lg trust-gradient flex items-center justify-center transition-transform group-hover:scale-105">
+              <Shield className="w-4 h-4 text-foreground" />
+            </div>
+            <span className="font-semibold text-foreground text-sm hidden sm:inline">Temp Ledger</span>
+          </button>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => scrollToSection(item.id)}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors relative group"
-            >
-              {item.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
-            </button>
-          ))}
-          <Button size="sm" className="ml-2">
+          {/* Desktop Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="hidden md:flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors px-3 py-2 rounded-lg hover:bg-card/50">
+                Solutions
+                <ChevronDown className="w-4 h-4" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="w-48 bg-card border border-border z-50">
+              {navItems.map((item) => (
+                <DropdownMenuItem
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="cursor-pointer"
+                >
+                  {item.label}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+
+        {/* Right side: Book Demo */}
+        <div className="flex items-center gap-3">
+          <Button size="sm" className="hidden md:flex">
             Book Demo
           </Button>
-        </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
-        >
-          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </header>
 
       {/* Mobile Menu */}
@@ -73,19 +93,20 @@ const WebsiteLayout = ({ children }: WebsiteLayoutProps) => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed top-16 left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-b border-border p-6 md:hidden"
+            className="fixed top-16 left-0 right-0 z-40 bg-background border-b border-border p-6 md:hidden"
           >
             <nav className="flex flex-col gap-4">
+              <p className="text-xs text-muted-foreground uppercase tracking-wide">Solutions</p>
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-left text-sm text-muted-foreground hover:text-foreground transition-colors py-2"
+                  className="text-left text-sm text-foreground hover:text-primary transition-colors py-2 pl-2 border-l-2 border-border hover:border-primary"
                 >
                   {item.label}
                 </button>
               ))}
-              <Button size="sm" className="w-full mt-2">
+              <Button size="sm" className="w-full mt-4">
                 Book Demo
               </Button>
             </nav>
