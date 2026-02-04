@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft, CheckCircle, XCircle } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 import Slide from "./Slide";
 
 const beforeItems = [
@@ -11,10 +11,10 @@ const beforeItems = [
 ];
 
 const afterItems = [
-  "Verified compliance",
+  "Verified compliance upfront",
   "Correct pay, every cycle",
   "Objective, real-time agency performance",
-  "Performance derived from execution, not reporting",
+  "Performance derived from execution",
   "Lower attrition and higher fulfilment",
 ];
 
@@ -30,7 +30,7 @@ const SlideBeforeAfter = () => {
           className="text-center mb-6 md:mb-10"
         >
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold">
-            Before vs After Temp Ledger
+            Before vs After
           </h2>
         </motion.div>
 
@@ -44,10 +44,10 @@ const SlideBeforeAfter = () => {
             className="p-4 md:p-6 rounded-xl bg-card border border-border"
           >
             <div className="flex items-center gap-2 mb-4">
-              <ArrowLeft className="w-5 h-5 text-destructive" />
+              <ArrowLeft className="w-5 h-5 text-muted-foreground" />
               <h3 className="text-lg font-semibold text-foreground">Before</h3>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {beforeItems.map((item, index) => (
                 <motion.div
                   key={index}
@@ -56,8 +56,8 @@ const SlideBeforeAfter = () => {
                   transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
                   className="flex items-start gap-2"
                 >
-                  <XCircle className="w-4 h-4 text-destructive flex-shrink-0 mt-0.5" />
-                  <span className="text-sm text-muted-foreground">{item}</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground flex-shrink-0 mt-1.5" />
+                  <span className="text-sm text-foreground">{item}</span>
                 </motion.div>
               ))}
             </div>
@@ -68,13 +68,13 @@ const SlideBeforeAfter = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="p-4 md:p-6 rounded-xl bg-card border border-primary/30"
+            className="p-4 md:p-6 rounded-xl bg-card border border-border"
           >
             <div className="flex items-center gap-2 mb-4">
-              <ArrowRight className="w-5 h-5 text-primary" />
+              <ArrowRight className="w-5 h-5 text-muted-foreground" />
               <h3 className="text-lg font-semibold text-foreground">After</h3>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {afterItems.map((item, index) => (
                 <motion.div
                   key={index}
@@ -83,7 +83,7 @@ const SlideBeforeAfter = () => {
                   transition={{ duration: 0.3, delay: 0.4 + index * 0.05 }}
                   className="flex items-start gap-2"
                 >
-                  <CheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground flex-shrink-0 mt-1.5" />
                   <span className="text-sm text-foreground">{item}</span>
                 </motion.div>
               ))}
@@ -99,7 +99,7 @@ const SlideBeforeAfter = () => {
           className="text-center"
         >
           <p className="text-sm md:text-lg font-bold text-foreground">
-            Guesswork is replaced with evidence.
+            Control replaces trust.
           </p>
         </motion.div>
       </div>
