@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import SlideHero from "@/components/presentation/SlideHero";
 import SlideProblem from "@/components/presentation/SlideProblem";
+import SlideIntermediation from "@/components/presentation/SlideIntermediation";
 import SlideSolution from "@/components/presentation/SlideSolution";
 import SlideTLSolution from "@/components/presentation/SlideTLSolution";
 import SlideMinimalChange from "@/components/presentation/SlideMinimalChange";
