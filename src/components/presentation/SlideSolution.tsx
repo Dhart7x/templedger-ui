@@ -68,7 +68,7 @@ const SlideSolution = () => {
           </div>
 
           {/* Desktop: Horizontal wrap with connectors */}
-          <div className="hidden md:flex flex-wrap justify-center items-center gap-2 md:gap-3 px-2">
+          <div className="hidden md:flex flex-wrap justify-center items-center gap-3 lg:gap-4 px-2">
             {ledgerSteps.map((step, index) => (
               <motion.div
                 key={index}
