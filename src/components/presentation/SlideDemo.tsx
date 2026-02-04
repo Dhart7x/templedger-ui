@@ -35,11 +35,6 @@ const SlideDemo = () => {
     "Objective, ledger-derived agency performance",
   ];
 
-  const principles = [
-    "No reliance on agency back-office systems",
-    "No retrospective reconciliation",
-    "Execution enforced before money moves",
-  ];
 
   if (!showDemo) {
     return (
@@ -54,7 +49,7 @@ const SlideDemo = () => {
             How It Works
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8 max-w-3xl mx-auto">
             {/* How It Works Column */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -91,23 +86,6 @@ const SlideDemo = () => {
               </ul>
             </motion.div>
 
-            {/* Principles Column */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.3 }}
-              className="bg-card/50 border border-border rounded-lg p-4"
-            >
-              <h3 className="text-xs md:text-sm font-semibold text-primary mb-3">Principles</h3>
-              <ul className="space-y-2">
-                {principles.map((item, index) => (
-                  <li key={index} className="text-[11px] md:text-sm text-foreground flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
           </div>
 
           <motion.p
