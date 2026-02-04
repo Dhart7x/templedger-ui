@@ -27,7 +27,7 @@ const SlideHero = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-lg md:text-xl lg:text-2xl text-foreground font-medium max-w-2xl mx-auto mb-4"
         >
-          The Operating System for Labour Users
+          The Operating System Behind Every Shift, Pay Run, and Invoice
         </motion.p>
 
         <motion.p
@@ -36,7 +36,7 @@ const SlideHero = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto"
         >
-          Manage agencies, labour, and outcomes in one place.
+          Adopted by labour users. Enforced across suppliers.
         </motion.p>
       </div>
     </Slide>

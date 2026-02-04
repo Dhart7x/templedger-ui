@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, Building2, BarChart3, AlertTriangle, DollarSign, Settings } from "lucide-react";
+import { Link2, Clock, AlertTriangle, Building2, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface DemoSidebarProps {
@@ -7,13 +7,11 @@ interface DemoSidebarProps {
 }
 
 const navItems = [
-  { id: "overview", label: "Overview", icon: LayoutDashboard },
-  { id: "live-labour", label: "Live Labour", icon: Users },
-  { id: "agencies", label: "Agencies", icon: Building2 },
-  { id: "performance", label: "Performance", icon: BarChart3 },
+  { id: "execution", label: "Execution Chain", icon: Link2 },
+  { id: "attendance", label: "Live Attendance", icon: Clock },
   { id: "exceptions", label: "Exceptions", icon: AlertTriangle },
-  { id: "spend", label: "Spend & Overtime", icon: DollarSign },
-  { id: "settings", label: "Settings", icon: Settings },
+  { id: "suppliers", label: "Suppliers", icon: Building2 },
+  { id: "assurance", label: "Assurance & Performance", icon: Shield },
 ];
 
 const DemoSidebar = ({ activeView, onViewChange }: DemoSidebarProps) => {
@@ -22,7 +20,7 @@ const DemoSidebar = ({ activeView, onViewChange }: DemoSidebarProps) => {
       <div className="p-4 border-b border-border">
         <div className="flex items-center gap-2">
           <div className="w-6 h-6 rounded bg-primary/20 flex items-center justify-center">
-            <LayoutDashboard className="w-3 h-3 text-primary" />
+            <Link2 className="w-3 h-3 text-primary" />
           </div>
           <span className="font-semibold text-foreground text-sm">Temp Ledger</span>
         </div>

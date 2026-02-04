@@ -1,26 +1,18 @@
 import { motion } from "framer-motion";
-import { Building2, Layers, Clock } from "lucide-react";
+import { Users, MapPin, Building2, AlertCircle } from "lucide-react";
 import Slide from "./Slide";
 
-const problemItems = [
-  { 
-    icon: Building2, 
-    text: "CRMs store data — they don't execute"
-  },
-  { 
-    icon: Layers, 
-    text: "HR, Payroll, Billing, and Credit Control operate in silos"
-  },
-  { 
-    icon: Clock, 
-    text: "Execution is validated retrospectively"
-  },
+const visibilityItems = [
+  { icon: Users, text: "Who is on site" },
+  { icon: MapPin, text: "Where they are working" },
+  { icon: Building2, text: "Which supplier provided them" },
+  { icon: AlertCircle, text: "Which exceptions exist" },
 ];
 
-const SlideRootCause = () => {
+const SlideVisibility = () => {
   return (
-    <Slide className="relative">
-      <div className="max-w-5xl mx-auto w-full">
+    <Slide className="relative overflow-hidden">
+      <div className="max-w-5xl mx-auto w-full relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -28,15 +20,15 @@ const SlideRootCause = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-6 md:mb-10"
         >
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold">
-            Why This Keeps Happening
+          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold">
+            Know What's True — Right Now
           </h2>
         </motion.div>
 
-        {/* Problem items */}
+        {/* Visibility items */}
         <div className="max-w-2xl mx-auto mb-8 md:mb-12">
           <div className="space-y-3 md:space-y-4">
-            {problemItems.map((item, index) => (
+            {visibilityItems.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
@@ -47,9 +39,7 @@ const SlideRootCause = () => {
                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg trust-gradient flex items-center justify-center flex-shrink-0">
                   <item.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
                 </div>
-                <span className="text-sm md:text-base text-foreground font-medium">
-                  {item.text}
-                </span>
+                <span className="text-sm md:text-base text-foreground font-medium">{item.text}</span>
               </motion.div>
             ))}
           </div>
@@ -59,11 +49,11 @@ const SlideRootCause = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
           className="text-center"
         >
           <p className="text-sm md:text-lg font-bold text-foreground">
-            There is no enforced chain from work to pay to invoice.
+            Live execution, not lagging reports.
           </p>
         </motion.div>
       </div>
@@ -71,4 +61,4 @@ const SlideRootCause = () => {
   );
 };
 
-export default SlideRootCause;
+export default SlideVisibility;

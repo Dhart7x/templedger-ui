@@ -1,128 +1,154 @@
-import { Users, Clock, AlertTriangle, TrendingUp, DollarSign, Building2 } from "lucide-react";
+import { UserPlus, Shield, Calendar, Clock, CheckSquare, CreditCard, FileText, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+
+const chainSteps = [
+  { 
+    id: 1, 
+    icon: UserPlus, 
+    label: "Worker Registration",
+    status: "complete",
+    detail: "147 registered this week",
+    metric: "100%"
+  },
+  { 
+    id: 2, 
+    icon: Shield, 
+    label: "Compliance Locked",
+    status: "complete",
+    detail: "RTW, contracts verified",
+    metric: "100%"
+  },
+  { 
+    id: 3, 
+    icon: Calendar, 
+    label: "Shift Scheduled",
+    status: "complete",
+    detail: "2,340 shifts this week",
+    metric: "98%"
+  },
+  { 
+    id: 4, 
+    icon: Clock, 
+    label: "Attendance Captured",
+    status: "active",
+    detail: "342 on site now",
+    metric: "94%"
+  },
+  { 
+    id: 5, 
+    icon: CheckSquare, 
+    label: "Hours Approved",
+    status: "pending",
+    detail: "Awaiting manager sign-off",
+    metric: "—"
+  },
+  { 
+    id: 6, 
+    icon: CreditCard, 
+    label: "Pay Validated",
+    status: "pending",
+    detail: "Next run: Friday",
+    metric: "—"
+  },
+  { 
+    id: 7, 
+    icon: FileText, 
+    label: "Invoice Produced",
+    status: "pending",
+    detail: "After pay validation",
+    metric: "—"
+  },
+];
+
+const getStatusIcon = (status: string) => {
+  switch (status) {
+    case "complete":
+      return <CheckCircle className="w-4 h-4 text-green-500" />;
+    case "active":
+      return <Loader2 className="w-4 h-4 text-primary animate-spin" />;
+    case "blocked":
+      return <AlertCircle className="w-4 h-4 text-destructive" />;
+    default:
+      return <div className="w-4 h-4 rounded-full border-2 border-muted-foreground/30" />;
+  }
+};
+
+const getStatusBg = (status: string) => {
+  switch (status) {
+    case "complete":
+      return "bg-green-500/5 border-green-500/20";
+    case "active":
+      return "bg-primary/10 border-primary/30";
+    case "blocked":
+      return "bg-destructive/5 border-destructive/20";
+    default:
+      return "bg-muted/50 border-border";
+  }
+};
 
 const DemoOverview = () => {
   return (
     <div className="p-6">
-      <h2 className="text-xl font-bold mb-6">Overview</h2>
-      
-      {/* Top stats row */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div className="p-4 rounded-lg bg-card border border-border">
-          <div className="flex items-center gap-2 mb-2">
-            <Users className="w-4 h-4 text-primary" />
-            <span className="text-xs text-muted-foreground">On Site Now</span>
-          </div>
-          <div className="text-2xl font-bold">342</div>
-          <div className="text-xs text-muted-foreground">across 5 sites</div>
-        </div>
-        
-        <div className="p-4 rounded-lg bg-card border border-border">
-          <div className="flex items-center gap-2 mb-2">
-            <Clock className="w-4 h-4 text-primary" />
-            <span className="text-xs text-muted-foreground">Open Shifts</span>
-          </div>
-          <div className="text-2xl font-bold">18</div>
-          <div className="text-xs text-muted-foreground">unfilled today</div>
-        </div>
-        
-        <div className="p-4 rounded-lg bg-card border border-border">
-          <div className="flex items-center gap-2 mb-2">
-            <AlertTriangle className="w-4 h-4 text-destructive" />
-            <span className="text-xs text-muted-foreground">Today's No-Shows</span>
-          </div>
-          <div className="text-2xl font-bold text-destructive">7</div>
-          <div className="text-xs text-muted-foreground">4 from Staffline</div>
-        </div>
-        
-        <div className="p-4 rounded-lg bg-card border border-border">
-          <div className="flex items-center gap-2 mb-2">
-            <TrendingUp className="w-4 h-4 text-amber-500" />
-            <span className="text-xs text-muted-foreground">Overtime Alerts</span>
-          </div>
-          <div className="text-2xl font-bold text-amber-500">12</div>
-          <div className="text-xs text-muted-foreground">threshold breaches</div>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-xl font-bold">Execution Chain</h2>
+        <div className="text-xs text-muted-foreground">
+          Live status • Updated just now
         </div>
       </div>
-
-      {/* Two column layout */}
-      <div className="grid md:grid-cols-2 gap-6">
-        {/* Workers by department */}
-        <div className="rounded-lg bg-card border border-border p-4">
-          <h3 className="font-semibold mb-4 flex items-center gap-2">
-            <Users className="w-4 h-4" />
-            Workers by Department
-          </h3>
-          <div className="space-y-3">
-            {[
-              { dept: "Warehouse", count: 156, capacity: 180 },
-              { dept: "Picking", count: 89, capacity: 100 },
-              { dept: "Packing", count: 67, capacity: 70 },
-              { dept: "Loading", count: 30, capacity: 40 },
-            ].map((item) => (
-              <div key={item.dept} className="flex items-center justify-between">
-                <span className="text-sm">{item.dept}</span>
+      
+      {/* Chain visualization */}
+      <div className="space-y-2 mb-8">
+        {chainSteps.map((step, index) => (
+          <div key={step.id} className="relative">
+            <div className={`flex items-center gap-4 p-4 rounded-lg border ${getStatusBg(step.status)}`}>
+              <div className="flex items-center gap-3 flex-shrink-0">
+                <div className="w-8 h-8 rounded-lg trust-gradient flex items-center justify-center">
+                  <span className="text-sm font-bold text-foreground">{step.id}</span>
+                </div>
+                <step.icon className="w-5 h-5 text-foreground" />
+              </div>
+              
+              <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <div className="w-24 h-2 bg-muted rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-primary rounded-full" 
-                      style={{ width: `${(item.count / item.capacity) * 100}%` }}
-                    />
-                  </div>
-                  <span className="text-xs text-muted-foreground w-16 text-right">
-                    {item.count}/{item.capacity}
-                  </span>
+                  <span className="font-medium text-sm">{step.label}</span>
+                  {getStatusIcon(step.status)}
+                </div>
+                <div className="text-xs text-muted-foreground">{step.detail}</div>
+              </div>
+              
+              <div className="text-right flex-shrink-0">
+                <div className={`text-sm font-bold ${
+                  step.status === 'complete' ? 'text-green-500' : 
+                  step.status === 'active' ? 'text-primary' : 
+                  'text-muted-foreground'
+                }`}>
+                  {step.metric}
                 </div>
               </div>
-            ))}
+            </div>
+            
+            {/* Connector line */}
+            {index < chainSteps.length - 1 && (
+              <div className="absolute left-7 top-full h-2 w-0.5 bg-border" />
+            )}
           </div>
-        </div>
+        ))}
+      </div>
 
-        {/* At-risk agencies */}
-        <div className="rounded-lg bg-card border border-border p-4">
-          <h3 className="font-semibold mb-4 flex items-center gap-2">
-            <Building2 className="w-4 h-4" />
-            At-Risk Agencies
-          </h3>
-          <div className="space-y-3">
-            {[
-              { name: "Staffline", issue: "4 no-shows today", severity: "high" },
-              { name: "Pertemps", issue: "Low fulfilment (72%)", severity: "medium" },
-              { name: "Blue Arrow", issue: "3 RTW expiring", severity: "medium" },
-            ].map((agency) => (
-              <div key={agency.name} className="flex items-center justify-between p-2 rounded bg-muted/50">
-                <div>
-                  <div className="text-sm font-medium">{agency.name}</div>
-                  <div className="text-xs text-muted-foreground">{agency.issue}</div>
-                </div>
-                <div className={`w-2 h-2 rounded-full ${agency.severity === 'high' ? 'bg-destructive' : 'bg-amber-500'}`} />
-              </div>
-            ))}
+      {/* Chain integrity summary */}
+      <div className="rounded-lg bg-card border border-border p-4">
+        <h3 className="font-semibold mb-4">Chain Integrity</h3>
+        <div className="grid grid-cols-3 gap-4">
+          <div className="text-center p-3 rounded bg-green-500/5 border border-green-500/20">
+            <div className="text-2xl font-bold text-green-500">3</div>
+            <div className="text-xs text-muted-foreground">Steps Complete</div>
           </div>
-        </div>
-
-        {/* Labour spend */}
-        <div className="rounded-lg bg-card border border-border p-4 md:col-span-2">
-          <h3 className="font-semibold mb-4 flex items-center gap-2">
-            <DollarSign className="w-4 h-4" />
-            Labour Spend
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="text-center p-3 rounded bg-muted/50">
-              <div className="text-lg font-bold">£12,450</div>
-              <div className="text-xs text-muted-foreground">Today</div>
-            </div>
-            <div className="text-center p-3 rounded bg-muted/50">
-              <div className="text-lg font-bold">£68,230</div>
-              <div className="text-xs text-muted-foreground">This Week</div>
-            </div>
-            <div className="text-center p-3 rounded bg-muted/50">
-              <div className="text-lg font-bold text-amber-500">£4,120</div>
-              <div className="text-xs text-muted-foreground">Overtime (WTD)</div>
-            </div>
-            <div className="text-center p-3 rounded bg-muted/50">
-              <div className="text-lg font-bold">£285,900</div>
-              <div className="text-xs text-muted-foreground">This Month</div>
-            </div>
+          <div className="text-center p-3 rounded bg-primary/10 border border-primary/30">
+            <div className="text-2xl font-bold text-primary">1</div>
+            <div className="text-xs text-muted-foreground">In Progress</div>
+          </div>
+          <div className="text-center p-3 rounded bg-muted/50 border border-border">
+            <div className="text-2xl font-bold text-muted-foreground">3</div>
+            <div className="text-xs text-muted-foreground">Awaiting</div>
           </div>
         </div>
       </div>

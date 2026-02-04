@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
-import { Eye, BarChart3, MapPin, TrendingUp, AlertTriangle } from "lucide-react";
+import { UserCheck, Clock, CheckSquare, CreditCard, FileText } from "lucide-react";
 import Slide from "./Slide";
 
-const features = [
-  { icon: Eye, text: "Real-time view of labour across all agencies" },
-  { icon: BarChart3, text: "Objective performance metrics — not opinions" },
-  { icon: MapPin, text: "Live visibility of who is on site, where, and why" },
-  { icon: TrendingUp, text: "Spend, overtime, and risk surfaced as it happens" },
-  { icon: AlertTriangle, text: "Issues flagged before they become failures" },
+const chainSteps = [
+  { icon: UserCheck, text: "Registration and compliance enforced first" },
+  { icon: Clock, text: "Attendance captured as ground truth" },
+  { icon: CheckSquare, text: "Hours approved before pay" },
+  { icon: CreditCard, text: "Pay validated before invoicing" },
+  { icon: FileText, text: "Invoices produced from verified execution" },
 ];
 
 const SlideSolution = () => {
@@ -26,28 +26,31 @@ const SlideSolution = () => {
           className="text-center mb-4 md:mb-6"
         >
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-3">
-            Temp Ledger Puts Labour Users Back in Control
+            An Enforced Execution Chain
           </h2>
           <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
-            A single operating system that sits above your agencies and below your operations.
+            Temp Ledger enforces a single, ordered chain that every labour provider must follow.
           </p>
         </motion.div>
 
-        {/* Features */}
+        {/* Chain Steps */}
         <div className="max-w-2xl mx-auto mb-6 md:mb-10">
           <div className="space-y-2 md:space-y-3">
-            {features.map((item, index) => (
+            {chainSteps.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: 0.2 + index * 0.08 }}
-                className="flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors"
+                className="flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-xl bg-card border border-border"
               >
                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg trust-gradient flex items-center justify-center flex-shrink-0">
-                  <item.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
+                  <span className="text-xs md:text-sm font-bold text-foreground">{index + 1}</span>
                 </div>
-                <span className="text-sm md:text-base text-foreground font-medium">{item.text}</span>
+                <div className="flex items-center gap-2 md:gap-3 flex-1">
+                  <item.icon className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
+                  <span className="text-sm md:text-base text-foreground font-medium">{item.text}</span>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -61,7 +64,7 @@ const SlideSolution = () => {
           className="text-center"
         >
           <p className="text-sm md:text-lg font-bold text-foreground">
-            Agencies execute. You control.
+            If any step fails, nothing moves forward.
           </p>
         </motion.div>
       </div>

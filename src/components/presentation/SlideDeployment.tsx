@@ -1,23 +1,15 @@
 import { motion } from "framer-motion";
-import { Building2, Layers, Clock } from "lucide-react";
+import { Building2, Users, Scale, CreditCard } from "lucide-react";
 import Slide from "./Slide";
 
-const problemItems = [
-  { 
-    icon: Building2, 
-    text: "CRMs store data — they don't execute"
-  },
-  { 
-    icon: Layers, 
-    text: "HR, Payroll, Billing, and Credit Control operate in silos"
-  },
-  { 
-    icon: Clock, 
-    text: "Execution is validated retrospectively"
-  },
+const deploymentSteps = [
+  { icon: Building2, text: "Labour user adopts Temp Ledger" },
+  { icon: Users, text: "All staffing agencies are required to operate through it" },
+  { icon: Scale, text: "Suppliers follow the same execution rules" },
+  { icon: CreditCard, text: "Suppliers pay to participate" },
 ];
 
-const SlideRootCause = () => {
+const SlideDeployment = () => {
   return (
     <Slide className="relative">
       <div className="max-w-5xl mx-auto w-full">
@@ -28,15 +20,15 @@ const SlideRootCause = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-6 md:mb-10"
         >
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold">
-            Why This Keeps Happening
+          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold">
+            How Labour Users Take Control
           </h2>
         </motion.div>
 
-        {/* Problem items */}
+        {/* Deployment steps */}
         <div className="max-w-2xl mx-auto mb-8 md:mb-12">
           <div className="space-y-3 md:space-y-4">
-            {problemItems.map((item, index) => (
+            {deploymentSteps.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
@@ -47,9 +39,7 @@ const SlideRootCause = () => {
                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg trust-gradient flex items-center justify-center flex-shrink-0">
                   <item.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
                 </div>
-                <span className="text-sm md:text-base text-foreground font-medium">
-                  {item.text}
-                </span>
+                <span className="text-sm md:text-base text-foreground font-medium">{item.text}</span>
               </motion.div>
             ))}
           </div>
@@ -59,11 +49,11 @@ const SlideRootCause = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
           className="text-center"
         >
           <p className="text-sm md:text-lg font-bold text-foreground">
-            There is no enforced chain from work to pay to invoice.
+            One system. All suppliers. Same rules.
           </p>
         </motion.div>
       </div>
@@ -71,4 +61,4 @@ const SlideRootCause = () => {
   );
 };
 
-export default SlideRootCause;
+export default SlideDeployment;
