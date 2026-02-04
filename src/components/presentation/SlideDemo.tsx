@@ -297,6 +297,8 @@ const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
     switch (activeAgencyView) {
       case "dashboard":
         return <DemoAgencyDashboard />;
+      case "allocations":
+        return <DemoAgencyAllocations />;
       case "workers":
         return <DemoAgencyWorkers onSelectWorker={handleSelectWorker} />;
       case "worker-detail":
