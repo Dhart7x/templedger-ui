@@ -33,7 +33,7 @@ const SlideSolution = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-3 md:mb-6 lg:mb-8"
+          className="text-center mb-3 md:mb-12 lg:mb-14"
         >
           <h2 className="text-lg md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2">
             Where Problems Occur
@@ -46,7 +46,7 @@ const SlideSolution = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mb-3 md:mb-10 lg:mb-12"
+            className="mb-3 md:mt-10 md:mb-10 lg:mt-12 lg:mb-12"
           >
             {/* Mobile: 2-column compact grid */}
             <div className="md:hidden grid grid-cols-2 gap-x-2 gap-y-1 px-1">
@@ -118,7 +118,7 @@ const SlideSolution = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.5 }}
-            className="flex justify-center"
+            className="flex justify-center md:mt-8 lg:mt-10"
           >
             <div className="inline-flex items-center gap-2 md:gap-3 px-3 py-2 md:px-6 md:py-4 rounded-xl bg-destructive/10 border border-destructive/30">
               <AlertTriangle className="w-4 h-4 md:w-5 md:h-5 text-destructive flex-shrink-0" />
