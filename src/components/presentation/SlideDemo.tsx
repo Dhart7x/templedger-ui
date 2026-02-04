@@ -278,6 +278,8 @@ const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
         return <DemoLiveSnapshot />;
       case "departments":
         return <DemoDepartments />;
+      case "coverage":
+        return <DemoShiftCoverage />;
       case "agencies":
         return <DemoAgenciesPerformance />;
       case "ledger":
