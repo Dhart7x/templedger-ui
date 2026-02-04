@@ -14,6 +14,8 @@ import SlideReactive from "@/components/presentation/SlideReactive";
 import SlideAdoption from "@/components/presentation/SlideAdoption";
 import SlideClosing from "@/components/presentation/SlideClosing";
 
+const DEMO_SLIDE_INDEX = 6;
+
 const slides = [
   { id: 0, component: SlideHero },
   { id: 1, component: SlideProblem },
@@ -21,7 +23,7 @@ const slides = [
   { id: 3, component: SlideSolution },
   { id: 4, component: SlideTLSolution },
   { id: 5, component: SlideMinimalChange },
-  { id: 6, component: SlideDemo },
+  { id: 6, component: SlideDemo, isDemo: true },
   { id: 7, component: SlidePerformance },
   { id: 8, component: SlideReactive },
   { id: 9, component: SlideAdoption },
