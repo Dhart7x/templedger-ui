@@ -101,7 +101,7 @@ const SlideSolution = () => {
           <div className="inline-flex items-center gap-3 px-5 py-3 md:px-6 md:py-4 rounded-xl bg-destructive/10 border border-destructive/30">
             <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0" />
             <p className="text-sm md:text-base text-foreground font-medium">
-              Pay and invoice disputes arise if one or more steps fail.
+              Pay, invoice, and performance disputes arise if one or more steps fail.
             </p>
           </div>
         </motion.div>
