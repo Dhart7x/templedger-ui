@@ -63,7 +63,7 @@ const SlideProblem = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="max-w-4xl mx-auto mb-6 md:mb-8"
         >
-          <h3 className="text-xs md:text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide text-center">
+          <h3 className="text-sm md:text-base font-semibold text-foreground/70 mb-3 uppercase tracking-wide text-center">
             This Leads To
           </h3>
           <div className="flex flex-wrap justify-center gap-2 md:gap-3">
