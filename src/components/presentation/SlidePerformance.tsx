@@ -37,7 +37,7 @@ const SlidePerformance = () => {
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2">
             Performance
           </h2>
-          <p className="text-xs md:text-base text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm md:text-base text-foreground max-w-2xl mx-auto">
             Because execution is enforced, performance becomes objective. Temp Ledger reveals in real time:
           </p>
         </motion.div>
