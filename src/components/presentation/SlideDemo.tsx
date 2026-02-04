@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Play, Eye, Users, ClipboardCheck, BarChart3, Calendar, BookOpen } from "lucide-react";
+import { Play, ArrowRight, Eye, BarChart3, Clock, FileCheck, Gauge } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DemoSidebar from "./demo/DemoSidebar";
 import DemoLiveSnapshot from "./demo/DemoLiveSnapshot";
