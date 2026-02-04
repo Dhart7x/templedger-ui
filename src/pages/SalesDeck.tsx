@@ -6,9 +6,6 @@ import SlideHero from "@/components/presentation/SlideHero";
 import SlideProblem from "@/components/presentation/SlideProblem";
 import SlideRootCause from "@/components/presentation/SlideRootCause";
 import SlideSolution from "@/components/presentation/SlideSolution";
-import SlideGuarantees from "@/components/presentation/SlideGuarantees";
-import SlideTimeAttendance from "@/components/presentation/SlideTimeAttendance";
-import SlidePerformance from "@/components/presentation/SlidePerformance";
 import SlideChain from "@/components/presentation/SlideChain";
 import SlideDemo from "@/components/presentation/SlideDemo";
 import SlideBeforeAfter from "@/components/presentation/SlideBeforeAfter";
@@ -21,15 +18,12 @@ const slides = [
   { id: 1, component: SlideProblem },
   { id: 2, component: SlideRootCause },
   { id: 3, component: SlideSolution },
-  { id: 4, component: SlideGuarantees },
-  { id: 5, component: SlideTimeAttendance },
-  { id: 6, component: SlidePerformance },
-  { id: 7, component: SlideChain },
-  { id: 8, component: SlideDemo },
-  { id: 9, component: SlideBeforeAfter },
-  { id: 10, component: SlideDeployment },
-  { id: 11, component: SlideAgencyBenefits },
-  { id: 12, component: SlideImplementation },
+  { id: 4, component: SlideChain },
+  { id: 5, component: SlideDemo },
+  { id: 6, component: SlideBeforeAfter },
+  { id: 7, component: SlideDeployment },
+  { id: 8, component: SlideAgencyBenefits },
+  { id: 9, component: SlideImplementation },
 ];
 
 const SalesDeck = () => {

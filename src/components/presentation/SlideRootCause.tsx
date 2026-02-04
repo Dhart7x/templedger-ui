@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Building2, Mail, Layers, Link2 } from "lucide-react";
+import { Building2, Mail, Layers } from "lucide-react";
 import Slide from "./Slide";
 
 const problemItems = [
@@ -13,11 +13,7 @@ const problemItems = [
   },
   { 
     icon: Layers, 
-    text: "Inside agencies, HR, Payroll, Compliance, and Billing work in silos"
-  },
-  { 
-    icon: Link2, 
-    text: "There has never been orchestration between the entities"
+    text: "Inside agencies, HR, Payroll, Compliance, and Billing operate in silos"
   },
 ];
 
@@ -33,7 +29,7 @@ const SlideRootCause = () => {
           className="text-center mb-6 md:mb-10"
         >
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold">
-            Why This Never Gets Fixed
+            Why This Keeps Happening
           </h2>
         </motion.div>
 
@@ -43,14 +39,19 @@ const SlideRootCause = () => {
             {problemItems.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
+                transition={{ duration: 0.4, delay: 0.2 + index * 0.12, ease: "easeOut" }}
                 className="flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-xl bg-card border border-border"
               >
-                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg trust-gradient flex items-center justify-center flex-shrink-0">
+                <motion.div 
+                  initial={{ scale: 0.8, rotate: -10 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ duration: 0.4, delay: 0.3 + index * 0.12 }}
+                  className="w-8 h-8 md:w-10 md:h-10 rounded-lg trust-gradient flex items-center justify-center flex-shrink-0"
+                >
                   <item.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
-                </div>
+                </motion.div>
                 <span className="text-sm md:text-base text-foreground font-medium">
                   {item.text}
                 </span>
@@ -63,11 +64,11 @@ const SlideRootCause = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.65 }}
           className="text-center"
         >
           <p className="text-sm md:text-lg font-bold text-foreground">
-            This guarantees re-work, disputes, and audit risk.
+            There has never been orchestration between the entities.
           </p>
         </motion.div>
       </div>
