@@ -3,7 +3,7 @@ import Slide from "./Slide";
 
 const SlideHero = () => {
   return (
-    <Slide className="relative overflow-hidden">
+    <Slide className="relative overflow-hidden md:justify-center md:pt-24 md:pb-24 lg:pt-28 lg:pb-28">
       {/* Background gradient */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 

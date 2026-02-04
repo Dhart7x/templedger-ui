@@ -25,9 +25,9 @@ const SlideReactive = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-6 md:mb-10"
+          className="text-center mb-6 md:mb-14 lg:mb-16"
         >
-          <p className="text-xs md:text-base text-muted-foreground mb-1 md:mb-2">
+          <p className="text-xs md:text-lg lg:text-xl text-muted-foreground mb-2 md:mb-5">
             Operational uncertainty is not a cost of contingent labour.
           </p>
           <h2 className="text-lg md:text-3xl lg:text-4xl font-bold">
@@ -40,11 +40,11 @@ const SlideReactive = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 mb-6 md:mb-12"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 lg:gap-20 mb-6 md:mb-14 lg:mb-16"
         >
           {/* Left: Questions */}
-          <div className="space-y-2 md:space-y-4">
-            <p className="text-[10px] md:text-xs text-muted-foreground mb-2 md:mb-4">
+          <div className="space-y-2 md:space-y-5">
+            <p className="text-[10px] md:text-sm text-muted-foreground mb-2 md:mb-5">
               With Temp Ledger, you never have to ask:
             </p>
             {questions.map((text, index) => (
@@ -53,17 +53,17 @@ const SlideReactive = () => {
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: 0.3 + index * 0.08 }}
-                className="flex items-center gap-2 md:gap-3 px-3 py-2 md:py-3 rounded-lg bg-card/50 border border-border/50"
+                className="flex items-center gap-2 md:gap-3 px-3 md:px-5 py-2 md:py-4 rounded-lg bg-card/50 border border-border/50"
               >
-                <HelpCircle className="w-3 h-3 md:w-4 md:h-4 text-muted-foreground flex-shrink-0" />
-                <span className="text-xs md:text-sm text-foreground">{text}</span>
+                <HelpCircle className="w-3 h-3 md:w-5 md:h-5 text-muted-foreground flex-shrink-0" />
+                <span className="text-xs md:text-base lg:text-lg text-foreground">{text}</span>
               </motion.div>
             ))}
           </div>
 
           {/* Right: Outcomes */}
-          <div className="space-y-2 md:space-y-4">
-            <p className="text-[10px] md:text-xs text-muted-foreground mb-2 md:mb-4">
+          <div className="space-y-2 md:space-y-5">
+            <p className="text-[10px] md:text-sm text-muted-foreground mb-2 md:mb-5">
               Temp Ledger makes execution explicit, enforced, and visible:
             </p>
             {outcomes.map((text, index) => (
@@ -72,10 +72,10 @@ const SlideReactive = () => {
                 initial={{ opacity: 0, x: 10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: 0.5 + index * 0.08 }}
-                className="flex items-center gap-2 md:gap-3 px-3 py-2 md:py-3 rounded-lg bg-primary/5 border border-primary/20"
+                className="flex items-center gap-2 md:gap-3 px-3 md:px-5 py-2 md:py-4 rounded-lg bg-primary/5 border border-primary/20"
               >
-                <CheckCircle className="w-3 h-3 md:w-4 md:h-4 text-primary flex-shrink-0" />
-                <span className="text-xs md:text-sm text-foreground">{text}</span>
+                <CheckCircle className="w-3 h-3 md:w-5 md:h-5 text-primary flex-shrink-0" />
+                <span className="text-xs md:text-base lg:text-lg text-foreground">{text}</span>
               </motion.div>
             ))}
           </div>
@@ -88,7 +88,7 @@ const SlideReactive = () => {
           transition={{ delay: 1, duration: 0.5 }}
           className="text-center"
         >
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm md:text-lg lg:text-xl text-muted-foreground">
             What used to be checked after the fact is now known as it happens.
           </p>
         </motion.div>
