@@ -40,10 +40,10 @@ const SlideReactive = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mb-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-10 md:mb-12"
         >
           {/* Left: Questions */}
-          <div className="space-y-3">
+          <div className="space-y-4">
             <p className="text-xs text-muted-foreground mb-4">
               With Temp Ledger, you never have to ask:
             </p>
