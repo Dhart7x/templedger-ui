@@ -32,9 +32,9 @@ const SlideMinimalChange = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-6 md:mb-8"
+          className="text-center mb-8 md:mb-12"
         >
-          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-3">
+          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-4">
             Minimal Change. Maximum Control.
           </h2>
           <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
@@ -47,21 +47,21 @@ const SlideMinimalChange = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.4 }}
-          className="text-xs md:text-sm text-muted-foreground text-center mb-6 md:mb-8"
+          className="text-xs md:text-sm text-muted-foreground text-center mb-8 md:mb-10"
         >
           It does not replace your workflows, retrain your teams, or require daily system interaction.
         </motion.p>
 
         {/* Two columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-8 md:mb-12">
           {/* Left: For the labour user */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.4 }}
           >
-            <p className="text-xs text-muted-foreground mb-3">For the labour user:</p>
-            <div className="space-y-2">
+            <p className="text-xs text-muted-foreground mb-4">For the labour user:</p>
+            <div className="space-y-3">
               {benefits.map((text, index) => (
                 <motion.div
                   key={index}
@@ -83,8 +83,8 @@ const SlideMinimalChange = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.4 }}
           >
-            <p className="text-xs text-muted-foreground mb-3">Your only active input is what you already know:</p>
-            <div className="space-y-2">
+            <p className="text-xs text-muted-foreground mb-4">Your only active input is what you already know:</p>
+            <div className="space-y-3">
               {inputs.map((item, index) => (
                 <motion.div
                   key={index}

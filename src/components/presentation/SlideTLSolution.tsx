@@ -36,7 +36,7 @@ const SlideTLSolution = () => {
         </motion.div>
 
         {/* Solution Points */}
-        <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
+        <div className="space-y-4 md:space-y-5 mb-8 md:mb-12">
           {solutionPoints.map((point, index) => (
             <motion.div
               key={index}
