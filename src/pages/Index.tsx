@@ -2,37 +2,23 @@ import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Shield } from "lucide-react";
 import SlideHero from "@/components/presentation/SlideHero";
-import SlideSymptoms from "@/components/presentation/SlideProblem";
+import SlideProblem from "@/components/presentation/SlideProblem";
 import SlideRootCause from "@/components/presentation/SlideRootCause";
 import SlideSolution from "@/components/presentation/SlideSolution";
-import SlideChain from "@/components/presentation/SlideChain";
+import SlideIntelligence from "@/components/presentation/SlideIntelligence";
 import SlideTimeAttendance from "@/components/presentation/SlideTimeAttendance";
-import SlideAI from "@/components/presentation/SlideAI";
-import SlideCompetition from "@/components/presentation/SlideCompetition";
-import SlideGTM from "@/components/presentation/SlideGTM";
-import SlidePricing from "@/components/presentation/SlidePricing";
-import SlideDefensibility from "@/components/presentation/SlideDefensibility";
-import SlideExit from "@/components/presentation/SlideExit";
-import SlideConclusion from "@/components/presentation/SlideConclusion";
+import SlideChain from "@/components/presentation/SlideChain";
 import SlideDemo from "@/components/presentation/SlideDemo";
-import SlideAsk from "@/components/presentation/SlideAsk";
 
 const slides = [
   { id: 0, component: SlideHero },
-  { id: 1, component: SlideSymptoms },
+  { id: 1, component: SlideProblem },
   { id: 2, component: SlideRootCause },
   { id: 3, component: SlideSolution },
-  { id: 4, component: SlideChain },
+  { id: 4, component: SlideIntelligence },
   { id: 5, component: SlideTimeAttendance },
-  { id: 6, component: SlideDemo },
-  { id: 7, component: SlideAI },
-  { id: 8, component: SlideCompetition },
-  { id: 9, component: SlideGTM },
-  { id: 10, component: SlidePricing },
-  { id: 11, component: SlideDefensibility },
-  { id: 12, component: SlideExit },
-  { id: 13, component: SlideAsk },
-  { id: 14, component: SlideConclusion },
+  { id: 6, component: SlideChain },
+  { id: 7, component: SlideDemo },
 ];
 
 const Index = () => {

@@ -3,17 +3,17 @@ import { ScanFace, Clock, ClockArrowDown, AlertTriangle, Users, UserX, AlertCirc
 import Slide from "./Slide";
 
 const taEnforces = [
-  { icon: ScanFace, label: "Scheduled only" },
+  { icon: ScanFace, label: "Scheduled workers only" },
   { icon: Clock, label: "Clock-in required" },
   { icon: ClockArrowDown, label: "Clock-out required" },
   { icon: AlertTriangle, label: "Overtime flagged" },
-  { icon: Users, label: "Live on-site view" },
+  { icon: Users, label: "Live site view" },
   { icon: UserX, label: "No-shows detected" },
 ];
 
 const exceptions = [
   "Unscheduled clock-in",
-  "Missed clock-in / out",
+  "Missed clock-in/out",
   "Overtime exceeded",
   "Right-to-work expired",
   "No active contract",
@@ -28,10 +28,10 @@ const SlideTimeAttendance = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-4 md:mb-8"
+          className="text-center mb-6 md:mb-10"
         >
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold">
-            Time & Attendance: Ground Truth
+            Time & Attendance: The Source of Truth
           </h2>
         </motion.div>
 
@@ -72,7 +72,7 @@ const SlideTimeAttendance = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-destructive/10 border border-destructive/20">
               <AlertCircle className="w-3.5 h-3.5 md:w-4 md:h-4 text-destructive" />
               <span className="text-xs md:text-sm font-semibold text-foreground">
-                Exceptions Are Created Automatically
+                Exceptions Created Automatically
               </span>
             </div>
           </div>
@@ -94,15 +94,17 @@ const SlideTimeAttendance = () => {
           </div>
         </motion.div>
 
-        {/* Bottom tagline */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+        {/* Bottom line */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.5 }}
-          className="text-center text-[10px] md:text-sm text-muted-foreground mt-6 md:mt-10"
+          className="text-center mt-6 md:mt-10"
         >
-          Facial recognition · Real-time enforcement · No silent pass-throughs
-        </motion.p>
+          <p className="text-sm md:text-lg font-bold text-foreground">
+            If attendance isn't clean, nothing moves forward.
+          </p>
+        </motion.div>
       </div>
     </Slide>
   );

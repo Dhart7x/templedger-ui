@@ -1,44 +1,21 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import DemoSidebar from "./demo/DemoSidebar";
-import DemoClientsView from "./demo/DemoClientsView";
-import DemoClientDetail from "./demo/DemoClientDetail";
-import DemoAuditModal from "./demo/DemoAuditModal";
-import DemoAuditLogView from "./demo/DemoAuditLogView";
-import DemoExceptionsView from "./demo/DemoExceptionsView";
-import DemoReportsView from "./demo/DemoReportsView";
-import DemoSettingsView from "./demo/DemoSettingsView";
-import { type Client } from "./demo/demoData";
+import DemoOverview from "./demo/DemoOverview";
+import DemoLiveLabour from "./demo/DemoLiveLabour";
+import DemoAgencies from "./demo/DemoAgencies";
+import DemoPerformance from "./demo/DemoPerformance";
+import DemoExceptionsQueue from "./demo/DemoExceptionsQueue";
+import DemoSpend from "./demo/DemoSpend";
+import DemoSettings from "./demo/DemoSettings";
 
 const SlideDemo = () => {
   const [showDemo, setShowDemo] = useState(false);
-  const [activeView, setActiveView] = useState("clients");
-  const [selectedClient, setSelectedClient] = useState<Client | null>(null);
-  const [showAuditModal, setShowAuditModal] = useState(false);
-
-  const handleSelectClient = (client: Client) => {
-    setSelectedClient(client);
-  };
-
-  const handleBack = () => {
-    setSelectedClient(null);
-  };
-
-  const handleSendAudit = () => {
-    setShowAuditModal(true);
-  };
+  const [activeView, setActiveView] = useState("overview");
 
   const handleExitDemo = () => {
     setShowDemo(false);
-    setSelectedClient(null);
-    setActiveView("clients");
-  };
-
-  const handleNavigateToWorker = (workerId: string, clientId: string) => {
-    // Navigate to clients view and select the relevant client
-    const client = { id: clientId, name: "", temps: 0, status: "green" as const };
-    setActiveView("clients");
-    setSelectedClient(client);
+    setActiveView("overview");
   };
 
   if (!showDemo) {
@@ -50,9 +27,8 @@ const SlideDemo = () => {
           transition={{ duration: 0.5 }}
           className="text-center"
         >
-          <span className="text-primary font-medium text-sm uppercase tracking-wider">Interactive Demo</span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mt-3 mb-8">
-            See How Temp Ledger Works
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8">
+            See It Live
           </h2>
           <motion.button
             initial={{ opacity: 0, scale: 0.9 }}
@@ -61,8 +37,11 @@ const SlideDemo = () => {
             onClick={() => setShowDemo(true)}
             className="px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-lg hover:bg-primary/90 transition-colors"
           >
-            Launch Demo
+            Launch Interactive Demo
           </motion.button>
+          <p className="text-xs text-muted-foreground mt-4 max-w-sm mx-auto">
+            Explore the labour user dashboard, performance views, and live site data.
+          </p>
         </motion.div>
       </div>
     );
@@ -70,40 +49,22 @@ const SlideDemo = () => {
 
   const renderActiveView = () => {
     switch (activeView) {
-      case "clients":
-        if (selectedClient) {
-          return (
-            <DemoClientDetail
-              client={selectedClient}
-              onBack={handleBack}
-              onSendAudit={handleSendAudit}
-            />
-          );
-        }
-        return <DemoClientsView onSelectClient={handleSelectClient} />;
-      
-      case "audit":
-        return <DemoAuditLogView onNavigateToWorker={handleNavigateToWorker} />;
-      
+      case "overview":
+        return <DemoOverview />;
+      case "live-labour":
+        return <DemoLiveLabour />;
+      case "agencies":
+        return <DemoAgencies />;
+      case "performance":
+        return <DemoPerformance />;
       case "exceptions":
-        return <DemoExceptionsView />;
-      
-      case "reports":
-        return <DemoReportsView />;
-      
+        return <DemoExceptionsQueue />;
+      case "spend":
+        return <DemoSpend />;
       case "settings":
-        return <DemoSettingsView />;
-      
+        return <DemoSettings />;
       default:
-        return (
-          <div className="flex-1 flex items-center justify-center">
-            <div className="text-center">
-              <div className="text-muted-foreground text-sm mb-1">
-                {activeView.charAt(0).toUpperCase() + activeView.slice(1)} View
-              </div>
-            </div>
-          </div>
-        );
+        return <DemoOverview />;
     }
   };
 
@@ -119,11 +80,9 @@ const SlideDemo = () => {
           <span>Back to Presentation</span>
         </button>
         <div className="flex items-center gap-2 text-sm">
-          <span className="text-muted-foreground">Interactive Demo</span>
-          <span className="text-muted-foreground">•</span>
-          <span className="text-primary font-medium">See how it works</span>
+          <span className="text-muted-foreground">Labour User Dashboard</span>
         </div>
-        <div className="w-[140px]" /> {/* Spacer for centering */}
+        <div className="w-[140px]" />
       </div>
 
       {/* Demo Container */}
@@ -134,25 +93,10 @@ const SlideDemo = () => {
         className="flex-1 flex overflow-hidden m-4 rounded-lg border border-border shadow-xl"
       >
         <DemoSidebar activeView={activeView} onViewChange={setActiveView} />
-        {renderActiveView()}
+        <div className="flex-1 overflow-auto bg-background">
+          {renderActiveView()}
+        </div>
       </motion.div>
-
-      {/* Hint */}
-      <div className="text-center pb-3">
-        <span className="text-xs text-muted-foreground">
-          {activeView === "clients" && "Click on clients and workers to explore the audit workflow"}
-          {activeView === "audit" && "Click on events to view details and linked chain context"}
-          {activeView === "exceptions" && "Click on exceptions to open the resolution workflow"}
-          {activeView === "reports" && "Click on reports to view trends and drill-down data"}
-          {activeView === "settings" && "Configure users, rules, approvals, and integrations"}
-        </span>
-      </div>
-
-      <DemoAuditModal
-        open={showAuditModal}
-        onClose={() => setShowAuditModal(false)}
-        client={selectedClient}
-      />
     </div>
   );
 };
