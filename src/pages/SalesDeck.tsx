@@ -1,35 +1,41 @@
 import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Shield } from "lucide-react";
+import { ChevronLeft, ChevronRight, Shield, Home } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import SlideHero from "@/components/presentation/SlideHero";
 import SlideProblem from "@/components/presentation/SlideProblem";
 import SlideRootCause from "@/components/presentation/SlideRootCause";
 import SlideSolution from "@/components/presentation/SlideSolution";
-import SlideDeployment from "@/components/presentation/SlideDeployment";
 import SlideGuarantees from "@/components/presentation/SlideGuarantees";
 import SlideTimeAttendance from "@/components/presentation/SlideTimeAttendance";
 import SlidePerformance from "@/components/presentation/SlidePerformance";
-import SlideVisibility from "@/components/presentation/SlideVisibility";
 import SlideChain from "@/components/presentation/SlideChain";
 import SlideDemo from "@/components/presentation/SlideDemo";
+import SlideBeforeAfter from "@/components/presentation/SlideBeforeAfter";
+import SlideDeployment from "@/components/presentation/SlideDeployment";
+import SlideAgencyBenefits from "@/components/presentation/SlideAgencyBenefits";
+import SlideImplementation from "@/components/presentation/SlideImplementation";
 
 const slides = [
   { id: 0, component: SlideHero },
   { id: 1, component: SlideProblem },
   { id: 2, component: SlideRootCause },
   { id: 3, component: SlideSolution },
-  { id: 4, component: SlideDeployment },
-  { id: 5, component: SlideGuarantees },
-  { id: 6, component: SlideTimeAttendance },
-  { id: 7, component: SlidePerformance },
-  { id: 8, component: SlideVisibility },
-  { id: 9, component: SlideChain },
-  { id: 10, component: SlideDemo },
+  { id: 4, component: SlideGuarantees },
+  { id: 5, component: SlideTimeAttendance },
+  { id: 6, component: SlidePerformance },
+  { id: 7, component: SlideChain },
+  { id: 8, component: SlideDemo },
+  { id: 9, component: SlideBeforeAfter },
+  { id: 10, component: SlideDeployment },
+  { id: 11, component: SlideAgencyBenefits },
+  { id: 12, component: SlideImplementation },
 ];
 
-const Index = () => {
+const SalesDeck = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0);
+  const navigate = useNavigate();
 
   const nextSlide = useCallback(() => {
     if (currentSlide < slides.length - 1) {
@@ -54,12 +60,14 @@ const Index = () => {
       } else if (e.key === "ArrowLeft") {
         e.preventDefault();
         prevSlide();
+      } else if (e.key === "Escape") {
+        navigate("/");
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [nextSlide, prevSlide]);
+  }, [nextSlide, prevSlide, navigate]);
 
   const CurrentSlideComponent = slides[currentSlide].component;
 
@@ -82,11 +90,19 @@ const Index = () => {
     <div className="h-screen w-screen overflow-hidden bg-background relative">
       {/* Header */}
       <header className="absolute top-0 left-0 right-0 z-20 px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg trust-gradient flex items-center justify-center">
-            <Shield className="w-4 h-4 text-foreground" />
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => navigate("/")}
+            className="w-8 h-8 rounded-lg bg-card/80 border border-border hover:border-primary/50 flex items-center justify-center transition-colors"
+          >
+            <Home className="w-4 h-4 text-muted-foreground" />
+          </button>
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg trust-gradient flex items-center justify-center">
+              <Shield className="w-4 h-4 text-foreground" />
+            </div>
+            <span className="font-semibold text-foreground text-sm">Temp Ledger</span>
           </div>
-          <span className="font-semibold text-foreground text-sm">Temp Ledger</span>
         </div>
         <div className="text-xs text-muted-foreground">
           {currentSlide + 1} / {slides.length}
@@ -110,7 +126,7 @@ const Index = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation arrows - positioned at bottom on mobile to avoid text overlap */}
+        {/* Navigation arrows */}
         <button
           onClick={prevSlide}
           disabled={currentSlide === 0}
@@ -148,4 +164,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default SalesDeck;

@@ -61,7 +61,7 @@ const SlideTimeAttendance = () => {
           className="text-center"
         >
           <p className="text-sm md:text-lg font-bold text-foreground">
-            No attendance, no approval. No approval, no pay or invoice.
+            No attendance, no pay. No pay, no invoice.
           </p>
         </motion.div>
       </div>

@@ -1,19 +1,23 @@
 import { motion } from "framer-motion";
-import { Building2, Layers, Clock } from "lucide-react";
+import { Building2, Mail, Layers, Link2 } from "lucide-react";
 import Slide from "./Slide";
 
 const problemItems = [
   { 
     icon: Building2, 
-    text: "CRMs store data — they don't execute"
+    text: "Labour users and agencies operate on different systems"
+  },
+  { 
+    icon: Mail, 
+    text: "Communication happens by phone, email, and spreadsheets"
   },
   { 
     icon: Layers, 
-    text: "HR, Payroll, Billing, and Credit Control operate in silos"
+    text: "Inside agencies, HR, Payroll, Compliance, and Billing work in silos"
   },
   { 
-    icon: Clock, 
-    text: "Execution is validated retrospectively"
+    icon: Link2, 
+    text: "There has never been orchestration between the entities"
   },
 ];
 
@@ -29,7 +33,7 @@ const SlideRootCause = () => {
           className="text-center mb-6 md:mb-10"
         >
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold">
-            Why This Keeps Happening
+            Why This Never Gets Fixed
           </h2>
         </motion.div>
 
@@ -59,11 +63,11 @@ const SlideRootCause = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
           className="text-center"
         >
           <p className="text-sm md:text-lg font-bold text-foreground">
-            There is no enforced chain from work to pay to invoice.
+            This guarantees re-work, disputes, and audit risk.
           </p>
         </motion.div>
       </div>

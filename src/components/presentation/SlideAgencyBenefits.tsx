@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
-import { Building2, Users, Scale, CreditCard } from "lucide-react";
+import { MessageSquare, FileText, Clock, CheckCircle, Shield } from "lucide-react";
 import Slide from "./Slide";
 
-const deploymentSteps = [
-  { icon: Building2, text: "Labour users deploy Temp Ledger" },
-  { icon: Users, text: "Agencies are required to operate through it" },
-  { icon: CreditCard, text: "Agencies pay to participate" },
-  { icon: Scale, text: "Labour users get assurance and control" },
+const benefits = [
+  { icon: MessageSquare, text: "Fewer pay queries" },
+  { icon: FileText, text: "Fewer invoice disputes" },
+  { icon: Clock, text: "Less admin re-work" },
+  { icon: CheckCircle, text: "Faster approvals" },
+  { icon: Shield, text: "Lower audit risk" },
 ];
 
-const SlideDeployment = () => {
+const SlideAgencyBenefits = () => {
   return (
     <Slide className="relative">
       <div className="max-w-5xl mx-auto w-full">
@@ -21,19 +22,19 @@ const SlideDeployment = () => {
           className="text-center mb-6 md:mb-10"
         >
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold">
-            How It's Adopted
+            Agencies Benefit Too
           </h2>
         </motion.div>
 
-        {/* Deployment steps */}
+        {/* Benefits */}
         <div className="max-w-2xl mx-auto mb-8 md:mb-12">
           <div className="space-y-3 md:space-y-4">
-            {deploymentSteps.map((item, index) => (
+            {benefits.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
+                transition={{ duration: 0.3, delay: 0.2 + index * 0.08 }}
                 className="flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-xl bg-card border border-border"
               >
                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg trust-gradient flex items-center justify-center flex-shrink-0">
@@ -53,7 +54,7 @@ const SlideDeployment = () => {
           className="text-center"
         >
           <p className="text-sm md:text-lg font-bold text-foreground">
-            One system. All suppliers. Same rules.
+            Better execution helps everyone.
           </p>
         </motion.div>
       </div>
@@ -61,4 +62,4 @@ const SlideDeployment = () => {
   );
 };
 
-export default SlideDeployment;
+export default SlideAgencyBenefits;

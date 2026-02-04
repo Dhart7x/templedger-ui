@@ -1,13 +1,11 @@
 import { motion } from "framer-motion";
-import { UserCheck, Clock, CheckSquare, CreditCard, FileText } from "lucide-react";
+import { Shield, CheckCircle, FileText, Lock } from "lucide-react";
 import Slide from "./Slide";
 
 const chainSteps = [
-  { icon: UserCheck, text: "Registration and compliance enforced first" },
-  { icon: Clock, text: "Attendance captured as ground truth" },
-  { icon: CheckSquare, text: "Hours approved before pay" },
-  { icon: CreditCard, text: "Pay validated before invoicing" },
-  { icon: FileText, text: "Invoices produced from verified execution" },
+  { icon: Shield, text: "Compliance, pay, and billing are checked every pay cycle" },
+  { icon: Lock, text: "Nothing progresses unless prior steps are true" },
+  { icon: FileText, text: "Every decision is executed and logged immutably" },
 ];
 
 const SlideSolution = () => {
@@ -26,10 +24,10 @@ const SlideSolution = () => {
           className="text-center mb-4 md:mb-6"
         >
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-3">
-            An Enforced Execution Chain
+            Ledger-Driven Orchestration
           </h2>
           <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
-            Temp Ledger enforces a single, ordered chain that every labour provider must follow.
+            Temp Ledger enforces a single execution ledger that every labour provider must operate through.
           </p>
         </motion.div>
 
@@ -60,11 +58,11 @@ const SlideSolution = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
           className="text-center"
         >
           <p className="text-sm md:text-lg font-bold text-foreground">
-            If any step fails, nothing moves forward.
+            If it can't be proven, it doesn't move.
           </p>
         </motion.div>
       </div>
