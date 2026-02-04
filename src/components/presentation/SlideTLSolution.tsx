@@ -34,12 +34,12 @@ const SlideTLSolution = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-4 md:mb-8"
+          className="text-center mb-4 md:mb-10 lg:mb-12"
         >
           <h2 className="text-lg md:text-3xl lg:text-4xl font-bold">
             Introducing Temp Ledger
           </h2>
-          <p className="text-sm md:text-lg text-muted-foreground mt-2">
+          <p className="text-sm md:text-lg text-muted-foreground mt-2 md:mt-3">
             The Unified System of Truth for Temp Staffing
           </p>
         </motion.div>
