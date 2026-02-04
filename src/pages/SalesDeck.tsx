@@ -23,6 +23,7 @@ const slides = [
   { id: 6, component: SlidePerformance },
   { id: 7, component: SlideReactive },
   { id: 8, component: SlideAdoption },
+  { id: 9, component: SlideClosing },
 ];
 
 const SalesDeck = () => {
