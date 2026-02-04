@@ -9,7 +9,7 @@ import SlideSolution from "@/components/presentation/SlideSolution";
 import SlideTLSolution from "@/components/presentation/SlideTLSolution";
 import SlideMinimalChange from "@/components/presentation/SlideMinimalChange";
 import SlideDemo from "@/components/presentation/SlideDemo";
-import SlideTimeAttendance from "@/components/presentation/SlideTimeAttendance";
+
 import SlidePerformance from "@/components/presentation/SlidePerformance";
 import SlideReactive from "@/components/presentation/SlideReactive";
 import SlideAdoption from "@/components/presentation/SlideAdoption";
@@ -23,11 +23,10 @@ const slides = [
   { id: 4, component: SlideTLSolution },
   { id: 5, component: SlideMinimalChange },
   { id: 6, component: SlideDemo },
-  { id: 7, component: SlideTimeAttendance },
-  { id: 8, component: SlidePerformance },
-  { id: 9, component: SlideReactive },
-  { id: 10, component: SlideAdoption },
-  { id: 11, component: SlideClosing },
+  { id: 7, component: SlidePerformance },
+  { id: 8, component: SlideReactive },
+  { id: 9, component: SlideAdoption },
+  { id: 10, component: SlideClosing },
 ];
 
 const SalesDeck = () => {
