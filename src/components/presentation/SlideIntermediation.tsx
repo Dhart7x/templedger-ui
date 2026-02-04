@@ -18,9 +18,9 @@ const SlideIntermediation = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-3 md:mb-6"
+          className="text-center mb-3 md:mb-8 lg:mb-10"
         >
-          <h2 className="text-base md:text-2xl lg:text-3xl font-bold leading-tight mb-0.5 md:mb-2">
+          <h2 className="text-base md:text-2xl lg:text-3xl font-bold leading-tight mb-0.5 md:mb-3">
             Intermediation reduced invoices.
           </h2>
           <p className="text-sm md:text-xl lg:text-2xl font-bold text-muted-foreground">
