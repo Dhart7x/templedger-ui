@@ -33,6 +33,7 @@ const slides = [
 const SalesDeck = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [isInDemo, setIsInDemo] = useState(false);
   const navigate = useNavigate();
 
   const nextSlide = useCallback(() => {
