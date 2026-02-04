@@ -33,21 +33,42 @@ const SlideSolution = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8 md:mb-12"
+          className="text-center mb-3 md:mb-8"
         >
-          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">
+          <h2 className="text-lg md:text-3xl lg:text-4xl font-bold mb-1">
             Where Problems Occur
           </h2>
         </motion.div>
 
-        {/* Ledger Chain Graphic - Larger and Animated */}
+        {/* Ledger Chain - Different layouts for mobile vs desktop */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-8 md:mb-12"
+          className="mb-3 md:mb-8"
         >
-          <div className="flex flex-wrap justify-center items-center gap-2 md:gap-3 px-2">
+          {/* Mobile: 2-column compact grid */}
+          <div className="md:hidden grid grid-cols-2 gap-x-2 gap-y-1 px-1">
+            {ledgerSteps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.3 + index * 0.04 }}
+                className="flex items-center gap-1 px-1.5 py-1 rounded bg-card border border-border"
+              >
+                <div className="w-3.5 h-3.5 rounded-full trust-gradient flex items-center justify-center flex-shrink-0">
+                  <span className="text-[7px] font-bold text-foreground">{index + 1}</span>
+                </div>
+                <span className="text-[9px] font-medium text-foreground leading-tight truncate">
+                  {step}?
+                </span>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Desktop: Horizontal wrap with connectors */}
+          <div className="hidden md:flex flex-wrap justify-center items-center gap-2 md:gap-3 px-2">
             {ledgerSteps.map((step, index) => (
               <motion.div
                 key={index}
@@ -91,16 +112,16 @@ const SlideSolution = () => {
           </div>
         </motion.div>
 
-        {/* Warning callout - Fixed width */}
+        {/* Warning callout */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.5 }}
+          transition={{ delay: 1, duration: 0.5 }}
           className="flex justify-center"
         >
-          <div className="inline-flex items-center gap-3 px-5 py-3 md:px-6 md:py-4 rounded-xl bg-destructive/10 border border-destructive/30">
-            <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0" />
-            <p className="text-sm md:text-base text-foreground font-medium">
+          <div className="inline-flex items-center gap-2 md:gap-3 px-3 py-2 md:px-6 md:py-4 rounded-xl bg-destructive/10 border border-destructive/30">
+            <AlertTriangle className="w-4 h-4 md:w-5 md:h-5 text-destructive flex-shrink-0" />
+            <p className="text-xs md:text-base text-foreground font-medium">
               Pay, invoice, and performance disputes arise if one or more steps fail.
             </p>
           </div>
