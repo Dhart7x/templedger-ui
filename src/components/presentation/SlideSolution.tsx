@@ -1,18 +1,18 @@
 import { motion } from "framer-motion";
-import { Check, AlertTriangle } from "lucide-react";
+import { AlertTriangle } from "lucide-react";
 import Slide from "./Slide";
 
 const ledgerSteps = [
-  { text: "Worker registered", key: true },
-  { text: "Contract signed", key: true },
-  { text: "Compliance satisfied", key: true },
-  { text: "Shift scheduled", key: true },
-  { text: "Clocked in", key: true },
-  { text: "Clocked out", key: true },
-  { text: "Hours approved", key: true },
-  { text: "Correct pay rate", key: true },
-  { text: "Correct charge rate", key: true },
-  { text: "Invoice", key: false },
+  "Worker registered",
+  "Contract signed",
+  "Compliance satisfied",
+  "Shift scheduled",
+  "Clocked in",
+  "Clocked out",
+  "Hours approved",
+  "Correct pay rate",
+  "Correct charge rate",
+  "Invoice",
 ];
 
 const SlideSolution = () => {
@@ -33,49 +33,57 @@ const SlideSolution = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-6 md:mb-8"
+          className="text-center mb-8 md:mb-12"
         >
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">
             Where Problems Occur
           </h2>
         </motion.div>
 
-        {/* Ledger Chain Graphic */}
+        {/* Ledger Chain Graphic - Larger and Animated */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-6 md:mb-8"
+          className="mb-8 md:mb-12"
         >
-          <div className="flex flex-wrap justify-center items-center gap-1 md:gap-1.5 px-2">
+          <div className="flex flex-wrap justify-center items-center gap-2 md:gap-3 px-2">
             {ledgerSteps.map((step, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
+                initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.4, 
+                  delay: 0.3 + index * 0.08,
+                  type: "spring",
+                  stiffness: 200
+                }}
                 className="flex items-center"
               >
-                <div className={`flex items-center gap-1.5 px-2 py-1.5 md:px-3 md:py-2 rounded-lg border ${
-                  step.key 
-                    ? 'bg-card border-border' 
-                    : 'trust-gradient border-transparent'
-                }`}>
-                  {step.key && (
-                    <Check className="w-3 h-3 md:w-3.5 md:h-3.5 text-primary flex-shrink-0" />
-                  )}
-                  <span className={`text-[10px] md:text-xs font-medium ${
-                    step.key ? 'text-foreground' : 'text-foreground'
-                  }`}>
-                    {step.text}{step.key && '?'}
+                <motion.div 
+                  className="flex items-center gap-2 px-3 py-2 md:px-4 md:py-3 rounded-lg bg-card border border-border"
+                  whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary))" }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.5 + index * 0.08, type: "spring" }}
+                    className="w-5 h-5 md:w-6 md:h-6 rounded-full trust-gradient flex items-center justify-center flex-shrink-0"
+                  >
+                    <span className="text-[10px] md:text-xs font-bold text-foreground">{index + 1}</span>
+                  </motion.div>
+                  <span className="text-xs md:text-sm font-medium text-foreground whitespace-nowrap">
+                    {step}?
                   </span>
-                </div>
+                </motion.div>
                 {index < ledgerSteps.length - 1 && (
                   <motion.div
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ duration: 0.2, delay: 0.4 + index * 0.05 }}
-                    className="w-2 md:w-4 h-0.5 bg-border origin-left"
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    animate={{ scaleX: 1, opacity: 1 }}
+                    transition={{ duration: 0.3, delay: 0.5 + index * 0.08 }}
+                    className="w-4 md:w-6 h-0.5 bg-border origin-left mx-1"
                   />
                 )}
               </motion.div>
@@ -83,31 +91,19 @@ const SlideSolution = () => {
           </div>
         </motion.div>
 
-        {/* Warning callout */}
+        {/* Warning callout - Fixed width */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
-          className="max-w-2xl mx-auto mb-6 md:mb-8"
+          transition={{ delay: 1.2, duration: 0.5 }}
+          className="flex justify-center"
         >
-          <div className="flex items-start gap-3 p-3 md:p-4 rounded-xl bg-destructive/10 border border-destructive/30">
-            <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
+          <div className="inline-flex items-center gap-3 px-5 py-3 md:px-6 md:py-4 rounded-xl bg-destructive/10 border border-destructive/30">
+            <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0" />
             <p className="text-sm md:text-base text-foreground font-medium">
               Pay and invoice disputes arise if one or more steps fail.
             </p>
           </div>
-        </motion.div>
-
-        {/* Bottom tagline */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.5 }}
-          className="text-center"
-        >
-          <p className="text-sm md:text-lg font-bold text-foreground">
-            Nothing advances unless the prior step is true in the ledger.
-          </p>
         </motion.div>
       </div>
     </Slide>
