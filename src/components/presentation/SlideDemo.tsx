@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Play, ArrowRight, Eye, BarChart3, Clock, FileCheck, Gauge } from "lucide-react";
+import { Play, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import DemoSidebar from "./demo/DemoSidebar";
 import DemoLiveSnapshot from "./demo/DemoLiveSnapshot";
 import DemoDepartments from "./demo/DemoDepartments";
@@ -9,14 +15,46 @@ import DemoAgenciesPerformance from "./demo/DemoAgenciesPerformance";
 import DemoPayrollBilling from "./demo/DemoPayrollBilling";
 import DemoHeadcountRequests from "./demo/DemoHeadcountRequests";
 import DemoExecutionLedger from "./demo/DemoExecutionLedger";
+import DemoAgencySidebar from "./demo/DemoAgencySidebar";
+import DemoAgencyDashboard from "./demo/DemoAgencyDashboard";
+import DemoAgencyWorkers from "./demo/DemoAgencyWorkers";
+import DemoAgencyWorkerDetail from "./demo/DemoAgencyWorkerDetail";
+import DemoAgencyDeployments from "./demo/DemoAgencyDeployments";
+import DemoAgencyIssues from "./demo/DemoAgencyIssues";
+import DemoAgencyDocuments from "./demo/DemoAgencyDocuments";
+import { AgencyWorker } from "./demo/agencyDemoData";
+
+type ViewMode = "labour-user" | "agency";
 
 const SlideDemo = () => {
   const [showDemo, setShowDemo] = useState(false);
-  const [activeView, setActiveView] = useState("snapshot");
+  const [viewMode, setViewMode] = useState<ViewMode>("labour-user");
+  const [activeLabourView, setActiveLabourView] = useState("snapshot");
+  const [activeAgencyView, setActiveAgencyView] = useState("dashboard");
+  const [selectedWorker, setSelectedWorker] = useState<AgencyWorker | null>(null);
 
   const handleExitDemo = () => {
     setShowDemo(false);
-    setActiveView("snapshot");
+    setActiveLabourView("snapshot");
+    setActiveAgencyView("dashboard");
+    setSelectedWorker(null);
+  };
+
+  const handleSelectWorker = (worker: AgencyWorker) => {
+    setSelectedWorker(worker);
+    setActiveAgencyView("worker-detail");
+  };
+
+  const handleBackToWorkers = () => {
+    setSelectedWorker(null);
+    setActiveAgencyView("workers");
+  };
+
+  const handleAgencyViewChange = (view: string) => {
+    setActiveAgencyView(view);
+    if (view !== "worker-detail") {
+      setSelectedWorker(null);
+    }
   };
 
   const processSteps = [
@@ -34,11 +72,9 @@ const SlideDemo = () => {
     "Objective, ledger-derived agency performance",
   ];
 
-
   if (!showDemo) {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center bg-background px-4 md:px-12 pt-14 pb-20 relative overflow-hidden">
-        {/* Background glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
         
         <motion.div
@@ -52,7 +88,6 @@ const SlideDemo = () => {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mb-6 md:mb-8 max-w-4xl mx-auto">
-            {/* Process Column */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -78,7 +113,6 @@ const SlideDemo = () => {
               </div>
             </motion.div>
 
-            {/* Output Column */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -134,8 +168,8 @@ const SlideDemo = () => {
     );
   }
 
-  const renderActiveView = () => {
-    switch (activeView) {
+  const renderLabourUserView = () => {
+    switch (activeLabourView) {
       case "snapshot":
         return <DemoLiveSnapshot />;
       case "departments":
@@ -153,6 +187,29 @@ const SlideDemo = () => {
     }
   };
 
+  const renderAgencyView = () => {
+    switch (activeAgencyView) {
+      case "dashboard":
+        return <DemoAgencyDashboard />;
+      case "workers":
+        return <DemoAgencyWorkers onSelectWorker={handleSelectWorker} />;
+      case "worker-detail":
+        return selectedWorker ? (
+          <DemoAgencyWorkerDetail worker={selectedWorker} onBack={handleBackToWorkers} />
+        ) : (
+          <DemoAgencyWorkers onSelectWorker={handleSelectWorker} />
+        );
+      case "deployments":
+        return <DemoAgencyDeployments />;
+      case "issues":
+        return <DemoAgencyIssues />;
+      case "documents":
+        return <DemoAgencyDocuments />;
+      default:
+        return <DemoAgencyDashboard />;
+    }
+  };
+
   return (
     <div className="w-full h-full flex flex-col bg-background">
       {/* Demo Header */}
@@ -164,23 +221,59 @@ const SlideDemo = () => {
           <span>←</span>
           <span>Back to Presentation</span>
         </button>
-        <div className="flex items-center gap-2 text-sm">
-          <span className="text-muted-foreground">Temp Ledger — Operations View</span>
+        
+        {/* View Mode Dropdown */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="sm" className="gap-2">
+              {viewMode === "labour-user" ? "Labour User View" : "Agency View"}
+              <ChevronDown className="w-4 h-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="center" className="bg-card border border-border">
+            <DropdownMenuItem 
+              onClick={() => setViewMode("labour-user")}
+              className={viewMode === "labour-user" ? "bg-primary/10 text-primary" : ""}
+            >
+              Labour User View
+            </DropdownMenuItem>
+            <DropdownMenuItem 
+              onClick={() => setViewMode("agency")}
+              className={viewMode === "agency" ? "bg-primary/10 text-primary" : ""}
+            >
+              Agency View
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        <div className="text-xs text-muted-foreground w-[140px] text-right">
+          {viewMode === "labour-user" ? "Operations View" : "Client-specific execution"}
         </div>
-        <div className="w-[140px]" />
       </div>
 
       {/* Demo Container */}
       <motion.div
+        key={viewMode}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: 0.3 }}
         className="flex-1 flex overflow-hidden m-4 rounded-lg border border-border shadow-xl"
       >
-        <DemoSidebar activeView={activeView} onViewChange={setActiveView} />
-        <div className="flex-1 overflow-auto bg-background">
-          {renderActiveView()}
-        </div>
+        {viewMode === "labour-user" ? (
+          <>
+            <DemoSidebar activeView={activeLabourView} onViewChange={setActiveLabourView} />
+            <div className="flex-1 overflow-auto bg-background">
+              {renderLabourUserView()}
+            </div>
+          </>
+        ) : (
+          <>
+            <DemoAgencySidebar activeView={activeAgencyView} onViewChange={handleAgencyViewChange} />
+            <div className="flex-1 overflow-auto bg-background">
+              {renderAgencyView()}
+            </div>
+          </>
+        )}
       </motion.div>
     </div>
   );
