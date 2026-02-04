@@ -9,6 +9,7 @@ import SlideSolution from "@/components/presentation/SlideSolution";
 import SlideTLSolution from "@/components/presentation/SlideTLSolution";
 import SlideMinimalChange from "@/components/presentation/SlideMinimalChange";
 import SlideDemo from "@/components/presentation/SlideDemo";
+import SlideAgencyDemo from "@/components/presentation/SlideAgencyDemo";
 
 import SlidePerformance from "@/components/presentation/SlidePerformance";
 import SlideReactive from "@/components/presentation/SlideReactive";
