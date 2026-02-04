@@ -19,20 +19,20 @@ const SlideDemo = () => {
     setActiveView("snapshot");
   };
 
-  const howItWorks = [
-    "Labour users mandate Temp Ledger as the execution layer",
-    "Agencies operate through a client-specific front end",
-    "Worker data, shifts, and exceptions are handled there",
-    "On-site Time & Attendance is deployed",
-    "Attendance syncs directly into the execution ledger",
+  const processSteps = [
+    { num: "01", text: "Labour users mandate Temp Ledger as the execution layer" },
+    { num: "02", text: "Agencies operate through a client-specific front end" },
+    { num: "03", text: "Worker data, shifts, and exceptions are handled there" },
+    { num: "04", text: "On-site Time & Attendance is deployed" },
+    { num: "05", text: "Attendance syncs directly into the execution ledger" },
   ];
 
-  const outputForUser = [
-    "One real-time operational view",
-    "Live status by department and location",
-    "Fulfilment and exceptions across agencies",
-    "Payroll and invoicing readiness before billing",
-    "Objective, ledger-derived agency performance",
+  const outputs = [
+    { icon: Eye, text: "One real-time operational view" },
+    { icon: Gauge, text: "Live status by department and location" },
+    { icon: BarChart3, text: "Fulfilment and exceptions across agencies" },
+    { icon: FileCheck, text: "Payroll and invoicing readiness before billing" },
+    { icon: Clock, text: "Objective, ledger-derived agency performance" },
   ];
 
 
