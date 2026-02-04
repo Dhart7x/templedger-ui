@@ -44,16 +44,6 @@ const SlideTLSolution = () => {
           </p>
         </motion.div>
 
-        {/* Main description */}
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="text-center text-sm md:text-lg text-foreground font-medium mb-4 md:mb-6"
-        >
-          A verified execution chain for every worker.
-        </motion.p>
-
         {/* Ledger steps chain */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

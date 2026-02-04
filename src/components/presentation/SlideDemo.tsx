@@ -322,21 +322,23 @@ const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
   return (
     <div className="w-full h-full flex flex-col bg-background">
       {/* Demo Header */}
-      <div className="flex items-center justify-between px-6 py-3 border-b border-border bg-muted/30">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={handleExitDemo}
-          className="gap-2 bg-card/80 border-border hover:border-primary/50"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Slides
-        </Button>
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/30">
+        <div className="flex items-center gap-3">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleExitDemo}
+            className="gap-2 bg-card/80 border-border hover:border-primary/50"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Slides
+          </Button>
+        </div>
         
         {/* View Mode Dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm" className="gap-2">
+            <Button variant="outline" size="sm" className="gap-2 min-w-[160px]">
               {viewMode === "labour-user" ? "Labour User View" : "Agency View"}
               <ChevronDown className="w-4 h-4" />
             </Button>
@@ -357,9 +359,7 @@ const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <div className="text-xs text-muted-foreground w-[140px] text-right">
-          {viewMode === "labour-user" ? "Operations View" : "Client-specific execution"}
-        </div>
+        <div className="w-[140px]" />
       </div>
 
       {/* Demo Container */}

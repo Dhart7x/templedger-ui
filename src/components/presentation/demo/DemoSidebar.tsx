@@ -19,14 +19,6 @@ const navItems = [
 const DemoSidebar = ({ activeView, onViewChange }: DemoSidebarProps) => {
   return (
     <div className="w-48 bg-card border-r border-border flex flex-col">
-      <div className="p-4 border-b border-border">
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded bg-primary/20 flex items-center justify-center">
-            <Eye className="w-3 h-3 text-primary" />
-          </div>
-          <span className="font-semibold text-foreground text-sm">Temp Ledger</span>
-        </div>
-      </div>
       <nav className="flex-1 p-2">
         {navItems.map((item) => (
           <button
