@@ -36,24 +36,24 @@ const SlideTLSolution = () => {
         </motion.div>
 
         {/* Solution Points */}
-        <div className="space-y-4 md:space-y-5 mb-8 md:mb-12">
+        <div className="space-y-2 md:space-y-4 mb-6 md:mb-12">
           {solutionPoints.map((point, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
-              className="flex items-start gap-3 p-3 md:p-4 rounded-lg bg-card/50 border border-border/50"
+              className="flex items-start gap-2 md:gap-3 p-2 md:p-4 rounded-lg bg-card/50 border border-border/50"
             >
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.4 + index * 0.1, type: "spring", stiffness: 300 }}
-                className="w-8 h-8 md:w-9 md:h-9 rounded-full trust-gradient flex items-center justify-center flex-shrink-0"
+                className="w-7 h-7 md:w-9 md:h-9 rounded-full trust-gradient flex items-center justify-center flex-shrink-0"
               >
-                <point.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
+                <point.icon className="w-3.5 h-3.5 md:w-5 md:h-5 text-foreground" />
               </motion.div>
-              <p className="text-xs md:text-sm text-foreground font-medium leading-relaxed pt-1.5">
+              <p className="text-xs md:text-sm text-foreground font-medium leading-relaxed pt-1 md:pt-1.5">
                 {point.text}
               </p>
             </motion.div>
