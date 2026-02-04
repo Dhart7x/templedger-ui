@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Play, ChevronDown } from "lucide-react";
+import { Play, ChevronDown, ArrowLeft, Shield, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,19 +27,35 @@ import DemoAgencyDocuments from "./demo/DemoAgencyDocuments";
 import { AgencyWorker } from "./demo/agencyDemoData";
 
 type ViewMode = "labour-user" | "agency";
+type DemoState = "intro" | "login" | "demo";
 
-const SlideDemo = () => {
-  const [showDemo, setShowDemo] = useState(false);
+interface SlideDemoProps {
+  onDemoStateChange?: (isInDemo: boolean) => void;
+}
+
+const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
+  const [demoState, setDemoState] = useState<DemoState>("intro");
+  const [showPassword, setShowPassword] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>("labour-user");
   const [activeLabourView, setActiveLabourView] = useState("snapshot");
   const [activeAgencyView, setActiveAgencyView] = useState("dashboard");
   const [selectedWorker, setSelectedWorker] = useState<AgencyWorker | null>(null);
 
+  const handleLaunchDemo = () => {
+    setDemoState("login");
+    onDemoStateChange?.(true);
+  };
+
+  const handleEnterDemo = () => {
+    setDemoState("demo");
+  };
+
   const handleExitDemo = () => {
-    setShowDemo(false);
+    setDemoState("intro");
     setActiveLabourView("snapshot");
     setActiveAgencyView("dashboard");
     setSelectedWorker(null);
+    onDemoStateChange?.(false);
   };
 
   const handleSelectWorker = (worker: AgencyWorker) => {
