@@ -38,19 +38,19 @@ const SlideProblem = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="max-w-2xl mx-auto mb-6 md:mb-10 lg:mb-12"
+          className="max-w-2xl mx-auto mb-6 md:mb-12 lg:mb-16"
         >
-          <div className="space-y-2 md:space-y-3 lg:space-y-4">
+          <div className="space-y-2 md:space-y-4 lg:space-y-6">
             {rootCauses.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -15 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: 0.25 + index * 0.06 }}
-                className="flex items-center gap-3 p-2.5 md:p-3"
+                className="flex items-center gap-3 p-2.5 md:p-4"
               >
-                <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                <span className="text-sm md:text-base text-foreground leading-relaxed">{item}</span>
+                <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary flex-shrink-0" />
+                <span className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed">{item}</span>
               </motion.div>
             ))}
           </div>
