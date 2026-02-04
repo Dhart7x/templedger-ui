@@ -138,7 +138,6 @@ const SlideDemo = () => {
       </div>
     );
   }
-  }
 
   const renderActiveView = () => {
     switch (activeView) {
