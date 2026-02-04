@@ -34,7 +34,7 @@ const SlideLedger = () => {
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">
             The Execution Ledger
           </h2>
-          <p className="text-sm md:text-base text-muted-foreground">
+          <p className="text-sm md:text-base text-foreground">
             Non-negotiable sequence. Each step is enforced. None are optional.
           </p>
         </motion.div>
