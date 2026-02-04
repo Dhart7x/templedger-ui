@@ -5,8 +5,11 @@ import SlideHero from "@/components/presentation/SlideHero";
 import SlideProblem from "@/components/presentation/SlideProblem";
 import SlideRootCause from "@/components/presentation/SlideRootCause";
 import SlideSolution from "@/components/presentation/SlideSolution";
-import SlideIntelligence from "@/components/presentation/SlideIntelligence";
+import SlideDeployment from "@/components/presentation/SlideDeployment";
+import SlideGuarantees from "@/components/presentation/SlideGuarantees";
 import SlideTimeAttendance from "@/components/presentation/SlideTimeAttendance";
+import SlidePerformance from "@/components/presentation/SlidePerformance";
+import SlideVisibility from "@/components/presentation/SlideVisibility";
 import SlideChain from "@/components/presentation/SlideChain";
 import SlideDemo from "@/components/presentation/SlideDemo";
 
@@ -15,10 +18,13 @@ const slides = [
   { id: 1, component: SlideProblem },
   { id: 2, component: SlideRootCause },
   { id: 3, component: SlideSolution },
-  { id: 4, component: SlideIntelligence },
-  { id: 5, component: SlideTimeAttendance },
-  { id: 6, component: SlideChain },
-  { id: 7, component: SlideDemo },
+  { id: 4, component: SlideDeployment },
+  { id: 5, component: SlideGuarantees },
+  { id: 6, component: SlideTimeAttendance },
+  { id: 7, component: SlidePerformance },
+  { id: 8, component: SlideVisibility },
+  { id: 9, component: SlideChain },
+  { id: 10, component: SlideDemo },
 ];
 
 const Index = () => {

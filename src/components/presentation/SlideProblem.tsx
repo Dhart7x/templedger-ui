@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
-import { Eye, MapPin, AlertTriangle, MessageSquare } from "lucide-react";
+import { Eye, Clock, AlertTriangle, MessageSquare } from "lucide-react";
 import Slide from "./Slide";
 
 const problemItems = [
-  { icon: Eye, text: "You rely on agencies to run critical operations" },
-  { icon: MapPin, text: "You don't know who's actually on site right now" },
-  { icon: AlertTriangle, text: "Issues surface after shifts fail or invoices land" },
-  { icon: MessageSquare, text: "Performance conversations are subjective and reactive" },
+  { icon: Eye, text: "Pay queries surface after payroll" },
+  { icon: AlertTriangle, text: "Invoices are challenged after approval" },
+  { icon: Clock, text: "Compliance gaps are discovered too late" },
+  { icon: MessageSquare, text: "Supplier performance is argued, not proven" },
 ];
 
 const SlideProblem = () => {
@@ -21,7 +21,7 @@ const SlideProblem = () => {
           className="text-center mb-6 md:mb-10"
         >
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold leading-tight">
-            Staffing Agencies Run Your Labour —<br className="hidden md:block" /> But You Can't See or Control It
+            You Only See Problems After They Hurt
           </h2>
         </motion.div>
 
@@ -53,7 +53,7 @@ const SlideProblem = () => {
           className="text-center"
         >
           <p className="text-sm md:text-lg font-bold text-foreground">
-            Labour is too important to manage by email, spreadsheets, and trust.
+            By the time issues appear, trust is already broken.
           </p>
         </motion.div>
       </div>

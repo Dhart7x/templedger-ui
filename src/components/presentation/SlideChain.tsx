@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
-import { Users, Clock, BarChart3, AlertTriangle, CheckCircle, Scale } from "lucide-react";
+import { UserPlus, Shield, Calendar, Clock, CheckSquare, CreditCard, FileText } from "lucide-react";
 import Slide from "./Slide";
 
 const flowSteps = [
-  { icon: Users, text: "Agencies supply workers" },
-  { icon: Clock, text: "Attendance captured in real time" },
-  { icon: BarChart3, text: "Performance measured automatically" },
-  { icon: AlertTriangle, text: "Exceptions routed instantly" },
-  { icon: CheckCircle, text: "Decisions approved with accountability" },
-  { icon: Scale, text: "Labour, cost, and risk stay aligned" },
+  { icon: UserPlus, text: "Supplier registers worker" },
+  { icon: Shield, text: "Compliance and terms locked" },
+  { icon: Calendar, text: "Shift scheduled" },
+  { icon: Clock, text: "Attendance captured" },
+  { icon: CheckSquare, text: "Hours approved" },
+  { icon: CreditCard, text: "Pay validated" },
+  { icon: FileText, text: "Invoice produced" },
 ];
 
 const SlideChain = () => {
@@ -35,7 +36,7 @@ const SlideChain = () => {
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.2 + index * 0.08 }}
+                transition={{ duration: 0.3, delay: 0.2 + index * 0.06 }}
                 className="flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-xl bg-card border border-border"
               >
                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg trust-gradient flex items-center justify-center flex-shrink-0">

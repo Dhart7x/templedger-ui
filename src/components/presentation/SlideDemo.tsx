@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Play } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import DemoSidebar from "./demo/DemoSidebar";
 import DemoOverview from "./demo/DemoOverview";
 import DemoLiveLabour from "./demo/DemoLiveLabour";
 import DemoAgencies from "./demo/DemoAgencies";
 import DemoPerformance from "./demo/DemoPerformance";
 import DemoExceptionsQueue from "./demo/DemoExceptionsQueue";
-import DemoSpend from "./demo/DemoSpend";
-import DemoSettings from "./demo/DemoSettings";
 
 const SlideDemo = () => {
   const [showDemo, setShowDemo] = useState(false);
-  const [activeView, setActiveView] = useState("overview");
+  const [activeView, setActiveView] = useState("execution");
 
   const handleExitDemo = () => {
     setShowDemo(false);
-    setActiveView("overview");
+    setActiveView("execution");
   };
 
   if (!showDemo) {
@@ -28,19 +28,24 @@ const SlideDemo = () => {
           className="text-center"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8">
-            See It Live
+            See the Chain in Action
           </h2>
-          <motion.button
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            onClick={() => setShowDemo(true)}
-            className="px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-lg hover:bg-primary/90 transition-colors"
           >
-            Launch Interactive Demo
-          </motion.button>
-          <p className="text-xs text-muted-foreground mt-4 max-w-sm mx-auto">
-            Explore the labour user dashboard, performance views, and live site data.
+            <Button
+              size="lg"
+              onClick={() => setShowDemo(true)}
+              className="text-lg px-8 py-6 rounded-xl trust-gradient hover:opacity-90 transition-opacity group"
+            >
+              <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+              Launch Interactive Demo
+            </Button>
+          </motion.div>
+          <p className="text-sm text-muted-foreground mt-6 max-w-sm mx-auto">
+            Follow a worker from registration to invoice.
           </p>
         </motion.div>
       </div>
@@ -49,20 +54,16 @@ const SlideDemo = () => {
 
   const renderActiveView = () => {
     switch (activeView) {
-      case "overview":
+      case "execution":
         return <DemoOverview />;
-      case "live-labour":
+      case "attendance":
         return <DemoLiveLabour />;
-      case "agencies":
-        return <DemoAgencies />;
-      case "performance":
-        return <DemoPerformance />;
       case "exceptions":
         return <DemoExceptionsQueue />;
-      case "spend":
-        return <DemoSpend />;
-      case "settings":
-        return <DemoSettings />;
+      case "suppliers":
+        return <DemoAgencies />;
+      case "assurance":
+        return <DemoPerformance />;
       default:
         return <DemoOverview />;
     }
@@ -80,7 +81,7 @@ const SlideDemo = () => {
           <span>Back to Presentation</span>
         </button>
         <div className="flex items-center gap-2 text-sm">
-          <span className="text-muted-foreground">Labour User Dashboard</span>
+          <span className="text-muted-foreground">Execution Chain Dashboard</span>
         </div>
         <div className="w-[140px]" />
       </div>
