@@ -49,7 +49,7 @@ const SlideDemo = () => {
             How It Works
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8 max-w-3xl mx-auto">
             {/* How It Works Column */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
