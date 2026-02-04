@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Play, ChevronDown } from "lucide-react";
+import { Play, ChevronDown, ArrowLeft, Shield, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,19 +27,35 @@ import DemoAgencyDocuments from "./demo/DemoAgencyDocuments";
 import { AgencyWorker } from "./demo/agencyDemoData";
 
 type ViewMode = "labour-user" | "agency";
+type DemoState = "intro" | "login" | "demo";
 
-const SlideDemo = () => {
-  const [showDemo, setShowDemo] = useState(false);
+interface SlideDemoProps {
+  onDemoStateChange?: (isInDemo: boolean) => void;
+}
+
+const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
+  const [demoState, setDemoState] = useState<DemoState>("intro");
+  const [showPassword, setShowPassword] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>("labour-user");
   const [activeLabourView, setActiveLabourView] = useState("snapshot");
   const [activeAgencyView, setActiveAgencyView] = useState("dashboard");
   const [selectedWorker, setSelectedWorker] = useState<AgencyWorker | null>(null);
 
+  const handleLaunchDemo = () => {
+    setDemoState("login");
+    onDemoStateChange?.(true);
+  };
+
+  const handleEnterDemo = () => {
+    setDemoState("demo");
+  };
+
   const handleExitDemo = () => {
-    setShowDemo(false);
+    setDemoState("intro");
     setActiveLabourView("snapshot");
     setActiveAgencyView("dashboard");
     setSelectedWorker(null);
+    onDemoStateChange?.(false);
   };
 
   const handleSelectWorker = (worker: AgencyWorker) => {
@@ -72,7 +90,8 @@ const SlideDemo = () => {
     "Objective, ledger-derived agency performance",
   ];
 
-  if (!showDemo) {
+  // Intro slide (How It Works)
+  if (demoState === "intro") {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center bg-background px-4 md:px-12 pt-14 pb-20 relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
@@ -156,7 +175,7 @@ const SlideDemo = () => {
           >
             <Button
               size="lg"
-              onClick={() => setShowDemo(true)}
+              onClick={handleLaunchDemo}
               className="text-sm md:text-base px-6 py-4 md:px-8 md:py-6 rounded-xl trust-gradient hover:opacity-90 transition-opacity group"
             >
               <Play className="w-4 h-4 md:w-5 md:h-5 mr-2 group-hover:scale-110 transition-transform" />
@@ -164,6 +183,89 @@ const SlideDemo = () => {
             </Button>
           </motion.div>
         </motion.div>
+      </div>
+    );
+  }
+
+  // Login screen
+  if (demoState === "login") {
+    return (
+      <div className="w-full h-full flex flex-col bg-background">
+        {/* Back button */}
+        <div className="absolute top-20 left-6 z-30">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleExitDemo}
+            className="gap-2 bg-card/80 border-border hover:border-primary/50"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Slides
+          </Button>
+        </div>
+
+        <div className="flex-1 flex items-center justify-center px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="w-full max-w-md"
+          >
+            {/* Logo/Brand */}
+            <div className="flex flex-col items-center mb-8">
+              <div className="w-16 h-16 rounded-2xl trust-gradient flex items-center justify-center mb-4">
+                <Shield className="w-8 h-8 text-foreground" />
+              </div>
+              <h1 className="text-2xl font-bold text-foreground">Temp Ledger</h1>
+              <p className="text-sm text-muted-foreground mt-1">Demo Environment</p>
+            </div>
+
+            {/* Login Card */}
+            <div className="bg-card border border-border rounded-xl p-6 shadow-xl">
+              <h2 className="text-lg font-semibold text-foreground mb-6 text-center">Sign in to Demo</h2>
+              
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="username" className="text-foreground">Username</Label>
+                  <Input
+                    id="username"
+                    value="TempLedgerDemo"
+                    readOnly
+                    className="bg-muted/50 border-border text-foreground"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="password" className="text-foreground">Password</Label>
+                  <div className="relative">
+                    <Input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      value="••••••••••••"
+                      readOnly
+                      className="bg-muted/50 border-border text-foreground pr-10"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
+                </div>
+
+                <Button
+                  onClick={handleEnterDemo}
+                  className="w-full mt-6 trust-gradient hover:opacity-90 transition-opacity"
+                  size="lg"
+                >
+                  Enter Demo
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     );
   }
@@ -210,17 +312,20 @@ const SlideDemo = () => {
     }
   };
 
+  // Main demo UI
   return (
     <div className="w-full h-full flex flex-col bg-background">
       {/* Demo Header */}
       <div className="flex items-center justify-between px-6 py-3 border-b border-border bg-muted/30">
-        <button
+        <Button
+          variant="outline"
+          size="sm"
           onClick={handleExitDemo}
-          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="gap-2 bg-card/80 border-border hover:border-primary/50"
         >
-          <span>←</span>
-          <span>Back to Presentation</span>
-        </button>
+          <ArrowLeft className="w-4 h-4" />
+          Back to Slides
+        </Button>
         
         {/* View Mode Dropdown */}
         <DropdownMenu>

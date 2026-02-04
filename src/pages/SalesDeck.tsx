@@ -14,6 +14,8 @@ import SlideReactive from "@/components/presentation/SlideReactive";
 import SlideAdoption from "@/components/presentation/SlideAdoption";
 import SlideClosing from "@/components/presentation/SlideClosing";
 
+const DEMO_SLIDE_INDEX = 6;
+
 const slides = [
   { id: 0, component: SlideHero },
   { id: 1, component: SlideProblem },
@@ -21,7 +23,7 @@ const slides = [
   { id: 3, component: SlideSolution },
   { id: 4, component: SlideTLSolution },
   { id: 5, component: SlideMinimalChange },
-  { id: 6, component: SlideDemo },
+  { id: 6, component: SlideDemo, isDemo: true },
   { id: 7, component: SlidePerformance },
   { id: 8, component: SlideReactive },
   { id: 9, component: SlideAdoption },
@@ -31,6 +33,7 @@ const slides = [
 const SalesDeck = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [isInDemo, setIsInDemo] = useState(false);
   const navigate = useNavigate();
 
   const nextSlide = useCallback(() => {
@@ -68,6 +71,8 @@ const SalesDeck = () => {
   // Ensure currentSlide is within bounds
   const safeCurrentSlide = Math.min(currentSlide, slides.length - 1);
   const CurrentSlideComponent = slides[safeCurrentSlide]?.component || slides[0].component;
+  const isOnDemoSlide = safeCurrentSlide === DEMO_SLIDE_INDEX;
+  const hideNavigation = isOnDemoSlide && isInDemo;
 
   const slideVariants = {
     enter: (direction: number) => ({
@@ -115,43 +120,53 @@ const SalesDeck = () => {
             transition={{ type: "tween", duration: 0.4, ease: "easeInOut" }}
             className="absolute inset-0"
           >
-            <CurrentSlideComponent />
+            {isOnDemoSlide ? (
+              <SlideDemo onDemoStateChange={setIsInDemo} />
+            ) : (
+              <CurrentSlideComponent />
+            )}
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation arrows */}
-        <button
-          onClick={prevSlide}
-          disabled={currentSlide === 0}
-          className="absolute left-4 md:left-6 bottom-16 md:bottom-auto md:top-1/2 md:-translate-y-1/2 w-10 h-10 md:w-14 md:h-14 rounded-full bg-card/90 backdrop-blur border border-border hover:border-primary/50 hover:bg-card flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all z-10 group"
-        >
-          <ChevronLeft className="w-5 h-5 md:w-7 md:h-7 text-muted-foreground group-hover:text-foreground transition-colors" />
-        </button>
-        <button
-          onClick={nextSlide}
-          disabled={currentSlide === slides.length - 1}
-          className="absolute right-4 md:right-6 bottom-16 md:bottom-auto md:top-1/2 md:-translate-y-1/2 w-10 h-10 md:w-14 md:h-14 rounded-full bg-card/90 backdrop-blur border border-border hover:border-primary/50 hover:bg-card flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all z-10 group"
-        >
-          <ChevronRight className="w-5 h-5 md:w-7 md:h-7 text-muted-foreground group-hover:text-foreground transition-colors" />
-        </button>
-
-        {/* Progress dots */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2">
-          {slides.map((_, index) => (
+        {/* Navigation arrows - hidden when in demo */}
+        {!hideNavigation && (
+          <>
             <button
-              key={index}
-              onClick={() => {
-                setDirection(index > currentSlide ? 1 : -1);
-                setCurrentSlide(index);
-              }}
-              className={`w-2 h-2 rounded-full transition-all ${
-                safeCurrentSlide === index
-                  ? "bg-primary w-6"
-                  : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
-              }`}
-            />
-          ))}
-        </div>
+              onClick={prevSlide}
+              disabled={currentSlide === 0}
+              className="absolute left-4 md:left-6 bottom-16 md:bottom-auto md:top-1/2 md:-translate-y-1/2 w-10 h-10 md:w-14 md:h-14 rounded-full bg-card/90 backdrop-blur border border-border hover:border-primary/50 hover:bg-card flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all z-10 group"
+            >
+              <ChevronLeft className="w-5 h-5 md:w-7 md:h-7 text-muted-foreground group-hover:text-foreground transition-colors" />
+            </button>
+            <button
+              onClick={nextSlide}
+              disabled={currentSlide === slides.length - 1}
+              className="absolute right-4 md:right-6 bottom-16 md:bottom-auto md:top-1/2 md:-translate-y-1/2 w-10 h-10 md:w-14 md:h-14 rounded-full bg-card/90 backdrop-blur border border-border hover:border-primary/50 hover:bg-card flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all z-10 group"
+            >
+              <ChevronRight className="w-5 h-5 md:w-7 md:h-7 text-muted-foreground group-hover:text-foreground transition-colors" />
+            </button>
+          </>
+        )}
+
+        {/* Progress dots - hidden when in demo */}
+        {!hideNavigation && (
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setDirection(index > currentSlide ? 1 : -1);
+                  setCurrentSlide(index);
+                }}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  safeCurrentSlide === index
+                    ? "bg-primary w-6"
+                    : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                }`}
+              />
+            ))}
+          </div>
+        )}
       </main>
     </div>
   );
