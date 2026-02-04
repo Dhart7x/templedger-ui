@@ -83,8 +83,8 @@ const SlideMinimalChange = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.4 }}
           >
-            <p className="text-xs text-muted-foreground mb-3">Your only active input is what you already know:</p>
-            <div className="space-y-2">
+            <p className="text-xs text-muted-foreground mb-4">Your only active input is what you already know:</p>
+            <div className="space-y-3">
               {inputs.map((item, index) => (
                 <motion.div
                   key={index}

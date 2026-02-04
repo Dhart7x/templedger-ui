@@ -62,7 +62,7 @@ const SlideReactive = () => {
           </div>
 
           {/* Right: Outcomes */}
-          <div className="space-y-3">
+          <div className="space-y-4">
             <p className="text-xs text-muted-foreground mb-4">
               Temp Ledger makes execution explicit, enforced, and visible:
             </p>
