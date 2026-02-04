@@ -53,7 +53,7 @@ const SlideMinimalChange = () => {
         </motion.p>
 
         {/* Two columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-8 md:mb-12">
           {/* Left: For the labour user */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
