@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Shield, ArrowRight } from "lucide-react";
 import Slide from "./Slide";
 
 const SlideHero = () => {
@@ -26,11 +25,19 @@ const SlideHero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-lg md:text-xl lg:text-2xl text-muted-foreground font-light max-w-2xl mx-auto mb-6"
+          className="text-lg md:text-xl lg:text-2xl text-foreground font-medium max-w-2xl mx-auto mb-4"
         >
-          Post-Hire Orchestration for Temp Staffing
+          The Operating System for Labour Users
         </motion.p>
 
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto"
+        >
+          Manage agencies, labour, and outcomes in one place.
+        </motion.p>
       </div>
     </Slide>
   );

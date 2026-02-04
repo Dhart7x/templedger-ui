@@ -1,22 +1,19 @@
 import { motion } from "framer-motion";
-import { Database, Layers, AlertCircle } from "lucide-react";
+import { Building2, Layers, Clock } from "lucide-react";
 import Slide from "./Slide";
 
 const problemItems = [
   { 
-    icon: Database, 
-    title: "CRMs store data — they don't execute",
-    description: "Information exists, but nothing enforces what must happen next."
+    icon: Building2, 
+    text: "Agencies operate inside their own systems"
   },
   { 
     icon: Layers, 
-    title: "Data Orchestration between departments is manual and error prone",
-    description: "HR, Payroll, Billing, Credit Control operate in silo."
+    text: "There is no operating system for labour users"
   },
   { 
-    icon: AlertCircle, 
-    title: "Problems are discovered retrospectively",
-    description: "Issues surface only when workers complain or invoices are challenged."
+    icon: Clock, 
+    text: "Performance, attendance, and cost are discovered retrospectively"
   },
 ];
 
@@ -24,50 +21,49 @@ const SlideRootCause = () => {
   return (
     <Slide className="relative">
       <div className="max-w-5xl mx-auto w-full">
-        {/* Header - Centered at top */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-4 md:mb-8"
+          className="text-center mb-6 md:mb-10"
         >
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold">
-            The Root Cause
+            Why This Keeps Happening
           </h2>
         </motion.div>
 
-        {/* Main content */}
-        <div className="max-w-3xl mx-auto">
-          <div className="space-y-2 md:space-y-3">
+        {/* Problem items */}
+        <div className="max-w-2xl mx-auto mb-8 md:mb-12">
+          <div className="space-y-3 md:space-y-4">
             {problemItems.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.1 + index * 0.08 }}
-                className="flex items-start gap-3 md:gap-4 p-2 md:p-4 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors group"
+                transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
+                className="flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-xl bg-card border border-border"
               >
-                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors mt-0.5">
-                  <item.icon className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg trust-gradient flex items-center justify-center flex-shrink-0">
+                  <item.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
                 </div>
-                <div>
-                  <span className="text-sm md:text-base text-foreground font-medium block">{item.title}</span>
-                  <span className="text-xs md:text-sm text-muted-foreground hidden md:block">{item.description}</span>
-                </div>
+                <span className="text-sm md:text-base text-foreground font-medium">{item.text}</span>
               </motion.div>
             ))}
           </div>
-
-          {/* Bottom quote */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="text-center text-muted-foreground mt-4 md:mt-8 text-xs md:text-lg"
-          >
-            When execution isn't controlled, everyone argues after the fact.
-          </motion.p>
         </div>
+
+        {/* Bottom line */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="text-center"
+        >
+          <p className="text-sm md:text-lg font-bold text-foreground">
+            Without a control layer, agencies run the model — not you.
+          </p>
+        </motion.div>
       </div>
     </Slide>
   );
