@@ -86,22 +86,22 @@ const SlideAdoption = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="max-w-3xl mx-auto mb-4 md:mb-12 lg:mb-14"
+          className="max-w-5xl mx-auto mb-4 md:mb-12 lg:mb-14"
         >
           <p className="text-[10px] md:text-sm text-muted-foreground text-center mb-2 md:mb-3 uppercase tracking-wide font-semibold">
             Agencies also benefit
           </p>
-          <div className="flex flex-wrap justify-center gap-1.5 md:gap-4 lg:gap-5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 lg:gap-5">
             {agencyBenefits.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: 0.7 + index * 0.05 }}
-                className="flex items-center gap-1.5 md:gap-3 px-2 md:px-5 py-1.5 md:py-3 rounded-lg bg-primary/5 border border-primary/20"
+                className="w-full flex items-center justify-center gap-1.5 md:gap-3 px-2 md:px-4 py-1.5 md:py-3 rounded-lg bg-primary/5 border border-primary/20"
               >
                 <item.icon className="w-3 h-3 md:w-4 md:h-4 text-primary flex-shrink-0" />
-                <span className="text-[10px] md:text-base lg:text-lg text-foreground font-medium">{item.text}</span>
+                <span className="text-[10px] md:text-base lg:text-lg text-foreground font-medium text-center">{item.text}</span>
               </motion.div>
             ))}
           </div>
