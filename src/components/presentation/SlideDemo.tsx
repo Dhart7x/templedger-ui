@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Play, Eye, Users, ClipboardCheck, BarChart3, Calendar } from "lucide-react";
+import { Play, Eye, Users, ClipboardCheck, BarChart3, Calendar, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DemoSidebar from "./demo/DemoSidebar";
 import DemoLiveSnapshot from "./demo/DemoLiveSnapshot";
@@ -8,6 +8,7 @@ import DemoDepartments from "./demo/DemoDepartments";
 import DemoAgenciesPerformance from "./demo/DemoAgenciesPerformance";
 import DemoPayrollBilling from "./demo/DemoPayrollBilling";
 import DemoHeadcountRequests from "./demo/DemoHeadcountRequests";
+import DemoExecutionLedger from "./demo/DemoExecutionLedger";
 
 const SlideDemo = () => {
   const [showDemo, setShowDemo] = useState(false);
@@ -105,6 +106,8 @@ const SlideDemo = () => {
         return <DemoDepartments />;
       case "agencies":
         return <DemoAgenciesPerformance />;
+      case "ledger":
+        return <DemoExecutionLedger />;
       case "payroll":
         return <DemoPayrollBilling />;
       case "headcount":
