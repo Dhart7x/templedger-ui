@@ -11,11 +11,11 @@ import DemoExceptionsQueue from "./demo/DemoExceptionsQueue";
 
 const SlideDemo = () => {
   const [showDemo, setShowDemo] = useState(false);
-  const [activeView, setActiveView] = useState("execution");
+  const [activeView, setActiveView] = useState("ledger");
 
   const handleExitDemo = () => {
     setShowDemo(false);
-    setActiveView("execution");
+    setActiveView("ledger");
   };
 
   if (!showDemo) {
@@ -27,8 +27,8 @@ const SlideDemo = () => {
           transition={{ duration: 0.5 }}
           className="text-center"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8">
-            See the Chain in Action
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-foreground">
+            See the Ledger in Action
           </h2>
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -54,7 +54,7 @@ const SlideDemo = () => {
 
   const renderActiveView = () => {
     switch (activeView) {
-      case "execution":
+      case "ledger":
         return <DemoOverview />;
       case "attendance":
         return <DemoLiveLabour />;
@@ -81,7 +81,7 @@ const SlideDemo = () => {
           <span>Back to Presentation</span>
         </button>
         <div className="flex items-center gap-2 text-sm">
-          <span className="text-muted-foreground">Execution Chain Dashboard</span>
+          <span className="text-muted-foreground">Ledger Dashboard</span>
         </div>
         <div className="w-[140px]" />
       </div>

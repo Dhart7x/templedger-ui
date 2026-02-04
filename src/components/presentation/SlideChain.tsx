@@ -3,8 +3,8 @@ import { UserPlus, Shield, Calendar, Clock, CheckSquare, CreditCard, FileText } 
 import Slide from "./Slide";
 
 const flowSteps = [
-  { icon: UserPlus, text: "Supplier registers worker" },
-  { icon: Shield, text: "Compliance and terms locked" },
+  { icon: UserPlus, text: "Agency registers worker" },
+  { icon: Shield, text: "Compliance and terms verified" },
   { icon: Calendar, text: "Shift scheduled" },
   { icon: Clock, text: "Attendance captured" },
   { icon: CheckSquare, text: "Hours approved" },
@@ -24,7 +24,7 @@ const SlideChain = () => {
           className="text-center mb-6 md:mb-10"
         >
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold">
-            How Temp Ledger Works
+            How Temp Ledger Orchestrates Agencies
           </h2>
         </motion.div>
 
@@ -59,7 +59,7 @@ const SlideChain = () => {
           className="text-center"
         >
           <p className="text-sm md:text-lg font-bold text-foreground">
-            Nothing progresses unless the previous step is true.
+            The ledger enforces the sequence.
           </p>
         </motion.div>
       </div>

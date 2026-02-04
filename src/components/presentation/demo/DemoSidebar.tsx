@@ -7,7 +7,7 @@ interface DemoSidebarProps {
 }
 
 const navItems = [
-  { id: "execution", label: "Execution Chain", icon: Link2 },
+  { id: "ledger", label: "Ledger", icon: Link2 },
   { id: "attendance", label: "Live Attendance", icon: Clock },
   { id: "exceptions", label: "Exceptions", icon: AlertTriangle },
   { id: "suppliers", label: "Suppliers", icon: Building2 },

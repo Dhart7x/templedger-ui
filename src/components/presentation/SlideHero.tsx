@@ -1,42 +1,56 @@
 import { motion } from "framer-motion";
+import { Shield } from "lucide-react";
 import Slide from "./Slide";
 
 const SlideHero = () => {
   return (
     <Slide className="relative overflow-hidden">
-      {/* Background gradient orbs */}
+      {/* Background gradient */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse-glow" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '1.5s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4"
+      <div className="flex flex-col items-center justify-center text-center relative z-10">
+        {/* Logo */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="mb-8"
         >
-          <span className="text-foreground">Temp</span>
-          <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> Ledger</span>
+          <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl trust-gradient flex items-center justify-center mx-auto">
+            <Shield className="w-10 h-10 md:w-12 md:h-12 text-foreground" />
+          </div>
+        </motion.div>
+
+        {/* Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4"
+        >
+          Temp Ledger
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-lg md:text-xl lg:text-2xl text-foreground font-medium max-w-2xl mx-auto mb-4"
-        >
-          The Operating System Behind Every Shift, Pay Run, and Invoice
-        </motion.p>
-
+        {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto"
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-lg md:text-2xl text-muted-foreground mb-6"
         >
-          Adopted by labour users. Enforced across suppliers.
+          The Operating System for Labour Users
+        </motion.p>
+
+        {/* Small line */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="text-sm text-muted-foreground/70"
+        >
+          Orchestrating labour providers from compliance to invoice.
         </motion.p>
       </div>
     </Slide>

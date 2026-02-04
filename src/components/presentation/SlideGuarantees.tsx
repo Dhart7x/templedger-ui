@@ -4,9 +4,9 @@ import Slide from "./Slide";
 
 const guarantees = [
   { icon: UserCheck, text: "Workers are compliant before they work" },
-  { icon: Clock, text: "Hours are real before they're approved" },
-  { icon: CreditCard, text: "Pay is correct before it's run" },
-  { icon: FileCheck, text: "Invoices are accurate before they're issued" },
+  { icon: Clock, text: "Temps are paid correctly, every cycle" },
+  { icon: CreditCard, text: "Invoices are accurate by construction" },
+  { icon: FileCheck, text: "Audit evidence exists before it's needed" },
 ];
 
 const SlideGuarantees = () => {
@@ -21,7 +21,7 @@ const SlideGuarantees = () => {
           className="text-center mb-6 md:mb-10"
         >
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold">
-            What Labour Users Get by Default
+            What Labour Users Gain
           </h2>
         </motion.div>
 
@@ -53,7 +53,7 @@ const SlideGuarantees = () => {
           className="text-center"
         >
           <p className="text-sm md:text-lg font-bold text-foreground">
-            No assumptions. No re-checking. No arguments.
+            No surprises. No assumptions.
           </p>
         </motion.div>
       </div>

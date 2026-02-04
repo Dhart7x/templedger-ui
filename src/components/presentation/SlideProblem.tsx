@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
-import { Eye, Clock, AlertTriangle, MessageSquare } from "lucide-react";
+import { AlertTriangle, CreditCard, FileText, Users } from "lucide-react";
 import Slide from "./Slide";
 
 const problemItems = [
-  { icon: Eye, text: "Pay queries surface after payroll" },
-  { icon: AlertTriangle, text: "Invoices are challenged after approval" },
-  { icon: Clock, text: "Compliance gaps are discovered too late" },
-  { icon: MessageSquare, text: "Supplier performance is argued, not proven" },
+  { icon: AlertTriangle, text: "You don't really know if agency workers are compliant" },
+  { icon: CreditCard, text: "You trust that temps are paid correctly — after the fact" },
+  { icon: FileText, text: "You assume invoices are accurate — until they're disputed" },
+  { icon: Users, text: "Pay issues drive worker churn and instability" },
 ];
 
 const SlideProblem = () => {
@@ -21,7 +21,7 @@ const SlideProblem = () => {
           className="text-center mb-6 md:mb-10"
         >
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold leading-tight">
-            You Only See Problems After They Hurt
+            You're Exposed — And You Know It
           </h2>
         </motion.div>
 
@@ -53,7 +53,7 @@ const SlideProblem = () => {
           className="text-center"
         >
           <p className="text-sm md:text-lg font-bold text-foreground">
-            By the time issues appear, trust is already broken.
+            Labour risk shows up late — and hits hard.
           </p>
         </motion.div>
       </div>

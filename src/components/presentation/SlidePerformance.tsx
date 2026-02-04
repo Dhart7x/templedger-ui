@@ -3,10 +3,10 @@ import { Zap, Clock, AlertTriangle, TrendingUp, Users, DollarSign } from "lucide
 import Slide from "./Slide";
 
 const performanceMetrics = [
-  { icon: Zap, text: "Response time to fill" },
-  { icon: Clock, text: "Time to approval" },
-  { icon: AlertTriangle, text: "Lateness and no-shows" },
+  { icon: Zap, text: "Response time by agency" },
+  { icon: Clock, text: "Time-to-fill" },
   { icon: TrendingUp, text: "Fulfilment vs commitment" },
+  { icon: AlertTriangle, text: "Lateness and no-shows" },
   { icon: Users, text: "Attrition by supplier" },
   { icon: DollarSign, text: "Spend and overtime by department" },
 ];
@@ -23,7 +23,7 @@ const SlidePerformance = () => {
           className="text-center mb-4 md:mb-6"
         >
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-3">
-            Performance Falls Out of the Chain
+            Performance Falls Out of the Ledger
           </h2>
           <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
             Because execution is enforced, performance becomes objective.
@@ -56,7 +56,7 @@ const SlidePerformance = () => {
           className="text-center"
         >
           <p className="text-sm md:text-lg font-bold text-foreground">
-            Performance isn't reported. It's revealed.
+            Performance isn't reviewed. It's revealed.
           </p>
         </motion.div>
       </div>
