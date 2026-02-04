@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import SlideHero from "@/components/presentation/SlideHero";
 import SlideProblem from "@/components/presentation/SlideProblem";
 import SlideSolution from "@/components/presentation/SlideSolution";
-import SlideLedger from "@/components/presentation/SlideLedger";
 import SlideDemo from "@/components/presentation/SlideDemo";
 import SlideTimeAttendance from "@/components/presentation/SlideTimeAttendance";
 import SlidePerformance from "@/components/presentation/SlidePerformance";
@@ -15,11 +14,10 @@ const slides = [
   { id: 0, component: SlideHero },
   { id: 1, component: SlideProblem },
   { id: 2, component: SlideSolution },
-  { id: 3, component: SlideLedger },
-  { id: 4, component: SlideDemo },
-  { id: 5, component: SlideTimeAttendance },
-  { id: 6, component: SlidePerformance },
-  { id: 7, component: SlideAdoption },
+  { id: 3, component: SlideDemo },
+  { id: 4, component: SlideTimeAttendance },
+  { id: 5, component: SlidePerformance },
+  { id: 6, component: SlideAdoption },
 ];
 
 const SalesDeck = () => {

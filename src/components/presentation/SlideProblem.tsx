@@ -31,21 +31,15 @@ const SlideProblem = () => {
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold leading-tight">
             The Core Problem
           </h2>
-          <p className="text-sm md:text-base text-muted-foreground mt-2">
-            Labour users rely on staffing agencies, but...
-          </p>
         </motion.div>
 
-        {/* The Reality - Vertical bullet points */}
+        {/* Vertical bullet points */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="max-w-2xl mx-auto mb-6 md:mb-8"
         >
-          <h3 className="text-xs md:text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide text-center">
-            The Reality
-          </h3>
           <div className="space-y-2">
             {rootCauses.map((item, index) => (
               <motion.div
