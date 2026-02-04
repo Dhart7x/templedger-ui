@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Shield } from "lucide-react";
 import Slide from "./Slide";
 
 const SlideHero = () => {
@@ -16,26 +15,14 @@ const SlideHero = () => {
       </div>
 
       <div className="flex flex-col items-center justify-center text-center relative z-10">
-        {/* Logo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-8"
-        >
-          <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl trust-gradient flex items-center justify-center mx-auto shadow-lg">
-            <Shield className="w-10 h-10 md:w-12 md:h-12 text-foreground" />
-          </div>
-        </motion.div>
-
-        {/* Title */}
+        {/* Title with gradient */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4"
         >
-          Temp Ledger
+          <span className="trust-gradient-text">Temp Ledger</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -53,9 +40,9 @@ const SlideHero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-sm text-muted-foreground/70"
+          className="text-sm text-muted-foreground/70 max-w-md"
         >
-          Orchestrating labour providers from compliance to invoice.
+          Orchestrating labour providers from compliance to pay to invoice.
         </motion.p>
       </div>
     </Slide>
