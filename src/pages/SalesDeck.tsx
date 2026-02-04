@@ -11,6 +11,7 @@ import SlideTimeAttendance from "@/components/presentation/SlideTimeAttendance";
 import SlidePerformance from "@/components/presentation/SlidePerformance";
 import SlideReactive from "@/components/presentation/SlideReactive";
 import SlideAdoption from "@/components/presentation/SlideAdoption";
+import SlideClosing from "@/components/presentation/SlideClosing";
 
 const slides = [
   { id: 0, component: SlideHero },
@@ -22,6 +23,7 @@ const slides = [
   { id: 6, component: SlidePerformance },
   { id: 7, component: SlideReactive },
   { id: 8, component: SlideAdoption },
+  { id: 9, component: SlideClosing },
 ];
 
 const SalesDeck = () => {
