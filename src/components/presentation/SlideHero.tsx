@@ -35,15 +35,6 @@ const SlideHero = () => {
           The Operating System for Labour Users
         </motion.p>
 
-        {/* Small line */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-sm text-muted-foreground/70 max-w-md"
-        >
-          Orchestrating labour providers from compliance to pay to invoice.
-        </motion.p>
       </div>
     </Slide>
   );

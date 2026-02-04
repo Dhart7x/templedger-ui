@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { BarChart3, Clock, CheckCircle, UserX, TrendingDown, Users, DollarSign } from "lucide-react";
+import { BarChart3, Clock, CheckCircle, UserX, TrendingDown, Users, DollarSign, AlertCircle, Percent } from "lucide-react";
 import Slide from "./Slide";
 
 const metrics = [
@@ -10,6 +10,8 @@ const metrics = [
   { icon: TrendingDown, text: "Attrition" },
   { icon: Users, text: "Who is on site now, by department" },
   { icon: DollarSign, text: "Spend and overtime alerts" },
+  { icon: AlertCircle, text: "Exception resolution time" },
+  { icon: Percent, text: "First-time approval rate" },
 ];
 
 const SlidePerformance = () => {
@@ -40,21 +42,21 @@ const SlidePerformance = () => {
           </p>
         </motion.div>
 
-        {/* Metrics Grid */}
+        {/* Metrics Grid - 3x3 */}
         <div className="max-w-3xl mx-auto mb-6 md:mb-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
             {metrics.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: 0.2 + index * 0.06 }}
+                transition={{ duration: 0.3, delay: 0.2 + index * 0.05 }}
                 className="flex items-center gap-3 p-3 md:p-4 rounded-xl bg-card border border-border"
               >
                 <motion.div 
                   initial={{ scale: 0.8 }}
                   animate={{ scale: 1 }}
-                  transition={{ duration: 0.3, delay: 0.3 + index * 0.06 }}
+                  transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
                   className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0"
                 >
                   <item.icon className="w-4 h-4 text-primary" />
