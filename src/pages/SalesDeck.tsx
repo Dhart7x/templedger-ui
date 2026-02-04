@@ -19,12 +19,13 @@ const slides = [
   { id: 1, component: SlideProblem },
   { id: 2, component: SlideSolution },
   { id: 3, component: SlideTLSolution },
-  { id: 4, component: SlideDemo },
-  { id: 5, component: SlideTimeAttendance },
-  { id: 6, component: SlidePerformance },
-  { id: 7, component: SlideReactive },
-  { id: 8, component: SlideAdoption },
-  { id: 9, component: SlideClosing },
+  { id: 4, component: SlideMinimalChange },
+  { id: 5, component: SlideDemo },
+  { id: 6, component: SlideTimeAttendance },
+  { id: 7, component: SlidePerformance },
+  { id: 8, component: SlideReactive },
+  { id: 9, component: SlideAdoption },
+  { id: 10, component: SlideClosing },
 ];
 
 const SalesDeck = () => {
