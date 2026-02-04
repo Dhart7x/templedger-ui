@@ -47,7 +47,7 @@ const SlideAdoption = () => {
               <div className="p-4 md:p-6 rounded-xl trust-gradient text-center">
                 <Building2 className="w-8 h-8 md:w-10 md:h-10 mx-auto mb-2 text-foreground" />
                 <h3 className="text-sm md:text-base font-bold text-foreground mb-1">Labour Users</h3>
-                <p className="text-xs md:text-sm text-foreground/80">Primary buyer</p>
+                <p className="text-xs md:text-sm text-foreground/80">No cost</p>
               </div>
             </motion.div>
 
