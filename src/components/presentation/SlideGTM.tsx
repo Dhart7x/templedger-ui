@@ -54,7 +54,7 @@ const SlideGTM = () => {
                 </div>
                 <span className="text-xs md:text-sm font-semibold text-foreground">Encourage</span>
               </div>
-              <p className="text-[10px] md:text-xs text-muted-foreground">
+              <p className="text-sm md:text-base text-foreground">
                 Sell directly to staffing agencies
               </p>
             </motion.div>
