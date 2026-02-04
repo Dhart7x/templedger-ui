@@ -45,7 +45,7 @@ const SlideSolution = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-3 md:mb-14 lg:mb-20"
+          className="mb-3 md:mt-10 md:mb-16 lg:mt-12 lg:mb-24"
         >
           {/* Mobile: 2-column compact grid */}
           <div className="md:hidden grid grid-cols-2 gap-x-2 gap-y-1 px-1">
