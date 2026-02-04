@@ -149,21 +149,23 @@ const SalesDeck = () => {
         )}
 
         {/* Progress dots - hidden when in demo */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setDirection(index > currentSlide ? 1 : -1);
-                setCurrentSlide(index);
-              }}
-              className={`w-2 h-2 rounded-full transition-all ${
-                safeCurrentSlide === index
-                  ? "bg-primary w-6"
-                  : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
-              }`}
-            />
-          ))}
+        {!hideNavigation && (
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setDirection(index > currentSlide ? 1 : -1);
+                  setCurrentSlide(index);
+                }}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  safeCurrentSlide === index
+                    ? "bg-primary w-6"
+                    : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </main>
     </div>
