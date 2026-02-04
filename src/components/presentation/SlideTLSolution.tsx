@@ -34,12 +34,12 @@ const SlideTLSolution = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-4 md:mb-8"
+          className="text-center mb-4 md:mb-10 lg:mb-12"
         >
           <h2 className="text-lg md:text-3xl lg:text-4xl font-bold">
             Introducing Temp Ledger
           </h2>
-          <p className="text-sm md:text-lg text-muted-foreground mt-2">
+          <p className="text-sm md:text-lg text-muted-foreground mt-2 md:mt-3">
             The Unified System of Truth for Temp Staffing
           </p>
         </motion.div>
@@ -49,7 +49,7 @@ const SlideTLSolution = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap justify-center items-center gap-1.5 md:gap-2 mb-4 md:mb-6"
+          className="flex flex-wrap justify-center items-center gap-1.5 md:gap-3 lg:gap-4 mb-4 md:mb-8 lg:mb-10"
         >
           {ledgerSteps.map((step, index) => (
             <div key={index} className="flex items-center">
@@ -73,7 +73,7 @@ const SlideTLSolution = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="space-y-1.5 md:space-y-2 max-w-2xl mx-auto mb-4 md:mb-6"
+          className="space-y-1.5 md:space-y-3 lg:space-y-4 max-w-2xl mx-auto mb-4 md:mb-8 lg:mb-10"
         >
           <div className="flex items-start gap-2 p-2 md:p-3">
             <CheckCircle className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary mt-0.5 flex-shrink-0" />

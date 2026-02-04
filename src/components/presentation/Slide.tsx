@@ -7,7 +7,7 @@ interface SlideProps {
 
 const Slide = ({ children, className = "" }: SlideProps) => {
   return (
-    <div className={`w-full h-full flex flex-col justify-center px-12 md:px-16 lg:px-24 pt-20 pb-28 md:pt-16 md:pb-20 overflow-hidden ${className}`}>
+    <div className={`w-full h-full flex flex-col justify-center px-12 md:px-20 lg:px-32 pt-20 pb-28 md:pt-24 md:pb-24 lg:pt-28 lg:pb-28 overflow-hidden ${className}`}>
       {children}
     </div>
   );
