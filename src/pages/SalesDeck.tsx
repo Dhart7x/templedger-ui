@@ -71,6 +71,8 @@ const SalesDeck = () => {
   // Ensure currentSlide is within bounds
   const safeCurrentSlide = Math.min(currentSlide, slides.length - 1);
   const CurrentSlideComponent = slides[safeCurrentSlide]?.component || slides[0].component;
+  const isOnDemoSlide = safeCurrentSlide === DEMO_SLIDE_INDEX;
+  const hideNavigation = isOnDemoSlide && isInDemo;
 
   const slideVariants = {
     enter: (direction: number) => ({
