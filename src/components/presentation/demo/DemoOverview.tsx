@@ -1,4 +1,5 @@
-import { UserPlus, Shield, Calendar, Clock, CheckSquare, CreditCard, FileText, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { UserPlus, Shield, Calendar, Clock, CheckSquare, CreditCard, FileText, CheckCircle, AlertCircle, Loader2, Users, DollarSign, AlertTriangle } from "lucide-react";
 
 const chainSteps = [
   { 
@@ -89,17 +90,24 @@ const DemoOverview = () => {
   return (
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold">Execution Chain</h2>
-        <div className="text-xs text-muted-foreground">
-          Live status • Updated just now
+        <h2 className="text-xl font-bold">Execution Ledger</h2>
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+          Live • Updated just now
         </div>
       </div>
       
       {/* Chain visualization */}
       <div className="space-y-2 mb-8">
         {chainSteps.map((step, index) => (
-          <div key={step.id} className="relative">
-            <div className={`flex items-center gap-4 p-4 rounded-lg border ${getStatusBg(step.status)}`}>
+          <motion.div 
+            key={step.id} 
+            className="relative"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.05 }}
+          >
+            <div className={`flex items-center gap-4 p-4 rounded-lg border transition-colors ${getStatusBg(step.status)}`}>
               <div className="flex items-center gap-3 flex-shrink-0">
                 <div className="w-8 h-8 rounded-lg trust-gradient flex items-center justify-center">
                   <span className="text-sm font-bold text-foreground">{step.id}</span>
@@ -130,12 +138,69 @@ const DemoOverview = () => {
             {index < chainSteps.length - 1 && (
               <div className="absolute left-7 top-full h-2 w-0.5 bg-border" />
             )}
-          </div>
+          </motion.div>
         ))}
       </div>
 
+      {/* Summary metrics */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.4 }}
+          className="p-4 rounded-lg bg-card border border-border"
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <Users className="w-4 h-4 text-primary" />
+            <span className="text-xs text-muted-foreground">On Site Now</span>
+          </div>
+          <div className="text-2xl font-bold">342</div>
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.45 }}
+          className="p-4 rounded-lg bg-card border border-border"
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <AlertTriangle className="w-4 h-4 text-amber-500" />
+            <span className="text-xs text-muted-foreground">Open Exceptions</span>
+          </div>
+          <div className="text-2xl font-bold">5</div>
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.5 }}
+          className="p-4 rounded-lg bg-card border border-border"
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <DollarSign className="w-4 h-4 text-primary" />
+            <span className="text-xs text-muted-foreground">Today's Spend</span>
+          </div>
+          <div className="text-2xl font-bold">£12.4k</div>
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.55 }}
+          className="p-4 rounded-lg bg-card border border-border"
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <Clock className="w-4 h-4 text-destructive" />
+            <span className="text-xs text-muted-foreground">Overtime Alert</span>
+          </div>
+          <div className="text-2xl font-bold text-destructive">3</div>
+        </motion.div>
+      </div>
+
       {/* Chain integrity summary */}
-      <div className="rounded-lg bg-card border border-border p-4">
+      <motion.div 
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.6 }}
+        className="rounded-lg bg-card border border-border p-4"
+      >
         <h3 className="font-semibold mb-4">Chain Integrity</h3>
         <div className="grid grid-cols-3 gap-4">
           <div className="text-center p-3 rounded bg-green-500/5 border border-green-500/20">
@@ -151,7 +216,7 @@ const DemoOverview = () => {
             <div className="text-xs text-muted-foreground">Awaiting</div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

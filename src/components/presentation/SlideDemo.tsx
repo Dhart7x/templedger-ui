@@ -44,9 +44,14 @@ const SlideDemo = () => {
               Launch Interactive Demo
             </Button>
           </motion.div>
-          <p className="text-sm text-muted-foreground mt-6 max-w-sm mx-auto">
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="text-sm text-muted-foreground mt-6 max-w-sm mx-auto"
+          >
             Follow a worker from registration to invoice.
-          </p>
+          </motion.p>
         </motion.div>
       </div>
     );
@@ -81,7 +86,7 @@ const SlideDemo = () => {
           <span>Back to Presentation</span>
         </button>
         <div className="flex items-center gap-2 text-sm">
-          <span className="text-muted-foreground">Ledger Dashboard</span>
+          <span className="text-muted-foreground">Execution Ledger Dashboard</span>
         </div>
         <div className="w-[140px]" />
       </div>

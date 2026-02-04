@@ -3,17 +3,19 @@ import { ArrowRight, ArrowLeft, CheckCircle, XCircle } from "lucide-react";
 import Slide from "./Slide";
 
 const beforeItems = [
-  "Chasing agencies",
-  "Arguing over pay and invoices",
-  "Retrospective audits",
-  "Worker churn from pay disputes",
+  "Pay queries and invoice disputes",
+  "Retrospective compliance checks",
+  "Agency performance debated, not proven",
+  "Reports that lag reality",
+  "Worker churn driven by pay issues",
 ];
 
 const afterItems = [
-  "Enforced execution",
-  "Verified pay cycles",
-  "Accurate invoices",
-  "Lower attrition, higher fulfilment",
+  "Verified compliance",
+  "Correct pay, every cycle",
+  "Objective, real-time agency performance",
+  "Performance derived from execution, not reporting",
+  "Lower attrition and higher fulfilment",
 ];
 
 const SlideBeforeAfter = () => {
@@ -36,7 +38,7 @@ const SlideBeforeAfter = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto mb-8 md:mb-12">
           {/* Before */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="p-4 md:p-6 rounded-xl bg-card border border-border"
@@ -49,12 +51,12 @@ const SlideBeforeAfter = () => {
               {beforeItems.map((item, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: -10 }}
+                  initial={{ opacity: 0, x: -15 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
-                  className="flex items-center gap-2"
+                  className="flex items-start gap-2"
                 >
-                  <XCircle className="w-4 h-4 text-destructive flex-shrink-0" />
+                  <XCircle className="w-4 h-4 text-destructive flex-shrink-0 mt-0.5" />
                   <span className="text-sm text-muted-foreground">{item}</span>
                 </motion.div>
               ))}
@@ -63,7 +65,7 @@ const SlideBeforeAfter = () => {
 
           {/* After */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             className="p-4 md:p-6 rounded-xl bg-card border border-primary/30"
@@ -76,12 +78,12 @@ const SlideBeforeAfter = () => {
               {afterItems.map((item, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: 10 }}
+                  initial={{ opacity: 0, x: 15 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: 0.4 + index * 0.05 }}
-                  className="flex items-center gap-2"
+                  className="flex items-start gap-2"
                 >
-                  <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                   <span className="text-sm text-foreground">{item}</span>
                 </motion.div>
               ))}
@@ -93,11 +95,11 @@ const SlideBeforeAfter = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
+          transition={{ duration: 0.5, delay: 0.75 }}
           className="text-center"
         >
           <p className="text-sm md:text-lg font-bold text-foreground">
-            Control replaces trust.
+            Guesswork is replaced with evidence.
           </p>
         </motion.div>
       </div>
