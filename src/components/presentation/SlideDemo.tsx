@@ -130,7 +130,7 @@ const SlideDemo = () => {
                     className="flex items-start gap-3"
                   >
                     <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-1.5 md:mt-2" />
-                    <span className="text-[11px] md:text-sm text-foreground leading-relaxed">{item}</span>
+                    <span className="text-sm md:text-base text-foreground leading-relaxed">{item}</span>
                   </motion.div>
                 ))}
               </div>
