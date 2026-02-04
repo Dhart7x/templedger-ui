@@ -33,7 +33,7 @@ const SlideSolution = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-3 md:mb-10 lg:mb-12"
+          className="text-center mb-3 md:mb-12 lg:mb-16"
         >
           <h2 className="text-lg md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2">
             Where Problems Occur
@@ -45,7 +45,7 @@ const SlideSolution = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-3 md:mb-10 lg:mb-12"
+          className="mb-3 md:mb-14 lg:mb-20"
         >
           {/* Mobile: 2-column compact grid */}
           <div className="md:hidden grid grid-cols-2 gap-x-2 gap-y-1 px-1">
@@ -68,7 +68,7 @@ const SlideSolution = () => {
           </div>
 
           {/* Desktop: Horizontal wrap with connectors */}
-          <div className="hidden md:flex flex-wrap justify-center items-center gap-2 md:gap-3 px-2">
+          <div className="hidden md:flex flex-wrap justify-center items-center gap-3 lg:gap-4 px-2">
             {ledgerSteps.map((step, index) => (
               <motion.div
                 key={index}
@@ -83,7 +83,7 @@ const SlideSolution = () => {
                 className="flex items-center"
               >
                 <motion.div 
-                  className="flex items-center gap-2 px-3 py-2 md:px-4 md:py-3 rounded-lg bg-card border border-border"
+                  className="flex items-center gap-2 px-3 py-2 md:px-5 md:py-4 rounded-lg bg-card border border-border"
                   whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary))" }}
                   transition={{ duration: 0.2 }}
                 >
