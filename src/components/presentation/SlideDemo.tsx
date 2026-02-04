@@ -312,17 +312,20 @@ const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
     }
   };
 
+  // Main demo UI
   return (
     <div className="w-full h-full flex flex-col bg-background">
       {/* Demo Header */}
       <div className="flex items-center justify-between px-6 py-3 border-b border-border bg-muted/30">
-        <button
+        <Button
+          variant="outline"
+          size="sm"
           onClick={handleExitDemo}
-          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="gap-2 bg-card/80 border-border hover:border-primary/50"
         >
-          <span>←</span>
-          <span>Back to Presentation</span>
-        </button>
+          <ArrowLeft className="w-4 h-4" />
+          Back to Slides
+        </Button>
         
         {/* View Mode Dropdown */}
         <DropdownMenu>

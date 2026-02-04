@@ -166,7 +166,7 @@ const SalesDeck = () => {
               />
             ))}
           </div>
-        </div>
+        )}
       </main>
     </div>
   );
