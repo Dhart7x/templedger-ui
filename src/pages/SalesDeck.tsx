@@ -6,6 +6,7 @@ import SlideHero from "@/components/presentation/SlideHero";
 import SlideProblem from "@/components/presentation/SlideProblem";
 import SlideSolution from "@/components/presentation/SlideSolution";
 import SlideTLSolution from "@/components/presentation/SlideTLSolution";
+import SlideMinimalChange from "@/components/presentation/SlideMinimalChange";
 import SlideDemo from "@/components/presentation/SlideDemo";
 import SlideTimeAttendance from "@/components/presentation/SlideTimeAttendance";
 import SlidePerformance from "@/components/presentation/SlidePerformance";
