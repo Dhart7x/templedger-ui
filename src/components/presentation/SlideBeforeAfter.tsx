@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft } from "lucide-react";
+import { X, Check } from "lucide-react";
 import Slide from "./Slide";
 
 const beforeItems = [
@@ -35,16 +35,18 @@ const SlideBeforeAfter = () => {
         </motion.div>
 
         {/* Two columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto mb-8 md:mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-3xl mx-auto mb-8 md:mb-12">
           {/* Before */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="p-4 md:p-6 rounded-xl bg-card border border-border"
+            className="p-5 md:p-6 rounded-xl bg-destructive/5 border border-destructive/20"
           >
-            <div className="flex items-center gap-2 mb-4">
-              <ArrowLeft className="w-5 h-5 text-muted-foreground" />
+            <div className="flex items-center gap-2 mb-5">
+              <div className="w-6 h-6 rounded-full bg-destructive/20 flex items-center justify-center">
+                <X className="w-3.5 h-3.5 text-destructive" />
+              </div>
               <h3 className="text-lg font-semibold text-foreground">Before</h3>
             </div>
             <div className="space-y-3">
@@ -54,9 +56,9 @@ const SlideBeforeAfter = () => {
                   initial={{ opacity: 0, x: -15 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
-                  className="flex items-start gap-2"
+                  className="flex items-start gap-3"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground flex-shrink-0 mt-1.5" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-destructive/50 flex-shrink-0 mt-2" />
                   <span className="text-sm text-foreground">{item}</span>
                 </motion.div>
               ))}
@@ -68,10 +70,12 @@ const SlideBeforeAfter = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="p-4 md:p-6 rounded-xl bg-card border border-border"
+            className="p-5 md:p-6 rounded-xl bg-primary/5 border border-primary/20"
           >
-            <div className="flex items-center gap-2 mb-4">
-              <ArrowRight className="w-5 h-5 text-muted-foreground" />
+            <div className="flex items-center gap-2 mb-5">
+              <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
+                <Check className="w-3.5 h-3.5 text-primary" />
+              </div>
               <h3 className="text-lg font-semibold text-foreground">After</h3>
             </div>
             <div className="space-y-3">
@@ -81,9 +85,9 @@ const SlideBeforeAfter = () => {
                   initial={{ opacity: 0, x: 15 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: 0.4 + index * 0.05 }}
-                  className="flex items-start gap-2"
+                  className="flex items-start gap-3"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground flex-shrink-0 mt-1.5" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/50 flex-shrink-0 mt-2" />
                   <span className="text-sm text-foreground">{item}</span>
                 </motion.div>
               ))}

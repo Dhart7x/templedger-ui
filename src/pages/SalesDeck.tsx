@@ -8,9 +8,8 @@ import SlideRootCause from "@/components/presentation/SlideRootCause";
 import SlideSolution from "@/components/presentation/SlideSolution";
 import SlideDemo from "@/components/presentation/SlideDemo";
 import SlideBeforeAfter from "@/components/presentation/SlideBeforeAfter";
-import SlideDeployment from "@/components/presentation/SlideDeployment";
+import SlideAdoption from "@/components/presentation/SlideAdoption";
 import SlideAgencyBenefits from "@/components/presentation/SlideAgencyBenefits";
-import SlideImplementation from "@/components/presentation/SlideImplementation";
 
 const slides = [
   { id: 0, component: SlideHero },
@@ -19,9 +18,8 @@ const slides = [
   { id: 3, component: SlideSolution },
   { id: 4, component: SlideDemo },
   { id: 5, component: SlideBeforeAfter },
-  { id: 6, component: SlideDeployment },
+  { id: 6, component: SlideAdoption },
   { id: 7, component: SlideAgencyBenefits },
-  { id: 8, component: SlideImplementation },
 ];
 
 const SalesDeck = () => {
