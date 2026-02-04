@@ -106,6 +106,8 @@ const SlideDemo = () => {
         return <DemoDepartments />;
       case "agencies":
         return <DemoAgenciesPerformance />;
+      case "ledger":
+        return <DemoExecutionLedger />;
       case "payroll":
         return <DemoPayrollBilling />;
       case "headcount":
