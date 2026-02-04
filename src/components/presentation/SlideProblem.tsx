@@ -38,9 +38,9 @@ const SlideProblem = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="max-w-2xl mx-auto mb-6 md:mb-8"
+          className="max-w-2xl mx-auto mb-6 md:mb-10 lg:mb-12"
         >
-          <div className="space-y-2">
+          <div className="space-y-2 md:space-y-3 lg:space-y-4">
             {rootCauses.map((item, index) => (
               <motion.div
                 key={index}
