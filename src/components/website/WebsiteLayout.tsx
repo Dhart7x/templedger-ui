@@ -1,7 +1,8 @@
-import { ReactNode } from "react";
-import { Shield, Home } from "lucide-react";
-import { useNavigate, Link } from "react-router-dom";
+import { ReactNode, useState } from "react";
+import { Shield, Menu, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface WebsiteLayoutProps {
   children: ReactNode;
@@ -9,64 +10,93 @@ interface WebsiteLayoutProps {
 
 const WebsiteLayout = ({ children }: WebsiteLayoutProps) => {
   const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    setMobileMenuOpen(false);
+  };
+
+  const navItems = [
+    { label: "Labour Users", id: "labour-users" },
+    { label: "Agencies", id: "agencies" },
+    { label: "IF Providers", id: "if-providers" },
+  ];
 
   return (
     <div className="min-h-screen w-full bg-background relative">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between bg-background/80 backdrop-blur border-b border-border">
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => navigate("/")}
-            className="w-8 h-8 rounded-lg bg-card/80 border border-border hover:border-primary/50 flex items-center justify-center transition-colors"
-          >
-            <Home className="w-4 h-4 text-muted-foreground" />
-          </button>
-          <Link to="/website" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg trust-gradient flex items-center justify-center">
-              <Shield className="w-4 h-4 text-foreground" />
-            </div>
-            <span className="font-semibold text-foreground text-sm">Temp Ledger</span>
-          </Link>
-        </div>
-        <nav className="hidden md:flex items-center gap-6">
-          <Link to="/website/how-it-works" className="text-sm text-muted-foreground hover:text-foreground transition-colors">How It Works</Link>
-          <Link to="/website/for-labour-users" className="text-sm text-muted-foreground hover:text-foreground transition-colors">For Labour Users</Link>
-          <Link to="/website/for-agencies" className="text-sm text-muted-foreground hover:text-foreground transition-colors">For Agencies</Link>
-          <Button size="sm" className="ml-2">Request Demo</Button>
+      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between bg-background/90 backdrop-blur-md border-b border-border/50">
+        <button
+          onClick={() => navigate("/website")}
+          className="flex items-center gap-2 group"
+        >
+          <div className="w-8 h-8 rounded-lg trust-gradient flex items-center justify-center transition-transform group-hover:scale-105">
+            <Shield className="w-4 h-4 text-foreground" />
+          </div>
+          <span className="font-semibold text-foreground text-sm">Temp Ledger</span>
+        </button>
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-8">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors relative group"
+            >
+              {item.label}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+            </button>
+          ))}
+          <Button size="sm" className="ml-2">
+            Book Demo
+          </Button>
         </nav>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
+        >
+          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
       </header>
 
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed top-16 left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-b border-border p-6 md:hidden"
+          >
+            <nav className="flex flex-col gap-4">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="text-left text-sm text-muted-foreground hover:text-foreground transition-colors py-2"
+                >
+                  {item.label}
+                </button>
+              ))}
+              <Button size="sm" className="w-full mt-2">
+                Book Demo
+              </Button>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Content */}
-      <main className="pt-20">
+      <main>
         {children}
       </main>
-
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-border">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <Link to="/website" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg trust-gradient flex items-center justify-center">
-                <Shield className="w-4 h-4 text-foreground" />
-              </div>
-              <span className="font-semibold text-foreground">Temp Ledger</span>
-            </Link>
-            <nav className="flex flex-wrap justify-center gap-6">
-              <Link to="/website/how-it-works" className="text-sm text-muted-foreground hover:text-foreground transition-colors">How It Works</Link>
-              <Link to="/website/performance" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Performance</Link>
-              <Link to="/website/time-and-attendance" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Time & Attendance</Link>
-              <Link to="/website/for-labour-users" className="text-sm text-muted-foreground hover:text-foreground transition-colors">For Labour Users</Link>
-              <Link to="/website/for-agencies" className="text-sm text-muted-foreground hover:text-foreground transition-colors">For Agencies</Link>
-              <Link to="/website/security-and-audit" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Security</Link>
-            </nav>
-          </div>
-          <div className="mt-8 pt-8 border-t border-border text-center">
-            <p className="text-sm text-muted-foreground">
-              © 2024 Temp Ledger. Labour infrastructure.
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
