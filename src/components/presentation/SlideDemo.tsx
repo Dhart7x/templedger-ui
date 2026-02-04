@@ -42,11 +42,6 @@ const SlideDemo = () => {
             Temp Ledger orchestrates execution by combining ground-truth Time & Attendance 
             with direct integration into agency systems.
           </p>
-          
-          <p className="text-muted-foreground text-center mb-8 text-sm md:text-base max-w-2xl mx-auto">
-            Attendance, approvals, pay validation, and billing data flow into a single, 
-            real-time operational interface for the labour user.
-          </p>
 
           <div className="mb-8">
             <p className="text-sm font-medium text-foreground text-center mb-4">
