@@ -17,6 +17,7 @@ import DemoAgenciesPerformance from "./demo/DemoAgenciesPerformance";
 import DemoPayrollBilling from "./demo/DemoPayrollBilling";
 import DemoHeadcountRequests from "./demo/DemoHeadcountRequests";
 import DemoExecutionLedger from "./demo/DemoExecutionLedger";
+import DemoShiftCoverage from "./demo/DemoShiftCoverage";
 import DemoAgencySidebar from "./demo/DemoAgencySidebar";
 import DemoAgencyDashboard from "./demo/DemoAgencyDashboard";
 import DemoAgencyWorkers from "./demo/DemoAgencyWorkers";
@@ -24,6 +25,7 @@ import DemoAgencyWorkerDetail from "./demo/DemoAgencyWorkerDetail";
 import DemoAgencyDeployments from "./demo/DemoAgencyDeployments";
 import DemoAgencyIssues from "./demo/DemoAgencyIssues";
 import DemoAgencyDocuments from "./demo/DemoAgencyDocuments";
+import DemoAgencyAllocations from "./demo/DemoAgencyAllocations";
 import { AgencyWorker } from "./demo/agencyDemoData";
 
 type ViewMode = "labour-user" | "agency";
