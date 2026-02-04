@@ -18,15 +18,16 @@ import SlideClosing from "@/components/presentation/SlideClosing";
 const slides = [
   { id: 0, component: SlideHero },
   { id: 1, component: SlideProblem },
-  { id: 2, component: SlideSolution },
-  { id: 3, component: SlideTLSolution },
-  { id: 4, component: SlideMinimalChange },
-  { id: 5, component: SlideDemo },
-  { id: 6, component: SlideTimeAttendance },
-  { id: 7, component: SlidePerformance },
-  { id: 8, component: SlideReactive },
-  { id: 9, component: SlideAdoption },
-  { id: 10, component: SlideClosing },
+  { id: 2, component: SlideIntermediation },
+  { id: 3, component: SlideSolution },
+  { id: 4, component: SlideTLSolution },
+  { id: 5, component: SlideMinimalChange },
+  { id: 6, component: SlideDemo },
+  { id: 7, component: SlideTimeAttendance },
+  { id: 8, component: SlidePerformance },
+  { id: 9, component: SlideReactive },
+  { id: 10, component: SlideAdoption },
+  { id: 11, component: SlideClosing },
 ];
 
 const SalesDeck = () => {
