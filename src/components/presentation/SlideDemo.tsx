@@ -35,11 +35,6 @@ const SlideDemo = () => {
     "Objective, ledger-derived agency performance",
   ];
 
-  const principles = [
-    "No reliance on agency back-office systems",
-    "No retrospective reconciliation",
-    "Execution enforced before money moves",
-  ];
 
   if (!showDemo) {
     return (
