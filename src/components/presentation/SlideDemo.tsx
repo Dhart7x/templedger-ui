@@ -43,55 +43,64 @@ const SlideDemo = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-5xl w-full"
+          className="max-w-3xl w-full"
         >
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 md:mb-8 text-foreground text-center">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 md:mb-10 text-foreground text-center">
             How It Works
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8 max-w-3xl mx-auto">
-            {/* How It Works Column */}
+          <div className="space-y-6 md:space-y-8 mb-6 md:mb-10">
+            {/* Process Section */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="bg-card/50 border border-border rounded-lg p-4"
             >
-              <h3 className="text-xs md:text-sm font-semibold text-primary mb-3">Process</h3>
-              <ul className="space-y-2">
+              <h3 className="text-xs font-semibold text-primary uppercase tracking-wider mb-3 text-center">Process</h3>
+              <div className="space-y-1.5">
                 {howItWorks.map((item, index) => (
-                  <li key={index} className="text-[11px] md:text-sm text-foreground flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
-                    <span>{item}</span>
-                  </li>
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: 0.15 + index * 0.05 }}
+                    className="flex items-center gap-3 justify-center"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                    <span className="text-xs md:text-sm text-foreground">{item}</span>
+                  </motion.div>
                 ))}
-              </ul>
+              </div>
             </motion.div>
 
-            {/* Output Column */}
+            {/* Output Section */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              className="bg-card/50 border border-border rounded-lg p-4"
+              transition={{ duration: 0.4, delay: 0.4 }}
             >
-              <h3 className="text-xs md:text-sm font-semibold text-primary mb-3">Output for the Labour User</h3>
-              <ul className="space-y-2">
+              <h3 className="text-xs font-semibold text-primary uppercase tracking-wider mb-3 text-center">Output for the Labour User</h3>
+              <div className="space-y-1.5">
                 {outputForUser.map((item, index) => (
-                  <li key={index} className="text-[11px] md:text-sm text-foreground flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
-                    <span>{item}</span>
-                  </li>
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: 0.45 + index * 0.05 }}
+                    className="flex items-center gap-3 justify-center"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                    <span className="text-xs md:text-sm text-foreground">{item}</span>
+                  </motion.div>
                 ))}
-              </ul>
+              </div>
             </motion.div>
-
           </div>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
             className="text-center text-sm md:text-base font-semibold trust-gradient-text mb-6 md:mb-8"
           >
             Execution is visible as it happens.
@@ -100,7 +109,7 @@ const SlideDemo = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.6 }}
+            transition={{ duration: 0.4, delay: 0.8 }}
             className="flex justify-center"
           >
             <Button
