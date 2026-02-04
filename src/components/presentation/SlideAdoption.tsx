@@ -1,18 +1,17 @@
 import { motion } from "framer-motion";
-import { Building2, Users, CreditCard, Scale, ScanFace, Link, Rocket } from "lucide-react";
+import { Building2, Users, CreditCard, MessageSquare, FileText, ClipboardCheck, Shield } from "lucide-react";
 import Slide from "./Slide";
 
-const adoptionItems = [
-  { icon: Building2, text: "Labour users deploy Temp Ledger" },
-  { icon: Users, text: "Agencies are required to operate through it" },
-  { icon: CreditCard, text: "Agencies pay to participate" },
-  { icon: Scale, text: "Labour users get assurance and control" },
+const buyerModel = [
+  { icon: Building2, text: "Labour users mandate that agencies adopt Temp Ledger" },
+  { icon: Users, text: "Agencies pay to participate" },
 ];
 
-const implementationItems = [
-  { icon: ScanFace, text: "Install facial-recognition T&A" },
-  { icon: Link, text: "Integrate with agency systems" },
-  { icon: Rocket, text: "Go live in weeks" },
+const agencyBenefits = [
+  { icon: MessageSquare, text: "Fewer pay queries" },
+  { icon: FileText, text: "Fewer disputes" },
+  { icon: ClipboardCheck, text: "Reduced admin" },
+  { icon: Shield, text: "Lower audit risk" },
 ];
 
 const SlideAdoption = () => {
@@ -26,65 +25,60 @@ const SlideAdoption = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-6 md:mb-8"
         >
-          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold">
-            Adoption & Implementation
+          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">
+            Buyer & Adoption Model
           </h2>
         </motion.div>
 
         {/* Two columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto mb-6 md:mb-10">
-          {/* How It's Adopted */}
+          {/* Buyer Model */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h3 className="text-sm md:text-base font-semibold text-muted-foreground mb-3 md:mb-4 uppercase tracking-wide">
-              How It's Adopted
+            <h3 className="text-xs md:text-sm font-semibold text-muted-foreground mb-3 md:mb-4 uppercase tracking-wide">
+              Primary Buyer: Labour Users
             </h3>
-            <div className="space-y-2 md:space-y-3">
-              {adoptionItems.map((item, index) => (
+            <div className="space-y-3">
+              {buyerModel.map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: -15 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: 0.3 + index * 0.08 }}
-                  className="flex items-center gap-3 p-2.5 md:p-3 rounded-lg bg-card border border-border"
+                  transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
+                  className="flex items-center gap-3 p-3 md:p-4 rounded-xl bg-card border border-border"
                 >
-                  <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg trust-gradient flex items-center justify-center flex-shrink-0">
-                    <item.icon className="w-3.5 h-3.5 md:w-4 md:h-4 text-foreground" />
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg trust-gradient flex items-center justify-center flex-shrink-0">
+                    <item.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
                   </div>
-                  <span className="text-xs md:text-sm text-foreground font-medium">{item.text}</span>
+                  <span className="text-sm md:text-base text-foreground font-medium">{item.text}</span>
                 </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* How It's Implemented */}
+          {/* Agency Benefits */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <h3 className="text-sm md:text-base font-semibold text-muted-foreground mb-3 md:mb-4 uppercase tracking-wide">
-              How It's Implemented
+            <h3 className="text-xs md:text-sm font-semibold text-muted-foreground mb-3 md:mb-4 uppercase tracking-wide">
+              Agencies Also Benefit
             </h3>
-            <div className="space-y-2 md:space-y-3">
-              {implementationItems.map((item, index) => (
+            <div className="grid grid-cols-2 gap-2 md:gap-3">
+              {agencyBenefits.map((item, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: 15 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: 0.4 + index * 0.08 }}
-                  className="flex items-center gap-3 p-2.5 md:p-3 rounded-lg bg-card border border-border"
+                  className="flex items-center gap-2 p-2.5 md:p-3 rounded-lg bg-primary/5 border border-primary/20"
                 >
-                  <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-primary/10 border border-primary/20">
-                    <span className="text-xs font-bold text-primary">{index + 1}</span>
-                  </div>
-                  <div className="flex items-center gap-2 flex-1">
-                    <item.icon className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary flex-shrink-0" />
-                    <span className="text-xs md:text-sm text-foreground font-medium">{item.text}</span>
-                  </div>
+                  <item.icon className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary flex-shrink-0" />
+                  <span className="text-xs md:text-sm text-foreground font-medium">{item.text}</span>
                 </motion.div>
               ))}
             </div>
@@ -99,7 +93,7 @@ const SlideAdoption = () => {
           className="text-center"
         >
           <p className="text-sm md:text-lg font-bold text-foreground">
-            One system. All suppliers. Same rules.
+            Control replaces trust.
           </p>
         </motion.div>
       </div>

@@ -1,25 +1,25 @@
 import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Shield, Home } from "lucide-react";
+import { ChevronLeft, ChevronRight, Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import SlideHero from "@/components/presentation/SlideHero";
 import SlideProblem from "@/components/presentation/SlideProblem";
-import SlideRootCause from "@/components/presentation/SlideRootCause";
 import SlideSolution from "@/components/presentation/SlideSolution";
+import SlideLedger from "@/components/presentation/SlideLedger";
 import SlideDemo from "@/components/presentation/SlideDemo";
-import SlideBeforeAfter from "@/components/presentation/SlideBeforeAfter";
+import SlideTimeAttendance from "@/components/presentation/SlideTimeAttendance";
+import SlidePerformance from "@/components/presentation/SlidePerformance";
 import SlideAdoption from "@/components/presentation/SlideAdoption";
-import SlideAgencyBenefits from "@/components/presentation/SlideAgencyBenefits";
 
 const slides = [
   { id: 0, component: SlideHero },
   { id: 1, component: SlideProblem },
-  { id: 2, component: SlideRootCause },
-  { id: 3, component: SlideSolution },
+  { id: 2, component: SlideSolution },
+  { id: 3, component: SlideLedger },
   { id: 4, component: SlideDemo },
-  { id: 5, component: SlideBeforeAfter },
-  { id: 6, component: SlideAdoption },
-  { id: 7, component: SlideAgencyBenefits },
+  { id: 5, component: SlideTimeAttendance },
+  { id: 6, component: SlidePerformance },
+  { id: 7, component: SlideAdoption },
 ];
 
 const SalesDeck = () => {
@@ -89,12 +89,7 @@ const SalesDeck = () => {
           >
             <Home className="w-4 h-4 text-muted-foreground" />
           </button>
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg trust-gradient flex items-center justify-center">
-              <Shield className="w-4 h-4 text-foreground" />
-            </div>
-            <span className="font-semibold text-foreground text-sm">Temp Ledger</span>
-          </div>
+          <span className="font-semibold text-sm trust-gradient-text">Temp Ledger</span>
         </div>
         <div className="text-xs text-muted-foreground">
           {safeCurrentSlide + 1} / {slides.length}
