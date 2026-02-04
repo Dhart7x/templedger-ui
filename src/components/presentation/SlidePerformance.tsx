@@ -26,7 +26,7 @@ const SlidePerformance = () => {
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl" />
       </motion.div>
 
-      <div className="relative z-10 max-w-5xl mx-auto w-full">
+      <div className="relative z-10 max-w-5xl mx-auto w-full md:h-full md:flex md:flex-col">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -42,28 +42,30 @@ const SlidePerformance = () => {
           </p>
         </motion.div>
 
-        {/* Metrics Grid - 3x3 */}
-        <div className="max-w-5xl mx-auto mb-4 md:mb-12 lg:mb-14">
-          <div className="grid grid-cols-3 gap-2 md:gap-6 lg:gap-7">
-            {metrics.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: 0.2 + index * 0.05 }}
-                className="flex flex-col md:flex-row items-center gap-1.5 md:gap-4 p-2 md:p-5 lg:p-6 rounded-lg md:rounded-xl bg-card border border-border text-center md:text-left"
-              >
-                <motion.div 
-                  initial={{ scale: 0.8 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
-                  className="w-6 h-6 md:w-10 md:h-10 rounded-md md:rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0"
+        <div className="md:flex-1 md:flex md:items-center">
+          {/* Metrics Grid - 3x3 */}
+          <div className="max-w-5xl mx-auto mb-4 md:mb-0 w-full">
+            <div className="grid grid-cols-3 gap-2 md:gap-6 lg:gap-7">
+              {metrics.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: 0.2 + index * 0.05 }}
+                  className="flex flex-col md:flex-row items-center gap-1.5 md:gap-4 p-2 md:p-5 lg:p-6 rounded-lg md:rounded-xl bg-card border border-border text-center md:text-left"
                 >
-                  <item.icon className="w-3 h-3 md:w-5 md:h-5 text-primary" />
+                  <motion.div 
+                    initial={{ scale: 0.8 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
+                    className="w-6 h-6 md:w-10 md:h-10 rounded-md md:rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0"
+                  >
+                    <item.icon className="w-3 h-3 md:w-5 md:h-5 text-primary" />
+                  </motion.div>
+                  <span className="text-sm md:text-lg lg:text-xl text-foreground font-medium leading-tight">{item.text}</span>
                 </motion.div>
-                <span className="text-sm md:text-lg lg:text-xl text-foreground font-medium leading-tight">{item.text}</span>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
@@ -72,7 +74,7 @@ const SlidePerformance = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.5 }}
-          className="text-center"
+          className="text-center md:mt-auto"
         >
           <p className="text-sm md:text-xl lg:text-2xl font-bold text-foreground">
             Performance is not self-reported. It falls out of the ledger.
