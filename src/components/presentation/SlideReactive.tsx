@@ -25,12 +25,12 @@ const SlideReactive = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8 md:mb-10"
+          className="text-center mb-6 md:mb-10"
         >
-          <p className="text-sm md:text-base text-muted-foreground mb-2">
+          <p className="text-xs md:text-base text-muted-foreground mb-1 md:mb-2">
             Operational uncertainty is not a cost of contingent labour.
           </p>
-          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold">
+          <h2 className="text-lg md:text-3xl lg:text-4xl font-bold">
             It's a cost of reactive systems.
           </h2>
         </motion.div>
@@ -40,11 +40,11 @@ const SlideReactive = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-10 md:mb-12"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 mb-6 md:mb-12"
         >
           {/* Left: Questions */}
-          <div className="space-y-4">
-            <p className="text-xs text-muted-foreground mb-4">
+          <div className="space-y-2 md:space-y-4">
+            <p className="text-[10px] md:text-xs text-muted-foreground mb-2 md:mb-4">
               With Temp Ledger, you never have to ask:
             </p>
             {questions.map((text, index) => (
@@ -53,17 +53,17 @@ const SlideReactive = () => {
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: 0.3 + index * 0.08 }}
-                className="flex items-center gap-3 px-4 py-3 rounded-lg bg-card/50 border border-border/50"
+                className="flex items-center gap-2 md:gap-3 px-3 py-2 md:py-3 rounded-lg bg-card/50 border border-border/50"
               >
-                <HelpCircle className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-                <span className="text-sm text-foreground">{text}</span>
+                <HelpCircle className="w-3 h-3 md:w-4 md:h-4 text-muted-foreground flex-shrink-0" />
+                <span className="text-xs md:text-sm text-foreground">{text}</span>
               </motion.div>
             ))}
           </div>
 
           {/* Right: Outcomes */}
-          <div className="space-y-4">
-            <p className="text-xs text-muted-foreground mb-4">
+          <div className="space-y-2 md:space-y-4">
+            <p className="text-[10px] md:text-xs text-muted-foreground mb-2 md:mb-4">
               Temp Ledger makes execution explicit, enforced, and visible:
             </p>
             {outcomes.map((text, index) => (
@@ -72,10 +72,10 @@ const SlideReactive = () => {
                 initial={{ opacity: 0, x: 10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: 0.5 + index * 0.08 }}
-                className="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/5 border border-primary/20"
+                className="flex items-center gap-2 md:gap-3 px-3 py-2 md:py-3 rounded-lg bg-primary/5 border border-primary/20"
               >
-                <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                <span className="text-sm text-foreground">{text}</span>
+                <CheckCircle className="w-3 h-3 md:w-4 md:h-4 text-primary flex-shrink-0" />
+                <span className="text-xs md:text-sm text-foreground">{text}</span>
               </motion.div>
             ))}
           </div>

@@ -32,12 +32,12 @@ const SlideMinimalChange = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8 md:mb-12"
+          className="text-center mb-4 md:mb-12"
         >
-          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-4">
+          <h2 className="text-lg md:text-3xl lg:text-4xl font-bold mb-2 md:mb-4">
             Minimal Change. Maximum Control.
           </h2>
-          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xs md:text-base text-muted-foreground max-w-2xl mx-auto">
             Temp Ledger does not ask you to run staffing differently.
           </p>
         </motion.div>
@@ -47,31 +47,31 @@ const SlideMinimalChange = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.4 }}
-          className="text-xs md:text-sm text-muted-foreground text-center mb-8 md:mb-10"
+          className="text-[10px] md:text-sm text-muted-foreground text-center mb-4 md:mb-10"
         >
           It does not replace your workflows, retrain your teams, or require daily system interaction.
         </motion.p>
 
         {/* Two columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-8 md:mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 mb-4 md:mb-12">
           {/* Left: For the labour user */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.4 }}
           >
-            <p className="text-xs text-muted-foreground mb-4">For the labour user:</p>
-            <div className="space-y-3">
+            <p className="text-[10px] md:text-xs text-muted-foreground mb-2 md:mb-4">For the labour user:</p>
+            <div className="space-y-1.5 md:space-y-3">
               {benefits.map((text, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.4 + index * 0.1, duration: 0.3 }}
-                  className="flex items-start gap-2 px-3 py-2 rounded-lg bg-primary/5 border border-primary/20"
+                  className="flex items-start gap-2 px-2 md:px-3 py-1.5 md:py-2 rounded-lg bg-primary/5 border border-primary/20"
                 >
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                  <span className="text-xs md:text-sm text-foreground">{text}</span>
+                  <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                  <span className="text-[11px] md:text-sm text-foreground">{text}</span>
                 </motion.div>
               ))}
             </div>
@@ -83,18 +83,18 @@ const SlideMinimalChange = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.4 }}
           >
-            <p className="text-xs text-muted-foreground mb-4">Your only active input is what you already know:</p>
-            <div className="space-y-3">
+            <p className="text-[10px] md:text-xs text-muted-foreground mb-2 md:mb-4">Your only active input is what you already know:</p>
+            <div className="space-y-1.5 md:space-y-3">
               {inputs.map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: 10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.6 + index * 0.1, duration: 0.3 }}
-                  className="flex items-center gap-3 px-3 py-2 rounded-lg bg-card/50 border border-border/50"
+                  className="flex items-center gap-2 md:gap-3 px-2 md:px-3 py-1.5 md:py-2 rounded-lg bg-card/50 border border-border/50"
                 >
-                  <item.icon className="w-4 h-4 text-primary flex-shrink-0" />
-                  <span className="text-xs md:text-sm text-foreground">{item.text}</span>
+                  <item.icon className="w-3 h-3 md:w-4 md:h-4 text-primary flex-shrink-0" />
+                  <span className="text-[11px] md:text-sm text-foreground">{item.text}</span>
                 </motion.div>
               ))}
             </div>
@@ -106,12 +106,12 @@ const SlideMinimalChange = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.5 }}
-          className="text-center space-y-2"
+          className="text-center space-y-1 md:space-y-2"
         >
-          <p className="text-xs md:text-sm text-muted-foreground">
+          <p className="text-[10px] md:text-sm text-muted-foreground">
             Everything else is enforced, captured, and resolved through the ledger.
           </p>
-          <p className="text-sm md:text-base font-semibold trust-gradient-text">
+          <p className="text-xs md:text-base font-semibold trust-gradient-text">
             Control without complexity.
           </p>
         </motion.div>
