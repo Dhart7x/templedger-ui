@@ -39,7 +39,7 @@ const SlideIBusinessModel = () => {
               <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
                 <item.icon className="w-5 h-5 text-primary" />
               </div>
-              <span className="text-foreground font-medium">{item.text}</span>
+              <span className="text-sm md:text-base text-foreground font-medium">{item.text}</span>
             </motion.div>
           ))}
         </div>

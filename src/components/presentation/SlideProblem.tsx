@@ -50,7 +50,7 @@ const SlideProblem = () => {
                 className="flex items-center gap-3 p-2.5 md:p-3"
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                <span className="text-sm md:text-base text-foreground">{item}</span>
+                <span className="text-sm md:text-base text-foreground leading-relaxed">{item}</span>
               </motion.div>
             ))}
           </div>
@@ -63,7 +63,7 @@ const SlideProblem = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="max-w-4xl mx-auto mb-6 md:mb-8"
         >
-          <h3 className="text-xs md:text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wide text-center">
+          <h3 className="text-sm md:text-base font-semibold text-foreground/70 mb-3 uppercase tracking-wide text-center">
             This Leads To
           </h3>
           <div className="flex flex-wrap justify-center gap-2 md:gap-3">
@@ -76,7 +76,7 @@ const SlideProblem = () => {
                 className="flex items-center gap-2 px-3 py-2 md:px-4 md:py-2.5 rounded-lg bg-destructive/10 border border-destructive/30"
               >
                 <item.icon className="w-3.5 h-3.5 md:w-4 md:h-4 text-destructive flex-shrink-0" />
-                <span className="text-xs md:text-sm text-foreground font-medium">{item.text}</span>
+                <span className="text-sm md:text-base text-foreground font-medium">{item.text}</span>
               </motion.div>
             ))}
           </div>

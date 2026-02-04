@@ -19,7 +19,7 @@ const SlideClosing = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="space-y-4"
         >
-          <p className="text-lg md:text-xl text-muted-foreground">
+          <p className="text-base md:text-xl text-foreground">
             Staffing only works when execution is visible, enforced, and shared.
           </p>
           <p className="text-lg md:text-xl trust-gradient-text font-semibold">

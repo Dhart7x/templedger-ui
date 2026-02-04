@@ -53,7 +53,7 @@ const SlideTimeAttendance = () => {
               >
                 <feature.icon className="w-3.5 h-3.5 md:w-5 md:h-5 text-foreground" />
               </motion.div>
-              <p className="text-xs md:text-sm text-foreground font-medium leading-relaxed pt-1 md:pt-1.5">
+              <p className="text-sm md:text-base text-foreground font-medium leading-relaxed pt-1 md:pt-1.5">
                 {feature.text}
               </p>
             </motion.div>

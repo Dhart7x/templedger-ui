@@ -94,7 +94,7 @@ const SlideDemo = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="bg-card/60 border border-border rounded-xl p-4 md:p-6"
             >
-              <h3 className="text-xs md:text-sm font-bold text-primary mb-3 md:mb-4">Process</h3>
+              <h3 className="text-sm md:text-base font-bold text-primary mb-3 md:mb-4">Process</h3>
               <div className="space-y-2 md:space-y-3">
                 {processSteps.map((step, index) => (
                   <motion.div
@@ -107,7 +107,7 @@ const SlideDemo = () => {
                     <div className="w-5 h-5 md:w-6 md:h-6 rounded-full trust-gradient flex items-center justify-center flex-shrink-0 mt-0.5">
                       <span className="text-[9px] md:text-[10px] font-bold text-foreground">{index + 1}</span>
                     </div>
-                    <span className="text-[11px] md:text-sm text-foreground leading-relaxed">{step}</span>
+                    <span className="text-sm md:text-base text-foreground leading-relaxed">{step}</span>
                   </motion.div>
                 ))}
               </div>
@@ -119,7 +119,7 @@ const SlideDemo = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="bg-card/60 border border-border rounded-xl p-4 md:p-6"
             >
-              <h3 className="text-xs md:text-sm font-bold text-primary mb-3 md:mb-4">Output for Labour User</h3>
+              <h3 className="text-sm md:text-base font-bold text-primary mb-3 md:mb-4">Output for Labour User</h3>
               <div className="space-y-2 md:space-y-3">
                 {outputs.map((item, index) => (
                   <motion.div
@@ -130,7 +130,7 @@ const SlideDemo = () => {
                     className="flex items-start gap-3"
                   >
                     <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-1.5 md:mt-2" />
-                    <span className="text-[11px] md:text-sm text-foreground leading-relaxed">{item}</span>
+                    <span className="text-sm md:text-base text-foreground leading-relaxed">{item}</span>
                   </motion.div>
                 ))}
               </div>

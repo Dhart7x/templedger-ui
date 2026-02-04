@@ -34,7 +34,7 @@ const SlideLedger = () => {
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-2">
             The Execution Ledger
           </h2>
-          <p className="text-sm md:text-base text-muted-foreground">
+          <p className="text-sm md:text-base text-foreground">
             Non-negotiable sequence. Each step is enforced. None are optional.
           </p>
         </motion.div>
@@ -88,7 +88,7 @@ const SlideLedger = () => {
           transition={{ delay: 1.2, duration: 0.5 }}
           className="text-center"
         >
-          <p className="text-sm md:text-base text-muted-foreground mb-2">
+          <p className="text-sm md:text-base text-foreground mb-2">
             Issues arise when any one of these fails.
           </p>
           <p className="text-sm md:text-lg font-bold text-foreground">

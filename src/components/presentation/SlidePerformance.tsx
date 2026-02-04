@@ -37,7 +37,7 @@ const SlidePerformance = () => {
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2">
             Performance
           </h2>
-          <p className="text-xs md:text-base text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm md:text-base text-foreground max-w-2xl mx-auto">
             Because execution is enforced, performance becomes objective. Temp Ledger reveals in real time:
           </p>
         </motion.div>
@@ -61,7 +61,7 @@ const SlidePerformance = () => {
                 >
                   <item.icon className="w-3 h-3 md:w-4 md:h-4 text-primary" />
                 </motion.div>
-                <span className="text-[10px] md:text-sm text-foreground font-medium leading-tight">{item.text}</span>
+                <span className="text-sm md:text-base text-foreground font-medium leading-tight">{item.text}</span>
               </motion.div>
             ))}
           </div>

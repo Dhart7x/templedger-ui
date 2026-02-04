@@ -118,7 +118,7 @@ const SlideCompetition = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
-            className="mt-4 text-base text-muted-foreground max-w-2xl mx-auto"
+            className="mt-4 text-sm md:text-base text-foreground max-w-2xl mx-auto"
           >
             Automation reduces effort. Transaction integrity eliminates disputes and risk.
           </motion.p>

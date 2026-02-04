@@ -54,7 +54,7 @@ const SlideGTM = () => {
                 </div>
                 <span className="text-xs md:text-sm font-semibold text-foreground">Encourage</span>
               </div>
-              <p className="text-[10px] md:text-xs text-muted-foreground">
+              <p className="text-sm md:text-base text-foreground">
                 Sell directly to staffing agencies
               </p>
             </motion.div>
@@ -121,7 +121,7 @@ const SlideGTM = () => {
                 </div>
                 <span className="text-[10px] md:text-sm font-semibold text-foreground leading-tight">Force The Issue</span>
               </div>
-              <p className="text-[10px] md:text-xs text-muted-foreground">
+              <p className="text-sm md:text-base text-foreground">
                 Clients & lenders push agencies
               </p>
             </motion.div>
@@ -147,7 +147,7 @@ const SlideGTM = () => {
                   {item.benefits.map((benefit, bIndex) => (
                     <div key={bIndex} className="flex items-center gap-1.5">
                       <Check className="w-3 h-3 text-accent flex-shrink-0" />
-                      <span className="text-[10px] md:text-xs text-muted-foreground">{benefit}</span>
+                      <span className="text-sm md:text-base text-foreground">{benefit}</span>
                     </div>
                   ))}
                 </div>
