@@ -73,23 +73,23 @@ const SlideTLSolution = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="space-y-1.5 md:space-y-3 lg:space-y-4 max-w-2xl mx-auto mb-4 md:mb-8 lg:mb-10"
+          className="space-y-1.5 md:space-y-5 lg:space-y-6 max-w-3xl mx-auto mb-4 md:mb-12 lg:mb-16"
         >
-          <div className="flex items-start gap-2 p-2 md:p-3">
-            <CheckCircle className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary mt-0.5 flex-shrink-0" />
-            <p className="text-[11px] md:text-sm text-foreground">
+          <div className="flex items-start gap-2 p-2 md:p-4">
+            <CheckCircle className="w-3.5 h-3.5 md:w-6 md:h-6 text-primary mt-0.5 flex-shrink-0" />
+            <p className="text-[11px] md:text-base lg:text-lg text-foreground">
               Each step must be validated before execution can continue.
             </p>
           </div>
-          <div className="flex items-start gap-2 p-2 md:p-3">
-            <CheckCircle className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary mt-0.5 flex-shrink-0" />
-            <p className="text-[11px] md:text-sm text-foreground">
+          <div className="flex items-start gap-2 p-2 md:p-4">
+            <CheckCircle className="w-3.5 h-3.5 md:w-6 md:h-6 text-primary mt-0.5 flex-shrink-0" />
+            <p className="text-[11px] md:text-base lg:text-lg text-foreground">
               Failures are captured as they occur and resolved upstream — not after payroll or billing.
             </p>
           </div>
-          <div className="flex items-start gap-2 p-2 md:p-3">
-            <CheckCircle className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary mt-0.5 flex-shrink-0" />
-            <p className="text-[11px] md:text-sm text-foreground">
+          <div className="flex items-start gap-2 p-2 md:p-4">
+            <CheckCircle className="w-3.5 h-3.5 md:w-6 md:h-6 text-primary mt-0.5 flex-shrink-0" />
+            <p className="text-[11px] md:text-base lg:text-lg text-foreground">
               Because execution is enforced, reporting is real-time and objective.
             </p>
           </div>
