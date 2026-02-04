@@ -19,12 +19,26 @@ const SlideDemo = () => {
     setActiveView("snapshot");
   };
 
-  const features = [
-    { icon: Eye, text: "See what is happening right now, by department and location" },
-    { icon: Users, text: "Track fulfilment, attendance, overtime, and exceptions across agencies" },
-    { icon: ClipboardCheck, text: "Validate payroll and invoicing before they occur" },
-    { icon: BarChart3, text: "View objective agency performance, live — not self-reported" },
-    { icon: Calendar, text: "Set headcount requirements and assign agencies to fill them" },
+  const howItWorks = [
+    "Labour users mandate Temp Ledger as the execution layer",
+    "Agencies operate through a client-specific front end",
+    "Worker data, shifts, and exceptions are handled there",
+    "On-site Time & Attendance is deployed",
+    "Attendance syncs directly into the execution ledger",
+  ];
+
+  const outputForUser = [
+    "One real-time operational view",
+    "Live status by department and location",
+    "Fulfilment and exceptions across agencies",
+    "Payroll and invoicing readiness before billing",
+    "Objective, ledger-derived agency performance",
+  ];
+
+  const principles = [
+    "No reliance on agency back-office systems",
+    "No retrospective reconciliation",
+    "Execution enforced before money moves",
   ];
 
   if (!showDemo) {
@@ -34,54 +48,81 @@ const SlideDemo = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-4xl w-full"
+          className="max-w-5xl w-full"
         >
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-foreground text-center">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 md:mb-8 text-foreground text-center">
             How It Works
           </h2>
-          <p className="text-muted-foreground text-center mb-8 text-sm md:text-base max-w-2xl mx-auto">
-            Temp Ledger orchestrates execution by combining ground-truth Time & Attendance 
-            with direct integration into agency systems.
-          </p>
 
-          <div className="mb-8">
-            <p className="text-sm font-medium text-foreground text-center mb-4">
-              From one view, the end user can:
-            </p>
-            <div className="grid gap-3 max-w-2xl mx-auto">
-              {features.map((feature, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: 0.1 + index * 0.1 }}
-                  className="flex items-center gap-3 bg-card/50 border border-border rounded-lg px-4 py-3"
-                >
-                  <feature.icon className="w-4 h-4 text-primary shrink-0" />
-                  <span className="text-sm text-foreground">{feature.text}</span>
-                </motion.div>
-              ))}
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+            {/* How It Works Column */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="bg-card/50 border border-border rounded-lg p-4"
+            >
+              <h3 className="text-xs md:text-sm font-semibold text-primary mb-3">Process</h3>
+              <ul className="space-y-2">
+                {howItWorks.map((item, index) => (
+                  <li key={index} className="text-[11px] md:text-sm text-foreground flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Output Column */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="bg-card/50 border border-border rounded-lg p-4"
+            >
+              <h3 className="text-xs md:text-sm font-semibold text-primary mb-3">Output for the Labour User</h3>
+              <ul className="space-y-2">
+                {outputForUser.map((item, index) => (
+                  <li key={index} className="text-[11px] md:text-sm text-foreground flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Principles Column */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              className="bg-card/50 border border-border rounded-lg p-4"
+            >
+              <h3 className="text-xs md:text-sm font-semibold text-primary mb-3">Principles</h3>
+              <ul className="space-y-2">
+                {principles.map((item, index) => (
+                  <li key={index} className="text-[11px] md:text-sm text-foreground flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
           </div>
 
-          <motion.div
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="text-center mb-8"
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="text-center text-sm md:text-base font-semibold trust-gradient-text mb-6 md:mb-8"
           >
-            <p className="text-sm md:text-base text-foreground font-medium">
-              Execution is visible as it happens.
-            </p>
-            <p className="text-sm md:text-base trust-gradient-text font-semibold">
-              Confidence replaces trust.
-            </p>
-          </motion.div>
+            Execution is visible as it happens.
+          </motion.p>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.7 }}
+            transition={{ duration: 0.4, delay: 0.6 }}
             className="flex justify-center"
           >
             <Button
