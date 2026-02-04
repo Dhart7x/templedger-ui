@@ -49,7 +49,7 @@ const SlideTLSolution = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap justify-center items-center gap-1.5 md:gap-2 mb-4 md:mb-6"
+          className="flex flex-wrap justify-center items-center gap-1.5 md:gap-3 lg:gap-4 mb-4 md:mb-8 lg:mb-10"
         >
           {ledgerSteps.map((step, index) => (
             <div key={index} className="flex items-center">
