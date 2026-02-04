@@ -36,24 +36,24 @@ const SlideTLSolution = () => {
         </motion.div>
 
         {/* Solution Points */}
-        <div className="space-y-4 md:space-y-5 mb-8 md:mb-12">
+        <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
           {solutionPoints.map((point, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
-              className="flex items-start gap-4 p-4 md:p-5 rounded-xl bg-card border border-border"
+              className="flex items-start gap-3 p-3 md:p-4 rounded-lg bg-card/50 border border-border/50"
             >
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.4 + index * 0.1, type: "spring", stiffness: 300 }}
-                className="w-10 h-10 md:w-12 md:h-12 rounded-full trust-gradient flex items-center justify-center flex-shrink-0"
+                className="w-8 h-8 md:w-9 md:h-9 rounded-full trust-gradient flex items-center justify-center flex-shrink-0"
               >
-                <point.icon className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+                <point.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
               </motion.div>
-              <p className="text-sm md:text-base lg:text-lg text-foreground font-medium leading-relaxed pt-2">
+              <p className="text-xs md:text-sm text-foreground font-medium leading-relaxed pt-1.5">
                 {point.text}
               </p>
             </motion.div>
@@ -67,9 +67,9 @@ const SlideTLSolution = () => {
           transition={{ delay: 0.9, duration: 0.5 }}
           className="flex justify-center"
         >
-          <div className="inline-flex items-center gap-3 px-6 py-4 rounded-xl bg-primary/10 border border-primary/30">
-            <XCircle className="w-6 h-6 text-primary flex-shrink-0" />
-            <p className="text-base md:text-lg lg:text-xl font-bold text-foreground">
+          <div className="inline-flex items-center gap-2 px-4 py-3 rounded-lg bg-primary/10 border border-primary/30">
+            <XCircle className="w-5 h-5 text-primary flex-shrink-0" />
+            <p className="text-sm md:text-base font-bold text-foreground">
               Failures stop the chain
             </p>
           </div>
