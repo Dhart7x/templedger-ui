@@ -50,7 +50,7 @@ const SlideProblem = () => {
                 className="flex items-center gap-3 p-2.5 md:p-3"
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                <span className="text-sm md:text-base text-foreground">{item}</span>
+                <span className="text-sm md:text-base text-foreground leading-relaxed">{item}</span>
               </motion.div>
             ))}
           </div>
