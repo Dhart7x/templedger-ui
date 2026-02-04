@@ -94,7 +94,7 @@ const SlideDemo = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="bg-card/60 border border-border rounded-xl p-4 md:p-6"
             >
-              <h3 className="text-xs md:text-sm font-bold text-primary mb-3 md:mb-4">Process</h3>
+              <h3 className="text-sm md:text-base font-bold text-primary mb-3 md:mb-4">Process</h3>
               <div className="space-y-2 md:space-y-3">
                 {processSteps.map((step, index) => (
                   <motion.div
