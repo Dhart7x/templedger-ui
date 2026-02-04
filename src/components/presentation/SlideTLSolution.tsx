@@ -13,7 +13,7 @@ const ledgerSteps = [
 const outcomes = [
   "Fewer issues",
   "Less admin",
-  "Less day-to-day agency management",
+  "Less agency management",
 ];
 
 const SlideTLSolution = () => {
