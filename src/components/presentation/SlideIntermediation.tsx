@@ -66,15 +66,15 @@ const SlideIntermediation = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="max-w-2xl mx-auto p-2.5 md:p-4 rounded-lg bg-muted/50 border border-border text-center"
+          className="max-w-3xl mx-auto p-2.5 md:p-6 lg:p-8 rounded-lg bg-muted/50 border border-border text-center"
         >
-          <p className="text-[10px] md:text-sm text-muted-foreground mb-1 md:mb-2">
+          <p className="text-[10px] md:text-base text-muted-foreground mb-1 md:mb-3">
             These models primarily consolidated billing, not execution.
           </p>
-          <p className="text-[10px] md:text-sm text-muted-foreground mb-1 md:mb-2">
+          <p className="text-[10px] md:text-base text-muted-foreground mb-1 md:mb-3">
             They sat between parties — but never orchestrated the work itself.
           </p>
-          <p className="text-[11px] md:text-sm font-semibold text-foreground">
+          <p className="text-[11px] md:text-base lg:text-lg font-semibold text-foreground">
             The operational burden of managing agencies never went away.
           </p>
         </motion.div>

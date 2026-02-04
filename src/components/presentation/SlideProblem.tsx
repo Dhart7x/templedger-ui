@@ -61,22 +61,22 @@ const SlideProblem = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="max-w-4xl mx-auto mb-6 md:mb-10 lg:mb-12"
+          className="max-w-4xl mx-auto mb-6 md:mb-12 lg:mb-16"
         >
-          <h3 className="text-sm md:text-base font-semibold text-foreground/70 mb-3 md:mb-4 uppercase tracking-wide text-center">
+          <h3 className="text-sm md:text-base lg:text-lg font-semibold text-foreground/70 mb-3 md:mb-6 uppercase tracking-wide text-center">
             This Leads To
           </h3>
-          <div className="flex flex-wrap justify-center gap-2 md:gap-3">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-4 lg:gap-5">
             {consequences.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: 0.5 + index * 0.06 }}
-                className="flex items-center gap-2 px-3 py-2 md:px-4 md:py-2.5 rounded-lg bg-destructive/10 border border-destructive/30"
+                className="flex items-center gap-2 px-3 py-2 md:px-5 md:py-3 rounded-lg bg-destructive/10 border border-destructive/30"
               >
-                <item.icon className="w-3.5 h-3.5 md:w-4 md:h-4 text-destructive flex-shrink-0" />
-                <span className="text-sm md:text-base text-foreground font-medium">{item.text}</span>
+                <item.icon className="w-3.5 h-3.5 md:w-5 md:h-5 text-destructive flex-shrink-0" />
+                <span className="text-sm md:text-base lg:text-lg text-foreground font-medium">{item.text}</span>
               </motion.div>
             ))}
           </div>

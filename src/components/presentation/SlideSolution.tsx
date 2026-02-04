@@ -83,7 +83,7 @@ const SlideSolution = () => {
                 className="flex items-center"
               >
                 <motion.div 
-                  className="flex items-center gap-2 px-3 py-2 md:px-4 md:py-3 rounded-lg bg-card border border-border"
+                  className="flex items-center gap-2 px-3 py-2 md:px-5 md:py-4 rounded-lg bg-card border border-border"
                   whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary))" }}
                   transition={{ duration: 0.2 }}
                 >

@@ -102,10 +102,10 @@ const SlideTLSolution = () => {
           transition={{ delay: 0.8, duration: 0.5 }}
           className="flex justify-center"
         >
-          <div className="inline-flex flex-wrap justify-center gap-2 md:gap-3 px-3 py-2 md:px-4 md:py-3 rounded-lg bg-primary/10 border border-primary/30">
+          <div className="inline-flex flex-wrap justify-center gap-2 md:gap-5 px-3 py-2 md:px-8 md:py-5 rounded-lg bg-primary/10 border border-primary/30">
             {outcomes.map((outcome, index) => (
-              <span key={index} className="text-[10px] md:text-sm font-semibold text-foreground">
-                {outcome}{index < outcomes.length - 1 && <span className="text-muted-foreground ml-2 md:ml-3">•</span>}
+              <span key={index} className="text-[10px] md:text-base lg:text-lg font-semibold text-foreground">
+                {outcome}{index < outcomes.length - 1 && <span className="text-muted-foreground ml-2 md:ml-5">•</span>}
               </span>
             ))}
           </div>
