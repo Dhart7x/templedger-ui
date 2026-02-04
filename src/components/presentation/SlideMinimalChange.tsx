@@ -60,8 +60,8 @@ const SlideMinimalChange = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.4 }}
           >
-            <p className="text-xs text-muted-foreground mb-3">For the labour user:</p>
-            <div className="space-y-2">
+            <p className="text-xs text-muted-foreground mb-4">For the labour user:</p>
+            <div className="space-y-3">
               {benefits.map((text, index) => (
                 <motion.div
                   key={index}
