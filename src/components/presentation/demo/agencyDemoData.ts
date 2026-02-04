@@ -45,6 +45,20 @@ export interface AgencyIssue {
   createdAt: string;
 }
 
+export interface Allocation {
+  id: string;
+  department: string;
+  location: string;
+  role: string;
+  date: string;
+  shift: string;
+  requestedHeadcount: number;
+  assignedWorkers: { workerId: string; workerName: string; status: "confirmed" | "pending" }[];
+  status: "filled" | "partial" | "unfilled";
+  agencyId?: string;
+  agencyName?: string;
+}
+
 export const agencyWorkers: AgencyWorker[] = [
   { id: "W001", name: "Sarah Mitchell", status: "deployed", department: "Picking", location: "Zone A", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2024-01-15", complianceStatus: "verified" },
   { id: "W002", name: "James Cooper", status: "deployed", department: "Packing", location: "Zone B", currentShift: "06:00–14:00", executionStatus: "at-risk", registeredDate: "2024-02-20", complianceStatus: "pending" },
