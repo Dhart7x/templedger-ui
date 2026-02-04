@@ -36,7 +36,7 @@ const SlideIMarket = () => {
               transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
               className="p-4 rounded-xl bg-card border border-border text-center"
             >
-              <span className="text-foreground">{item}</span>
+              <span className="text-sm md:text-base text-foreground">{item}</span>
             </motion.div>
           ))}
         </div>

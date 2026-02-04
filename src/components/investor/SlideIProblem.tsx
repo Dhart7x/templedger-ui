@@ -35,7 +35,7 @@ const SlideIProblem = () => {
               className="flex items-center gap-3 p-3 mb-2 rounded-lg bg-destructive/5 border border-destructive/20"
             >
               <AlertTriangle className="w-4 h-4 text-destructive flex-shrink-0" />
-              <span className="text-foreground">{item}</span>
+              <span className="text-sm md:text-base text-foreground">{item}</span>
             </motion.div>
           ))}
         </div>
