@@ -33,7 +33,7 @@ const SlideSolution = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-3 md:mb-10 lg:mb-12"
+          className="text-center mb-3 md:mb-12 lg:mb-16"
         >
           <h2 className="text-lg md:text-3xl lg:text-4xl font-bold mb-1 md:mb-2">
             Where Problems Occur
