@@ -45,6 +45,20 @@ export interface AgencyIssue {
   createdAt: string;
 }
 
+export interface Allocation {
+  id: string;
+  department: string;
+  location: string;
+  role: string;
+  date: string;
+  shift: string;
+  requestedHeadcount: number;
+  assignedWorkers: { workerId: string; workerName: string; status: "confirmed" | "pending" }[];
+  status: "filled" | "partial" | "unfilled";
+  agencyId?: string;
+  agencyName?: string;
+}
+
 export const agencyWorkers: AgencyWorker[] = [
   { id: "W001", name: "Sarah Mitchell", status: "deployed", department: "Picking", location: "Zone A", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2024-01-15", complianceStatus: "verified" },
   { id: "W002", name: "James Cooper", status: "deployed", department: "Packing", location: "Zone B", currentShift: "06:00–14:00", executionStatus: "at-risk", registeredDate: "2024-02-20", complianceStatus: "pending" },
@@ -93,3 +107,22 @@ export const agencyStats = {
   atRiskPayroll: 2,
   atRiskBilling: 2,
 };
+
+// Allocations given by the Labour User to agencies
+export const allocations: Allocation[] = [
+  // Monday
+  { id: "ALLOC001", department: "Picking", location: "Zone A", role: "Picker", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 4, assignedWorkers: [{ workerId: "W001", workerName: "Sarah Mitchell", status: "confirmed" }, { workerId: "W003", workerName: "Maria Santos", status: "pending" }], status: "partial", agencyId: "AG001", agencyName: "Swift Staffing" },
+  { id: "ALLOC002", department: "Picking", location: "Zone A", role: "Picker", date: "Mon 3 Feb", shift: "14:00–22:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "W005", workerName: "Emma Wilson", status: "confirmed" }], status: "partial", agencyId: "AG001", agencyName: "Swift Staffing" },
+  { id: "ALLOC003", department: "Packing", location: "Zone B", role: "Packer", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "W002", workerName: "James Cooper", status: "confirmed" }, { workerId: "W006", workerName: "Michael Brown", status: "confirmed" }], status: "filled", agencyId: "AG001", agencyName: "Swift Staffing" },
+  { id: "ALLOC004", department: "Goods In", location: "Zone C", role: "Goods In Operative", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "W007", workerName: "Lisa Anderson", status: "confirmed" }], status: "partial", agencyId: "AG001", agencyName: "Swift Staffing" },
+  // Tuesday  
+  { id: "ALLOC005", department: "Picking", location: "Zone A", role: "Picker", date: "Tue 4 Feb", shift: "06:00–14:00", requestedHeadcount: 5, assignedWorkers: [], status: "unfilled", agencyId: "AG001", agencyName: "Swift Staffing" },
+  { id: "ALLOC006", department: "Packing", location: "Zone B", role: "Packer", date: "Tue 4 Feb", shift: "06:00–14:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "W002", workerName: "James Cooper", status: "pending" }], status: "partial", agencyId: "AG001", agencyName: "Swift Staffing" },
+  { id: "ALLOC007", department: "Returns", location: "Zone D", role: "Returns Handler", date: "Tue 4 Feb", shift: "14:00–22:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "W005", workerName: "Emma Wilson", status: "confirmed" }, { workerId: "W003", workerName: "Maria Santos", status: "confirmed" }], status: "filled", agencyId: "AG001", agencyName: "Swift Staffing" },
+  // Wednesday
+  { id: "ALLOC008", department: "Picking", location: "Zone A", role: "Picker", date: "Wed 5 Feb", shift: "06:00–14:00", requestedHeadcount: 4, assignedWorkers: [], status: "unfilled", agencyId: "AG001", agencyName: "Swift Staffing" },
+  { id: "ALLOC009", department: "Goods In", location: "Zone C", role: "Goods In Operative", date: "Wed 5 Feb", shift: "14:00–22:00", requestedHeadcount: 2, assignedWorkers: [], status: "unfilled", agencyId: "AG001", agencyName: "Swift Staffing" },
+  // Multi-agency allocations visible to Labour User
+  { id: "ALLOC010", department: "Picking", location: "Zone A", role: "Picker", date: "Mon 3 Feb", shift: "22:00–06:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "EXT001", workerName: "Alex Johnson", status: "confirmed" }, { workerId: "EXT002", workerName: "Claire Smith", status: "confirmed" }], status: "partial", agencyId: "AG002", agencyName: "Elite Personnel" },
+  { id: "ALLOC011", department: "Packing", location: "Zone B", role: "Packer", date: "Tue 4 Feb", shift: "22:00–06:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "EXT003", workerName: "Tom Williams", status: "confirmed" }, { workerId: "EXT004", workerName: "Nina Patel", status: "confirmed" }], status: "filled", agencyId: "AG002", agencyName: "Elite Personnel" },
+];

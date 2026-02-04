@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, Calendar, AlertTriangle, FileText } from "lucide-react";
+import { LayoutDashboard, Users, Calendar, AlertTriangle, FileText, ClipboardList } from "lucide-react";
 
 interface DemoAgencySidebarProps {
   activeView: string;
@@ -7,6 +7,7 @@ interface DemoAgencySidebarProps {
 
 const navItems = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { id: "allocations", label: "Allocations", icon: ClipboardList, badge: "5" },
   { id: "workers", label: "Workers", icon: Users },
   { id: "deployments", label: "Deployments", icon: Calendar },
   { id: "issues", label: "Issues", icon: AlertTriangle },
@@ -42,6 +43,9 @@ const DemoAgencySidebar = ({ activeView, onViewChange }: DemoAgencySidebarProps)
                   <span>{item.label}</span>
                   {item.id === "issues" && (
                     <span className="ml-auto text-xs bg-destructive/20 text-destructive px-1.5 py-0.5 rounded">4</span>
+                  )}
+                  {item.id === "allocations" && (
+                    <span className="ml-auto text-xs bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded">5</span>
                   )}
                 </button>
               </li>
