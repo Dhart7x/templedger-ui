@@ -28,18 +28,18 @@ const SlideTLSolution = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
       </motion.div>
 
-      <div className="relative z-10 max-w-4xl mx-auto w-full">
+      <div className="relative z-10 max-w-5xl mx-auto w-full">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-4 md:mb-10 lg:mb-12"
+          className="text-center mb-4 md:mb-12 lg:mb-16"
         >
           <h2 className="text-lg md:text-3xl lg:text-4xl font-bold">
             Introducing Temp Ledger
           </h2>
-          <p className="text-sm md:text-lg text-muted-foreground mt-2 md:mt-3">
+          <p className="text-sm md:text-xl lg:text-2xl text-muted-foreground mt-2 md:mt-4">
             The Unified System of Truth for Temp Staffing
           </p>
         </motion.div>
