@@ -107,7 +107,7 @@ const SlideDemo = () => {
                     <div className="w-5 h-5 md:w-6 md:h-6 rounded-full trust-gradient flex items-center justify-center flex-shrink-0 mt-0.5">
                       <span className="text-[9px] md:text-[10px] font-bold text-foreground">{index + 1}</span>
                     </div>
-                    <span className="text-[11px] md:text-sm text-foreground leading-relaxed">{step}</span>
+                    <span className="text-sm md:text-base text-foreground leading-relaxed">{step}</span>
                   </motion.div>
                 ))}
               </div>
