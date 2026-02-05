@@ -30,7 +30,17 @@ const SlideHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-          className="text-lg md:text-2xl text-muted-foreground mb-6"
+          className="text-lg md:text-2xl text-primary font-medium mb-2"
+        >
+          The unified system for agency orchestration
+        </motion.p>
+
+        {/* Tagline */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.45, ease: "easeOut" }}
+          className="text-base md:text-xl text-muted-foreground mb-6"
         >
           The Operating System for Labour Users
         </motion.p>
