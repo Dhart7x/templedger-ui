@@ -326,7 +326,7 @@ const SlideWorkerImpact = () => {
         </motion.h2>
 
         {/* Main content - copy and phone side by side on desktop */}
-        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-10">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-10 mt-12 md:mt-16 lg:mt-20">
           {/* Copy */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
