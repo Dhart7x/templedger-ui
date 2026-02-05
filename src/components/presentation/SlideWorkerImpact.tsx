@@ -271,7 +271,7 @@ const InteractivePhone = () => {
         ) : (
           <>
             {activeTab === "time" && <TimeView />}
-            {activeTab === "status" && <StatusView />}
+            {activeTab === "shifts" && <ShiftsView />}
             {activeTab === "query" && <QueryView onSubmit={handleQuerySubmit} />}
             {activeTab === "tracking" && <TrackingView />}
           </>
