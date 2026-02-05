@@ -108,17 +108,6 @@ const SlideAdoption = () => {
           </div>
         </motion.div>
 
-        {/* Bottom line */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.9 }}
-          className="text-center"
-        >
-          <p className="text-sm md:text-xl lg:text-2xl font-bold text-foreground">
-            Control replaces trust.
-          </p>
-        </motion.div>
       </div>
     </Slide>
   );
