@@ -332,7 +332,7 @@ const SlideWorkerImpact = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="space-y-3 md:space-y-4 flex-1 max-w-xl"
+            className="space-y-3 md:space-y-4 flex-1 max-w-xl pt-6 md:pt-10"
           >
             <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed">
               Fragmentation hits workers first.
