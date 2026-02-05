@@ -5,31 +5,19 @@ import { useNavigate } from "react-router-dom";
 import SlideHero from "@/components/presentation/SlideHero";
 import SlideProblem from "@/components/presentation/SlideProblem";
 import SlideWhyThisHappens from "@/components/presentation/SlideWhyThisHappens";
-import SlideIntermediation from "@/components/presentation/SlideIntermediation";
-import SlideSolution from "@/components/presentation/SlideSolution";
-import SlideTLSolution from "@/components/presentation/SlideTLSolution";
-import SlideMinimalChange from "@/components/presentation/SlideMinimalChange";
 import SlideDemo from "@/components/presentation/SlideDemo";
-import SlidePerformance from "@/components/presentation/SlidePerformance";
-import SlideReactive from "@/components/presentation/SlideReactive";
 import SlideAdoption from "@/components/presentation/SlideAdoption";
 import SlideClosing from "@/components/presentation/SlideClosing";
 
-const DEMO_SLIDE_INDEX = 6;
+const DEMO_SLIDE_INDEX = 3;
 
 const slides = [
   { id: 0, component: SlideHero },
   { id: 1, component: SlideProblem },
   { id: 2, component: SlideWhyThisHappens },
-  { id: 3, component: SlideIntermediation },
-  { id: 4, component: SlideSolution },
-  { id: 5, component: SlideTLSolution },
-  { id: 6, component: SlideDemo, isDemo: true },
-  { id: 7, component: SlideMinimalChange },
-  { id: 8, component: SlidePerformance },
-  { id: 9, component: SlideReactive },
-  { id: 10, component: SlideAdoption },
-  { id: 11, component: SlideClosing },
+  { id: 3, component: SlideDemo, isDemo: true },
+  { id: 4, component: SlideAdoption },
+  { id: 5, component: SlideClosing },
 ];
 
 const SalesDeck = () => {

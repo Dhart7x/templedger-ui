@@ -101,102 +101,26 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
     setActiveAgencyView(wasLive ? "live-workers" : "standby");
   };
  
-  const processSteps = [
-    "Agencies operate through a client-specific front end",
-    "Worker data, shifts, and exceptions are handled there",
-    "On-site Time & Attendance is deployed",
-    "Attendance syncs directly into system",
-  ];
-
-  const outputs = [
-    "One real-time operational view",
-    "Live status by department and location",
-    "Fulfilment and exceptions across agencies",
-    "Payroll and invoicing readiness before billing",
-    "Objective, ledger-derived agency performance",
-  ];
-
-  // Intro slide (How It Works)
+  // Intro slide - just Demo button
   if (demoState === "intro") {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center bg-background px-4 md:px-12 pt-14 pb-20 relative overflow-hidden">
+      <div className="w-full h-full flex flex-col items-center justify-center bg-background relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
         
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="max-w-5xl w-full relative z-10"
+          className="relative z-10"
         >
-          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-8 text-foreground text-center">
-            How It Works
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mb-6 md:mb-8 max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-card/60 border border-border rounded-xl p-4 md:p-6"
-            >
-              <h3 className="text-sm md:text-base font-bold text-primary mb-3 md:mb-4">Process</h3>
-              <div className="space-y-2 md:space-y-3">
-                {processSteps.map((step, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3, delay: 0.2 + index * 0.08 }}
-                    className="flex items-start gap-3"
-                  >
-                    <div className="w-5 h-5 md:w-6 md:h-6 rounded-full trust-gradient flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-[9px] md:text-[10px] font-bold text-foreground">{index + 1}</span>
-                    </div>
-                    <span className="text-sm md:text-base text-foreground leading-relaxed">{step}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="bg-card/60 border border-border rounded-xl p-4 md:p-6"
-            >
-              <h3 className="text-sm md:text-base font-bold text-primary mb-3 md:mb-4">Output for Labour User</h3>
-              <div className="space-y-2 md:space-y-3">
-                {outputs.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3, delay: 0.4 + index * 0.08 }}
-                    className="flex items-start gap-3"
-                  >
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-1.5 md:mt-2" />
-                    <span className="text-sm md:text-base text-foreground leading-relaxed">{item}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.7 }}
-            className="flex justify-center"
+          <Button
+            size="lg"
+            onClick={handleLaunchDemo}
+            className="text-base md:text-lg px-8 py-6 md:px-10 md:py-8 rounded-xl trust-gradient hover:opacity-90 transition-opacity group"
           >
-            <Button
-              size="lg"
-              onClick={handleLaunchDemo}
-              className="text-sm md:text-base px-6 py-4 md:px-8 md:py-6 rounded-xl trust-gradient hover:opacity-90 transition-opacity group"
-            >
-              <Play className="w-4 h-4 md:w-5 md:h-5 mr-2 group-hover:scale-110 transition-transform" />
-              Launch Demo
-            </Button>
-          </motion.div>
+            <Play className="w-5 h-5 md:w-6 md:h-6 mr-3 group-hover:scale-110 transition-transform" />
+            Demo
+          </Button>
         </motion.div>
       </div>
     );
