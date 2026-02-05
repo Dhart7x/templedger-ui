@@ -248,14 +248,14 @@ const InteractivePhone = () => {
   };
 
   return (
-    <div className="w-[200px] md:w-[260px] lg:w-[300px] rounded-[2rem] border-4 border-border bg-card shadow-2xl overflow-hidden">
+    <div className="w-[180px] md:w-[220px] lg:w-[260px] rounded-[1.5rem] border-4 border-border bg-card shadow-2xl overflow-hidden">
       {/* Phone notch */}
-      <div className="h-6 md:h-8 bg-muted/50 flex items-center justify-center">
-        <div className="w-16 md:w-20 h-1.5 md:h-2 bg-border rounded-full" />
+      <div className="h-5 md:h-6 bg-muted/50 flex items-center justify-center">
+        <div className="w-14 md:w-16 h-1 md:h-1.5 bg-border rounded-full" />
       </div>
 
       {/* Phone content */}
-      <div className="h-[320px] md:h-[400px] lg:h-[450px] p-3 md:p-4 overflow-y-auto bg-background">
+      <div className="h-[260px] md:h-[320px] lg:h-[380px] p-2 md:p-3 overflow-y-auto bg-background">
         {showSuccess ? (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -279,7 +279,7 @@ const InteractivePhone = () => {
       </div>
 
       {/* Bottom navigation */}
-      <div className="h-14 md:h-16 bg-muted/30 border-t border-border flex items-center justify-around px-2">
+      <div className="h-12 md:h-14 bg-muted/30 border-t border-border flex items-center justify-around px-2">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -287,20 +287,20 @@ const InteractivePhone = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex flex-col items-center gap-0.5 p-1.5 rounded-lg transition-colors ${
+              className={`flex flex-col items-center gap-0.5 p-1 rounded-lg transition-colors ${
                 isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              <Icon className={`w-4 h-4 md:w-5 md:h-5 ${isActive ? "text-primary" : ""}`} />
-              <span className="text-[8px] md:text-[10px] font-medium">{tab.label}</span>
+              <Icon className={`w-3.5 h-3.5 md:w-4 md:h-4 ${isActive ? "text-primary" : ""}`} />
+              <span className="text-[7px] md:text-[9px] font-medium">{tab.label}</span>
             </button>
           );
         })}
       </div>
 
       {/* Home indicator */}
-      <div className="h-4 md:h-5 bg-muted/30 flex items-center justify-center">
-        <div className="w-24 md:w-28 h-1 bg-border rounded-full" />
+      <div className="h-3 md:h-4 bg-muted/30 flex items-center justify-center">
+        <div className="w-20 md:w-24 h-1 bg-border rounded-full" />
       </div>
     </div>
   );
@@ -308,7 +308,7 @@ const InteractivePhone = () => {
 
 const SlideWorkerImpact = () => {
   return (
-    <Slide className="relative md:justify-start md:pt-12 lg:pt-16">
+    <Slide className="relative md:justify-start md:pt-8 lg:pt-12">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -320,30 +320,30 @@ const SlideWorkerImpact = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-6 md:mb-10"
+          className="text-xl md:text-3xl lg:text-4xl font-bold text-foreground text-center mb-4 md:mb-6"
         >
           Worker Impact
         </motion.h2>
 
         {/* Main content - copy and phone side by side on desktop */}
-        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-12">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-10">
           {/* Copy */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="space-y-5 md:space-y-6 flex-1 max-w-xl pt-6 md:pt-10"
+            className="space-y-3 md:space-y-4 flex-1 max-w-xl pt-4 md:pt-6"
           >
-            <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed">
+            <p className="text-xs md:text-sm lg:text-base text-foreground leading-relaxed">
               Fragmentation hits workers first.
             </p>
-            <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed">
+            <p className="text-xs md:text-sm lg:text-base text-muted-foreground leading-relaxed">
               Pay errors and unresolved queries drive attrition and reputational risk.
             </p>
-            <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed">
+            <p className="text-xs md:text-sm lg:text-base text-foreground leading-relaxed">
               <span className="trust-gradient-text font-semibold">Temp Ledger</span> provides clarity and accountability.
             </p>
-            <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed mt-3 md:mt-4">
+            <p className="text-xs md:text-sm lg:text-base text-muted-foreground leading-relaxed mt-2 md:mt-3">
               Workers have a simple view of their time for the week and one place to raise queries — tracked through to resolution.
             </p>
           </motion.div>
