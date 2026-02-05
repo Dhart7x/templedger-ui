@@ -11,15 +11,15 @@ import SlideDemo from "@/components/presentation/SlideDemo";
 import SlideAdoption from "@/components/presentation/SlideAdoption";
 import SlideClosing from "@/components/presentation/SlideClosing";
 
-const DEMO_SLIDE_INDEX = 5;
+const DEMO_SLIDE_INDEX = 4;
 
 const slides = [
   { id: 0, component: SlideHero },
   { id: 1, component: SlideProblem },
-  { id: 2, component: SlideWorkerImpact },
-  { id: 3, component: SlideWhyThisHappens },
-  { id: 4, component: SlideIntroducingTL },
-  { id: 5, component: SlideDemo, isDemo: true },
+  { id: 2, component: SlideWhyThisHappens },
+  { id: 3, component: SlideIntroducingTL },
+  { id: 4, component: SlideDemo, isDemo: true },
+  { id: 5, component: SlideWorkerImpact },
   { id: 6, component: SlideAdoption },
   { id: 7, component: SlideClosing },
 ];
