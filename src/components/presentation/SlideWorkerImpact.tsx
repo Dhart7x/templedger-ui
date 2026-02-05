@@ -279,7 +279,7 @@ const InteractivePhone = () => {
       </div>
 
       {/* Bottom navigation */}
-      <div className="h-14 md:h-16 bg-muted/30 border-t border-border flex items-center justify-around px-2">
+      <div className="h-12 md:h-14 bg-muted/30 border-t border-border flex items-center justify-around px-2">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -287,20 +287,20 @@ const InteractivePhone = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex flex-col items-center gap-0.5 p-1.5 rounded-lg transition-colors ${
+              className={`flex flex-col items-center gap-0.5 p-1 rounded-lg transition-colors ${
                 isActive ? "text-primary" : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              <Icon className={`w-4 h-4 md:w-5 md:h-5 ${isActive ? "text-primary" : ""}`} />
-              <span className="text-[8px] md:text-[10px] font-medium">{tab.label}</span>
+              <Icon className={`w-3.5 h-3.5 md:w-4 md:h-4 ${isActive ? "text-primary" : ""}`} />
+              <span className="text-[7px] md:text-[9px] font-medium">{tab.label}</span>
             </button>
           );
         })}
       </div>
 
       {/* Home indicator */}
-      <div className="h-4 md:h-5 bg-muted/30 flex items-center justify-center">
-        <div className="w-24 md:w-28 h-1 bg-border rounded-full" />
+      <div className="h-3 md:h-4 bg-muted/30 flex items-center justify-center">
+        <div className="w-20 md:w-24 h-1 bg-border rounded-full" />
       </div>
     </div>
   );
