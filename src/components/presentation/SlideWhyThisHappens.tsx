@@ -56,6 +56,16 @@ const SlideWhyThisHappens = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Bottom line */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 1.1 }}
+          className="text-center text-lg md:text-xl lg:text-2xl font-semibold text-foreground mt-10 md:mt-14"
+        >
+          The result? Chaos.
+        </motion.p>
       </motion.div>
     </Slide>
   );
