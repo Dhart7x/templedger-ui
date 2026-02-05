@@ -248,14 +248,14 @@ const InteractivePhone = () => {
   };
 
   return (
-    <div className="w-[200px] md:w-[260px] lg:w-[300px] rounded-[2rem] border-4 border-border bg-card shadow-2xl overflow-hidden">
+    <div className="w-[180px] md:w-[220px] lg:w-[260px] rounded-[1.5rem] border-4 border-border bg-card shadow-2xl overflow-hidden">
       {/* Phone notch */}
-      <div className="h-6 md:h-8 bg-muted/50 flex items-center justify-center">
-        <div className="w-16 md:w-20 h-1.5 md:h-2 bg-border rounded-full" />
+      <div className="h-5 md:h-6 bg-muted/50 flex items-center justify-center">
+        <div className="w-14 md:w-16 h-1 md:h-1.5 bg-border rounded-full" />
       </div>
 
       {/* Phone content */}
-      <div className="h-[320px] md:h-[400px] lg:h-[450px] p-3 md:p-4 overflow-y-auto bg-background">
+      <div className="h-[260px] md:h-[320px] lg:h-[380px] p-2 md:p-3 overflow-y-auto bg-background">
         {showSuccess ? (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
