@@ -343,7 +343,7 @@ const SlideWorkerImpact = () => {
             <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed">
               <span className="trust-gradient-text font-semibold">Temp Ledger</span> provides clarity and accountability.
             </p>
-            <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed">
+            <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed mt-3 md:mt-4">
               Workers have a simple view of their time for the week and one place to raise queries — tracked through to resolution.
             </p>
           </motion.div>
