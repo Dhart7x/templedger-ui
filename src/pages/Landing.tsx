@@ -10,25 +10,19 @@ const Landing = () => {
        id: "website",
        icon: Globe,
        title: "Website",
-       label: "Product overview",
        path: "/website",
-       disabled: false,
      },
      {
        id: "sales-deck",
        icon: Presentation,
        title: "Sales Deck",
-       label: "Detailed product deck",
        path: "/sales-deck",
-       disabled: false,
      },
      {
        id: "investor-deck",
        icon: TrendingUp,
        title: "Investor Deck",
-       label: "Coming soon",
        path: "/investor-deck",
-       disabled: false,
      },
    ];
  
@@ -66,8 +60,7 @@ const Landing = () => {
              animate={{ opacity: 1, y: 0 }}
              transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
              onClick={() => navigate(exp.path)}
-             disabled={exp.disabled}
-             className="group w-full md:w-48 p-6 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-300 text-center disabled:opacity-50 disabled:cursor-not-allowed"
+             className="group w-full md:w-48 p-6 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-300 text-center"
            >
              <div className="w-12 h-12 rounded-lg trust-gradient flex items-center justify-center mb-4 mx-auto group-hover:scale-105 transition-transform">
                <exp.icon className="w-6 h-6 text-foreground" />
@@ -75,9 +68,6 @@ const Landing = () => {
              <h2 className="text-lg font-semibold text-foreground mb-1">
                {exp.title}
              </h2>
-             <p className="text-xs text-muted-foreground">
-               {exp.label}
-             </p>
            </motion.button>
          ))}
        </div>
