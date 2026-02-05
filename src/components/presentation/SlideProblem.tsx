@@ -1,98 +1,70 @@
 import { motion } from "framer-motion";
-import { AlertTriangle, CreditCard, FileText, Users, TrendingDown } from "lucide-react";
 import Slide from "./Slide";
 
-const rootCauses = [
-  "Agencies and labour users operate in different systems",
-  "Communication is via email, phone, spreadsheets",
-  "Inside agencies, HR, Payroll, Compliance, Billing operate in silos",
-  "Execution is validated retrospectively",
-];
-
-const consequences = [
-  { icon: CreditCard, text: "Pay queries" },
-  { icon: FileText, text: "Invoice disputes" },
-  { icon: AlertTriangle, text: "Compliance failures" },
-  { icon: TrendingDown, text: "Misreported performance" },
-  { icon: Users, text: "Worker attrition" },
+const questions = [
+  { text: "How many no-shows do we have today?", x: "5%", y: "15%", size: "text-sm md:text-base lg:text-lg" },
+  { text: "Was that temp even on site?", x: "55%", y: "8%", size: "text-xs md:text-sm lg:text-base" },
+  { text: "Why does this invoice not match the hours?", x: "25%", y: "28%", size: "text-sm md:text-base lg:text-lg" },
+  { text: "What's this pay query?", x: "65%", y: "22%", size: "text-base md:text-lg lg:text-xl" },
+  { text: "How long until the replacement arrives?", x: "8%", y: "42%", size: "text-xs md:text-sm lg:text-base" },
+  { text: "Will my agencies pass this audit?", x: "50%", y: "38%", size: "text-sm md:text-base lg:text-lg" },
+  { text: "Are my departments adequately staffed right now?", x: "15%", y: "55%", size: "text-sm md:text-base lg:text-lg" },
+  { text: "What's our attrition percentage?", x: "58%", y: "52%", size: "text-xs md:text-sm lg:text-base" },
+  { text: "Which agency is best suited to fill these bookings?", x: "5%", y: "68%", size: "text-sm md:text-base lg:text-lg" },
+  { text: "Who's going to fill this last-minute requirement fastest?", x: "45%", y: "65%", size: "text-xs md:text-sm lg:text-base" },
+  { text: "When will I get the hours to approve?", x: "25%", y: "80%", size: "text-sm md:text-base lg:text-lg" },
 ];
 
 const SlideProblem = () => {
   return (
-    <Slide className="relative">
-      <div className="max-w-5xl mx-auto w-full">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
+    <Slide className="relative md:pt-20 lg:pt-24">
+      <div className="w-full h-full flex flex-col">
+        {/* Title */}
+        <motion.h2
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-6 md:mb-12 lg:mb-16"
+          className="text-xl md:text-3xl lg:text-4xl font-bold text-foreground mb-8 md:mb-0"
         >
-          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold leading-tight">
-            The Core Problem
-          </h2>
-        </motion.div>
+          Managing agencies is a nightmare.
+        </motion.h2>
 
-        {/* Vertical bullet points */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="max-w-2xl mx-auto mb-6 md:mb-12 lg:mb-16"
-        >
-          <div className="space-y-2 md:space-y-4 lg:space-y-6">
-            {rootCauses.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -15 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.25 + index * 0.06 }}
-                className="flex items-center gap-3 p-2.5 md:p-4"
+        {/* Desktop: Scattered questions */}
+        <div className="hidden md:block relative flex-1 mt-8">
+          {questions.map((q, i) => (
+            <motion.p
+              key={i}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4, delay: 0.3 + i * 0.12 }}
+              className={`absolute ${q.size} text-muted-foreground max-w-xs lg:max-w-sm`}
+              style={{ left: q.x, top: q.y }}
+            >
+              {q.text}
+            </motion.p>
+          ))}
+        </div>
+
+        {/* Mobile: Flowing questions with varied spacing */}
+        <div className="md:hidden flex-1 flex flex-col justify-center -mt-4">
+          <div className="space-y-3">
+            {questions.map((q, i) => (
+              <motion.p
+                key={i}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
+                className={`text-muted-foreground ${
+                  i % 3 === 0 ? "text-sm pl-0" : 
+                  i % 3 === 1 ? "text-xs pl-4" : 
+                  "text-sm pl-2"
+                }`}
               >
-                <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary flex-shrink-0" />
-                <span className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed">{item}</span>
-              </motion.div>
+                {q.text}
+              </motion.p>
             ))}
           </div>
-        </motion.div>
-
-        {/* This Leads To - Horizontal boxes */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="max-w-4xl mx-auto mb-6 md:mb-12 lg:mb-16"
-        >
-          <h3 className="text-sm md:text-base lg:text-lg font-semibold text-foreground/70 mb-3 md:mb-6 uppercase tracking-wide text-center">
-            This Leads To
-          </h3>
-          <div className="flex flex-wrap justify-center gap-2 md:gap-4 lg:gap-5">
-            {consequences.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: 0.5 + index * 0.06 }}
-                className="flex items-center gap-2 px-3 py-2 md:px-5 md:py-3 rounded-lg bg-destructive/10 border border-destructive/30"
-              >
-                <item.icon className="w-3.5 h-3.5 md:w-5 md:h-5 text-destructive flex-shrink-0" />
-                <span className="text-sm md:text-base lg:text-lg text-foreground font-medium">{item.text}</span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Bottom line */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
-          className="text-center"
-        >
-          <p className="text-sm md:text-lg font-bold text-foreground">
-            There has never been orchestration between the entities.
-          </p>
-        </motion.div>
+        </div>
       </div>
     </Slide>
   );
