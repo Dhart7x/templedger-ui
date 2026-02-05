@@ -64,7 +64,7 @@ const SlideWhyThisHappens = () => {
           transition={{ duration: 0.5, delay: 1.1 }}
           className="text-center text-lg md:text-xl lg:text-2xl font-semibold text-foreground mt-16 md:mt-20"
         >
-          The result? Chaos.
+          This is a recipe for inefficiency.
         </motion.p>
       </motion.div>
     </Slide>

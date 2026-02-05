@@ -162,7 +162,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
               className="text-base md:text-lg px-8 py-6 md:px-10 md:py-8 rounded-xl trust-gradient hover:opacity-90 transition-opacity group"
             >
               <Play className="w-5 h-5 md:w-6 md:h-6 mr-3 group-hover:scale-110 transition-transform" />
-              Demo
+              Launch Demo
             </Button>
           </motion.div>
         </motion.div>
