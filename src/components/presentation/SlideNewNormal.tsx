@@ -26,7 +26,7 @@ const SlideNewNormal = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-20 md:mb-24"
         >
-          The New Normal
+          Have it <span className="italic">your</span> way
         </motion.h2>
 
         {/* Benefit points */}
