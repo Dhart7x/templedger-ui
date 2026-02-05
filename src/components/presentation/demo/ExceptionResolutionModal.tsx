@@ -10,7 +10,7 @@
    SelectValue,
  } from "@/components/ui/select";
  import { useDemoContext, type ExceptionResolution } from "./DemoContext";
- import { standbyWorkers } from "./standbyWorkersData";
+ import { standbyWorkers, type StandbyWorker } from "./standbyWorkersData";
  
  interface ExceptionResolutionModalProps {
    isOpen: boolean;
@@ -33,8 +33,9 @@
    // Get best matches for the department
    const bestMatches = standbyWorkers
      .filter(w => w.bestMatchDepartment.toLowerCase() === exception.department.toLowerCase() || 
-                  w.qualifiedDepartments.some(d => d.toLowerCase() === exception.department.toLowerCase()))
-     .sort((a, b) => a.distanceToSite - b.distanceToSite)
+                  w.departments.some(d => d.toLowerCase() === exception.department.toLowerCase()))
+     .filter(w => w.status === "standby")
+     .sort((a, b) => a.distance.miles - b.distance.miles)
      .slice(0, 6);
  
    const selectedWorker = bestMatches.find(w => w.id === selectedReplacement);
@@ -57,7 +58,7 @@
      } else if (resolutionType === "replaced" && selectedWorker) {
        resolution.replacementWorkerId = selectedWorker.id;
        resolution.replacementWorkerName = selectedWorker.name;
-       resolution.replacementEtaMinutes = selectedWorker.travelTimeCar;
+       resolution.replacementEtaMinutes = parseInt(selectedWorker.distance.carTime);
      }
  
      resolveException(resolution);
@@ -178,17 +179,17 @@
                                  <span className="font-medium text-sm text-foreground">{worker.name}</span>
                                  <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
                                    <MapPin className="w-3 h-3" />
-                                   <span>{worker.distanceToSite} miles</span>
+                                   <span>{worker.distance.miles} miles</span>
                                  </div>
                                </div>
                                <div className="text-right">
                                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
                                    <Car className="w-3 h-3" />
-                                   <span>{worker.travelTimeCar} min</span>
+                                   <span>{worker.distance.carTime}</span>
                                  </div>
                                  <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
                                    <Bus className="w-3 h-3" />
-                                   <span>{worker.travelTimePublic} min</span>
+                                   <span>{worker.distance.publicTransportTime}</span>
                                  </div>
                                </div>
                              </div>
