@@ -90,7 +90,7 @@ const SlideAdoption = () => {
           className="max-w-5xl mx-auto mb-4 md:mb-12 lg:mb-14"
         >
           <p className="text-[10px] md:text-sm text-muted-foreground text-center mb-2 md:mb-3 uppercase tracking-wide font-semibold">
-            Agencies also benefit
+            For the agency, this is self-funded
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 lg:gap-5">
             {agencyBenefits.map((item, index) => (
