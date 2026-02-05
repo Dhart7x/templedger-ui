@@ -334,16 +334,16 @@ const SlideWorkerImpact = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="space-y-3 md:space-y-4 flex-1 max-w-xl pt-4 md:pt-6"
           >
-            <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed">
+            <p className="text-xs md:text-sm lg:text-base text-foreground leading-relaxed">
               Fragmentation hits workers first.
             </p>
-            <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed">
+            <p className="text-xs md:text-sm lg:text-base text-muted-foreground leading-relaxed">
               Pay errors and unresolved queries drive attrition and reputational risk.
             </p>
-            <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed">
+            <p className="text-xs md:text-sm lg:text-base text-foreground leading-relaxed">
               <span className="trust-gradient-text font-semibold">Temp Ledger</span> provides clarity and accountability.
             </p>
-            <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed mt-3 md:mt-4">
+            <p className="text-xs md:text-sm lg:text-base text-muted-foreground leading-relaxed mt-2 md:mt-3">
               Workers have a simple view of their time for the week and one place to raise queries — tracked through to resolution.
             </p>
           </motion.div>
