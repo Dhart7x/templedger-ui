@@ -11,6 +11,7 @@ import SlideDemo from "@/components/presentation/SlideDemo";
 import SlideNewNormal from "@/components/presentation/SlideNewNormal";
 import SlideAdoption from "@/components/presentation/SlideAdoption";
 import SlideClosing from "@/components/presentation/SlideClosing";
+import SlideAttrition from "@/components/presentation/SlideAttrition";
 
 const DEMO_SLIDE_INDEX = 4;
 
@@ -21,9 +22,10 @@ const slides = [
   { id: 3, component: SlideIntroducingTL },
   { id: 4, component: SlideDemo, isDemo: true },
   { id: 5, component: SlideWorkerImpact },
-  { id: 6, component: SlideNewNormal },
-  { id: 7, component: SlideAdoption },
-  { id: 8, component: SlideClosing },
+  { id: 6, component: SlideAttrition },
+  { id: 7, component: SlideNewNormal },
+  { id: 8, component: SlideAdoption },
+  { id: 9, component: SlideClosing },
 ];
 
 const SalesDeck = () => {
