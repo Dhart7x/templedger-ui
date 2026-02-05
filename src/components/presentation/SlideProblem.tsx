@@ -91,8 +91,11 @@ const SlideProblem = () => {
     <Slide className="relative">
       {/* Title - top aligned as header */}
       <div className="pt-20 md:pt-24 lg:pt-28 px-6 md:px-12">
-        <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground">
-          {displayedTitle}
+        <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground min-h-[2em]">
+          <span>{displayedTitle}</span>
+          {phase === "typing" && displayedTitle.length < title.length && (
+            <span className="inline-block w-[2px] h-[1em] bg-primary ml-1 animate-pulse" />
+          )}
         </h2>
       </div>
 
