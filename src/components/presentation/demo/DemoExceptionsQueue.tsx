@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { AlertTriangle, Clock, User, Building2, MapPin } from "lucide-react";
+ import { useState } from "react";
+ import { AlertTriangle, Clock, User, Building2, MapPin, UserPlus, CheckCircle, Bell } from "lucide-react";
+ import { useDemoContext } from "./DemoContext";
 
 interface Exception {
   id: string;
@@ -13,20 +14,31 @@ interface Exception {
   status: "open" | "in-review" | "resolved";
   priority: "P1" | "P2" | "P3";
   createdAt: string;
+ workerId?: string;
 }
 
 const exceptions: Exception[] = [
-  { id: "1", type: "No-Show", agency: "Staffline", worker: "James Wilson", department: "Loading", site: "Birmingham DC", trigger: "Missed clock-in", owner: null, status: "open", priority: "P1", createdAt: "06:15" },
-  { id: "2", type: "No-Show", agency: "Staffline", worker: "David Chen", department: "Warehouse", site: "Birmingham DC", trigger: "Missed clock-in", owner: null, status: "open", priority: "P1", createdAt: "06:18" },
-  { id: "3", type: "RTW Expiring", agency: "Blue Arrow", worker: "Maria Santos", department: "Picking", site: "Heathrow DC", trigger: "RTW expires in 3 days", owner: "Sarah Mitchell", status: "in-review", priority: "P2", createdAt: "Yesterday" },
-  { id: "4", type: "Overtime Exceeded", agency: "Pertemps", worker: "Ahmed Khan", department: "Warehouse", site: "Heathrow DC", trigger: "48h weekly limit reached", owner: null, status: "open", priority: "P2", createdAt: "14:30" },
-  { id: "5", type: "Missed Clock-Out", agency: "Staffline", worker: "Lucy Brown", department: "Warehouse", site: "Coventry Hub", trigger: "No clock-out recorded", owner: "John Smith", status: "in-review", priority: "P3", createdAt: "Yesterday" },
+ { id: "ISS001", type: "Compliance", agency: "Staffline", worker: "David Chen", department: "Picking", site: "Birmingham DC", trigger: "Right to Work expired", owner: null, status: "open", priority: "P1", createdAt: "06:15", workerId: "W004" },
+ { id: "ISS002", type: "Compliance", agency: "Staffline", worker: "Robert Taylor", department: "Picking", site: "Birmingham DC", trigger: "H&S certification expired", owner: null, status: "open", priority: "P1", createdAt: "06:18", workerId: "W008" },
+ { id: "ISS003", type: "Pending Verification", agency: "Staffline", worker: "James Cooper", department: "Packing", site: "Birmingham DC", trigger: "Right to Work pending", owner: "Sarah Mitchell", status: "in-review", priority: "P2", createdAt: "Yesterday", workerId: "W002" },
+ { id: "ISS004", type: "Late Arrival", agency: "Staffline", worker: "Lisa Anderson", department: "Goods In", site: "Birmingham DC", trigger: "Late clock-in (12 mins)", owner: null, status: "open", priority: "P2", createdAt: "14:30", workerId: "W007" },
 ];
 
 const DemoExceptionsQueue = () => {
   const [selectedException, setSelectedException] = useState<Exception | null>(null);
+   const { exceptionResolutions, notifications } = useDemoContext();
+ 
+   // Get unread notifications for labour user
+   const unreadNotifications = notifications.filter(n => 
+     (n.targetView === "labour-user" || n.targetView === "both") && !n.read
+   );
+ 
+   const getResolutionStatus = (exceptionId: string) => {
+     return exceptionResolutions[exceptionId];
+   };
 
   if (selectedException) {
+     const resolution = getResolutionStatus(selectedException.id);
     return (
       <div className="p-6">
         <button 
@@ -81,15 +93,43 @@ const DemoExceptionsQueue = () => {
         </div>
 
         <div className="flex gap-3">
-          <button className="px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium">
-            Assign to Me
-          </button>
-          <button className="px-4 py-2 rounded-lg bg-card border border-border text-sm font-medium">
-            Escalate
-          </button>
-          <button className="px-4 py-2 rounded-lg bg-green-500 text-white text-sm font-medium">
-            Resolve
-          </button>
+           {resolution ? (
+             <div className="w-full p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+               <div className="flex items-center gap-2 text-emerald-500 font-medium mb-2">
+                 <CheckCircle className="w-5 h-5" />
+                 Agency Response Received
+               </div>
+               {resolution.resolutionType === "on-the-way" ? (
+                 <div className="flex items-center gap-2 text-sm text-foreground">
+                   <Clock className="w-4 h-4 text-amber-500" />
+                   <span>{resolution.workerName} is on the way — ETA {resolution.etaMinutes} mins</span>
+                 </div>
+               ) : (
+                 <div className="space-y-1">
+                   <div className="flex items-center gap-2 text-sm text-foreground">
+                     <UserPlus className="w-4 h-4 text-emerald-500" />
+                     <span>Replacement: <strong>{resolution.replacementWorkerName}</strong></span>
+                   </div>
+                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                     <Clock className="w-4 h-4" />
+                     <span>ETA: {resolution.replacementEtaMinutes} mins</span>
+                   </div>
+                 </div>
+               )}
+             </div>
+           ) : (
+             <>
+               <button className="px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium">
+                 Assign to Me
+               </button>
+               <button className="px-4 py-2 rounded-lg bg-card border border-border text-sm font-medium">
+                 Escalate
+               </button>
+               <button className="px-4 py-2 rounded-lg bg-emerald-500 text-white text-sm font-medium">
+                 Resolve
+               </button>
+             </>
+           )}
         </div>
       </div>
     );
@@ -102,7 +142,14 @@ const DemoExceptionsQueue = () => {
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-bold">Exceptions Queue</h2>
-        <div className="flex items-center gap-4 text-sm">
+         <div className="flex items-center gap-4">
+           {unreadNotifications.length > 0 && (
+             <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/10 border border-primary/20">
+               <Bell className="w-4 h-4 text-primary" />
+               <span className="text-sm text-primary font-medium">{unreadNotifications.length} Agency Update{unreadNotifications.length > 1 ? 's' : ''}</span>
+             </div>
+           )}
+           <div className="flex items-center gap-4 text-sm">
           <span className="flex items-center gap-1">
             <span className="w-2 h-2 rounded-full bg-destructive" />
             {openCount} Open
@@ -112,6 +159,7 @@ const DemoExceptionsQueue = () => {
             {inReviewCount} In Review
           </span>
         </div>
+         </div>
       </div>
 
       {/* Exceptions table */}
@@ -168,10 +216,21 @@ const DemoExceptionsQueue = () => {
                       ? "bg-destructive/10 text-destructive" 
                       : exception.status === "in-review"
                       ? "bg-amber-500/10 text-amber-500"
-                      : "bg-green-500/10 text-green-500"
+                       : "bg-emerald-500/10 text-emerald-500"
                   }`}>
-                    {exception.status === "open" ? "Open" : exception.status === "in-review" ? "In Review" : "Resolved"}
+                     {getResolutionStatus(exception.id) 
+                       ? (getResolutionStatus(exception.id)?.resolutionType === "on-the-way" ? "On Way" : "Replaced")
+                       : exception.status === "open" ? "Open" : exception.status === "in-review" ? "In Review" : "Resolved"
+                     }
                   </span>
+                   {getResolutionStatus(exception.id) && (
+                     <div className="text-xs text-muted-foreground mt-1">
+                       {getResolutionStatus(exception.id)?.resolutionType === "on-the-way" 
+                         ? `ETA ${getResolutionStatus(exception.id)?.etaMinutes} min`
+                         : getResolutionStatus(exception.id)?.replacementWorkerName
+                       }
+                     </div>
+                   )}
                 </td>
               </tr>
             ))}
