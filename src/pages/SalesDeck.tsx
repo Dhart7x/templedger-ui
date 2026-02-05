@@ -5,19 +5,21 @@ import { useNavigate } from "react-router-dom";
 import SlideHero from "@/components/presentation/SlideHero";
 import SlideProblem from "@/components/presentation/SlideProblem";
 import SlideWhyThisHappens from "@/components/presentation/SlideWhyThisHappens";
+import SlideIntroducingTL from "@/components/presentation/SlideIntroducingTL";
 import SlideDemo from "@/components/presentation/SlideDemo";
 import SlideAdoption from "@/components/presentation/SlideAdoption";
 import SlideClosing from "@/components/presentation/SlideClosing";
 
-const DEMO_SLIDE_INDEX = 3;
+const DEMO_SLIDE_INDEX = 4;
 
 const slides = [
   { id: 0, component: SlideHero },
   { id: 1, component: SlideProblem },
   { id: 2, component: SlideWhyThisHappens },
-  { id: 3, component: SlideDemo, isDemo: true },
-  { id: 4, component: SlideAdoption },
-  { id: 5, component: SlideClosing },
+  { id: 3, component: SlideIntroducingTL },
+  { id: 4, component: SlideDemo, isDemo: true },
+  { id: 5, component: SlideAdoption },
+  { id: 6, component: SlideClosing },
 ];
 
 const SalesDeck = () => {
