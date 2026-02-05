@@ -65,10 +65,22 @@ const SlideAttrition = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.9 }}
-          className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed text-center"
+          className="text-sm md:text-base text-muted-foreground leading-relaxed text-center"
         >
           These costs compound quietly, week after week.
         </motion.p>
+
+        {/* Bottom insight */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.1 }}
+          className="absolute bottom-20 md:bottom-24 left-0 right-0 px-6"
+        >
+          <p className="text-xs md:text-sm text-center text-muted-foreground/80 italic max-w-2xl mx-auto">
+            We scraped over 1m agency reviews on Google. The #1 driver of negative reviews and reason for leaving — <span className="text-primary font-medium">pay disputes</span>.
+          </p>
+        </motion.div>
       </motion.div>
     </Slide>
   );
