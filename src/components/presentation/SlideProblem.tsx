@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Slide from "./Slide";
 
@@ -20,80 +20,84 @@ const questions = [
 
 const SlideProblem = () => {
   const [displayedTitle, setDisplayedTitle] = useState("");
-  const [phase, setPhase] = useState<"typing" | "waiting" | "questions" | "final">("typing");
+  const [phase, setPhase] = useState<"typing" | "questions" | "final">("typing");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(-1);
-  const [showQuestion, setShowQuestion] = useState(false);
+  const [questionVisible, setQuestionVisible] = useState(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Phase 1: Typing animation
   useEffect(() => {
     if (phase !== "typing") return;
-    
+
     if (displayedTitle.length < title.length) {
-      const timeout = setTimeout(() => {
+      timerRef.current = setTimeout(() => {
         setDisplayedTitle(title.slice(0, displayedTitle.length + 1));
-      }, 50); // Natural typing speed
-      return () => clearTimeout(timeout);
+      }, 50);
     } else {
-      // Title complete, wait 3 seconds
-      setPhase("waiting");
-      const timeout = setTimeout(() => {
+      // Title complete - wait 3 seconds then start questions
+      timerRef.current = setTimeout(() => {
         setPhase("questions");
         setCurrentQuestionIndex(0);
       }, 3000);
-      return () => clearTimeout(timeout);
     }
+
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, [displayedTitle, phase]);
 
   // Phase 2: Sequential questions
   useEffect(() => {
-    if (phase !== "questions" || currentQuestionIndex < 0) return;
+    if (phase !== "questions") return;
+    if (currentQuestionIndex < 0) return;
 
+    // Check if we've shown all questions
     if (currentQuestionIndex >= questions.length) {
-      // All questions done, move to final phase
       setPhase("final");
       return;
     }
 
-    // Show question
-    setShowQuestion(true);
-    
-    // After display time, fade out
-    const hideTimeout = setTimeout(() => {
-      setShowQuestion(false);
-    }, 1800); // Time to read
+    // Show the current question
+    setQuestionVisible(true);
 
-    // After fade out, move to next question
-    const nextTimeout = setTimeout(() => {
-      setCurrentQuestionIndex(prev => prev + 1);
-    }, 2400); // Total time per question
+    // After 1.8s, hide it
+    const hideTimer = setTimeout(() => {
+      setQuestionVisible(false);
+    }, 1800);
+
+    // After 2.4s total, move to next question
+    const nextTimer = setTimeout(() => {
+      setCurrentQuestionIndex((prev) => prev + 1);
+    }, 2400);
 
     return () => {
-      clearTimeout(hideTimeout);
-      clearTimeout(nextTimeout);
+      clearTimeout(hideTimer);
+      clearTimeout(nextTimer);
     };
   }, [phase, currentQuestionIndex]);
 
   return (
     <Slide className="flex items-center justify-center">
       <div className="w-full h-full flex flex-col items-center justify-center text-center px-6">
-        {/* Title - always visible after typing */}
-        <motion.h2
-          className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground mb-16"
-        >
+        {/* Title - always visible once typed */}
+        <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground mb-16 min-h-[1.5em]">
           {displayedTitle}
-        </motion.h2>
+          {phase === "typing" && displayedTitle.length < title.length && (
+            <span className="opacity-0">|</span>
+          )}
+        </h2>
 
-        {/* Questions area - fixed height to prevent layout shift */}
-        <div className="h-24 flex items-center justify-center">
+        {/* Questions area */}
+        <div className="h-32 flex items-center justify-center">
           <AnimatePresence mode="wait">
-            {phase === "questions" && showQuestion && currentQuestionIndex < questions.length && (
+            {phase === "questions" && questionVisible && currentQuestionIndex >= 0 && currentQuestionIndex < questions.length && (
               <motion.p
-                key={currentQuestionIndex}
+                key={`question-${currentQuestionIndex}`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.4 }}
-                className="text-lg md:text-2xl lg:text-3xl text-muted-foreground max-w-3xl"
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                className="text-lg md:text-2xl lg:text-3xl text-muted-foreground max-w-3xl px-4"
               >
                 {questions[currentQuestionIndex]}
               </motion.p>
@@ -101,9 +105,10 @@ const SlideProblem = () => {
 
             {phase === "final" && (
               <motion.p
+                key="final"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
                 className="text-xl md:text-3xl lg:text-4xl text-foreground font-medium"
               >
                 Sound familiar?
