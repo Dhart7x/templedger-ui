@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Slide from "./Slide";
 
 const points = [
+  "Agencies and labour users operate in completely different systems.",
   "Worker data and agency actions live inside agency systems — not shared.",
   "Agencies use their systems to serve many clients.",
   "Those systems are not designed to serve any single labour user.",
