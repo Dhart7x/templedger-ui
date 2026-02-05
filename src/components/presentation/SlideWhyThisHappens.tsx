@@ -31,7 +31,7 @@ const SlideWhyThisHappens = () => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="p-6 md:p-8 rounded-xl bg-card/60 border border-border mb-10 md:mb-14 text-center"
+          className="p-6 md:p-8 rounded-xl bg-card/60 border border-border mb-12 md:mb-16 text-center"
         >
           <p className="text-lg md:text-xl lg:text-2xl text-foreground leading-relaxed">
             Agencies and labour users operate in completely different systems.
