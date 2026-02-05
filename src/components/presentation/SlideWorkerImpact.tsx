@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Clock, Eye, MessageSquare, CheckCircle } from "lucide-react";
+import { Clock, Calendar, MessageSquare, CheckCircle, X, Check } from "lucide-react";
 import Slide from "./Slide";
 
-type TabId = "time" | "status" | "query" | "tracking";
+type TabId = "time" | "shifts" | "query" | "tracking";
 
 interface Tab {
   id: TabId;
@@ -13,7 +13,7 @@ interface Tab {
 
 const tabs: Tab[] = [
   { id: "time", icon: Clock, label: "Time" },
-  { id: "status", icon: Eye, label: "Status" },
+  { id: "shifts", icon: Calendar, label: "Shifts" },
   { id: "query", icon: MessageSquare, label: "Query" },
   { id: "tracking", icon: CheckCircle, label: "Track" },
 ];
@@ -64,24 +64,76 @@ const TimeView = () => {
   );
 };
 
-const StatusView = () => {
-  const shifts = [
-    { day: "Mon 6 Jan", status: "Approved", color: "text-primary", bg: "bg-primary/20" },
-    { day: "Tue 7 Jan", status: "Approved", color: "text-primary", bg: "bg-primary/20" },
-    { day: "Wed 8 Jan", status: "Under review", color: "text-amber-400", bg: "bg-amber-500/20" },
-    { day: "Thu 9 Jan", status: "Recorded", color: "text-muted-foreground", bg: "bg-muted/50" },
-    { day: "Fri 10 Jan", status: "Missing", color: "text-destructive", bg: "bg-destructive/20" },
+const ShiftsView = () => {
+  const [pendingShifts, setPendingShifts] = useState([
+    { id: 1, day: "Sat 11 Jan", time: "07:00 - 15:30", site: "Warehouse A" },
+    { id: 2, day: "Sun 12 Jan", time: "08:00 - 16:00", site: "Warehouse B" },
+  ]);
+  const [acceptedShifts, setAcceptedShifts] = useState<number[]>([]);
+  const [rejectedShifts, setRejectedShifts] = useState<number[]>([]);
+
+  const handleAccept = (id: number) => {
+    setAcceptedShifts([...acceptedShifts, id]);
+    setPendingShifts(pendingShifts.filter(s => s.id !== id));
+  };
+
+  const handleReject = (id: number) => {
+    setRejectedShifts([...rejectedShifts, id]);
+    setPendingShifts(pendingShifts.filter(s => s.id !== id));
+  };
+
+  const confirmedShifts = [
+    { day: "Mon 13 Jan", time: "07:00 - 15:30", site: "Warehouse A", status: "Confirmed" },
+    { day: "Tue 14 Jan", time: "07:00 - 15:30", site: "Warehouse A", status: "Confirmed" },
   ];
 
   return (
-    <div className="space-y-2">
-      <div className="text-[10px] md:text-xs font-semibold text-foreground mb-3">Shift Status</div>
-      {shifts.map((s, i) => (
-        <div key={i} className="flex items-center justify-between text-[9px] md:text-[11px] p-2 rounded bg-muted/20">
-          <span className="text-foreground">{s.day}</span>
-          <span className={`px-2 py-0.5 rounded ${s.bg} ${s.color} font-medium`}>{s.status}</span>
+    <div className="space-y-3">
+      {pendingShifts.length > 0 && (
+        <div>
+          <div className="text-[10px] md:text-xs font-semibold text-foreground mb-2">Pending Assignment</div>
+          {pendingShifts.map((shift) => (
+            <div key={shift.id} className="p-2 rounded bg-amber-500/10 border border-amber-500/30 mb-2">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-[9px] md:text-[11px] text-foreground font-medium">{shift.day}</span>
+                <span className="text-[8px] md:text-[10px] text-amber-400">Action required</span>
+              </div>
+              <div className="text-[8px] md:text-[10px] text-muted-foreground mb-2">
+                {shift.time} • {shift.site}
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleAccept(shift.id)}
+                  className="flex-1 h-6 md:h-7 rounded text-[8px] md:text-[10px] font-medium trust-gradient text-foreground flex items-center justify-center gap-1"
+                >
+                  <Check className="w-3 h-3" /> Accept
+                </button>
+                <button
+                  onClick={() => handleReject(shift.id)}
+                  className="flex-1 h-6 md:h-7 rounded text-[8px] md:text-[10px] font-medium bg-muted/50 text-muted-foreground hover:bg-destructive/20 hover:text-destructive transition-colors flex items-center justify-center gap-1"
+                >
+                  <X className="w-3 h-3" /> Reject
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
+
+      <div>
+        <div className="text-[10px] md:text-xs font-semibold text-foreground mb-2">Upcoming Shifts</div>
+        {confirmedShifts.map((s, i) => (
+          <div key={i} className="flex items-center justify-between text-[9px] md:text-[11px] p-2 rounded bg-primary/10 border border-primary/30 mb-1.5">
+            <div>
+              <div className="text-foreground font-medium">{s.day}</div>
+              <div className="text-[8px] md:text-[10px] text-muted-foreground">{s.time}</div>
+            </div>
+            <span className="text-[8px] md:text-[10px] px-1.5 py-0.5 rounded bg-primary/20 text-primary font-medium">
+              {s.status}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -219,7 +271,7 @@ const InteractivePhone = () => {
         ) : (
           <>
             {activeTab === "time" && <TimeView />}
-            {activeTab === "status" && <StatusView />}
+            {activeTab === "shifts" && <ShiftsView />}
             {activeTab === "query" && <QueryView onSubmit={handleQuerySubmit} />}
             {activeTab === "tracking" && <TrackingView />}
           </>
@@ -280,7 +332,7 @@ const SlideWorkerImpact = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="space-y-3 md:space-y-4 flex-1 max-w-xl"
+            className="space-y-3 md:space-y-4 flex-1 max-w-xl pt-6 md:pt-10"
           >
             <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed">
               Fragmentation hits workers first.
