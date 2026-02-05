@@ -308,7 +308,7 @@ const InteractivePhone = () => {
 
 const SlideWorkerImpact = () => {
   return (
-    <Slide className="relative md:justify-start md:pt-12 lg:pt-16">
+    <Slide className="relative md:justify-start md:pt-8 lg:pt-12">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -320,19 +320,19 @@ const SlideWorkerImpact = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-6 md:mb-10"
+          className="text-xl md:text-3xl lg:text-4xl font-bold text-foreground text-center mb-4 md:mb-6"
         >
           Worker Impact
         </motion.h2>
 
         {/* Main content - copy and phone side by side on desktop */}
-        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-12">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-10">
           {/* Copy */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="space-y-5 md:space-y-6 flex-1 max-w-xl pt-6 md:pt-10"
+            className="space-y-3 md:space-y-4 flex-1 max-w-xl pt-4 md:pt-6"
           >
             <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed">
               Fragmentation hits workers first.
