@@ -34,7 +34,7 @@ const SlideIntroducingTL = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-lg md:text-xl lg:text-2xl text-primary font-medium text-center mb-12 md:mb-16"
+          className="text-lg md:text-xl lg:text-2xl text-primary font-medium text-center mb-16 md:mb-20"
         >
           The unified system for agency orchestration
         </motion.p>
