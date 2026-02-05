@@ -3,7 +3,7 @@ import Slide from "./Slide";
 
 const points = [
   "Agencies and labour users operate in completely different platforms.",
-  "Worker data and agency actions live inside their own environment — not shared.",
+  "Worker data and agency actions live inside their own environment.",
   "Agencies have one CRM to serve all clients.",
   "Systems were designed with the agency in mind, not you.",
 ];
