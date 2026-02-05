@@ -224,11 +224,6 @@ const DemoHeadcountRequests = () => {
         </div>
       )}
 
-  const handleRequestClick = (request: HeadcountRequest) => {
-    setSelectedRequest(request);
-    setShowDetailModal(true);
-  };
- 
       {/* Requests list */}
       <div className="space-y-4">
         {requests.map((request) => {
@@ -238,7 +233,10 @@ const DemoHeadcountRequests = () => {
           return (
             <div
               key={request.id}
-              onClick={() => handleRequestClick(request)}
+              onClick={() => {
+                setSelectedRequest(request);
+                setShowDetailModal(true);
+              }}
               className="bg-card border border-border rounded-lg p-4 hover:border-primary/30 transition-colors cursor-pointer"
             >
               <div className="flex items-start justify-between mb-3">
