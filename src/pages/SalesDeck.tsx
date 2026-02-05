@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import SlideHero from "@/components/presentation/SlideHero";
 import SlideProblem from "@/components/presentation/SlideProblem";
 import SlideWhyThisHappens from "@/components/presentation/SlideWhyThisHappens";
+import SlideIntroducingTL from "@/components/presentation/SlideIntroducingTL";
 import SlideDemo from "@/components/presentation/SlideDemo";
 import SlideAdoption from "@/components/presentation/SlideAdoption";
 import SlideClosing from "@/components/presentation/SlideClosing";
