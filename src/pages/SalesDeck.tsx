@@ -4,7 +4,6 @@ import { ChevronLeft, ChevronRight, Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import SlideHero from "@/components/presentation/SlideHero";
 import SlideProblem from "@/components/presentation/SlideProblem";
-import SlideWorkerImpact from "@/components/presentation/SlideWorkerImpact";
 import SlideWhyThisHappens from "@/components/presentation/SlideWhyThisHappens";
 import SlideIntroducingTL from "@/components/presentation/SlideIntroducingTL";
 import SlideDemo from "@/components/presentation/SlideDemo";
@@ -21,11 +20,10 @@ const slides = [
   { id: 2, component: SlideWhyThisHappens },
   { id: 3, component: SlideIntroducingTL },
   { id: 4, component: SlideDemo, isDemo: true },
-  { id: 5, component: SlideWorkerImpact },
-  { id: 6, component: SlideAttrition },
-  { id: 7, component: SlideNewNormal },
-  { id: 8, component: SlideAdoption },
-  { id: 9, component: SlideClosing },
+  { id: 5, component: SlideAttrition },
+  { id: 6, component: SlideNewNormal },
+  { id: 7, component: SlideAdoption },
+  { id: 8, component: SlideClosing },
 ];
 
 const SalesDeck = () => {
