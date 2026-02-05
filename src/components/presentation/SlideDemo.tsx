@@ -101,26 +101,59 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
     setActiveAgencyView(wasLive ? "live-workers" : "standby");
   };
  
-  // Intro slide - just Demo button
+  const orchestrationPoints = [
+    "Agencies operate through a dedicated, client-specific interface",
+    "Labour users see a unified, real-time view across all agencies",
+    "Both views connect to the same underlying record",
+    "Actions on one side are immediately visible on the other",
+    "Orchestration happens through shared visibility, not coordination calls",
+  ];
+
+  // Intro slide - content + Demo button
   if (demoState === "intro") {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center bg-background relative overflow-hidden">
+      <div className="w-full h-full flex flex-col items-center justify-center bg-background relative overflow-hidden px-6">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
         
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="relative z-10"
+          className="relative z-10 max-w-3xl w-full flex flex-col items-center"
         >
-          <Button
-            size="lg"
-            onClick={handleLaunchDemo}
-            className="text-base md:text-lg px-8 py-6 md:px-10 md:py-8 rounded-xl trust-gradient hover:opacity-90 transition-opacity group"
+          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold text-foreground text-center mb-10 md:mb-14">
+            How Orchestration Happens
+          </h2>
+
+          <div className="space-y-3 md:space-y-4 mb-12 md:mb-16 w-full">
+            {orchestrationPoints.map((point, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -15 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 + index * 0.1 }}
+                className="flex items-start gap-3"
+              >
+                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 flex-shrink-0" />
+                <p className="text-sm md:text-base lg:text-lg text-foreground">{point}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: 0.6 }}
           >
-            <Play className="w-5 h-5 md:w-6 md:h-6 mr-3 group-hover:scale-110 transition-transform" />
-            Demo
-          </Button>
+            <Button
+              size="lg"
+              onClick={handleLaunchDemo}
+              className="text-base md:text-lg px-8 py-6 md:px-10 md:py-8 rounded-xl trust-gradient hover:opacity-90 transition-opacity group"
+            >
+              <Play className="w-5 h-5 md:w-6 md:h-6 mr-3 group-hover:scale-110 transition-transform" />
+              Demo
+            </Button>
+          </motion.div>
         </motion.div>
       </div>
     );

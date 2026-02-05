@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Shield, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import Slide from "./Slide";
 
 const capabilities = [
@@ -19,27 +19,22 @@ const SlideIntroducingTL = () => {
         transition={{ duration: 0.5 }}
         className="max-w-3xl mx-auto w-full"
       >
-        {/* Logo + Title */}
-        <motion.div
+        {/* Title */}
+        <motion.h2
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex items-center justify-center gap-3 mb-3"
+          className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-3"
         >
-          <div className="w-10 h-10 rounded-lg trust-gradient flex items-center justify-center">
-            <Shield className="w-5 h-5 text-foreground" />
-          </div>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground">
-            Introducing Temp Ledger
-          </h2>
-        </motion.div>
+          Introducing <span className="trust-gradient-text">Temp Ledger</span>
+        </motion.h2>
 
         {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-lg md:text-xl lg:text-2xl text-primary font-medium text-center mb-12 md:mb-16"
+          className="text-lg md:text-xl lg:text-2xl text-primary font-medium text-center mb-16 md:mb-20"
         >
           The unified system for agency orchestration
         </motion.p>
