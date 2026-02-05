@@ -20,10 +20,21 @@ const questions = [
 
 const SlideProblem = () => {
   const [displayedTitle, setDisplayedTitle] = useState("");
-  const [phase, setPhase] = useState<"typing" | "questions" | "final" | "done">("typing");
+  const [phase, setPhase] = useState<"waiting" | "typing" | "questions" | "final" | "done">("waiting");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(-1);
   const [questionVisible, setQuestionVisible] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Initial delay before typing starts
+  useEffect(() => {
+    if (phase !== "waiting") return;
+    
+    const startTimer = setTimeout(() => {
+      setPhase("typing");
+    }, 600);
+
+    return () => clearTimeout(startTimer);
+  }, [phase]);
 
   // Phase 1: Typing animation
   useEffect(() => {
@@ -32,7 +43,7 @@ const SlideProblem = () => {
     if (displayedTitle.length < title.length) {
       timerRef.current = setTimeout(() => {
         setDisplayedTitle(title.slice(0, displayedTitle.length + 1));
-      }, 50);
+      }, 60);
     } else {
       // Title complete - wait 3 seconds then start questions
       timerRef.current = setTimeout(() => {
