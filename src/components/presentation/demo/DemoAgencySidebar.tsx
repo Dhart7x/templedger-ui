@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, Calendar, AlertTriangle, FileText, ClipboardList } from "lucide-react";
+import { LayoutDashboard, Users, Calendar, AlertTriangle, FileText, ClipboardList, Eye, UserCheck, Clock } from "lucide-react";
 
 interface DemoAgencySidebarProps {
   activeView: string;
@@ -7,7 +7,10 @@ interface DemoAgencySidebarProps {
 
 const navItems = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { id: "live-snapshot", label: "Live Snapshot", icon: Eye },
   { id: "allocations", label: "Allocations", icon: ClipboardList, badge: "5" },
+  { id: "live-workers", label: "Live Workers", icon: UserCheck },
+  { id: "standby", label: "Standby Pool", icon: Clock },
   { id: "workers", label: "Workers", icon: Users },
   { id: "deployments", label: "Deployments", icon: Calendar },
   { id: "issues", label: "Issues", icon: AlertTriangle },
@@ -28,7 +31,10 @@ const DemoAgencySidebar = ({ activeView, onViewChange }: DemoAgencySidebarProps)
       <nav className="flex-1 p-2">
         <ul className="space-y-1">
           {navItems.map((item) => {
-            const isActive = activeView === item.id || (activeView === "worker-detail" && item.id === "workers");
+            const isActive = activeView === item.id || 
+              (activeView === "worker-detail" && item.id === "workers") ||
+              (activeView === "standby-detail" && item.id === "standby") ||
+              (activeView === "live-detail" && item.id === "live-workers");
             return (
               <li key={item.id}>
                 <button
@@ -46,6 +52,12 @@ const DemoAgencySidebar = ({ activeView, onViewChange }: DemoAgencySidebarProps)
                   )}
                   {item.id === "allocations" && (
                     <span className="ml-auto text-xs bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded">5</span>
+                  )}
+                  {item.id === "standby" && (
+                    <span className="ml-auto text-xs bg-muted text-muted-foreground px-1.5 py-0.5 rounded">37</span>
+                  )}
+                  {item.id === "live-workers" && (
+                    <span className="ml-auto text-xs bg-green-500/20 text-green-400 px-1.5 py-0.5 rounded">8</span>
                   )}
                 </button>
               </li>

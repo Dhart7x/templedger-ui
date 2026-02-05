@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Play, ChevronDown, ArrowLeft, Shield, Eye, EyeOff } from "lucide-react";
+import { Play, ChevronDown, ArrowLeft, Shield, Eye, EyeOff, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -27,6 +27,11 @@ import DemoAgencyIssues from "./demo/DemoAgencyIssues";
 import DemoAgencyDocuments from "./demo/DemoAgencyDocuments";
 import DemoAgencyAllocations from "./demo/DemoAgencyAllocations";
 import { AgencyWorker } from "./demo/agencyDemoData";
+import { DemoProvider, useDemoContext } from "./demo/DemoContext";
+import DemoStandbyWorkers from "./demo/DemoStandbyWorkers";
+import DemoStandbyWorkerDetail from "./demo/DemoStandbyWorkerDetail";
+import DemoAgencyLiveSnapshot from "./demo/DemoAgencyLiveSnapshot";
+import { StandbyWorker } from "./demo/standbyWorkersData";
 
 type ViewMode = "labour-user" | "agency";
 type DemoState = "intro" | "login" | "demo";
@@ -35,13 +40,17 @@ interface SlideDemoProps {
   onDemoStateChange?: (isInDemo: boolean) => void;
 }
 
-const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
+const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   const [demoState, setDemoState] = useState<DemoState>("intro");
   const [showPassword, setShowPassword] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>("labour-user");
   const [activeLabourView, setActiveLabourView] = useState("snapshot");
   const [activeAgencyView, setActiveAgencyView] = useState("dashboard");
   const [selectedWorker, setSelectedWorker] = useState<AgencyWorker | null>(null);
+  const [selectedStandbyWorker, setSelectedStandbyWorker] = useState<StandbyWorker | null>(null);
+  const { notifications } = useDemoContext();
+  
+  const unreadCount = notifications.filter(n => !n.read && (n.targetView === viewMode || n.targetView === "both")).length;
 
   const handleLaunchDemo = () => {
     setDemoState("login");
@@ -57,6 +66,7 @@ const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
     setActiveLabourView("snapshot");
     setActiveAgencyView("dashboard");
     setSelectedWorker(null);
+    setSelectedStandbyWorker(null);
     onDemoStateChange?.(false);
   };
 
@@ -75,8 +85,22 @@ const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
     if (view !== "worker-detail") {
       setSelectedWorker(null);
     }
+    if (view !== "standby-detail" && view !== "live-detail") {
+      setSelectedStandbyWorker(null);
+    }
   };
 
+  const handleSelectStandbyWorker = (worker: StandbyWorker) => {
+    setSelectedStandbyWorker(worker);
+    setActiveAgencyView(worker.status === "live" ? "live-detail" : "standby-detail");
+  };
+ 
+  const handleBackToStandby = () => {
+    const wasLive = selectedStandbyWorker?.status === "live";
+    setSelectedStandbyWorker(null);
+    setActiveAgencyView(wasLive ? "live-workers" : "standby");
+  };
+ 
   const processSteps = [
     "Agencies operate through a client-specific front end",
     "Worker data, shifts, and exceptions are handled there",
@@ -297,6 +321,8 @@ const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
     switch (activeAgencyView) {
       case "dashboard":
         return <DemoAgencyDashboard />;
+      case "live-snapshot":
+        return <DemoAgencyLiveSnapshot />;
       case "allocations":
         return <DemoAgencyAllocations />;
       case "workers":
@@ -306,6 +332,22 @@ const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
           <DemoAgencyWorkerDetail worker={selectedWorker} onBack={handleBackToWorkers} />
         ) : (
           <DemoAgencyWorkers onSelectWorker={handleSelectWorker} />
+        );
+      case "standby":
+        return <DemoStandbyWorkers onSelectWorker={handleSelectStandbyWorker} showLive={false} />;
+      case "standby-detail":
+        return selectedStandbyWorker ? (
+          <DemoStandbyWorkerDetail worker={selectedStandbyWorker} onBack={handleBackToStandby} />
+        ) : (
+          <DemoStandbyWorkers onSelectWorker={handleSelectStandbyWorker} showLive={false} />
+        );
+      case "live-workers":
+        return <DemoStandbyWorkers onSelectWorker={handleSelectStandbyWorker} showLive={true} />;
+      case "live-detail":
+        return selectedStandbyWorker ? (
+          <DemoStandbyWorkerDetail worker={selectedStandbyWorker} onBack={handleBackToStandby} />
+        ) : (
+          <DemoStandbyWorkers onSelectWorker={handleSelectStandbyWorker} showLive={true} />
         );
       case "deployments":
         return <DemoAgencyDeployments />;
@@ -333,6 +375,14 @@ const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
             <ArrowLeft className="w-4 h-4" />
             Back to Slides
           </Button>
+          
+          {/* Notifications indicator */}
+          {unreadCount > 0 && (
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/30 rounded-lg">
+              <Bell className="w-4 h-4 text-primary" />
+              <span className="text-xs font-medium text-primary">{unreadCount} new</span>
+            </div>
+          )}
         </div>
         
         {/* View Mode Dropdown */}
@@ -390,4 +440,12 @@ const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
   );
 };
 
+const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
+  return (
+    <DemoProvider>
+      <SlideDemoContent onDemoStateChange={onDemoStateChange} />
+    </DemoProvider>
+  );
+};
+ 
 export default SlideDemo;

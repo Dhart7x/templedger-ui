@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Plus, CheckCircle, Clock, AlertTriangle, Users, Calendar, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import HeadcountDetailModal from "./HeadcountDetailModal";
 
 interface HeadcountRequest {
   id: string;
@@ -98,6 +99,8 @@ const requests: HeadcountRequest[] = [
 
 const DemoHeadcountRequests = () => {
   const [showNewRequest, setShowNewRequest] = useState(false);
+  const [selectedRequest, setSelectedRequest] = useState<HeadcountRequest | null>(null);
+  const [showDetailModal, setShowDetailModal] = useState(false);
 
   const statusConfig = {
     fulfilled: { icon: CheckCircle, color: "text-green-500", bg: "bg-green-500/10", label: "Fulfilled" },
@@ -230,7 +233,11 @@ const DemoHeadcountRequests = () => {
           return (
             <div
               key={request.id}
-              className="bg-card border border-border rounded-lg p-4 hover:border-primary/30 transition-colors"
+              onClick={() => {
+                setSelectedRequest(request);
+                setShowDetailModal(true);
+              }}
+              className="bg-card border border-border rounded-lg p-4 hover:border-primary/30 transition-colors cursor-pointer"
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
@@ -238,7 +245,7 @@ const DemoHeadcountRequests = () => {
                     <StatusIcon className={`w-5 h-5 ${config.color}`} />
                   </div>
                   <div>
-                    <h3 className="font-semibold">{request.department}</h3>
+                    <h3 className="font-semibold">{request.department} <span className="text-xs text-primary ml-1">View workers →</span></h3>
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <Building2 className="w-3 h-3" />
                       <span>{request.site}</span>
@@ -295,6 +302,16 @@ const DemoHeadcountRequests = () => {
           );
         })}
       </div>
+      
+      {/* Headcount Detail Modal */}
+      <HeadcountDetailModal
+        isOpen={showDetailModal}
+        onClose={() => {
+          setShowDetailModal(false);
+          setSelectedRequest(null);
+        }}
+        request={selectedRequest}
+      />
     </div>
   );
 };
