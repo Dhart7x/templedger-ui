@@ -337,8 +337,18 @@ const SlideAttrition = () => {
         <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-12">
           {/* Left side - costs */}
           <div className="flex-1">
+            {/* Intro statement */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-base md:text-lg lg:text-xl text-foreground leading-relaxed mb-6 md:mb-8"
+            >
+              Every departure creates operational cost and reputational damage.
+            </motion.p>
+
             {/* Cost points */}
-            <div className="space-y-3 md:space-y-4 mb-6">
+            <div className="space-y-3 md:space-y-4">
               {costs.map((item, index) => (
                 <motion.div
                   key={index}
@@ -354,16 +364,6 @@ const SlideAttrition = () => {
                 </motion.div>
               ))}
             </div>
-
-            {/* Closing statement */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.9 }}
-              className="text-sm md:text-base text-muted-foreground leading-relaxed"
-            >
-              Every departure creates operational cost and reputational damage.
-            </motion.p>
           </div>
 
           {/* Right side - Interactive phone */}
