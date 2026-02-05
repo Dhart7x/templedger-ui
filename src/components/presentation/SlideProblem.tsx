@@ -97,7 +97,7 @@ const SlideProblem = () => {
       </div>
 
       {/* Questions area - full canvas for scattered positioning */}
-      <div className="absolute inset-0 pt-32 md:pt-40 pb-20 overflow-hidden pointer-events-none">
+      <div className="absolute inset-x-0 top-28 md:top-36 lg:top-40 bottom-20 overflow-hidden pointer-events-none">
         <AnimatePresence mode="wait">
           {phase === "questions" && questionVisible && currentQuestionIndex >= 0 && currentQuestionIndex < questions.length && (
             <motion.p
