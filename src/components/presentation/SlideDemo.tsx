@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Play, ChevronDown, ArrowLeft, Shield, Eye, EyeOff, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Slide from "./Slide";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -112,38 +113,48 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   // Intro slide - content + Demo button
   if (demoState === "intro") {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center bg-background relative overflow-hidden px-6">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-        
+      <Slide className="relative md:justify-start md:pt-16">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="relative z-10 max-w-3xl w-full flex flex-col items-center"
+          className="max-w-3xl mx-auto w-full"
         >
-          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold text-foreground text-center mb-10 md:mb-14">
+          {/* Title */}
+          <motion.h2
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-3"
+          >
             How Orchestration Happens
-          </h2>
+          </motion.h2>
 
-          <div className="space-y-3 md:space-y-4 mb-12 md:mb-16 w-full">
+          {/* Spacer to match slide 4 */}
+          <div className="mb-16 md:mb-20" />
+
+          {/* Points */}
+          <div className="space-y-4 md:space-y-5 mb-16 md:mb-20">
             {orchestrationPoints.map((point, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -15 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 + index * 0.1 }}
-                className="flex items-start gap-3"
+                transition={{ duration: 0.4, delay: 0.3 + index * 0.12 }}
+                className="flex items-start gap-3 md:gap-4"
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 flex-shrink-0" />
-                <p className="text-sm md:text-base lg:text-lg text-foreground">{point}</p>
+                <p className="text-base md:text-lg lg:text-xl text-foreground leading-relaxed">{point}</p>
               </motion.div>
             ))}
           </div>
 
+          {/* Demo Button - centered at bottom */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.6 }}
+            transition={{ duration: 0.4, delay: 0.9 }}
+            className="flex justify-center"
           >
             <Button
               size="lg"
@@ -155,7 +166,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
             </Button>
           </motion.div>
         </motion.div>
-      </div>
+      </Slide>
     );
   }
 
