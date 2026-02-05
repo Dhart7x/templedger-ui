@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import Slide from "./Slide";
 
 const points = [
-  "Agencies and labour users operate in completely different systems.",
-  "Worker data and agency actions live inside agency systems — not shared.",
-  "Agencies use their systems to serve many clients.",
-  "Those systems are not designed to serve any single labour user.",
+  "Agencies and labour users operate in completely different platforms.",
+  "Worker data and agency actions live inside their own environment — not shared.",
+  "Agencies have one CRM to serve all clients.",
+  "Systems were designed with the agency in mind, not you.",
 ];
 
 const SlideWhyThisHappens = () => {
@@ -56,6 +56,16 @@ const SlideWhyThisHappens = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Bottom line */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 1.1 }}
+          className="text-center text-lg md:text-xl lg:text-2xl font-semibold text-foreground mt-10 md:mt-14"
+        >
+          The result? Chaos.
+        </motion.p>
       </motion.div>
     </Slide>
   );
