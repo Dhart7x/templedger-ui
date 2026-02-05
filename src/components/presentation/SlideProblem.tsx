@@ -2,18 +2,18 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Slide from "./Slide";
 
-const title = "Managing agencies is a nightmare.";
+const title = "Here's the problem....";
 
 const questions = [
-  { text: "How many no-shows do we have today?", x: "8%", y: "20%" },
-  { text: "Was that temp even on site?", x: "55%", y: "12%" },
-  { text: "Why does this invoice not match the hours?", x: "15%", y: "42%" },
-  { text: "What's this pay query?", x: "58%", y: "30%" },
+  { text: "How many no-shows do we have today?", x: "8%", y: "25%" },
+  { text: "Was that temp even on site?", x: "55%", y: "22%" },
+  { text: "Why does this invoice not match the hours?", x: "15%", y: "45%" },
+  { text: "What's this pay query?", x: "58%", y: "35%" },
   { text: "How long until the replacement arrives?", x: "5%", y: "62%" },
   { text: "Will my agencies pass this audit?", x: "50%", y: "52%" },
   { text: "Are my departments adequately staffed right now?", x: "12%", y: "78%" },
   { text: "What's our attrition percentage?", x: "52%", y: "72%" },
-  { text: "Which agency is best suited to fill these bookings?", x: "20%", y: "28%" },
+  { text: "Which agency is best suited to fill these bookings?", x: "20%", y: "32%" },
   { text: "Who's going to fill this last-minute requirement fastest?", x: "42%", y: "48%" },
   { text: "When will I get the hours to approve?", x: "28%", y: "68%" },
 ];
