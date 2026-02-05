@@ -14,7 +14,7 @@ import SlideReactive from "@/components/presentation/SlideReactive";
 import SlideAdoption from "@/components/presentation/SlideAdoption";
 import SlideClosing from "@/components/presentation/SlideClosing";
 
-const DEMO_SLIDE_INDEX = 6;
+const DEMO_SLIDE_INDEX = 5;
 
 const slides = [
   { id: 0, component: SlideHero },

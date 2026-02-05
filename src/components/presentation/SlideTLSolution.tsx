@@ -10,12 +10,6 @@ const ledgerSteps = [
   "Invoicing",
 ];
 
-const outcomes = [
-  "Fewer issues",
-  "Less admin",
-  "Less agency management",
-];
-
 const SlideTLSolution = () => {
   return (
     <Slide className="relative overflow-hidden">

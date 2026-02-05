@@ -183,20 +183,9 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-            className="text-center mb-4 md:mb-6"
-          >
-            <p className="text-sm md:text-lg font-bold trust-gradient-text">
-              Execution is visible as it happens.
-            </p>
-          </motion.div>
-
-          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.8 }}
+            transition={{ duration: 0.4, delay: 0.7 }}
             className="flex justify-center"
           >
             <Button
