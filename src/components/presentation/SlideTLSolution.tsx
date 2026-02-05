@@ -10,12 +10,6 @@ const ledgerSteps = [
   "Invoicing",
 ];
 
-const outcomes = [
-  "Fewer issues",
-  "Less admin",
-  "Less agency management",
-];
-
 const SlideTLSolution = () => {
   return (
     <Slide className="relative overflow-hidden">
@@ -88,27 +82,11 @@ const SlideTLSolution = () => {
             </p>
           </div>
           <div className="flex items-start gap-2 p-2 md:p-4">
-            <CheckCircle className="w-3.5 h-3.5 md:w-6 md:h-6 text-primary mt-0.5 flex-shrink-0" />
-            <p className="text-[11px] md:text-base lg:text-lg text-foreground">
-              Because execution is enforced, reporting is real-time and objective.
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Result callout */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
-          className="flex justify-center"
-        >
-          <div className="inline-flex flex-wrap justify-center gap-2 md:gap-5 px-3 py-2 md:px-8 md:py-5 rounded-lg bg-primary/10 border border-primary/30">
-            {outcomes.map((outcome, index) => (
-              <span key={index} className="text-[10px] md:text-base lg:text-lg font-semibold text-foreground">
-                {outcome}{index < outcomes.length - 1 && <span className="text-muted-foreground ml-2 md:ml-5">•</span>}
-              </span>
-            ))}
-          </div>
+          <CheckCircle className="w-3.5 h-3.5 md:w-6 md:h-6 text-primary mt-0.5 flex-shrink-0" />
+          <p className="text-[11px] md:text-base lg:text-lg text-foreground">
+            Because execution is enforced, failures surface immediately — not after payroll or billing.
+          </p>
+        </div>
         </motion.div>
       </div>
     </Slide>
