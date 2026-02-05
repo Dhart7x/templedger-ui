@@ -37,8 +37,26 @@
  
    // Live sync indicator
    lastSyncTime: string;
+
+   // Exception resolutions (agency -> labour user)
+   exceptionResolutions: Record<string, ExceptionResolution>;
+   resolveException: (resolution: ExceptionResolution) => void;
  }
  
+ export interface ExceptionResolution {
+   exceptionId: string;
+   workerId: string;
+   workerName: string;
+   department: string;
+   resolutionType: "on-the-way" | "replaced";
+   etaMinutes?: number;
+   replacementWorkerId?: string;
+   replacementWorkerName?: string;
+   replacementEtaMinutes?: number;
+   timestamp: string;
+   acknowledged: boolean;
+ }
+
  const DemoContext = createContext<SharedLedgerState | null>(null);
  
  export const useDemoContext = () => {
@@ -54,6 +72,33 @@
    const [workerActions, setWorkerActions] = useState<WorkerAction[]>([]);
    const [workerStatuses, setWorkerStatuses] = useState<Record<string, { status: string; executionStatus: string; lastUpdated: string }>>({});
    const [lastSyncTime, setLastSyncTime] = useState(new Date().toISOString());
+   const [exceptionResolutions, setExceptionResolutions] = useState<Record<string, ExceptionResolution>>({});
+
+   const resolveException = (resolution: ExceptionResolution) => {
+     const fullResolution: ExceptionResolution = {
+       ...resolution,
+       timestamp: new Date().toISOString(),
+       acknowledged: false,
+     };
+     setExceptionResolutions((prev) => ({
+       ...prev,
+       [resolution.exceptionId]: fullResolution,
+     }));
+     
+     // Add notification for labour user
+     const message = resolution.resolutionType === "on-the-way"
+       ? `${resolution.workerName} is on the way (ETA: ${resolution.etaMinutes} mins)`
+       : `${resolution.workerName} replaced by ${resolution.replacementWorkerName} (ETA: ${resolution.replacementEtaMinutes} mins)`;
+     
+     addNotification({
+       type: "status-change",
+       message,
+       read: false,
+       targetView: "labour-user",
+     });
+     
+     setLastSyncTime(new Date().toISOString());
+   };
  
    const addNotification = (notification: Omit<LedgerNotification, "id" | "timestamp">) => {
      const newNotification: LedgerNotification = {
@@ -119,6 +164,8 @@
          workerStatuses,
          updateWorkerStatus,
          lastSyncTime,
+         exceptionResolutions,
+         resolveException,
        }}
      >
        {children}
