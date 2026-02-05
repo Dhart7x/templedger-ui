@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { MapPin, Clock, AlertTriangle, CheckCircle, Users, Filter } from "lucide-react";
+import WorkerActionModal from "./WorkerActionModal";
+import { DemoProvider, useDemoContext } from "./DemoContext";
 
 interface Worker {
   id: string;
@@ -34,6 +36,8 @@ const departmentSummary = [
 const DemoLiveSnapshot = () => {
   const [siteFilter, setSiteFilter] = useState<string>("all");
   const [departmentFilter, setDepartmentFilter] = useState<string>("all");
+  const [selectedWorker, setSelectedWorker] = useState<Worker | null>(null);
+  const [showActionModal, setShowActionModal] = useState(false);
 
   const sites = [...new Set(workers.map(w => w.site))];
   const departments = [...new Set(workers.map(w => w.department))];
@@ -53,11 +57,26 @@ const DemoLiveSnapshot = () => {
   };
 
   const issues = [
-    { type: "no-show", text: "James Wilson (Loading) - No-show at Birmingham DC", urgent: true },
-    { type: "late", text: "Tomasz Nowak (Loading) - 45 min late at Heathrow DC", urgent: false },
-    { type: "headcount", text: "Loading department 2 workers short", urgent: true },
+    { type: "no-show", text: "James Wilson (Loading) - No-show at Birmingham DC", urgent: true, workerId: "7", workerName: "James Wilson", department: "Loading", status: "blocked", executionStatus: "blocked" },
+    { type: "late", text: "Tomasz Nowak (Loading) - 45 min late at Heathrow DC", urgent: false, workerId: "5", workerName: "Tomasz Nowak", department: "Loading", status: "active", executionStatus: "at-risk" },
+    { type: "headcount", text: "Loading department 2 workers short", urgent: true, workerId: "", workerName: "", department: "", status: "", executionStatus: "" },
   ];
 
+  const handleIssueClick = (issue: typeof issues[0]) => {
+    if (issue.workerId) {
+      setSelectedWorker({
+        id: issue.workerId,
+        name: issue.workerName,
+        department: issue.department,
+        agency: "Staffline",
+        site: "Heathrow DC",
+        status: issue.status as "on-site" | "late" | "no-show" | "overtime",
+        shift: "Morning"
+      });
+      setShowActionModal(true);
+    }
+  };
+ 
   return (
     <div className="p-6">
       {/* Header with filters */}
@@ -158,16 +177,26 @@ const DemoLiveSnapshot = () => {
           <h3 className="text-sm font-semibold mb-3">Requires Attention</h3>
           <div className="space-y-2">
             {issues.map((issue, idx) => (
-              <div key={idx} className={`border rounded-lg p-3 ${
-                issue.urgent ? "bg-destructive/5 border-destructive/20" : "bg-card border-border"
-              }`}>
+              <button
+                key={idx}
+                onClick={() => handleIssueClick(issue)}
+                disabled={!issue.workerId}
+                className={`w-full text-left border rounded-lg p-3 transition-colors ${
+                  issue.urgent ? "bg-destructive/5 border-destructive/20" : "bg-card border-border"
+                } ${issue.workerId ? "hover:border-primary/50 cursor-pointer" : ""}`}
+              >
                 <div className="flex items-start gap-2">
                   <AlertTriangle className={`w-4 h-4 mt-0.5 shrink-0 ${
                     issue.urgent ? "text-destructive" : "text-amber-500"
                   }`} />
-                  <p className="text-sm">{issue.text}</p>
+                  <div>
+                    <p className="text-sm">{issue.text}</p>
+                    {issue.workerId && (
+                      <p className="text-xs text-primary mt-1">Click to take action →</p>
+                    )}
+                  </div>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -196,6 +225,24 @@ const DemoLiveSnapshot = () => {
           </div>
         </div>
       </div>
+      
+      {/* Worker Action Modal */}
+      {selectedWorker && (
+        <WorkerActionModal
+          isOpen={showActionModal}
+          onClose={() => {
+            setShowActionModal(false);
+            setSelectedWorker(null);
+          }}
+          worker={{
+            id: selectedWorker.id,
+            name: selectedWorker.name,
+            department: selectedWorker.department,
+            status: selectedWorker.status,
+            executionStatus: selectedWorker.status === "no-show" ? "blocked" : selectedWorker.status === "late" ? "at-risk" : "on-track"
+          }}
+        />
+      )}
     </div>
   );
 };
