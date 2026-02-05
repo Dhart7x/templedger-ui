@@ -67,7 +67,7 @@ const SlideTLSolution = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="space-y-1.5 md:space-y-5 lg:space-y-6 max-w-3xl mx-auto mb-4 md:mb-12 lg:mb-16"
+        className="space-y-1.5 md:space-y-5 lg:space-y-6 max-w-3xl mx-auto"
         >
           <div className="flex items-start gap-2 p-2 md:p-4">
             <CheckCircle className="w-3.5 h-3.5 md:w-6 md:h-6 text-primary mt-0.5 flex-shrink-0" />
@@ -81,12 +81,6 @@ const SlideTLSolution = () => {
               Failures are captured as they occur and resolved upstream — not after payroll or billing.
             </p>
           </div>
-          <div className="flex items-start gap-2 p-2 md:p-4">
-          <CheckCircle className="w-3.5 h-3.5 md:w-6 md:h-6 text-primary mt-0.5 flex-shrink-0" />
-          <p className="text-[11px] md:text-base lg:text-lg text-foreground">
-            Because execution is enforced, failures surface immediately — not after payroll or billing.
-          </p>
-        </div>
         </motion.div>
       </div>
     </Slide>
