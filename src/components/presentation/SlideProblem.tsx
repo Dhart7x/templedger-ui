@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Slide from "./Slide";
 
-const title = "Here's the problem....";
+const title = "Managing agencies is a nightmare.";
 
 const questions = [
   { text: "How many no-shows do we have today?", x: "8%", y: "25%" },
