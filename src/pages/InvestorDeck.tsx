@@ -1,51 +1,42 @@
-import { useState, useCallback, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Shield, Home } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+ import { useState, useCallback, useEffect } from "react";
+ import { motion, AnimatePresence } from "framer-motion";
+ import { ChevronLeft, ChevronRight, Shield, Home } from "lucide-react";
+ import { useNavigate } from "react-router-dom";
+ 
+ import SlideIProblemNew from "@/components/investor/SlideIProblemNew";
+ import SlideIRootCauseNew from "@/components/investor/SlideIRootCauseNew";
+ import SlideISolutionNew from "@/components/investor/SlideISolutionNew";
+ import SlideIHowItWorks from "@/components/investor/SlideIHowItWorks";
+ import SlideITeamNew from "@/components/investor/SlideITeamNew";
+ import SlideITractionNew from "@/components/investor/SlideITractionNew";
+ import SlideIMarketNew from "@/components/investor/SlideIMarketNew";
+ import SlideIGTMNew from "@/components/investor/SlideIGTMNew";
+ import SlideIAskNew from "@/components/investor/SlideIAskNew";
+ 
+ const DEMO_SLIDE_INDEX = 3;
+ 
+ const slides = [
+   { id: 0, component: SlideIProblemNew },
+   { id: 1, component: SlideIRootCauseNew },
+   { id: 2, component: SlideISolutionNew },
+   { id: 3, component: SlideIHowItWorks, isDemo: true },
+   { id: 4, component: SlideITeamNew },
+   { id: 5, component: SlideITractionNew },
+   { id: 6, component: SlideIMarketNew },
+   { id: 7, component: SlideIGTMNew },
+   { id: 8, component: SlideIAskNew },
+ ];
 
-import SlideTitle from "@/components/investor/SlideTitle";
-import SlideIProblem from "@/components/investor/SlideIProblem";
-import SlideIRootCause from "@/components/investor/SlideIRootCause";
-import SlideIInsight from "@/components/investor/SlideIInsight";
-import SlideISolution from "@/components/investor/SlideISolution";
-import SlideILedger from "@/components/investor/SlideILedger";
-import SlideITimeAttendance from "@/components/investor/SlideITimeAttendance";
-import SlideIPerformance from "@/components/investor/SlideIPerformance";
-import SlideIGTM from "@/components/investor/SlideIGTM";
-import SlideIWhyNow from "@/components/investor/SlideIWhyNow";
-import SlideIMarket from "@/components/investor/SlideIMarket";
-import SlideIBusinessModel from "@/components/investor/SlideIBusinessModel";
-import SlideICompetition from "@/components/investor/SlideICompetition";
-import SlideITeam from "@/components/investor/SlideITeam";
-import SlideIAsk from "@/components/investor/SlideIAsk";
-import SlideIClosing from "@/components/investor/SlideIClosing";
-
-const slides = [
-  { id: 0, component: SlideTitle },
-  { id: 1, component: SlideIProblem },
-  { id: 2, component: SlideIRootCause },
-  { id: 3, component: SlideIInsight },
-  { id: 4, component: SlideISolution },
-  { id: 5, component: SlideILedger },
-  { id: 6, component: SlideITimeAttendance },
-  { id: 7, component: SlideIPerformance },
-  { id: 8, component: SlideIGTM },
-  { id: 9, component: SlideIWhyNow },
-  { id: 10, component: SlideIMarket },
-  { id: 11, component: SlideIBusinessModel },
-  { id: 12, component: SlideICompetition },
-  { id: 13, component: SlideITeam },
-  { id: 14, component: SlideIAsk },
-  { id: 15, component: SlideIClosing },
-];
-
-const InvestorDeck = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [direction, setDirection] = useState(0);
-  const navigate = useNavigate();
-
-  const safeCurrentSlide = Math.min(currentSlide, slides.length - 1);
-  const CurrentSlideComponent = slides[safeCurrentSlide]?.component || slides[0].component;
+ const InvestorDeck = () => {
+   const [currentSlide, setCurrentSlide] = useState(0);
+   const [direction, setDirection] = useState(0);
+   const [isInDemo, setIsInDemo] = useState(false);
+   const navigate = useNavigate();
+ 
+   const safeCurrentSlide = Math.min(currentSlide, slides.length - 1);
+   const CurrentSlideComponent = slides[safeCurrentSlide]?.component || slides[0].component;
+   const isOnDemoSlide = safeCurrentSlide === DEMO_SLIDE_INDEX;
+   const hideNavigation = isOnDemoSlide && isInDemo;
 
   const nextSlide = useCallback(() => {
     if (currentSlide < slides.length - 1) {
@@ -95,8 +86,9 @@ const InvestorDeck = () => {
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-background relative">
-      {/* Header */}
-      <header className="absolute top-0 left-0 right-0 z-20 px-6 py-4 flex items-center justify-between">
+       {/* Header - hidden when in demo */}
+       {!hideNavigation && (
+       <header className="absolute top-0 left-0 right-0 z-20 px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <button
             onClick={() => navigate("/")}
@@ -114,7 +106,8 @@ const InvestorDeck = () => {
         <div className="text-xs text-muted-foreground">
           {safeCurrentSlide + 1} / {slides.length}
         </div>
-      </header>
+       </header>
+       )}
 
       {/* Main content */}
       <main className="h-full w-full relative overflow-hidden">
@@ -129,28 +122,37 @@ const InvestorDeck = () => {
             transition={{ type: "tween", duration: 0.4, ease: "easeInOut" }}
             className="absolute inset-0"
           >
-            <CurrentSlideComponent />
+             {isOnDemoSlide ? (
+               <SlideIHowItWorks onDemoStateChange={setIsInDemo} />
+             ) : (
+               <CurrentSlideComponent />
+             )}
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation arrows */}
-        <button
+         {/* Navigation arrows - hidden when in demo */}
+         {!hideNavigation && (
+         <>
+         <button
           onClick={prevSlide}
           disabled={currentSlide === 0}
           className="absolute left-4 md:left-6 bottom-16 md:bottom-auto md:top-1/2 md:-translate-y-1/2 w-10 h-10 md:w-14 md:h-14 rounded-full bg-card/90 backdrop-blur border border-border hover:border-primary/50 hover:bg-card flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all z-10 group"
         >
           <ChevronLeft className="w-5 h-5 md:w-7 md:h-7 text-muted-foreground group-hover:text-foreground transition-colors" />
-        </button>
-        <button
+         </button>
+         <button
           onClick={nextSlide}
           disabled={currentSlide === slides.length - 1}
           className="absolute right-4 md:right-6 bottom-16 md:bottom-auto md:top-1/2 md:-translate-y-1/2 w-10 h-10 md:w-14 md:h-14 rounded-full bg-card/90 backdrop-blur border border-border hover:border-primary/50 hover:bg-card flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all z-10 group"
         >
           <ChevronRight className="w-5 h-5 md:w-7 md:h-7 text-muted-foreground group-hover:text-foreground transition-colors" />
-        </button>
-
-        {/* Progress dots */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5">
+         </button>
+         </>
+         )}
+ 
+         {/* Progress dots - hidden when in demo */}
+         {!hideNavigation && (
+         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5">
           {slides.map((_, index) => (
             <button
               key={index}
@@ -165,7 +167,8 @@ const InvestorDeck = () => {
               }`}
             />
           ))}
-        </div>
+         </div>
+         )}
       </main>
     </div>
   );

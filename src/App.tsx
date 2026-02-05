@@ -7,7 +7,6 @@
  import Website from "./pages/Website";
  import SalesDeck from "./pages/SalesDeck";
  import InvestorDeck from "./pages/InvestorDeck";
- import InvestorDeckPlaceholder from "./pages/InvestorDeckPlaceholder";
  import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,8 +21,7 @@ const App = () => (
            <Route path="/" element={<Landing />} />
           <Route path="/website" element={<Website />} />
           <Route path="/sales-deck" element={<SalesDeck />} />
-           <Route path="/investor-deck" element={<InvestorDeckPlaceholder />} />
-           <Route path="/investor-deck-full" element={<InvestorDeck />} />
+           <Route path="/investor-deck" element={<InvestorDeck />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
