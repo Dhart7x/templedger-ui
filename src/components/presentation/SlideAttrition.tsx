@@ -317,6 +317,7 @@ const InteractivePhone = () => {
           </motion.div>
         ) : (
           <>
+            {activeTab === "home" && <HomeView onNavigate={handleNavigate} />}
             {activeTab === "time" && <TimeView />}
             {activeTab === "shifts" && <ShiftsView />}
             {activeTab === "query" && <QueryView onSubmit={handleQuerySubmit} />}
