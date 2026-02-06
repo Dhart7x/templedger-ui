@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Play, ChevronDown, ArrowLeft, Shield, Eye, EyeOff, Bell } from "lucide-react";
+import { Play, ChevronDown, ArrowLeft, Shield, Eye, EyeOff, Bell, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Slide from "./Slide";
 import { Input } from "@/components/ui/input";
@@ -16,7 +16,6 @@ import DemoLiveSnapshot from "./demo/DemoLiveSnapshot";
 import DemoDepartments from "./demo/DemoDepartments";
 import DemoAgenciesPerformance from "./demo/DemoAgenciesPerformance";
 import DemoPayrollBilling from "./demo/DemoPayrollBilling";
-import DemoHeadcountRequests from "./demo/DemoHeadcountRequests";
 import DemoExecutionLedger from "./demo/DemoExecutionLedger";
 import DemoShiftCoverage from "./demo/DemoShiftCoverage";
 import DemoAgencySidebar from "./demo/DemoAgencySidebar";
@@ -31,7 +30,6 @@ import { AgencyWorker } from "./demo/agencyDemoData";
 import { DemoProvider, useDemoContext } from "./demo/DemoContext";
 import DemoStandbyWorkers from "./demo/DemoStandbyWorkers";
 import DemoStandbyWorkerDetail from "./demo/DemoStandbyWorkerDetail";
-import DemoAgencyLiveSnapshot from "./demo/DemoAgencyLiveSnapshot";
 import { StandbyWorker } from "./demo/standbyWorkersData";
 
 type ViewMode = "labour-user" | "agency";
@@ -267,8 +265,6 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
         return <DemoExecutionLedger />;
       case "payroll":
         return <DemoPayrollBilling />;
-      case "headcount":
-        return <DemoHeadcountRequests />;
       default:
         return <DemoLiveSnapshot />;
     }
@@ -278,8 +274,14 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
     switch (activeAgencyView) {
       case "dashboard":
         return <DemoAgencyDashboard />;
-      case "live-snapshot":
-        return <DemoAgencyLiveSnapshot />;
+      case "live-workers":
+        return <DemoStandbyWorkers onSelectWorker={handleSelectStandbyWorker} showLive={true} />;
+      case "live-detail":
+        return selectedStandbyWorker ? (
+          <DemoStandbyWorkerDetail worker={selectedStandbyWorker} onBack={handleBackToStandby} />
+        ) : (
+          <DemoStandbyWorkers onSelectWorker={handleSelectStandbyWorker} showLive={true} />
+        );
       case "allocations":
         return <DemoAgencyAllocations />;
       case "workers":
@@ -298,20 +300,14 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
         ) : (
           <DemoStandbyWorkers onSelectWorker={handleSelectStandbyWorker} showLive={false} />
         );
-      case "live-workers":
-        return <DemoStandbyWorkers onSelectWorker={handleSelectStandbyWorker} showLive={true} />;
-      case "live-detail":
-        return selectedStandbyWorker ? (
-          <DemoStandbyWorkerDetail worker={selectedStandbyWorker} onBack={handleBackToStandby} />
-        ) : (
-          <DemoStandbyWorkers onSelectWorker={handleSelectStandbyWorker} showLive={true} />
-        );
       case "deployments":
         return <DemoAgencyDeployments />;
       case "issues":
         return <DemoAgencyIssues />;
       case "documents":
         return <DemoAgencyDocuments />;
+      case "payroll":
+        return <DemoPayrollBilling />;
       default:
         return <DemoAgencyDashboard />;
     }
@@ -319,75 +315,86 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
 
   // Main demo UI
   return (
-    <div className="w-full h-full flex flex-col bg-background">
-      {/* Demo Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/30">
+    <div className="w-full h-full flex flex-col bg-[hsl(222,47%,4%)]">
+      {/* Demo Header - Distinctive design */}
+      <div className="flex items-center justify-between px-4 py-2 border-b border-[hsl(217,33%,12%)] bg-[hsl(222,47%,6%)]">
         <div className="flex items-center gap-3">
           <Button
-            variant="outline"
+            variant="ghost"
             size="sm"
             onClick={handleExitDemo}
-            className="gap-2 bg-card/80 border-border hover:border-primary/50"
+            className="gap-2 text-muted-foreground hover:text-foreground hover:bg-[hsl(217,33%,12%)]"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Slides
+            <span className="hidden md:inline">Exit Demo</span>
           </Button>
+          
+          {/* Sync indicator */}
+          <div className="hidden md:flex items-center gap-2 px-2 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20">
+            <RefreshCw className="w-3 h-3 text-emerald-500" />
+            <span className="text-[10px] font-medium text-emerald-500">Live Sync</span>
+          </div>
           
           {/* Notifications indicator */}
           {unreadCount > 0 && (
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/30 rounded-lg">
-              <Bell className="w-4 h-4 text-primary" />
-              <span className="text-xs font-medium text-primary">{unreadCount} new</span>
+            <div className="flex items-center gap-1.5 px-2 py-1 bg-primary/10 border border-primary/20 rounded-md">
+              <Bell className="w-3 h-3 text-primary" />
+              <span className="text-[10px] font-medium text-primary">{unreadCount}</span>
             </div>
           )}
         </div>
         
-        {/* View Mode Dropdown */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm" className="gap-2 min-w-[160px]">
-              {viewMode === "labour-user" ? "Labour User View" : "Agency View"}
-              <ChevronDown className="w-4 h-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="center" className="bg-card border border-border">
-            <DropdownMenuItem 
-              onClick={() => setViewMode("labour-user")}
-              className={viewMode === "labour-user" ? "bg-primary/10 text-primary" : ""}
-            >
-              Labour User View
-            </DropdownMenuItem>
-            <DropdownMenuItem 
-              onClick={() => setViewMode("agency")}
-              className={viewMode === "agency" ? "bg-primary/10 text-primary" : ""}
-            >
-              Agency View
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-
-        <div className="w-[140px]" />
+        {/* Center - Title */}
+        <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
+          <Shield className="w-4 h-4 text-primary" />
+          <span className="text-sm font-semibold text-foreground">Temp Ledger</span>
+          <span className="text-xs text-muted-foreground hidden md:inline">• Demo Environment</span>
+        </div>
+        
+        {/* View Mode Selector - Tab style */}
+        <div className="flex items-center gap-1 p-1 bg-[hsl(217,33%,10%)] rounded-lg">
+          <button
+            onClick={() => setViewMode("labour-user")}
+            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
+              viewMode === "labour-user"
+                ? "bg-primary text-white shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            Labour User
+          </button>
+          <button
+            onClick={() => setViewMode("agency")}
+            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
+              viewMode === "agency"
+                ? "bg-primary text-white shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            Agency
+          </button>
+        </div>
       </div>
 
       {/* Demo Container */}
       <motion.div
         key={viewMode}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="flex-1 flex overflow-hidden m-4 rounded-lg border border-border shadow-xl"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.2 }}
+        className="flex-1 flex overflow-hidden"
       >
         {viewMode === "labour-user" ? (
           <>
             <DemoSidebar activeView={activeLabourView} onViewChange={setActiveLabourView} />
-            <div className="flex-1 overflow-auto bg-background">
+            <div className="flex-1 overflow-auto bg-[hsl(222,47%,4%)]">
               {renderLabourUserView()}
             </div>
           </>
         ) : (
           <>
             <DemoAgencySidebar activeView={activeAgencyView} onViewChange={handleAgencyViewChange} />
-            <div className="flex-1 overflow-auto bg-background">
+            <div className="flex-1 overflow-auto bg-[hsl(222,47%,4%)]">
               {renderAgencyView()}
             </div>
           </>
