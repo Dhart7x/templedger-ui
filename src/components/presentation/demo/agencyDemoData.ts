@@ -106,6 +106,8 @@ export const agencyStats = {
   criticalIssues: 2,
   atRiskPayroll: 2,
   atRiskBilling: 2,
+  registrationsThisWeek: 8,
+  registrationsThisMonth: 24,
 };
 
 // Allocations given by the Labour User to agencies

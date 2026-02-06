@@ -1,4 +1,4 @@
-import { Users, MapPin, Clock, AlertTriangle, FileWarning, DollarSign } from "lucide-react";
+import { Users, MapPin, Clock, AlertTriangle, FileWarning, DollarSign, UserPlus } from "lucide-react";
 import { agencyStats, agencyDeployments, agencyIssues } from "./agencyDemoData";
 
 const DemoAgencyDashboard = () => {
@@ -14,7 +14,7 @@ const DemoAgencyDashboard = () => {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
         <div className="bg-card border border-border rounded-lg p-3">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center">
@@ -53,6 +53,17 @@ const DemoAgencyDashboard = () => {
             <span className="text-xs text-muted-foreground">Blocked</span>
           </div>
           <div className="text-2xl font-bold text-amber-500">{agencyStats.blocked}</div>
+        </div>
+
+        <div className="bg-card border border-border rounded-lg p-3">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-7 h-7 rounded-md bg-primary/10 flex items-center justify-center">
+              <UserPlus className="w-3.5 h-3.5 text-primary" />
+            </div>
+            <span className="text-xs text-muted-foreground">Registrations</span>
+          </div>
+          <div className="text-2xl font-bold text-primary">{agencyStats.registrationsThisWeek}</div>
+          <div className="text-xs text-muted-foreground">This week</div>
         </div>
       </div>
 
