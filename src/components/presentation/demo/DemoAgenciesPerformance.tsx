@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TrendingUp, TrendingDown, Minus, Users, Calendar } from "lucide-react";
+import { TrendingUp, TrendingDown, Minus, Users, Calendar, UserPlus } from "lucide-react";
 
 interface Agency {
   id: string;
@@ -13,6 +13,7 @@ interface Agency {
     responseTime: { value: string; trend: "up" | "down" | "stable" };
     payrollAccuracy: { value: number; trend: "up" | "down" | "stable" };
     billingAccuracy: { value: number; trend: "up" | "down" | "stable" };
+    registrations: { value: number; trend: "up" | "down" | "stable" };
   };
   activeWorkers: number;
   overallScore: number;
@@ -25,26 +26,27 @@ interface MetricsData {
   lateness: number;
   noShows: number;
   overallScore: number;
+  registrations: number;
 }
  
 const agencyMetricsByRange: Record<string, Record<TimeRange, MetricsData>> = {
   "Staffline": {
-    live: { fulfilment: 94, lateness: 3.2, noShows: 1.8, overallScore: 92 },
-    week: { fulfilment: 93, lateness: 3.5, noShows: 2.1, overallScore: 90 },
-    month: { fulfilment: 91, lateness: 4.0, noShows: 2.5, overallScore: 88 },
-    year: { fulfilment: 89, lateness: 4.2, noShows: 2.8, overallScore: 85 },
+    live: { fulfilment: 94, lateness: 3.2, noShows: 1.8, overallScore: 92, registrations: 3 },
+    week: { fulfilment: 93, lateness: 3.5, noShows: 2.1, overallScore: 90, registrations: 8 },
+    month: { fulfilment: 91, lateness: 4.0, noShows: 2.5, overallScore: 88, registrations: 24 },
+    year: { fulfilment: 89, lateness: 4.2, noShows: 2.8, overallScore: 85, registrations: 156 },
   },
   "Pertemps": {
-    live: { fulfilment: 97, lateness: 2.1, noShows: 0.9, overallScore: 96 },
-    week: { fulfilment: 96, lateness: 2.3, noShows: 1.0, overallScore: 95 },
-    month: { fulfilment: 95, lateness: 2.5, noShows: 1.2, overallScore: 94 },
-    year: { fulfilment: 94, lateness: 2.8, noShows: 1.5, overallScore: 92 },
+    live: { fulfilment: 97, lateness: 2.1, noShows: 0.9, overallScore: 96, registrations: 2 },
+    week: { fulfilment: 96, lateness: 2.3, noShows: 1.0, overallScore: 95, registrations: 6 },
+    month: { fulfilment: 95, lateness: 2.5, noShows: 1.2, overallScore: 94, registrations: 18 },
+    year: { fulfilment: 94, lateness: 2.8, noShows: 1.5, overallScore: 92, registrations: 112 },
   },
   "Blue Arrow": {
-    live: { fulfilment: 88, lateness: 5.4, noShows: 4.2, overallScore: 78 },
-    week: { fulfilment: 85, lateness: 5.8, noShows: 4.5, overallScore: 75 },
-    month: { fulfilment: 82, lateness: 6.2, noShows: 5.0, overallScore: 72 },
-    year: { fulfilment: 80, lateness: 6.5, noShows: 5.5, overallScore: 70 },
+    live: { fulfilment: 88, lateness: 5.4, noShows: 4.2, overallScore: 78, registrations: 1 },
+    week: { fulfilment: 85, lateness: 5.8, noShows: 4.5, overallScore: 75, registrations: 4 },
+    month: { fulfilment: 82, lateness: 6.2, noShows: 5.0, overallScore: 72, registrations: 12 },
+    year: { fulfilment: 80, lateness: 6.5, noShows: 5.5, overallScore: 70, registrations: 78 },
   },
 };
 
@@ -61,6 +63,7 @@ const agencies: Agency[] = [
       responseTime: { value: "15 min", trend: "up" },
       payrollAccuracy: { value: 99.2, trend: "stable" },
       billingAccuracy: { value: 98.8, trend: "up" },
+      registrations: { value: 8, trend: "up" },
     },
     activeWorkers: 45,
     overallScore: 92,
@@ -77,6 +80,7 @@ const agencies: Agency[] = [
       responseTime: { value: "12 min", trend: "stable" },
       payrollAccuracy: { value: 99.8, trend: "up" },
       billingAccuracy: { value: 99.5, trend: "stable" },
+      registrations: { value: 6, trend: "stable" },
     },
     activeWorkers: 32,
     overallScore: 96,
@@ -93,6 +97,7 @@ const agencies: Agency[] = [
       responseTime: { value: "45 min", trend: "down" },
       payrollAccuracy: { value: 97.1, trend: "down" },
       billingAccuracy: { value: 96.5, trend: "stable" },
+      registrations: { value: 4, trend: "down" },
     },
     activeWorkers: 28,
     overallScore: 78,
@@ -187,7 +192,7 @@ const DemoAgenciesPerformance = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-3 md:grid-cols-5 gap-4">
                 {/* Fulfilment */}
                 <div className="bg-muted/30 rounded-lg p-3">
                   <div className="flex items-center justify-between mb-1">
@@ -291,6 +296,18 @@ const DemoAgenciesPerformance = () => {
                   }`}>
                     {agency.metrics.billingAccuracy.value}%
                   </p>
+                </div>
+
+                {/* Registrations */}
+                <div className="bg-muted/30 rounded-lg p-3">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs text-muted-foreground">Registrations</span>
+                    {trendIcon(agency.metrics.registrations.trend)}
+                  </div>
+                  <p className="text-lg font-bold text-primary">
+                    {rangeMetrics.registrations}
+                  </p>
+                  <p className="text-xs text-muted-foreground">This {timeRange === "live" ? "day" : timeRange}</p>
                 </div>
               </div>
             </div>
