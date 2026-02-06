@@ -184,7 +184,7 @@ const ShiftsView = () => {
 const QueryView = ({ onSubmit }: { onSubmit: () => void }) => {
   const [selected, setSelected] = useState<string | null>(null);
 
-  const options = ["Missing hours", "Incorrect rate", "Wrong shift time", "Other"];
+  const options = ["Missing hours", "Incorrect rate", "Wrong shift time", "PPE Request", "Other"];
 
   return (
     <div className="space-y-3">
