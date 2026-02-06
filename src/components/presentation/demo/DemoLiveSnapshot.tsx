@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { MapPin, Clock, AlertTriangle, CheckCircle, Users, Filter } from "lucide-react";
+import { MapPin, Clock, AlertTriangle, CheckCircle, Users, Filter, ArrowRight, RefreshCw } from "lucide-react";
+import { cn } from "@/lib/utils";
 import WorkerActionModal from "./WorkerActionModal";
-import { DemoProvider, useDemoContext } from "./DemoContext";
+import { useDemoContext, ExceptionResolution } from "./DemoContext";
+import { VerificationProgress, StepBadge } from "./VerificationSteps";
 
 interface Worker {
   id: string;
@@ -12,25 +14,26 @@ interface Worker {
   status: "on-site" | "late" | "no-show" | "overtime";
   clockIn?: string;
   shift: string;
+  executionStep: number;
 }
 
 const workers: Worker[] = [
-  { id: "1", name: "John Patel", department: "Warehouse", agency: "Staffline", site: "Heathrow DC", status: "on-site", clockIn: "06:02", shift: "Morning" },
-  { id: "2", name: "Maria Santos", department: "Picking", agency: "Pertemps", site: "Heathrow DC", status: "on-site", clockIn: "06:00", shift: "Morning" },
-  { id: "3", name: "Ahmed Khan", department: "Warehouse", agency: "Blue Arrow", site: "Heathrow DC", status: "overtime", clockIn: "05:58", shift: "Morning" },
-  { id: "4", name: "Lucy Brown", department: "Warehouse", agency: "Staffline", site: "Coventry Hub", status: "on-site", clockIn: "06:01", shift: "Morning" },
-  { id: "5", name: "Tomasz Nowak", department: "Loading", agency: "Staffline", site: "Heathrow DC", status: "late", clockIn: "06:45", shift: "Morning" },
-  { id: "6", name: "Priya Sharma", department: "Quality", agency: "Pertemps", site: "Heathrow DC", status: "on-site", clockIn: "06:00", shift: "Morning" },
-  { id: "7", name: "James Wilson", department: "Loading", agency: "Blue Arrow", site: "Birmingham DC", status: "no-show", shift: "Morning" },
-  { id: "8", name: "Fatima Ali", department: "Packing", agency: "Staffline", site: "Heathrow DC", status: "on-site", clockIn: "06:03", shift: "Morning" },
+  { id: "1", name: "John Patel", department: "Warehouse", agency: "Staffline", site: "Heathrow DC", status: "on-site", clockIn: "06:02", shift: "Morning", executionStep: 6 },
+  { id: "2", name: "Maria Santos", department: "Picking", agency: "Pertemps", site: "Heathrow DC", status: "on-site", clockIn: "06:00", shift: "Morning", executionStep: 6 },
+  { id: "3", name: "Ahmed Khan", department: "Warehouse", agency: "Blue Arrow", site: "Heathrow DC", status: "overtime", clockIn: "05:58", shift: "Morning", executionStep: 7 },
+  { id: "4", name: "Lucy Brown", department: "Warehouse", agency: "Staffline", site: "Coventry Hub", status: "on-site", clockIn: "06:01", shift: "Morning", executionStep: 6 },
+  { id: "5", name: "Tomasz Nowak", department: "Loading", agency: "Staffline", site: "Heathrow DC", status: "late", clockIn: "06:45", shift: "Morning", executionStep: 5 },
+  { id: "6", name: "Priya Sharma", department: "Quality", agency: "Pertemps", site: "Heathrow DC", status: "on-site", clockIn: "06:00", shift: "Morning", executionStep: 6 },
+  { id: "7", name: "James Wilson", department: "Loading", agency: "Blue Arrow", site: "Birmingham DC", status: "no-show", shift: "Morning", executionStep: 4 },
+  { id: "8", name: "Fatima Ali", department: "Packing", agency: "Staffline", site: "Heathrow DC", status: "on-site", clockIn: "06:03", shift: "Morning", executionStep: 6 },
 ];
 
 const departmentSummary = [
-  { name: "Warehouse", required: 25, actual: 23, status: "at-risk" },
-  { name: "Picking", required: 15, actual: 15, status: "on-track" },
-  { name: "Loading", required: 10, actual: 8, status: "failing" },
-  { name: "Packing", required: 12, actual: 12, status: "on-track" },
-  { name: "Quality", required: 5, actual: 5, status: "on-track" },
+  { name: "Warehouse", required: 25, actual: 23, status: "at-risk" as const },
+  { name: "Picking", required: 15, actual: 15, status: "on-track" as const },
+  { name: "Loading", required: 10, actual: 8, status: "failing" as const },
+  { name: "Packing", required: 12, actual: 12, status: "on-track" as const },
+  { name: "Quality", required: 5, actual: 5, status: "on-track" as const },
 ];
 
 const DemoLiveSnapshot = () => {
@@ -38,6 +41,7 @@ const DemoLiveSnapshot = () => {
   const [departmentFilter, setDepartmentFilter] = useState<string>("all");
   const [selectedWorker, setSelectedWorker] = useState<Worker | null>(null);
   const [showActionModal, setShowActionModal] = useState(false);
+  const { exceptionResolutions } = useDemoContext();
 
   const sites = [...new Set(workers.map(w => w.site))];
   const departments = [...new Set(workers.map(w => w.department))];
@@ -57,9 +61,9 @@ const DemoLiveSnapshot = () => {
   };
 
   const issues = [
-    { type: "no-show", text: "James Wilson (Loading) - No-show at Birmingham DC", urgent: true, workerId: "7", workerName: "James Wilson", department: "Loading", status: "blocked", executionStatus: "blocked" },
-    { type: "late", text: "Tomasz Nowak (Loading) - 45 min late at Heathrow DC", urgent: false, workerId: "5", workerName: "Tomasz Nowak", department: "Loading", status: "active", executionStatus: "at-risk" },
-    { type: "headcount", text: "Loading department 2 workers short", urgent: true, workerId: "", workerName: "", department: "", status: "", executionStatus: "" },
+    { id: "iss-1", type: "no-show", text: "James Wilson (Loading)", subtext: "No-show at Birmingham DC", urgent: true, workerId: "7", workerName: "James Wilson", department: "Loading" },
+    { id: "iss-2", type: "late", text: "Tomasz Nowak (Loading)", subtext: "45 min late at Heathrow DC", urgent: false, workerId: "5", workerName: "Tomasz Nowak", department: "Loading" },
+    { id: "iss-3", type: "headcount", text: "Loading Department", subtext: "2 workers short of requirement", urgent: true, workerId: "", workerName: "", department: "Loading" },
   ];
 
   const handleIssueClick = (issue: typeof issues[0]) => {
@@ -68,157 +72,190 @@ const DemoLiveSnapshot = () => {
         id: issue.workerId,
         name: issue.workerName,
         department: issue.department,
-        agency: "Staffline",
-        site: "Heathrow DC",
-        status: issue.status as "on-site" | "late" | "no-show" | "overtime",
-        shift: "Morning"
+        agency: "Blue Arrow",
+        site: "Birmingham DC",
+        status: issue.type as "on-site" | "late" | "no-show" | "overtime",
+        shift: "Morning",
+        executionStep: 4
       });
       setShowActionModal(true);
     }
   };
- 
+
+  const getResolutionStatus = (issueId: string): ExceptionResolution | undefined => {
+    return exceptionResolutions[issueId];
+  };
+  
   return (
-    <div className="p-6">
-      {/* Header with filters */}
+    <div className="p-4 md:p-6 h-full overflow-auto">
+      {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl font-bold">Live Snapshot</h2>
-          <p className="text-sm text-muted-foreground">What's happening right now</p>
+          <h1 className="text-lg md:text-xl font-bold text-foreground">Live Snapshot</h1>
+          <p className="text-xs text-muted-foreground">What's happening right now across all sites</p>
         </div>
         <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-muted-foreground" />
-          <select 
-            value={siteFilter}
-            onChange={(e) => setSiteFilter(e.target.value)}
-            className="text-sm bg-card border border-border rounded px-3 py-1.5"
-          >
-            <option value="all">All Sites</option>
-            {sites.map(site => (
-              <option key={site} value={site}>{site}</option>
-            ))}
-          </select>
-          <select 
-            value={departmentFilter}
-            onChange={(e) => setDepartmentFilter(e.target.value)}
-            className="text-sm bg-card border border-border rounded px-3 py-1.5"
-          >
-            <option value="all">All Departments</option>
-            {departments.map(dept => (
-              <option key={dept} value={dept}>{dept}</option>
-            ))}
-          </select>
+          <button className="p-2 rounded-lg bg-card border border-border hover:border-primary/50 transition-colors">
+            <RefreshCw className="w-4 h-4 text-muted-foreground" />
+          </button>
+          <div className="flex items-center gap-2 text-xs text-muted-foreground px-3 py-2 bg-card border border-border rounded-lg">
+            <Filter className="w-3.5 h-3.5" />
+            <select 
+              value={siteFilter}
+              onChange={(e) => setSiteFilter(e.target.value)}
+              className="bg-transparent border-none text-xs focus:outline-none"
+            >
+              <option value="all">All Sites</option>
+              {sites.map(site => (
+                <option key={site} value={site}>{site}</option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
-      {/* Status cards */}
-      <div className="grid grid-cols-5 gap-3 mb-6">
-        <div className="bg-card border border-border rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-1">
-            <Users className="w-4 h-4 text-muted-foreground" />
-            <span className="text-xs text-muted-foreground">Total</span>
+      {/* Status Overview */}
+      <div className="grid grid-cols-5 gap-2 md:gap-3 mb-6">
+        {[
+          { label: "Total", value: counts.total, icon: Users, color: "text-foreground", bg: "bg-card" },
+          { label: "On Site", value: counts.onSite, icon: CheckCircle, color: "text-emerald-500", bg: "bg-emerald-500/5" },
+          { label: "Late", value: counts.late, icon: Clock, color: "text-amber-500", bg: "bg-amber-500/5" },
+          { label: "No-Show", value: counts.noShow, icon: AlertTriangle, color: "text-destructive", bg: "bg-destructive/5" },
+          { label: "Overtime", value: counts.overtime, icon: Clock, color: "text-primary", bg: "bg-primary/5" },
+        ].map((stat) => (
+          <div key={stat.label} className={cn("rounded-lg p-3 border border-border", stat.bg)}>
+            <div className="flex items-center gap-1.5 mb-1">
+              <stat.icon className={cn("w-3.5 h-3.5", stat.color)} />
+              <span className="text-[10px] text-muted-foreground">{stat.label}</span>
+            </div>
+            <p className={cn("text-xl font-bold", stat.color)}>{stat.value}</p>
           </div>
-          <p className="text-2xl font-bold">{counts.total}</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-1">
-            <CheckCircle className="w-4 h-4 text-green-500" />
-            <span className="text-xs text-muted-foreground">On Site</span>
-          </div>
-          <p className="text-2xl font-bold text-green-500">{counts.onSite}</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-1">
-            <Clock className="w-4 h-4 text-amber-500" />
-            <span className="text-xs text-muted-foreground">Late</span>
-          </div>
-          <p className="text-2xl font-bold text-amber-500">{counts.late}</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-1">
-            <AlertTriangle className="w-4 h-4 text-destructive" />
-            <span className="text-xs text-muted-foreground">No-Show</span>
-          </div>
-          <p className="text-2xl font-bold text-destructive">{counts.noShow}</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-1">
-            <Clock className="w-4 h-4 text-primary" />
-            <span className="text-xs text-muted-foreground">Overtime</span>
-          </div>
-          <p className="text-2xl font-bold text-primary">{counts.overtime}</p>
-        </div>
+        ))}
       </div>
 
-      <div className="grid grid-cols-3 gap-6">
-        {/* Department summary */}
-        <div className="col-span-1">
-          <h3 className="text-sm font-semibold mb-3">Department Status</h3>
-          <div className="space-y-2">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+        {/* Departments Panel */}
+        <div className="bg-card border border-border rounded-lg">
+          <div className="p-3 border-b border-border flex items-center justify-between">
+            <h2 className="text-sm font-semibold">Department Status</h2>
+            <span className="text-[10px] text-muted-foreground">Heathrow DC</span>
+          </div>
+          <div className="divide-y divide-border">
             {departmentSummary.map((dept) => (
-              <div key={dept.name} className="bg-card border border-border rounded-lg p-3 flex items-center justify-between">
+              <div key={dept.name} className="p-3 flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium">{dept.name}</p>
                   <p className="text-xs text-muted-foreground">{dept.actual}/{dept.required} workers</p>
                 </div>
-                <span className={`px-2 py-1 rounded text-xs font-medium ${
-                  dept.status === "on-track" ? "bg-green-500/10 text-green-500" :
-                  dept.status === "at-risk" ? "bg-amber-500/10 text-amber-500" :
-                  "bg-destructive/10 text-destructive"
-                }`}>
-                  {dept.status === "on-track" ? "On Track" : dept.status === "at-risk" ? "At Risk" : "Failing"}
-                </span>
+                <div className="flex items-center gap-2">
+                  <div className="w-16">
+                    <div className="h-1.5 bg-muted rounded-full overflow-hidden">
+                      <div 
+                        className={cn(
+                          "h-full rounded-full",
+                          dept.status === "on-track" && "bg-emerald-500",
+                          dept.status === "at-risk" && "bg-amber-500",
+                          dept.status === "failing" && "bg-destructive"
+                        )}
+                        style={{ width: `${(dept.actual / dept.required) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                  <span className={cn(
+                    "text-[10px] font-medium px-1.5 py-0.5 rounded",
+                    dept.status === "on-track" && "bg-emerald-500/10 text-emerald-500",
+                    dept.status === "at-risk" && "bg-amber-500/10 text-amber-500",
+                    dept.status === "failing" && "bg-destructive/10 text-destructive"
+                  )}>
+                    {dept.status === "on-track" ? "OK" : dept.status === "at-risk" ? "-2" : "-2"}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Issues requiring attention */}
-        <div className="col-span-1">
-          <h3 className="text-sm font-semibold mb-3">Requires Attention</h3>
-          <div className="space-y-2">
-            {issues.map((issue, idx) => (
-              <button
-                key={idx}
-                onClick={() => handleIssueClick(issue)}
-                disabled={!issue.workerId}
-                className={`w-full text-left border rounded-lg p-3 transition-colors ${
-                  issue.urgent ? "bg-destructive/5 border-destructive/20" : "bg-card border-border"
-                } ${issue.workerId ? "hover:border-primary/50 cursor-pointer" : ""}`}
-              >
-                <div className="flex items-start gap-2">
-                  <AlertTriangle className={`w-4 h-4 mt-0.5 shrink-0 ${
-                    issue.urgent ? "text-destructive" : "text-amber-500"
-                  }`} />
-                  <div>
-                    <p className="text-sm">{issue.text}</p>
-                    {issue.workerId && (
-                      <p className="text-xs text-primary mt-1">Click to take action →</p>
-                    )}
+        {/* Issues Panel */}
+        <div className="bg-card border border-border rounded-lg">
+          <div className="p-3 border-b border-border flex items-center justify-between">
+            <h2 className="text-sm font-semibold">Requires Attention</h2>
+            <span className="text-[10px] bg-destructive/10 text-destructive px-1.5 py-0.5 rounded font-medium">
+              {issues.filter(i => i.urgent).length} critical
+            </span>
+          </div>
+          <div className="divide-y divide-border">
+            {issues.map((issue) => {
+              const resolution = getResolutionStatus(issue.id);
+              return (
+                <button
+                  key={issue.id}
+                  onClick={() => handleIssueClick(issue)}
+                  disabled={!issue.workerId}
+                  className={cn(
+                    "w-full text-left p-3 transition-colors",
+                    issue.workerId && "hover:bg-muted/50 cursor-pointer",
+                    !issue.workerId && "cursor-default"
+                  )}
+                >
+                  <div className="flex items-start gap-2">
+                    <AlertTriangle className={cn(
+                      "w-4 h-4 mt-0.5 shrink-0",
+                      issue.urgent ? "text-destructive" : "text-amber-500"
+                    )} />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium">{issue.text}</p>
+                      <p className="text-xs text-muted-foreground">{issue.subtext}</p>
+                      {resolution ? (
+                        <div className="mt-2 p-2 rounded bg-emerald-500/5 border border-emerald-500/20">
+                          <div className="flex items-center gap-1.5 text-[10px] text-emerald-500 font-medium">
+                            <CheckCircle className="w-3 h-3" />
+                            {resolution.resolutionType === "on-the-way" 
+                              ? `On the way (ETA: ${resolution.etaMinutes} mins)`
+                              : `Replaced by ${resolution.replacementWorkerName}`
+                            }
+                          </div>
+                        </div>
+                      ) : issue.workerId && (
+                        <div className="flex items-center gap-1 mt-1.5 text-xs text-primary">
+                          <span>Take action</span>
+                          <ArrowRight className="w-3 h-3" />
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </button>
-            ))}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Recent activity */}
-        <div className="col-span-1">
-          <h3 className="text-sm font-semibold mb-3">Recent Clock-ins</h3>
-          <div className="space-y-2">
+        {/* Recent Activity Panel */}
+        <div className="bg-card border border-border rounded-lg">
+          <div className="p-3 border-b border-border">
+            <h2 className="text-sm font-semibold">Recent Clock-ins</h2>
+          </div>
+          <div className="divide-y divide-border">
             {filteredWorkers.filter(w => w.clockIn).slice(0, 5).map((worker) => (
-              <div key={worker.id} className="bg-card border border-border rounded-lg p-3 flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium">{worker.name}</p>
+              <div key={worker.id} className="p-3 flex items-center justify-between">
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium truncate">{worker.name}</p>
                   <p className="text-xs text-muted-foreground">{worker.department} • {worker.agency}</p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className={`w-2 h-2 rounded-full ${
-                    worker.status === "on-site" ? "bg-green-500" :
-                    worker.status === "late" ? "bg-amber-500" :
-                    worker.status === "overtime" ? "bg-primary" :
-                    "bg-destructive"
-                  }`} />
-                  <span className="text-xs text-muted-foreground">{worker.clockIn}</span>
+                <div className="flex items-center gap-3">
+                  <VerificationProgress 
+                    completedSteps={worker.executionStep} 
+                    className="w-20 hidden md:block"
+                  />
+                  <div className="flex flex-col items-end gap-1">
+                    <span className={cn(
+                      "w-2 h-2 rounded-full",
+                      worker.status === "on-site" && "bg-emerald-500",
+                      worker.status === "late" && "bg-amber-500",
+                      worker.status === "overtime" && "bg-primary",
+                      worker.status === "no-show" && "bg-destructive"
+                    )} />
+                    <span className="text-xs text-muted-foreground">{worker.clockIn}</span>
+                  </div>
                 </div>
               </div>
             ))}
