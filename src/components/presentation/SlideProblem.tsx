@@ -5,17 +5,17 @@ import Slide from "./Slide";
 const title = "Managing agencies is a nightmare.";
 
 const questions = [
-  { text: "How many no-shows do we have today?", x: "8%", y: "25%" },
-  { text: "Was that temp even on site?", x: "55%", y: "22%" },
-  { text: "Why does this invoice not match the hours?", x: "15%", y: "45%" },
-  { text: "What's this pay query?", x: "58%", y: "35%" },
-  { text: "How long until the replacement arrives?", x: "5%", y: "62%" },
-  { text: "Will my agencies pass this audit?", x: "50%", y: "52%" },
-  { text: "Are my departments adequately staffed right now?", x: "12%", y: "78%" },
-  { text: "What's our attrition percentage?", x: "52%", y: "72%" },
-  { text: "Which agency is best suited to fill these bookings?", x: "20%", y: "32%" },
-  { text: "Who's going to fill this last-minute requirement fastest?", x: "42%", y: "48%" },
-  { text: "When will I get the hours to approve?", x: "28%", y: "68%" },
+  { text: "How many no-shows do we have today?", x: "5%", y: "12%" },
+  { text: "Was that temp even on site?", x: "50%", y: "8%" },
+  { text: "Why does this invoice not match the hours?", x: "8%", y: "25%" },
+  { text: "What's this pay query?", x: "52%", y: "22%" },
+  { text: "How long until the replacement arrives?", x: "3%", y: "70%" },
+  { text: "Will my agencies pass this audit?", x: "48%", y: "68%" },
+  { text: "Are my departments adequately staffed right now?", x: "5%", y: "82%" },
+  { text: "What's our attrition percentage?", x: "50%", y: "80%" },
+  { text: "Which agency is best suited to fill these bookings?", x: "10%", y: "18%" },
+  { text: "Who's going to fill this last-minute requirement fastest?", x: "40%", y: "75%" },
+  { text: "When will I get the hours to approve?", x: "20%", y: "88%" },
 ];
 
 const SlideProblem = () => {
@@ -99,10 +99,10 @@ const SlideProblem = () => {
   }, [phase]);
 
   return (
-    <Slide className="relative flex items-center justify-center">
-      {/* Title - centered on mobile, top on desktop */}
-      <div className="absolute inset-0 flex items-center justify-center md:items-start md:pt-24 lg:pt-28 px-6 md:px-12">
-        <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground min-h-[2em] text-center md:text-left">
+    <div className="w-full h-full relative overflow-hidden bg-background">
+      {/* Title - centered */}
+      <div className="absolute inset-0 flex items-center justify-center px-6 md:px-12 z-10">
+        <h2 className="text-xl md:text-4xl lg:text-5xl font-bold text-foreground min-h-[2em] text-center">
           <span>{displayedTitle}</span>
           {(phase === "waiting" || phase === "typing") && displayedTitle.length < title.length && (
             <span className="inline-block w-[3px] h-[0.9em] bg-primary ml-0.5 animate-pulse align-middle" />
@@ -120,7 +120,7 @@ const SlideProblem = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="absolute text-sm md:text-xl lg:text-2xl text-muted-foreground max-w-[45%] md:max-w-sm lg:max-w-md px-2"
+              className="absolute text-xs md:text-xl lg:text-2xl text-muted-foreground max-w-[42%] md:max-w-sm lg:max-w-md px-2"
               style={{
                 left: questions[currentQuestionIndex].x,
                 top: questions[currentQuestionIndex].y,
@@ -137,14 +137,14 @@ const SlideProblem = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xl md:text-3xl lg:text-4xl text-foreground font-medium"
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xl md:text-3xl lg:text-4xl text-foreground font-medium text-center"
             >
               Sound familiar?
             </motion.p>
           )}
         </AnimatePresence>
       </div>
-    </Slide>
+    </div>
   );
 };
 

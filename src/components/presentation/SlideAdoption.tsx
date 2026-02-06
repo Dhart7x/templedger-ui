@@ -11,7 +11,7 @@ const agencyBenefits = [
 
 const SlideAdoption = () => {
   return (
-    <Slide className="relative overflow-hidden">
+    <Slide className="relative overflow-hidden !pt-12 md:!pt-16">
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -29,7 +29,7 @@ const SlideAdoption = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-4 md:mb-14 lg:mb-16"
         >
-          <h2 className="text-xl md:text-3xl lg:text-4xl font-bold">
+          <h2 className="text-lg md:text-3xl lg:text-4xl font-bold">
             Buyer & Adoption Model
           </h2>
         </motion.div>

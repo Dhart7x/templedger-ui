@@ -364,7 +364,7 @@ const costs = [
 
 const SlideAttrition = () => {
   return (
-    <Slide className="relative md:justify-start md:pt-12">
+    <Slide className="relative !pt-12 md:!pt-12">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -376,13 +376,13 @@ const SlideAttrition = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-xl md:text-3xl lg:text-4xl font-bold text-foreground text-center mb-8 md:mb-12 max-w-4xl mx-auto"
+          className="text-base md:text-3xl lg:text-4xl font-bold text-foreground text-center mb-4 md:mb-12 max-w-4xl mx-auto"
         >
           Pay disputes are the second-largest driver of attrition
         </motion.h2>
 
         {/* Main content - costs on left, phone on right */}
-        <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-12">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-12">
           {/* Left side - costs */}
           <div className="flex-1">
             {/* Intro statement */}
@@ -390,13 +390,13 @@ const SlideAttrition = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-base md:text-lg lg:text-xl text-foreground leading-relaxed mb-6 md:mb-8"
+              className="text-sm md:text-lg lg:text-xl text-foreground leading-relaxed mb-3 md:mb-8 text-center lg:text-left"
             >
               Every departure creates operational cost and reputational damage.
             </motion.p>
 
             {/* Cost points */}
-            <div className="space-y-3 md:space-y-4">
+            <div className="hidden lg:block space-y-3 md:space-y-4">
               {costs.map((item, index) => (
                 <motion.div
                   key={index}

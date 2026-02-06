@@ -10,7 +10,7 @@ const points = [
 
 const SlideWhyThisHappens = () => {
   return (
-    <Slide className="relative md:justify-start md:pt-16">
+    <Slide className="relative">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -22,7 +22,7 @@ const SlideWhyThisHappens = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-        className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground mb-12 md:mb-16 text-center"
+          className="text-xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 md:mb-16 text-center"
         >
           Here's the problem....
         </motion.h2>
@@ -32,15 +32,15 @@ const SlideWhyThisHappens = () => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="p-6 md:p-8 rounded-xl bg-card/60 border border-border mb-12 md:mb-16 text-center"
+          className="p-4 md:p-8 rounded-xl bg-card/60 border border-border mb-6 md:mb-16 text-center"
         >
-          <p className="text-lg md:text-xl lg:text-2xl text-foreground leading-relaxed">
+          <p className="text-base md:text-xl lg:text-2xl text-foreground leading-relaxed">
             Fragmented, reactive systems
           </p>
         </motion.div>
 
         {/* Bullet points */}
-        <div className="space-y-4 md:space-y-5">
+        <div className="space-y-2 md:space-y-5">
           {points.map((point, index) => (
             <motion.div
               key={index}
@@ -50,7 +50,7 @@ const SlideWhyThisHappens = () => {
               className="flex items-start gap-3 md:gap-4"
             >
               <div className="w-2 h-2 rounded-full bg-primary mt-2.5 flex-shrink-0" />
-              <p className="text-base md:text-lg lg:text-xl text-foreground leading-relaxed">
+              <p className="text-sm md:text-lg lg:text-xl text-foreground leading-relaxed">
                 {point}
               </p>
             </motion.div>
@@ -62,7 +62,7 @@ const SlideWhyThisHappens = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1.1 }}
-          className="text-center text-lg md:text-xl lg:text-2xl font-semibold text-foreground mt-16 md:mt-20"
+          className="text-center text-base md:text-xl lg:text-2xl font-semibold text-foreground mt-6 md:mt-20"
         >
           This is a recipe for inefficiency.
         </motion.p>

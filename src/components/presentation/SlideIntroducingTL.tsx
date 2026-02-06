@@ -12,7 +12,7 @@ const capabilities = [
 
 const SlideIntroducingTL = () => {
   return (
-    <Slide className="relative md:justify-start md:pt-16">
+    <Slide className="relative">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -24,7 +24,7 @@ const SlideIntroducingTL = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-3"
+          className="text-xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-2 md:mb-3"
         >
           Introducing <span className="trust-gradient-text">Temp Ledger</span>
         </motion.h2>
@@ -34,13 +34,13 @@ const SlideIntroducingTL = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-lg md:text-xl lg:text-2xl text-primary font-medium text-center mb-16 md:mb-20"
+          className="text-sm md:text-xl lg:text-2xl text-primary font-medium text-center mb-6 md:mb-20"
         >
           The unified system for agency orchestration
         </motion.p>
 
         {/* Capability points */}
-        <div className="space-y-4 md:space-y-5">
+        <div className="space-y-2 md:space-y-5">
           {capabilities.map((item, index) => (
             <motion.div
               key={index}
@@ -49,8 +49,8 @@ const SlideIntroducingTL = () => {
               transition={{ duration: 0.4, delay: 0.3 + index * 0.12 }}
               className="flex items-start gap-3 md:gap-4"
             >
-              <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-              <p className="text-base md:text-lg lg:text-xl text-foreground leading-relaxed">
+              <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-primary mt-0.5 md:mt-1 flex-shrink-0" />
+              <p className="text-sm md:text-lg lg:text-xl text-foreground leading-relaxed">
                 {item}
               </p>
             </motion.div>

@@ -12,7 +12,7 @@ const benefits = [
 
 const SlideNewNormal = () => {
   return (
-    <Slide className="relative md:justify-start md:pt-16">
+    <Slide className="relative">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -24,13 +24,13 @@ const SlideNewNormal = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-24 md:mb-28"
+          className="text-xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-10 md:mb-28"
         >
           Have it <span className="italic">your</span> way
         </motion.h2>
 
         {/* Benefit points */}
-        <div className="space-y-6 md:space-y-8">
+        <div className="space-y-3 md:space-y-8">
           {benefits.map((item, index) => (
             <motion.div
               key={index}
@@ -39,8 +39,8 @@ const SlideNewNormal = () => {
               transition={{ duration: 0.4, delay: 0.3 + index * 0.12 }}
               className="flex items-start gap-3 md:gap-4"
             >
-              <CheckCircle className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-              <p className="text-base md:text-lg lg:text-xl text-foreground leading-relaxed">
+              <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-primary mt-0.5 md:mt-1 flex-shrink-0" />
+              <p className="text-sm md:text-lg lg:text-xl text-foreground leading-relaxed">
                 {item}
               </p>
             </motion.div>

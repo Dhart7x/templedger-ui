@@ -3,7 +3,7 @@ import Slide from "./Slide";
 
 const SlideHero = () => {
   return (
-    <Slide className="relative overflow-hidden md:justify-center md:pt-24 md:pb-24 lg:pt-28 lg:pb-28">
+    <Slide className="relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
@@ -20,7 +20,7 @@ const SlideHero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4"
+          className="text-3xl md:text-6xl lg:text-7xl font-bold mb-3 md:mb-4"
         >
           <span className="trust-gradient-text">Temp Ledger</span>
         </motion.h1>
@@ -30,7 +30,7 @@ const SlideHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-          className="text-lg md:text-2xl text-foreground font-medium"
+          className="text-base md:text-2xl text-foreground font-medium text-center px-4"
         >
           The unified system for agency orchestration
         </motion.p>
