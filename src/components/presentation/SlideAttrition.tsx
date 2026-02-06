@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { TrendingDown, Clock, Calendar, MessageSquare, CheckCircle, X, Check } from "lucide-react";
+import { TrendingDown, Clock, Calendar, MessageSquare, CheckCircle, X, Check, Home, ChevronRight, Shield } from "lucide-react";
 import Slide from "./Slide";
 
-type TabId = "time" | "shifts" | "query" | "tracking";
+type TabId = "home" | "time" | "shifts" | "query" | "tracking";
 
 interface Tab {
   id: TabId;
@@ -12,11 +12,54 @@ interface Tab {
 }
 
 const tabs: Tab[] = [
+  { id: "home", icon: Home, label: "Home" },
   { id: "time", icon: Clock, label: "Time" },
   { id: "shifts", icon: Calendar, label: "Shifts" },
   { id: "query", icon: MessageSquare, label: "Query" },
   { id: "tracking", icon: CheckCircle, label: "Track" },
 ];
+
+const HomeView = ({ onNavigate }: { onNavigate: (tab: TabId) => void }) => {
+  const menuItems = [
+    { id: "time" as TabId, icon: Clock, label: "View Hours", description: "Check your recorded time" },
+    { id: "shifts" as TabId, icon: Calendar, label: "My Shifts", description: "Accept or reject assignments" },
+    { id: "query" as TabId, icon: MessageSquare, label: "Raise Query", description: "Report an issue" },
+    { id: "tracking" as TabId, icon: CheckCircle, label: "Track Queries", description: "View query status" },
+  ];
+
+  return (
+    <div className="space-y-3">
+      {/* Branded header */}
+      <div className="text-center py-3 mb-2">
+        <div className="w-10 h-10 mx-auto rounded-xl trust-gradient flex items-center justify-center mb-2">
+          <Shield className="w-5 h-5 text-foreground" />
+        </div>
+        <h3 className="text-sm md:text-base font-bold trust-gradient-text">Temp Ledger Hub</h3>
+        <p className="text-[8px] md:text-[10px] text-muted-foreground mt-0.5">Welcome back, Sarah</p>
+      </div>
+
+      {/* Navigation menu */}
+      <div className="space-y-2">
+        {menuItems.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => onNavigate(item.id)}
+            className="w-full flex items-center gap-3 p-2.5 rounded-lg bg-card border border-border hover:border-primary/50 transition-colors text-left"
+          >
+            <div className="w-8 h-8 rounded-lg trust-gradient flex items-center justify-center flex-shrink-0">
+              <item.icon className="w-4 h-4 text-foreground" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[10px] md:text-xs font-medium text-foreground">{item.label}</p>
+              <p className="text-[8px] md:text-[9px] text-muted-foreground">{item.description}</p>
+            </div>
+            <ChevronRight className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const TimeView = () => {
   const days = [
@@ -141,7 +184,7 @@ const ShiftsView = () => {
 const QueryView = ({ onSubmit }: { onSubmit: () => void }) => {
   const [selected, setSelected] = useState<string | null>(null);
 
-  const options = ["Missing hours", "Incorrect rate", "Wrong shift time", "Other"];
+  const options = ["Missing hours", "Incorrect rate", "Wrong shift time", "PPE Request", "Other"];
 
   return (
     <div className="space-y-3">
@@ -236,8 +279,12 @@ const TrackingView = () => {
 };
 
 const InteractivePhone = () => {
-  const [activeTab, setActiveTab] = useState<TabId>("time");
+  const [activeTab, setActiveTab] = useState<TabId>("home");
   const [showSuccess, setShowSuccess] = useState(false);
+
+  const handleNavigate = (tab: TabId) => {
+    setActiveTab(tab);
+  };
 
   const handleQuerySubmit = () => {
     setShowSuccess(true);
@@ -270,6 +317,7 @@ const InteractivePhone = () => {
           </motion.div>
         ) : (
           <>
+            {activeTab === "home" && <HomeView onNavigate={handleNavigate} />}
             {activeTab === "time" && <TimeView />}
             {activeTab === "shifts" && <ShiftsView />}
             {activeTab === "query" && <QueryView onSubmit={handleQuerySubmit} />}
@@ -330,7 +378,7 @@ const SlideAttrition = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-xl md:text-3xl lg:text-4xl font-bold text-foreground text-center mb-8 md:mb-12 max-w-4xl mx-auto"
         >
-          We scraped over 1m agency reviews on Google. The #1 driver of negative reviews and reason for leaving — <span className="text-primary">pay disputes</span>.
+          Pay disputes are the second-largest driver of attrition
         </motion.h2>
 
         {/* Main content - costs on left, phone on right */}

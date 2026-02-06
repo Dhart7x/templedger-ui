@@ -24,7 +24,7 @@ const SlideNewNormal = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-20 md:mb-24"
+          className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-24 md:mb-28"
         >
           Have it <span className="italic">your</span> way
         </motion.h2>
