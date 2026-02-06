@@ -76,10 +76,10 @@ const SlideProblem = () => {
       setQuestionVisible(false);
     }, 3000);
 
-    // After 3.5s total (3s visible + 0.5s gap), move to next question
+    // After 3.15s total (3s visible + 0.15s quick transition), move to next question
     const nextTimer = setTimeout(() => {
       setCurrentQuestionIndex((prev) => prev + 1);
-    }, 3500);
+    }, 3150);
 
     return () => {
       clearTimeout(hideTimer);
@@ -119,7 +119,7 @@ const SlideProblem = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
+              transition={{ duration: 0.15, ease: "easeInOut" }}
               className="absolute text-sm md:text-xl lg:text-2xl text-muted-foreground max-w-[44%] md:max-w-sm lg:max-w-md px-2"
               style={{
                 left: questions[currentQuestionIndex].x,
