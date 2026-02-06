@@ -106,16 +106,16 @@ const DemoAgenciesPerformance = () => {
     const isGood = trend === "up" ? isPositiveGood : !isPositiveGood;
     switch (trend) {
       case "up":
-        return <TrendingUp className={`w-3 h-3 ${isGood ? "text-emerald-500" : "text-destructive"}`} />;
+        return <TrendingUp className={`w-3 h-3 ${isGood ? "text-green-500" : "text-destructive"}`} />;
       case "down":
-        return <TrendingDown className={`w-3 h-3 ${isGood ? "text-emerald-500" : "text-destructive"}`} />;
+        return <TrendingDown className={`w-3 h-3 ${isGood ? "text-green-500" : "text-destructive"}`} />;
       default:
         return <Minus className="w-3 h-3 text-muted-foreground" />;
     }
   };
 
   const getScoreColor = (score: number) => {
-    if (score >= 90) return "text-emerald-500";
+    if (score >= 90) return "text-green-500";
     if (score >= 80) return "text-amber-500";
     return "text-destructive";
   };
@@ -132,17 +132,17 @@ const DemoAgenciesPerformance = () => {
   ];
 
   return (
-    <div className="p-4 md:p-6 h-full overflow-auto">
+    <div className="p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-lg md:text-xl font-bold text-foreground">Agency Performance</h1>
-          <p className="text-xs text-muted-foreground">Ledger-derived metrics — no self-reported data</p>
+          <h2 className="text-xl font-bold">Agency Performance</h2>
+          <p className="text-sm text-muted-foreground">Objective, ledger-derived metrics — no self-reported data</p>
         </div>
         
         {/* Time Range Filter */}
         <div className="flex items-center gap-2">
           <Calendar className="w-4 h-4 text-muted-foreground" />
-          <div className="flex bg-[hsl(217,33%,10%)] rounded-lg p-1">
+          <div className="flex bg-muted rounded-lg p-1">
             {timeRangeOptions.map((option) => (
               <button
                 key={option.id}
@@ -160,14 +160,14 @@ const DemoAgenciesPerformance = () => {
         </div>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-6">
         {agencies.map((agency) => {
           const rangeMetrics = getMetricsForRange(agency.name, timeRange);
           
           return (
             <div
               key={agency.id}
-              className="bg-card border border-border rounded-lg p-4"
+              className="bg-card border border-border rounded-lg p-5"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
@@ -175,53 +175,53 @@ const DemoAgenciesPerformance = () => {
                     <Users className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-base">{agency.name}</h3>
-                    <p className="text-[10px] text-muted-foreground">{agency.activeWorkers} active workers</p>
+                    <h3 className="font-semibold text-lg">{agency.name}</h3>
+                    <p className="text-xs text-muted-foreground">{agency.activeWorkers} active workers</p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-[10px] text-muted-foreground mb-1">Overall Score ({timeRange})</p>
+                  <p className="text-xs text-muted-foreground mb-1">Overall Score ({timeRange})</p>
                   <p className={`text-2xl font-bold ${getScoreColor(rangeMetrics.overallScore)}`}>
                     {rangeMetrics.overallScore}%
                   </p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-4 gap-3">
+              <div className="grid grid-cols-4 gap-4">
                 {/* Fulfilment */}
-                <div className="bg-[hsl(217,33%,10%)] rounded-lg p-3">
+                <div className="bg-muted/30 rounded-lg p-3">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] text-muted-foreground">Fulfilment</span>
+                    <span className="text-xs text-muted-foreground">Fulfilment</span>
                     {trendIcon(agency.metrics.fulfilment.trend)}
                   </div>
                   <p className={`text-lg font-bold ${
                     rangeMetrics.fulfilment >= agency.metrics.fulfilment.target 
-                      ? "text-emerald-500" 
+                      ? "text-green-500" 
                       : "text-amber-500"
                   }`}>
                     {rangeMetrics.fulfilment}%
                   </p>
-                  <p className="text-[9px] text-muted-foreground">Target: {agency.metrics.fulfilment.target}%</p>
+                  <p className="text-xs text-muted-foreground">Target: {agency.metrics.fulfilment.target}%</p>
                 </div>
 
                 {/* Time to Fill */}
-                <div className="bg-[hsl(217,33%,10%)] rounded-lg p-3">
+                <div className="bg-muted/30 rounded-lg p-3">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] text-muted-foreground">Time to Fill</span>
+                    <span className="text-xs text-muted-foreground">Time to Fill</span>
                     {trendIcon(agency.metrics.timeToFill.trend)}
                   </div>
-                  <p className="text-lg font-bold text-foreground">{agency.metrics.timeToFill.value}</p>
-                  <p className="text-[9px] text-muted-foreground">Target: {agency.metrics.timeToFill.target}</p>
+                  <p className="text-lg font-bold">{agency.metrics.timeToFill.value}</p>
+                  <p className="text-xs text-muted-foreground">Target: {agency.metrics.timeToFill.target}</p>
                 </div>
 
                 {/* Lateness */}
-                <div className="bg-[hsl(217,33%,10%)] rounded-lg p-3">
+                <div className="bg-muted/30 rounded-lg p-3">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] text-muted-foreground">Lateness</span>
+                    <span className="text-xs text-muted-foreground">Lateness Rate</span>
                     {trendIcon(agency.metrics.lateness.trend, false)}
                   </div>
                   <p className={`text-lg font-bold ${
-                    rangeMetrics.lateness <= 3 ? "text-emerald-500" : 
+                    rangeMetrics.lateness <= 3 ? "text-green-500" : 
                     rangeMetrics.lateness <= 5 ? "text-amber-500" : "text-destructive"
                   }`}>
                     {rangeMetrics.lateness}%
@@ -229,13 +229,13 @@ const DemoAgenciesPerformance = () => {
                 </div>
 
                 {/* No-shows */}
-                <div className="bg-[hsl(217,33%,10%)] rounded-lg p-3">
+                <div className="bg-muted/30 rounded-lg p-3">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] text-muted-foreground">No-Shows</span>
+                    <span className="text-xs text-muted-foreground">No-Show Rate</span>
                     {trendIcon(agency.metrics.noShows.trend, false)}
                   </div>
                   <p className={`text-lg font-bold ${
-                    rangeMetrics.noShows <= 2 ? "text-emerald-500" : 
+                    rangeMetrics.noShows <= 2 ? "text-green-500" : 
                     rangeMetrics.noShows <= 4 ? "text-amber-500" : "text-destructive"
                   }`}>
                     {rangeMetrics.noShows}%
@@ -243,13 +243,13 @@ const DemoAgenciesPerformance = () => {
                 </div>
 
                 {/* Attrition */}
-                <div className="bg-[hsl(217,33%,10%)] rounded-lg p-3">
+                <div className="bg-muted/30 rounded-lg p-3">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] text-muted-foreground">Attrition</span>
+                    <span className="text-xs text-muted-foreground">Attrition</span>
                     {trendIcon(agency.metrics.attrition.trend, false)}
                   </div>
                   <p className={`text-lg font-bold ${
-                    agency.metrics.attrition.value <= 6 ? "text-emerald-500" : 
+                    agency.metrics.attrition.value <= 6 ? "text-green-500" : 
                     agency.metrics.attrition.value <= 10 ? "text-amber-500" : "text-destructive"
                   }`}>
                     {agency.metrics.attrition.value}%
@@ -257,22 +257,22 @@ const DemoAgenciesPerformance = () => {
                 </div>
 
                 {/* Response Time */}
-                <div className="bg-[hsl(217,33%,10%)] rounded-lg p-3">
+                <div className="bg-muted/30 rounded-lg p-3">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] text-muted-foreground">Response</span>
+                    <span className="text-xs text-muted-foreground">Response Time</span>
                     {trendIcon(agency.metrics.responseTime.trend)}
                   </div>
-                  <p className="text-lg font-bold text-foreground">{agency.metrics.responseTime.value}</p>
+                  <p className="text-lg font-bold">{agency.metrics.responseTime.value}</p>
                 </div>
 
                 {/* Payroll Accuracy */}
-                <div className="bg-[hsl(217,33%,10%)] rounded-lg p-3">
+                <div className="bg-muted/30 rounded-lg p-3">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] text-muted-foreground">Payroll Acc.</span>
+                    <span className="text-xs text-muted-foreground">Payroll Accuracy</span>
                     {trendIcon(agency.metrics.payrollAccuracy.trend)}
                   </div>
                   <p className={`text-lg font-bold ${
-                    agency.metrics.payrollAccuracy.value >= 99 ? "text-emerald-500" : 
+                    agency.metrics.payrollAccuracy.value >= 99 ? "text-green-500" : 
                     agency.metrics.payrollAccuracy.value >= 97 ? "text-amber-500" : "text-destructive"
                   }`}>
                     {agency.metrics.payrollAccuracy.value}%
@@ -280,13 +280,13 @@ const DemoAgenciesPerformance = () => {
                 </div>
 
                 {/* Billing Accuracy */}
-                <div className="bg-[hsl(217,33%,10%)] rounded-lg p-3">
+                <div className="bg-muted/30 rounded-lg p-3">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] text-muted-foreground">Billing Acc.</span>
+                    <span className="text-xs text-muted-foreground">Billing Accuracy</span>
                     {trendIcon(agency.metrics.billingAccuracy.trend)}
                   </div>
                   <p className={`text-lg font-bold ${
-                    agency.metrics.billingAccuracy.value >= 99 ? "text-emerald-500" : 
+                    agency.metrics.billingAccuracy.value >= 99 ? "text-green-500" : 
                     agency.metrics.billingAccuracy.value >= 97 ? "text-amber-500" : "text-destructive"
                   }`}>
                     {agency.metrics.billingAccuracy.value}%

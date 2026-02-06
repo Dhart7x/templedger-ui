@@ -114,7 +114,7 @@ const getExecutionSteps = (workerId: string): ExecutionStep[] => {
 const StatusBadge = ({ status }: { status: "verified" | "pending" | "failed" }) => {
   if (status === "verified") {
     return (
-      <Badge className="bg-emerald-500/10 text-emerald-500 border-emerald-500/20 hover:bg-emerald-500/10">
+      <Badge className="bg-green-500/10 text-green-500 border-green-500/20 hover:bg-green-500/10">
         <CheckCircle className="w-3 h-3 mr-1" />
         Verified
       </Badge>
@@ -156,16 +156,16 @@ const DemoExecutionLedger = () => {
   const invoiceBlocked = !allVerified;
 
   return (
-    <div className="p-4 md:p-6 h-full flex flex-col overflow-hidden">
+    <div className="p-6 h-full flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-lg md:text-xl font-bold text-foreground">Performance</h1>
-          <p className="text-xs text-muted-foreground">Execution ledger — verified sequence per worker</p>
+          <h2 className="text-xl font-bold">Execution Ledger</h2>
+          <p className="text-sm text-muted-foreground">Verified execution sequence per worker</p>
         </div>
-        <div className="flex items-center gap-2 px-2 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-[10px] font-medium text-emerald-500">Authority for payroll & billing</span>
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+          Authority for payroll & billing
         </div>
       </div>
 
@@ -244,7 +244,7 @@ const DemoExecutionLedger = () => {
                       <Clock className="w-4 h-4 text-muted-foreground" />
                     )}
                     {!hasFailed && !hasPending && (
-                      <CheckCircle className="w-4 h-4 text-emerald-500" />
+                      <CheckCircle className="w-4 h-4 text-green-500" />
                     )}
                     <ChevronRight className="w-4 h-4 text-muted-foreground" />
                   </div>
@@ -276,7 +276,7 @@ const DemoExecutionLedger = () => {
                     Invoice Blocked
                   </Badge>
                 ) : (
-                  <Badge className="bg-emerald-500/10 text-emerald-500 border-emerald-500/20 hover:bg-emerald-500/10">
+                  <Badge className="bg-green-500/10 text-green-500 border-green-500/20 hover:bg-green-500/10">
                     <CheckCircle className="w-3 h-3 mr-1" />
                     Invoice Permitted
                   </Badge>
@@ -294,7 +294,7 @@ const DemoExecutionLedger = () => {
                       transition={{ duration: 0.2, delay: index * 0.03 }}
                       className={`relative flex items-center gap-4 p-3 rounded-lg border transition-colors ${
                         step.status === "verified" 
-                          ? "bg-emerald-500/5 border-emerald-500/20" 
+                          ? "bg-green-500/5 border-green-500/20" 
                           : step.status === "failed"
                           ? "bg-destructive/5 border-destructive/20"
                           : "bg-muted/30 border-border"
@@ -303,7 +303,7 @@ const DemoExecutionLedger = () => {
                       {/* Step number */}
                       <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
                         step.status === "verified" 
-                          ? "bg-emerald-500/20 text-emerald-500" 
+                          ? "bg-green-500/20 text-green-500" 
                           : step.status === "failed"
                           ? "bg-destructive/20 text-destructive"
                           : "bg-muted text-muted-foreground"
@@ -314,7 +314,7 @@ const DemoExecutionLedger = () => {
                       {/* Icon */}
                       <step.icon className={`w-4 h-4 ${
                         step.status === "verified" 
-                          ? "text-emerald-500" 
+                          ? "text-green-500" 
                           : step.status === "failed"
                           ? "text-destructive"
                           : "text-muted-foreground"
@@ -342,7 +342,7 @@ const DemoExecutionLedger = () => {
                       {/* Connector line */}
                       {index < executionSteps.length - 1 && (
                         <div className={`absolute left-[2.15rem] top-full h-1 w-0.5 ${
-                          step.status === "verified" ? "bg-emerald-500/30" : "bg-border"
+                          step.status === "verified" ? "bg-green-500/30" : "bg-border"
                         }`} />
                       )}
                     </motion.div>
