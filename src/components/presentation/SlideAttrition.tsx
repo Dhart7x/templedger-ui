@@ -376,8 +376,9 @@ const SlideAttrition = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-xl md:text-3xl lg:text-4xl font-bold text-foreground text-center mb-8 md:mb-12 max-w-4xl mx-auto"
+          className="text-lg md:text-3xl lg:text-4xl font-bold text-foreground text-center mb-8 md:mb-12 max-w-4xl mx-auto"
         >
+          Pay disputes are the second-largest driver of attrition
           We scraped over 1m agency reviews on Google. The #1 driver of negative reviews and reason for leaving — <span className="text-primary">pay disputes</span>.
         </motion.h2>
 
