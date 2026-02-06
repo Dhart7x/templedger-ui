@@ -396,17 +396,17 @@ const SlideAttrition = () => {
             </motion.p>
 
             {/* Cost points */}
-            <div className="hidden lg:block space-y-3 md:space-y-4">
+            <div className="space-y-2 md:space-y-3 lg:space-y-4">
               {costs.map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: -15 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                  className="flex items-start gap-3 md:gap-4"
+                  className="flex items-start gap-2 md:gap-4"
                 >
-                  <TrendingDown className="w-5 h-5 text-destructive mt-1 flex-shrink-0" />
-                  <p className="text-sm md:text-base lg:text-lg text-foreground leading-relaxed">
+                  <TrendingDown className="w-4 h-4 md:w-5 md:h-5 text-destructive mt-0.5 md:mt-1 flex-shrink-0" />
+                  <p className="text-xs md:text-base lg:text-lg text-foreground leading-relaxed">
                     {item}
                   </p>
                 </motion.div>
