@@ -99,10 +99,10 @@ const SlideProblem = () => {
   }, [phase]);
 
   return (
-    <Slide className="relative">
-      {/* Title - top aligned as header */}
-      <div className="pt-20 md:pt-24 lg:pt-28 px-6 md:px-12">
-        <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground min-h-[2em]">
+    <Slide className="relative flex items-center justify-center">
+      {/* Title - centered on mobile, top on desktop */}
+      <div className="absolute inset-0 flex items-center justify-center md:items-start md:pt-24 lg:pt-28 px-6 md:px-12">
+        <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground min-h-[2em] text-center md:text-left">
           <span>{displayedTitle}</span>
           {(phase === "waiting" || phase === "typing") && displayedTitle.length < title.length && (
             <span className="inline-block w-[3px] h-[0.9em] bg-primary ml-0.5 animate-pulse align-middle" />
@@ -110,8 +110,8 @@ const SlideProblem = () => {
         </h2>
       </div>
 
-      {/* Questions area - full canvas for scattered positioning */}
-      <div className="absolute inset-x-0 top-28 md:top-36 lg:top-40 bottom-20 overflow-hidden pointer-events-none">
+      {/* Questions area - scattered around the title */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <AnimatePresence mode="wait">
           {phase === "questions" && questionVisible && currentQuestionIndex >= 0 && currentQuestionIndex < questions.length && (
             <motion.p
@@ -120,7 +120,7 @@ const SlideProblem = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="absolute text-base md:text-xl lg:text-2xl text-muted-foreground max-w-xs md:max-w-sm lg:max-w-md"
+              className="absolute text-sm md:text-xl lg:text-2xl text-muted-foreground max-w-[45%] md:max-w-sm lg:max-w-md px-2"
               style={{
                 left: questions[currentQuestionIndex].x,
                 top: questions[currentQuestionIndex].y,
