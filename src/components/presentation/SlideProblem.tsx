@@ -71,15 +71,15 @@ const SlideProblem = () => {
     // Show the current question
     setQuestionVisible(true);
 
-    // After 3s, hide it
+    // After 2.1s, hide it (reduced by 30%)
     const hideTimer = setTimeout(() => {
       setQuestionVisible(false);
-    }, 3000);
+    }, 2100);
 
-    // After 3.15s total (3s visible + 0.15s quick transition), move to next question
+    // After 2.25s total (2.1s visible + 0.15s quick transition), move to next question
     const nextTimer = setTimeout(() => {
       setCurrentQuestionIndex((prev) => prev + 1);
-    }, 3150);
+    }, 2250);
 
     return () => {
       clearTimeout(hideTimer);
