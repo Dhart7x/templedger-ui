@@ -279,8 +279,12 @@ const TrackingView = () => {
 };
 
 const InteractivePhone = () => {
-  const [activeTab, setActiveTab] = useState<TabId>("time");
+  const [activeTab, setActiveTab] = useState<TabId>("home");
   const [showSuccess, setShowSuccess] = useState(false);
+
+  const handleNavigate = (tab: TabId) => {
+    setActiveTab(tab);
+  };
 
   const handleQuerySubmit = () => {
     setShowSuccess(true);
