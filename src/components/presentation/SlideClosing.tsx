@@ -9,7 +9,7 @@ const SlideClosing = () => {
         transition={{ duration: 0.6 }}
         className="text-center max-w-3xl"
       >
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-foreground">
+        <h1 className="text-xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-8 text-foreground">
           Take Control of Your Contingent Workforce.
         </h1>
         
@@ -19,10 +19,10 @@ const SlideClosing = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="space-y-4"
         >
-          <p className="text-base md:text-xl text-foreground">
+          <p className="text-sm md:text-xl text-foreground">
             Staffing only works when execution is visible, enforced, and shared.
           </p>
-          <p className="text-lg md:text-xl trust-gradient-text font-semibold">
+          <p className="text-base md:text-xl trust-gradient-text font-semibold">
             Temp Ledger makes that the default.
           </p>
         </motion.div>
