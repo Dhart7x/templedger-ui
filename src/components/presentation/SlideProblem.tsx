@@ -1,21 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Slide from "./Slide";
 
 const title = "Managing agencies is a nightmare.";
 
+// Questions positioned BELOW the header (y values start from ~30% onwards)
 const questions = [
-  { text: "How many no-shows do we have today?", x: "5%", y: "12%" },
-  { text: "Was that temp even on site?", x: "50%", y: "8%" },
-  { text: "Why does this invoice not match the hours?", x: "8%", y: "25%" },
-  { text: "What's this pay query?", x: "52%", y: "22%" },
-  { text: "How long until the replacement arrives?", x: "3%", y: "70%" },
-  { text: "Will my agencies pass this audit?", x: "48%", y: "68%" },
-  { text: "Are my departments adequately staffed right now?", x: "5%", y: "82%" },
-  { text: "What's our attrition percentage?", x: "50%", y: "80%" },
-  { text: "Which agency is best suited to fill these bookings?", x: "10%", y: "18%" },
-  { text: "Who's going to fill this last-minute requirement fastest?", x: "40%", y: "75%" },
-  { text: "When will I get the hours to approve?", x: "20%", y: "88%" },
+  { text: "How many no-shows do we have today?", x: "5%", y: "32%" },
+  { text: "Was that temp even on site?", x: "52%", y: "30%" },
+  { text: "Why does this invoice not match the hours?", x: "8%", y: "45%" },
+  { text: "What's this pay query?", x: "50%", y: "42%" },
+  { text: "How long until the replacement arrives?", x: "3%", y: "58%" },
+  { text: "Will my agencies pass this audit?", x: "48%", y: "55%" },
+  { text: "Are my departments adequately staffed right now?", x: "5%", y: "72%" },
+  { text: "What's our attrition percentage?", x: "50%", y: "68%" },
+  { text: "Which agency is best suited to fill these bookings?", x: "10%", y: "38%" },
+  { text: "Who's going to fill this last-minute requirement fastest?", x: "40%", y: "78%" },
+  { text: "When will I get the hours to approve?", x: "20%", y: "85%" },
 ];
 
 const SlideProblem = () => {
@@ -45,11 +45,11 @@ const SlideProblem = () => {
         setDisplayedTitle(title.slice(0, displayedTitle.length + 1));
       }, 60);
     } else {
-      // Title complete - wait 3 seconds then start questions
+      // Title complete - wait 1 second then start questions
       timerRef.current = setTimeout(() => {
         setPhase("questions");
         setCurrentQuestionIndex(0);
-      }, 3000);
+      }, 1000);
     }
 
     return () => {
@@ -71,15 +71,15 @@ const SlideProblem = () => {
     // Show the current question
     setQuestionVisible(true);
 
-    // After 1.8s, hide it
+    // After 3s, hide it
     const hideTimer = setTimeout(() => {
       setQuestionVisible(false);
-    }, 1800);
+    }, 3000);
 
-    // After 2.4s total, move to next question
+    // After 3.5s total (3s visible + 0.5s gap), move to next question
     const nextTimer = setTimeout(() => {
       setCurrentQuestionIndex((prev) => prev + 1);
-    }, 2400);
+    }, 3500);
 
     return () => {
       clearTimeout(hideTimer);
@@ -100,9 +100,9 @@ const SlideProblem = () => {
 
   return (
     <div className="w-full h-full relative overflow-hidden bg-background">
-      {/* Title - centered */}
-      <div className="absolute inset-0 flex items-center justify-center px-6 md:px-12 z-10">
-        <h2 className="text-xl md:text-4xl lg:text-5xl font-bold text-foreground min-h-[2em] text-center">
+      {/* Title - at the top */}
+      <div className="absolute top-16 md:top-20 lg:top-24 left-0 right-0 px-6 md:px-12 lg:px-20 z-10">
+        <h2 className="text-xl md:text-4xl lg:text-5xl font-bold text-foreground text-center md:text-left">
           <span>{displayedTitle}</span>
           {(phase === "waiting" || phase === "typing") && displayedTitle.length < title.length && (
             <span className="inline-block w-[3px] h-[0.9em] bg-primary ml-0.5 animate-pulse align-middle" />
@@ -110,7 +110,7 @@ const SlideProblem = () => {
         </h2>
       </div>
 
-      {/* Questions area - scattered around the title */}
+      {/* Questions area - below the header */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <AnimatePresence mode="wait">
           {phase === "questions" && questionVisible && currentQuestionIndex >= 0 && currentQuestionIndex < questions.length && (
@@ -120,7 +120,7 @@ const SlideProblem = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="absolute text-xs md:text-xl lg:text-2xl text-muted-foreground max-w-[42%] md:max-w-sm lg:max-w-md px-2"
+              className="absolute text-sm md:text-xl lg:text-2xl text-muted-foreground max-w-[44%] md:max-w-sm lg:max-w-md px-2"
               style={{
                 left: questions[currentQuestionIndex].x,
                 top: questions[currentQuestionIndex].y,
