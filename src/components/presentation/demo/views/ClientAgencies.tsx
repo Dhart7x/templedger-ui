@@ -1,12 +1,8 @@
 import { useState } from "react";
-import { Building2, TrendingUp, Clock, Users, AlertTriangle, Star, ChevronRight, FileText } from "lucide-react";
+import { Building2, TrendingUp, Clock, Users, Star, FileText, ChevronDown, ChevronUp, MapPin, Briefcase } from "lucide-react";
 
-interface Agency {
-  id: string;
-  name: string;
-  activeWorkers: number;
-  totalWorkers: number;
-  performance: {
+interface PerformanceByPeriod {
+  week: {
     responseTime: string;
     timeToFill: string;
     attendance: number;
@@ -14,6 +10,30 @@ interface Agency {
     attrition: number;
     newRegistrations: number;
   };
+  month: {
+    responseTime: string;
+    timeToFill: string;
+    attendance: number;
+    punctuality: number;
+    attrition: number;
+    newRegistrations: number;
+  };
+  year: {
+    responseTime: string;
+    timeToFill: string;
+    attendance: number;
+    punctuality: number;
+    attrition: number;
+    newRegistrations: number;
+  };
+}
+
+interface Agency {
+  id: string;
+  name: string;
+  activeWorkers: number;
+  totalWorkers: number;
+  performance: PerformanceByPeriod;
   rateCard: {
     warehouseOp: number;
     picker: number;
@@ -22,6 +42,7 @@ interface Agency {
   };
   rating: number;
   status: "active" | "on-hold";
+  sites: { name: string; workers: number; departments: { name: string; workers: number }[] }[];
 }
 
 const agencies: Agency[] = [
@@ -31,16 +52,62 @@ const agencies: Agency[] = [
     activeWorkers: 32,
     totalWorkers: 85,
     performance: {
-      responseTime: "12 min",
-      timeToFill: "4.2 hrs",
-      attendance: 94,
-      punctuality: 91,
-      attrition: 8,
-      newRegistrations: 12,
+      week: {
+        responseTime: "12 min",
+        timeToFill: "4.2 hrs",
+        attendance: 94,
+        punctuality: 91,
+        attrition: 8,
+        newRegistrations: 12,
+      },
+      month: {
+        responseTime: "15 min",
+        timeToFill: "4.8 hrs",
+        attendance: 92,
+        punctuality: 89,
+        attrition: 10,
+        newRegistrations: 42,
+      },
+      year: {
+        responseTime: "14 min",
+        timeToFill: "4.5 hrs",
+        attendance: 93,
+        punctuality: 90,
+        attrition: 9,
+        newRegistrations: 156,
+      },
     },
-    rateCard: { warehouseOp: 12.50, picker: 12.00, forklift: 15.00, loader: 12.50 },
+    rateCard: { warehouseOp: 12.5, picker: 12.0, forklift: 15.0, loader: 12.5 },
     rating: 4.5,
     status: "active",
+    sites: [
+      {
+        name: "Heathrow DC",
+        workers: 25,
+        departments: [
+          { name: "Warehouse", workers: 12 },
+          { name: "Picking", workers: 8 },
+          { name: "Loading", workers: 5 },
+        ],
+      },
+      {
+        name: "Coventry Hub",
+        workers: 18,
+        departments: [
+          { name: "Warehouse", workers: 10 },
+          { name: "Picking", workers: 5 },
+          { name: "Quality", workers: 3 },
+        ],
+      },
+      {
+        name: "Birmingham DC",
+        workers: 7,
+        departments: [
+          { name: "Warehouse", workers: 4 },
+          { name: "Picking", workers: 3 },
+        ],
+      },
+    ],
   },
   {
     id: "2",
@@ -48,16 +115,54 @@ const agencies: Agency[] = [
     activeWorkers: 18,
     totalWorkers: 45,
     performance: {
-      responseTime: "8 min",
-      timeToFill: "3.8 hrs",
-      attendance: 96,
-      punctuality: 94,
-      attrition: 5,
-      newRegistrations: 8,
+      week: {
+        responseTime: "8 min",
+        timeToFill: "3.8 hrs",
+        attendance: 96,
+        punctuality: 94,
+        attrition: 5,
+        newRegistrations: 8,
+      },
+      month: {
+        responseTime: "10 min",
+        timeToFill: "4.0 hrs",
+        attendance: 95,
+        punctuality: 93,
+        attrition: 6,
+        newRegistrations: 28,
+      },
+      year: {
+        responseTime: "9 min",
+        timeToFill: "3.9 hrs",
+        attendance: 95,
+        punctuality: 93,
+        attrition: 6,
+        newRegistrations: 112,
+      },
     },
-    rateCard: { warehouseOp: 13.00, picker: 12.50, forklift: 15.50, loader: 13.00 },
+    rateCard: { warehouseOp: 13.0, picker: 12.5, forklift: 15.5, loader: 13.0 },
     rating: 4.8,
     status: "active",
+    sites: [
+      {
+        name: "Heathrow DC",
+        workers: 12,
+        departments: [
+          { name: "Warehouse", workers: 6 },
+          { name: "Packing", workers: 4 },
+          { name: "Loading", workers: 2 },
+        ],
+      },
+      {
+        name: "Birmingham DC",
+        workers: 15,
+        departments: [
+          { name: "Warehouse", workers: 8 },
+          { name: "Picking", workers: 5 },
+          { name: "Quality", workers: 2 },
+        ],
+      },
+    ],
   },
   {
     id: "3",
@@ -65,21 +170,70 @@ const agencies: Agency[] = [
     activeWorkers: 12,
     totalWorkers: 30,
     performance: {
-      responseTime: "18 min",
-      timeToFill: "5.5 hrs",
-      attendance: 89,
-      punctuality: 86,
-      attrition: 12,
-      newRegistrations: 3,
+      week: {
+        responseTime: "18 min",
+        timeToFill: "5.5 hrs",
+        attendance: 89,
+        punctuality: 86,
+        attrition: 12,
+        newRegistrations: 3,
+      },
+      month: {
+        responseTime: "22 min",
+        timeToFill: "6.2 hrs",
+        attendance: 87,
+        punctuality: 84,
+        attrition: 14,
+        newRegistrations: 10,
+      },
+      year: {
+        responseTime: "20 min",
+        timeToFill: "5.8 hrs",
+        attendance: 88,
+        punctuality: 85,
+        attrition: 13,
+        newRegistrations: 48,
+      },
     },
-    rateCard: { warehouseOp: 11.80, picker: 11.50, forklift: 14.50, loader: 12.00 },
+    rateCard: { warehouseOp: 11.8, picker: 11.5, forklift: 14.5, loader: 12.0 },
     rating: 3.8,
     status: "active",
+    sites: [
+      {
+        name: "Heathrow DC",
+        workers: 5,
+        departments: [
+          { name: "Loading", workers: 3 },
+          { name: "Picking", workers: 2 },
+        ],
+      },
+      {
+        name: "Coventry Hub",
+        workers: 12,
+        departments: [
+          { name: "Warehouse", workers: 6 },
+          { name: "Loading", workers: 4 },
+          { name: "Packing", workers: 2 },
+        ],
+      },
+    ],
   },
 ];
 
-const ClientAgencies = () => {
+interface ClientAgenciesProps {
+  onViewWorker?: (workerName: string) => void;
+}
+
+const ClientAgencies = ({ onViewWorker }: ClientAgenciesProps) => {
   const [selectedAgency, setSelectedAgency] = useState<Agency | null>(null);
+  const [timePeriod, setTimePeriod] = useState<"week" | "month" | "year">("week");
+  const [expandedAgencies, setExpandedAgencies] = useState<string[]>([]);
+
+  const toggleAgency = (agencyId: string) => {
+    setExpandedAgencies((prev) =>
+      prev.includes(agencyId) ? prev.filter((id) => id !== agencyId) : [...prev, agencyId]
+    );
+  };
 
   const getPerformanceColor = (value: number, type: "attendance" | "punctuality" | "attrition") => {
     if (type === "attrition") {
@@ -92,12 +246,31 @@ const ClientAgencies = () => {
     return "text-destructive";
   };
 
+  const currentMetrics = (agency: Agency) => agency.performance[timePeriod];
+
   return (
     <div className="p-4 md:p-6 space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-lg md:text-xl font-bold text-foreground">Agencies</h1>
-        <p className="text-xs text-muted-foreground">Manage and monitor agency performance</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-lg md:text-xl font-bold text-foreground">Agencies</h1>
+          <p className="text-xs text-muted-foreground">Manage and monitor agency performance</p>
+        </div>
+        <div className="flex items-center bg-card border border-border rounded-lg">
+          {(["week", "month", "year"] as const).map((period) => (
+            <button
+              key={period}
+              onClick={() => setTimePeriod(period)}
+              className={`px-4 py-1.5 text-xs capitalize transition-colors ${
+                timePeriod === period
+                  ? "bg-primary text-primary-foreground rounded-lg"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {period}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Summary Cards */}
@@ -122,7 +295,7 @@ const ClientAgencies = () => {
             <span className="text-xs text-muted-foreground">Avg Attendance</span>
           </div>
           <p className="text-xl font-bold text-primary">
-            {Math.round(agencies.reduce((a, ag) => a + ag.performance.attendance, 0) / agencies.length)}%
+            {Math.round(agencies.reduce((a, ag) => a + currentMetrics(ag).attendance, 0) / agencies.length)}%
           </p>
         </div>
         <div className="bg-card border border-border rounded-lg p-3">
@@ -130,63 +303,128 @@ const ClientAgencies = () => {
             <Clock className="w-4 h-4 text-muted-foreground" />
             <span className="text-xs text-muted-foreground">Avg Response</span>
           </div>
-          <p className="text-xl font-bold">12 min</p>
+          <p className="text-xl font-bold">
+            {Math.round(
+              agencies.reduce((a, ag) => a + parseInt(currentMetrics(ag).responseTime), 0) / agencies.length
+            )}{" "}
+            min
+          </p>
         </div>
       </div>
 
-      {/* Agency List */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {agencies.map((agency) => (
-          <div
-            key={agency.id}
-            className="bg-card border border-border rounded-lg p-4 hover:border-primary/50 transition-colors cursor-pointer"
-            onClick={() => setSelectedAgency(agency)}
-          >
-            <div className="flex items-start justify-between mb-4">
-              <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="font-semibold">{agency.name}</h3>
-                  <div className="flex items-center gap-0.5">
-                    <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
-                    <span className="text-xs font-medium">{agency.rating}</span>
+      {/* Agency List - Stacked */}
+      <div className="space-y-3">
+        {agencies.map((agency) => {
+          const isExpanded = expandedAgencies.includes(agency.id);
+          const metrics = currentMetrics(agency);
+          return (
+            <div key={agency.id} className="bg-card border border-border rounded-lg overflow-hidden">
+              {/* Agency Header */}
+              <div
+                className="p-4 cursor-pointer hover:bg-muted/30 transition-colors"
+                onClick={() => toggleAgency(agency.id)}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-semibold text-base">{agency.name}</h3>
+                        <div className="flex items-center gap-0.5">
+                          <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                          <span className="text-sm font-medium">{agency.rating}</span>
+                        </div>
+                      </div>
+                      <p className="text-xs text-muted-foreground">
+                        {agency.activeWorkers} active / {agency.totalWorkers} total workers
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedAgency(agency);
+                      }}
+                      className="text-xs text-primary hover:underline"
+                    >
+                      View Details
+                    </button>
+                    {isExpanded ? (
+                      <ChevronUp className="w-5 h-5 text-muted-foreground" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                    )}
                   </div>
                 </div>
-                <p className="text-xs text-muted-foreground">{agency.activeWorkers} active / {agency.totalWorkers} total workers</p>
-              </div>
-              <ChevronRight className="w-5 h-5 text-muted-foreground" />
-            </div>
 
-            <div className="grid grid-cols-3 gap-3 mb-3">
-              <div>
-                <p className="text-xs text-muted-foreground">Attendance</p>
-                <p className={`text-sm font-semibold ${getPerformanceColor(agency.performance.attendance, "attendance")}`}>
-                  {agency.performance.attendance}%
-                </p>
+                {/* Performance Metrics Row */}
+                <div className="grid grid-cols-6 gap-3">
+                  <div>
+                    <p className="text-xs text-muted-foreground">Attendance</p>
+                    <p className={`text-sm font-semibold ${getPerformanceColor(metrics.attendance, "attendance")}`}>
+                      {metrics.attendance}%
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Punctuality</p>
+                    <p className={`text-sm font-semibold ${getPerformanceColor(metrics.punctuality, "punctuality")}`}>
+                      {metrics.punctuality}%
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Attrition</p>
+                    <p className={`text-sm font-semibold ${getPerformanceColor(metrics.attrition, "attrition")}`}>
+                      {metrics.attrition}%
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Response Time</p>
+                    <p className="text-sm font-semibold">{metrics.responseTime}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Time-to-Fill</p>
+                    <p className="text-sm font-semibold">{metrics.timeToFill}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">New Registered</p>
+                    <p className="text-sm font-semibold text-primary">+{metrics.newRegistrations}</p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="text-xs text-muted-foreground">Punctuality</p>
-                <p className={`text-sm font-semibold ${getPerformanceColor(agency.performance.punctuality, "punctuality")}`}>
-                  {agency.performance.punctuality}%
-                </p>
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">Attrition</p>
-                <p className={`text-sm font-semibold ${getPerformanceColor(agency.performance.attrition, "attrition")}`}>
-                  {agency.performance.attrition}%
-                </p>
-              </div>
-            </div>
 
-            <div className="flex items-center gap-4 text-xs text-muted-foreground pt-3 border-t border-border">
-              <span className="flex items-center gap-1">
-                <Clock className="w-3 h-3" />
-                Response: {agency.performance.responseTime}
-              </span>
-              <span>Time-to-fill: {agency.performance.timeToFill}</span>
-              <span>+{agency.performance.newRegistrations} new this week</span>
+              {/* Expanded Site/Department Breakdown */}
+              {isExpanded && (
+                <div className="border-t border-border bg-muted/20 p-4">
+                  <h4 className="text-xs font-semibold text-muted-foreground mb-3 uppercase tracking-wider">
+                    Site & Department Breakdown
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    {agency.sites.map((site) => (
+                      <div key={site.name} className="bg-card rounded-lg p-3 border border-border">
+                        <div className="flex items-center gap-2 mb-2">
+                          <MapPin className="w-3.5 h-3.5 text-muted-foreground" />
+                          <span className="text-sm font-medium">{site.name}</span>
+                          <span className="text-xs text-muted-foreground ml-auto">{site.workers} workers</span>
+                        </div>
+                        <div className="space-y-1.5">
+                          {site.departments.map((dept) => (
+                            <div key={dept.name} className="flex items-center justify-between text-xs">
+                              <div className="flex items-center gap-1.5">
+                                <Briefcase className="w-3 h-3 text-muted-foreground" />
+                                <span className="text-muted-foreground">{dept.name}</span>
+                              </div>
+                              <span className="font-medium">{dept.workers}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Agency Detail Modal */}
@@ -198,41 +436,66 @@ const ClientAgencies = () => {
                 <h2 className="text-lg font-semibold">{selectedAgency.name}</h2>
                 <p className="text-xs text-muted-foreground">{selectedAgency.totalWorkers} workers registered</p>
               </div>
-              <button onClick={() => setSelectedAgency(null)} className="text-muted-foreground hover:text-foreground">×</button>
+              <button onClick={() => setSelectedAgency(null)} className="text-muted-foreground hover:text-foreground">
+                ×
+              </button>
             </div>
 
             {/* Performance Metrics */}
             <div className="mb-6">
-              <h3 className="text-sm font-semibold mb-3">Performance Metrics</h3>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-sm font-semibold">Performance Metrics</h3>
+                <div className="flex items-center bg-muted rounded-lg">
+                  {(["week", "month", "year"] as const).map((period) => (
+                    <button
+                      key={period}
+                      onClick={() => setTimePeriod(period)}
+                      className={`px-3 py-1 text-xs capitalize transition-colors ${
+                        timePeriod === period
+                          ? "bg-primary text-primary-foreground rounded-lg"
+                          : "text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      {period}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <div className="grid grid-cols-3 gap-4">
                 <div className="bg-muted/30 rounded-lg p-3">
                   <p className="text-xs text-muted-foreground">Response Time</p>
-                  <p className="text-lg font-bold">{selectedAgency.performance.responseTime}</p>
+                  <p className="text-lg font-bold">{currentMetrics(selectedAgency).responseTime}</p>
                 </div>
                 <div className="bg-muted/30 rounded-lg p-3">
                   <p className="text-xs text-muted-foreground">Time-to-Fill</p>
-                  <p className="text-lg font-bold">{selectedAgency.performance.timeToFill}</p>
+                  <p className="text-lg font-bold">{currentMetrics(selectedAgency).timeToFill}</p>
                 </div>
                 <div className="bg-muted/30 rounded-lg p-3">
                   <p className="text-xs text-muted-foreground">New Registrations</p>
-                  <p className="text-lg font-bold text-primary">{selectedAgency.performance.newRegistrations}</p>
+                  <p className="text-lg font-bold text-primary">{currentMetrics(selectedAgency).newRegistrations}</p>
                 </div>
                 <div className="bg-muted/30 rounded-lg p-3">
                   <p className="text-xs text-muted-foreground">Attendance</p>
-                  <p className={`text-lg font-bold ${getPerformanceColor(selectedAgency.performance.attendance, "attendance")}`}>
-                    {selectedAgency.performance.attendance}%
+                  <p
+                    className={`text-lg font-bold ${getPerformanceColor(currentMetrics(selectedAgency).attendance, "attendance")}`}
+                  >
+                    {currentMetrics(selectedAgency).attendance}%
                   </p>
                 </div>
                 <div className="bg-muted/30 rounded-lg p-3">
                   <p className="text-xs text-muted-foreground">Punctuality</p>
-                  <p className={`text-lg font-bold ${getPerformanceColor(selectedAgency.performance.punctuality, "punctuality")}`}>
-                    {selectedAgency.performance.punctuality}%
+                  <p
+                    className={`text-lg font-bold ${getPerformanceColor(currentMetrics(selectedAgency).punctuality, "punctuality")}`}
+                  >
+                    {currentMetrics(selectedAgency).punctuality}%
                   </p>
                 </div>
                 <div className="bg-muted/30 rounded-lg p-3">
                   <p className="text-xs text-muted-foreground">Attrition</p>
-                  <p className={`text-lg font-bold ${getPerformanceColor(selectedAgency.performance.attrition, "attrition")}`}>
-                    {selectedAgency.performance.attrition}%
+                  <p
+                    className={`text-lg font-bold ${getPerformanceColor(currentMetrics(selectedAgency).attrition, "attrition")}`}
+                  >
+                    {currentMetrics(selectedAgency).attrition}%
                   </p>
                 </div>
               </div>

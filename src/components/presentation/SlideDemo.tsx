@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Play, ChevronDown, ArrowLeft, Shield, Eye, EyeOff, Bell } from "lucide-react";
+import { Play, ChevronDown, ArrowLeft, Shield, Eye, EyeOff, Bell, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Slide from "./Slide";
 import { Input } from "@/components/ui/input";
@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DemoProvider, useDemoContext } from "./demo/DemoContext";
+import WorkerProfileModal from "./demo/WorkerProfileModal";
 
 // New sidebars
 import ClientSidebar from "./demo/ClientSidebar";
@@ -51,7 +52,12 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   const [viewMode, setViewMode] = useState<ViewMode>("client");
   const [activeClientView, setActiveClientView] = useState("live-snapshot");
   const [activeAgencyView, setActiveAgencyView] = useState("live-snapshot");
+  const [selectedWorkerName, setSelectedWorkerName] = useState<string | null>(null);
   const { notifications, bookings } = useDemoContext();
+
+  const handleViewWorker = (workerName: string) => {
+    setSelectedWorkerName(workerName);
+  };
 
   const unreadCount = notifications.filter(
     (n) => !n.read && (n.targetView === viewMode || n.targetView === "both")
@@ -236,13 +242,13 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   const renderClientView = () => {
     switch (activeClientView) {
       case "live-snapshot":
-        return <ClientLiveSnapshot />;
+        return <ClientLiveSnapshot onViewWorker={handleViewWorker} />;
       case "schedule":
         return <ClientSchedule />;
       case "bookings":
         return <ClientBookings />;
       case "agencies":
-        return <ClientAgencies />;
+        return <ClientAgencies onViewWorker={handleViewWorker} />;
       case "workers":
         return <ClientWorkers />;
       case "payroll":
@@ -250,7 +256,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
       case "billing":
         return <ClientBilling />;
       case "spend-analysis":
-        return <ClientSpendAnalysis />;
+        return <ClientSpendAnalysis onViewWorker={handleViewWorker} />;
       case "temp-perm":
         return <ClientTempPerm />;
       case "notifications":
@@ -258,7 +264,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
       case "chatbot":
         return <DemoChatbot />;
       default:
-        return <ClientLiveSnapshot />;
+        return <ClientLiveSnapshot onViewWorker={handleViewWorker} />;
     }
   };
 
@@ -305,13 +311,6 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
             <ArrowLeft className="w-4 h-4" />
             Back to Slides
           </Button>
-
-          {unreadCount > 0 && (
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/30 rounded-lg">
-              <Bell className="w-4 h-4 text-primary" />
-              <span className="text-xs font-medium text-primary">{unreadCount} new</span>
-            </div>
-          )}
         </div>
 
         {/* View Mode Dropdown */}
@@ -338,7 +337,24 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <div className="w-[140px]" />
+        {/* Notification Bell - Top Right */}
+        <button
+          onClick={() => {
+            if (viewMode === "client") {
+              setActiveClientView("notifications");
+            } else {
+              setActiveAgencyView("notifications");
+            }
+          }}
+          className="relative p-2 rounded-lg hover:bg-muted/50 transition-colors"
+        >
+          <Bell className="w-5 h-5 text-muted-foreground" />
+          {unreadCount > 0 && (
+            <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full flex items-center justify-center">
+              {unreadCount > 9 ? "9+" : unreadCount}
+            </span>
+          )}
+        </button>
       </div>
 
       {/* Demo Container */}
@@ -370,6 +386,14 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
           </>
         )}
       </motion.div>
+
+      {/* Worker Profile Modal */}
+      {selectedWorkerName && (
+        <WorkerProfileModal
+          workerName={selectedWorkerName}
+          onClose={() => setSelectedWorkerName(null)}
+        />
+      )}
     </div>
   );
 };
