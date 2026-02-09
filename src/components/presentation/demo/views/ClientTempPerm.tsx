@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UserCheck, Clock, TrendingUp, Star, Building2, Filter, ChevronRight } from "lucide-react";
+import { UserCheck, Clock, TrendingUp, Star, Building2, Filter, ChevronRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface TempPermCandidate {
@@ -15,20 +15,33 @@ interface TempPermCandidate {
   departments: string[];
   rating: number;
   eligible: boolean;
+  hoursWorked: number;
 }
 
 const candidates: TempPermCandidate[] = [
-  { id: "1", name: "Maria Santos", agency: "Pertemps", site: "Heathrow DC", department: "Picking", role: "Senior Picker", timeServed: 18, attendance: 100, punctuality: 98, departments: ["Picking", "Packing", "Quality"], rating: 4.9, eligible: true },
-  { id: "2", name: "John Patel", agency: "Staffline", site: "Heathrow DC", department: "Warehouse", role: "Operative", timeServed: 14, attendance: 98, punctuality: 95, departments: ["Warehouse", "Loading"], rating: 4.7, eligible: true },
-  { id: "3", name: "Lucy Brown", agency: "Staffline", site: "Coventry Hub", department: "Warehouse", role: "Team Lead", timeServed: 24, attendance: 97, punctuality: 96, departments: ["Warehouse", "Picking", "Loading"], rating: 4.8, eligible: true },
-  { id: "4", name: "Ahmed Khan", agency: "Blue Arrow", site: "Heathrow DC", department: "Warehouse", role: "Forklift", timeServed: 12, attendance: 95, punctuality: 91, departments: ["Warehouse"], rating: 4.5, eligible: true },
-  { id: "5", name: "Priya Sharma", agency: "Pertemps", site: "Heathrow DC", department: "Quality", role: "QC", timeServed: 10, attendance: 100, punctuality: 100, departments: ["Quality", "Packing"], rating: 5.0, eligible: true },
-  { id: "6", name: "Tomasz Nowak", agency: "Staffline", site: "Heathrow DC", department: "Loading", role: "Loader", timeServed: 6, attendance: 85, punctuality: 80, departments: ["Loading"], rating: 3.5, eligible: false },
+  { id: "1", name: "Maria Santos", agency: "Pertemps", site: "Heathrow DC", department: "Picking", role: "Senior Picker", timeServed: 18, attendance: 100, punctuality: 98, departments: ["Picking", "Packing", "Quality"], rating: 4.9, eligible: true, hoursWorked: 2880 },
+  { id: "2", name: "John Patel", agency: "Staffline", site: "Heathrow DC", department: "Warehouse", role: "Operative", timeServed: 14, attendance: 98, punctuality: 95, departments: ["Warehouse", "Loading"], rating: 4.7, eligible: true, hoursWorked: 2240 },
+  { id: "3", name: "Lucy Brown", agency: "Staffline", site: "Coventry Hub", department: "Warehouse", role: "Team Lead", timeServed: 24, attendance: 97, punctuality: 96, departments: ["Warehouse", "Picking", "Loading"], rating: 4.8, eligible: true, hoursWorked: 3840 },
+  { id: "4", name: "Ahmed Khan", agency: "Blue Arrow", site: "Heathrow DC", department: "Warehouse", role: "Forklift", timeServed: 12, attendance: 95, punctuality: 91, departments: ["Warehouse"], rating: 4.5, eligible: true, hoursWorked: 1920 },
+  { id: "5", name: "Priya Sharma", agency: "Pertemps", site: "Heathrow DC", department: "Quality", role: "QC", timeServed: 10, attendance: 100, punctuality: 100, departments: ["Quality", "Packing"], rating: 5.0, eligible: true, hoursWorked: 1600 },
+  { id: "6", name: "Marcus Johnson", agency: "Staffline", site: "Heathrow DC", department: "Loading", role: "Loader", timeServed: 16, attendance: 99, punctuality: 97, departments: ["Loading", "Warehouse"], rating: 4.9, eligible: true, hoursWorked: 2560 },
+  { id: "7", name: "Fatima Ali", agency: "Pertemps", site: "Birmingham DC", department: "Packing", role: "Senior Packer", timeServed: 15, attendance: 96, punctuality: 94, departments: ["Packing", "Returns"], rating: 4.6, eligible: true, hoursWorked: 2400 },
+  { id: "8", name: "Daniel Kim", agency: "Blue Arrow", site: "Heathrow DC", department: "Picking", role: "Picker", timeServed: 11, attendance: 97, punctuality: 95, departments: ["Picking", "Goods In"], rating: 4.7, eligible: true, hoursWorked: 1760 },
+  { id: "9", name: "Elena Rodriguez", agency: "Staffline", site: "Coventry Hub", department: "Returns", role: "Handler", timeServed: 13, attendance: 93, punctuality: 90, departments: ["Returns", "Quality"], rating: 4.3, eligible: true, hoursWorked: 2080 },
+  { id: "10", name: "Kevin Wright", agency: "Pertemps", site: "Heathrow DC", department: "Quality", role: "Senior QC", timeServed: 20, attendance: 99, punctuality: 98, departments: ["Quality", "Packing", "Returns"], rating: 4.8, eligible: true, hoursWorked: 3200 },
+  { id: "11", name: "Tomasz Nowak", agency: "Staffline", site: "Heathrow DC", department: "Loading", role: "Loader", timeServed: 6, attendance: 85, punctuality: 80, departments: ["Loading"], rating: 3.5, eligible: false, hoursWorked: 960 },
+  { id: "12", name: "Sophie Turner", agency: "Blue Arrow", site: "Birmingham DC", department: "Warehouse", role: "Operative", timeServed: 4, attendance: 88, punctuality: 82, departments: ["Warehouse"], rating: 3.8, eligible: false, hoursWorked: 640 },
+  { id: "13", name: "James Wilson", agency: "Pertemps", site: "Coventry Hub", department: "Picking", role: "Picker", timeServed: 8, attendance: 91, punctuality: 88, departments: ["Picking"], rating: 4.0, eligible: false, hoursWorked: 1280 },
 ];
 
-const ClientTempPerm = () => {
+interface ClientTempPermProps {
+  onViewWorker?: (workerName: string) => void;
+}
+
+const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
   const [siteFilter, setSiteFilter] = useState("all");
   const [departmentFilter, setDepartmentFilter] = useState("all");
+  const [agencyFilter, setAgencyFilter] = useState("all");
   const [selectedCandidate, setSelectedCandidate] = useState<TempPermCandidate | null>(null);
 
   const eligibleCount = candidates.filter(c => c.eligible).length;
@@ -36,12 +49,21 @@ const ClientTempPerm = () => {
   const getSortedCandidates = () => {
     return [...candidates]
       .filter(c => c.eligible)
+      .filter(c => siteFilter === "all" || c.site === siteFilter)
+      .filter(c => departmentFilter === "all" || c.department.toLowerCase() === departmentFilter)
+      .filter(c => agencyFilter === "all" || c.agency === agencyFilter)
       .sort((a, b) => {
         // Sort by: time served, then attendance, then multi-skill
         const scoreA = a.timeServed * 2 + a.attendance + a.departments.length * 5;
         const scoreB = b.timeServed * 2 + b.attendance + b.departments.length * 5;
         return scoreB - scoreA;
       });
+  };
+
+  const handleWorkerClick = (name: string) => {
+    if (onViewWorker) {
+      onViewWorker(name);
+    }
   };
 
   return (
@@ -60,9 +82,9 @@ const ClientTempPerm = () => {
             className="text-xs bg-card border border-border rounded px-2 py-1.5"
           >
             <option value="all">All Sites</option>
-            <option value="heathrow">Heathrow DC</option>
-            <option value="coventry">Coventry Hub</option>
-            <option value="birmingham">Birmingham DC</option>
+            <option value="Heathrow DC">Heathrow DC</option>
+            <option value="Coventry Hub">Coventry Hub</option>
+            <option value="Birmingham DC">Birmingham DC</option>
           </select>
           <select
             value={departmentFilter}
@@ -72,7 +94,20 @@ const ClientTempPerm = () => {
             <option value="all">All Departments</option>
             <option value="warehouse">Warehouse</option>
             <option value="picking">Picking</option>
+            <option value="packing">Packing</option>
             <option value="loading">Loading</option>
+            <option value="quality">Quality</option>
+            <option value="returns">Returns</option>
+          </select>
+          <select
+            value={agencyFilter}
+            onChange={(e) => setAgencyFilter(e.target.value)}
+            className="text-xs bg-card border border-border rounded px-2 py-1.5"
+          >
+            <option value="all">All Agencies</option>
+            <option value="Staffline">Staffline</option>
+            <option value="Pertemps">Pertemps</option>
+            <option value="Blue Arrow">Blue Arrow</option>
           </select>
         </div>
       </div>
@@ -91,7 +126,7 @@ const ClientTempPerm = () => {
             <Clock className="w-4 h-4 text-muted-foreground" />
             <span className="text-xs text-muted-foreground">Avg Time Served</span>
           </div>
-          <p className="text-xl font-bold">14 mo</p>
+          <p className="text-xl font-bold">15 mo</p>
         </div>
         <div className="bg-card border border-border rounded-lg p-3">
           <div className="flex items-center gap-2 mb-1">
@@ -103,9 +138,9 @@ const ClientTempPerm = () => {
         <div className="bg-card border border-border rounded-lg p-3">
           <div className="flex items-center gap-2 mb-1">
             <Star className="w-4 h-4 text-amber-500" />
-            <span className="text-xs text-muted-foreground">Top Rated</span>
+            <span className="text-xs text-muted-foreground">Top Rated (4.8+)</span>
           </div>
-          <p className="text-xl font-bold">3</p>
+          <p className="text-xl font-bold">5</p>
         </div>
       </div>
 
@@ -119,10 +154,9 @@ const ClientTempPerm = () => {
           {getSortedCandidates().map((candidate, idx) => (
             <div
               key={candidate.id}
-              onClick={() => setSelectedCandidate(candidate)}
-              className="p-4 flex items-center justify-between hover:bg-muted/30 cursor-pointer transition-colors"
+              className="p-4 flex items-center justify-between hover:bg-muted/30 transition-colors"
             >
-              <div className="flex items-center gap-4">
+              <button onClick={() => handleWorkerClick(candidate.name)} className="flex items-center gap-4 text-left hover:underline">
                 <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-sm font-bold text-primary">
                   {idx + 1}
                 </div>
@@ -134,10 +168,17 @@ const ClientTempPerm = () => {
                       <span className="text-xs font-medium">{candidate.rating}</span>
                     </div>
                   </div>
-                  <p className="text-xs text-muted-foreground">{candidate.role} • {candidate.site} • {candidate.department}</p>
+                  <p className="text-xs text-muted-foreground">{candidate.role} • {candidate.agency}</p>
                 </div>
-              </div>
+              </button>
               <div className="flex items-center gap-6">
+                <div className="text-center">
+                  <div className="flex items-center gap-1">
+                    <MapPin className="w-3 h-3 text-muted-foreground" />
+                    <p className="text-sm font-medium">{candidate.site}</p>
+                  </div>
+                  <p className="text-xs text-muted-foreground">{candidate.department}</p>
+                </div>
                 <div className="text-center">
                   <p className="text-sm font-bold">{candidate.timeServed}mo</p>
                   <p className="text-xs text-muted-foreground">Time Served</p>
@@ -147,10 +188,19 @@ const ClientTempPerm = () => {
                   <p className="text-xs text-muted-foreground">Attendance</p>
                 </div>
                 <div className="text-center">
+                  <p className="text-sm font-bold">{candidate.hoursWorked.toLocaleString()}</p>
+                  <p className="text-xs text-muted-foreground">Hours</p>
+                </div>
+                <div className="text-center">
                   <p className="text-sm font-bold">{candidate.departments.length}</p>
                   <p className="text-xs text-muted-foreground">Depts</p>
                 </div>
-                <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                <button
+                  onClick={() => setSelectedCandidate(candidate)}
+                  className="p-2 hover:bg-muted rounded-lg transition-colors"
+                >
+                  <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                </button>
               </div>
             </div>
           ))}
@@ -164,7 +214,9 @@ const ClientTempPerm = () => {
             <div className="flex items-start justify-between mb-4">
               <div>
                 <div className="flex items-center gap-2">
-                  <h2 className="text-lg font-semibold">{selectedCandidate.name}</h2>
+                  <button onClick={() => handleWorkerClick(selectedCandidate.name)} className="hover:underline">
+                    <h2 className="text-lg font-semibold">{selectedCandidate.name}</h2>
+                  </button>
                   <div className="flex items-center gap-0.5">
                     <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
                     <span className="font-medium">{selectedCandidate.rating}</span>
@@ -189,8 +241,16 @@ const ClientTempPerm = () => {
                 <p className="text-lg font-bold">{selectedCandidate.punctuality}%</p>
               </div>
               <div className="bg-muted/30 rounded-lg p-3">
+                <p className="text-xs text-muted-foreground">Total Hours</p>
+                <p className="text-lg font-bold">{selectedCandidate.hoursWorked.toLocaleString()}</p>
+              </div>
+              <div className="bg-muted/30 rounded-lg p-3">
                 <p className="text-xs text-muted-foreground">Agency</p>
                 <p className="text-lg font-bold">{selectedCandidate.agency}</p>
+              </div>
+              <div className="bg-muted/30 rounded-lg p-3">
+                <p className="text-xs text-muted-foreground">Site</p>
+                <p className="text-lg font-bold">{selectedCandidate.site}</p>
               </div>
             </div>
 
