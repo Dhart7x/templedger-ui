@@ -1,12 +1,23 @@
-import { useState } from "react";
-import { Plus, Check, X, MessageSquare, Clock, Users, Building2, Sparkles, Send } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Plus, Check, X, MessageSquare, Clock, Users, Building2, Sparkles, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDemoContext } from "../DemoContext";
+
+const agencies = ["Staffline", "Pertemps", "Blue Arrow", "Elite Personnel", "Reed"];
+const rationales = [
+  "This agency has {count} trained temps on standby within 3 miles of site",
+  "Best availability match with {count} workers ready for immediate deployment",
+  "Highest reliability score (98%) for {role} roles at {site}",
+  "Fastest response time and {count} verified workers available",
+  "Cost-effective option with {count} pre-vetted workers nearby",
+];
 
 const ClientBookings = () => {
   const { bookings, createBooking } = useDemoContext();
   const [filter, setFilter] = useState<"all" | "pending" | "accepted" | "rejected">("all");
   const [showNewBooking, setShowNewBooking] = useState(false);
+  const [isAllocating, setIsAllocating] = useState(false);
+  const [allocationResult, setAllocationResult] = useState<{ agency: string; rationale: string } | null>(null);
   const [newBooking, setNewBooking] = useState({
     role: "Warehouse Operative",
     quantity: 1,
@@ -21,6 +32,23 @@ const ClientBookings = () => {
   
   const pendingCount = bookings.filter(b => b.status === "pending" || b.status === "info-requested").length;
 
+  const runIntelligentAllocation = () => {
+    setIsAllocating(true);
+    setAllocationResult(null);
+    
+    // Simulate 3 second loading
+    setTimeout(() => {
+      const randomAgency = agencies[Math.floor(Math.random() * agencies.length)];
+      const randomRationale = rationales[Math.floor(Math.random() * rationales.length)]
+        .replace("{count}", String(Math.floor(Math.random() * 15) + 8))
+        .replace("{role}", newBooking.role)
+        .replace("{site}", newBooking.location.split(" - ")[0]);
+      
+      setAllocationResult({ agency: randomAgency, rationale: randomRationale });
+      setIsAllocating(false);
+    }, 3000);
+  };
+
   const handleCreateBooking = () => {
     const [site, zone] = newBooking.location.split(" - ");
     createBooking({
@@ -30,9 +58,10 @@ const ClientBookings = () => {
       site: site,
       shift: newBooking.shift,
       date: "Mon 10 Feb",
-      suggestedAgency: newBooking.useIntelligentAllocation ? "Staffline" : undefined,
+      suggestedAgency: allocationResult?.agency || (newBooking.useIntelligentAllocation ? "Staffline" : undefined),
     });
     setShowNewBooking(false);
+    setAllocationResult(null);
     setNewBooking({
       role: "Warehouse Operative",
       quantity: 1,
@@ -40,6 +69,12 @@ const ClientBookings = () => {
       location: "Heathrow DC - Zone A",
       useIntelligentAllocation: false,
     });
+  };
+
+  const handleCloseModal = () => {
+    setShowNewBooking(false);
+    setAllocationResult(null);
+    setIsAllocating(false);
   };
 
   const getStatusBadge = (status: string) => {
@@ -187,6 +222,7 @@ const ClientBookings = () => {
                   value={newBooking.role}
                   onChange={(e) => setNewBooking({ ...newBooking, role: e.target.value })}
                   className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm"
+                  disabled={isAllocating}
                 >
                   <option>Warehouse Operative</option>
                   <option>Picker</option>
@@ -203,7 +239,8 @@ const ClientBookings = () => {
                     value={newBooking.quantity}
                     onChange={(e) => setNewBooking({ ...newBooking, quantity: parseInt(e.target.value) || 1 })}
                     min="1"
-                    className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm" 
+                    className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm"
+                    disabled={isAllocating}
                   />
                 </div>
                 <div>
@@ -212,6 +249,7 @@ const ClientBookings = () => {
                     value={newBooking.shift}
                     onChange={(e) => setNewBooking({ ...newBooking, shift: e.target.value })}
                     className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm"
+                    disabled={isAllocating}
                   >
                     <option>06:00–14:00</option>
                     <option>14:00–22:00</option>
@@ -225,6 +263,7 @@ const ClientBookings = () => {
                   value={newBooking.location}
                   onChange={(e) => setNewBooking({ ...newBooking, location: e.target.value })}
                   className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm"
+                  disabled={isAllocating}
                 >
                   <option>Heathrow DC - Zone A</option>
                   <option>Heathrow DC - Zone B</option>
@@ -232,29 +271,60 @@ const ClientBookings = () => {
                   <option>Birmingham DC - Zone A</option>
                 </select>
               </div>
-              <div className="pt-2">
-                <button
-                  onClick={() => setNewBooking({ ...newBooking, useIntelligentAllocation: !newBooking.useIntelligentAllocation })}
-                  className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg border transition-colors ${
-                    newBooking.useIntelligentAllocation
-                      ? "bg-primary/10 border-primary text-primary"
-                      : "bg-muted/30 border-border text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  <Sparkles className="w-4 h-4" />
-                  <span className="font-medium">Use Intelligent Allocation</span>
-                  {newBooking.useIntelligentAllocation && <Check className="w-4 h-4" />}
-                </button>
-                {newBooking.useIntelligentAllocation && (
-                  <p className="text-xs text-muted-foreground mt-2 text-center">
-                    Will suggest best agency based on availability, reliability & cost
-                  </p>
+              
+              {/* Intelligent Allocation Section */}
+              <div className="pt-2 space-y-3">
+                {!isAllocating && !allocationResult && (
+                  <button
+                    onClick={runIntelligentAllocation}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg border bg-primary/10 border-primary text-primary hover:bg-primary/20 transition-colors"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    <span className="font-medium">Use Intelligent Allocation</span>
+                  </button>
+                )}
+
+                {isAllocating && (
+                  <div className="w-full flex flex-col items-center justify-center gap-3 px-4 py-6 rounded-lg bg-primary/5 border border-primary/30">
+                    <Loader2 className="w-8 h-8 text-primary animate-spin" />
+                    <div className="text-center">
+                      <p className="font-medium text-primary">Finding best agency...</p>
+                      <p className="text-xs text-muted-foreground mt-1">Analyzing availability, reliability & cost</p>
+                    </div>
+                  </div>
+                )}
+
+                {allocationResult && (
+                  <div className="w-full p-4 rounded-lg bg-green-500/5 border border-green-500/30 space-y-3">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-green-500" />
+                      <span className="text-sm font-medium text-green-500">Recommended Agency</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                          <Building2 className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-lg">{allocationResult.agency}</p>
+                          <p className="text-xs text-muted-foreground">{allocationResult.rationale}</p>
+                        </div>
+                      </div>
+                      <Check className="w-5 h-5 text-green-500" />
+                    </div>
+                    <button
+                      onClick={() => setAllocationResult(null)}
+                      className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      Choose different agency →
+                    </button>
+                  </div>
                 )}
               </div>
             </div>
             <div className="flex justify-end gap-2 mt-6">
-              <Button variant="outline" onClick={() => setShowNewBooking(false)}>Cancel</Button>
-              <Button onClick={handleCreateBooking} className="gap-2">
+              <Button variant="outline" onClick={handleCloseModal} disabled={isAllocating}>Cancel</Button>
+              <Button onClick={handleCreateBooking} className="gap-2" disabled={isAllocating}>
                 <Send className="w-4 h-4" />
                 Submit Booking
               </Button>

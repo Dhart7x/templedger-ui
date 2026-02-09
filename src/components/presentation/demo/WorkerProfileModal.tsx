@@ -1,4 +1,5 @@
-import { X, User, MapPin, Clock, Calendar, Award, AlertTriangle, CheckCircle, Car, Train } from "lucide-react";
+import { useState } from "react";
+import { X, User, MapPin, Clock, Calendar, Award, AlertTriangle, CheckCircle, Car, Train, FileText, ChevronRight, Shield, CreditCard, FileCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface WorkerProfileModalProps {
@@ -6,8 +7,27 @@ interface WorkerProfileModalProps {
   onClose: () => void;
 }
 
+interface ComplianceDocument {
+  type: string;
+  name: string;
+  status: "verified" | "pending" | "expired" | "expiring";
+  expiry?: string;
+  icon: "passport" | "address" | "right-to-work" | "reference" | "dbs" | "bank" | "ni";
+  verifiedDate?: string;
+}
+
 // Mock worker data - in a real app this would come from context/API
 const getWorkerData = (name: string) => {
+  const defaultCompliance: ComplianceDocument[] = [
+    { type: "ID Document", name: "Passport / Driving License", status: "verified", expiry: "Dec 2030", icon: "passport", verifiedDate: "Jan 2024" },
+    { type: "Address", name: "Proof of Address", status: "verified", icon: "address", verifiedDate: "Jan 2024" },
+    { type: "Right to Work", name: "Right to Work", status: "verified", expiry: "Nov 2025", icon: "right-to-work", verifiedDate: "Jan 2024" },
+    { type: "References", name: "References (2)", status: "verified", icon: "reference", verifiedDate: "Jan 2024" },
+    { type: "DBS", name: "Criminal Record Check", status: "verified", expiry: "Jan 2027", icon: "dbs", verifiedDate: "Jan 2024" },
+    { type: "Bank", name: "Bank Details", status: "verified", icon: "bank", verifiedDate: "Jan 2024" },
+    { type: "NI", name: "NI Number", status: "verified", icon: "ni", verifiedDate: "Jan 2024" },
+  ];
+
   const workers: Record<string, {
     name: string;
     agency: string;
@@ -24,7 +44,7 @@ const getWorkerData = (name: string) => {
     distanceToSite: string;
     etaCar: string;
     etaPublicTransport: string;
-    compliance: { item: string; status: "valid" | "expiring" | "expired"; expiry?: string }[];
+    compliance: ComplianceDocument[];
     recentShifts: { date: string; site: string; department: string; hours: number; status: string }[];
   }> = {
     "Marcus Johnson": {
@@ -44,9 +64,13 @@ const getWorkerData = (name: string) => {
       etaCar: "18 min",
       etaPublicTransport: "45 min",
       compliance: [
-        { item: "Right to Work", status: "valid", expiry: "Dec 2026" },
-        { item: "ID Verification", status: "valid" },
-        { item: "Health & Safety", status: "valid", expiry: "Mar 2025" },
+        { type: "ID Document", name: "Passport", status: "verified", expiry: "Dec 2028", icon: "passport", verifiedDate: "Mar 2024" },
+        { type: "Address", name: "Proof of Address", status: "verified", icon: "address", verifiedDate: "Mar 2024" },
+        { type: "Right to Work", name: "Right to Work (British Citizen)", status: "verified", expiry: "Dec 2026", icon: "right-to-work", verifiedDate: "Mar 2024" },
+        { type: "References", name: "References (2)", status: "verified", icon: "reference", verifiedDate: "Mar 2024" },
+        { type: "DBS", name: "Basic DBS Check", status: "verified", expiry: "Mar 2027", icon: "dbs", verifiedDate: "Mar 2024" },
+        { type: "Bank", name: "Bank Details", status: "verified", icon: "bank", verifiedDate: "Mar 2024" },
+        { type: "NI", name: "NI Number", status: "verified", icon: "ni", verifiedDate: "Mar 2024" },
       ],
       recentShifts: [
         { date: "Today", site: "Heathrow DC", department: "Warehouse", hours: 8, status: "In Progress" },
@@ -71,9 +95,13 @@ const getWorkerData = (name: string) => {
       etaCar: "25 min",
       etaPublicTransport: "55 min",
       compliance: [
-        { item: "Right to Work", status: "valid", expiry: "Aug 2025" },
-        { item: "ID Verification", status: "valid" },
-        { item: "Health & Safety", status: "expiring", expiry: "Feb 2025" },
+        { type: "ID Document", name: "Driving License", status: "verified", expiry: "Aug 2030", icon: "passport", verifiedDate: "Nov 2023" },
+        { type: "Address", name: "Proof of Address", status: "verified", icon: "address", verifiedDate: "Nov 2023" },
+        { type: "Right to Work", name: "Right to Work (EU Settled Status)", status: "expiring", expiry: "Feb 2025", icon: "right-to-work", verifiedDate: "Nov 2023" },
+        { type: "References", name: "References (2)", status: "verified", icon: "reference", verifiedDate: "Nov 2023" },
+        { type: "DBS", name: "Criminal Record Check", status: "verified", expiry: "Nov 2026", icon: "dbs", verifiedDate: "Nov 2023" },
+        { type: "Bank", name: "Bank Details", status: "verified", icon: "bank", verifiedDate: "Nov 2023" },
+        { type: "NI", name: "NI Number", status: "verified", icon: "ni", verifiedDate: "Nov 2023" },
       ],
       recentShifts: [
         { date: "Today", site: "Heathrow DC", department: "Picking", hours: 8, status: "In Progress" },
@@ -99,11 +127,7 @@ const getWorkerData = (name: string) => {
     distanceToSite: "6.5 miles",
     etaCar: "15 min",
     etaPublicTransport: "40 min",
-    compliance: [
-      { item: "Right to Work", status: "valid", expiry: "Nov 2025" },
-      { item: "ID Verification", status: "valid" },
-      { item: "Health & Safety", status: "valid", expiry: "Jun 2025" },
-    ],
+    compliance: defaultCompliance,
     recentShifts: [
       { date: "Today", site: "Heathrow DC", department: "Warehouse", hours: 8, status: "In Progress" },
       { date: "Yesterday", site: "Heathrow DC", department: "Warehouse", hours: 8, status: "Completed" },
@@ -113,6 +137,20 @@ const getWorkerData = (name: string) => {
 
 const WorkerProfileModal = ({ workerName, onClose }: WorkerProfileModalProps) => {
   const worker = getWorkerData(workerName);
+  const [showComplianceDetail, setShowComplianceDetail] = useState(false);
+
+  const getDocIcon = (icon: ComplianceDocument["icon"]) => {
+    switch (icon) {
+      case "passport": return <FileText className="w-4 h-4" />;
+      case "address": return <MapPin className="w-4 h-4" />;
+      case "right-to-work": return <Shield className="w-4 h-4" />;
+      case "reference": return <FileCheck className="w-4 h-4" />;
+      case "dbs": return <Shield className="w-4 h-4" />;
+      case "bank": return <CreditCard className="w-4 h-4" />;
+      case "ni": return <FileText className="w-4 h-4" />;
+      default: return <FileText className="w-4 h-4" />;
+    }
+  };
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
@@ -218,32 +256,37 @@ const WorkerProfileModal = ({ workerName, onClose }: WorkerProfileModalProps) =>
             </div>
           </div>
 
-          {/* Compliance */}
-          <div className="bg-muted/30 rounded-lg p-4">
-            <h3 className="text-sm font-semibold mb-3">Compliance & Registration</h3>
-            <div className="space-y-2">
-              {worker.compliance.map((item) => (
-                <div key={item.item} className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    {item.status === "valid" && <CheckCircle className="w-4 h-4 text-green-500" />}
-                    {item.status === "expiring" && <AlertTriangle className="w-4 h-4 text-amber-500" />}
-                    {item.status === "expired" && <AlertTriangle className="w-4 h-4 text-destructive" />}
-                    <span className="text-sm">{item.item}</span>
-                  </div>
-                  <div className="text-right">
-                    <span className={`text-xs px-2 py-0.5 rounded ${
-                      item.status === "valid" ? "bg-green-500/20 text-green-500" :
-                      item.status === "expiring" ? "bg-amber-500/20 text-amber-500" :
-                      "bg-destructive/20 text-destructive"
-                    }`}>
-                      {item.status === "valid" ? "Valid" : item.status === "expiring" ? "Expiring Soon" : "Expired"}
-                    </span>
-                    {item.expiry && <p className="text-xs text-muted-foreground mt-0.5">{item.expiry}</p>}
-                  </div>
-                </div>
-              ))}
+          {/* Compliance - Clickable */}
+          <button 
+            onClick={() => setShowComplianceDetail(true)}
+            className="w-full bg-muted/30 rounded-lg p-4 text-left hover:bg-muted/50 transition-colors group"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-semibold">Compliance & Registration</h3>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground group-hover:text-foreground">
+                <span>View Documents</span>
+                <ChevronRight className="w-4 h-4" />
+              </div>
             </div>
-          </div>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1.5 text-xs">
+                <CheckCircle className="w-4 h-4 text-green-500" />
+                <span className="text-green-500 font-medium">{worker.compliance.filter(c => c.status === "verified").length} Verified</span>
+              </div>
+              {worker.compliance.some(c => c.status === "expiring") && (
+                <div className="flex items-center gap-1.5 text-xs">
+                  <AlertTriangle className="w-4 h-4 text-amber-500" />
+                  <span className="text-amber-500 font-medium">{worker.compliance.filter(c => c.status === "expiring").length} Expiring</span>
+                </div>
+              )}
+              {worker.compliance.some(c => c.status === "expired") && (
+                <div className="flex items-center gap-1.5 text-xs">
+                  <AlertTriangle className="w-4 h-4 text-destructive" />
+                  <span className="text-destructive font-medium">{worker.compliance.filter(c => c.status === "expired").length} Expired</span>
+                </div>
+              )}
+            </div>
+          </button>
 
           {/* Recent Shifts */}
           <div className="bg-muted/30 rounded-lg p-4">
@@ -270,6 +313,69 @@ const WorkerProfileModal = ({ workerName, onClose }: WorkerProfileModalProps) =>
           </div>
         </div>
       </div>
+
+      {/* Compliance Documents Modal */}
+      {showComplianceDetail && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[60] p-4">
+          <div className="bg-card border border-border rounded-xl w-full max-w-lg max-h-[80vh] overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between p-4 border-b border-border">
+              <div>
+                <h2 className="text-lg font-semibold">Compliance Documents</h2>
+                <p className="text-sm text-muted-foreground">{worker.name}</p>
+              </div>
+              <Button variant="ghost" size="icon" onClick={() => setShowComplianceDetail(false)}>
+                <X className="w-5 h-5" />
+              </Button>
+            </div>
+            <div className="flex-1 overflow-y-auto p-4 space-y-3">
+              {worker.compliance.map((doc, idx) => (
+                <div 
+                  key={idx} 
+                  className={`p-4 rounded-lg border ${
+                    doc.status === "verified" ? "bg-green-500/5 border-green-500/30" :
+                    doc.status === "expiring" ? "bg-amber-500/5 border-amber-500/30" :
+                    "bg-destructive/5 border-destructive/30"
+                  }`}
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-start gap-3">
+                      <div className={`p-2 rounded-lg ${
+                        doc.status === "verified" ? "bg-green-500/10 text-green-500" :
+                        doc.status === "expiring" ? "bg-amber-500/10 text-amber-500" :
+                        "bg-destructive/10 text-destructive"
+                      }`}>
+                        {getDocIcon(doc.icon)}
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium">{doc.name}</p>
+                        <p className="text-xs text-muted-foreground">{doc.type}</p>
+                        {doc.verifiedDate && (
+                          <p className="text-xs text-muted-foreground mt-1">Verified: {doc.verifiedDate}</p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className={`flex items-center gap-1.5 px-2 py-1 rounded text-xs font-medium ${
+                        doc.status === "verified" ? "bg-green-500/20 text-green-500" :
+                        doc.status === "expiring" ? "bg-amber-500/20 text-amber-500" :
+                        "bg-destructive/20 text-destructive"
+                      }`}>
+                        {doc.status === "verified" && <CheckCircle className="w-3 h-3" />}
+                        {doc.status === "expiring" && <AlertTriangle className="w-3 h-3" />}
+                        {doc.status === "expired" && <AlertTriangle className="w-3 h-3" />}
+                        {doc.status === "verified" ? "Verified" : doc.status === "expiring" ? "Expiring" : "Expired"}
+                      </div>
+                      {doc.expiry && (
+                        <p className="text-xs text-muted-foreground mt-1">Exp: {doc.expiry}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
