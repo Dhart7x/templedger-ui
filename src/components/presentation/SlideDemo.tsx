@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Play, ChevronDown, ArrowLeft, Shield, Eye, EyeOff, Bell, User } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import Slide from "./Slide";
 import { Input } from "@/components/ui/input";
@@ -53,6 +54,10 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   const [activeClientView, setActiveClientView] = useState("live-snapshot");
   const [activeAgencyView, setActiveAgencyView] = useState("live-snapshot");
   const [selectedWorkerName, setSelectedWorkerName] = useState<string | null>(null);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const saved = localStorage.getItem("demo-theme");
+    return saved ? saved === "dark" : true;
+  });
   const { notifications, bookings } = useDemoContext();
 
   const handleViewWorker = (workerName: string) => {
@@ -298,7 +303,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
 
   // Main demo UI
   return (
-    <div className="w-full h-full flex flex-col bg-background">
+    <div className={`w-full h-full flex flex-col ${isDarkMode ? "" : "light"}`} style={{ background: "hsl(var(--background))", color: "hsl(var(--foreground))" }}>
       {/* Demo Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/30">
         <div className="flex items-center gap-3">
@@ -337,24 +342,29 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        {/* Notification Bell - Top Right */}
-        <button
-          onClick={() => {
-            if (viewMode === "client") {
-              setActiveClientView("notifications");
-            } else {
-              setActiveAgencyView("notifications");
-            }
-          }}
-          className="relative p-2 rounded-lg hover:bg-muted/50 transition-colors"
-        >
-          <Bell className="w-5 h-5 text-muted-foreground" />
-          {unreadCount > 0 && (
-            <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full flex items-center justify-center">
-              {unreadCount > 9 ? "9+" : unreadCount}
-            </span>
-          )}
-        </button>
+        {/* Right side controls */}
+        <div className="flex items-center gap-3">
+          <ThemeToggle onThemeChange={setIsDarkMode} />
+          
+          {/* Notification Bell */}
+          <button
+            onClick={() => {
+              if (viewMode === "client") {
+                setActiveClientView("notifications");
+              } else {
+                setActiveAgencyView("notifications");
+              }
+            }}
+            className="relative p-2 rounded-lg hover:bg-muted/50 transition-colors"
+          >
+            <Bell className="w-5 h-5 text-muted-foreground" />
+            {unreadCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full flex items-center justify-center">
+                {unreadCount > 9 ? "9+" : unreadCount}
+              </span>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Demo Container */}
