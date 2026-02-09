@@ -11,7 +11,7 @@ import SlideNewNormal from "@/components/presentation/SlideNewNormal";
 import SlideAdoption from "@/components/presentation/SlideAdoption";
 import SlideClosing from "@/components/presentation/SlideClosing";
 import SlideAttrition from "@/components/presentation/SlideAttrition";
-import ThemeToggle from "@/components/ThemeToggle";
+
 
 const DEMO_SLIDE_INDEX = 4;
 
@@ -100,11 +100,8 @@ const SalesDeck = () => {
             </button>
             <span className="font-semibold text-sm trust-gradient-text">Temp Ledger</span>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="text-xs text-muted-foreground">
-              {safeCurrentSlide + 1} / {slides.length}
-            </div>
-            <ThemeToggle />
+          <div className="text-xs text-muted-foreground">
+            {safeCurrentSlide + 1} / {slides.length}
           </div>
         </header>
       )}
