@@ -11,30 +11,34 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import DemoSidebar from "./demo/DemoSidebar";
-import DemoLiveSnapshot from "./demo/DemoLiveSnapshot";
-import DemoDepartments from "./demo/DemoDepartments";
-import DemoAgenciesPerformance from "./demo/DemoAgenciesPerformance";
-import DemoPayrollBilling from "./demo/DemoPayrollBilling";
-import DemoHeadcountRequests from "./demo/DemoHeadcountRequests";
-import DemoExecutionLedger from "./demo/DemoExecutionLedger";
-import DemoShiftCoverage from "./demo/DemoShiftCoverage";
-import DemoAgencySidebar from "./demo/DemoAgencySidebar";
-import DemoAgencyDashboard from "./demo/DemoAgencyDashboard";
-import DemoAgencyWorkers from "./demo/DemoAgencyWorkers";
-import DemoAgencyWorkerDetail from "./demo/DemoAgencyWorkerDetail";
-import DemoAgencyDeployments from "./demo/DemoAgencyDeployments";
-import DemoAgencyIssues from "./demo/DemoAgencyIssues";
-import DemoAgencyDocuments from "./demo/DemoAgencyDocuments";
-import DemoAgencyAllocations from "./demo/DemoAgencyAllocations";
-import { AgencyWorker } from "./demo/agencyDemoData";
 import { DemoProvider, useDemoContext } from "./demo/DemoContext";
-import DemoStandbyWorkers from "./demo/DemoStandbyWorkers";
-import DemoStandbyWorkerDetail from "./demo/DemoStandbyWorkerDetail";
-import DemoAgencyLiveSnapshot from "./demo/DemoAgencyLiveSnapshot";
-import { StandbyWorker } from "./demo/standbyWorkersData";
 
-type ViewMode = "labour-user" | "agency";
+// New sidebars
+import ClientSidebar from "./demo/ClientSidebar";
+import AgencySidebar from "./demo/AgencySidebar";
+
+// Client views
+import ClientLiveSnapshot from "./demo/views/ClientLiveSnapshot";
+import ClientSchedule from "./demo/views/ClientSchedule";
+import ClientBookings from "./demo/views/ClientBookings";
+import ClientAgencies from "./demo/views/ClientAgencies";
+import ClientWorkers from "./demo/views/ClientWorkers";
+import ClientPayroll from "./demo/views/ClientPayroll";
+import ClientBilling from "./demo/views/ClientBilling";
+import ClientSpendAnalysis from "./demo/views/ClientSpendAnalysis";
+import ClientTempPerm from "./demo/views/ClientTempPerm";
+
+// Agency views
+import AgencyLiveSnapshot from "./demo/views/AgencyLiveSnapshot";
+import AgencyNewOrder from "./demo/views/AgencyNewOrder";
+import AgencySchedule from "./demo/views/AgencySchedule";
+import AgencyWorkers from "./demo/views/AgencyWorkers";
+
+// Shared views
+import DemoChatbot from "./demo/views/DemoChatbot";
+import DemoNotifications from "./demo/views/DemoNotifications";
+
+type ViewMode = "client" | "agency";
 type DemoState = "intro" | "login" | "demo";
 
 interface SlideDemoProps {
@@ -44,14 +48,14 @@ interface SlideDemoProps {
 const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   const [demoState, setDemoState] = useState<DemoState>("intro");
   const [showPassword, setShowPassword] = useState(false);
-  const [viewMode, setViewMode] = useState<ViewMode>("labour-user");
-  const [activeLabourView, setActiveLabourView] = useState("snapshot");
-  const [activeAgencyView, setActiveAgencyView] = useState("dashboard");
-  const [selectedWorker, setSelectedWorker] = useState<AgencyWorker | null>(null);
-  const [selectedStandbyWorker, setSelectedStandbyWorker] = useState<StandbyWorker | null>(null);
+  const [viewMode, setViewMode] = useState<ViewMode>("client");
+  const [activeClientView, setActiveClientView] = useState("live-snapshot");
+  const [activeAgencyView, setActiveAgencyView] = useState("live-snapshot");
   const { notifications } = useDemoContext();
-  
-  const unreadCount = notifications.filter(n => !n.read && (n.targetView === viewMode || n.targetView === "both")).length;
+
+  const unreadCount = notifications.filter(
+    (n) => !n.read && (n.targetView === viewMode || n.targetView === "both")
+  ).length;
 
   const handleLaunchDemo = () => {
     setDemoState("login");
@@ -64,44 +68,11 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
 
   const handleExitDemo = () => {
     setDemoState("intro");
-    setActiveLabourView("snapshot");
-    setActiveAgencyView("dashboard");
-    setSelectedWorker(null);
-    setSelectedStandbyWorker(null);
+    setActiveClientView("live-snapshot");
+    setActiveAgencyView("live-snapshot");
     onDemoStateChange?.(false);
   };
 
-  const handleSelectWorker = (worker: AgencyWorker) => {
-    setSelectedWorker(worker);
-    setActiveAgencyView("worker-detail");
-  };
-
-  const handleBackToWorkers = () => {
-    setSelectedWorker(null);
-    setActiveAgencyView("workers");
-  };
-
-  const handleAgencyViewChange = (view: string) => {
-    setActiveAgencyView(view);
-    if (view !== "worker-detail") {
-      setSelectedWorker(null);
-    }
-    if (view !== "standby-detail" && view !== "live-detail") {
-      setSelectedStandbyWorker(null);
-    }
-  };
-
-  const handleSelectStandbyWorker = (worker: StandbyWorker) => {
-    setSelectedStandbyWorker(worker);
-    setActiveAgencyView(worker.status === "live" ? "live-detail" : "standby-detail");
-  };
- 
-  const handleBackToStandby = () => {
-    const wasLive = selectedStandbyWorker?.status === "live";
-    setSelectedStandbyWorker(null);
-    setActiveAgencyView(wasLive ? "live-workers" : "standby");
-  };
- 
   const orchestrationPoints = [
     "Agencies operate through a dedicated, client-specific interface",
     "Labour users see a unified, real-time view across all agencies",
@@ -110,7 +81,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
     "Orchestration happens through shared visibility, not coordination calls",
   ];
 
-  // Intro slide - content + Demo button
+  // Intro slide
   if (demoState === "intro") {
     return (
       <Slide className="relative md:justify-start md:pt-16">
@@ -120,7 +91,6 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto w-full"
         >
-          {/* Title */}
           <motion.h2
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -130,10 +100,8 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
             How Orchestration Happens
           </motion.h2>
 
-          {/* Spacer to match slide 4 */}
           <div className="mb-16 md:mb-20" />
 
-          {/* Points */}
           <div className="space-y-4 md:space-y-5 mb-16 md:mb-20">
             {orchestrationPoints.map((point, index) => (
               <motion.div
@@ -144,12 +112,13 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
                 className="flex items-start gap-3 md:gap-4"
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 flex-shrink-0" />
-                <p className="text-base md:text-lg lg:text-xl text-foreground leading-relaxed">{point}</p>
+                <p className="text-base md:text-lg lg:text-xl text-foreground leading-relaxed">
+                  {point}
+                </p>
               </motion.div>
             ))}
           </div>
 
-          {/* Demo Button - centered at bottom */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -174,7 +143,6 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   if (demoState === "login") {
     return (
       <div className="w-full h-full flex flex-col bg-background">
-        {/* Back button */}
         <div className="absolute top-6 left-6 z-30">
           <Button
             variant="outline"
@@ -194,7 +162,6 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
             transition={{ duration: 0.5 }}
             className="w-full max-w-md"
           >
-            {/* Logo/Brand */}
             <div className="flex flex-col items-center mb-8">
               <div className="w-16 h-16 rounded-2xl trust-gradient flex items-center justify-center mb-4">
                 <Shield className="w-8 h-8 text-foreground" />
@@ -203,13 +170,16 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
               <p className="text-sm text-muted-foreground mt-1">Demo Environment</p>
             </div>
 
-            {/* Login Card */}
             <div className="bg-card border border-border rounded-xl p-6 shadow-xl">
-              <h2 className="text-lg font-semibold text-foreground mb-6 text-center">Sign in to Demo</h2>
-              
+              <h2 className="text-lg font-semibold text-foreground mb-6 text-center">
+                Sign in to Demo
+              </h2>
+
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="username" className="text-foreground">Username</Label>
+                  <Label htmlFor="username" className="text-foreground">
+                    Username
+                  </Label>
                   <Input
                     id="username"
                     value="TempLedgerDemo"
@@ -219,7 +189,9 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-foreground">Password</Label>
+                  <Label htmlFor="password" className="text-foreground">
+                    Password
+                  </Label>
                   <div className="relative">
                     <Input
                       id="password"
@@ -233,7 +205,11 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
                       onClick={() => setShowPassword(!showPassword)}
                       className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      {showPassword ? (
+                        <EyeOff className="w-4 h-4" />
+                      ) : (
+                        <Eye className="w-4 h-4" />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -253,67 +229,61 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
     );
   }
 
-  const renderLabourUserView = () => {
-    switch (activeLabourView) {
-      case "snapshot":
-        return <DemoLiveSnapshot />;
-      case "departments":
-        return <DemoDepartments />;
-      case "coverage":
-        return <DemoShiftCoverage />;
+  // Render Client views
+  const renderClientView = () => {
+    switch (activeClientView) {
+      case "live-snapshot":
+        return <ClientLiveSnapshot />;
+      case "schedule":
+        return <ClientSchedule />;
+      case "bookings":
+        return <ClientBookings />;
       case "agencies":
-        return <DemoAgenciesPerformance />;
-      case "ledger":
-        return <DemoExecutionLedger />;
+        return <ClientAgencies />;
+      case "workers":
+        return <ClientWorkers />;
       case "payroll":
-        return <DemoPayrollBilling />;
-      case "headcount":
-        return <DemoHeadcountRequests />;
+        return <ClientPayroll />;
+      case "billing":
+        return <ClientBilling />;
+      case "spend-analysis":
+        return <ClientSpendAnalysis />;
+      case "temp-perm":
+        return <ClientTempPerm />;
+      case "notifications":
+        return <DemoNotifications />;
+      case "chatbot":
+        return <DemoChatbot />;
       default:
-        return <DemoLiveSnapshot />;
+        return <ClientLiveSnapshot />;
     }
   };
 
+  // Render Agency views
   const renderAgencyView = () => {
     switch (activeAgencyView) {
-      case "dashboard":
-        return <DemoAgencyDashboard />;
       case "live-snapshot":
-        return <DemoAgencyLiveSnapshot />;
-      case "allocations":
-        return <DemoAgencyAllocations />;
-      case "workers":
-        return <DemoAgencyWorkers onSelectWorker={handleSelectWorker} />;
-      case "worker-detail":
-        return selectedWorker ? (
-          <DemoAgencyWorkerDetail worker={selectedWorker} onBack={handleBackToWorkers} />
-        ) : (
-          <DemoAgencyWorkers onSelectWorker={handleSelectWorker} />
-        );
-      case "standby":
-        return <DemoStandbyWorkers onSelectWorker={handleSelectStandbyWorker} showLive={false} />;
-      case "standby-detail":
-        return selectedStandbyWorker ? (
-          <DemoStandbyWorkerDetail worker={selectedStandbyWorker} onBack={handleBackToStandby} />
-        ) : (
-          <DemoStandbyWorkers onSelectWorker={handleSelectStandbyWorker} showLive={false} />
-        );
-      case "live-workers":
-        return <DemoStandbyWorkers onSelectWorker={handleSelectStandbyWorker} showLive={true} />;
-      case "live-detail":
-        return selectedStandbyWorker ? (
-          <DemoStandbyWorkerDetail worker={selectedStandbyWorker} onBack={handleBackToStandby} />
-        ) : (
-          <DemoStandbyWorkers onSelectWorker={handleSelectStandbyWorker} showLive={true} />
-        );
-      case "deployments":
-        return <DemoAgencyDeployments />;
-      case "issues":
-        return <DemoAgencyIssues />;
-      case "documents":
-        return <DemoAgencyDocuments />;
+        return <AgencyLiveSnapshot />;
+      case "new-order":
+        return <AgencyNewOrder />;
+      case "schedule":
+        return <AgencySchedule />;
+      case "workers-live":
+        return <AgencyWorkers tab="live" />;
+      case "workers-standby":
+        return <AgencyWorkers tab="standby" />;
+      case "workers-new":
+        return <AgencyWorkers tab="new" />;
+      case "payroll":
+        return <ClientPayroll />; // Reuse with different context
+      case "billing":
+        return <ClientBilling />; // Reuse with different context
+      case "notifications":
+        return <DemoNotifications />;
+      case "chatbot":
+        return <DemoChatbot />;
       default:
-        return <DemoAgencyDashboard />;
+        return <AgencyLiveSnapshot />;
     }
   };
 
@@ -332,8 +302,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
             <ArrowLeft className="w-4 h-4" />
             Back to Slides
           </Button>
-          
-          {/* Notifications indicator */}
+
           {unreadCount > 0 && (
             <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/30 rounded-lg">
               <Bell className="w-4 h-4 text-primary" />
@@ -341,27 +310,27 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
             </div>
           )}
         </div>
-        
+
         {/* View Mode Dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="sm" className="gap-2 min-w-[160px]">
-              {viewMode === "labour-user" ? "Labour User View" : "Agency View"}
+              {viewMode === "client" ? "Client View" : "Agency View"}
               <ChevronDown className="w-4 h-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="center" className="bg-card border border-border">
-            <DropdownMenuItem 
-              onClick={() => setViewMode("labour-user")}
-              className={viewMode === "labour-user" ? "bg-primary/10 text-primary" : ""}
+            <DropdownMenuItem
+              onClick={() => setViewMode("client")}
+              className={viewMode === "client" ? "bg-primary/10 text-primary" : ""}
             >
-              Labour User View
+              Client View (Clipper Logistics)
             </DropdownMenuItem>
-            <DropdownMenuItem 
+            <DropdownMenuItem
               onClick={() => setViewMode("agency")}
               className={viewMode === "agency" ? "bg-primary/10 text-primary" : ""}
             >
-              Agency View
+              Agency View (Staffline)
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -377,19 +346,24 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
         transition={{ duration: 0.3 }}
         className="flex-1 flex overflow-hidden m-4 rounded-lg border border-border shadow-xl"
       >
-        {viewMode === "labour-user" ? (
+        {viewMode === "client" ? (
           <>
-            <DemoSidebar activeView={activeLabourView} onViewChange={setActiveLabourView} />
-            <div className="flex-1 overflow-auto bg-background">
-              {renderLabourUserView()}
-            </div>
+            <ClientSidebar
+              activeView={activeClientView}
+              onViewChange={setActiveClientView}
+              notificationCount={unreadCount}
+            />
+            <div className="flex-1 overflow-auto bg-background">{renderClientView()}</div>
           </>
         ) : (
           <>
-            <DemoAgencySidebar activeView={activeAgencyView} onViewChange={handleAgencyViewChange} />
-            <div className="flex-1 overflow-auto bg-background">
-              {renderAgencyView()}
-            </div>
+            <AgencySidebar
+              activeView={activeAgencyView}
+              onViewChange={setActiveAgencyView}
+              notificationCount={unreadCount}
+              newOrderCount={2}
+            />
+            <div className="flex-1 overflow-auto bg-background">{renderAgencyView()}</div>
           </>
         )}
       </motion.div>
@@ -404,5 +378,5 @@ const SlideDemo = ({ onDemoStateChange }: SlideDemoProps) => {
     </DemoProvider>
   );
 };
- 
+
 export default SlideDemo;

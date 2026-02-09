@@ -1,0 +1,214 @@
+import { useState } from "react";
+import { MapPin, Users, Clock, AlertTriangle, CheckCircle, Filter, TrendingUp } from "lucide-react";
+
+interface LiveWorker {
+  id: string;
+  name: string;
+  department: string;
+  location: string;
+  shift: string;
+  clockIn: string | null;
+  status: "on-site" | "due-soon" | "late" | "no-show" | "overtime";
+}
+
+const liveWorkers: LiveWorker[] = [
+  { id: "1", name: "Sarah Mitchell", department: "Picking", location: "Zone A", shift: "06:00–14:00", clockIn: "05:58", status: "on-site" },
+  { id: "2", name: "James Cooper", department: "Packing", location: "Zone B", shift: "06:00–14:00", clockIn: "06:02", status: "on-site" },
+  { id: "3", name: "Lisa Anderson", department: "Goods In", location: "Zone C", shift: "06:00–14:00", clockIn: "06:12", status: "late" },
+  { id: "4", name: "Emma Wilson", department: "Returns", location: "Zone D", shift: "14:00–22:00", clockIn: null, status: "due-soon" },
+  { id: "5", name: "Maria Santos", department: "Goods In", location: "Zone C", shift: "14:00–22:00", clockIn: null, status: "due-soon" },
+  { id: "6", name: "Michael Brown", department: "Packing", location: "Zone B", shift: "22:00–06:00", clockIn: null, status: "due-soon" },
+  { id: "7", name: "David Chen", department: "Picking", location: "Zone A", shift: "06:00–14:00", clockIn: null, status: "no-show" },
+  { id: "8", name: "Ahmed Khan", department: "Warehouse", location: "Zone A", shift: "06:00–14:00", clockIn: "05:55", status: "overtime" },
+];
+
+const departmentStats = [
+  { name: "Picking", onSite: 3, dueNext: 1, issues: 1 },
+  { name: "Packing", onSite: 2, dueNext: 1, issues: 0 },
+  { name: "Goods In", onSite: 1, dueNext: 1, issues: 1 },
+  { name: "Returns", onSite: 0, dueNext: 1, issues: 0 },
+];
+
+const AgencyLiveSnapshot = () => {
+  const [locationFilter, setLocationFilter] = useState("all");
+
+  const counts = {
+    onSite: liveWorkers.filter(w => w.status === "on-site" || w.status === "overtime").length,
+    dueSoon: liveWorkers.filter(w => w.status === "due-soon").length,
+    late: liveWorkers.filter(w => w.status === "late").length,
+    noShow: liveWorkers.filter(w => w.status === "no-show").length,
+    overtime: liveWorkers.filter(w => w.status === "overtime").length,
+  };
+
+  const getStatusColor = (status: LiveWorker["status"]) => {
+    switch (status) {
+      case "on-site": return "bg-green-500";
+      case "due-soon": return "bg-primary";
+      case "late": return "bg-amber-500";
+      case "no-show": return "bg-destructive";
+      case "overtime": return "bg-purple-500";
+      default: return "bg-muted";
+    }
+  };
+
+  const getStatusText = (status: LiveWorker["status"]) => {
+    switch (status) {
+      case "on-site": return "On Site";
+      case "due-soon": return "Due Soon";
+      case "late": return "Late";
+      case "no-show": return "No Show";
+      case "overtime": return "Overtime";
+      default: return status;
+    }
+  };
+
+  return (
+    <div className="p-4 md:p-6 space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-lg md:text-xl font-bold text-foreground">Live Snapshot</h1>
+          <p className="text-xs text-muted-foreground">Real-time worker status at Clipper Logistics</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Filter className="w-4 h-4 text-muted-foreground" />
+          <select
+            value={locationFilter}
+            onChange={(e) => setLocationFilter(e.target.value)}
+            className="text-xs bg-card border border-border rounded px-2 py-1.5"
+          >
+            <option value="all">All Locations</option>
+            <option value="zone-a">Zone A</option>
+            <option value="zone-b">Zone B</option>
+            <option value="zone-c">Zone C</option>
+            <option value="zone-d">Zone D</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Status Cards */}
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <div className="bg-card border border-border rounded-lg p-3">
+          <div className="flex items-center gap-2 mb-1">
+            <MapPin className="w-4 h-4 text-green-500" />
+            <span className="text-xs text-muted-foreground">On Site</span>
+          </div>
+          <p className="text-xl font-bold text-green-500">{counts.onSite}</p>
+        </div>
+        <div className="bg-card border border-border rounded-lg p-3">
+          <div className="flex items-center gap-2 mb-1">
+            <Clock className="w-4 h-4 text-primary" />
+            <span className="text-xs text-muted-foreground">Due Soon</span>
+          </div>
+          <p className="text-xl font-bold text-primary">{counts.dueSoon}</p>
+        </div>
+        <div className="bg-card border border-border rounded-lg p-3">
+          <div className="flex items-center gap-2 mb-1">
+            <Clock className="w-4 h-4 text-amber-500" />
+            <span className="text-xs text-muted-foreground">Late</span>
+          </div>
+          <p className="text-xl font-bold text-amber-500">{counts.late}</p>
+        </div>
+        <div className="bg-card border border-border rounded-lg p-3">
+          <div className="flex items-center gap-2 mb-1">
+            <AlertTriangle className="w-4 h-4 text-destructive" />
+            <span className="text-xs text-muted-foreground">No-Show</span>
+          </div>
+          <p className="text-xl font-bold text-destructive">{counts.noShow}</p>
+        </div>
+        <div className="bg-card border border-border rounded-lg p-3">
+          <div className="flex items-center gap-2 mb-1">
+            <TrendingUp className="w-4 h-4 text-purple-500" />
+            <span className="text-xs text-muted-foreground">Overtime</span>
+          </div>
+          <p className="text-xl font-bold text-purple-500">{counts.overtime}</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {/* Workers List */}
+        <div className="lg:col-span-2 bg-card border border-border rounded-lg">
+          <div className="p-3 border-b border-border">
+            <h2 className="text-sm font-semibold">Workers</h2>
+          </div>
+          <div className="divide-y divide-border max-h-[350px] overflow-y-auto">
+            {liveWorkers.map((worker) => (
+              <div key={worker.id} className="p-3 flex items-center justify-between hover:bg-muted/30 transition-colors">
+                <div className="flex items-center gap-3">
+                  <span className={`w-2 h-2 rounded-full ${getStatusColor(worker.status)}`} />
+                  <div>
+                    <p className="text-sm font-medium">{worker.name}</p>
+                    <p className="text-xs text-muted-foreground">{worker.department} • {worker.location}</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs font-medium">{worker.shift}</p>
+                  <p className={`text-xs ${
+                    worker.status === "on-site" ? "text-green-500" :
+                    worker.status === "late" ? "text-amber-500" :
+                    worker.status === "no-show" ? "text-destructive" :
+                    worker.status === "overtime" ? "text-purple-500" :
+                    "text-muted-foreground"
+                  }`}>
+                    {worker.clockIn ? `Clocked in: ${worker.clockIn}` : getStatusText(worker.status)}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Department Summary */}
+        <div className="bg-card border border-border rounded-lg">
+          <div className="p-3 border-b border-border">
+            <h2 className="text-sm font-semibold">By Department</h2>
+          </div>
+          <div className="divide-y divide-border">
+            {departmentStats.map((dept) => (
+              <div key={dept.name} className="p-3">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-medium">{dept.name}</span>
+                  {dept.issues > 0 && (
+                    <span className="text-xs bg-destructive/20 text-destructive px-1.5 py-0.5 rounded">
+                      {dept.issues} issue{dept.issues > 1 ? "s" : ""}
+                    </span>
+                  )}
+                </div>
+                <div className="flex items-center gap-4 text-xs">
+                  <span className="flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                    {dept.onSite} on-site
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    {dept.dueNext} due next
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Attendance Issues Alert */}
+      {(counts.late > 0 || counts.noShow > 0) && (
+        <div className="bg-destructive/5 border border-destructive/20 rounded-lg p-4">
+          <div className="flex items-start gap-3">
+            <AlertTriangle className="w-5 h-5 text-destructive mt-0.5" />
+            <div>
+              <h3 className="text-sm font-semibold text-foreground">Attendance Issues</h3>
+              <p className="text-xs text-muted-foreground mt-1">
+                {counts.noShow > 0 && `${counts.noShow} no-show${counts.noShow > 1 ? "s" : ""} `}
+                {counts.noShow > 0 && counts.late > 0 && "and "}
+                {counts.late > 0 && `${counts.late} late arrival${counts.late > 1 ? "s" : ""} `}
+                require attention. Client has been notified.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default AgencyLiveSnapshot;
