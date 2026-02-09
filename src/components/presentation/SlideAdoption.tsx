@@ -76,7 +76,7 @@ const SlideAdoption = () => {
                 <Users className="w-6 h-6 md:w-12 md:h-12 mx-auto mb-1 md:mb-3 text-muted-foreground" />
                 <h3 className="text-xs md:text-lg lg:text-xl font-bold text-foreground mb-0.5 md:mb-1">Agencies</h3>
                 <p className="text-[10px] md:text-base lg:text-lg text-muted-foreground">Pay to participate</p>
-                <p className="text-[9px] md:text-sm lg:text-base text-muted-foreground/70 mt-0.5 md:mt-1">£60k/year</p>
+                <p className="text-[9px] md:text-sm lg:text-base text-muted-foreground/70 mt-0.5 md:mt-1">Annual licence fee</p>
               </div>
             </motion.div>
           </div>
