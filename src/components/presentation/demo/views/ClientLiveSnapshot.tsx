@@ -1,7 +1,15 @@
 import { useState } from "react";
-import { MapPin, Users, Clock, AlertTriangle, CheckCircle, Filter, TrendingUp, ChevronRight, MessageSquare, Check, RefreshCw } from "lucide-react";
+import { MapPin, Users, Clock, AlertTriangle, CheckCircle, Filter, TrendingUp, ChevronRight, ChevronDown, MessageSquare, Check, RefreshCw } from "lucide-react";
 import { useDemoContext } from "../DemoContext";
 import { Button } from "@/components/ui/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+
+interface DepartmentData {
+  name: string;
+  required: number;
+  filled: number;
+  confidence: number;
+}
 
 interface SiteData {
   id: string;
@@ -13,6 +21,7 @@ interface SiteData {
   noShow: number;
   overtime: number;
   agencies: { name: string; workers: number }[];
+  departments: DepartmentData[];
 }
 
 const sites: SiteData[] = [
@@ -30,6 +39,12 @@ const sites: SiteData[] = [
       { name: "Pertemps", workers: 12 },
       { name: "Blue Arrow", workers: 5 },
     ],
+    departments: [
+      { name: "Warehouse", required: 18, filled: 17, confidence: 94 },
+      { name: "Picking", required: 12, filled: 12, confidence: 100 },
+      { name: "Loading", required: 10, filled: 8, confidence: 80 },
+      { name: "Packing", required: 5, filled: 5, confidence: 100 },
+    ],
   },
   {
     id: "2",
@@ -43,6 +58,12 @@ const sites: SiteData[] = [
     agencies: [
       { name: "Staffline", workers: 18 },
       { name: "Blue Arrow", workers: 12 },
+    ],
+    departments: [
+      { name: "Warehouse", required: 12, filled: 12, confidence: 100 },
+      { name: "Picking", required: 10, filled: 10, confidence: 100 },
+      { name: "Loading", required: 5, filled: 5, confidence: 100 },
+      { name: "Quality", required: 3, filled: 3, confidence: 100 },
     ],
   },
   {
@@ -58,22 +79,31 @@ const sites: SiteData[] = [
       { name: "Pertemps", workers: 15 },
       { name: "Staffline", workers: 7 },
     ],
+    departments: [
+      { name: "Warehouse", required: 10, filled: 9, confidence: 90 },
+      { name: "Picking", required: 8, filled: 7, confidence: 88 },
+      { name: "Loading", required: 5, filled: 4, confidence: 80 },
+      { name: "Packing", required: 2, filled: 2, confidence: 100 },
+    ],
   },
 ];
 
-const departments = [
-  { name: "Warehouse", required: 35, filled: 33, confidence: 95 },
-  { name: "Picking", required: 25, filled: 25, confidence: 100 },
-  { name: "Loading", required: 20, filled: 17, confidence: 85 },
-  { name: "Packing", required: 15, filled: 15, confidence: 100 },
-  { name: "Quality", required: 5, filled: 4, confidence: 80 },
-];
+interface ClientLiveSnapshotProps {
+  onViewWorker?: (workerName: string) => void;
+}
 
-const ClientLiveSnapshot = () => {
-  const { exceptions, respondToException, allocations, notifications } = useDemoContext();
+const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
+  const { exceptions, respondToException, allocations } = useDemoContext();
   const [siteFilter, setSiteFilter] = useState("all");
   const [agencyFilter, setAgencyFilter] = useState("all");
   const [selectedExceptionId, setSelectedExceptionId] = useState<string | null>(null);
+  const [expandedSites, setExpandedSites] = useState<string[]>([]);
+
+  const toggleSite = (siteId: string) => {
+    setExpandedSites((prev) =>
+      prev.includes(siteId) ? prev.filter((id) => id !== siteId) : [...prev, siteId]
+    );
+  };
 
   const totals = sites.reduce(
     (acc, site) => ({
@@ -88,8 +118,8 @@ const ClientLiveSnapshot = () => {
   );
 
   // Get open exceptions
-  const openExceptions = exceptions.filter(e => e.status !== "resolved");
-  const exceptionsWithUpdates = openExceptions.filter(e => e.resolution && !e.resolution.acknowledged);
+  const openExceptions = exceptions.filter((e) => e.status !== "resolved");
+  const exceptionsWithUpdates = openExceptions.filter((e) => e.resolution && !e.resolution.acknowledged);
 
   const handleExceptionResponse = (exceptionId: string, response: "accepted" | "request-replacement") => {
     respondToException(exceptionId, response);
@@ -98,6 +128,12 @@ const ClientLiveSnapshot = () => {
 
   // Recent allocations (show the last 3)
   const recentAllocations = allocations.slice(0, 3);
+
+  const handleWorkerClick = (workerName: string) => {
+    if (onViewWorker) {
+      onViewWorker(workerName);
+    }
+  };
 
   return (
     <div className="p-4 md:p-6 space-y-6">
@@ -116,7 +152,9 @@ const ClientLiveSnapshot = () => {
           >
             <option value="all">All Sites</option>
             {sites.map((s) => (
-              <option key={s.id} value={s.id}>{s.name}</option>
+              <option key={s.id} value={s.id}>
+                {s.name}
+              </option>
             ))}
           </select>
           <select
@@ -157,8 +195,14 @@ const ClientLiveSnapshot = () => {
           <div className="space-y-1">
             {recentAllocations.map((alloc) => (
               <div key={alloc.id} className="text-xs text-muted-foreground">
-                <span className="font-medium text-foreground">{alloc.workerName}</span>
-                {" → "}{alloc.department} at {alloc.site} ({alloc.shift})
+                <button
+                  onClick={() => handleWorkerClick(alloc.workerName)}
+                  className="font-medium text-foreground hover:text-primary hover:underline cursor-pointer"
+                >
+                  {alloc.workerName}
+                </button>
+                {" → "}
+                {alloc.department} at {alloc.site} ({alloc.shift})
               </div>
             ))}
           </div>
@@ -212,53 +256,110 @@ const ClientLiveSnapshot = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        {/* Sites Overview */}
+        {/* Sites Overview with Collapsible Departments */}
         <div className="lg:col-span-2 bg-card border border-border rounded-lg">
           <div className="p-3 border-b border-border">
             <h2 className="text-sm font-semibold">Sites</h2>
+            <p className="text-xs text-muted-foreground">Click to view department coverage</p>
           </div>
           <div className="divide-y divide-border">
-            {sites.map((site) => (
-              <div key={site.id} className="p-3">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-muted-foreground" />
-                    <span className="font-medium text-sm">{site.name}</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className={`text-sm font-medium ${site.filled === site.required ? "text-green-500" : "text-amber-500"}`}>
-                      {site.filled}/{site.required}
-                    </span>
-                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                  <span className="flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                    {site.onSite} on-site
-                  </span>
-                  {site.late > 0 && (
-                    <span className="flex items-center gap-1 text-amber-500">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                      {site.late} late
-                    </span>
-                  )}
-                  {site.noShow > 0 && (
-                    <span className="flex items-center gap-1 text-destructive">
-                      <span className="w-1.5 h-1.5 rounded-full bg-destructive" />
-                      {site.noShow} no-show
-                    </span>
-                  )}
-                </div>
-                <div className="mt-2 flex gap-2 flex-wrap">
-                  {site.agencies.map((agency) => (
-                    <span key={agency.name} className="text-xs bg-muted px-2 py-0.5 rounded">
-                      {agency.name}: {agency.workers}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+            {sites.map((site) => {
+              const isExpanded = expandedSites.includes(site.id);
+              return (
+                <Collapsible key={site.id} open={isExpanded} onOpenChange={() => toggleSite(site.id)}>
+                  <CollapsibleTrigger className="w-full p-3 hover:bg-muted/30 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        {isExpanded ? (
+                          <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                        ) : (
+                          <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                        )}
+                        <MapPin className="w-4 h-4 text-muted-foreground" />
+                        <span className="font-medium text-sm">{site.name}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span
+                          className={`text-sm font-medium ${site.filled === site.required ? "text-green-500" : "text-amber-500"}`}
+                        >
+                          {site.filled}/{site.required}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4 text-xs text-muted-foreground ml-6">
+                      <span className="flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                        {site.onSite} on-site
+                      </span>
+                      {site.late > 0 && (
+                        <span className="flex items-center gap-1 text-amber-500">
+                          <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                          {site.late} late
+                        </span>
+                      )}
+                      {site.noShow > 0 && (
+                        <span className="flex items-center gap-1 text-destructive">
+                          <span className="w-1.5 h-1.5 rounded-full bg-destructive" />
+                          {site.noShow} no-show
+                        </span>
+                      )}
+                    </div>
+                    <div className="mt-2 flex gap-2 flex-wrap ml-6">
+                      {site.agencies.map((agency) => (
+                        <span key={agency.name} className="text-xs bg-muted px-2 py-0.5 rounded">
+                          {agency.name}: {agency.workers}
+                        </span>
+                      ))}
+                    </div>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <div className="px-3 pb-3 ml-6">
+                      <div className="bg-muted/30 rounded-lg p-3 border border-border">
+                        <h4 className="text-xs font-semibold text-muted-foreground mb-3 uppercase tracking-wider">
+                          Department Coverage
+                        </h4>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                          {site.departments.map((dept) => (
+                            <div key={dept.name} className="bg-card rounded-lg p-2.5 border border-border">
+                              <div className="flex items-center justify-between mb-1">
+                                <span className="text-xs font-medium">{dept.name}</span>
+                                <span
+                                  className={`text-xs px-1.5 py-0.5 rounded ${
+                                    dept.confidence >= 95
+                                      ? "bg-green-500/20 text-green-500"
+                                      : dept.confidence >= 85
+                                        ? "bg-amber-500/20 text-amber-500"
+                                        : "bg-destructive/20 text-destructive"
+                                  }`}
+                                >
+                                  {dept.confidence}%
+                                </span>
+                              </div>
+                              <div className="text-base font-bold">
+                                {dept.filled}
+                                <span className="text-muted-foreground text-xs">/{dept.required}</span>
+                              </div>
+                              <div className="mt-1.5 h-1 bg-muted rounded-full overflow-hidden">
+                                <div
+                                  className={`h-full rounded-full ${
+                                    dept.confidence >= 95
+                                      ? "bg-green-500"
+                                      : dept.confidence >= 85
+                                        ? "bg-amber-500"
+                                        : "bg-destructive"
+                                  }`}
+                                  style={{ width: `${(dept.filled / dept.required) * 100}%` }}
+                                />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </CollapsibleContent>
+                </Collapsible>
+              );
+            })}
           </div>
         </div>
 
@@ -282,10 +383,20 @@ const ClientLiveSnapshot = () => {
                   onClick={() => setSelectedExceptionId(selectedExceptionId === exception.id ? null : exception.id)}
                 >
                   <div className="flex items-start gap-2">
-                    <AlertTriangle className={`w-4 h-4 mt-0.5 ${exception.type === "no-show" ? "text-destructive" : "text-amber-500"}`} />
+                    <AlertTriangle
+                      className={`w-4 h-4 mt-0.5 ${exception.type === "no-show" ? "text-destructive" : "text-amber-500"}`}
+                    />
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
-                        <p className="text-sm font-medium">{exception.workerName}</p>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleWorkerClick(exception.workerName);
+                          }}
+                          className="text-sm font-medium hover:text-primary hover:underline"
+                        >
+                          {exception.workerName}
+                        </button>
                         {hasUpdate && (
                           <span className="text-xs bg-primary/20 text-primary px-1.5 py-0.5 rounded animate-pulse">
                             Update
@@ -294,7 +405,8 @@ const ClientLiveSnapshot = () => {
                       </div>
                       <p className="text-xs text-muted-foreground">
                         {exception.type === "no-show" ? "No-show" : `${exception.lateMinutes} min late`}
-                        {" • "}{exception.site} • {exception.department}
+                        {" • "}
+                        {exception.site} • {exception.department}
                       </p>
                       <p className="text-xs text-muted-foreground">{exception.agency}</p>
 
@@ -311,7 +423,16 @@ const ClientLiveSnapshot = () => {
                             ) : (
                               <span className="flex items-center gap-1">
                                 <Users className="w-3 h-3 text-green-500" />
-                                Replaced by {exception.resolution.replacementWorkerName}
+                                Replaced by{" "}
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleWorkerClick(exception.resolution!.replacementWorkerName || "");
+                                  }}
+                                  className="font-medium hover:text-primary hover:underline"
+                                >
+                                  {exception.resolution.replacementWorkerName}
+                                </button>
                               </span>
                             )}
                           </div>
@@ -365,42 +486,6 @@ const ClientLiveSnapshot = () => {
               </div>
             )}
           </div>
-        </div>
-      </div>
-
-      {/* Departments with Confidence */}
-      <div className="bg-card border border-border rounded-lg">
-        <div className="p-3 border-b border-border">
-          <h2 className="text-sm font-semibold">Department Coverage</h2>
-        </div>
-        <div className="p-3 grid grid-cols-2 md:grid-cols-5 gap-3">
-          {departments.map((dept) => (
-            <div key={dept.name} className="bg-muted/30 rounded-lg p-3">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium">{dept.name}</span>
-                <span className={`text-xs px-1.5 py-0.5 rounded ${
-                  dept.confidence >= 95 ? "bg-green-500/20 text-green-500" :
-                  dept.confidence >= 85 ? "bg-amber-500/20 text-amber-500" :
-                  "bg-destructive/20 text-destructive"
-                }`}>
-                  {dept.confidence}%
-                </span>
-              </div>
-              <div className="text-lg font-bold">
-                {dept.filled}<span className="text-muted-foreground text-sm">/{dept.required}</span>
-              </div>
-              <div className="mt-2 h-1.5 bg-muted rounded-full overflow-hidden">
-                <div
-                  className={`h-full rounded-full ${
-                    dept.confidence >= 95 ? "bg-green-500" :
-                    dept.confidence >= 85 ? "bg-amber-500" :
-                    "bg-destructive"
-                  }`}
-                  style={{ width: `${(dept.filled / dept.required) * 100}%` }}
-                />
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </div>

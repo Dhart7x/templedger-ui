@@ -1,4 +1,4 @@
-import { Eye, Calendar, ClipboardList, Building2, Users, DollarSign, FileText, TrendingUp, UserCheck, Bell, MessageCircle } from "lucide-react";
+import { Eye, Calendar, ClipboardList, Building2, Users, DollarSign, FileText, TrendingUp, UserCheck, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ClientSidebarProps {
@@ -17,7 +17,6 @@ const navItems = [
   { id: "billing", label: "Billing", icon: FileText },
   { id: "spend-analysis", label: "Spend Analysis", icon: TrendingUp },
   { id: "temp-perm", label: "Temp-Perm", icon: UserCheck },
-  { id: "notifications", label: "Notifications", icon: Bell },
 ];
 
 const ClientSidebar = ({ activeView, onViewChange, notificationCount = 0 }: ClientSidebarProps) => {
@@ -50,9 +49,6 @@ const ClientSidebar = ({ activeView, onViewChange, notificationCount = 0 }: Clie
                   <span className="flex-1 text-left">{item.label}</span>
                   {item.id === "bookings" && item.badge && (
                     <span className="text-xs bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded">{item.badge}</span>
-                  )}
-                  {item.id === "notifications" && notificationCount > 0 && (
-                    <span className="text-xs bg-primary/20 text-primary px-1.5 py-0.5 rounded">{notificationCount}</span>
                   )}
                 </button>
               </li>
