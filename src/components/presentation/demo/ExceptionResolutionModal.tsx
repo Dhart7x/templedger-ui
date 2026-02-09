@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, Clock, UserPlus, Car, Bus, MapPin } from "lucide-react";
+import { X, Clock, UserPlus, Car, Bus, MapPin, Info, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -30,6 +30,9 @@ const ExceptionResolutionModal = ({ isOpen, onClose, exception }: ExceptionResol
   const [etaMinutes, setEtaMinutes] = useState<string>("15");
   const [selectedReplacement, setSelectedReplacement] = useState<string>("");
 
+  // Determine if this is a no-show/late exception (requires on-the-way or replacement)
+  const isAttendanceException = exception.type === "no-show" || exception.type === "late";
+
   // Get best matches for the department
   const bestMatches = standbyWorkers
     .filter(w => w.bestMatchDepartment.toLowerCase() === exception.department.toLowerCase() ||
@@ -41,6 +44,22 @@ const ExceptionResolutionModal = ({ isOpen, onClose, exception }: ExceptionResol
   const selectedWorker = bestMatches.find(w => w.id === selectedReplacement);
 
   const handleSubmit = () => {
+    if (!isAttendanceException) {
+      // For non-attendance exceptions, just acknowledge
+      const resolution: ExceptionResolution = {
+        exceptionId: exception.id,
+        workerId: exception.workerId,
+        workerName: exception.workerName,
+        department: exception.department,
+        resolutionType: "acknowledged",
+        timestamp: new Date().toISOString(),
+        acknowledged: false,
+      };
+      updateExceptionStatus(exception.id, "resolving", resolution);
+      onClose();
+      return;
+    }
+
     if (!resolutionType) return;
 
     const resolution: ExceptionResolution = {
@@ -67,6 +86,18 @@ const ExceptionResolutionModal = ({ isOpen, onClose, exception }: ExceptionResol
 
   if (!isOpen) return null;
 
+  const getExceptionTypeLabel = (type: string) => {
+    switch (type) {
+      case "no-show": return "No-Show";
+      case "late": return "Late Arrival";
+      case "overtime": return "Overtime Triggered";
+      case "clocked-in-not-out": return "Clocked In, Not Out";
+      case "rtw-expired": return "Right to Work Expired";
+      case "traffic-alert": return "Traffic Alert";
+      default: return type;
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/60" onClick={onClose} />
@@ -75,7 +106,9 @@ const ExceptionResolutionModal = ({ isOpen, onClose, exception }: ExceptionResol
         <div className="flex items-center justify-between p-4 border-b border-border">
           <div>
             <h2 className="text-lg font-semibold text-foreground">Resolve Exception</h2>
-            <p className="text-sm text-muted-foreground">{exception.workerName} • {exception.type}</p>
+            <p className="text-sm text-muted-foreground">
+              {exception.workerName} • {getExceptionTypeLabel(exception.type)}
+            </p>
           </div>
           <button onClick={onClose} className="p-1 hover:bg-muted rounded-lg transition-colors">
             <X className="w-5 h-5 text-muted-foreground" />
@@ -84,124 +117,163 @@ const ExceptionResolutionModal = ({ isOpen, onClose, exception }: ExceptionResol
 
         {/* Body */}
         <div className="p-4 space-y-4">
-          {/* Resolution Type Selection */}
-          <div className="space-y-3">
-            <label className="text-sm font-medium text-foreground">Resolution Type</label>
+          {isAttendanceException ? (
+            <>
+              {/* Resolution Type Selection for No-Show/Late */}
+              <div className="space-y-3">
+                <label className="text-sm font-medium text-foreground">Resolution Type</label>
 
-            {/* On the Way Option */}
-            <div
-              className={`p-4 rounded-lg border cursor-pointer transition-all ${
-                resolutionType === "on-the-way"
-                  ? "border-primary bg-primary/5"
-                  : "border-border hover:border-muted-foreground/50"
-              }`}
-              onClick={() => setResolutionType("on-the-way")}
-            >
-              <div className="flex items-start gap-3">
-                <Checkbox
-                  checked={resolutionType === "on-the-way"}
-                  className="mt-0.5"
-                />
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-amber-500" />
-                    <span className="font-medium text-foreground">On the Way</span>
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Worker is running late but confirmed arriving
-                  </p>
-
-                  {resolutionType === "on-the-way" && (
-                    <div className="mt-3 flex items-center gap-2">
-                      <span className="text-sm text-muted-foreground">ETA:</span>
-                      <Select value={etaMinutes} onValueChange={setEtaMinutes}>
-                        <SelectTrigger className="w-28 h-8">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent className="bg-card border-border">
-                          <SelectItem value="5">5 mins</SelectItem>
-                          <SelectItem value="10">10 mins</SelectItem>
-                          <SelectItem value="15">15 mins</SelectItem>
-                          <SelectItem value="20">20 mins</SelectItem>
-                          <SelectItem value="30">30 mins</SelectItem>
-                          <SelectItem value="45">45 mins</SelectItem>
-                          <SelectItem value="60">1 hour</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* Replace Option */}
-            <div
-              className={`p-4 rounded-lg border cursor-pointer transition-all ${
-                resolutionType === "replaced"
-                  ? "border-primary bg-primary/5"
-                  : "border-border hover:border-muted-foreground/50"
-              }`}
-              onClick={() => setResolutionType("replaced")}
-            >
-              <div className="flex items-start gap-3">
-                <Checkbox
-                  checked={resolutionType === "replaced"}
-                  className="mt-0.5"
-                />
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <UserPlus className="w-4 h-4 text-emerald-500" />
-                    <span className="font-medium text-foreground">Replace Worker</span>
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Send a replacement from standby pool
-                  </p>
-
-                  {resolutionType === "replaced" && (
-                    <div className="mt-3 space-y-2">
-                      <span className="text-sm text-muted-foreground">Best matches for {exception.department}:</span>
-                      <div className="space-y-2 max-h-48 overflow-y-auto">
-                        {bestMatches.map((worker) => (
-                          <div
-                            key={worker.id}
-                            className={`p-3 rounded-lg border cursor-pointer transition-all ${
-                              selectedReplacement === worker.id
-                                ? "border-primary bg-primary/10"
-                                : "border-border/50 hover:border-muted-foreground/50"
-                            }`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setSelectedReplacement(worker.id);
-                            }}
-                          >
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <span className="font-medium text-sm text-foreground">{worker.name}</span>
-                                <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
-                                  <MapPin className="w-3 h-3" />
-                                  <span>{worker.distance.miles} miles</span>
-                                </div>
-                              </div>
-                              <div className="text-right">
-                                <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                                  <Car className="w-3 h-3" />
-                                  <span>{worker.distance.carTime}</span>
-                                </div>
-                                <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
-                                  <Bus className="w-3 h-3" />
-                                  <span>{worker.distance.publicTransportTime}</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
+                {/* On the Way Option */}
+                <div
+                  className={`p-4 rounded-lg border cursor-pointer transition-all ${
+                    resolutionType === "on-the-way"
+                      ? "border-primary bg-primary/5"
+                      : "border-border hover:border-muted-foreground/50"
+                  }`}
+                  onClick={() => setResolutionType("on-the-way")}
+                >
+                  <div className="flex items-start gap-3">
+                    <Checkbox
+                      checked={resolutionType === "on-the-way"}
+                      className="mt-0.5"
+                    />
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-4 h-4 text-amber-500" />
+                        <span className="font-medium text-foreground">On the Way</span>
                       </div>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Worker is running late but confirmed arriving
+                      </p>
+
+                      {resolutionType === "on-the-way" && (
+                        <div className="mt-3 flex items-center gap-2">
+                          <span className="text-sm text-muted-foreground">ETA:</span>
+                          <Select value={etaMinutes} onValueChange={setEtaMinutes}>
+                            <SelectTrigger className="w-28 h-8">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent className="bg-card border-border">
+                              <SelectItem value="5">5 mins</SelectItem>
+                              <SelectItem value="10">10 mins</SelectItem>
+                              <SelectItem value="15">15 mins</SelectItem>
+                              <SelectItem value="20">20 mins</SelectItem>
+                              <SelectItem value="30">30 mins</SelectItem>
+                              <SelectItem value="45">45 mins</SelectItem>
+                              <SelectItem value="60">1 hour</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </div>
+                </div>
+
+                {/* Replace Option */}
+                <div
+                  className={`p-4 rounded-lg border cursor-pointer transition-all ${
+                    resolutionType === "replaced"
+                      ? "border-primary bg-primary/5"
+                      : "border-border hover:border-muted-foreground/50"
+                  }`}
+                  onClick={() => setResolutionType("replaced")}
+                >
+                  <div className="flex items-start gap-3">
+                    <Checkbox
+                      checked={resolutionType === "replaced"}
+                      className="mt-0.5"
+                    />
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <UserPlus className="w-4 h-4 text-green-500" />
+                        <span className="font-medium text-foreground">Replace Worker</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Send a replacement from standby pool
+                      </p>
+
+                      {resolutionType === "replaced" && (
+                        <div className="mt-3 space-y-2">
+                          <span className="text-sm text-muted-foreground">Best matches for {exception.department}:</span>
+                          <div className="space-y-2 max-h-48 overflow-y-auto">
+                            {bestMatches.length > 0 ? (
+                              bestMatches.map((worker) => (
+                                <div
+                                  key={worker.id}
+                                  className={`p-3 rounded-lg border cursor-pointer transition-all ${
+                                    selectedReplacement === worker.id
+                                      ? "border-primary bg-primary/10"
+                                      : "border-border/50 hover:border-muted-foreground/50"
+                                  }`}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedReplacement(worker.id);
+                                  }}
+                                >
+                                  <div className="flex items-center justify-between">
+                                    <div>
+                                      <span className="font-medium text-sm text-foreground">{worker.name}</span>
+                                      <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
+                                        <MapPin className="w-3 h-3" />
+                                        <span>{worker.distance.miles} miles</span>
+                                      </div>
+                                    </div>
+                                    <div className="text-right">
+                                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                                        <Car className="w-3 h-3" />
+                                        <span>{worker.distance.carTime}</span>
+                                      </div>
+                                      <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
+                                        <Bus className="w-3 h-3" />
+                                        <span>{worker.distance.publicTransportTime}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))
+                            ) : (
+                              <div className="p-3 text-center text-sm text-muted-foreground">
+                                No standby workers available for this department
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
+            </>
+          ) : (
+            /* Non-attendance exception - Simple acknowledgement */
+            <div className="space-y-4">
+              <div className="p-4 rounded-lg border border-border bg-muted/30">
+                <div className="flex items-start gap-3">
+                  <Info className="w-5 h-5 text-primary mt-0.5" />
+                  <div>
+                    <h3 className="font-medium text-foreground">Acknowledge Exception</h3>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      {exception.type === "overtime" && "This worker has triggered overtime. Acknowledging will notify the client that you are aware."}
+                      {exception.type === "clocked-in-not-out" && "This worker clocked in but has not clocked out. Please verify their status."}
+                      {exception.type === "rtw-expired" && "This worker's Right to Work documentation has expired. They should not work until this is resolved."}
+                      {exception.type === "traffic-alert" && "High traffic reported near this site. Multiple workers may be delayed."}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {exception.type === "rtw-expired" && (
+                <div className="p-3 rounded-lg border border-destructive/30 bg-destructive/5">
+                  <div className="flex items-start gap-2">
+                    <AlertTriangle className="w-4 h-4 text-destructive mt-0.5" />
+                    <p className="text-sm text-destructive">
+                      <strong>Compliance Alert:</strong> Worker must not continue working until Right to Work is renewed.
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
+          )}
         </div>
 
         {/* Footer */}
@@ -211,9 +283,9 @@ const ExceptionResolutionModal = ({ isOpen, onClose, exception }: ExceptionResol
           </Button>
           <Button
             onClick={handleSubmit}
-            disabled={!resolutionType || (resolutionType === "replaced" && !selectedReplacement)}
+            disabled={isAttendanceException && (!resolutionType || (resolutionType === "replaced" && !selectedReplacement))}
           >
-            Notify Client
+            {isAttendanceException ? "Notify Client" : "Acknowledge"}
           </Button>
         </div>
       </div>
