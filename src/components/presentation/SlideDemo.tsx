@@ -250,7 +250,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
       case "agencies":
         return <ClientAgencies onViewWorker={handleViewWorker} />;
       case "workers":
-        return <ClientWorkers />;
+        return <ClientWorkers onViewWorker={handleViewWorker} />;
       case "payroll":
         return <ClientPayroll />;
       case "billing":
@@ -258,7 +258,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
       case "spend-analysis":
         return <ClientSpendAnalysis onViewWorker={handleViewWorker} />;
       case "temp-perm":
-        return <ClientTempPerm />;
+        return <ClientTempPerm onViewWorker={handleViewWorker} />;
       case "notifications":
         return <DemoNotifications onNavigate={setActiveClientView} />;
       case "chatbot":
@@ -278,11 +278,11 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
       case "schedule":
         return <AgencySchedule />;
       case "workers-live":
-        return <AgencyWorkers tab="live" />;
+        return <AgencyWorkers tab="live" onViewWorker={handleViewWorker} />;
       case "workers-standby":
-        return <AgencyWorkers tab="standby" />;
+        return <AgencyWorkers tab="standby" onViewWorker={handleViewWorker} />;
       case "workers-new":
-        return <AgencyWorkers tab="new" />;
+        return <AgencyWorkers tab="new" onViewWorker={handleViewWorker} />;
       case "payroll":
         return <ClientPayroll />; // Reuse with different context
       case "billing":
