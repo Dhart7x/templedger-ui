@@ -74,16 +74,29 @@ export interface ExceptionResolution {
   clientResponse?: "accepted" | "request-replacement";
 }
 
+export type ExceptionType = 
+  | "no-show" 
+  | "late" 
+  | "overtime" 
+  | "clocked-in-not-out" 
+  | "rtw-expired" 
+  | "traffic-alert";
+
 export interface LiveException {
   id: string;
   workerId: string;
   workerName: string;
-  type: "no-show" | "late";
+  type: ExceptionType;
   site: string;
   department: string;
   agency: string;
   shift: string;
   lateMinutes?: number;
+  overtimeMinutes?: number;
+  clockInTime?: string;
+  rtwExpiryDate?: string;
+  trafficSeverity?: "moderate" | "severe";
+  affectedWorkers?: number;
   timestamp: string;
   status: "open" | "resolving" | "resolved";
   resolution?: ExceptionResolution;
@@ -171,6 +184,7 @@ const initialBookings: Booking[] = [
 ];
 
 const initialExceptions: LiveException[] = [
+  // No-shows (minimum 5)
   {
     id: "exc-1",
     workerId: "w-james",
@@ -196,6 +210,43 @@ const initialExceptions: LiveException[] = [
     status: "open",
   },
   {
+    id: "exc-5",
+    workerId: "w-kevin",
+    workerName: "Kevin Morris",
+    type: "no-show",
+    site: "Heathrow DC",
+    department: "Packing",
+    agency: "Blue Arrow",
+    shift: "06:00–14:00",
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  {
+    id: "exc-8",
+    workerId: "w-lisa",
+    workerName: "Lisa Chen",
+    type: "no-show",
+    site: "Birmingham DC",
+    department: "Picking",
+    agency: "Pertemps",
+    shift: "06:00–14:00",
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  {
+    id: "exc-10",
+    workerId: "w-marcus",
+    workerName: "Marcus Taylor",
+    type: "no-show",
+    site: "Coventry Hub",
+    department: "Warehouse",
+    agency: "Staffline",
+    shift: "06:00–14:00",
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  // Late arrivals (minimum 5)
+  {
     id: "exc-3",
     workerId: "w-tomasz",
     workerName: "Tomasz Nowak",
@@ -218,18 +269,6 @@ const initialExceptions: LiveException[] = [
     agency: "Pertemps",
     shift: "06:00–14:00",
     lateMinutes: 32,
-    timestamp: new Date().toISOString(),
-    status: "open",
-  },
-  {
-    id: "exc-5",
-    workerId: "w-kevin",
-    workerName: "Kevin Morris",
-    type: "no-show",
-    site: "Heathrow DC",
-    department: "Packing",
-    agency: "Blue Arrow",
-    shift: "06:00–14:00",
     timestamp: new Date().toISOString(),
     status: "open",
   },
@@ -260,18 +299,6 @@ const initialExceptions: LiveException[] = [
     status: "open",
   },
   {
-    id: "exc-8",
-    workerId: "w-lisa",
-    workerName: "Lisa Chen",
-    type: "no-show",
-    site: "Birmingham DC",
-    department: "Picking",
-    agency: "Pertemps",
-    shift: "06:00–14:00",
-    timestamp: new Date().toISOString(),
-    status: "open",
-  },
-  {
     id: "exc-9",
     workerId: "w-mark",
     workerName: "Mark Edwards",
@@ -281,6 +308,116 @@ const initialExceptions: LiveException[] = [
     agency: "Staffline",
     shift: "06:00–14:00",
     lateMinutes: 42,
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  // Overtime triggered
+  {
+    id: "exc-11",
+    workerId: "w-priya",
+    workerName: "Priya Sharma",
+    type: "overtime",
+    site: "Heathrow DC",
+    department: "Picking",
+    agency: "Staffline",
+    shift: "06:00–14:00",
+    overtimeMinutes: 45,
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  {
+    id: "exc-12",
+    workerId: "w-robert",
+    workerName: "Robert Garcia",
+    type: "overtime",
+    site: "Birmingham DC",
+    department: "Packing",
+    agency: "Pertemps",
+    shift: "06:00–14:00",
+    overtimeMinutes: 90,
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  // Clocked in but not out
+  {
+    id: "exc-13",
+    workerId: "w-emma",
+    workerName: "Emma Richardson",
+    type: "clocked-in-not-out",
+    site: "Coventry Hub",
+    department: "Goods In",
+    agency: "Blue Arrow",
+    shift: "22:00–06:00",
+    clockInTime: "22:02",
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  {
+    id: "exc-14",
+    workerId: "w-ahmed",
+    workerName: "Ahmed Hassan",
+    type: "clocked-in-not-out",
+    site: "Heathrow DC",
+    department: "Returns",
+    agency: "Staffline",
+    shift: "14:00–22:00",
+    clockInTime: "14:05",
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  // Right to work expired
+  {
+    id: "exc-15",
+    workerId: "w-andrei",
+    workerName: "Andrei Petrov",
+    type: "rtw-expired",
+    site: "Birmingham DC",
+    department: "Warehouse",
+    agency: "Pertemps",
+    shift: "06:00–14:00",
+    rtwExpiryDate: "2026-02-01",
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  {
+    id: "exc-16",
+    workerId: "w-fatima",
+    workerName: "Fatima Al-Rashid",
+    type: "rtw-expired",
+    site: "Heathrow DC",
+    department: "Picking",
+    agency: "Blue Arrow",
+    shift: "06:00–14:00",
+    rtwExpiryDate: "2026-02-05",
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  // Traffic alerts
+  {
+    id: "exc-17",
+    workerId: "traffic-heathrow",
+    workerName: "M25 Junction 15",
+    type: "traffic-alert",
+    site: "Heathrow DC",
+    department: "All",
+    agency: "All",
+    shift: "06:00–14:00",
+    trafficSeverity: "severe",
+    affectedWorkers: 12,
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  {
+    id: "exc-18",
+    workerId: "traffic-coventry",
+    workerName: "A45 Coventry Road",
+    type: "traffic-alert",
+    site: "Coventry Hub",
+    department: "All",
+    agency: "All",
+    shift: "06:00–14:00",
+    trafficSeverity: "moderate",
+    affectedWorkers: 6,
     timestamp: new Date().toISOString(),
     status: "open",
   },

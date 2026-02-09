@@ -272,7 +272,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   const renderAgencyView = () => {
     switch (activeAgencyView) {
       case "live-snapshot":
-        return <AgencyLiveSnapshot />;
+        return <AgencyLiveSnapshot onViewWorker={handleViewWorker} />;
       case "new-order":
         return <AgencyNewOrder />;
       case "schedule":
@@ -292,7 +292,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
       case "chatbot":
         return <DemoChatbot />;
       default:
-        return <AgencyLiveSnapshot />;
+        return <AgencyLiveSnapshot onViewWorker={handleViewWorker} />;
     }
   };
 
