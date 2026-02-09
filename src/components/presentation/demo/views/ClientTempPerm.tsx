@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { UserCheck, Clock, TrendingUp, Star, Building2, Filter, ChevronRight, MapPin } from "lucide-react";
+import { UserCheck, Clock, TrendingUp, Star, Building2, Filter, ChevronRight, MapPin, Send, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useDemoContext } from "../DemoContext";
 
 interface TempPermCandidate {
   id: string;
@@ -39,10 +40,12 @@ interface ClientTempPermProps {
 }
 
 const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
+  const { addNotification } = useDemoContext();
   const [siteFilter, setSiteFilter] = useState("all");
   const [departmentFilter, setDepartmentFilter] = useState("all");
   const [agencyFilter, setAgencyFilter] = useState("all");
   const [selectedCandidate, setSelectedCandidate] = useState<TempPermCandidate | null>(null);
+  const [conversionSent, setConversionSent] = useState<string[]>([]);
 
   const eligibleCount = candidates.filter(c => c.eligible).length;
 
@@ -64,6 +67,25 @@ const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
     if (onViewWorker) {
       onViewWorker(name);
     }
+  };
+
+  const handleInitiateConversion = (candidate: TempPermCandidate) => {
+    // Add to agency notifications
+    addNotification({
+      type: "temp-perm",
+      title: "Temp-to-Perm Conversion Request",
+      message: `Client wishes to convert ${candidate.name} to permanent staff. Please review the request and respond.`,
+      read: false,
+      targetView: "agency",
+      contextType: "worker",
+      workerName: candidate.name,
+      agency: candidate.agency,
+      site: candidate.site,
+      fromAgency: false,
+    });
+    
+    setConversionSent(prev => [...prev, candidate.id]);
+    setSelectedCandidate(null);
   };
 
   return (
@@ -267,7 +289,17 @@ const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
 
             <div className="flex justify-end gap-2">
               <Button variant="outline" onClick={() => setSelectedCandidate(null)}>Close</Button>
-              <Button>Initiate Conversion</Button>
+              {conversionSent.includes(selectedCandidate.id) ? (
+                <Button disabled className="gap-2 bg-green-500/20 text-green-500 hover:bg-green-500/20">
+                  <Bell className="w-4 h-4" />
+                  Request Sent
+                </Button>
+              ) : (
+                <Button onClick={() => handleInitiateConversion(selectedCandidate)} className="gap-2">
+                  <Send className="w-4 h-4" />
+                  Initiate Conversion
+                </Button>
+              )}
             </div>
           </div>
         </div>

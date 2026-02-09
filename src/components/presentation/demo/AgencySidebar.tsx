@@ -1,4 +1,4 @@
-import { Eye, Plus, Calendar, Users, DollarSign, FileText, Bell, MessageCircle, UserCheck, Clock } from "lucide-react";
+import { Eye, ClipboardList, Calendar, Users, DollarSign, FileText, Bell, MessageCircle, UserCheck, Clock, UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface AgencySidebarProps {
@@ -10,7 +10,7 @@ interface AgencySidebarProps {
 
 const navItems = [
   { id: "live-snapshot", label: "Live Snapshot", icon: Eye },
-  { id: "new-order", label: "New Order", icon: Plus, hasBadge: true },
+  { id: "new-order", label: "Bookings", icon: ClipboardList, hasBadge: true },
   { id: "schedule", label: "Schedule", icon: Calendar },
   { id: "workers", label: "Workers", icon: Users },
   { id: "payroll", label: "Payroll", icon: DollarSign },
@@ -21,7 +21,7 @@ const navItems = [
 const workerSubNav = [
   { id: "workers-live", label: "Live", icon: UserCheck },
   { id: "workers-standby", label: "Standby", icon: Clock },
-  { id: "workers-new", label: "New Registered", icon: Plus },
+  { id: "workers-new", label: "New Registered", icon: UserPlus },
 ];
 
 const AgencySidebar = ({ activeView, onViewChange, notificationCount = 0, newOrderCount = 2 }: AgencySidebarProps) => {

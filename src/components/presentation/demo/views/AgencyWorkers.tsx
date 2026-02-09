@@ -138,7 +138,7 @@ const AgencyWorkers = ({ tab = "live", onViewWorker }: AgencyWorkersProps) => {
 
       {/* Tabs */}
       <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "live" | "standby" | "new")}>
-        <TabsList className="bg-muted/50">
+        <TabsList className="bg-muted/50 gap-4">
           <TabsTrigger value="live" className="gap-2 data-[state=active]:bg-green-500/10 data-[state=active]:text-green-500">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
             Live Workers
