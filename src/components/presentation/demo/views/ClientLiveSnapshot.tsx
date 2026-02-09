@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { MapPin, Users, Clock, AlertTriangle, CheckCircle, Filter, TrendingUp, ChevronRight } from "lucide-react";
+import { MapPin, Users, Clock, AlertTriangle, CheckCircle, Filter, TrendingUp, ChevronRight, MessageSquare, Check, RefreshCw } from "lucide-react";
+import { useDemoContext } from "../DemoContext";
+import { Button } from "@/components/ui/button";
 
 interface SiteData {
   id: string;
@@ -67,16 +69,11 @@ const departments = [
   { name: "Quality", required: 5, filled: 4, confidence: 80 },
 ];
 
-const issues = [
-  { id: "1", type: "no-show", worker: "James Wilson", site: "Birmingham DC", dept: "Loading", agency: "Blue Arrow", urgent: true },
-  { id: "2", type: "no-show", worker: "Mike Stevens", site: "Heathrow DC", dept: "Warehouse", agency: "Pertemps", urgent: true },
-  { id: "3", type: "late", worker: "Tomasz Nowak", site: "Heathrow DC", dept: "Loading", agency: "Staffline", mins: 45, urgent: false },
-  { id: "4", type: "overtime", worker: "Ahmed Khan", site: "Heathrow DC", dept: "Warehouse", agency: "Blue Arrow", decision: "pending", urgent: false },
-];
-
 const ClientLiveSnapshot = () => {
+  const { exceptions, respondToException, allocations, notifications } = useDemoContext();
   const [siteFilter, setSiteFilter] = useState("all");
   const [agencyFilter, setAgencyFilter] = useState("all");
+  const [selectedExceptionId, setSelectedExceptionId] = useState<string | null>(null);
 
   const totals = sites.reduce(
     (acc, site) => ({
@@ -89,6 +86,18 @@ const ClientLiveSnapshot = () => {
     }),
     { required: 0, filled: 0, onSite: 0, late: 0, noShow: 0, overtime: 0 }
   );
+
+  // Get open exceptions
+  const openExceptions = exceptions.filter(e => e.status !== "resolved");
+  const exceptionsWithUpdates = openExceptions.filter(e => e.resolution && !e.resolution.acknowledged);
+
+  const handleExceptionResponse = (exceptionId: string, response: "accepted" | "request-replacement") => {
+    respondToException(exceptionId, response);
+    setSelectedExceptionId(null);
+  };
+
+  // Recent allocations (show the last 3)
+  const recentAllocations = allocations.slice(0, 3);
 
   return (
     <div className="p-4 md:p-6 space-y-6">
@@ -122,6 +131,39 @@ const ClientLiveSnapshot = () => {
           </select>
         </div>
       </div>
+
+      {/* Agency Updates Banner */}
+      {exceptionsWithUpdates.length > 0 && (
+        <div className="p-3 bg-primary/10 border border-primary/30 rounded-lg animate-pulse">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <MessageSquare className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium text-primary">
+                {exceptionsWithUpdates.length} agency update{exceptionsWithUpdates.length > 1 ? "s" : ""} awaiting response
+              </span>
+            </div>
+            <span className="text-xs text-primary">Click on issue to respond</span>
+          </div>
+        </div>
+      )}
+
+      {/* Recent Allocations */}
+      {recentAllocations.length > 0 && (
+        <div className="p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
+          <div className="flex items-center gap-2 mb-2">
+            <CheckCircle className="w-4 h-4 text-green-500" />
+            <span className="text-sm font-medium text-green-500">Recent Allocations</span>
+          </div>
+          <div className="space-y-1">
+            {recentAllocations.map((alloc) => (
+              <div key={alloc.id} className="text-xs text-muted-foreground">
+                <span className="font-medium text-foreground">{alloc.workerName}</span>
+                {" → "}{alloc.department} at {alloc.site} ({alloc.shift})
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Summary Cards */}
       <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
@@ -220,32 +262,108 @@ const ClientLiveSnapshot = () => {
           </div>
         </div>
 
-        {/* Issues */}
+        {/* Issues Panel */}
         <div className="bg-card border border-border rounded-lg">
           <div className="p-3 border-b border-border flex items-center justify-between">
-            <h2 className="text-sm font-semibold">Issues</h2>
+            <h2 className="text-sm font-semibold">Live Issues</h2>
             <span className="text-xs bg-destructive/20 text-destructive px-2 py-0.5 rounded">
-              {issues.filter(i => i.urgent).length} critical
+              {openExceptions.length} active
             </span>
           </div>
-          <div className="divide-y divide-border max-h-[280px] overflow-y-auto">
-            {issues.map((issue) => (
-              <div key={issue.id} className={`p-3 ${issue.urgent ? "bg-destructive/5" : ""}`}>
-                <div className="flex items-start gap-2">
-                  <AlertTriangle className={`w-4 h-4 mt-0.5 ${issue.urgent ? "text-destructive" : "text-amber-500"}`} />
-                  <div className="flex-1">
-                    <p className="text-sm font-medium">{issue.worker}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {issue.type === "no-show" && "No-show"}
-                      {issue.type === "late" && `${issue.mins} min late`}
-                      {issue.type === "overtime" && "Overtime decision pending"}
-                      {" • "}{issue.site} • {issue.dept}
-                    </p>
-                    <p className="text-xs text-muted-foreground">{issue.agency}</p>
+          <div className="divide-y divide-border max-h-[350px] overflow-y-auto">
+            {openExceptions.map((exception) => {
+              const hasUpdate = exception.resolution && !exception.resolution.acknowledged;
+              return (
+                <div
+                  key={exception.id}
+                  className={`p-3 cursor-pointer transition-colors ${
+                    hasUpdate ? "bg-primary/5 hover:bg-primary/10" : "hover:bg-muted/30"
+                  } ${selectedExceptionId === exception.id ? "ring-2 ring-primary ring-inset" : ""}`}
+                  onClick={() => setSelectedExceptionId(selectedExceptionId === exception.id ? null : exception.id)}
+                >
+                  <div className="flex items-start gap-2">
+                    <AlertTriangle className={`w-4 h-4 mt-0.5 ${exception.type === "no-show" ? "text-destructive" : "text-amber-500"}`} />
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <p className="text-sm font-medium">{exception.workerName}</p>
+                        {hasUpdate && (
+                          <span className="text-xs bg-primary/20 text-primary px-1.5 py-0.5 rounded animate-pulse">
+                            Update
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-xs text-muted-foreground">
+                        {exception.type === "no-show" ? "No-show" : `${exception.lateMinutes} min late`}
+                        {" • "}{exception.site} • {exception.department}
+                      </p>
+                      <p className="text-xs text-muted-foreground">{exception.agency}</p>
+
+                      {/* Resolution details */}
+                      {exception.resolution && (
+                        <div className="mt-2 p-2 bg-muted/50 rounded-lg border border-border">
+                          <div className="text-xs text-muted-foreground mb-1">Agency Response:</div>
+                          <div className="text-sm">
+                            {exception.resolution.resolutionType === "on-the-way" ? (
+                              <span className="flex items-center gap-1">
+                                <Clock className="w-3 h-3 text-amber-500" />
+                                On the way — ETA {exception.resolution.etaMinutes} mins
+                              </span>
+                            ) : (
+                              <span className="flex items-center gap-1">
+                                <Users className="w-3 h-3 text-green-500" />
+                                Replaced by {exception.resolution.replacementWorkerName}
+                              </span>
+                            )}
+                          </div>
+
+                          {/* Response buttons */}
+                          {!exception.resolution.acknowledged && selectedExceptionId === exception.id && (
+                            <div className="flex gap-2 mt-2">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="flex-1 text-xs h-7 gap-1"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleExceptionResponse(exception.id, "request-replacement");
+                                }}
+                              >
+                                <RefreshCw className="w-3 h-3" />
+                                Replace
+                              </Button>
+                              <Button
+                                size="sm"
+                                className="flex-1 text-xs h-7 gap-1"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleExceptionResponse(exception.id, "accepted");
+                                }}
+                              >
+                                <Check className="w-3 h-3" />
+                                Accept
+                              </Button>
+                            </div>
+                          )}
+
+                          {exception.resolution.acknowledged && (
+                            <div className="mt-2 text-xs text-green-500 flex items-center gap-1">
+                              <CheckCircle className="w-3 h-3" />
+                              Accepted
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
+              );
+            })}
+            {openExceptions.length === 0 && (
+              <div className="p-6 text-center text-muted-foreground">
+                <CheckCircle className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                <p className="text-sm">No active issues</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </div>

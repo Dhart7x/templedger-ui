@@ -51,11 +51,14 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   const [viewMode, setViewMode] = useState<ViewMode>("client");
   const [activeClientView, setActiveClientView] = useState("live-snapshot");
   const [activeAgencyView, setActiveAgencyView] = useState("live-snapshot");
-  const { notifications } = useDemoContext();
+  const { notifications, bookings } = useDemoContext();
 
   const unreadCount = notifications.filter(
     (n) => !n.read && (n.targetView === viewMode || n.targetView === "both")
   ).length;
+
+  // Count pending bookings for agency "new order" badge
+  const pendingBookingsCount = bookings.filter(b => b.status === "pending").length;
 
   const handleLaunchDemo = () => {
     setDemoState("login");
@@ -251,7 +254,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
       case "temp-perm":
         return <ClientTempPerm />;
       case "notifications":
-        return <DemoNotifications />;
+        return <DemoNotifications onNavigate={setActiveClientView} />;
       case "chatbot":
         return <DemoChatbot />;
       default:
@@ -279,7 +282,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
       case "billing":
         return <ClientBilling />; // Reuse with different context
       case "notifications":
-        return <DemoNotifications />;
+        return <DemoNotifications onNavigate={setActiveAgencyView} />;
       case "chatbot":
         return <DemoChatbot />;
       default:
@@ -361,7 +364,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
               activeView={activeAgencyView}
               onViewChange={setActiveAgencyView}
               notificationCount={unreadCount}
-              newOrderCount={2}
+              newOrderCount={pendingBookingsCount}
             />
             <div className="flex-1 overflow-auto bg-background">{renderAgencyView()}</div>
           </>
