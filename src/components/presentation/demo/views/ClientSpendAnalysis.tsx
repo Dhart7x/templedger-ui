@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { TrendingUp, DollarSign, Building2, Clock, Users, BarChart3, ChevronDown, ChevronUp, MapPin, Briefcase } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 interface SpendByPeriod {
   week: { amount: number; hours: number; workers: number; change: number; overtimeHours: number };
@@ -32,25 +33,25 @@ const overallSpend: SiteSpend[] = [
   {
     category: "Heathrow DC",
     data: {
-      week: { amount: 28500, hours: 2280, workers: 45, change: 5.2, overtimeHours: 180 },
-      month: { amount: 114000, hours: 9120, workers: 48, change: 3.8, overtimeHours: 720 },
-      year: { amount: 1368000, hours: 109440, workers: 52, change: 4.2, overtimeHours: 8640 },
+      week: { amount: 85500, hours: 6840, workers: 95, change: 5.2, overtimeHours: 540 },
+      month: { amount: 342000, hours: 27360, workers: 102, change: 3.8, overtimeHours: 2160 },
+      year: { amount: 4104000, hours: 328320, workers: 115, change: 4.2, overtimeHours: 25920 },
     },
   },
   {
     category: "Coventry Hub",
     data: {
-      week: { amount: 18200, hours: 1456, workers: 30, change: -2.1, overtimeHours: 96 },
-      month: { amount: 72800, hours: 5824, workers: 32, change: -1.5, overtimeHours: 384 },
-      year: { amount: 873600, hours: 69888, workers: 35, change: 1.2, overtimeHours: 4608 },
+      week: { amount: 54600, hours: 4368, workers: 72, change: -2.1, overtimeHours: 288 },
+      month: { amount: 218400, hours: 17472, workers: 78, change: -1.5, overtimeHours: 1152 },
+      year: { amount: 2620800, hours: 209664, workers: 85, change: 1.2, overtimeHours: 13824 },
     },
   },
   {
     category: "Birmingham DC",
     data: {
-      week: { amount: 12800, hours: 1024, workers: 25, change: 8.4, overtimeHours: 120 },
-      month: { amount: 51200, hours: 4096, workers: 27, change: 6.2, overtimeHours: 480 },
-      year: { amount: 614400, hours: 49152, workers: 30, change: 5.8, overtimeHours: 5760 },
+      week: { amount: 44800, hours: 3584, workers: 68, change: 8.4, overtimeHours: 360 },
+      month: { amount: 179200, hours: 14336, workers: 74, change: 6.2, overtimeHours: 1440 },
+      year: { amount: 2150400, hours: 172032, workers: 82, change: 5.8, overtimeHours: 17280 },
     },
   },
 ];
@@ -59,38 +60,38 @@ const agencySpend: AgencySpendData[] = [
   {
     name: "Staffline",
     data: {
-      week: { amount: 32400, hours: 2592, workers: 32, change: 4.5, overtimeHours: 216 },
-      month: { amount: 129600, hours: 10368, workers: 35, change: 3.2, overtimeHours: 864 },
-      year: { amount: 1555200, hours: 124416, workers: 40, change: 4.8, overtimeHours: 10368 },
+      week: { amount: 97200, hours: 7776, workers: 85, change: 4.5, overtimeHours: 648 },
+      month: { amount: 388800, hours: 31104, workers: 92, change: 3.2, overtimeHours: 2592 },
+      year: { amount: 4665600, hours: 373248, workers: 105, change: 4.8, overtimeHours: 31104 },
     },
     sites: [
       {
         name: "Heathrow DC",
-        amount: 18500,
-        hours: 1480,
+        amount: 55500,
+        hours: 4440,
         departments: [
-          { name: "Warehouse", amount: 8200, hours: 656, overtimeHours: 82 },
-          { name: "Picking", amount: 6100, hours: 488, overtimeHours: 49 },
-          { name: "Loading", amount: 4200, hours: 336, overtimeHours: 42 },
+          { name: "Warehouse", amount: 24600, hours: 1968, overtimeHours: 246 },
+          { name: "Picking", amount: 18300, hours: 1464, overtimeHours: 147 },
+          { name: "Loading", amount: 12600, hours: 1008, overtimeHours: 126 },
         ],
       },
       {
         name: "Coventry Hub",
-        amount: 10200,
-        hours: 816,
+        amount: 30600,
+        hours: 2448,
         departments: [
-          { name: "Warehouse", amount: 5800, hours: 464, overtimeHours: 46 },
-          { name: "Picking", amount: 2900, hours: 232, overtimeHours: 23 },
-          { name: "Quality", amount: 1500, hours: 120, overtimeHours: 12 },
+          { name: "Warehouse", amount: 17400, hours: 1392, overtimeHours: 139 },
+          { name: "Picking", amount: 8700, hours: 696, overtimeHours: 70 },
+          { name: "Quality", amount: 4500, hours: 360, overtimeHours: 36 },
         ],
       },
       {
         name: "Birmingham DC",
-        amount: 3700,
-        hours: 296,
+        amount: 11100,
+        hours: 888,
         departments: [
-          { name: "Warehouse", amount: 2200, hours: 176, overtimeHours: 18 },
-          { name: "Picking", amount: 1500, hours: 120, overtimeHours: 12 },
+          { name: "Warehouse", amount: 6600, hours: 528, overtimeHours: 53 },
+          { name: "Picking", amount: 4500, hours: 360, overtimeHours: 36 },
         ],
       },
     ],
@@ -98,29 +99,29 @@ const agencySpend: AgencySpendData[] = [
   {
     name: "Pertemps",
     data: {
-      week: { amount: 18200, hours: 1456, workers: 18, change: 2.1, overtimeHours: 116 },
-      month: { amount: 72800, hours: 5824, workers: 20, change: 1.8, overtimeHours: 466 },
-      year: { amount: 873600, hours: 69888, workers: 24, change: 2.5, overtimeHours: 5590 },
+      week: { amount: 54600, hours: 4368, workers: 58, change: 2.1, overtimeHours: 349 },
+      month: { amount: 218400, hours: 17472, workers: 64, change: 1.8, overtimeHours: 1398 },
+      year: { amount: 2620800, hours: 209664, workers: 72, change: 2.5, overtimeHours: 16773 },
     },
     sites: [
       {
         name: "Heathrow DC",
-        amount: 8400,
-        hours: 672,
+        amount: 25200,
+        hours: 2016,
         departments: [
-          { name: "Warehouse", amount: 4200, hours: 336, overtimeHours: 34 },
-          { name: "Packing", amount: 2800, hours: 224, overtimeHours: 22 },
-          { name: "Loading", amount: 1400, hours: 112, overtimeHours: 11 },
+          { name: "Warehouse", amount: 12600, hours: 1008, overtimeHours: 101 },
+          { name: "Packing", amount: 8400, hours: 672, overtimeHours: 67 },
+          { name: "Loading", amount: 4200, hours: 336, overtimeHours: 34 },
         ],
       },
       {
         name: "Birmingham DC",
-        amount: 9800,
-        hours: 784,
+        amount: 29400,
+        hours: 2352,
         departments: [
-          { name: "Warehouse", amount: 5200, hours: 416, overtimeHours: 42 },
-          { name: "Picking", amount: 3200, hours: 256, overtimeHours: 26 },
-          { name: "Quality", amount: 1400, hours: 112, overtimeHours: 11 },
+          { name: "Warehouse", amount: 15600, hours: 1248, overtimeHours: 125 },
+          { name: "Picking", amount: 9600, hours: 768, overtimeHours: 77 },
+          { name: "Quality", amount: 4200, hours: 336, overtimeHours: 34 },
         ],
       },
     ],
@@ -128,28 +129,28 @@ const agencySpend: AgencySpendData[] = [
   {
     name: "Blue Arrow",
     data: {
-      week: { amount: 8900, hours: 712, workers: 12, change: -1.2, overtimeHours: 64 },
-      month: { amount: 35600, hours: 2848, workers: 14, change: -0.8, overtimeHours: 256 },
-      year: { amount: 427200, hours: 34176, workers: 18, change: 1.5, overtimeHours: 3072 },
+      week: { amount: 26700, hours: 2136, workers: 35, change: -1.2, overtimeHours: 192 },
+      month: { amount: 106800, hours: 8544, workers: 40, change: -0.8, overtimeHours: 768 },
+      year: { amount: 1281600, hours: 102528, workers: 48, change: 1.5, overtimeHours: 9216 },
     },
     sites: [
       {
         name: "Heathrow DC",
-        amount: 3200,
-        hours: 256,
+        amount: 9600,
+        hours: 768,
         departments: [
-          { name: "Loading", amount: 1920, hours: 154, overtimeHours: 15 },
-          { name: "Picking", amount: 1280, hours: 102, overtimeHours: 10 },
+          { name: "Loading", amount: 5760, hours: 461, overtimeHours: 46 },
+          { name: "Picking", amount: 3840, hours: 307, overtimeHours: 31 },
         ],
       },
       {
         name: "Coventry Hub",
-        amount: 5700,
-        hours: 456,
+        amount: 17100,
+        hours: 1368,
         departments: [
-          { name: "Warehouse", amount: 2850, hours: 228, overtimeHours: 23 },
-          { name: "Loading", amount: 1900, hours: 152, overtimeHours: 15 },
-          { name: "Packing", amount: 950, hours: 76, overtimeHours: 8 },
+          { name: "Warehouse", amount: 8550, hours: 684, overtimeHours: 68 },
+          { name: "Loading", amount: 5700, hours: 456, overtimeHours: 46 },
+          { name: "Packing", amount: 2850, hours: 228, overtimeHours: 23 },
         ],
       },
     ],
@@ -160,41 +161,41 @@ const departmentSpend: DepartmentSpend[] = [
   {
     name: "Warehouse",
     data: {
-      week: { amount: 22500, hours: 1800, workers: 35, change: 3.2, overtimeHours: 144 },
-      month: { amount: 90000, hours: 7200, workers: 38, change: 2.8, overtimeHours: 576 },
-      year: { amount: 1080000, hours: 86400, workers: 42, change: 3.5, overtimeHours: 6912 },
+      week: { amount: 67500, hours: 5400, workers: 92, change: 3.2, overtimeHours: 432 },
+      month: { amount: 270000, hours: 21600, workers: 98, change: 2.8, overtimeHours: 1728 },
+      year: { amount: 3240000, hours: 259200, workers: 108, change: 3.5, overtimeHours: 20736 },
     },
   },
   {
     name: "Picking",
     data: {
-      week: { amount: 15800, hours: 1264, workers: 28, change: -1.5, overtimeHours: 101 },
-      month: { amount: 63200, hours: 5056, workers: 30, change: -0.8, overtimeHours: 404 },
-      year: { amount: 758400, hours: 60672, workers: 34, change: 1.2, overtimeHours: 4854 },
+      week: { amount: 47400, hours: 3792, workers: 75, change: -1.5, overtimeHours: 303 },
+      month: { amount: 189600, hours: 15168, workers: 82, change: -0.8, overtimeHours: 1213 },
+      year: { amount: 2275200, hours: 182016, workers: 90, change: 1.2, overtimeHours: 14561 },
     },
   },
   {
     name: "Loading",
     data: {
-      week: { amount: 11200, hours: 896, workers: 18, change: 6.8, overtimeHours: 90 },
-      month: { amount: 44800, hours: 3584, workers: 20, change: 5.5, overtimeHours: 358 },
-      year: { amount: 537600, hours: 43008, workers: 24, change: 4.8, overtimeHours: 4301 },
+      week: { amount: 33600, hours: 2688, workers: 52, change: 6.8, overtimeHours: 269 },
+      month: { amount: 134400, hours: 10752, workers: 58, change: 5.5, overtimeHours: 1075 },
+      year: { amount: 1612800, hours: 129024, workers: 65, change: 4.8, overtimeHours: 12902 },
     },
   },
   {
     name: "Packing",
     data: {
-      week: { amount: 7500, hours: 600, workers: 12, change: 0, overtimeHours: 48 },
-      month: { amount: 30000, hours: 2400, workers: 14, change: 1.2, overtimeHours: 192 },
-      year: { amount: 360000, hours: 28800, workers: 16, change: 2.0, overtimeHours: 2304 },
+      week: { amount: 22500, hours: 1800, workers: 38, change: 0, overtimeHours: 144 },
+      month: { amount: 90000, hours: 7200, workers: 42, change: 1.2, overtimeHours: 576 },
+      year: { amount: 1080000, hours: 86400, workers: 48, change: 2.0, overtimeHours: 6912 },
     },
   },
   {
     name: "Quality",
     data: {
-      week: { amount: 2500, hours: 200, workers: 7, change: -5.0, overtimeHours: 13 },
-      month: { amount: 10000, hours: 800, workers: 8, change: -3.2, overtimeHours: 52 },
-      year: { amount: 120000, hours: 9600, workers: 10, change: 0.5, overtimeHours: 624 },
+      week: { amount: 7500, hours: 600, workers: 18, change: -5.0, overtimeHours: 39 },
+      month: { amount: 30000, hours: 2400, workers: 22, change: -3.2, overtimeHours: 156 },
+      year: { amount: 360000, hours: 28800, workers: 28, change: 0.5, overtimeHours: 1872 },
     },
   },
 ];
@@ -203,21 +204,81 @@ interface ClientSpendAnalysisProps {
   onViewWorker?: (workerName: string) => void;
 }
 
+type ViewCategory = "overall" | "by-site" | "by-department" | "by-agency" | "overtime";
+type SubSelection = string | null;
+
 const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
-  const [viewBy, setViewBy] = useState("overall");
+  const [viewBy, setViewBy] = useState<ViewCategory>("overall");
+  const [subSelection, setSubSelection] = useState<SubSelection>(null);
   const [timeRange, setTimeRange] = useState<"week" | "month" | "year">("month");
   const [expandedAgency, setExpandedAgency] = useState<string | null>(null);
+  const [showViewOptions, setShowViewOptions] = useState(false);
 
   const getData = (item: SiteSpend | DepartmentSpend) => item.data[timeRange];
   const getAgencyData = (item: AgencySpendData) => item.data[timeRange];
 
-  const totalSpend = overallSpend.reduce((a, s) => a + getData(s).amount, 0);
-  const totalHours = overallSpend.reduce((a, s) => a + getData(s).hours, 0);
-  const totalOvertimeHours = overallSpend.reduce((a, s) => a + getData(s).overtimeHours, 0);
+  const getSiteOptions = () => overallSpend.map(s => s.category);
+  const getDepartmentOptions = () => departmentSpend.map(d => d.name);
+  const getAgencyOptions = () => agencySpend.map(a => a.name);
+
+  const handleViewChange = (view: ViewCategory) => {
+    setViewBy(view);
+    setSubSelection(null);
+    setShowViewOptions(false);
+  };
+
+  const handleSubSelection = (item: string) => {
+    setSubSelection(item);
+    setShowViewOptions(false);
+  };
+
+  // Calculate totals based on view selection
+  const calculateTotals = () => {
+    if (viewBy === "by-site" && subSelection) {
+      const site = overallSpend.find(s => s.category === subSelection);
+      if (site) {
+        const data = getData(site);
+        return { totalSpend: data.amount, totalHours: data.hours, totalOvertimeHours: data.overtimeHours, workers: data.workers };
+      }
+    }
+    if (viewBy === "by-department" && subSelection) {
+      const dept = departmentSpend.find(d => d.name === subSelection);
+      if (dept) {
+        const data = getData(dept);
+        return { totalSpend: data.amount, totalHours: data.hours, totalOvertimeHours: data.overtimeHours, workers: data.workers };
+      }
+    }
+    if (viewBy === "by-agency" && subSelection) {
+      const agency = agencySpend.find(a => a.name === subSelection);
+      if (agency) {
+        const data = getAgencyData(agency);
+        return { totalSpend: data.amount, totalHours: data.hours, totalOvertimeHours: data.overtimeHours, workers: data.workers };
+      }
+    }
+    // Default: all data
+    const totalSpend = overallSpend.reduce((a, s) => a + getData(s).amount, 0);
+    const totalHours = overallSpend.reduce((a, s) => a + getData(s).hours, 0);
+    const totalOvertimeHours = overallSpend.reduce((a, s) => a + getData(s).overtimeHours, 0);
+    return { totalSpend, totalHours, totalOvertimeHours, workers: overallSpend.reduce((a, s) => a + getData(s).workers, 0) };
+  };
+
+  const { totalSpend, totalHours, totalOvertimeHours } = calculateTotals();
   const avgRate = totalSpend / totalHours;
 
   const toggleAgencyExpand = (agencyName: string) => {
     setExpandedAgency(expandedAgency === agencyName ? null : agencyName);
+  };
+
+  const getViewLabel = () => {
+    if (subSelection) return subSelection;
+    switch (viewBy) {
+      case "overall": return "Overall";
+      case "by-site": return "By Site";
+      case "by-department": return "By Department";
+      case "by-agency": return "By Agency";
+      case "overtime": return "Overtime";
+      default: return "Overall";
+    }
   };
 
   return (
@@ -229,17 +290,94 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
           <p className="text-xs text-muted-foreground">Track and analyze agency spend</p>
         </div>
         <div className="flex items-center gap-2">
-          <select
-            value={viewBy}
-            onChange={(e) => setViewBy(e.target.value)}
-            className="text-xs bg-card border border-border rounded px-2 py-1.5"
-          >
-            <option value="overall">Overall</option>
-            <option value="by-site">By Site</option>
-            <option value="by-department">By Department</option>
-            <option value="by-agency">By Agency</option>
-            <option value="overtime">Overtime</option>
-          </select>
+          {/* Hierarchical View Selector */}
+          <div className="relative">
+            <button
+              onClick={() => setShowViewOptions(!showViewOptions)}
+              className="flex items-center gap-2 text-xs bg-card border border-border rounded px-3 py-1.5 hover:bg-muted/50 transition-colors"
+            >
+              <span>{getViewLabel()}</span>
+              <ChevronDown className="w-3 h-3" />
+            </button>
+            
+            {showViewOptions && (
+              <div className="absolute top-full right-0 mt-1 bg-card border border-border rounded-lg shadow-lg z-50 min-w-[200px]">
+                {/* Overall */}
+                <button
+                  onClick={() => handleViewChange("overall")}
+                  className={`w-full text-left px-3 py-2 text-xs hover:bg-muted/50 ${viewBy === "overall" && !subSelection ? "bg-primary/10 text-primary" : ""}`}
+                >
+                  Overall
+                </button>
+                
+                {/* By Site with sub-options */}
+                <Collapsible>
+                  <CollapsibleTrigger className="w-full flex items-center justify-between px-3 py-2 text-xs hover:bg-muted/50">
+                    <span>By Site</span>
+                    <ChevronDown className="w-3 h-3" />
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    {getSiteOptions().map((site) => (
+                      <button
+                        key={site}
+                        onClick={() => { setViewBy("by-site"); handleSubSelection(site); }}
+                        className={`w-full text-left px-6 py-1.5 text-xs hover:bg-muted/50 ${viewBy === "by-site" && subSelection === site ? "bg-primary/10 text-primary" : "text-muted-foreground"}`}
+                      >
+                        {site}
+                      </button>
+                    ))}
+                  </CollapsibleContent>
+                </Collapsible>
+                
+                {/* By Department with sub-options */}
+                <Collapsible>
+                  <CollapsibleTrigger className="w-full flex items-center justify-between px-3 py-2 text-xs hover:bg-muted/50">
+                    <span>By Department</span>
+                    <ChevronDown className="w-3 h-3" />
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    {getDepartmentOptions().map((dept) => (
+                      <button
+                        key={dept}
+                        onClick={() => { setViewBy("by-department"); handleSubSelection(dept); }}
+                        className={`w-full text-left px-6 py-1.5 text-xs hover:bg-muted/50 ${viewBy === "by-department" && subSelection === dept ? "bg-primary/10 text-primary" : "text-muted-foreground"}`}
+                      >
+                        {dept}
+                      </button>
+                    ))}
+                  </CollapsibleContent>
+                </Collapsible>
+                
+                {/* By Agency with sub-options */}
+                <Collapsible>
+                  <CollapsibleTrigger className="w-full flex items-center justify-between px-3 py-2 text-xs hover:bg-muted/50">
+                    <span>By Agency</span>
+                    <ChevronDown className="w-3 h-3" />
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    {getAgencyOptions().map((agency) => (
+                      <button
+                        key={agency}
+                        onClick={() => { setViewBy("by-agency"); handleSubSelection(agency); }}
+                        className={`w-full text-left px-6 py-1.5 text-xs hover:bg-muted/50 ${viewBy === "by-agency" && subSelection === agency ? "bg-primary/10 text-primary" : "text-muted-foreground"}`}
+                      >
+                        {agency}
+                      </button>
+                    ))}
+                  </CollapsibleContent>
+                </Collapsible>
+                
+                {/* Overtime */}
+                <button
+                  onClick={() => handleViewChange("overtime")}
+                  className={`w-full text-left px-3 py-2 text-xs hover:bg-muted/50 border-t border-border ${viewBy === "overtime" ? "bg-primary/10 text-primary" : ""}`}
+                >
+                  Overtime Analysis
+                </button>
+              </div>
+            )}
+          </div>
+          
           <div className="flex items-center bg-card border border-border rounded">
             {(["week", "month", "year"] as const).map((range) => (
               <button
@@ -300,10 +438,13 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
             <BarChart3 className="w-4 h-4 text-muted-foreground" />
           </div>
           <div className="p-4 space-y-4">
-            {overallSpend.map((item) => {
+            {overallSpend
+              .filter(item => !subSelection || viewBy !== "by-site" || item.category === subSelection)
+              .map((item) => {
               const data = getData(item);
+              const highlighted = viewBy === "by-site" && subSelection === item.category;
               return (
-                <div key={item.category}>
+                <div key={item.category} className={`${highlighted ? "ring-2 ring-primary rounded-lg p-2 -mx-2" : ""}`}>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium">{item.category}</span>
                     <div className="text-right">
@@ -335,15 +476,18 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
             <Building2 className="w-4 h-4 text-muted-foreground" />
           </div>
           <div className="divide-y divide-border">
-            {agencySpend.map((agency, idx) => {
+            {agencySpend
+              .filter(agency => !subSelection || viewBy !== "by-agency" || agency.name === subSelection)
+              .map((agency, idx) => {
               const data = getAgencyData(agency);
               const isExpanded = expandedAgency === agency.name;
               const overtimePercent = ((data.overtimeHours / data.hours) * 100).toFixed(1);
               const totalAgencySpend = agencySpend.reduce((a, ag) => a + getAgencyData(ag).amount, 0);
               const percentage = ((data.amount / totalAgencySpend) * 100).toFixed(0);
+              const highlighted = viewBy === "by-agency" && subSelection === agency.name;
 
               return (
-                <div key={agency.name}>
+                <div key={agency.name} className={`${highlighted ? "ring-2 ring-primary" : ""}`}>
                   <div
                     className="p-4 cursor-pointer hover:bg-muted/30 transition-colors"
                     onClick={() => toggleAgencyExpand(agency.name)}
@@ -405,9 +549,10 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
                                     <div key={dept.name} className="flex items-center justify-between text-xs">
                                       <div className="flex items-center gap-1.5">
                                         <Briefcase className="w-3 h-3 text-muted-foreground" />
-                                        <span className="text-muted-foreground">{dept.name}</span>
+                                        <span>{dept.name}</span>
                                       </div>
                                       <div className="flex items-center gap-3">
+                                        <span className="text-muted-foreground">{dept.hours} hrs</span>
                                         <span className="text-amber-500">{deptOtPercent}% OT</span>
                                         <span className="font-medium">£{dept.amount.toLocaleString()}</span>
                                       </div>
@@ -428,28 +573,35 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
         </div>
       </div>
 
-      {/* Department Breakdown */}
+      {/* Spend by Department */}
       <div className="bg-card border border-border rounded-lg">
-        <div className="p-3 border-b border-border">
+        <div className="p-3 border-b border-border flex items-center justify-between">
           <h2 className="text-sm font-semibold">By Department</h2>
+          <Briefcase className="w-4 h-4 text-muted-foreground" />
         </div>
-        <div className="p-4 grid grid-cols-2 md:grid-cols-5 gap-3">
-          {departmentSpend.map((dept) => {
-            const data = getData(dept as unknown as SiteSpend);
-            return (
-              <div key={dept.name} className="bg-muted/30 rounded-lg p-3">
-                <p className="text-xs text-muted-foreground mb-1">{dept.name}</p>
-                <p className="text-lg font-bold">£{(data.amount / 1000).toFixed(1)}k</p>
-                <div className="flex items-center justify-between mt-1">
-                  <p className={`text-xs ${data.change >= 0 ? "text-green-500" : "text-destructive"}`}>
-                    {data.change >= 0 ? "+" : ""}
-                    {data.change}%
-                  </p>
-                  <p className="text-xs text-amber-500">{((data.overtimeHours / data.hours) * 100).toFixed(0)}% OT</p>
+        <div className="p-4">
+          <div className="grid grid-cols-5 gap-4">
+            {departmentSpend
+              .filter(dept => !subSelection || viewBy !== "by-department" || dept.name === subSelection)
+              .map((dept) => {
+              const data = getData(dept);
+              const overtimePercent = ((data.overtimeHours / data.hours) * 100).toFixed(1);
+              const highlighted = viewBy === "by-department" && subSelection === dept.name;
+              return (
+                <div key={dept.name} className={`p-3 bg-muted/30 rounded-lg ${highlighted ? "ring-2 ring-primary" : ""}`}>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium">{dept.name}</span>
+                  </div>
+                  <p className="text-lg font-bold">£{data.amount.toLocaleString()}</p>
+                  <div className="text-xs text-muted-foreground mt-1 space-y-0.5">
+                    <p>{data.hours.toLocaleString()} hrs</p>
+                    <p>{data.workers} workers</p>
+                    <p className="text-amber-500">{overtimePercent}% OT</p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

@@ -15,13 +15,18 @@ export interface WorkerAction {
 
 export interface LedgerNotification {
   id: string;
-  type: "action" | "status-change" | "allocation" | "booking" | "exception";
+  type: "action" | "status-change" | "allocation" | "booking" | "exception" | "temp-perm";
   message: string;
+  title?: string;
   timestamp: string;
   read: boolean;
   targetView: "labour-user" | "agency" | "both";
   contextType?: "booking" | "worker" | "exception" | "schedule";
   contextId?: string;
+  workerName?: string;
+  agency?: string;
+  site?: string;
+  fromAgency?: boolean;
 }
 
 export interface Booking {
@@ -200,6 +205,82 @@ const initialExceptions: LiveException[] = [
     agency: "Staffline",
     shift: "06:00–14:00",
     lateMinutes: 45,
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  {
+    id: "exc-4",
+    workerId: "w-rachel",
+    workerName: "Rachel Adams",
+    type: "late",
+    site: "Coventry Hub",
+    department: "Picking",
+    agency: "Pertemps",
+    shift: "06:00–14:00",
+    lateMinutes: 32,
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  {
+    id: "exc-5",
+    workerId: "w-kevin",
+    workerName: "Kevin Morris",
+    type: "no-show",
+    site: "Heathrow DC",
+    department: "Packing",
+    agency: "Blue Arrow",
+    shift: "06:00–14:00",
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  {
+    id: "exc-6",
+    workerId: "w-sarah",
+    workerName: "Sarah Bennett",
+    type: "late",
+    site: "Birmingham DC",
+    department: "Warehouse",
+    agency: "Staffline",
+    shift: "06:00–14:00",
+    lateMinutes: 25,
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  {
+    id: "exc-7",
+    workerId: "w-david",
+    workerName: "David Thompson",
+    type: "late",
+    site: "Coventry Hub",
+    department: "Loading",
+    agency: "Blue Arrow",
+    shift: "06:00–14:00",
+    lateMinutes: 18,
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  {
+    id: "exc-8",
+    workerId: "w-lisa",
+    workerName: "Lisa Chen",
+    type: "no-show",
+    site: "Birmingham DC",
+    department: "Picking",
+    agency: "Pertemps",
+    shift: "06:00–14:00",
+    timestamp: new Date().toISOString(),
+    status: "open",
+  },
+  {
+    id: "exc-9",
+    workerId: "w-mark",
+    workerName: "Mark Edwards",
+    type: "late",
+    site: "Heathrow DC",
+    department: "Quality",
+    agency: "Staffline",
+    shift: "06:00–14:00",
+    lateMinutes: 42,
     timestamp: new Date().toISOString(),
     status: "open",
   },

@@ -70,7 +70,7 @@ const AgencyNewOrder = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg md:text-xl font-bold text-foreground">New Orders</h1>
+          <h1 className="text-lg md:text-xl font-bold text-foreground">Bookings</h1>
           <p className="text-xs text-muted-foreground">Inbound requests from clients</p>
         </div>
         {newCount > 0 && (
