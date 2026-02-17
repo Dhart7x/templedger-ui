@@ -1,49 +1,89 @@
 import { motion } from "framer-motion";
-import { TrendingUp } from "lucide-react";
+import { Zap, ShieldCheck, DollarSign, Activity } from "lucide-react";
 import Slide from "./Slide";
 
-const impacts = [
-  "Pay disputes were resolved before payroll ran?",
-  "Under-filled shifts were identified and addressed immediately?",
-  "Overtime was controlled in real time, not reviewed later?",
-  "High-performing temps stayed longer?",
-  "Replacement cycles shortened?",
-  "Onboarding and ramp time reduced?",
-  "Productivity loss from churn compressed?",
-  "Compliance was continuous and enforced by default?",
+const sections = [
+  {
+    icon: Zap,
+    title: "Faster Ramp Time. Fewer Non-Productive Hours.",
+    points: [
+      "Faster replacement decisions",
+      "Pay disputes resolved early",
+      "Lower churn of proven workers",
+    ],
+  },
+  {
+    icon: Activity,
+    title: "Reduced Operational Volatility",
+    points: [
+      "Issues surfaced in real time",
+      "Overtime controlled before escalation",
+      "Under-filled shifts addressed immediately",
+    ],
+  },
+  {
+    icon: ShieldCheck,
+    title: "Lower Compliance & Audit Risk",
+    points: [
+      "Continuous verification by default",
+      "Reduced remediation and shutdown exposure",
+      "Audit-ready data without manual effort",
+    ],
+  },
+  {
+    icon: DollarSign,
+    title: "Stronger Financial Control",
+    points: [
+      "Hours validated before payroll",
+      "Invoices verified before payment",
+      "Spend visible across agencies in real time",
+    ],
+  },
 ];
 
 const SlideAttrition = () => {
   return (
-    <Slide className="relative !pt-12 md:!pt-12">
+    <Slide className="relative !pt-10 md:!pt-12">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="max-w-4xl mx-auto w-full"
+        className="max-w-5xl mx-auto w-full"
       >
         <motion.h2
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-base md:text-3xl lg:text-4xl font-bold text-foreground text-center mb-4 md:mb-12 max-w-4xl mx-auto"
+          className="text-base md:text-3xl lg:text-4xl font-bold text-foreground text-center mb-6 md:mb-12"
         >
-          What would your P&L impact be if…
+          Enterprise Impact
         </motion.h2>
 
-        <div className="space-y-2 md:space-y-4">
-          {impacts.map((item, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+          {sections.map((section, idx) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -15 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
-              className="flex items-start gap-2 md:gap-4"
+              key={idx}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 + idx * 0.1 }}
+              className="rounded-xl border border-border bg-card/50 p-4 md:p-6"
             >
-              <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-primary mt-0.5 md:mt-1 flex-shrink-0" />
-              <p className="text-xs md:text-base lg:text-lg text-foreground leading-relaxed">
-                {item}
-              </p>
+              <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
+                <section.icon className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
+                <h3 className="text-xs md:text-base lg:text-lg font-semibold text-foreground">
+                  {section.title}
+                </h3>
+              </div>
+              <ul className="space-y-1.5 md:space-y-2">
+                {section.points.map((point, pIdx) => (
+                  <li
+                    key={pIdx}
+                    className="text-[11px] md:text-sm lg:text-base text-muted-foreground leading-relaxed pl-4 md:pl-6 relative before:content-['–'] before:absolute before:left-0 before:text-muted-foreground/60"
+                  >
+                    {point}
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </div>
