@@ -10,6 +10,7 @@ const impacts = [
   "Replacement cycles shortened?",
   "Onboarding and ramp time reduced?",
   "Productivity loss from churn compressed?",
+  "Compliance was continuous and enforced by default?",
 ];
 
 const SlideAttrition = () => {
@@ -27,7 +28,7 @@ const SlideAttrition = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-base md:text-3xl lg:text-4xl font-bold text-foreground text-center mb-4 md:mb-12 max-w-4xl mx-auto"
         >
-          What would the P&L impact be if…
+          What would your P&L impact be if…
         </motion.h2>
 
         <div className="space-y-2 md:space-y-4">
