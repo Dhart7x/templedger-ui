@@ -88,11 +88,12 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   };
 
   const orchestrationPoints = [
-    "Agencies operate through a dedicated, client-specific interface",
-    "Labour users see a unified, real-time view across all agencies",
-    "Both views connect to the same underlying record",
-    "Actions on one side are immediately visible on the other",
-    "Orchestration happens through shared visibility, not coordination calls",
+    "Agencies operate inside a client-specific interface.",
+    "Worker data and agency actions live in one unified system.",
+    "Verified steps govern compliance, scheduling, attendance, pay, and billing.",
+    "Issues surface as they happen.",
+    "Hours and invoices are approved only when validated.",
+    "Both sides work from the same system, in real time.",
   ];
 
   // Intro slide
