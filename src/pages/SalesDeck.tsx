@@ -16,8 +16,8 @@ const slides = [
   { id: 1, component: SlideProblem },
   { id: 2, component: SlideWhyThisHappens },
   { id: 3, component: SlideIntroducingTL, isDemo: true },
-  { id: 4, component: SlideAttrition },
-  { id: 5, component: SlideNewNormal },
+  { id: 4, component: SlideNewNormal },
+  { id: 5, component: SlideAttrition },
   { id: 6, component: SlideAdoption },
   { id: 7, component: SlideClosing },
 ];
