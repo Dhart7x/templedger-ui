@@ -41,14 +41,14 @@ import DemoChatbot from "./demo/views/DemoChatbot";
 import DemoNotifications from "./demo/views/DemoNotifications";
 
 type ViewMode = "client" | "agency";
-type DemoState = "intro" | "login" | "demo";
+type DemoState = "login" | "demo";
 
 interface SlideDemoProps {
   onDemoStateChange?: (isInDemo: boolean) => void;
 }
 
 const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
-  const [demoState, setDemoState] = useState<DemoState>("intro");
+  const [demoState, setDemoState] = useState<DemoState>("login");
   const [showPassword, setShowPassword] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>("client");
   const [activeClientView, setActiveClientView] = useState("live-snapshot");
@@ -71,88 +71,17 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   // Count pending bookings for agency "new order" badge
   const pendingBookingsCount = bookings.filter(b => b.status === "pending").length;
 
-  const handleLaunchDemo = () => {
-    setDemoState("login");
+  const handleEnterDemo = () => {
+    setDemoState("demo");
     onDemoStateChange?.(true);
   };
 
-  const handleEnterDemo = () => {
-    setDemoState("demo");
-  };
-
   const handleExitDemo = () => {
-    setDemoState("intro");
+    setDemoState("login");
     setActiveClientView("live-snapshot");
     setActiveAgencyView("live-snapshot");
     onDemoStateChange?.(false);
   };
-
-  const orchestrationPoints = [
-    "Agencies operate inside a client-specific interface.",
-    "Worker data and agency actions live in one unified system.",
-    "Verified steps govern compliance, scheduling, attendance, pay, and billing.",
-    "Issues surface as they happen.",
-    "Hours and invoices are approved only when validated.",
-    "Both sides work from the same system, in real time.",
-  ];
-
-  // Intro slide
-  if (demoState === "intro") {
-    return (
-      <Slide className="relative md:justify-start md:pt-16">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-3xl mx-auto w-full"
-        >
-          <motion.h2
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-3"
-          >
-            How Orchestration Happens
-          </motion.h2>
-
-          <div className="mb-16 md:mb-20" />
-
-          <div className="space-y-4 md:space-y-5 mb-16 md:mb-20">
-            {orchestrationPoints.map((point, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -15 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: 0.3 + index * 0.12 }}
-                className="flex items-start gap-3 md:gap-4"
-              >
-                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 flex-shrink-0" />
-                <p className="text-base md:text-lg lg:text-xl text-foreground leading-relaxed">
-                  {point}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.9 }}
-            className="flex justify-center"
-          >
-            <Button
-              size="lg"
-              onClick={handleLaunchDemo}
-              className="text-base md:text-lg px-8 py-6 md:px-10 md:py-8 rounded-xl trust-gradient hover:opacity-90 transition-opacity group"
-            >
-              <Play className="w-5 h-5 md:w-6 md:h-6 mr-3 group-hover:scale-110 transition-transform" />
-              Launch Demo
-            </Button>
-          </motion.div>
-        </motion.div>
-      </Slide>
-    );
-  }
 
   // Login screen
   if (demoState === "login") {
