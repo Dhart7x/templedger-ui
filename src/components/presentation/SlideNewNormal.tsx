@@ -3,11 +3,9 @@ import { CheckCircle } from "lucide-react";
 import Slide from "./Slide";
 
 const benefits = [
-  "Guaranteed compliance.",
-  "Visible operations.",
-  "No pay surprises.",
-  "No invoice disputes.",
-  "Clear agency performance.",
+  "Financial Integrity.",
+  "Operational Accountability.",
+  "Compliance by Default.",
 ];
 
 const SlideNewNormal = () => {
@@ -26,7 +24,7 @@ const SlideNewNormal = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-10 md:mb-28"
         >
-          Have it <span className="italic">your</span> way
+          As it happens, in real time
         </motion.h2>
 
         {/* Benefit points */}
