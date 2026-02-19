@@ -1,26 +1,16 @@
 import { motion } from "framer-motion";
-import { CheckCircle, Play } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { CheckCircle } from "lucide-react";
 import Slide from "./Slide";
 
 const capabilities = [
-  "Creates a single shared record between labour users and agencies",
-  "Verifies each critical step before work, pay, or billing progresses",
-  "Surfaces issues as they arise — not after the fact",
-  "Makes agency activity visible and accountable",
-  "Produces reliable, real-time and historical performance insight",
-  "Agencies operate inside a client-specific interface",
-  "Worker data and agency actions live in one unified system",
-  "Issues surface as they happen",
-  "Hours and invoices are approved only when validated",
-  "Both sides work from the same system, in real time",
+  "Agencies operate in a client-specific system",
+  "Intelligent T&A implemented on-site",
+  "Worker data and agency actions live inside a shared platform",
+  "Each critical step is verified before work, pay, or billing progresses",
+  "Surfaces issues as they arise — in real time",
 ];
 
-interface SlideIntroducingTLProps {
-  onLaunchDemo?: () => void;
-}
-
-const SlideIntroducingTL = ({ onLaunchDemo }: SlideIntroducingTLProps) => {
+const SlideIntroducingTL = () => {
   return (
     <Slide className="relative md:justify-start md:pt-16">
       <motion.div
@@ -66,25 +56,6 @@ const SlideIntroducingTL = ({ onLaunchDemo }: SlideIntroducingTLProps) => {
             </motion.div>
           ))}
         </div>
-
-        {/* Launch Demo Button */}
-        {onLaunchDemo && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 1.1 }}
-            className="flex justify-center"
-          >
-            <Button
-              size="lg"
-              onClick={onLaunchDemo}
-              className="text-base md:text-lg px-8 py-6 md:px-10 md:py-8 rounded-xl trust-gradient hover:opacity-90 transition-opacity group"
-            >
-              <Play className="w-5 h-5 md:w-6 md:h-6 mr-3 group-hover:scale-110 transition-transform" />
-              Launch Demo
-            </Button>
-          </motion.div>
-        )}
       </motion.div>
     </Slide>
   );
