@@ -10,19 +10,19 @@ const benefits = [
 
 const SlideNewNormal = () => {
   return (
-    <Slide className="relative">
+    <Slide className="relative md:justify-start md:pt-12">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="max-w-3xl mx-auto w-full"
+        className="max-w-3xl mx-auto w-full flex flex-col h-full"
       >
         {/* Title */}
         <motion.h2
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-10 md:mb-28"
+          className="text-xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-10 md:mb-20"
         >
           Why not have it <span className="italic">your</span> way?
         </motion.h2>
@@ -44,6 +44,19 @@ const SlideNewNormal = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Spacer */}
+        <div className="flex-1" />
+
+        {/* Bottom tagline */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="text-sm md:text-lg text-muted-foreground text-center pb-12 md:pb-16"
+        >
+          ...in real time
+        </motion.p>
       </motion.div>
     </Slide>
   );
