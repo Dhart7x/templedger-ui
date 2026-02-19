@@ -121,6 +121,12 @@ const SalesDeck = () => {
           >
             {isOnDemoSlide ? (
               <SlideDemo onDemoStateChange={setIsInDemo} />
+            ) : safeCurrentSlide === 3 ? (
+              <SlideIntroducingTL onLaunchDemo={() => {
+                setDirection(1);
+                setCurrentSlide(DEMO_SLIDE_INDEX);
+                setIsInDemo(true);
+              }} />
             ) : (
               <CurrentSlideComponent />
             )}
