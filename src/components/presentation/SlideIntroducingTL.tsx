@@ -29,7 +29,7 @@ const SlideIntroducingTL = ({ onDemoStateChange }: SlideIntroducingTLProps) => {
   }
 
   return (
-    <Slide className="relative md:justify-start md:pt-16">
+    <Slide className="relative flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
