@@ -61,7 +61,7 @@ const SlideNewNormal = () => {
           transition={{ duration: 0.5, delay: 1.0 }}
           className="text-sm md:text-base text-muted-foreground/60 text-center mt-6 md:mt-10"
         >
-          Because agency management should be oversight, not firefight.
+          Because agency coordination should mean oversight, not firefight.
         </motion.p>
       </motion.div>
     </Slide>
