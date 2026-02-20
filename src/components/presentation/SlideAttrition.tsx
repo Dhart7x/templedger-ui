@@ -8,7 +8,6 @@ const sections = [
       "Pay issues resolved in real time",
       "Lower attrition",
       "Fewer ramp hours and non-productive time",
-      "Reduced reputational damage with workers",
     ],
   },
   {
@@ -72,7 +71,7 @@ const SlideAttrition = () => {
               <div className="space-y-1.5">
                 {section.chain.map((step, sIdx) => (
                   <p key={sIdx} className="text-[11px] md:text-sm text-muted-foreground/70 leading-relaxed">
-                    {sIdx === 0 ? step : `→ ${step}`}
+                    {`→ ${step}`}
                   </p>
                 ))}
               </div>
