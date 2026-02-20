@@ -54,6 +54,15 @@ const SlideNewNormal = () => {
         >
           ...in real time
         </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 1.0 }}
+          className="text-xs md:text-sm text-muted-foreground/60 text-center mt-6 md:mt-10"
+        >
+          Agency management should be oversight, not firefight.
+        </motion.p>
       </motion.div>
     </Slide>
   );
