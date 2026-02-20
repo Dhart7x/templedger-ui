@@ -12,11 +12,11 @@ const sitePricing = [
 const costScenarios = [
   {
     title: "Scenario A",
-    description: "Agencies split entire cost proportionately across suppliers",
+    description: "You negotiate with agencies to split the entire cost proportionately based on percentage of current supply",
   },
   {
     title: "Scenario B",
-    description: "End user covers per-site cost; agency covers additional agency fee",
+    description: "You cover the cost per site, agencies cover the cost per agency",
   },
 ];
 
@@ -107,7 +107,7 @@ const SlideAdoption = () => {
           <div className="flex items-center justify-center gap-2 md:gap-3 px-3 md:px-5 py-2 md:py-3 rounded-lg bg-primary/5 border border-primary/20 text-center">
             <Users className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
             <span className="text-[10px] md:text-sm text-foreground font-medium">
-              Each additional agency per site: <span className="text-primary font-bold">£15,000 / year</span>
+              £15,000 per agency, per site
             </span>
           </div>
         </motion.div>
@@ -119,12 +119,6 @@ const SlideAdoption = () => {
           transition={{ duration: 0.4, delay: 0.5 }}
           className="max-w-3xl mx-auto"
         >
-          <div className="flex items-center justify-center gap-2 mb-2 md:mb-3">
-            <Handshake className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground" />
-            <p className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wide font-semibold">
-              Cost is between labour user & agency
-            </p>
-          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
             {costScenarios.map((scenario, index) => (
               <motion.div
