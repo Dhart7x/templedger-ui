@@ -3,27 +3,28 @@ import Slide from "./Slide";
 
 const sections = [
   {
-    header: "Pay Issues → Attrition → Productivity Loss",
+    header: "Workforce Stability",
     chain: [
-      "Real-time resolution",
-      "Lower churn",
-      "Fewer non-productive hours",
+      "Pay issues resolved in real time",
+      "Lower attrition",
+      "Fewer ramp hours and non-productive time",
+      "Reduced reputational damage with workers",
     ],
   },
   {
-    header: "Slow Replacement → Throughput Drag",
+    header: "Smarter Allocation",
     chain: [
-      "Faster time-to-fill",
-      "Shorter under-staffed periods",
-      "Reduced overtime volatility",
+      "Best-fit workers matched to shifts",
+      "Fewer avoidable drop-offs",
+      "Less reactive overtime and gap cover",
     ],
   },
   {
-    header: "Compliance Gaps → Financial Risk",
+    header: "Continuous Assurance",
     chain: [
-      "Continuous verification",
-      "Lower remediation cost",
-      "Reduced regulatory exposure",
+      "Compliance verified daily",
+      "Reduced remediation cost",
+      "Lower regulatory and brand exposure",
     ],
   },
 ];
@@ -52,7 +53,7 @@ const SlideAttrition = () => {
           transition={{ duration: 0.4, delay: 0.2 }}
           className="text-xs md:text-sm text-muted-foreground text-center mb-10 md:mb-16"
         >
-          Operational friction erodes margin.
+          Operational instability reduces margin. Stability protects it.
         </motion.p>
 
         <div className="space-y-8 md:space-y-10">
@@ -68,9 +69,13 @@ const SlideAttrition = () => {
                 {section.header}
               </h3>
 
-              <p className="text-[11px] md:text-sm text-muted-foreground/70 leading-relaxed">
-                {section.chain.join("  →  ")}
-              </p>
+              <div className="space-y-1.5">
+                {section.chain.map((step, sIdx) => (
+                  <p key={sIdx} className="text-[11px] md:text-sm text-muted-foreground/70 leading-relaxed">
+                    {sIdx === 0 ? step : `→ ${step}`}
+                  </p>
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>
