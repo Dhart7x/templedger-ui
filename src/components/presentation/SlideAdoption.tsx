@@ -1,12 +1,23 @@
 import { motion } from "framer-motion";
-import { Building2, Users, ArrowRight, MessageSquare, FileText, ClipboardCheck, Shield } from "lucide-react";
+import { Building2, Users, Handshake } from "lucide-react";
 import Slide from "./Slide";
 
-const agencyBenefits = [
-  { icon: MessageSquare, text: "Fewer pay queries" },
-  { icon: FileText, text: "Fewer disputes" },
-  { icon: ClipboardCheck, text: "Reduced admin" },
-  { icon: Shield, text: "Lower audit risk" },
+const sitePricing = [
+  { sites: "1 site", perSite: "£85,000" },
+  { sites: "2 sites", perSite: "£75,000" },
+  { sites: "3 sites", perSite: "£65,000" },
+  { sites: "4+ sites", perSite: "£60,000" },
+];
+
+const costScenarios = [
+  {
+    title: "Scenario A",
+    description: "Agencies split entire cost proportionately across suppliers",
+  },
+  {
+    title: "Scenario B",
+    description: "End user covers per-site cost; agency covers additional agency fee",
+  },
 ];
 
 const SlideAdoption = () => {
@@ -27,87 +38,108 @@ const SlideAdoption = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-4 md:mb-14 lg:mb-16"
+          className="text-center mb-4 md:mb-10"
         >
           <h2 className="text-lg md:text-3xl lg:text-4xl font-bold">
             Buyer & Adoption Model
           </h2>
         </motion.div>
 
-        {/* Flow diagram */}
-        <div className="max-w-4xl mx-auto mb-4 md:mb-14 lg:mb-16">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-10">
-            {/* Labour Users */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex-1 w-full md:w-auto"
-            >
-              <div className="p-3 md:p-8 lg:p-10 rounded-xl trust-gradient text-center">
-                <Building2 className="w-6 h-6 md:w-12 md:h-12 mx-auto mb-1 md:mb-3 text-foreground" />
-                <h3 className="text-xs md:text-lg lg:text-xl font-bold text-foreground mb-0.5 md:mb-1">Labour Users</h3>
-                <p className="text-[10px] md:text-base lg:text-lg text-foreground/80">No cost</p>
-              </div>
-            </motion.div>
-
-            {/* Arrow */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: 0.4 }}
-              className="flex items-center justify-center"
-            >
-              <div className="flex flex-col items-center gap-0.5 md:gap-1">
-                <ArrowRight className="w-5 h-5 md:w-6 md:h-6 text-primary hidden md:block" />
-                <ArrowRight className="w-5 h-5 text-primary rotate-90 md:hidden" />
-                <span className="text-[9px] md:text-sm text-muted-foreground font-medium">mandate</span>
-              </div>
-            </motion.div>
-
-            {/* Agencies */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex-1 w-full md:w-auto"
-            >
-              <div className="p-3 md:p-8 lg:p-10 rounded-xl bg-card border border-border text-center">
-                <Users className="w-6 h-6 md:w-12 md:h-12 mx-auto mb-1 md:mb-3 text-muted-foreground" />
-                <h3 className="text-xs md:text-lg lg:text-xl font-bold text-foreground mb-0.5 md:mb-1">Agencies</h3>
-                <p className="text-[10px] md:text-base lg:text-lg text-muted-foreground">Pay to participate</p>
-                <p className="text-[9px] md:text-sm lg:text-base text-muted-foreground/70 mt-0.5 md:mt-1">Annual licence fee</p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Agency benefits */}
+        {/* Implementation fee callout */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="max-w-5xl mx-auto mb-4 md:mb-12 lg:mb-14"
+          transition={{ duration: 0.4, delay: 0.15 }}
+          className="max-w-3xl mx-auto mb-4 md:mb-8"
         >
-          <p className="text-[10px] md:text-sm text-muted-foreground text-center mb-2 md:mb-3 uppercase tracking-wide font-semibold">
-            For the agency, this is self-funded
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 lg:gap-5">
-            {agencyBenefits.map((item, index) => (
-              <motion.div
+          <div className="flex items-center justify-center gap-2 md:gap-4 p-3 md:p-5 rounded-xl trust-gradient text-center">
+            <Building2 className="w-5 h-5 md:w-8 md:h-8 text-foreground flex-shrink-0" />
+            <div>
+              <h3 className="text-xs md:text-lg font-bold text-foreground">
+                £15,000 implementation fee
+              </h3>
+              <p className="text-[10px] md:text-sm text-foreground/70">
+                Credited against Year 1 spend
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Per-site pricing table */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="max-w-2xl mx-auto mb-3 md:mb-6"
+        >
+          <div className="bg-card border border-border rounded-xl overflow-hidden">
+            <div className="grid grid-cols-2 bg-muted/30 border-b border-border">
+              <div className="px-4 py-2 md:py-3 text-[10px] md:text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                Sites
+              </div>
+              <div className="px-4 py-2 md:py-3 text-[10px] md:text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                Per Site / Year
+              </div>
+            </div>
+            {sitePricing.map((tier, index) => (
+              <div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: 0.7 + index * 0.05 }}
-                className="w-full flex items-center justify-center gap-1.5 md:gap-3 px-2 md:px-4 py-1.5 md:py-3 rounded-lg bg-primary/5 border border-primary/20"
+                className="grid grid-cols-2 border-b border-border last:border-0"
               >
-                <item.icon className="w-3 h-3 md:w-4 md:h-4 text-primary flex-shrink-0" />
-                <span className="text-[10px] md:text-base lg:text-lg text-foreground font-medium text-center">{item.text}</span>
-              </motion.div>
+                <div className="px-4 py-2 md:py-3 text-xs md:text-sm text-foreground font-medium">
+                  {tier.sites}
+                </div>
+                <div className="px-4 py-2 md:py-3 text-xs md:text-sm text-primary font-semibold">
+                  {tier.perSite}
+                </div>
+              </div>
             ))}
           </div>
         </motion.div>
 
+        {/* Additional agency cost */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.4 }}
+          className="max-w-2xl mx-auto mb-4 md:mb-8"
+        >
+          <div className="flex items-center justify-center gap-2 md:gap-3 px-3 md:px-5 py-2 md:py-3 rounded-lg bg-primary/5 border border-primary/20 text-center">
+            <Users className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
+            <span className="text-[10px] md:text-sm text-foreground font-medium">
+              Each additional agency per site: <span className="text-primary font-bold">£15,000 / year</span>
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Who pays */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.5 }}
+          className="max-w-3xl mx-auto"
+        >
+          <div className="flex items-center justify-center gap-2 mb-2 md:mb-3">
+            <Handshake className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground" />
+            <p className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wide font-semibold">
+              Cost is between labour user & agency
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+            {costScenarios.map((scenario, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.6 + index * 0.1 }}
+                className="p-3 md:p-4 rounded-xl bg-card border border-border"
+              >
+                <h4 className="text-[10px] md:text-xs font-bold text-primary mb-1">{scenario.title}</h4>
+                <p className="text-[10px] md:text-sm text-muted-foreground leading-relaxed">{scenario.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </Slide>
   );
