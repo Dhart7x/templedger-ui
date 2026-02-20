@@ -114,7 +114,7 @@ const SlideAdoption = () => {
           <div className="flex items-center justify-center gap-2 md:gap-3 px-3 md:px-5 py-2 md:py-3 rounded-lg bg-primary/5 border border-primary/20 text-center">
             <Users className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
             <span className="text-[10px] md:text-sm text-foreground font-medium">
-              £15,000 per agency, per site
+              £15,000 / year — per agency, per site
             </span>
           </div>
         </motion.div>
