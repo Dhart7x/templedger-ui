@@ -38,7 +38,7 @@ const SlideAttrition = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="max-w-4xl mx-auto w-full"
+        className="max-w-5xl mx-auto w-full"
       >
         <motion.h2
           initial={{ opacity: 0 }}
@@ -53,35 +53,34 @@ const SlideAttrition = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className="text-xs md:text-base text-muted-foreground text-center mb-12 md:mb-20"
+          className="text-xs md:text-sm text-muted-foreground text-center mb-10 md:mb-16"
         >
           Operational friction compounds into margin erosion.
         </motion.p>
 
-        <div className="space-y-10 md:space-y-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
           {sections.map((section, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.3 + idx * 0.15 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 + idx * 0.12 }}
+              className="flex flex-col"
             >
-              <h3 className="text-xs md:text-sm font-semibold text-foreground mb-3 md:mb-4 tracking-wide">
+              <h3 className="text-[11px] md:text-xs font-semibold text-foreground/80 uppercase tracking-wider mb-5 md:mb-6 leading-relaxed min-h-[2.5em]">
                 {section.header}
               </h3>
 
-              <div className="flex flex-wrap items-center gap-x-2 md:gap-x-3 gap-y-1">
+              <div className="space-y-3 md:space-y-4">
                 {section.chain.map((step, sIdx) => (
-                  <span key={sIdx} className="flex items-center gap-x-2 md:gap-x-3">
-                    {sIdx > 0 && (
-                      <span className="text-muted-foreground/30 text-xs md:text-sm select-none">
-                        →
-                      </span>
-                    )}
-                    <span className="text-[11px] md:text-sm text-muted-foreground">
-                      {step}
+                  <div key={sIdx} className="flex items-start gap-2.5">
+                    <span className="text-muted-foreground/25 text-[10px] md:text-xs mt-0.5 select-none shrink-0">
+                      {sIdx === 0 ? "○" : "→"}
                     </span>
-                  </span>
+                    <p className="text-[11px] md:text-sm text-muted-foreground leading-relaxed">
+                      {step}
+                    </p>
+                  </div>
                 ))}
               </div>
             </motion.div>
