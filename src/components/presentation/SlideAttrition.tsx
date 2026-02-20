@@ -5,28 +5,25 @@ const sections = [
   {
     header: "Pay Issues → Attrition → Productivity Loss",
     chain: [
-      "Pay disputes resolved in real time",
-      "Fewer worker departures",
-      "Less ramp time and onboarding cost",
-      "Fewer non-productive manhours",
+      "Real-time resolution",
+      "Lower churn",
+      "Fewer non-productive hours",
     ],
   },
   {
-    header: "Slow Replacement → Under-Filled Shifts → Throughput Risk",
+    header: "Slow Replacement → Throughput Drag",
     chain: [
       "Faster time-to-fill",
       "Shorter under-staffed periods",
-      "Lower overtime dependency",
-      "More stable output",
+      "Reduced overtime volatility",
     ],
   },
   {
-    header: "Compliance Gaps → Regulatory & Reputational Exposure",
+    header: "Compliance Gaps → Financial Risk",
     chain: [
       "Continuous verification",
-      "Reduced audit failure risk",
       "Lower remediation cost",
-      "Protected brand and contract stability",
+      "Reduced regulatory exposure",
     ],
   },
 ];
@@ -53,9 +50,9 @@ const SlideAttrition = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className="text-xs md:text-sm text-muted-foreground text-center mb-10 md:mb-16"
+          className="text-xs md:text-sm text-muted-foreground text-center mb-12 md:mb-20"
         >
-          Operational friction compounds into margin erosion.
+          Operational friction erodes margin.
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
