@@ -98,43 +98,19 @@ const agencySpend: AgencySpendData[] = [
 
 const departmentSpend: DepartmentSpend[] = [
   {
-    name: "Warehouse",
+    name: "Warehouse Operative",
     data: {
-      week: { amount: 67500, hours: 5400, workers: 92, change: 3.2, overtimeHours: 432 },
-      month: { amount: 270000, hours: 21600, workers: 98, change: 2.8, overtimeHours: 1728 },
-      year: { amount: 3240000, hours: 259200, workers: 108, change: 3.5, overtimeHours: 20736 },
+      week: { amount: 114900, hours: 9192, workers: 167, change: 3.2, overtimeHours: 735 },
+      month: { amount: 459600, hours: 36768, workers: 180, change: 2.8, overtimeHours: 2941 },
+      year: { amount: 5515200, hours: 441216, workers: 198, change: 3.5, overtimeHours: 35297 },
     },
   },
   {
-    name: "Picking",
+    name: "MHE",
     data: {
-      week: { amount: 47400, hours: 3792, workers: 75, change: -1.5, overtimeHours: 303 },
-      month: { amount: 189600, hours: 15168, workers: 82, change: -0.8, overtimeHours: 1213 },
-      year: { amount: 2275200, hours: 182016, workers: 90, change: 1.2, overtimeHours: 14561 },
-    },
-  },
-  {
-    name: "Loading",
-    data: {
-      week: { amount: 33600, hours: 2688, workers: 52, change: 6.8, overtimeHours: 269 },
-      month: { amount: 134400, hours: 10752, workers: 58, change: 5.5, overtimeHours: 1075 },
-      year: { amount: 1612800, hours: 129024, workers: 65, change: 4.8, overtimeHours: 12902 },
-    },
-  },
-  {
-    name: "Packing",
-    data: {
-      week: { amount: 22500, hours: 1800, workers: 38, change: 0, overtimeHours: 144 },
-      month: { amount: 90000, hours: 7200, workers: 42, change: 1.2, overtimeHours: 576 },
-      year: { amount: 1080000, hours: 86400, workers: 48, change: 2.0, overtimeHours: 6912 },
-    },
-  },
-  {
-    name: "Quality",
-    data: {
-      week: { amount: 7500, hours: 600, workers: 18, change: -5.0, overtimeHours: 39 },
-      month: { amount: 30000, hours: 2400, workers: 22, change: -3.2, overtimeHours: 156 },
-      year: { amount: 360000, hours: 28800, workers: 28, change: 0.5, overtimeHours: 1872 },
+      week: { amount: 63600, hours: 5088, workers: 110, change: 1.5, overtimeHours: 453 },
+      month: { amount: 254400, hours: 20352, workers: 118, change: 1.2, overtimeHours: 1811 },
+      year: { amount: 3052800, hours: 244224, workers: 130, change: 2.0, overtimeHours: 21742 },
     },
   },
 ];

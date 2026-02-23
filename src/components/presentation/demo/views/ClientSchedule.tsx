@@ -62,11 +62,8 @@ interface RoleRow {
 
 const buildSchedule = (isFuture: boolean): RoleRow[] => {
   const data: { dept: string; role: string; early: number; late: number; night: number }[] = [
-    { dept: "Warehouse", role: "Warehouse Operative", early: 12, late: 10, night: 6 },
-    { dept: "Warehouse", role: "Forklift Driver", early: 4, late: 3, night: 2 },
-    { dept: "Picking", role: "Picker", early: 8, late: 6, night: 0 },
-    { dept: "Packing", role: "Packer", early: 6, late: 4, night: 0 },
-    { dept: "Loading", role: "Loader", early: 6, late: 4, night: 2 },
+    { dept: "Warehouse Operative", role: "Warehouse Operative", early: 20, late: 16, night: 6 },
+    { dept: "MHE", role: "MHE Operative", early: 10, late: 8, night: 4 },
   ];
   return data.map(d => ({
     department: d.dept,
