@@ -101,6 +101,7 @@ const payrollData: PayrollEntry[] = [
 const ClientPayroll = () => {
   const [weekFilter, setWeekFilter] = useState("current");
   const [viewBy, setViewBy] = useState("overall");
+  const [expandedRow, setExpandedRow] = useState<string | null>(null);
 
   const totals = {
     workers: payrollData.length,
