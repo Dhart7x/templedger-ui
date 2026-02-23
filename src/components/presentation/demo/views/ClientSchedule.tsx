@@ -15,8 +15,8 @@ const weekOptions = [
   { label: "Week of 3–9 Mar 2025", key: "wk5", isFuture: true },
 ];
 
-const departments = ["All Departments", "Warehouse", "Picking", "Packing", "Loading", "Quality"];
-const agencyOptions = ["All Agencies", "Staffline", "Pertemps", "Blue Arrow", "Elite Personnel"];
+const departments = ["All Departments", "Warehouse Operative", "MHE"];
+const agencyOptions = ["All Agencies", "Staffline", "KPI", "The Results People"];
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 interface WorkerSlot {
