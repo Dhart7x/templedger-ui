@@ -31,7 +31,7 @@ interface DepartmentSpend {
 
 const overallSpend: SiteSpend[] = [
   {
-    category: "Heathrow DC",
+    category: "The Vault",
     data: {
       week: { amount: 85500, hours: 6840, workers: 95, change: 5.2, overtimeHours: 540 },
       month: { amount: 342000, hours: 27360, workers: 102, change: 3.8, overtimeHours: 2160 },
@@ -39,7 +39,7 @@ const overallSpend: SiteSpend[] = [
     },
   },
   {
-    category: "Coventry Hub",
+    category: "The Cube",
     data: {
       week: { amount: 54600, hours: 4368, workers: 72, change: -2.1, overtimeHours: 288 },
       month: { amount: 218400, hours: 17472, workers: 78, change: -1.5, overtimeHours: 1152 },
@@ -47,7 +47,7 @@ const overallSpend: SiteSpend[] = [
     },
   },
   {
-    category: "Birmingham DC",
+    category: "Ellesmere Port",
     data: {
       week: { amount: 44800, hours: 3584, workers: 68, change: 8.4, overtimeHours: 360 },
       month: { amount: 179200, hours: 14336, workers: 74, change: 6.2, overtimeHours: 1440 },
