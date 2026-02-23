@@ -372,6 +372,12 @@ const WorkerListPopover = ({ cell, role, day, shift, onClose, onWorkerClick, age
           </button>
         ))}
       </div>
+      {/* Edit Requirements button */}
+      <div className="p-2 border-t border-border">
+        <button onClick={onEditRequirements} className="w-full flex items-center justify-center gap-1.5 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary text-[10px] font-medium transition-colors">
+          <Zap className="w-3 h-3" /> Edit Requirements
+        </button>
+      </div>
     </div>
   );
 };
