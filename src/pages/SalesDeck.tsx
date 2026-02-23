@@ -7,6 +7,8 @@ import SlideProblem from "@/components/presentation/SlideProblem";
 import SlideWhyThisHappens from "@/components/presentation/SlideWhyThisHappens";
 import SlideIntroducingTL from "@/components/presentation/SlideIntroducingTL";
 import SlideNewNormal from "@/components/presentation/SlideNewNormal";
+import SlideClosing from "@/components/presentation/SlideClosing";
+import SlideAttrition from "@/components/presentation/SlideAttrition";
 
 const slides = [
   { id: 0, component: SlideHero },
