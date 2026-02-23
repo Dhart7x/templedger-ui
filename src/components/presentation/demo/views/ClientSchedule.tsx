@@ -337,7 +337,7 @@ interface WorkerListProps {
   agencyFilter: string;
 }
 
-const WorkerListPopover = ({ cell, role, day, shift, onClose, onWorkerClick, agencyFilter }: WorkerListProps) => {
+const WorkerListPopover = ({ cell, role, day, shift, onClose, onWorkerClick, onEditRequirements, agencyFilter }: WorkerListProps) => {
   const filtered = agencyFilter === "All Agencies" ? cell.workers : cell.workers.filter(w => w.agency === agencyFilter);
   return (
     <div className="absolute z-50 top-full left-1/2 -translate-x-1/2 mt-1 w-64 bg-card border border-border rounded-xl shadow-xl overflow-hidden" onClick={e => e.stopPropagation()}>
