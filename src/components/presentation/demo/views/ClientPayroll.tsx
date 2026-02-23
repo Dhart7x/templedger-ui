@@ -207,63 +207,106 @@ const ClientPayroll = () => {
           </thead>
           <tbody className="divide-y divide-border">
             {payrollData.map((entry) => (
-              <tr key={entry.id} className={`hover:bg-muted/30 ${entry.status === "blocked" ? "bg-destructive/5" : ""}`}>
-                <td className="px-4 py-3">
-                  <div>
-                    <p className="font-medium">{entry.worker}</p>
-                    <p className="text-xs text-muted-foreground">{entry.site} • {entry.department}</p>
-                  </div>
-                </td>
-                <td className="px-4 py-3 text-muted-foreground">{entry.agency}</td>
-                <td className="px-4 py-3 text-right">{entry.scheduledHours}h</td>
-                <td className="px-4 py-3 text-right font-medium">{entry.clockedHours}h</td>
-                <td className="px-4 py-3 text-right">
-                  {entry.overtimeHours > 0 ? (
-                    <span className="text-primary font-medium">+{entry.overtimeHours}h</span>
-                  ) : (
-                    <span className="text-muted-foreground">-</span>
-                  )}
-                </td>
-                <td className="px-4 py-3">
-                  <div className="flex items-center justify-center gap-1">
-                    {Object.entries(entry.verificationSteps).map(([step, verified], idx) => (
-                      <div
-                        key={step}
-                        className={`w-2 h-2 rounded-full ${verified ? "bg-green-500" : "bg-muted-foreground"}`}
-                        title={`${step}: ${verified ? "✓" : "✗"}`}
-                      />
-                    ))}
-                  </div>
-                </td>
-                <td className="px-4 py-3 text-center">
-                  <span className={`px-2 py-0.5 rounded text-xs font-medium ${
-                    entry.status === "verified" ? "bg-green-500/20 text-green-500" :
-                    entry.status === "pending-approval" ? "bg-amber-500/20 text-amber-500" :
-                    "bg-destructive/20 text-destructive"
-                  }`}>
-                    {entry.status === "verified" ? "Verified" :
-                     entry.status === "pending-approval" ? "Pending" :
-                     entry.blockReason || "Blocked"}
-                  </span>
-                </td>
-                <td className="px-4 py-3">
-                  <div className="flex items-center justify-end gap-1">
-                    {entry.status === "pending-approval" && (
-                      <>
-                        <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive">
-                          <X className="w-3 h-3" />
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-7 w-7 text-amber-500">
-                          <MessageSquare className="w-3 h-3" />
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-7 w-7 text-green-500">
-                          <Check className="w-3 h-3" />
-                        </Button>
-                      </>
+              <React.Fragment key={entry.id}>
+                <tr 
+                  className={`hover:bg-muted/30 cursor-pointer ${entry.status === "blocked" ? "bg-destructive/5" : ""} ${expandedRow === entry.id ? "bg-muted/40" : ""}`}
+                  onClick={() => setExpandedRow(expandedRow === entry.id ? null : entry.id)}
+                >
+                  <td className="px-4 py-3">
+                    <div>
+                      <p className="font-medium">{entry.worker}</p>
+                      <p className="text-xs text-muted-foreground">{entry.site} • {entry.department}</p>
+                    </div>
+                  </td>
+                  <td className="px-4 py-3 text-muted-foreground">{entry.agency}</td>
+                  <td className="px-4 py-3 text-right">{entry.scheduledHours}h</td>
+                  <td className="px-4 py-3 text-right font-medium">{entry.clockedHours}h</td>
+                  <td className="px-4 py-3 text-right">
+                    {entry.overtimeHours > 0 ? (
+                      <span className="text-primary font-medium">+{entry.overtimeHours}h</span>
+                    ) : (
+                      <span className="text-muted-foreground">-</span>
                     )}
-                  </div>
-                </td>
-              </tr>
+                  </td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center justify-center gap-1">
+                      {Object.entries(entry.verificationSteps).map(([step, verified]) => (
+                        <div
+                          key={step}
+                          className={`w-2 h-2 rounded-full ${verified ? "bg-green-500" : "bg-muted-foreground"}`}
+                          title={`${step}: ${verified ? "✓" : "✗"}`}
+                        />
+                      ))}
+                    </div>
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    <span className={`px-2 py-0.5 rounded text-xs font-medium ${
+                      entry.status === "verified" ? "bg-green-500/20 text-green-500" :
+                      entry.status === "pending-approval" ? "bg-amber-500/20 text-amber-500" :
+                      "bg-destructive/20 text-destructive"
+                    }`}>
+                      {entry.status === "verified" ? "Verified" :
+                       entry.status === "pending-approval" ? "Pending" :
+                       entry.blockReason || "Blocked"}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center justify-end gap-1">
+                      {entry.status === "pending-approval" && (
+                        <>
+                          <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive" onClick={(e) => e.stopPropagation()}>
+                            <X className="w-3 h-3" />
+                          </Button>
+                          <Button variant="ghost" size="icon" className="h-7 w-7 text-amber-500" onClick={(e) => e.stopPropagation()}>
+                            <MessageSquare className="w-3 h-3" />
+                          </Button>
+                          <Button variant="ghost" size="icon" className="h-7 w-7 text-green-500" onClick={(e) => e.stopPropagation()}>
+                            <Check className="w-3 h-3" />
+                          </Button>
+                        </>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+                {expandedRow === entry.id && (
+                  <tr>
+                    <td colSpan={8} className="px-4 py-4 bg-muted/20 border-t border-border">
+                      <div className="space-y-3">
+                        <p className="text-sm font-medium">Verification Details — {entry.worker}</p>
+                        <div className="grid grid-cols-5 gap-3">
+                          {Object.entries(entry.verificationSteps).map(([step, verified]) => {
+                            const labels: Record<string, string> = {
+                              scheduled: "Scheduled",
+                              clockedIn: "Clocked In",
+                              clockedOut: "Clocked Out",
+                              managerApproved: "Manager Approved",
+                              rateVerified: "Rate Verified",
+                            };
+                            return (
+                              <div key={step} className={`flex items-center gap-2 rounded-lg border p-2 text-xs ${verified ? "border-green-500/30 bg-green-500/10" : "border-destructive/30 bg-destructive/10"}`}>
+                                {verified ? <CheckCircle className="w-3.5 h-3.5 text-green-500 shrink-0" /> : <AlertTriangle className="w-3.5 h-3.5 text-destructive shrink-0" />}
+                                <span className={verified ? "text-green-500" : "text-destructive"}>{labels[step] ?? step}</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                        {entry.status === "blocked" && entry.blockReason && (
+                          <div className="flex items-center gap-2 text-xs text-destructive bg-destructive/10 border border-destructive/20 rounded-lg px-3 py-2">
+                            <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+                            <span>Block reason: {entry.blockReason}</span>
+                          </div>
+                        )}
+                        {entry.status === "pending-approval" && (
+                          <div className="flex items-center gap-2 text-xs text-amber-500 bg-amber-500/10 border border-amber-500/20 rounded-lg px-3 py-2">
+                            <Clock className="w-3.5 h-3.5 shrink-0" />
+                            <span>Awaiting manager approval for {entry.overtimeHours > 0 ? `${entry.overtimeHours}h overtime` : "hours"}</span>
+                          </div>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                )}
+              </React.Fragment>
             ))}
           </tbody>
         </table>
