@@ -360,7 +360,7 @@ const AgencySchedule = () => {
     <div className="p-4 md:p-6 space-y-6">
       <div>
         <h1 className="text-lg md:text-xl font-bold text-foreground">Schedule</h1>
-        <p className="text-xs text-muted-foreground">Clipper Logistics • View and manage workforce schedules</p>
+        <p className="text-xs text-muted-foreground">B&M • View and manage workforce schedules</p>
       </div>
       <Tabs defaultValue="upload" className="space-y-5">
         <TabsList className="grid w-full max-w-sm grid-cols-2">

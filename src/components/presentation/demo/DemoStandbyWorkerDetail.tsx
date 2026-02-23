@@ -112,7 +112,7 @@
            </h3>
            <div className="text-center py-4">
              <div className="text-3xl font-bold text-foreground">{worker.distance.miles} miles</div>
-             <p className="text-sm text-muted-foreground">from Clipper Logistics - Heathrow DC</p>
+             <p className="text-sm text-muted-foreground">from B&M - The Vault</p>
            </div>
            <div className="grid grid-cols-2 gap-3">
              <div className="bg-muted/30 rounded-lg p-3 text-center">
