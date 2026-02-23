@@ -333,6 +333,7 @@ interface WorkerListProps {
   shift: string;
   onClose: () => void;
   onWorkerClick: (name: string) => void;
+  onEditRequirements: () => void;
   agencyFilter: string;
 }
 
