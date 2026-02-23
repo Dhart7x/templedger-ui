@@ -15,8 +15,8 @@ const weekOptions = [
   { label: "Week of 3–9 Mar 2025", key: "wk5", isFuture: true },
 ];
 
-const departments = ["All Departments", "Warehouse", "Picking", "Packing", "Loading", "Quality"];
-const agencyOptions = ["All Agencies", "Staffline", "Pertemps", "Blue Arrow", "Elite Personnel"];
+const departments = ["All Departments", "Warehouse Operative", "MHE"];
+const agencyOptions = ["All Agencies", "Staffline", "KPI", "The Results People"];
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 interface WorkerSlot {
@@ -33,9 +33,8 @@ interface ShiftCell {
 // Generate workers for filled weeks
 const workerNames: Record<string, string[]> = {
   Staffline: ["Marcus Johnson", "Sarah Williams", "Tomasz Nowak", "David Thompson", "Priya Sharma", "Ahmed Hassan", "Emma Richardson", "Robert Garcia"],
-  Pertemps: ["Rachel Adams", "Mike Stevens", "Lisa Chen", "Mark Edwards", "Kevin Morris", "Fatima Al-Rashid"],
-  "Blue Arrow": ["James Wilson", "Andrei Petrov", "Sophie Turner", "Daniel Brown", "Amy Clarke"],
-  "Elite Personnel": ["Chris Martin", "Laura White", "Ben Foster"],
+  KPI: ["Rachel Adams", "Mike Stevens", "Lisa Chen", "Mark Edwards", "Kevin Morris", "Fatima Al-Rashid"],
+  "The Results People": ["James Wilson", "Andrei Petrov", "Sophie Turner", "Daniel Brown", "Amy Clarke"],
 };
 
 const buildCell = (required: number, isFuture: boolean): ShiftCell => {
@@ -63,11 +62,8 @@ interface RoleRow {
 
 const buildSchedule = (isFuture: boolean): RoleRow[] => {
   const data: { dept: string; role: string; early: number; late: number; night: number }[] = [
-    { dept: "Warehouse", role: "Warehouse Operative", early: 12, late: 10, night: 6 },
-    { dept: "Warehouse", role: "Forklift Driver", early: 4, late: 3, night: 2 },
-    { dept: "Picking", role: "Picker", early: 8, late: 6, night: 0 },
-    { dept: "Packing", role: "Packer", early: 6, late: 4, night: 0 },
-    { dept: "Loading", role: "Loader", early: 6, late: 4, night: 2 },
+    { dept: "Warehouse Operative", role: "Warehouse Operative", early: 20, late: 16, night: 6 },
+    { dept: "MHE", role: "MHE Operative", early: 10, late: 8, night: 4 },
   ];
   return data.map(d => ({
     department: d.dept,

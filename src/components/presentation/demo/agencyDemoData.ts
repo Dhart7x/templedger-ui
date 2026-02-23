@@ -60,14 +60,14 @@ export interface Allocation {
 }
 
 export const agencyWorkers: AgencyWorker[] = [
-  { id: "W001", name: "Sarah Mitchell", status: "deployed", department: "Picking", location: "Zone A", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2024-01-15", complianceStatus: "verified" },
-  { id: "W002", name: "James Cooper", status: "deployed", department: "Packing", location: "Zone B", currentShift: "06:00–14:00", executionStatus: "at-risk", registeredDate: "2024-02-20", complianceStatus: "pending" },
-  { id: "W003", name: "Maria Santos", status: "active", department: "Goods In", location: "Zone C", currentShift: null, executionStatus: "on-track", registeredDate: "2024-01-08", complianceStatus: "verified" },
-  { id: "W004", name: "David Chen", status: "blocked", department: "Picking", location: "Zone A", currentShift: null, executionStatus: "blocked", registeredDate: "2023-11-12", complianceStatus: "expired" },
-  { id: "W005", name: "Emma Wilson", status: "deployed", department: "Returns", location: "Zone D", currentShift: "14:00–22:00", executionStatus: "on-track", registeredDate: "2024-03-01", complianceStatus: "verified" },
-  { id: "W006", name: "Michael Brown", status: "active", department: "Packing", location: "Zone B", currentShift: null, executionStatus: "on-track", registeredDate: "2024-02-15", complianceStatus: "verified" },
-  { id: "W007", name: "Lisa Anderson", status: "deployed", department: "Goods In", location: "Zone C", currentShift: "06:00–14:00", executionStatus: "at-risk", registeredDate: "2024-01-22", complianceStatus: "verified" },
-  { id: "W008", name: "Robert Taylor", status: "blocked", department: "Picking", location: "Zone A", currentShift: null, executionStatus: "blocked", registeredDate: "2023-12-05", complianceStatus: "expired" },
+  { id: "W001", name: "Sarah Mitchell", status: "deployed", department: "Warehouse Operative", location: "Zone A", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2024-01-15", complianceStatus: "verified" },
+  { id: "W002", name: "James Cooper", status: "deployed", department: "MHE", location: "Zone B", currentShift: "06:00–14:00", executionStatus: "at-risk", registeredDate: "2024-02-20", complianceStatus: "pending" },
+  { id: "W003", name: "Maria Santos", status: "active", department: "Warehouse Operative", location: "Zone C", currentShift: null, executionStatus: "on-track", registeredDate: "2024-01-08", complianceStatus: "verified" },
+  { id: "W004", name: "David Chen", status: "blocked", department: "Warehouse Operative", location: "Zone A", currentShift: null, executionStatus: "blocked", registeredDate: "2023-11-12", complianceStatus: "expired" },
+  { id: "W005", name: "Emma Wilson", status: "deployed", department: "Warehouse Operative", location: "Zone D", currentShift: "14:00–22:00", executionStatus: "on-track", registeredDate: "2024-03-01", complianceStatus: "verified" },
+  { id: "W006", name: "Michael Brown", status: "active", department: "MHE", location: "Zone B", currentShift: null, executionStatus: "on-track", registeredDate: "2024-02-15", complianceStatus: "verified" },
+  { id: "W007", name: "Lisa Anderson", status: "deployed", department: "Warehouse Operative", location: "Zone C", currentShift: "06:00–14:00", executionStatus: "at-risk", registeredDate: "2024-01-22", complianceStatus: "verified" },
+  { id: "W008", name: "Robert Taylor", status: "blocked", department: "Warehouse Operative", location: "Zone A", currentShift: null, executionStatus: "blocked", registeredDate: "2023-12-05", complianceStatus: "expired" },
 ];
 
 export const agencyDocuments: AgencyDocument[] = [
@@ -82,12 +82,12 @@ export const agencyDocuments: AgencyDocument[] = [
 ];
 
 export const agencyDeployments: AgencyDeployment[] = [
-  { id: "DEP001", workerId: "W001", workerName: "Sarah Mitchell", department: "Picking", location: "Zone A", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
-  { id: "DEP002", workerId: "W002", workerName: "James Cooper", department: "Packing", location: "Zone B", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
-  { id: "DEP003", workerId: "W007", workerName: "Lisa Anderson", department: "Goods In", location: "Zone C", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
-  { id: "DEP004", workerId: "W005", workerName: "Emma Wilson", department: "Returns", location: "Zone D", shiftStart: "14:00", shiftEnd: "22:00", status: "scheduled", attendanceStatus: "pending" },
-  { id: "DEP005", workerId: "W003", workerName: "Maria Santos", department: "Goods In", location: "Zone C", shiftStart: "14:00", shiftEnd: "22:00", status: "scheduled", attendanceStatus: "pending" },
-  { id: "DEP006", workerId: "W006", workerName: "Michael Brown", department: "Packing", location: "Zone B", shiftStart: "22:00", shiftEnd: "06:00", status: "scheduled", attendanceStatus: "pending" },
+  { id: "DEP001", workerId: "W001", workerName: "Sarah Mitchell", department: "Warehouse Operative", location: "Zone A", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
+  { id: "DEP002", workerId: "W002", workerName: "James Cooper", department: "MHE", location: "Zone B", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
+  { id: "DEP003", workerId: "W007", workerName: "Lisa Anderson", department: "Warehouse Operative", location: "Zone C", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
+  { id: "DEP004", workerId: "W005", workerName: "Emma Wilson", department: "Warehouse Operative", location: "Zone D", shiftStart: "14:00", shiftEnd: "22:00", status: "scheduled", attendanceStatus: "pending" },
+  { id: "DEP005", workerId: "W003", workerName: "Maria Santos", department: "Warehouse Operative", location: "Zone C", shiftStart: "14:00", shiftEnd: "22:00", status: "scheduled", attendanceStatus: "pending" },
+  { id: "DEP006", workerId: "W006", workerName: "Michael Brown", department: "MHE", location: "Zone B", shiftStart: "22:00", shiftEnd: "06:00", status: "scheduled", attendanceStatus: "pending" },
 ];
 
 export const agencyIssues: AgencyIssue[] = [
@@ -113,18 +113,18 @@ export const agencyStats = {
 // Allocations given by the Labour User to agencies
 export const allocations: Allocation[] = [
   // Monday
-  { id: "ALLOC001", department: "Picking", location: "Zone A", role: "Picker", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 4, assignedWorkers: [{ workerId: "W001", workerName: "Sarah Mitchell", status: "confirmed" }, { workerId: "W003", workerName: "Maria Santos", status: "pending" }], status: "partial", agencyId: "AG001", agencyName: "Staffline" },
-  { id: "ALLOC002", department: "Picking", location: "Zone A", role: "Picker", date: "Mon 3 Feb", shift: "14:00–22:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "W005", workerName: "Emma Wilson", status: "confirmed" }], status: "partial", agencyId: "AG001", agencyName: "Staffline" },
-  { id: "ALLOC003", department: "Packing", location: "Zone B", role: "Packer", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "W002", workerName: "James Cooper", status: "confirmed" }, { workerId: "W006", workerName: "Michael Brown", status: "confirmed" }], status: "filled", agencyId: "AG001", agencyName: "Staffline" },
-  { id: "ALLOC004", department: "Goods In", location: "Zone C", role: "Goods In Operative", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "W007", workerName: "Lisa Anderson", status: "confirmed" }], status: "partial", agencyId: "AG001", agencyName: "Staffline" },
+  { id: "ALLOC001", department: "Warehouse Operative", location: "Zone A", role: "Warehouse Operative", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 4, assignedWorkers: [{ workerId: "W001", workerName: "Sarah Mitchell", status: "confirmed" }, { workerId: "W003", workerName: "Maria Santos", status: "pending" }], status: "partial", agencyId: "AG001", agencyName: "Staffline" },
+  { id: "ALLOC002", department: "Warehouse Operative", location: "Zone A", role: "Warehouse Operative", date: "Mon 3 Feb", shift: "14:00–22:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "W005", workerName: "Emma Wilson", status: "confirmed" }], status: "partial", agencyId: "AG001", agencyName: "Staffline" },
+  { id: "ALLOC003", department: "MHE", location: "Zone B", role: "MHE Operative", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "W002", workerName: "James Cooper", status: "confirmed" }, { workerId: "W006", workerName: "Michael Brown", status: "confirmed" }], status: "filled", agencyId: "AG001", agencyName: "Staffline" },
+  { id: "ALLOC004", department: "Warehouse Operative", location: "Zone C", role: "Warehouse Operative", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "W007", workerName: "Lisa Anderson", status: "confirmed" }], status: "partial", agencyId: "AG001", agencyName: "Staffline" },
   // Tuesday  
-  { id: "ALLOC005", department: "Picking", location: "Zone A", role: "Picker", date: "Tue 4 Feb", shift: "06:00–14:00", requestedHeadcount: 5, assignedWorkers: [], status: "unfilled", agencyId: "AG001", agencyName: "Staffline" },
-  { id: "ALLOC006", department: "Packing", location: "Zone B", role: "Packer", date: "Tue 4 Feb", shift: "06:00–14:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "W002", workerName: "James Cooper", status: "pending" }], status: "partial", agencyId: "AG001", agencyName: "Staffline" },
-  { id: "ALLOC007", department: "Returns", location: "Zone D", role: "Returns Handler", date: "Tue 4 Feb", shift: "14:00–22:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "W005", workerName: "Emma Wilson", status: "confirmed" }, { workerId: "W003", workerName: "Maria Santos", status: "confirmed" }], status: "filled", agencyId: "AG001", agencyName: "Staffline" },
+  { id: "ALLOC005", department: "Warehouse Operative", location: "Zone A", role: "Warehouse Operative", date: "Tue 4 Feb", shift: "06:00–14:00", requestedHeadcount: 5, assignedWorkers: [], status: "unfilled", agencyId: "AG001", agencyName: "Staffline" },
+  { id: "ALLOC006", department: "MHE", location: "Zone B", role: "MHE Operative", date: "Tue 4 Feb", shift: "06:00–14:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "W002", workerName: "James Cooper", status: "pending" }], status: "partial", agencyId: "AG001", agencyName: "Staffline" },
+  { id: "ALLOC007", department: "Warehouse Operative", location: "Zone D", role: "Warehouse Operative", date: "Tue 4 Feb", shift: "14:00–22:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "W005", workerName: "Emma Wilson", status: "confirmed" }, { workerId: "W003", workerName: "Maria Santos", status: "confirmed" }], status: "filled", agencyId: "AG001", agencyName: "Staffline" },
   // Wednesday
-  { id: "ALLOC008", department: "Picking", location: "Zone A", role: "Picker", date: "Wed 5 Feb", shift: "06:00–14:00", requestedHeadcount: 4, assignedWorkers: [], status: "unfilled", agencyId: "AG001", agencyName: "Staffline" },
-  { id: "ALLOC009", department: "Goods In", location: "Zone C", role: "Goods In Operative", date: "Wed 5 Feb", shift: "14:00–22:00", requestedHeadcount: 2, assignedWorkers: [], status: "unfilled", agencyId: "AG001", agencyName: "Staffline" },
-  // Multi-agency allocations visible to Labour User
-  { id: "ALLOC010", department: "Picking", location: "Zone A", role: "Picker", date: "Mon 3 Feb", shift: "22:00–06:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "EXT001", workerName: "Alex Johnson", status: "confirmed" }, { workerId: "EXT002", workerName: "Claire Smith", status: "confirmed" }], status: "partial", agencyId: "AG002", agencyName: "Elite Personnel" },
-  { id: "ALLOC011", department: "Packing", location: "Zone B", role: "Packer", date: "Tue 4 Feb", shift: "22:00–06:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "EXT003", workerName: "Tom Williams", status: "confirmed" }, { workerId: "EXT004", workerName: "Nina Patel", status: "confirmed" }], status: "filled", agencyId: "AG002", agencyName: "Elite Personnel" },
+  { id: "ALLOC008", department: "Warehouse Operative", location: "Zone A", role: "Warehouse Operative", date: "Wed 5 Feb", shift: "06:00–14:00", requestedHeadcount: 4, assignedWorkers: [], status: "unfilled", agencyId: "AG001", agencyName: "Staffline" },
+  { id: "ALLOC009", department: "Warehouse Operative", location: "Zone C", role: "Warehouse Operative", date: "Wed 5 Feb", shift: "14:00–22:00", requestedHeadcount: 2, assignedWorkers: [], status: "unfilled", agencyId: "AG001", agencyName: "Staffline" },
+  // Multi-agency allocations
+  { id: "ALLOC010", department: "MHE", location: "Zone A", role: "MHE Operative", date: "Mon 3 Feb", shift: "22:00–06:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "EXT001", workerName: "Alex Johnson", status: "confirmed" }, { workerId: "EXT002", workerName: "Claire Smith", status: "confirmed" }], status: "partial", agencyId: "AG002", agencyName: "KPI" },
+  { id: "ALLOC011", department: "Warehouse Operative", location: "Zone B", role: "Warehouse Operative", date: "Tue 4 Feb", shift: "22:00–06:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "EXT003", workerName: "Tom Williams", status: "confirmed" }, { workerId: "EXT004", workerName: "Nina Patel", status: "confirmed" }], status: "filled", agencyId: "AG002", agencyName: "KPI" },
 ];
