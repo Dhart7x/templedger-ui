@@ -92,7 +92,7 @@ const DemoAgencies = () => {
             <div className="flex items-center justify-between p-2 rounded bg-destructive/5 border border-destructive/20">
               <div>
                 <div className="text-sm font-medium">2 No-Shows Today</div>
-                <div className="text-xs text-muted-foreground">Warehouse - Heathrow DC</div>
+                <div className="text-xs text-muted-foreground">Warehouse Operative - The Vault</div>
               </div>
               <span className="text-xs text-destructive">Unresolved</span>
             </div>

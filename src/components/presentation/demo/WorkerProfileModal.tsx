@@ -115,8 +115,8 @@ const getWorkerData = (name: string) => {
     name,
     agency: "Staffline",
     role: "Warehouse Operative",
-    site: "Heathrow DC",
-    department: "Warehouse",
+    site: "The Vault",
+    department: "Warehouse Operative",
     shift: "Early (06:00-14:00)",
     clockIn: "06:02",
     clockOut: "-",
@@ -129,8 +129,8 @@ const getWorkerData = (name: string) => {
     etaPublicTransport: "40 min",
     compliance: defaultCompliance,
     recentShifts: [
-      { date: "Today", site: "Heathrow DC", department: "Warehouse", hours: 8, status: "In Progress" },
-      { date: "Yesterday", site: "Heathrow DC", department: "Warehouse", hours: 8, status: "Completed" },
+      { date: "Today", site: "The Vault", department: "Warehouse Operative", hours: 8, status: "In Progress" },
+      { date: "Yesterday", site: "The Vault", department: "Warehouse Operative", hours: 8, status: "Completed" },
     ],
   };
 };
