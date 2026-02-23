@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { DollarSign, Clock, CheckCircle, AlertTriangle, Users, Building2, Filter, Check, X, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
