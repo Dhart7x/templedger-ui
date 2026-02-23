@@ -217,15 +217,13 @@ interface EditPopoverProps {
 }
 
 const smartPrefLabels: Record<SmartPref, { label: string; icon: React.ReactNode; desc: string }> = {
-  cheapest: { label: "Cheapest Rate", icon: <DollarSign className="w-3.5 h-3.5" />, desc: "Lowest hourly cost" },
-  "top-performer": { label: "Top Performer", icon: <TrendingUp className="w-3.5 h-3.5" />, desc: "Highest KPIs last week" },
-  "attendance-punctuality": { label: "Attendance & Punctuality", icon: <UserCheck className="w-3.5 h-3.5" />, desc: "Best reliability scores" },
+  cheapest: { label: "Cheapest Rate", icon: <DollarSign className="w-4 h-4" />, desc: "Lowest hourly cost" },
+  "top-performer": { label: "Top Performer Last Week", icon: <TrendingUp className="w-4 h-4" />, desc: "Best KPIs from previous week" },
 };
 
 const smartSuggestions: Record<SmartPref, string> = {
   cheapest: "Elite Personnel",
   "top-performer": "Staffline",
-  "attendance-punctuality": "Blue Arrow",
 };
 
 const EditPopover = ({ cell, role, department, day, shift, onClose, onSubmit }: EditPopoverProps) => {
