@@ -65,94 +65,33 @@ const agencySpend: AgencySpendData[] = [
       year: { amount: 4665600, hours: 373248, workers: 105, change: 4.8, overtimeHours: 31104 },
     },
     sites: [
-      {
-        name: "Heathrow DC",
-        amount: 55500,
-        hours: 4440,
-        departments: [
-          { name: "Warehouse", amount: 24600, hours: 1968, overtimeHours: 246 },
-          { name: "Picking", amount: 18300, hours: 1464, overtimeHours: 147 },
-          { name: "Loading", amount: 12600, hours: 1008, overtimeHours: 126 },
-        ],
-      },
-      {
-        name: "Coventry Hub",
-        amount: 30600,
-        hours: 2448,
-        departments: [
-          { name: "Warehouse", amount: 17400, hours: 1392, overtimeHours: 139 },
-          { name: "Picking", amount: 8700, hours: 696, overtimeHours: 70 },
-          { name: "Quality", amount: 4500, hours: 360, overtimeHours: 36 },
-        ],
-      },
-      {
-        name: "Birmingham DC",
-        amount: 11100,
-        hours: 888,
-        departments: [
-          { name: "Warehouse", amount: 6600, hours: 528, overtimeHours: 53 },
-          { name: "Picking", amount: 4500, hours: 360, overtimeHours: 36 },
-        ],
-      },
+      { name: "The Vault", amount: 55500, hours: 4440, departments: [{ name: "Warehouse Operative", amount: 33300, hours: 2664, overtimeHours: 266 }, { name: "MHE", amount: 22200, hours: 1776, overtimeHours: 178 }] },
+      { name: "The Cube", amount: 30600, hours: 2448, departments: [{ name: "Warehouse Operative", amount: 18360, hours: 1469, overtimeHours: 147 }, { name: "MHE", amount: 12240, hours: 979, overtimeHours: 98 }] },
+      { name: "Ellesmere Port", amount: 11100, hours: 888, departments: [{ name: "Warehouse Operative", amount: 6660, hours: 533, overtimeHours: 53 }, { name: "MHE", amount: 4440, hours: 355, overtimeHours: 36 }] },
     ],
   },
   {
-    name: "Pertemps",
+    name: "KPI",
     data: {
       week: { amount: 54600, hours: 4368, workers: 58, change: 2.1, overtimeHours: 349 },
       month: { amount: 218400, hours: 17472, workers: 64, change: 1.8, overtimeHours: 1398 },
       year: { amount: 2620800, hours: 209664, workers: 72, change: 2.5, overtimeHours: 16773 },
     },
     sites: [
-      {
-        name: "Heathrow DC",
-        amount: 25200,
-        hours: 2016,
-        departments: [
-          { name: "Warehouse", amount: 12600, hours: 1008, overtimeHours: 101 },
-          { name: "Packing", amount: 8400, hours: 672, overtimeHours: 67 },
-          { name: "Loading", amount: 4200, hours: 336, overtimeHours: 34 },
-        ],
-      },
-      {
-        name: "Birmingham DC",
-        amount: 29400,
-        hours: 2352,
-        departments: [
-          { name: "Warehouse", amount: 15600, hours: 1248, overtimeHours: 125 },
-          { name: "Picking", amount: 9600, hours: 768, overtimeHours: 77 },
-          { name: "Quality", amount: 4200, hours: 336, overtimeHours: 34 },
-        ],
-      },
+      { name: "The Vault", amount: 25200, hours: 2016, departments: [{ name: "Warehouse Operative", amount: 15120, hours: 1210, overtimeHours: 121 }, { name: "MHE", amount: 10080, hours: 806, overtimeHours: 81 }] },
+      { name: "Ellesmere Port", amount: 29400, hours: 2352, departments: [{ name: "Warehouse Operative", amount: 17640, hours: 1411, overtimeHours: 141 }, { name: "MHE", amount: 11760, hours: 941, overtimeHours: 94 }] },
     ],
   },
   {
-    name: "Blue Arrow",
+    name: "The Results People",
     data: {
       week: { amount: 26700, hours: 2136, workers: 35, change: -1.2, overtimeHours: 192 },
       month: { amount: 106800, hours: 8544, workers: 40, change: -0.8, overtimeHours: 768 },
       year: { amount: 1281600, hours: 102528, workers: 48, change: 1.5, overtimeHours: 9216 },
     },
     sites: [
-      {
-        name: "Heathrow DC",
-        amount: 9600,
-        hours: 768,
-        departments: [
-          { name: "Loading", amount: 5760, hours: 461, overtimeHours: 46 },
-          { name: "Picking", amount: 3840, hours: 307, overtimeHours: 31 },
-        ],
-      },
-      {
-        name: "Coventry Hub",
-        amount: 17100,
-        hours: 1368,
-        departments: [
-          { name: "Warehouse", amount: 8550, hours: 684, overtimeHours: 68 },
-          { name: "Loading", amount: 5700, hours: 456, overtimeHours: 46 },
-          { name: "Packing", amount: 2850, hours: 228, overtimeHours: 23 },
-        ],
-      },
+      { name: "The Vault", amount: 9600, hours: 768, departments: [{ name: "Warehouse Operative", amount: 5760, hours: 461, overtimeHours: 46 }, { name: "MHE", amount: 3840, hours: 307, overtimeHours: 31 }] },
+      { name: "The Cube", amount: 17100, hours: 1368, departments: [{ name: "Warehouse Operative", amount: 10260, hours: 821, overtimeHours: 82 }, { name: "MHE", amount: 6840, hours: 547, overtimeHours: 55 }] },
     ],
   },
 ];
