@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Plus, Check, X, MessageSquare, Clock, Users, Building2, Sparkles, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDemoContext } from "../DemoContext";
 
-const agencies = ["Staffline", "Pertemps", "Blue Arrow", "Elite Personnel", "Reed"];
+const agencies = ["Staffline", "KPI", "The Results People"];
 const rationales = [
   "This agency has {count} trained temps on standby within 3 miles of site",
   "Best availability match with {count} workers ready for immediate deployment",
@@ -22,7 +22,7 @@ const ClientBookings = () => {
     role: "Warehouse Operative",
     quantity: 1,
     shift: "06:00–14:00",
-    location: "Heathrow DC - Zone A",
+    location: "The Vault - Zone A",
     useIntelligentAllocation: false,
   });
 
@@ -36,7 +36,6 @@ const ClientBookings = () => {
     setIsAllocating(true);
     setAllocationResult(null);
     
-    // Simulate 3 second loading
     setTimeout(() => {
       const randomAgency = agencies[Math.floor(Math.random() * agencies.length)];
       const randomRationale = rationales[Math.floor(Math.random() * rationales.length)]
@@ -66,7 +65,7 @@ const ClientBookings = () => {
       role: "Warehouse Operative",
       quantity: 1,
       shift: "06:00–14:00",
-      location: "Heathrow DC - Zone A",
+      location: "The Vault - Zone A",
       useIntelligentAllocation: false,
     });
   };
@@ -225,10 +224,7 @@ const ClientBookings = () => {
                   disabled={isAllocating}
                 >
                   <option>Warehouse Operative</option>
-                  <option>Picker</option>
-                  <option>Packer</option>
-                  <option>Forklift Driver</option>
-                  <option>Loader</option>
+                  <option>MHE Operative</option>
                 </select>
               </div>
               <div className="grid grid-cols-2 gap-3">
@@ -265,10 +261,12 @@ const ClientBookings = () => {
                   className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm"
                   disabled={isAllocating}
                 >
-                  <option>Heathrow DC - Zone A</option>
-                  <option>Heathrow DC - Zone B</option>
-                  <option>Coventry Hub - Zone A</option>
-                  <option>Birmingham DC - Zone A</option>
+                  <option>The Vault - Zone A</option>
+                  <option>The Vault - Zone B</option>
+                  <option>The Cube - Zone A</option>
+                  <option>Ellesmere Port - Zone A</option>
+                  <option>Runcorn - Zone A</option>
+                  <option>Bedford - Zone A</option>
                 </select>
               </div>
               

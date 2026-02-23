@@ -10,7 +10,7 @@ interface TempPermCandidate {
   site: string;
   department: string;
   role: string;
-  timeServed: number; // months
+  timeServed: number;
   attendance: number;
   punctuality: number;
   departments: string[];
@@ -20,19 +20,19 @@ interface TempPermCandidate {
 }
 
 const candidates: TempPermCandidate[] = [
-  { id: "1", name: "Maria Santos", agency: "Pertemps", site: "Heathrow DC", department: "Picking", role: "Senior Picker", timeServed: 18, attendance: 100, punctuality: 98, departments: ["Picking", "Packing", "Quality"], rating: 4.9, eligible: true, hoursWorked: 2880 },
-  { id: "2", name: "John Patel", agency: "Staffline", site: "Heathrow DC", department: "Warehouse", role: "Operative", timeServed: 14, attendance: 98, punctuality: 95, departments: ["Warehouse", "Loading"], rating: 4.7, eligible: true, hoursWorked: 2240 },
-  { id: "3", name: "Lucy Brown", agency: "Staffline", site: "Coventry Hub", department: "Warehouse", role: "Team Lead", timeServed: 24, attendance: 97, punctuality: 96, departments: ["Warehouse", "Picking", "Loading"], rating: 4.8, eligible: true, hoursWorked: 3840 },
-  { id: "4", name: "Ahmed Khan", agency: "Blue Arrow", site: "Heathrow DC", department: "Warehouse", role: "Forklift", timeServed: 12, attendance: 95, punctuality: 91, departments: ["Warehouse"], rating: 4.5, eligible: true, hoursWorked: 1920 },
-  { id: "5", name: "Priya Sharma", agency: "Pertemps", site: "Heathrow DC", department: "Quality", role: "QC", timeServed: 10, attendance: 100, punctuality: 100, departments: ["Quality", "Packing"], rating: 5.0, eligible: true, hoursWorked: 1600 },
-  { id: "6", name: "Marcus Johnson", agency: "Staffline", site: "Heathrow DC", department: "Loading", role: "Loader", timeServed: 16, attendance: 99, punctuality: 97, departments: ["Loading", "Warehouse"], rating: 4.9, eligible: true, hoursWorked: 2560 },
-  { id: "7", name: "Fatima Ali", agency: "Pertemps", site: "Birmingham DC", department: "Packing", role: "Senior Packer", timeServed: 15, attendance: 96, punctuality: 94, departments: ["Packing", "Returns"], rating: 4.6, eligible: true, hoursWorked: 2400 },
-  { id: "8", name: "Daniel Kim", agency: "Blue Arrow", site: "Heathrow DC", department: "Picking", role: "Picker", timeServed: 11, attendance: 97, punctuality: 95, departments: ["Picking", "Goods In"], rating: 4.7, eligible: true, hoursWorked: 1760 },
-  { id: "9", name: "Elena Rodriguez", agency: "Staffline", site: "Coventry Hub", department: "Returns", role: "Handler", timeServed: 13, attendance: 93, punctuality: 90, departments: ["Returns", "Quality"], rating: 4.3, eligible: true, hoursWorked: 2080 },
-  { id: "10", name: "Kevin Wright", agency: "Pertemps", site: "Heathrow DC", department: "Quality", role: "Senior QC", timeServed: 20, attendance: 99, punctuality: 98, departments: ["Quality", "Packing", "Returns"], rating: 4.8, eligible: true, hoursWorked: 3200 },
-  { id: "11", name: "Tomasz Nowak", agency: "Staffline", site: "Heathrow DC", department: "Loading", role: "Loader", timeServed: 6, attendance: 85, punctuality: 80, departments: ["Loading"], rating: 3.5, eligible: false, hoursWorked: 960 },
-  { id: "12", name: "Sophie Turner", agency: "Blue Arrow", site: "Birmingham DC", department: "Warehouse", role: "Operative", timeServed: 4, attendance: 88, punctuality: 82, departments: ["Warehouse"], rating: 3.8, eligible: false, hoursWorked: 640 },
-  { id: "13", name: "James Wilson", agency: "Pertemps", site: "Coventry Hub", department: "Picking", role: "Picker", timeServed: 8, attendance: 91, punctuality: 88, departments: ["Picking"], rating: 4.0, eligible: false, hoursWorked: 1280 },
+  { id: "1", name: "Maria Santos", agency: "KPI", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 18, attendance: 100, punctuality: 98, departments: ["Warehouse Operative", "MHE"], rating: 4.9, eligible: true, hoursWorked: 2880 },
+  { id: "2", name: "John Patel", agency: "Staffline", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 14, attendance: 98, punctuality: 95, departments: ["Warehouse Operative", "MHE"], rating: 4.7, eligible: true, hoursWorked: 2240 },
+  { id: "3", name: "Lucy Brown", agency: "Staffline", site: "The Cube", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 24, attendance: 97, punctuality: 96, departments: ["Warehouse Operative", "MHE"], rating: 4.8, eligible: true, hoursWorked: 3840 },
+  { id: "4", name: "Ahmed Khan", agency: "The Results People", site: "The Vault", department: "MHE", role: "MHE Operative", timeServed: 12, attendance: 95, punctuality: 91, departments: ["MHE"], rating: 4.5, eligible: true, hoursWorked: 1920 },
+  { id: "5", name: "Priya Sharma", agency: "KPI", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 10, attendance: 100, punctuality: 100, departments: ["Warehouse Operative"], rating: 5.0, eligible: true, hoursWorked: 1600 },
+  { id: "6", name: "Marcus Johnson", agency: "Staffline", site: "The Vault", department: "MHE", role: "MHE Operative", timeServed: 16, attendance: 99, punctuality: 97, departments: ["MHE", "Warehouse Operative"], rating: 4.9, eligible: true, hoursWorked: 2560 },
+  { id: "7", name: "Fatima Ali", agency: "KPI", site: "Ellesmere Port", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 15, attendance: 96, punctuality: 94, departments: ["Warehouse Operative"], rating: 4.6, eligible: true, hoursWorked: 2400 },
+  { id: "8", name: "Daniel Kim", agency: "The Results People", site: "The Vault", department: "MHE", role: "MHE Operative", timeServed: 11, attendance: 97, punctuality: 95, departments: ["MHE", "Warehouse Operative"], rating: 4.7, eligible: true, hoursWorked: 1760 },
+  { id: "9", name: "Elena Rodriguez", agency: "Staffline", site: "The Cube", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 13, attendance: 93, punctuality: 90, departments: ["Warehouse Operative"], rating: 4.3, eligible: true, hoursWorked: 2080 },
+  { id: "10", name: "Kevin Wright", agency: "KPI", site: "Runcorn", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 20, attendance: 99, punctuality: 98, departments: ["Warehouse Operative", "MHE"], rating: 4.8, eligible: true, hoursWorked: 3200 },
+  { id: "11", name: "Tomasz Nowak", agency: "Staffline", site: "The Vault", department: "MHE", role: "MHE Operative", timeServed: 6, attendance: 85, punctuality: 80, departments: ["MHE"], rating: 3.5, eligible: false, hoursWorked: 960 },
+  { id: "12", name: "Sophie Turner", agency: "The Results People", site: "Ellesmere Port", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 4, attendance: 88, punctuality: 82, departments: ["Warehouse Operative"], rating: 3.8, eligible: false, hoursWorked: 640 },
+  { id: "13", name: "James Wilson", agency: "KPI", site: "The Cube", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 8, attendance: 91, punctuality: 88, departments: ["Warehouse Operative"], rating: 4.0, eligible: false, hoursWorked: 1280 },
 ];
 
 interface ClientTempPermProps {
@@ -56,7 +56,6 @@ const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
       .filter(c => departmentFilter === "all" || c.department.toLowerCase() === departmentFilter)
       .filter(c => agencyFilter === "all" || c.agency === agencyFilter)
       .sort((a, b) => {
-        // Sort by: time served, then attendance, then multi-skill
         const scoreA = a.timeServed * 2 + a.attendance + a.departments.length * 5;
         const scoreB = b.timeServed * 2 + b.attendance + b.departments.length * 5;
         return scoreB - scoreA;
@@ -70,7 +69,6 @@ const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
   };
 
   const handleInitiateConversion = (candidate: TempPermCandidate) => {
-    // Add to agency notifications
     addNotification({
       type: "temp-perm",
       title: "Temp-to-Perm Conversion Request",
@@ -104,9 +102,11 @@ const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
             className="text-xs bg-card border border-border rounded px-2 py-1.5"
           >
             <option value="all">All Sites</option>
-            <option value="Heathrow DC">Heathrow DC</option>
-            <option value="Coventry Hub">Coventry Hub</option>
-            <option value="Birmingham DC">Birmingham DC</option>
+            <option value="The Vault">The Vault</option>
+            <option value="The Cube">The Cube</option>
+            <option value="Ellesmere Port">Ellesmere Port</option>
+            <option value="Runcorn">Runcorn</option>
+            <option value="Bedford">Bedford</option>
           </select>
           <select
             value={departmentFilter}
@@ -114,12 +114,8 @@ const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
             className="text-xs bg-card border border-border rounded px-2 py-1.5"
           >
             <option value="all">All Departments</option>
-            <option value="warehouse">Warehouse</option>
-            <option value="picking">Picking</option>
-            <option value="packing">Packing</option>
-            <option value="loading">Loading</option>
-            <option value="quality">Quality</option>
-            <option value="returns">Returns</option>
+            <option value="warehouse operative">Warehouse Operative</option>
+            <option value="mhe">MHE</option>
           </select>
           <select
             value={agencyFilter}
@@ -128,8 +124,8 @@ const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
           >
             <option value="all">All Agencies</option>
             <option value="Staffline">Staffline</option>
-            <option value="Pertemps">Pertemps</option>
-            <option value="Blue Arrow">Blue Arrow</option>
+            <option value="KPI">KPI</option>
+            <option value="The Results People">The Results People</option>
           </select>
         </div>
       </div>

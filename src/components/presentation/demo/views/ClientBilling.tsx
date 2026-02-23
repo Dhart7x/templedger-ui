@@ -51,122 +51,122 @@ const invoices: Invoice[] = [
     id: "1",
     invoiceNumber: "INV-2025-0234",
     agency: "Staffline",
-    site: "Heathrow DC",
+    site: "The Vault",
     weekEnding: "9 Feb 2025",
     amount: 87450,
     workers: 85,
     hours: 6996,
     workerDetails: [
-      { name: "Marcus Johnson", hours: 40, rate: 12.50, amount: 500, department: "Warehouse" },
-      { name: "Sarah Williams", hours: 45, rate: 12.50, amount: 562.50, department: "Picking" },
-      { name: "Tomasz Nowak", hours: 38, rate: 13.00, amount: 494, department: "Loading" },
-      { name: "David Thompson", hours: 42, rate: 14.00, amount: 588, department: "Warehouse" },
-      { name: "Priya Sharma", hours: 44, rate: 12.50, amount: 550, department: "Picking" },
-      { name: "Ahmed Hassan", hours: 40, rate: 13.50, amount: 540, department: "Packing" },
+      { name: "Marcus Johnson", hours: 40, rate: 12.50, amount: 500, department: "Warehouse Operative" },
+      { name: "Sarah Williams", hours: 45, rate: 12.50, amount: 562.50, department: "Warehouse Operative" },
+      { name: "Tomasz Nowak", hours: 38, rate: 13.00, amount: 494, department: "MHE" },
+      { name: "David Thompson", hours: 42, rate: 14.00, amount: 588, department: "Warehouse Operative" },
+      { name: "Priya Sharma", hours: 44, rate: 12.50, amount: 550, department: "MHE" },
+      { name: "Ahmed Hassan", hours: 40, rate: 13.50, amount: 540, department: "Warehouse Operative" },
     ],
   },
   {
     id: "2",
     invoiceNumber: "INV-2025-0235",
-    agency: "Pertemps",
-    site: "Heathrow DC",
+    agency: "KPI",
+    site: "The Vault",
     weekEnding: "9 Feb 2025",
     amount: 54740,
     workers: 58,
     hours: 4640,
     workerDetails: [
-      { name: "Rachel Adams", hours: 40, rate: 12.00, amount: 480, department: "Picking" },
-      { name: "Mike Stevens", hours: 38, rate: 12.00, amount: 456, department: "Warehouse" },
-      { name: "Lisa Chen", hours: 40, rate: 13.00, amount: 520, department: "Packing" },
-      { name: "Mark Edwards", hours: 44, rate: 12.00, amount: 528, department: "Loading" },
+      { name: "Rachel Adams", hours: 40, rate: 12.00, amount: 480, department: "Warehouse Operative" },
+      { name: "Mike Stevens", hours: 38, rate: 12.00, amount: 456, department: "Warehouse Operative" },
+      { name: "Lisa Chen", hours: 40, rate: 13.00, amount: 520, department: "MHE" },
+      { name: "Mark Edwards", hours: 44, rate: 12.00, amount: 528, department: "Warehouse Operative" },
     ],
   },
   {
     id: "3",
     invoiceNumber: "INV-2025-0236",
-    agency: "Blue Arrow",
-    site: "Birmingham DC",
+    agency: "The Results People",
+    site: "Ellesmere Port",
     weekEnding: "9 Feb 2025",
     amount: 42100,
     workers: 40,
     hours: 3400,
     workerDetails: [
-      { name: "James Wilson", hours: 40, rate: 14.00, amount: 560, department: "Loading" },
-      { name: "Andrei Petrov", hours: 38, rate: 12.50, amount: 475, department: "Warehouse" },
-      { name: "Sophie Turner", hours: 40, rate: 12.00, amount: 480, department: "Picking" },
+      { name: "James Wilson", hours: 40, rate: 14.00, amount: 560, department: "MHE" },
+      { name: "Andrei Petrov", hours: 38, rate: 12.50, amount: 475, department: "Warehouse Operative" },
+      { name: "Sophie Turner", hours: 40, rate: 12.00, amount: 480, department: "Warehouse Operative" },
     ],
   },
   {
     id: "4",
     invoiceNumber: "INV-2025-0220",
     agency: "Staffline",
-    site: "Heathrow DC",
+    site: "The Vault",
     weekEnding: "2 Feb 2025",
     amount: 83230,
     workers: 82,
     hours: 6560,
     workerDetails: [
-      { name: "Marcus Johnson", hours: 40, rate: 12.50, amount: 500, department: "Warehouse" },
-      { name: "Sarah Williams", hours: 40, rate: 12.50, amount: 500, department: "Picking" },
-      { name: "Tomasz Nowak", hours: 40, rate: 13.00, amount: 520, department: "Loading" },
-      { name: "Priya Sharma", hours: 40, rate: 12.50, amount: 500, department: "Picking" },
+      { name: "Marcus Johnson", hours: 40, rate: 12.50, amount: 500, department: "Warehouse Operative" },
+      { name: "Sarah Williams", hours: 40, rate: 12.50, amount: 500, department: "Warehouse Operative" },
+      { name: "Tomasz Nowak", hours: 40, rate: 13.00, amount: 520, department: "MHE" },
+      { name: "Priya Sharma", hours: 40, rate: 12.50, amount: 500, department: "MHE" },
     ],
   },
   {
     id: "5",
     invoiceNumber: "INV-2025-0221",
-    agency: "Blue Arrow",
-    site: "Coventry Hub",
+    agency: "The Results People",
+    site: "The Cube",
     weekEnding: "2 Feb 2025",
     amount: 36680,
     workers: 35,
     hours: 2940,
     workerDetails: [
-      { name: "James Wilson", hours: 40, rate: 14.00, amount: 560, department: "Warehouse" },
-      { name: "Sophie Turner", hours: 32, rate: 12.00, amount: 384, department: "Picking" },
-      { name: "Daniel Brown", hours: 38, rate: 12.50, amount: 475, department: "Loading" },
+      { name: "James Wilson", hours: 40, rate: 14.00, amount: 560, department: "MHE" },
+      { name: "Sophie Turner", hours: 32, rate: 12.00, amount: 384, department: "Warehouse Operative" },
+      { name: "Daniel Brown", hours: 38, rate: 12.50, amount: 475, department: "Warehouse Operative" },
     ],
   },
   {
     id: "6",
     invoiceNumber: "INV-2025-0222",
-    agency: "Pertemps",
-    site: "Birmingham DC",
+    agency: "KPI",
+    site: "Ellesmere Port",
     weekEnding: "2 Feb 2025",
     amount: 48900,
     workers: 50,
     hours: 4000,
     workerDetails: [
-      { name: "Rachel Adams", hours: 40, rate: 12.00, amount: 480, department: "Picking" },
-      { name: "Kevin Morris", hours: 40, rate: 13.00, amount: 520, department: "Warehouse" },
+      { name: "Rachel Adams", hours: 40, rate: 12.00, amount: 480, department: "Warehouse Operative" },
+      { name: "Kevin Morris", hours: 40, rate: 13.00, amount: 520, department: "MHE" },
     ],
   },
   {
     id: "7",
     invoiceNumber: "INV-2025-0206",
     agency: "Staffline",
-    site: "Heathrow DC",
+    site: "The Vault",
     weekEnding: "26 Jan 2025",
     amount: 79800,
     workers: 80,
     hours: 6400,
     workerDetails: [
-      { name: "Marcus Johnson", hours: 40, rate: 12.50, amount: 500, department: "Warehouse" },
-      { name: "Ahmed Hassan", hours: 40, rate: 13.50, amount: 540, department: "Packing" },
+      { name: "Marcus Johnson", hours: 40, rate: 12.50, amount: 500, department: "Warehouse Operative" },
+      { name: "Ahmed Hassan", hours: 40, rate: 13.50, amount: 540, department: "Warehouse Operative" },
     ],
   },
   {
     id: "8",
     invoiceNumber: "INV-2025-0207",
-    agency: "Pertemps",
-    site: "Coventry Hub",
+    agency: "KPI",
+    site: "The Cube",
     weekEnding: "26 Jan 2025",
     amount: 51200,
     workers: 55,
     hours: 4400,
     workerDetails: [
-      { name: "Rachel Adams", hours: 40, rate: 12.00, amount: 480, department: "Picking" },
-      { name: "Mark Edwards", hours: 40, rate: 13.00, amount: 520, department: "Loading" },
+      { name: "Rachel Adams", hours: 40, rate: 12.00, amount: 480, department: "Warehouse Operative" },
+      { name: "Mark Edwards", hours: 40, rate: 13.00, amount: 520, department: "MHE" },
     ],
   },
 ];
@@ -388,37 +388,31 @@ const ClientBilling = ({ onViewWorker }: ClientBillingProps) => {
                                 <th className="text-right py-2 text-muted-foreground font-medium">Hours</th>
                                 <th className="text-right py-2 text-muted-foreground font-medium">Rate</th>
                                 <th className="text-right py-2 text-muted-foreground font-medium">Amount</th>
-                                <th className="text-center py-2 text-muted-foreground font-medium">Status</th>
                               </tr>
                             </thead>
                             <tbody>
-                              {visibleWorkers.map((w, i) => (
-                                <tr key={i} className="border-b border-border/50 last:border-0">
+                              {visibleWorkers.map((w, idx) => (
+                                <tr key={idx} className="border-b border-border/50">
                                   <td className="py-2">
-                                    <button
-                                      onClick={() => handleWorkerClick(w.name)}
-                                      className="text-xs font-medium text-primary hover:underline"
-                                    >
+                                    <button onClick={() => handleWorkerClick(w.name)} className="text-foreground hover:text-primary hover:underline font-medium">
                                       {w.name}
                                     </button>
                                   </td>
                                   <td className="py-2 text-muted-foreground">{w.department}</td>
-                                  <td className="text-right py-2 text-foreground">{w.hours}</td>
-                                  <td className="text-right py-2 text-foreground">£{w.rate.toFixed(2)}</td>
-                                  <td className="text-right py-2 font-medium text-foreground">£{w.amount.toFixed(2)}</td>
-                                  <td className="text-center py-2">
-                                    <CheckCircle className="w-3 h-3 text-green-500 mx-auto" />
-                                  </td>
+                                  <td className="py-2 text-right text-foreground">{w.hours}h</td>
+                                  <td className="py-2 text-right text-muted-foreground">£{w.rate.toFixed(2)}</td>
+                                  <td className="py-2 text-right font-medium text-foreground">£{w.amount.toFixed(2)}</td>
                                 </tr>
                               ))}
                             </tbody>
                           </table>
                         </div>
 
-                        {/* Actions */}
-                        <div className="p-4 border-t border-border flex items-center justify-end gap-2">
-                          <Button variant="outline" size="sm" className="text-xs gap-1.5">
-                            <Download className="w-3.5 h-3.5" /> Export PDF
+                        {/* Export */}
+                        <div className="p-4 border-t border-border flex justify-end">
+                          <Button variant="outline" size="sm" className="gap-2 text-xs">
+                            <Download className="w-3.5 h-3.5" />
+                            Export Invoice
                           </Button>
                         </div>
                       </div>
@@ -431,7 +425,13 @@ const ClientBilling = ({ onViewWorker }: ClientBillingProps) => {
         );
       })}
 
-      {profileWorker && <WorkerProfileModal workerName={profileWorker} onClose={() => setProfileWorker(null)} />}
+      {/* Worker Profile Modal */}
+      {profileWorker && (
+        <WorkerProfileModal
+          workerName={profileWorker}
+          onClose={() => setProfileWorker(null)}
+        />
+      )}
     </div>
   );
 };

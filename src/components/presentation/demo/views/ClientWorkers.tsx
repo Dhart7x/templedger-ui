@@ -45,44 +45,44 @@ interface NewWorker {
 }
 
 const liveWorkers: LiveWorker[] = [
-  { id: "1", name: "John Patel", agency: "Staffline", site: "Heathrow DC", department: "Warehouse", role: "Operative", clockIn: "06:02", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 32, attendance: 98, rating: 4.7 },
-  { id: "2", name: "Maria Santos", agency: "Pertemps", site: "Heathrow DC", department: "Picking", role: "Picker", clockIn: "06:00", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 40, attendance: 100, rating: 4.9 },
-  { id: "3", name: "Ahmed Khan", agency: "Blue Arrow", site: "Heathrow DC", department: "Warehouse", role: "Forklift", clockIn: "05:58", shift: "06:00–14:00", hoursToday: 5.6, hoursWeek: 44, attendance: 95, rating: 4.5 },
-  { id: "4", name: "Lucy Brown", agency: "Staffline", site: "Coventry Hub", department: "Warehouse", role: "Team Lead", clockIn: "06:01", shift: "06:00–14:00", hoursToday: 5.4, hoursWeek: 38, attendance: 97, rating: 4.8 },
-  { id: "5", name: "Priya Sharma", agency: "Pertemps", site: "Heathrow DC", department: "Quality", role: "QC", clockIn: "06:00", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 40, attendance: 100, rating: 5.0 },
-  { id: "6", name: "Marcus Johnson", agency: "Staffline", site: "Heathrow DC", department: "Loading", role: "Loader", clockIn: "05:55", shift: "06:00–14:00", hoursToday: 5.7, hoursWeek: 42, attendance: 99, rating: 4.9 },
-  { id: "7", name: "Fatima Ali", agency: "Pertemps", site: "Birmingham DC", department: "Packing", role: "Packer", clockIn: "06:03", shift: "06:00–14:00", hoursToday: 5.3, hoursWeek: 35, attendance: 96, rating: 4.6 },
-  { id: "8", name: "Daniel Kim", agency: "Blue Arrow", site: "Heathrow DC", department: "Picking", role: "Picker", clockIn: "06:01", shift: "06:00–14:00", hoursToday: 5.4, hoursWeek: 36, attendance: 97, rating: 4.7 },
-  { id: "9", name: "Elena Rodriguez", agency: "Staffline", site: "Coventry Hub", department: "Returns", role: "Handler", clockIn: "14:02", shift: "14:00–22:00", hoursToday: 2.0, hoursWeek: 28, attendance: 93, rating: 4.3 },
-  { id: "10", name: "Robert Taylor", agency: "Pertemps", site: "Heathrow DC", department: "Goods In", role: "Operative", clockIn: "13:58", shift: "14:00–22:00", hoursToday: 2.1, hoursWeek: 30, attendance: 94, rating: 4.4 },
+  { id: "1", name: "John Patel", agency: "Staffline", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:02", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 32, attendance: 98, rating: 4.7 },
+  { id: "2", name: "Maria Santos", agency: "KPI", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:00", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 40, attendance: 100, rating: 4.9 },
+  { id: "3", name: "Ahmed Khan", agency: "The Results People", site: "The Vault", department: "MHE", role: "MHE Operative", clockIn: "05:58", shift: "06:00–14:00", hoursToday: 5.6, hoursWeek: 44, attendance: 95, rating: 4.5 },
+  { id: "4", name: "Lucy Brown", agency: "Staffline", site: "The Cube", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:01", shift: "06:00–14:00", hoursToday: 5.4, hoursWeek: 38, attendance: 97, rating: 4.8 },
+  { id: "5", name: "Priya Sharma", agency: "KPI", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:00", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 40, attendance: 100, rating: 5.0 },
+  { id: "6", name: "Marcus Johnson", agency: "Staffline", site: "The Vault", department: "MHE", role: "MHE Operative", clockIn: "05:55", shift: "06:00–14:00", hoursToday: 5.7, hoursWeek: 42, attendance: 99, rating: 4.9 },
+  { id: "7", name: "Fatima Ali", agency: "KPI", site: "Ellesmere Port", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:03", shift: "06:00–14:00", hoursToday: 5.3, hoursWeek: 35, attendance: 96, rating: 4.6 },
+  { id: "8", name: "Daniel Kim", agency: "The Results People", site: "The Vault", department: "MHE", role: "MHE Operative", clockIn: "06:01", shift: "06:00–14:00", hoursToday: 5.4, hoursWeek: 36, attendance: 97, rating: 4.7 },
+  { id: "9", name: "Elena Rodriguez", agency: "Staffline", site: "The Cube", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "14:02", shift: "14:00–22:00", hoursToday: 2.0, hoursWeek: 28, attendance: 93, rating: 4.3 },
+  { id: "10", name: "Robert Taylor", agency: "KPI", site: "Runcorn", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "13:58", shift: "14:00–22:00", hoursToday: 2.1, hoursWeek: 30, attendance: 94, rating: 4.4 },
 ];
 
 const standbyWorkers: StandbyWorker[] = [
-  { id: "S1", name: "Emma Wilson", agency: "Pertemps", site: "Heathrow DC", department: "Picking", role: "Picker", preferredShifts: ["M", "L"], lastShift: "2 days ago", attendance: 97, rating: 4.7, distance: { miles: 3.2, carTime: "12 min", publicTransportTime: "25 min" } },
-  { id: "S2", name: "Michael Brown", agency: "Staffline", site: "Heathrow DC", department: "Packing", role: "Packer", preferredShifts: ["L", "N"], lastShift: "3 days ago", attendance: 94, rating: 4.4, distance: { miles: 5.1, carTime: "18 min", publicTransportTime: "35 min" } },
-  { id: "S3", name: "David Chen", agency: "Blue Arrow", site: "Coventry Hub", department: "Warehouse", role: "Operative", preferredShifts: ["E", "M"], lastShift: "1 day ago", attendance: 96, rating: 4.6, distance: { miles: 2.8, carTime: "10 min", publicTransportTime: "22 min" } },
-  { id: "S4", name: "Rachel Green", agency: "Pertemps", site: "Heathrow DC", department: "Picking", role: "Picker", preferredShifts: ["E", "M"], lastShift: "Today", attendance: 95, rating: 4.5, distance: { miles: 4.5, carTime: "15 min", publicTransportTime: "30 min" } },
-  { id: "S5", name: "Tom Hardy", agency: "Staffline", site: "Heathrow DC", department: "Loading", role: "Forklift", preferredShifts: ["E", "M", "L"], lastShift: "5 days ago", attendance: 98, rating: 4.9, distance: { miles: 6.2, carTime: "22 min", publicTransportTime: "45 min" } },
-  { id: "S6", name: "Angela Martinez", agency: "Blue Arrow", site: "Birmingham DC", department: "Returns", role: "Handler", preferredShifts: ["M", "L"], lastShift: "1 week ago", attendance: 93, rating: 4.3, distance: { miles: 4.0, carTime: "14 min", publicTransportTime: "28 min" } },
-  { id: "S7", name: "Kevin Wright", agency: "Pertemps", site: "Heathrow DC", department: "Quality", role: "QC", preferredShifts: ["E", "M"], lastShift: "2 days ago", attendance: 99, rating: 4.8, distance: { miles: 2.5, carTime: "8 min", publicTransportTime: "18 min" } },
-  { id: "S8", name: "Sophie Turner", agency: "Staffline", site: "Coventry Hub", department: "Warehouse", role: "Operative", preferredShifts: ["M", "L", "N"], lastShift: "4 days ago", attendance: 91, rating: 4.1, distance: { miles: 7.3, carTime: "25 min", publicTransportTime: "50 min" } },
-  { id: "S9", name: "Nathan Brooks", agency: "Blue Arrow", site: "Heathrow DC", department: "Picking", role: "Picker", preferredShifts: ["E"], lastShift: "Yesterday", attendance: 95, rating: 4.5, distance: { miles: 3.8, carTime: "13 min", publicTransportTime: "26 min" } },
-  { id: "S10", name: "Olivia Parker", agency: "Pertemps", site: "Heathrow DC", department: "Packing", role: "Packer", preferredShifts: ["E", "M", "L"], lastShift: "Today", attendance: 97, rating: 4.7, distance: { miles: 1.9, carTime: "6 min", publicTransportTime: "12 min" } },
+  { id: "S1", name: "Emma Wilson", agency: "KPI", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["M", "L"], lastShift: "2 days ago", attendance: 97, rating: 4.7, distance: { miles: 3.2, carTime: "12 min", publicTransportTime: "25 min" } },
+  { id: "S2", name: "Michael Brown", agency: "Staffline", site: "The Vault", department: "MHE", role: "MHE Operative", preferredShifts: ["L", "N"], lastShift: "3 days ago", attendance: 94, rating: 4.4, distance: { miles: 5.1, carTime: "18 min", publicTransportTime: "35 min" } },
+  { id: "S3", name: "David Chen", agency: "The Results People", site: "The Cube", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E", "M"], lastShift: "1 day ago", attendance: 96, rating: 4.6, distance: { miles: 2.8, carTime: "10 min", publicTransportTime: "22 min" } },
+  { id: "S4", name: "Rachel Green", agency: "KPI", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E", "M"], lastShift: "Today", attendance: 95, rating: 4.5, distance: { miles: 4.5, carTime: "15 min", publicTransportTime: "30 min" } },
+  { id: "S5", name: "Tom Hardy", agency: "Staffline", site: "The Vault", department: "MHE", role: "MHE Operative", preferredShifts: ["E", "M", "L"], lastShift: "5 days ago", attendance: 98, rating: 4.9, distance: { miles: 6.2, carTime: "22 min", publicTransportTime: "45 min" } },
+  { id: "S6", name: "Angela Martinez", agency: "The Results People", site: "Ellesmere Port", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["M", "L"], lastShift: "1 week ago", attendance: 93, rating: 4.3, distance: { miles: 4.0, carTime: "14 min", publicTransportTime: "28 min" } },
+  { id: "S7", name: "Kevin Wright", agency: "KPI", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E", "M"], lastShift: "2 days ago", attendance: 99, rating: 4.8, distance: { miles: 2.5, carTime: "8 min", publicTransportTime: "18 min" } },
+  { id: "S8", name: "Sophie Turner", agency: "Staffline", site: "The Cube", department: "MHE", role: "MHE Operative", preferredShifts: ["M", "L", "N"], lastShift: "4 days ago", attendance: 91, rating: 4.1, distance: { miles: 7.3, carTime: "25 min", publicTransportTime: "50 min" } },
+  { id: "S9", name: "Nathan Brooks", agency: "The Results People", site: "Bedford", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E"], lastShift: "Yesterday", attendance: 95, rating: 4.5, distance: { miles: 3.8, carTime: "13 min", publicTransportTime: "26 min" } },
+  { id: "S10", name: "Olivia Parker", agency: "KPI", site: "Runcorn", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E", "M", "L"], lastShift: "Today", attendance: 97, rating: 4.7, distance: { miles: 1.9, carTime: "6 min", publicTransportTime: "12 min" } },
 ];
 
 const newWorkers: NewWorker[] = [
-  { id: "N1", name: "Ryan Hughes", agency: "Staffline", site: "Heathrow DC", role: "Picker", registeredDate: "2025-02-08", experience: ["Picking"], preferredShifts: ["M", "L"], status: "pending-induction" },
-  { id: "N2", name: "Sophie Turner", agency: "Pertemps", site: "Heathrow DC", role: "Operative", registeredDate: "2025-02-07", experience: [], preferredShifts: ["E", "M", "L"], status: "documents-pending" },
-  { id: "N3", name: "Alex Foster", agency: "Blue Arrow", site: "Coventry Hub", role: "Packer", registeredDate: "2025-02-06", experience: ["Packing", "Warehouse"], preferredShifts: ["E", "M"], status: "ready" },
-  { id: "N4", name: "Maya Singh", agency: "Staffline", site: "Heathrow DC", role: "Quality Controller", registeredDate: "2025-02-05", experience: ["Quality"], preferredShifts: ["M"], status: "pending-induction" },
-  { id: "N5", name: "Jordan Blake", agency: "Pertemps", site: "Birmingham DC", role: "Forklift Operator", registeredDate: "2025-02-04", experience: ["Loading", "Warehouse"], preferredShifts: ["E", "M", "L"], status: "ready" },
-  { id: "N6", name: "Casey Morgan", agency: "Blue Arrow", site: "Heathrow DC", role: "Returns Handler", registeredDate: "2025-02-03", experience: [], preferredShifts: ["L", "N"], status: "documents-pending" },
-  { id: "N7", name: "Taylor Reed", agency: "Staffline", site: "Heathrow DC", role: "Picker", registeredDate: "2025-02-01", experience: ["Picking", "Packing"], preferredShifts: ["E"], status: "ready" },
-  { id: "N8", name: "Morgan Chen", agency: "Pertemps", site: "Coventry Hub", role: "Warehouse Operative", registeredDate: "2025-01-28", experience: ["Warehouse"], preferredShifts: ["M", "L"], status: "ready" },
-  { id: "N9", name: "Jamie Scott", agency: "Staffline", site: "Birmingham DC", role: "Loader", registeredDate: "2025-01-25", experience: [], preferredShifts: ["N"], status: "pending-induction" },
-  { id: "N10", name: "Sam Roberts", agency: "Blue Arrow", site: "Heathrow DC", role: "Goods In Operative", registeredDate: "2025-01-20", experience: ["Goods In"], preferredShifts: ["E", "M"], status: "ready" },
-  { id: "N11", name: "Drew Campbell", agency: "Pertemps", site: "Heathrow DC", role: "Picker", registeredDate: "2025-01-15", experience: [], preferredShifts: ["M"], status: "documents-pending" },
-  { id: "N12", name: "Pat Sullivan", agency: "Staffline", site: "Coventry Hub", role: "Packer", registeredDate: "2025-01-10", experience: ["Packing"], preferredShifts: ["E", "M"], status: "ready" },
+  { id: "N1", name: "Ryan Hughes", agency: "Staffline", site: "The Vault", role: "Warehouse Operative", registeredDate: "2025-02-08", experience: ["Warehouse Operative"], preferredShifts: ["M", "L"], status: "pending-induction" },
+  { id: "N2", name: "Sophie Turner", agency: "KPI", site: "The Vault", role: "Warehouse Operative", registeredDate: "2025-02-07", experience: [], preferredShifts: ["E", "M", "L"], status: "documents-pending" },
+  { id: "N3", name: "Alex Foster", agency: "The Results People", site: "The Cube", role: "Warehouse Operative", registeredDate: "2025-02-06", experience: ["Warehouse Operative"], preferredShifts: ["E", "M"], status: "ready" },
+  { id: "N4", name: "Maya Singh", agency: "Staffline", site: "The Vault", role: "MHE Operative", registeredDate: "2025-02-05", experience: ["MHE"], preferredShifts: ["M"], status: "pending-induction" },
+  { id: "N5", name: "Jordan Blake", agency: "KPI", site: "Ellesmere Port", role: "MHE Operative", registeredDate: "2025-02-04", experience: ["MHE", "Warehouse Operative"], preferredShifts: ["E", "M", "L"], status: "ready" },
+  { id: "N6", name: "Casey Morgan", agency: "The Results People", site: "Runcorn", role: "Warehouse Operative", registeredDate: "2025-02-03", experience: [], preferredShifts: ["L", "N"], status: "documents-pending" },
+  { id: "N7", name: "Taylor Reed", agency: "Staffline", site: "The Vault", role: "Warehouse Operative", registeredDate: "2025-02-01", experience: ["Warehouse Operative"], preferredShifts: ["E"], status: "ready" },
+  { id: "N8", name: "Morgan Chen", agency: "KPI", site: "The Cube", role: "Warehouse Operative", registeredDate: "2025-01-28", experience: ["Warehouse Operative"], preferredShifts: ["M", "L"], status: "ready" },
+  { id: "N9", name: "Jamie Scott", agency: "Staffline", site: "Bedford", role: "MHE Operative", registeredDate: "2025-01-25", experience: [], preferredShifts: ["N"], status: "pending-induction" },
+  { id: "N10", name: "Sam Roberts", agency: "The Results People", site: "The Vault", role: "Warehouse Operative", registeredDate: "2025-01-20", experience: ["Warehouse Operative"], preferredShifts: ["E", "M"], status: "ready" },
+  { id: "N11", name: "Drew Campbell", agency: "KPI", site: "Ellesmere Port", role: "Warehouse Operative", registeredDate: "2025-01-15", experience: [], preferredShifts: ["M"], status: "documents-pending" },
+  { id: "N12", name: "Pat Sullivan", agency: "Staffline", site: "The Cube", role: "MHE Operative", registeredDate: "2025-01-10", experience: ["MHE"], preferredShifts: ["E", "M"], status: "ready" },
 ];
 
 interface ClientWorkersProps {
@@ -219,14 +219,16 @@ const ClientWorkers = ({ onViewWorker }: ClientWorkersProps) => {
               <select value={agencyFilter} onChange={(e) => setAgencyFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Agencies</option>
                 <option value="Staffline">Staffline</option>
-                <option value="Pertemps">Pertemps</option>
-                <option value="Blue Arrow">Blue Arrow</option>
+                <option value="KPI">KPI</option>
+                <option value="The Results People">The Results People</option>
               </select>
               <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Sites</option>
-                <option value="Heathrow DC">Heathrow DC</option>
-                <option value="Coventry Hub">Coventry Hub</option>
-                <option value="Birmingham DC">Birmingham DC</option>
+                <option value="The Vault">The Vault</option>
+                <option value="The Cube">The Cube</option>
+                <option value="Ellesmere Port">Ellesmere Port</option>
+                <option value="Runcorn">Runcorn</option>
+                <option value="Bedford">Bedford</option>
               </select>
             </div>
           </div>
@@ -270,21 +272,19 @@ const ClientWorkers = ({ onViewWorker }: ClientWorkersProps) => {
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-1">
                         <MapPin className="w-3 h-3 text-muted-foreground" />
-                        <span className="text-muted-foreground">{worker.site}</span>
+                        <span className="text-sm">{worker.site}</span>
                       </div>
                     </td>
                     <td className="px-4 py-3 text-muted-foreground">{worker.department}</td>
-                    <td className="px-4 py-3">
-                      <div className="flex justify-center">
-                        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-medium bg-green-500/20 text-green-500">
-                          <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                          On Site • {worker.clockIn}
-                        </span>
+                    <td className="px-4 py-3 text-center">
+                      <div className="flex items-center justify-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                        <span className="text-xs text-green-500">On site</span>
                       </div>
                     </td>
                     <td className="px-4 py-3 text-right font-medium">{worker.hoursWeek}h</td>
                     <td className="px-4 py-3 text-right">
-                      <span className={`font-medium ${worker.attendance >= 95 ? "text-green-500" : worker.attendance >= 85 ? "text-amber-500" : "text-destructive"}`}>
+                      <span className={`font-medium ${worker.attendance >= 95 ? "text-green-500" : worker.attendance >= 90 ? "text-amber-500" : "text-destructive"}`}>
                         {worker.attendance}%
                       </span>
                     </td>
@@ -300,81 +300,92 @@ const ClientWorkers = ({ onViewWorker }: ClientWorkersProps) => {
           <div className="flex items-center gap-3 flex-wrap">
             <div className="relative flex-1 min-w-[200px]">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input placeholder="Search by name..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9" />
+              <Input placeholder="Search standby workers..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9" />
             </div>
             <div className="flex items-center gap-2">
               <Filter className="w-4 h-4 text-muted-foreground" />
               <select value={agencyFilter} onChange={(e) => setAgencyFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Agencies</option>
                 <option value="Staffline">Staffline</option>
-                <option value="Pertemps">Pertemps</option>
-                <option value="Blue Arrow">Blue Arrow</option>
+                <option value="KPI">KPI</option>
+                <option value="The Results People">The Results People</option>
               </select>
               <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Sites</option>
-                <option value="Heathrow DC">Heathrow DC</option>
-                <option value="Coventry Hub">Coventry Hub</option>
-                <option value="Birmingham DC">Birmingham DC</option>
+                <option value="The Vault">The Vault</option>
+                <option value="The Cube">The Cube</option>
+                <option value="Ellesmere Port">Ellesmere Port</option>
+                <option value="Runcorn">Runcorn</option>
+                <option value="Bedford">Bedford</option>
               </select>
             </div>
           </div>
 
-          <div className="bg-card border border-border rounded-lg overflow-hidden divide-y divide-border">
-            {filteredStandby.map((worker) => (
-              <div key={worker.id} className="p-4 hover:bg-muted/30 transition-colors">
-                <div className="flex items-center justify-between">
-                  <button onClick={() => handleWorkerClick(worker.name)} className="flex items-center gap-4 text-left hover:underline">
-                    <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-sm font-bold text-amber-500">
-                      {worker.name.split(" ").map(n => n[0]).join("")}
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <p className="font-medium">{worker.name}</p>
-                        <div className="flex items-center gap-0.5">
-                          <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
-                          <span className="text-xs">{worker.rating}</span>
+          <div className="bg-card border border-border rounded-lg overflow-hidden">
+            <table className="w-full text-sm">
+              <thead className="bg-muted/50">
+                <tr>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Worker</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Agency</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Site</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Department</th>
+                  <th className="text-center px-4 py-3 font-medium text-muted-foreground">Shifts</th>
+                  <th className="text-center px-4 py-3 font-medium text-muted-foreground">Last Worked</th>
+                  <th className="text-center px-4 py-3 font-medium text-muted-foreground">Distance</th>
+                  <th className="text-right px-4 py-3 font-medium text-muted-foreground">Rating</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border">
+                {filteredStandby.map((worker) => (
+                  <tr key={worker.id} className="hover:bg-muted/30 transition-colors">
+                    <td className="px-4 py-3">
+                      <button onClick={() => handleWorkerClick(worker.name)} className="text-left hover:underline">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-amber-500/10 flex items-center justify-center text-xs font-bold text-amber-500">
+                            {worker.name.split(" ").map(n => n[0]).join("")}
+                          </div>
+                          <div>
+                            <p className="font-medium">{worker.name}</p>
+                            <p className="text-xs text-muted-foreground">{worker.role}</p>
+                          </div>
                         </div>
-                      </div>
-                      <p className="text-xs text-muted-foreground">{worker.role} • {worker.agency}</p>
-                    </div>
-                  </button>
-                  
-                  <div className="flex items-center gap-6">
-                    <div className="text-center">
+                      </button>
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground">{worker.agency}</td>
+                    <td className="px-4 py-3">
                       <div className="flex items-center gap-1">
                         <MapPin className="w-3 h-3 text-muted-foreground" />
-                        <span className="text-sm font-medium">{worker.site}</span>
+                        <span className="text-sm">{worker.site}</span>
                       </div>
-                      <p className="text-xs text-muted-foreground">{worker.department}</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-sm font-medium">{worker.preferredShifts.join(", ")}</p>
-                      <p className="text-xs text-muted-foreground">Preferred</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-sm text-muted-foreground">{worker.lastShift}</p>
-                      <p className="text-xs text-muted-foreground">Last Shift</p>
-                    </div>
-                    <div className="text-center">
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <Car className="w-3 h-3" />
-                        <span>{worker.distance.carTime}</span>
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground">{worker.department}</td>
+                    <td className="px-4 py-3 text-center">
+                      <div className="flex items-center justify-center gap-1">
+                        {worker.preferredShifts.map((s) => (
+                          <span key={s} className="w-5 h-5 rounded bg-muted flex items-center justify-center text-[10px] font-medium">{s}</span>
+                        ))}
                       </div>
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <Bus className="w-3 h-3" />
-                        <span>{worker.distance.publicTransportTime}</span>
+                    </td>
+                    <td className="px-4 py-3 text-center text-muted-foreground text-xs">{worker.lastShift}</td>
+                    <td className="px-4 py-3 text-center">
+                      <div className="flex flex-col items-center text-xs">
+                        <span className="font-medium">{worker.distance.miles} mi</span>
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <span className="flex items-center gap-0.5"><Car className="w-3 h-3" /> {worker.distance.carTime}</span>
+                          <span className="flex items-center gap-0.5"><Bus className="w-3 h-3" /> {worker.distance.publicTransportTime}</span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="text-center">
-                      <p className={`text-sm font-medium ${worker.attendance >= 95 ? "text-green-500" : "text-amber-500"}`}>
-                        {worker.attendance}%
-                      </p>
-                      <p className="text-xs text-muted-foreground">Attendance</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+                    </td>
+                    <td className="px-4 py-3 text-right">
+                      <div className="flex items-center justify-end gap-0.5">
+                        <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
+                        <span className="font-medium">{worker.rating}</span>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </TabsContent>
 
@@ -383,90 +394,96 @@ const ClientWorkers = ({ onViewWorker }: ClientWorkersProps) => {
           <div className="flex items-center gap-3 flex-wrap">
             <div className="relative flex-1 min-w-[200px]">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input placeholder="Search by name..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9" />
+              <Input placeholder="Search new registrations..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9" />
             </div>
             <div className="flex items-center gap-2">
               <Filter className="w-4 h-4 text-muted-foreground" />
               <select value={agencyFilter} onChange={(e) => setAgencyFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Agencies</option>
                 <option value="Staffline">Staffline</option>
-                <option value="Pertemps">Pertemps</option>
-                <option value="Blue Arrow">Blue Arrow</option>
+                <option value="KPI">KPI</option>
+                <option value="The Results People">The Results People</option>
               </select>
-            </div>
-            <div className="flex items-center gap-1 bg-muted/50 p-1 rounded-lg">
-              {(["week", "month", "quarter", "year"] as const).map((period) => (
-                <button
-                  key={period}
-                  onClick={() => setTimeFilter(period)}
-                  className={`px-3 py-1.5 text-xs rounded transition-colors ${
-                    timeFilter === period
-                      ? "bg-background text-foreground shadow-sm"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {period.charAt(0).toUpperCase() + period.slice(1)}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-3 gap-3 mb-4">
-            <div className="bg-card border border-border rounded-lg p-3">
-              <p className="text-xs text-muted-foreground">This {timeFilter}</p>
-              <p className="text-xl font-bold text-primary">{filteredNew.length}</p>
-            </div>
-            <div className="bg-card border border-border rounded-lg p-3">
-              <p className="text-xs text-muted-foreground">Ready to Deploy</p>
-              <p className="text-xl font-bold text-green-500">{filteredNew.filter(w => w.status === "ready").length}</p>
-            </div>
-            <div className="bg-card border border-border rounded-lg p-3">
-              <p className="text-xs text-muted-foreground">Pending</p>
-              <p className="text-xl font-bold text-amber-500">{filteredNew.filter(w => w.status !== "ready").length}</p>
-            </div>
-          </div>
-
-          <div className="bg-card border border-border rounded-lg overflow-hidden divide-y divide-border">
-            {filteredNew.map((worker) => (
-              <div key={worker.id} className="p-4 hover:bg-muted/30 transition-colors">
-                <div className="flex items-center justify-between">
-                  <button onClick={() => handleWorkerClick(worker.name)} className="flex items-center gap-4 text-left hover:underline">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-sm font-bold text-primary">
-                      {worker.name.split(" ").map(n => n[0]).join("")}
-                    </div>
-                    <div>
-                      <p className="font-medium">{worker.name}</p>
-                      <p className="text-xs text-muted-foreground">{worker.role} • {worker.agency}</p>
-                    </div>
+              <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
+                <option value="all">All Sites</option>
+                <option value="The Vault">The Vault</option>
+                <option value="The Cube">The Cube</option>
+                <option value="Ellesmere Port">Ellesmere Port</option>
+                <option value="Runcorn">Runcorn</option>
+                <option value="Bedford">Bedford</option>
+              </select>
+              <div className="flex items-center bg-card border border-border rounded">
+                {(["week", "month", "quarter", "year"] as const).map((t) => (
+                  <button
+                    key={t}
+                    onClick={() => setTimeFilter(t)}
+                    className={`px-2 py-1 text-xs capitalize ${timeFilter === t ? "bg-primary text-primary-foreground" : "text-muted-foreground"}`}
+                  >
+                    {t}
                   </button>
-                  
-                  <div className="flex items-center gap-6">
-                    <div className="text-center">
-                      <p className="text-sm font-medium">{new Date(worker.registeredDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</p>
-                      <p className="text-xs text-muted-foreground">Registered</p>
-                    </div>
-                    <div className="text-center">
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-card border border-border rounded-lg overflow-hidden">
+            <table className="w-full text-sm">
+              <thead className="bg-muted/50">
+                <tr>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Worker</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Agency</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Site</th>
+                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Role</th>
+                  <th className="text-center px-4 py-3 font-medium text-muted-foreground">Status</th>
+                  <th className="text-center px-4 py-3 font-medium text-muted-foreground">Experience</th>
+                  <th className="text-center px-4 py-3 font-medium text-muted-foreground">Availability</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border">
+                {filteredNew.map((worker) => (
+                  <tr key={worker.id} className="hover:bg-muted/30 transition-colors">
+                    <td className="px-4 py-3">
+                      <button onClick={() => handleWorkerClick(worker.name)} className="text-left hover:underline">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">
+                            {worker.name.split(" ").map(n => n[0]).join("")}
+                          </div>
+                          <div>
+                            <p className="font-medium">{worker.name}</p>
+                            <p className="text-xs text-muted-foreground">Registered {worker.registeredDate}</p>
+                          </div>
+                        </div>
+                      </button>
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground">{worker.agency}</td>
+                    <td className="px-4 py-3">
                       <div className="flex items-center gap-1">
                         <MapPin className="w-3 h-3 text-muted-foreground" />
-                        <span className="text-sm font-medium">{worker.site}</span>
+                        <span className="text-sm">{worker.site}</span>
                       </div>
-                      <p className="text-xs text-muted-foreground">Site</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-sm font-medium">{worker.preferredShifts.join(", ") || "—"}</p>
-                      <p className="text-xs text-muted-foreground">Preferred</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-sm font-medium">{worker.experience.length > 0 ? worker.experience.join(", ") : "None"}</p>
-                      <p className="text-xs text-muted-foreground">Experience</p>
-                    </div>
-                    <div>
-                      {getStatusBadge(worker.status)}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+                    </td>
+                    <td className="px-4 py-3 text-muted-foreground">{worker.role}</td>
+                    <td className="px-4 py-3 text-center">{getStatusBadge(worker.status)}</td>
+                    <td className="px-4 py-3 text-center">
+                      <div className="flex items-center justify-center gap-1 flex-wrap">
+                        {worker.experience.length > 0 ? worker.experience.map((exp) => (
+                          <span key={exp} className="px-1.5 py-0.5 rounded bg-primary/10 text-primary text-[10px]">{exp}</span>
+                        )) : (
+                          <span className="text-xs text-muted-foreground">No prior exp</span>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      <div className="flex items-center justify-center gap-1">
+                        {worker.preferredShifts.map((s) => (
+                          <span key={s} className="w-5 h-5 rounded bg-muted flex items-center justify-center text-[10px] font-medium">{s}</span>
+                        ))}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </TabsContent>
       </Tabs>
