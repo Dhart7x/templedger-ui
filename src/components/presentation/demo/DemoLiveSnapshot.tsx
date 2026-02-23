@@ -15,22 +15,19 @@ interface Worker {
 }
 
 const workers: Worker[] = [
-  { id: "1", name: "John Patel", department: "Warehouse", agency: "Staffline", site: "Heathrow DC", status: "on-site", clockIn: "06:02", shift: "Morning" },
-  { id: "2", name: "Maria Santos", department: "Picking", agency: "Pertemps", site: "Heathrow DC", status: "on-site", clockIn: "06:00", shift: "Morning" },
-  { id: "3", name: "Ahmed Khan", department: "Warehouse", agency: "Blue Arrow", site: "Heathrow DC", status: "overtime", clockIn: "05:58", shift: "Morning" },
-  { id: "4", name: "Lucy Brown", department: "Warehouse", agency: "Staffline", site: "Coventry Hub", status: "on-site", clockIn: "06:01", shift: "Morning" },
-  { id: "5", name: "Tomasz Nowak", department: "Loading", agency: "Staffline", site: "Heathrow DC", status: "late", clockIn: "06:45", shift: "Morning" },
-  { id: "6", name: "Priya Sharma", department: "Quality", agency: "Pertemps", site: "Heathrow DC", status: "on-site", clockIn: "06:00", shift: "Morning" },
-  { id: "7", name: "James Wilson", department: "Loading", agency: "Blue Arrow", site: "Birmingham DC", status: "no-show", shift: "Morning" },
-  { id: "8", name: "Fatima Ali", department: "Packing", agency: "Staffline", site: "Heathrow DC", status: "on-site", clockIn: "06:03", shift: "Morning" },
+  { id: "1", name: "John Patel", department: "Warehouse Operative", agency: "Staffline", site: "The Vault", status: "on-site", clockIn: "06:02", shift: "Morning" },
+  { id: "2", name: "Maria Santos", department: "Warehouse Operative", agency: "KPI", site: "The Vault", status: "on-site", clockIn: "06:00", shift: "Morning" },
+  { id: "3", name: "Ahmed Khan", department: "MHE", agency: "The Results People", site: "The Vault", status: "overtime", clockIn: "05:58", shift: "Morning" },
+  { id: "4", name: "Lucy Brown", department: "Warehouse Operative", agency: "Staffline", site: "The Cube", status: "on-site", clockIn: "06:01", shift: "Morning" },
+  { id: "5", name: "Tomasz Nowak", department: "MHE", agency: "Staffline", site: "The Vault", status: "late", clockIn: "06:45", shift: "Morning" },
+  { id: "6", name: "Priya Sharma", department: "Warehouse Operative", agency: "KPI", site: "The Vault", status: "on-site", clockIn: "06:00", shift: "Morning" },
+  { id: "7", name: "James Wilson", department: "MHE", agency: "The Results People", site: "Ellesmere Port", status: "no-show", shift: "Morning" },
+  { id: "8", name: "Fatima Ali", department: "Warehouse Operative", agency: "Staffline", site: "The Vault", status: "on-site", clockIn: "06:03", shift: "Morning" },
 ];
 
 const departmentSummary = [
-  { name: "Warehouse", required: 25, actual: 23, status: "at-risk" },
-  { name: "Picking", required: 15, actual: 15, status: "on-track" },
-  { name: "Loading", required: 10, actual: 8, status: "failing" },
-  { name: "Packing", required: 12, actual: 12, status: "on-track" },
-  { name: "Quality", required: 5, actual: 5, status: "on-track" },
+  { name: "Warehouse Operative", required: 40, actual: 37, status: "at-risk" },
+  { name: "MHE", required: 20, actual: 18, status: "at-risk" },
 ];
 
 const DemoLiveSnapshot = () => {
@@ -57,9 +54,9 @@ const DemoLiveSnapshot = () => {
   };
 
   const issues = [
-    { type: "no-show", text: "James Wilson (Loading) - No-show at Birmingham DC", urgent: true, workerId: "7", workerName: "James Wilson", department: "Loading", status: "blocked", executionStatus: "blocked" },
-    { type: "late", text: "Tomasz Nowak (Loading) - 45 min late at Heathrow DC", urgent: false, workerId: "5", workerName: "Tomasz Nowak", department: "Loading", status: "active", executionStatus: "at-risk" },
-    { type: "headcount", text: "Loading department 2 workers short", urgent: true, workerId: "", workerName: "", department: "", status: "", executionStatus: "" },
+    { type: "no-show", text: "James Wilson (MHE) - No-show at Ellesmere Port", urgent: true, workerId: "7", workerName: "James Wilson", department: "MHE", status: "blocked", executionStatus: "blocked" },
+    { type: "late", text: "Tomasz Nowak (MHE) - 45 min late at The Vault", urgent: false, workerId: "5", workerName: "Tomasz Nowak", department: "MHE", status: "active", executionStatus: "at-risk" },
+    { type: "headcount", text: "MHE department 2 workers short", urgent: true, workerId: "", workerName: "", department: "", status: "", executionStatus: "" },
   ];
 
   const handleIssueClick = (issue: typeof issues[0]) => {
@@ -69,7 +66,7 @@ const DemoLiveSnapshot = () => {
         name: issue.workerName,
         department: issue.department,
         agency: "Staffline",
-        site: "Heathrow DC",
+        site: "The Vault",
         status: issue.status as "on-site" | "late" | "no-show" | "overtime",
         shift: "Morning"
       });
@@ -79,7 +76,6 @@ const DemoLiveSnapshot = () => {
  
   return (
     <div className="p-6">
-      {/* Header with filters */}
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-xl font-bold">Live Snapshot</h2>
@@ -87,70 +83,41 @@ const DemoLiveSnapshot = () => {
         </div>
         <div className="flex items-center gap-2">
           <Filter className="w-4 h-4 text-muted-foreground" />
-          <select 
-            value={siteFilter}
-            onChange={(e) => setSiteFilter(e.target.value)}
-            className="text-sm bg-card border border-border rounded px-3 py-1.5"
-          >
+          <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} className="text-sm bg-card border border-border rounded px-3 py-1.5">
             <option value="all">All Sites</option>
-            {sites.map(site => (
-              <option key={site} value={site}>{site}</option>
-            ))}
+            {sites.map(site => <option key={site} value={site}>{site}</option>)}
           </select>
-          <select 
-            value={departmentFilter}
-            onChange={(e) => setDepartmentFilter(e.target.value)}
-            className="text-sm bg-card border border-border rounded px-3 py-1.5"
-          >
+          <select value={departmentFilter} onChange={(e) => setDepartmentFilter(e.target.value)} className="text-sm bg-card border border-border rounded px-3 py-1.5">
             <option value="all">All Departments</option>
-            {departments.map(dept => (
-              <option key={dept} value={dept}>{dept}</option>
-            ))}
+            {departments.map(dept => <option key={dept} value={dept}>{dept}</option>)}
           </select>
         </div>
       </div>
 
-      {/* Status cards */}
       <div className="grid grid-cols-5 gap-3 mb-6">
         <div className="bg-card border border-border rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-1">
-            <Users className="w-4 h-4 text-muted-foreground" />
-            <span className="text-xs text-muted-foreground">Total</span>
-          </div>
+          <div className="flex items-center gap-2 mb-1"><Users className="w-4 h-4 text-muted-foreground" /><span className="text-xs text-muted-foreground">Total</span></div>
           <p className="text-2xl font-bold">{counts.total}</p>
         </div>
         <div className="bg-card border border-border rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-1">
-            <CheckCircle className="w-4 h-4 text-green-500" />
-            <span className="text-xs text-muted-foreground">On Site</span>
-          </div>
+          <div className="flex items-center gap-2 mb-1"><CheckCircle className="w-4 h-4 text-green-500" /><span className="text-xs text-muted-foreground">On Site</span></div>
           <p className="text-2xl font-bold text-green-500">{counts.onSite}</p>
         </div>
         <div className="bg-card border border-border rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-1">
-            <Clock className="w-4 h-4 text-amber-500" />
-            <span className="text-xs text-muted-foreground">Late</span>
-          </div>
+          <div className="flex items-center gap-2 mb-1"><Clock className="w-4 h-4 text-amber-500" /><span className="text-xs text-muted-foreground">Late</span></div>
           <p className="text-2xl font-bold text-amber-500">{counts.late}</p>
         </div>
         <div className="bg-card border border-border rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-1">
-            <AlertTriangle className="w-4 h-4 text-destructive" />
-            <span className="text-xs text-muted-foreground">No-Show</span>
-          </div>
+          <div className="flex items-center gap-2 mb-1"><AlertTriangle className="w-4 h-4 text-destructive" /><span className="text-xs text-muted-foreground">No-Show</span></div>
           <p className="text-2xl font-bold text-destructive">{counts.noShow}</p>
         </div>
         <div className="bg-card border border-border rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-1">
-            <Clock className="w-4 h-4 text-primary" />
-            <span className="text-xs text-muted-foreground">Overtime</span>
-          </div>
+          <div className="flex items-center gap-2 mb-1"><Clock className="w-4 h-4 text-primary" /><span className="text-xs text-muted-foreground">Overtime</span></div>
           <p className="text-2xl font-bold text-primary">{counts.overtime}</p>
         </div>
       </div>
 
       <div className="grid grid-cols-3 gap-6">
-        {/* Department summary */}
         <div className="col-span-1">
           <h3 className="text-sm font-semibold mb-3">Department Status</h3>
           <div className="space-y-2">
@@ -172,7 +139,6 @@ const DemoLiveSnapshot = () => {
           </div>
         </div>
 
-        {/* Issues requiring attention */}
         <div className="col-span-1">
           <h3 className="text-sm font-semibold mb-3">Requires Attention</h3>
           <div className="space-y-2">
@@ -186,14 +152,10 @@ const DemoLiveSnapshot = () => {
                 } ${issue.workerId ? "hover:border-primary/50 cursor-pointer" : ""}`}
               >
                 <div className="flex items-start gap-2">
-                  <AlertTriangle className={`w-4 h-4 mt-0.5 shrink-0 ${
-                    issue.urgent ? "text-destructive" : "text-amber-500"
-                  }`} />
+                  <AlertTriangle className={`w-4 h-4 mt-0.5 shrink-0 ${issue.urgent ? "text-destructive" : "text-amber-500"}`} />
                   <div>
                     <p className="text-sm">{issue.text}</p>
-                    {issue.workerId && (
-                      <p className="text-xs text-primary mt-1">Click to take action →</p>
-                    )}
+                    {issue.workerId && <p className="text-xs text-primary mt-1">Click to take action →</p>}
                   </div>
                 </div>
               </button>
@@ -201,7 +163,6 @@ const DemoLiveSnapshot = () => {
           </div>
         </div>
 
-        {/* Recent activity */}
         <div className="col-span-1">
           <h3 className="text-sm font-semibold mb-3">Recent Clock-ins</h3>
           <div className="space-y-2">
@@ -226,14 +187,10 @@ const DemoLiveSnapshot = () => {
         </div>
       </div>
       
-      {/* Worker Action Modal */}
       {selectedWorker && (
         <WorkerActionModal
           isOpen={showActionModal}
-          onClose={() => {
-            setShowActionModal(false);
-            setSelectedWorker(null);
-          }}
+          onClose={() => { setShowActionModal(false); setSelectedWorker(null); }}
           worker={{
             id: selectedWorker.id,
             name: selectedWorker.name,

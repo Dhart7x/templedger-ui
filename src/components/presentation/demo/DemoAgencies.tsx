@@ -16,9 +16,8 @@ interface Agency {
 
 const agencies: Agency[] = [
   { id: "1", name: "Staffline", fulfilment: 94, responseTime: "1.2h", noShowRate: 3.2, latenessRate: 4.1, attrition: 8, workersOnSite: 156, weeklySpend: 28450, trend: "down" },
-  { id: "2", name: "Pertemps", fulfilment: 72, responseTime: "3.8h", noShowRate: 1.8, latenessRate: 2.5, attrition: 12, workersOnSite: 89, weeklySpend: 18200, trend: "down" },
-  { id: "3", name: "Blue Arrow", fulfilment: 88, responseTime: "2.1h", noShowRate: 2.4, latenessRate: 3.2, attrition: 6, workersOnSite: 67, weeklySpend: 14800, trend: "up" },
-  { id: "4", name: "Hays", fulfilment: 91, responseTime: "1.8h", noShowRate: 1.2, latenessRate: 1.8, attrition: 4, workersOnSite: 30, weeklySpend: 8900, trend: "up" },
+  { id: "2", name: "KPI", fulfilment: 72, responseTime: "3.8h", noShowRate: 1.8, latenessRate: 2.5, attrition: 12, workersOnSite: 89, weeklySpend: 18200, trend: "down" },
+  { id: "3", name: "The Results People", fulfilment: 88, responseTime: "2.1h", noShowRate: 2.4, latenessRate: 3.2, attrition: 6, workersOnSite: 67, weeklySpend: 14800, trend: "up" },
 ];
 
 const DemoAgencies = () => {
@@ -93,7 +92,7 @@ const DemoAgencies = () => {
             <div className="flex items-center justify-between p-2 rounded bg-destructive/5 border border-destructive/20">
               <div>
                 <div className="text-sm font-medium">2 No-Shows Today</div>
-                <div className="text-xs text-muted-foreground">Warehouse - Heathrow DC</div>
+                <div className="text-xs text-muted-foreground">Warehouse Operative - The Vault</div>
               </div>
               <span className="text-xs text-destructive">Unresolved</span>
             </div>

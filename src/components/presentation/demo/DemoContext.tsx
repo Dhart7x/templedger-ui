@@ -105,37 +105,24 @@ export interface LiveException {
 // ============= CONTEXT INTERFACE =============
 
 interface SharedLedgerState {
-  // Cross-view notifications
   notifications: LedgerNotification[];
   addNotification: (notification: Omit<LedgerNotification, "id" | "timestamp">) => void;
   markNotificationRead: (id: string) => void;
   clearNotifications: () => void;
-
-  // Worker actions (approvals, rejections, info requests)
   workerActions: WorkerAction[];
   addWorkerAction: (action: Omit<WorkerAction, "id" | "timestamp" | "status">) => void;
   acknowledgeAction: (id: string) => void;
-
-  // Shared worker statuses
   workerStatuses: Record<string, { status: string; executionStatus: string; lastUpdated: string }>;
   updateWorkerStatus: (workerId: string, status: string, executionStatus: string) => void;
-
-  // Bookings (Client → Agency)
   bookings: Booking[];
   createBooking: (booking: Omit<Booking, "id" | "status" | "createdAt" | "updatedAt">) => void;
   updateBookingStatus: (bookingId: string, status: Booking["status"], notes?: string) => void;
-
-  // Worker allocations (Agency → Client visible)
   allocations: WorkerAllocation[];
   allocateWorker: (allocation: Omit<WorkerAllocation, "id" | "allocatedAt" | "status">) => void;
-
-  // Live exceptions
   exceptions: LiveException[];
   addException: (exception: Omit<LiveException, "id" | "timestamp" | "status">) => void;
   updateExceptionStatus: (exceptionId: string, status: LiveException["status"], resolution?: ExceptionResolution) => void;
   respondToException: (exceptionId: string, response: "accepted" | "request-replacement") => void;
-
-  // Live sync indicator
   lastSyncTime: string;
 }
 
@@ -147,7 +134,7 @@ const initialBookings: Booking[] = [
     role: "Warehouse Operative",
     quantity: 4,
     location: "Zone A",
-    site: "Heathrow DC",
+    site: "The Vault",
     shift: "06:00–14:00",
     date: "Mon 10 Feb",
     status: "pending",
@@ -157,42 +144,41 @@ const initialBookings: Booking[] = [
   },
   {
     id: "booking-2",
-    role: "Picker",
+    role: "MHE Operative",
     quantity: 2,
     location: "Zone B",
-    site: "Heathrow DC",
+    site: "The Vault",
     shift: "14:00–22:00",
     date: "Mon 10 Feb",
     status: "pending",
-    suggestedAgency: "Pertemps",
+    suggestedAgency: "KPI",
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
   {
     id: "booking-3",
-    role: "Forklift Driver",
+    role: "MHE Operative",
     quantity: 1,
     location: "Zone A",
-    site: "Coventry Hub",
+    site: "The Cube",
     shift: "06:00–14:00",
     date: "Tue 11 Feb",
     status: "accepted",
-    agency: "Blue Arrow",
+    agency: "The Results People",
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   },
 ];
 
 const initialExceptions: LiveException[] = [
-  // No-shows (minimum 5)
   {
     id: "exc-1",
     workerId: "w-james",
     workerName: "James Wilson",
     type: "no-show",
-    site: "Birmingham DC",
-    department: "Loading",
-    agency: "Blue Arrow",
+    site: "Ellesmere Port",
+    department: "MHE",
+    agency: "The Results People",
     shift: "06:00–14:00",
     timestamp: new Date().toISOString(),
     status: "open",
@@ -202,9 +188,9 @@ const initialExceptions: LiveException[] = [
     workerId: "w-mike",
     workerName: "Mike Stevens",
     type: "no-show",
-    site: "Heathrow DC",
-    department: "Warehouse",
-    agency: "Pertemps",
+    site: "The Vault",
+    department: "Warehouse Operative",
+    agency: "KPI",
     shift: "06:00–14:00",
     timestamp: new Date().toISOString(),
     status: "open",
@@ -214,9 +200,9 @@ const initialExceptions: LiveException[] = [
     workerId: "w-kevin",
     workerName: "Kevin Morris",
     type: "no-show",
-    site: "Heathrow DC",
-    department: "Packing",
-    agency: "Blue Arrow",
+    site: "The Vault",
+    department: "Warehouse Operative",
+    agency: "The Results People",
     shift: "06:00–14:00",
     timestamp: new Date().toISOString(),
     status: "open",
@@ -226,9 +212,9 @@ const initialExceptions: LiveException[] = [
     workerId: "w-lisa",
     workerName: "Lisa Chen",
     type: "no-show",
-    site: "Birmingham DC",
-    department: "Picking",
-    agency: "Pertemps",
+    site: "Ellesmere Port",
+    department: "Warehouse Operative",
+    agency: "KPI",
     shift: "06:00–14:00",
     timestamp: new Date().toISOString(),
     status: "open",
@@ -238,21 +224,20 @@ const initialExceptions: LiveException[] = [
     workerId: "w-marcus",
     workerName: "Marcus Taylor",
     type: "no-show",
-    site: "Coventry Hub",
-    department: "Warehouse",
+    site: "The Cube",
+    department: "Warehouse Operative",
     agency: "Staffline",
     shift: "06:00–14:00",
     timestamp: new Date().toISOString(),
     status: "open",
   },
-  // Late arrivals (minimum 5)
   {
     id: "exc-3",
     workerId: "w-tomasz",
     workerName: "Tomasz Nowak",
     type: "late",
-    site: "Heathrow DC",
-    department: "Loading",
+    site: "The Vault",
+    department: "MHE",
     agency: "Staffline",
     shift: "06:00–14:00",
     lateMinutes: 45,
@@ -264,9 +249,9 @@ const initialExceptions: LiveException[] = [
     workerId: "w-rachel",
     workerName: "Rachel Adams",
     type: "late",
-    site: "Coventry Hub",
-    department: "Picking",
-    agency: "Pertemps",
+    site: "The Cube",
+    department: "Warehouse Operative",
+    agency: "KPI",
     shift: "06:00–14:00",
     lateMinutes: 32,
     timestamp: new Date().toISOString(),
@@ -277,8 +262,8 @@ const initialExceptions: LiveException[] = [
     workerId: "w-sarah",
     workerName: "Sarah Bennett",
     type: "late",
-    site: "Birmingham DC",
-    department: "Warehouse",
+    site: "Ellesmere Port",
+    department: "Warehouse Operative",
     agency: "Staffline",
     shift: "06:00–14:00",
     lateMinutes: 25,
@@ -290,9 +275,9 @@ const initialExceptions: LiveException[] = [
     workerId: "w-david",
     workerName: "David Thompson",
     type: "late",
-    site: "Coventry Hub",
-    department: "Loading",
-    agency: "Blue Arrow",
+    site: "The Cube",
+    department: "MHE",
+    agency: "The Results People",
     shift: "06:00–14:00",
     lateMinutes: 18,
     timestamp: new Date().toISOString(),
@@ -303,22 +288,21 @@ const initialExceptions: LiveException[] = [
     workerId: "w-mark",
     workerName: "Mark Edwards",
     type: "late",
-    site: "Heathrow DC",
-    department: "Quality",
+    site: "The Vault",
+    department: "Warehouse Operative",
     agency: "Staffline",
     shift: "06:00–14:00",
     lateMinutes: 42,
     timestamp: new Date().toISOString(),
     status: "open",
   },
-  // Overtime triggered
   {
     id: "exc-11",
     workerId: "w-priya",
     workerName: "Priya Sharma",
     type: "overtime",
-    site: "Heathrow DC",
-    department: "Picking",
+    site: "The Vault",
+    department: "Warehouse Operative",
     agency: "Staffline",
     shift: "06:00–14:00",
     overtimeMinutes: 45,
@@ -330,23 +314,22 @@ const initialExceptions: LiveException[] = [
     workerId: "w-robert",
     workerName: "Robert Garcia",
     type: "overtime",
-    site: "Birmingham DC",
-    department: "Packing",
-    agency: "Pertemps",
+    site: "Ellesmere Port",
+    department: "Warehouse Operative",
+    agency: "KPI",
     shift: "06:00–14:00",
     overtimeMinutes: 90,
     timestamp: new Date().toISOString(),
     status: "open",
   },
-  // Clocked in but not out
   {
     id: "exc-13",
     workerId: "w-emma",
     workerName: "Emma Richardson",
     type: "clocked-in-not-out",
-    site: "Coventry Hub",
-    department: "Goods In",
-    agency: "Blue Arrow",
+    site: "The Cube",
+    department: "Warehouse Operative",
+    agency: "The Results People",
     shift: "22:00–06:00",
     clockInTime: "22:02",
     timestamp: new Date().toISOString(),
@@ -357,23 +340,22 @@ const initialExceptions: LiveException[] = [
     workerId: "w-ahmed",
     workerName: "Ahmed Hassan",
     type: "clocked-in-not-out",
-    site: "Heathrow DC",
-    department: "Returns",
+    site: "The Vault",
+    department: "Warehouse Operative",
     agency: "Staffline",
     shift: "14:00–22:00",
     clockInTime: "14:05",
     timestamp: new Date().toISOString(),
     status: "open",
   },
-  // Right to work expired
   {
     id: "exc-15",
     workerId: "w-andrei",
     workerName: "Andrei Petrov",
     type: "rtw-expired",
-    site: "Birmingham DC",
-    department: "Warehouse",
-    agency: "Pertemps",
+    site: "Ellesmere Port",
+    department: "Warehouse Operative",
+    agency: "KPI",
     shift: "06:00–14:00",
     rtwExpiryDate: "2026-02-01",
     timestamp: new Date().toISOString(),
@@ -384,21 +366,20 @@ const initialExceptions: LiveException[] = [
     workerId: "w-fatima",
     workerName: "Fatima Al-Rashid",
     type: "rtw-expired",
-    site: "Heathrow DC",
-    department: "Picking",
-    agency: "Blue Arrow",
+    site: "The Vault",
+    department: "Warehouse Operative",
+    agency: "The Results People",
     shift: "06:00–14:00",
     rtwExpiryDate: "2026-02-05",
     timestamp: new Date().toISOString(),
     status: "open",
   },
-  // Traffic alerts
   {
     id: "exc-17",
-    workerId: "traffic-heathrow",
-    workerName: "M25 Junction 15",
+    workerId: "traffic-vault",
+    workerName: "M62 Junction 6",
     type: "traffic-alert",
-    site: "Heathrow DC",
+    site: "The Vault",
     department: "All",
     agency: "All",
     shift: "06:00–14:00",
@@ -409,10 +390,10 @@ const initialExceptions: LiveException[] = [
   },
   {
     id: "exc-18",
-    workerId: "traffic-coventry",
-    workerName: "A45 Coventry Road",
+    workerId: "traffic-cube",
+    workerName: "A556 Northwich Road",
     type: "traffic-alert",
-    site: "Coventry Hub",
+    site: "The Cube",
     department: "All",
     agency: "All",
     shift: "06:00–14:00",
@@ -444,8 +425,6 @@ export const DemoProvider = ({ children }: { children: ReactNode }) => {
   const [allocations, setAllocations] = useState<WorkerAllocation[]>([]);
   const [exceptions, setExceptions] = useState<LiveException[]>(initialExceptions);
 
-  // ============= NOTIFICATIONS =============
-
   const addNotification = useCallback((notification: Omit<LedgerNotification, "id" | "timestamp">) => {
     const newNotification: LedgerNotification = {
       ...notification,
@@ -465,8 +444,6 @@ export const DemoProvider = ({ children }: { children: ReactNode }) => {
   const clearNotifications = useCallback(() => {
     setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
   }, []);
-
-  // ============= WORKER ACTIONS =============
 
   const addWorkerAction = useCallback((action: Omit<WorkerAction, "id" | "timestamp" | "status">) => {
     const newAction: WorkerAction = {
@@ -497,8 +474,6 @@ export const DemoProvider = ({ children }: { children: ReactNode }) => {
     setLastSyncTime(new Date().toISOString());
   }, []);
 
-  // ============= WORKER STATUS =============
-
   const updateWorkerStatus = useCallback((workerId: string, status: string, executionStatus: string) => {
     setWorkerStatuses((prev) => ({
       ...prev,
@@ -506,8 +481,6 @@ export const DemoProvider = ({ children }: { children: ReactNode }) => {
     }));
     setLastSyncTime(new Date().toISOString());
   }, []);
-
-  // ============= BOOKINGS =============
 
   const createBooking = useCallback((booking: Omit<Booking, "id" | "status" | "createdAt" | "updatedAt">) => {
     const newBooking: Booking = {
@@ -519,14 +492,13 @@ export const DemoProvider = ({ children }: { children: ReactNode }) => {
     };
     setBookings((prev) => [newBooking, ...prev]);
     
-    // Notify agency
     addNotification({
       type: "booking",
-      message: `New booking: ${booking.quantity} ${booking.role}${booking.quantity > 1 ? "s" : ""} for ${booking.site}`,
+      title: "New Booking Request",
+      message: `${booking.quantity}x ${booking.role} at ${booking.site} - ${booking.location} (${booking.shift})`,
       read: false,
       targetView: "agency",
       contextType: "booking",
-      contextId: newBooking.id,
     });
     
     setLastSyncTime(new Date().toISOString());
@@ -536,35 +508,39 @@ export const DemoProvider = ({ children }: { children: ReactNode }) => {
     setBookings((prev) =>
       prev.map((b) => {
         if (b.id === bookingId) {
-          return {
-            ...b,
-            status,
-            agencyNotes: notes || b.agencyNotes,
-            agency: status === "accepted" ? (b.suggestedAgency || "Staffline") : b.agency,
-            updatedAt: new Date().toISOString(),
-          };
+          const updated = { ...b, status, updatedAt: new Date().toISOString() };
+          if (notes) {
+            if (status === "info-requested") {
+              updated.agencyNotes = notes;
+            } else {
+              updated.agencyNotes = notes;
+            }
+          }
+          if (status === "accepted") {
+            updated.agency = "Staffline";
+          }
+          return updated;
         }
         return b;
       })
     );
 
-    const booking = bookings.find((b) => b.id === bookingId);
+    const booking = bookings.find(b => b.id === bookingId);
     if (booking) {
-      const statusText = status === "accepted" ? "accepted" : status === "rejected" ? "rejected" : "requested info on";
       addNotification({
         type: "booking",
-        message: `Booking ${statusText}: ${booking.quantity} ${booking.role}${booking.quantity > 1 ? "s" : ""} for ${booking.site}`,
+        title: `Booking ${status === "accepted" ? "Accepted" : status === "rejected" ? "Rejected" : "Info Requested"}`,
+        message: `${booking.role} at ${booking.site} has been ${status}${notes ? `: ${notes}` : ""}`,
         read: false,
         targetView: "labour-user",
         contextType: "booking",
         contextId: bookingId,
+        fromAgency: true,
       });
     }
-
+    
     setLastSyncTime(new Date().toISOString());
   }, [bookings, addNotification]);
-
-  // ============= ALLOCATIONS =============
 
   const allocateWorker = useCallback((allocation: Omit<WorkerAllocation, "id" | "allocatedAt" | "status">) => {
     const newAllocation: WorkerAllocation = {
@@ -573,21 +549,22 @@ export const DemoProvider = ({ children }: { children: ReactNode }) => {
       allocatedAt: new Date().toISOString(),
       status: "scheduled",
     };
-    setAllocations((prev) => [newAllocation, ...prev]);
+    setAllocations((prev) => [...prev, newAllocation]);
     
     addNotification({
       type: "allocation",
-      message: `${allocation.workerName} allocated to ${allocation.department} at ${allocation.site}`,
+      title: "Worker Allocated",
+      message: `${allocation.workerName} allocated to ${allocation.department} at ${allocation.site} (${allocation.shift})`,
       read: false,
       targetView: "labour-user",
-      contextType: "schedule",
-      contextId: newAllocation.id,
+      contextType: "worker",
+      workerName: allocation.workerName,
+      site: allocation.site,
+      fromAgency: true,
     });
     
     setLastSyncTime(new Date().toISOString());
   }, [addNotification]);
-
-  // ============= EXCEPTIONS =============
 
   const addException = useCallback((exception: Omit<LiveException, "id" | "timestamp" | "status">) => {
     const newException: LiveException = {
@@ -600,11 +577,11 @@ export const DemoProvider = ({ children }: { children: ReactNode }) => {
     
     addNotification({
       type: "exception",
-      message: `${exception.type === "no-show" ? "No-show" : "Late"}: ${exception.workerName} at ${exception.site}`,
+      title: `Exception: ${exception.type}`,
+      message: `${exception.workerName} - ${exception.type} at ${exception.site}`,
       read: false,
       targetView: "both",
       contextType: "exception",
-      contextId: newException.id,
     });
     
     setLastSyncTime(new Date().toISOString());
@@ -614,30 +591,37 @@ export const DemoProvider = ({ children }: { children: ReactNode }) => {
     setExceptions((prev) =>
       prev.map((e) => {
         if (e.id === exceptionId) {
-          return { ...e, status, resolution };
+          return { ...e, status, resolution: resolution || e.resolution };
         }
         return e;
       })
     );
 
-    const exception = exceptions.find((e) => e.id === exceptionId);
-    if (exception && resolution) {
-      const message = resolution.resolutionType === "on-the-way"
-        ? `${exception.workerName} is on the way (ETA: ${resolution.etaMinutes} mins)`
-        : resolution.resolutionType === "replaced"
-        ? `${exception.workerName} replaced by ${resolution.replacementWorkerName}`
-        : `Update on ${exception.workerName}`;
-      
-      addNotification({
-        type: "exception",
-        message,
-        read: false,
-        targetView: "labour-user",
-        contextType: "exception",
-        contextId: exceptionId,
-      });
-    }
+    if (resolution) {
+      const exception = exceptions.find(e => e.id === exceptionId);
+      if (exception) {
+        const message = resolution.resolutionType === "on-the-way"
+          ? `${exception.workerName} is on the way — ETA ${resolution.etaMinutes} mins`
+          : resolution.resolutionType === "replaced"
+          ? `Replacement ${resolution.replacementWorkerName} dispatched for ${exception.workerName} — ETA ${resolution.replacementEtaMinutes} mins`
+          : `Exception for ${exception.workerName} acknowledged`;
 
+        addNotification({
+          type: "exception",
+          title: "Agency Response",
+          message,
+          read: false,
+          targetView: "labour-user",
+          contextType: "exception",
+          contextId: exceptionId,
+          workerName: exception.workerName,
+          agency: exception.agency,
+          site: exception.site,
+          fromAgency: true,
+        });
+      }
+    }
+    
     setLastSyncTime(new Date().toISOString());
   }, [exceptions, addNotification]);
 
@@ -647,7 +631,6 @@ export const DemoProvider = ({ children }: { children: ReactNode }) => {
         if (e.id === exceptionId && e.resolution) {
           return {
             ...e,
-            status: response === "accepted" ? "resolved" : "open",
             resolution: {
               ...e.resolution,
               clientResponse: response,
@@ -659,50 +642,47 @@ export const DemoProvider = ({ children }: { children: ReactNode }) => {
       })
     );
 
-    const exception = exceptions.find((e) => e.id === exceptionId);
+    const exception = exceptions.find(e => e.id === exceptionId);
     if (exception) {
-      const message = response === "accepted"
-        ? `Client accepted update for ${exception.workerName}`
-        : `Client requested replacement for ${exception.workerName}`;
-      
       addNotification({
         type: "exception",
-        message,
+        title: response === "accepted" ? "Resolution Accepted" : "Replacement Requested",
+        message: response === "accepted"
+          ? `Client accepted resolution for ${exception.workerName}`
+          : `Client requesting replacement for ${exception.workerName}`,
         read: false,
         targetView: "agency",
         contextType: "exception",
         contextId: exceptionId,
+        workerName: exception.workerName,
+        site: exception.site,
       });
     }
-
+    
     setLastSyncTime(new Date().toISOString());
   }, [exceptions, addNotification]);
 
-  return (
-    <DemoContext.Provider
-      value={{
-        notifications,
-        addNotification,
-        markNotificationRead,
-        clearNotifications,
-        workerActions,
-        addWorkerAction,
-        acknowledgeAction,
-        workerStatuses,
-        updateWorkerStatus,
-        bookings,
-        createBooking,
-        updateBookingStatus,
-        allocations,
-        allocateWorker,
-        exceptions,
-        addException,
-        updateExceptionStatus,
-        respondToException,
-        lastSyncTime,
-      }}
-    >
-      {children}
-    </DemoContext.Provider>
-  );
+  const value: SharedLedgerState = {
+    notifications,
+    addNotification,
+    markNotificationRead,
+    clearNotifications,
+    workerActions,
+    addWorkerAction,
+    acknowledgeAction,
+    workerStatuses,
+    updateWorkerStatus,
+    bookings,
+    createBooking,
+    updateBookingStatus,
+    allocations,
+    allocateWorker,
+    exceptions,
+    addException,
+    updateExceptionStatus,
+    respondToException,
+    lastSyncTime,
+  };
+
+  return <DemoContext.Provider value={value}>{children}</DemoContext.Provider>;
 };
