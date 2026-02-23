@@ -486,11 +486,6 @@ const ViewSchedule = () => {
                               <span className={`text-xs font-semibold ${isFull ? "text-green-600" : isShort ? "text-amber-600" : isEmpty ? "text-destructive" : "text-muted-foreground"}`}>{filled}</span>
                               <span className="text-[9px] text-muted-foreground">/ {req}</span>
                             </div>
-                            {/* Hover edit icon */}
-                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-foreground/5 rounded">
-                              <span className="text-[9px] font-medium text-primary">Click</span>
-                            </div>
-
                             {/* Worker list popover */}
                             {activeCell === cellKey && !editCell && cell.workers.length > 0 && (
                               <WorkerListPopover
@@ -501,10 +496,11 @@ const ViewSchedule = () => {
                                 agencyFilter={selectedAgency}
                                 onClose={() => setActiveCell(null)}
                                 onWorkerClick={(name) => { setActiveCell(null); setProfileWorker(name); }}
+                                onEditRequirements={() => { setActiveCell(null); setEditCell(cellKey); }}
                               />
                             )}
 
-                            {/* Edit popover — show on second click or if empty */}
+                            {/* Edit popover — for empty cells or when edit mode triggered */}
                             {activeCell === cellKey && !editCell && cell.workers.length === 0 && (
                               <EditPopover
                                 cell={cell}
