@@ -33,9 +33,8 @@ interface ShiftCell {
 // Generate workers for filled weeks
 const workerNames: Record<string, string[]> = {
   Staffline: ["Marcus Johnson", "Sarah Williams", "Tomasz Nowak", "David Thompson", "Priya Sharma", "Ahmed Hassan", "Emma Richardson", "Robert Garcia"],
-  Pertemps: ["Rachel Adams", "Mike Stevens", "Lisa Chen", "Mark Edwards", "Kevin Morris", "Fatima Al-Rashid"],
-  "Blue Arrow": ["James Wilson", "Andrei Petrov", "Sophie Turner", "Daniel Brown", "Amy Clarke"],
-  "Elite Personnel": ["Chris Martin", "Laura White", "Ben Foster"],
+  KPI: ["Rachel Adams", "Mike Stevens", "Lisa Chen", "Mark Edwards", "Kevin Morris", "Fatima Al-Rashid"],
+  "The Results People": ["James Wilson", "Andrei Petrov", "Sophie Turner", "Daniel Brown", "Amy Clarke"],
 };
 
 const buildCell = (required: number, isFuture: boolean): ShiftCell => {
