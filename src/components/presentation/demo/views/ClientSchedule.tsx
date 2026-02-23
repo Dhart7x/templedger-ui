@@ -84,7 +84,7 @@ const buildSchedule = (isFuture: boolean): RoleRow[] => {
 const scheduleCache: Record<string, RoleRow[]> = {};
 weekOptions.forEach(w => { scheduleCache[w.key] = buildSchedule(w.isFuture); });
 
-type SmartPref = "cheapest" | "top-performer" | "attendance-punctuality";
+type SmartPref = "cheapest" | "top-performer";
 
 // ─── Upload Panel (unchanged) ────────────────────────────────────────────────
 
