@@ -7,9 +7,6 @@ import SlideProblem from "@/components/presentation/SlideProblem";
 import SlideWhyThisHappens from "@/components/presentation/SlideWhyThisHappens";
 import SlideIntroducingTL from "@/components/presentation/SlideIntroducingTL";
 import SlideNewNormal from "@/components/presentation/SlideNewNormal";
-import SlideAdoption from "@/components/presentation/SlideAdoption";
-import SlideClosing from "@/components/presentation/SlideClosing";
-import SlideAttrition from "@/components/presentation/SlideAttrition";
 
 const slides = [
   { id: 0, component: SlideHero },
@@ -18,8 +15,7 @@ const slides = [
   { id: 3, component: SlideIntroducingTL, isDemo: true },
   { id: 4, component: SlideNewNormal },
   { id: 5, component: SlideAttrition },
-  { id: 6, component: SlideAdoption },
-  { id: 7, component: SlideClosing },
+  { id: 6, component: SlideClosing },
 ];
 
 const SalesDeck = () => {
