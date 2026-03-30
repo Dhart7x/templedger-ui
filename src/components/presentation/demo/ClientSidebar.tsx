@@ -25,7 +25,7 @@ const ClientSidebar = ({ activeView, onViewChange, notificationCount = 0 }: Clie
       {/* Client Header */}
       <div className="p-4 border-b border-border">
         <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Client Portal</div>
-        <div className="text-sm font-semibold text-foreground">B&M</div>
+        <div className="text-sm font-semibold text-foreground">Alo Clothing</div>
         <div className="text-xs text-muted-foreground">All Sites</div>
       </div>
 

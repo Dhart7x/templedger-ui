@@ -141,7 +141,7 @@ const AgencyNewOrder = () => {
                   </span>
                   <span>{order.date}</span>
                 </div>
-                <p className="text-xs text-muted-foreground">From: <span className="font-medium text-foreground">B&M</span></p>
+                <p className="text-xs text-muted-foreground">From: <span className="font-medium text-foreground">Alo Clothing</span></p>
                 
                 {order.clientNotes && (
                   <div className="mt-3 p-2 bg-muted/50 rounded-lg border border-border">

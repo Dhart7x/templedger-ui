@@ -128,7 +128,7 @@ const AgencyWorkers = ({ tab = "live", onViewWorker }: AgencyWorkersProps) => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-lg md:text-xl font-bold text-foreground">Workers</h1>
-          <p className="text-xs text-muted-foreground">Manage your workforce at B&M</p>
+          <p className="text-xs text-muted-foreground">Manage your workforce at Alo Clothing</p>
         </div>
         <Button className="gap-2">
           <UserPlus className="w-4 h-4" />
