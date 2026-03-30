@@ -261,7 +261,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
               onClick={() => setViewMode("client")}
               className={viewMode === "client" ? "bg-primary/10 text-primary" : ""}
             >
-              Client View (B&M)
+              Client View (Alo Clothing)
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => setViewMode("agency")}

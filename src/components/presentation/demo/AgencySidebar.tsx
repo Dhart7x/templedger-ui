@@ -33,7 +33,7 @@ const AgencySidebar = ({ activeView, onViewChange, notificationCount = 0, newOrd
       <div className="p-4 border-b border-border">
         <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Agency Portal</div>
         <div className="text-sm font-semibold text-foreground">Staffline</div>
-        <div className="text-xs text-muted-foreground">Client: B&M</div>
+        <div className="text-xs text-muted-foreground">Client: Alo Clothing</div>
       </div>
 
       {/* Navigation */}
