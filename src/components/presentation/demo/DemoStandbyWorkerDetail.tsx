@@ -98,7 +98,7 @@
                <p className="text-foreground">{worker.dateOfBirth}</p>
              </div>
              <div>
-               <p className="text-xs text-muted-foreground">National Insurance</p>
+               <p className="text-xs text-muted-foreground">Social Security</p>
                <p className="text-foreground">{worker.nationalInsurance}</p>
              </div>
            </div>

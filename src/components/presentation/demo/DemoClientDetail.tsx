@@ -65,10 +65,10 @@ const eventStatusConfig = {
 };
 
 const financeProviderLabels: Record<string, string> = {
-  ultimate: "Ultimate Finance",
-  bibby: "Bibby Financial Services",
-  hsbc: "HSBC Invoice Finance",
-  close: "Close Brothers Invoice Finance",
+  ultimate: "Triumph Business Capital",
+  bibby: "BlueVine Capital",
+  hsbc: "Riviera Finance",
+  close: "Porter Capital Group",
 };
 
 interface DemoClientDetailProps {

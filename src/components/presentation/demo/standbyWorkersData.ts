@@ -79,7 +79,7 @@ const lastNames = [
     bankDetails: {
       sortCode: `${String(Math.floor(Math.random() * 90) + 10)}-${String(Math.floor(Math.random() * 90) + 10)}-${String(Math.floor(Math.random() * 90) + 10)}`,
       accountNumber: String(Math.floor(Math.random() * 90000000) + 10000000),
-      bankName: ["Barclays", "HSBC", "Lloyds", "NatWest", "Santander"][index % 5],
+      bankName: ["Chase", "Bank of America", "Wells Fargo", "Citi", "US Bank"][index % 5],
     },
     emergencyContact: {
       name: `${firstNames[(index + 10) % firstNames.length]} ${lastName}`,
