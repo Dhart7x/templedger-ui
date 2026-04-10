@@ -162,7 +162,7 @@ const DemoAgencies = () => {
                 </td>
                 <td className="px-4 py-3 text-sm">{agency.latenessRate}%</td>
                 <td className="px-4 py-3 text-sm font-medium">{agency.workersOnSite}</td>
-                <td className="px-4 py-3 text-sm">£{agency.weeklySpend.toLocaleString()}</td>
+                <td className="px-4 py-3 text-sm">${agency.weeklySpend.toLocaleString()}</td>
                 <td className="px-4 py-3">
                   <ChevronRight className="w-4 h-4 text-muted-foreground" />
                 </td>

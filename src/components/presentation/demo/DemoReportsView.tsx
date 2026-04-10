@@ -134,7 +134,7 @@ const DemoReportsView = () => {
                     <div className="text-xs text-muted-foreground">Invoice disputes</div>
                   </div>
                   <div className="bg-card border border-border rounded-lg p-3">
-                    <div className="text-2xl font-bold text-foreground">£{reportData.creditControl.creditNotesValue}</div>
+                    <div className="text-2xl font-bold text-foreground">${reportData.creditControl.creditNotesValue}</div>
                     <div className="text-xs text-muted-foreground">Credit notes value</div>
                   </div>
                   <div className="bg-card border border-border rounded-lg p-3">

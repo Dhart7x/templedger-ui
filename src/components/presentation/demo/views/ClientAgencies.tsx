@@ -391,19 +391,19 @@ const ClientAgencies = ({ onViewWorker }: ClientAgenciesProps) => {
                 <div className="grid grid-cols-2 gap-3 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Warehouse Operative</span>
-                    <span className="font-medium">£{selectedAgency.rateCard.warehouseOp.toFixed(2)}/hr</span>
+                    <span className="font-medium">${selectedAgency.rateCard.warehouseOp.toFixed(2)}/hr</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Picker</span>
-                    <span className="font-medium">£{selectedAgency.rateCard.picker.toFixed(2)}/hr</span>
+                    <span className="font-medium">${selectedAgency.rateCard.picker.toFixed(2)}/hr</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Forklift Driver</span>
-                    <span className="font-medium">£{selectedAgency.rateCard.forklift.toFixed(2)}/hr</span>
+                    <span className="font-medium">${selectedAgency.rateCard.forklift.toFixed(2)}/hr</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Loader</span>
-                    <span className="font-medium">£{selectedAgency.rateCard.loader.toFixed(2)}/hr</span>
+                    <span className="font-medium">${selectedAgency.rateCard.loader.toFixed(2)}/hr</span>
                   </div>
                 </div>
               </div>

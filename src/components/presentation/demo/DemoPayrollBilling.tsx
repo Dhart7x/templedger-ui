@@ -93,11 +93,11 @@ const DemoPayrollBilling = () => {
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
           <p className="text-xs text-muted-foreground mb-1">Approved Payroll</p>
-          <p className="text-2xl font-bold">£{summary.totalPayroll.toLocaleString('en-GB', { minimumFractionDigits: 2 })}</p>
+          <p className="text-2xl font-bold">${summary.totalPayroll.toLocaleString('en-GB', { minimumFractionDigits: 2 })}</p>
         </div>
         <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
           <p className="text-xs text-muted-foreground mb-1">Approved Billing</p>
-          <p className="text-2xl font-bold">£{summary.totalBilling.toLocaleString('en-GB', { minimumFractionDigits: 2 })}</p>
+          <p className="text-2xl font-bold">${summary.totalBilling.toLocaleString('en-GB', { minimumFractionDigits: 2 })}</p>
         </div>
       </div>
 
@@ -136,8 +136,8 @@ const DemoPayrollBilling = () => {
                 <td className="px-4 py-3"><div><p className="text-sm font-medium">{item.worker}</p><p className="text-xs text-muted-foreground">{item.department}</p></div></td>
                 <td className="px-4 py-3 text-sm">{item.agency}</td>
                 <td className="px-4 py-3 text-sm"><span className={item.hoursApproved < item.hoursWorked ? "text-amber-500" : ""}>{item.hoursApproved}</span><span className="text-muted-foreground"> / {item.hoursWorked}</span></td>
-                <td className="px-4 py-3 text-sm">£{item.payRate.toFixed(2)}</td>
-                <td className="px-4 py-3 text-sm">£{item.chargeRate.toFixed(2)}</td>
+                <td className="px-4 py-3 text-sm">${item.payRate.toFixed(2)}</td>
+                <td className="px-4 py-3 text-sm">${item.chargeRate.toFixed(2)}</td>
                 <td className="px-4 py-3">{item.issues && item.issues.length > 0 && <div className="space-y-1">{item.issues.map((issue, idx) => <p key={idx} className="text-xs text-muted-foreground">{issue}</p>)}</div>}</td>
               </tr>
             ))}

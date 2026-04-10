@@ -384,7 +384,7 @@ const DemoExecutionLedger = () => {
                         All steps verified — Invoice permitted
                       </div>
                       <div className="text-xs text-muted-foreground mt-1">
-                        8.0 hours @ £12.50/hr = £100.00 pay • £156.00 charge
+                        8.0 hours @ $12.50/hr = $100.00 pay • $156.00 charge
                       </div>
                     </div>
                   </div>

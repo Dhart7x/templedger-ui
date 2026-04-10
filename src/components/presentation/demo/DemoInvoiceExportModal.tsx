@@ -420,7 +420,7 @@ const DemoInvoiceExportModal = ({
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Invoice total</span>
-                    <span className="text-foreground font-medium">£{invoiceTotal.toLocaleString()}</span>
+                    <span className="text-foreground font-medium">${invoiceTotal.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Payment terms</span>

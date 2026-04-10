@@ -298,7 +298,7 @@ const EditPopover = ({ cell, role, department, day, shift, onClose, onSubmit }: 
                   <p className="text-xs font-medium text-primary flex items-center gap-1"><CheckCircle className="w-3.5 h-3.5" /> Recommended</p>
                   <p className="text-sm font-semibold text-foreground">{suggestedAgency}</p>
                   <p className="text-[10px] text-muted-foreground">
-                    {smartPref === "cheapest" ? "£11.20/hr – lowest available rate" : "98% fulfilment, 96% punctuality last week"}
+                    {smartPref === "cheapest" ? "$11.20/hr – lowest available rate" : "98% fulfilment, 96% punctuality last week"}
                   </p>
                 </div>
               )}

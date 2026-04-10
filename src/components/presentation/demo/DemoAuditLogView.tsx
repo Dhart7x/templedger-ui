@@ -284,7 +284,7 @@ const DemoAuditLogView = ({ onNavigateToWorker }: DemoAuditLogViewProps) => {
                 <div className="space-y-2 text-xs">
                   <div>
                     <span className="text-muted-foreground">Invoice Total: </span>
-                    <span className="text-foreground">£{selectedEvent.invoiceExport.invoiceTotal.toLocaleString()}</span>
+                    <span className="text-foreground">${selectedEvent.invoiceExport.invoiceTotal.toLocaleString()}</span>
                   </div>
                   <div>
                     <span className="text-muted-foreground">Payment Terms: </span>

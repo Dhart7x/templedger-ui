@@ -316,7 +316,7 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
             <DollarSign className="w-5 h-5 text-primary" />
             <span className="text-sm text-muted-foreground">Total Spend</span>
           </div>
-          <p className="text-2xl font-bold">£{totalSpend.toLocaleString()}</p>
+          <p className="text-2xl font-bold">${totalSpend.toLocaleString()}</p>
           <p className="text-xs text-green-500 mt-1">This {timeRange}</p>
         </div>
         <div className="bg-card border border-border rounded-lg p-4">
@@ -332,7 +332,7 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
             <TrendingUp className="w-5 h-5 text-muted-foreground" />
             <span className="text-sm text-muted-foreground">Avg Rate</span>
           </div>
-          <p className="text-2xl font-bold">£{avgRate.toFixed(2)}/hr</p>
+          <p className="text-2xl font-bold">${avgRate.toFixed(2)}/hr</p>
           <p className="text-xs text-amber-500 mt-1">Blended rate</p>
         </div>
         <div className="bg-card border border-border rounded-lg p-4">
@@ -363,7 +363,7 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium">{item.category}</span>
                     <div className="text-right">
-                      <span className="text-sm font-bold">£{data.amount.toLocaleString()}</span>
+                      <span className="text-sm font-bold">${data.amount.toLocaleString()}</span>
                       <span className={`ml-2 text-xs ${data.change >= 0 ? "text-green-500" : "text-destructive"}`}>
                         {data.change >= 0 ? "+" : ""}
                         {data.change}%
@@ -423,7 +423,7 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
                               <ChevronDown className="w-4 h-4 text-muted-foreground" />
                             )}
                           </div>
-                          <span className="text-sm font-bold">£{data.amount.toLocaleString()}</span>
+                          <span className="text-sm font-bold">${data.amount.toLocaleString()}</span>
                         </div>
                         <div className="flex items-center justify-between text-xs text-muted-foreground mt-1">
                           <span>
@@ -453,7 +453,7 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
                                   <span className="text-sm font-medium">{site.name}</span>
                                 </div>
                                 <div className="text-right">
-                                  <span className="text-sm font-bold">£{site.amount.toLocaleString()}</span>
+                                  <span className="text-sm font-bold">${site.amount.toLocaleString()}</span>
                                   <span className="ml-2 text-xs text-amber-500">{siteOvertimePercent}% OT</span>
                                 </div>
                               </div>
@@ -469,7 +469,7 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
                                       <div className="flex items-center gap-3">
                                         <span className="text-muted-foreground">{dept.hours} hrs</span>
                                         <span className="text-amber-500">{deptOtPercent}% OT</span>
-                                        <span className="font-medium">£{dept.amount.toLocaleString()}</span>
+                                        <span className="font-medium">${dept.amount.toLocaleString()}</span>
                                       </div>
                                     </div>
                                   );
@@ -507,7 +507,7 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium">{dept.name}</span>
                   </div>
-                  <p className="text-lg font-bold">£{data.amount.toLocaleString()}</p>
+                  <p className="text-lg font-bold">${data.amount.toLocaleString()}</p>
                   <div className="text-xs text-muted-foreground mt-1 space-y-0.5">
                     <p>{data.hours.toLocaleString()} hrs</p>
                     <p>{data.workers} workers</p>

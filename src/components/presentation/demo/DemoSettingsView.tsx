@@ -264,7 +264,7 @@ const DemoSettingsView = () => {
               <h3 className="text-sm font-medium text-foreground mb-3">Dual Approval</h3>
               <div className="space-y-2">
                 <label className="flex items-center justify-between">
-                  <span className="text-sm text-foreground">Require dual approval for overrides &gt; £500</span>
+                  <span className="text-sm text-foreground">Require dual approval for overrides &gt; $500</span>
                   <Switch defaultChecked />
                 </label>
                 <label className="flex items-center justify-between">
