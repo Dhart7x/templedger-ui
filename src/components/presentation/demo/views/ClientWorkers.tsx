@@ -219,7 +219,7 @@ const ClientWorkers = ({ onViewWorker }: ClientWorkersProps) => {
               <select value={agencyFilter} onChange={(e) => setAgencyFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Agencies</option>
                 <option value="Staffmark">Staffmark</option>
-                <option value="Elite Staffing">KPI</option>
+                <option value="Elite Staffing">Elite Staffing</option>
                 <option value="Elwood Staffing">Elwood Staffing</option>
               </select>
               <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
@@ -307,7 +307,7 @@ const ClientWorkers = ({ onViewWorker }: ClientWorkersProps) => {
               <select value={agencyFilter} onChange={(e) => setAgencyFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Agencies</option>
                 <option value="Staffmark">Staffmark</option>
-                <option value="Elite Staffing">KPI</option>
+                <option value="Elite Staffing">Elite Staffing</option>
                 <option value="Elwood Staffing">Elwood Staffing</option>
               </select>
               <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
@@ -401,7 +401,7 @@ const ClientWorkers = ({ onViewWorker }: ClientWorkersProps) => {
               <select value={agencyFilter} onChange={(e) => setAgencyFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Agencies</option>
                 <option value="Staffmark">Staffmark</option>
-                <option value="Elite Staffing">KPI</option>
+                <option value="Elite Staffing">Elite Staffing</option>
                 <option value="Elwood Staffing">Elwood Staffing</option>
               </select>
               <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">

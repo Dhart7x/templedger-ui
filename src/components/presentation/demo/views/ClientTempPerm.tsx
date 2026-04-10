@@ -124,7 +124,7 @@ const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
           >
             <option value="all">All Agencies</option>
             <option value="Staffmark">Staffmark</option>
-            <option value="Elite Staffing">KPI</option>
+            <option value="Elite Staffing">Elite Staffing</option>
             <option value="Elwood Staffing">Elwood Staffing</option>
           </select>
         </div>
