@@ -17,10 +17,7 @@ const SlideTimeAttendance = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="absolute inset-0 overflow-hidden pointer-events-none"
       >
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl" />
-      </motion.div>
 
       <div className="relative z-10 max-w-4xl mx-auto w-full">
         {/* Header */}
@@ -33,7 +30,6 @@ const SlideTimeAttendance = () => {
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold">
             Time & Attendance
           </h2>
-        </motion.div>
 
         {/* Features List */}
         <div className="space-y-2 md:space-y-4">
@@ -52,13 +48,10 @@ const SlideTimeAttendance = () => {
                 className="w-7 h-7 md:w-9 md:h-9 rounded-full trust-gradient flex items-center justify-center flex-shrink-0"
               >
                 <feature.icon className="w-3.5 h-3.5 md:w-5 md:h-5 text-foreground" />
-              </motion.div>
               <p className="text-sm md:text-base text-foreground font-medium leading-relaxed pt-1 md:pt-1.5">
                 {feature.text}
               </p>
-            </motion.div>
           ))}
-        </div>
       </div>
     </Slide>
   );

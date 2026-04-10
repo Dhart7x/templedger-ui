@@ -21,10 +21,7 @@ const SlideMinimalChange = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="absolute inset-0 overflow-hidden pointer-events-none"
       >
-        <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl" />
-      </motion.div>
 
       <div className="relative z-10 max-w-5xl mx-auto w-full md:h-full md:flex md:flex-col">
         {/* Header */}
@@ -40,7 +37,6 @@ const SlideMinimalChange = () => {
           <p className="text-xs md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
             Temp Ledger does not ask you to run staffing differently.
           </p>
-        </motion.div>
 
         {/* No change required */}
         <motion.p
@@ -73,9 +69,7 @@ const SlideMinimalChange = () => {
                   >
                     <div className="w-1 h-1 md:w-2 md:h-2 rounded-full bg-primary mt-1.5 flex-shrink-0" />
                     <span className="text-[11px] md:text-base lg:text-lg text-foreground">{text}</span>
-                  </motion.div>
                 ))}
-              </div>
             </motion.div>
 
             {/* Right: Your only active input */}

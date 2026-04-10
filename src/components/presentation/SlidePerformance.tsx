@@ -21,10 +21,7 @@ const SlidePerformance = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="absolute inset-0 overflow-hidden pointer-events-none"
       >
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl" />
-      </motion.div>
 
       <div className="relative z-10 max-w-5xl mx-auto w-full md:h-full md:flex md:flex-col">
         {/* Header */}
@@ -40,7 +37,6 @@ const SlidePerformance = () => {
           <p className="text-sm md:text-lg lg:text-xl text-foreground max-w-3xl mx-auto">
             Because execution is enforced, performance becomes objective. Temp Ledger reveals in real time:
           </p>
-        </motion.div>
 
         <div className="md:flex-1 md:flex md:items-center">
           {/* Metrics Grid - 3x3 */}
@@ -61,11 +57,8 @@ const SlidePerformance = () => {
                     className="w-6 h-6 md:w-10 md:h-10 rounded-md md:rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0"
                   >
                     <item.icon className="w-3 h-3 md:w-5 md:h-5 text-primary" />
-                  </motion.div>
                   <span className="text-sm md:text-lg lg:text-xl text-foreground font-medium leading-tight">{item.text}</span>
-                </motion.div>
               ))}
-            </div>
           </div>
         </div>
 

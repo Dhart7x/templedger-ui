@@ -18,10 +18,7 @@ const SlideLedger = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="absolute inset-0 overflow-hidden pointer-events-none"
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
-      </motion.div>
 
       <div className="relative z-10 max-w-5xl mx-auto w-full">
         {/* Header */}
@@ -37,7 +34,6 @@ const SlideLedger = () => {
           <p className="text-sm md:text-base text-foreground">
             Non-negotiable sequence. Each step is enforced. None are optional.
           </p>
-        </motion.div>
 
         {/* Ledger Steps - Vertical Chain */}
         <div className="max-w-md mx-auto mb-6 md:mb-10">
@@ -71,10 +67,8 @@ const SlideLedger = () => {
                     className="w-10 h-10 md:w-12 md:h-12 rounded-full trust-gradient flex items-center justify-center z-10 flex-shrink-0"
                   >
                     <span className="text-sm md:text-base font-bold text-foreground">{index + 1}</span>
-                  </motion.div>
                   <div className="flex-1 p-3 md:p-4 rounded-lg bg-card border border-border">
                     <span className="text-sm md:text-base text-foreground font-medium">{step}</span>
-                  </div>
                 </motion.div>
               ))}
             </div>

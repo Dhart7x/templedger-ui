@@ -12,9 +12,6 @@ const aiFeatures = [
 const SlideAI = () => {
   return (
     <Slide className="relative overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-accent/10 rounded-full blur-3xl" />
-      </div>
 
       <div className="relative z-10 max-w-5xl mx-auto w-full">
         {/* Header - Centered at top */}
