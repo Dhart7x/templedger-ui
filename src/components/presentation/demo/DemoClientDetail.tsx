@@ -41,7 +41,7 @@ const workers: Worker[] = [
 
 const events: Event[] = [
   { id: "1", name: "Candidate registered", timestamp: "01 Apr 09:15", source: "System", status: "verified" },
-  { id: "2", name: "Right to work confirmed", timestamp: "01 Apr 09:32", source: "System", status: "verified" },
+  { id: "2", name: "I9 Verification confirmed", timestamp: "01 Apr 09:32", source: "System", status: "verified" },
   { id: "3", name: "Contract accepted", timestamp: "01 Apr 14:20", source: "System", status: "verified" },
   { id: "4", name: "Shift scheduled", timestamp: "05 Apr 08:00", source: "System", status: "verified" },
   { id: "5", name: "Clock-in / clock-out captured", timestamp: "05 Apr 18:45", source: "System", status: "verified" },

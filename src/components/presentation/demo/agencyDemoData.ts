@@ -72,12 +72,12 @@ export const agencyWorkers: AgencyWorker[] = [
 
 export const agencyDocuments: AgencyDocument[] = [
   { id: "D001", workerId: "W001", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-01-15", expiryDate: null },
-  { id: "D002", workerId: "W001", name: "Right to Work", type: "compliance", status: "verified", uploadedDate: "2024-01-15", expiryDate: "2025-01-15" },
+  { id: "D002", workerId: "W001", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-01-15", expiryDate: "2025-01-15" },
   { id: "D003", workerId: "W001", name: "Health & Safety Cert", type: "client-required", status: "verified", uploadedDate: "2024-01-16", expiryDate: "2025-01-16" },
   { id: "D004", workerId: "W002", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-02-20", expiryDate: null },
-  { id: "D005", workerId: "W002", name: "Right to Work", type: "compliance", status: "pending", uploadedDate: "2024-02-20", expiryDate: "2024-02-25" },
+  { id: "D005", workerId: "W002", name: "I9 Verification", type: "compliance", status: "pending", uploadedDate: "2024-02-20", expiryDate: "2024-02-25" },
   { id: "D006", workerId: "W004", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2023-11-12", expiryDate: null },
-  { id: "D007", workerId: "W004", name: "Right to Work", type: "compliance", status: "expired", uploadedDate: "2023-11-12", expiryDate: "2024-01-12" },
+  { id: "D007", workerId: "W004", name: "I9 Verification", type: "compliance", status: "expired", uploadedDate: "2023-11-12", expiryDate: "2024-01-12" },
   { id: "D008", workerId: "W008", name: "Health & Safety Cert", type: "client-required", status: "expired", uploadedDate: "2023-12-05", expiryDate: "2024-01-05" },
 ];
 
@@ -91,9 +91,9 @@ export const agencyDeployments: AgencyDeployment[] = [
 ];
 
 export const agencyIssues: AgencyIssue[] = [
-  { id: "ISS001", workerId: "W004", workerName: "David Chen", failedStep: "Compliance", reason: "Right to Work document expired", requiredAction: "Upload valid Right to Work document", severity: "critical", createdAt: "2024-01-12" },
+  { id: "ISS001", workerId: "W004", workerName: "David Chen", failedStep: "Compliance", reason: "I9 Verification expired", requiredAction: "Upload valid I9 Verification document", severity: "critical", createdAt: "2024-01-12" },
   { id: "ISS002", workerId: "W008", workerName: "Robert Taylor", failedStep: "Compliance", reason: "Health & Safety certification expired", requiredAction: "Complete H&S training and upload certificate", severity: "critical", createdAt: "2024-01-05" },
-  { id: "ISS003", workerId: "W002", workerName: "James Cooper", failedStep: "Compliance", reason: "Right to Work pending verification", requiredAction: "Await document verification", severity: "warning", createdAt: "2024-02-22" },
+  { id: "ISS003", workerId: "W002", workerName: "James Cooper", failedStep: "Compliance", reason: "I9 Verification pending verification", requiredAction: "Await document verification", severity: "warning", createdAt: "2024-02-22" },
   { id: "ISS004", workerId: "W007", workerName: "Lisa Anderson", failedStep: "Attendance", reason: "Late clock-in (12 mins)", requiredAction: "Review and approve exception", severity: "warning", createdAt: "2024-02-04" },
 ];
 
