@@ -30,7 +30,7 @@ interface MetricsData {
 }
  
 const agencyMetricsByRange: Record<string, Record<TimeRange, MetricsData>> = {
-  "Staffline": {
+  "Staffmark": {
     live: { fulfilment: 94, lateness: 3.2, noShows: 1.8, overallScore: 92, registrations: 3 },
     week: { fulfilment: 93, lateness: 3.5, noShows: 2.1, overallScore: 90, registrations: 8 },
     month: { fulfilment: 91, lateness: 4.0, noShows: 2.5, overallScore: 88, registrations: 24 },
@@ -53,7 +53,7 @@ const agencyMetricsByRange: Record<string, Record<TimeRange, MetricsData>> = {
 const agencies: Agency[] = [
   {
     id: "1",
-    name: "Staffline",
+    name: "Staffmark",
     metrics: {
       fulfilment: { value: 94, target: 95, trend: "up" },
       timeToFill: { value: "2.1 days", target: "2 days", trend: "stable" },
@@ -126,7 +126,7 @@ const DemoAgenciesPerformance = () => {
   };
 
   const getMetricsForRange = (agencyName: string, range: TimeRange) => {
-    return agencyMetricsByRange[agencyName]?.[range] || agencyMetricsByRange["Staffline"][range];
+    return agencyMetricsByRange[agencyName]?.[range] || agencyMetricsByRange["Staffmark"][range];
   };
  
   const timeRangeOptions: { id: TimeRange; label: string }[] = [

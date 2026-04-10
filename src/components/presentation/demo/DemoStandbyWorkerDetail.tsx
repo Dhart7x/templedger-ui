@@ -98,7 +98,7 @@
                <p className="text-foreground">{worker.dateOfBirth}</p>
              </div>
              <div>
-               <p className="text-xs text-muted-foreground">National Insurance</p>
+               <p className="text-xs text-muted-foreground">Social Security</p>
                <p className="text-foreground">{worker.nationalInsurance}</p>
              </div>
            </div>
@@ -112,7 +112,7 @@
            </h3>
            <div className="text-center py-4">
              <div className="text-3xl font-bold text-foreground">{worker.distance.miles} miles</div>
-             <p className="text-sm text-muted-foreground">from Alo Clothing - The Vault</p>
+             <p className="text-sm text-muted-foreground">from Alo Clothing - Baltimore, MD</p>
            </div>
            <div className="grid grid-cols-2 gap-3">
              <div className="bg-muted/30 rounded-lg p-3 text-center">

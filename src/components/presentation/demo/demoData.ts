@@ -383,7 +383,7 @@ export const auditEvents: AuditEvent[] = [
       paymentTerms: 45,
       recipients: ["ap@dhl.com", "finance@dhl.com"],
       financeProviderCopied: true,
-      financeProvider: "Ultimate Finance",
+      financeProvider: "Triumph Business Capital",
       exportMethod: "secure-link",
     },
   },

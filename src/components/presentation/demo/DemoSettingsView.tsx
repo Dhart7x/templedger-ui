@@ -264,7 +264,7 @@ const DemoSettingsView = () => {
               <h3 className="text-sm font-medium text-foreground mb-3">Dual Approval</h3>
               <div className="space-y-2">
                 <label className="flex items-center justify-between">
-                  <span className="text-sm text-foreground">Require dual approval for overrides &gt; £500</span>
+                  <span className="text-sm text-foreground">Require dual approval for overrides &gt; $500</span>
                   <Switch defaultChecked />
                 </label>
                 <label className="flex items-center justify-between">
@@ -441,7 +441,7 @@ const DemoSettingsView = () => {
                 <h3 className="text-sm font-medium text-foreground mb-3">Invoice Finance Providers</h3>
                 <div className="space-y-2">
                   <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
-                    <span className="text-sm text-foreground">Ultimate Finance</span>
+                    <span className="text-sm text-foreground">Triumph Business Capital</span>
                     <button className="p-1 hover:bg-muted rounded"><Trash2 className="w-3 h-3 text-muted-foreground" /></button>
                   </div>
                   <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
@@ -449,11 +449,11 @@ const DemoSettingsView = () => {
                     <button className="p-1 hover:bg-muted rounded"><Trash2 className="w-3 h-3 text-muted-foreground" /></button>
                   </div>
                   <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
-                    <span className="text-sm text-foreground">HSBC Invoice Finance</span>
+                    <span className="text-sm text-foreground">Riviera Finance</span>
                     <button className="p-1 hover:bg-muted rounded"><Trash2 className="w-3 h-3 text-muted-foreground" /></button>
                   </div>
                   <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
-                    <span className="text-sm text-foreground">Close Brothers Invoice Finance</span>
+                    <span className="text-sm text-foreground">Porter Capital Group</span>
                     <button className="p-1 hover:bg-muted rounded"><Trash2 className="w-3 h-3 text-muted-foreground" /></button>
                   </div>
                   <Button variant="outline" size="sm" className="w-full mt-2">

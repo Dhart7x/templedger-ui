@@ -25,7 +25,7 @@ const requests: HeadcountRequest[] = [
     required: 25,
     fulfilled: 25,
     agencies: [
-      { name: "Staffline", assigned: 15, confirmed: 15 },
+      { name: "Staffmark", assigned: 15, confirmed: 15 },
       { name: "Blue Arrow", assigned: 10, confirmed: 10 },
     ],
     status: "fulfilled",
@@ -40,7 +40,7 @@ const requests: HeadcountRequest[] = [
     fulfilled: 8,
     agencies: [
       { name: "Blue Arrow", assigned: 6, confirmed: 5 },
-      { name: "Staffline", assigned: 4, confirmed: 3 },
+      { name: "Staffmark", assigned: 4, confirmed: 3 },
     ],
     status: "partial",
   },
@@ -54,7 +54,7 @@ const requests: HeadcountRequest[] = [
     fulfilled: 12,
     agencies: [
       { name: "Pertemps", assigned: 10, confirmed: 8 },
-      { name: "Staffline", assigned: 5, confirmed: 4 },
+      { name: "Staffmark", assigned: 5, confirmed: 4 },
     ],
     status: "partial",
   },
@@ -67,7 +67,7 @@ const requests: HeadcountRequest[] = [
     required: 18,
     fulfilled: 0,
     agencies: [
-      { name: "Staffline", assigned: 18, confirmed: 0 },
+      { name: "Staffmark", assigned: 18, confirmed: 0 },
     ],
     status: "pending",
   },
@@ -205,7 +205,7 @@ const DemoHeadcountRequests = () => {
             <div className="flex gap-2">
               <label className="flex items-center gap-2 bg-muted px-3 py-2 rounded cursor-pointer">
                 <input type="checkbox" className="rounded" />
-                <span className="text-sm">Staffline</span>
+                <span className="text-sm">Staffmark</span>
               </label>
               <label className="flex items-center gap-2 bg-muted px-3 py-2 rounded cursor-pointer">
                 <input type="checkbox" className="rounded" />

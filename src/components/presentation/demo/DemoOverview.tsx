@@ -178,7 +178,7 @@ const DemoOverview = () => {
             <DollarSign className="w-4 h-4 text-primary" />
             <span className="text-xs text-muted-foreground">Today's Spend</span>
           </div>
-          <div className="text-2xl font-bold">£12.4k</div>
+          <div className="text-2xl font-bold">$12.4k</div>
         </motion.div>
         <motion.div 
           initial={{ opacity: 0, y: 10 }}

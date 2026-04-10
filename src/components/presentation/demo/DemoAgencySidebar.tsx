@@ -23,7 +23,7 @@ const DemoAgencySidebar = ({ activeView, onViewChange }: DemoAgencySidebarProps)
       {/* Agency Header */}
       <div className="p-4 border-b border-border">
         <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Agency Portal</div>
-        <div className="text-sm font-semibold text-foreground">Staffline</div>
+        <div className="text-sm font-semibold text-foreground">Staffmark</div>
         <div className="text-xs text-muted-foreground">Client: Alo Clothing</div>
       </div>
 

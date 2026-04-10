@@ -21,7 +21,7 @@ const departments: Department[] = [
     required: 25,
     actual: 23,
     agencies: [
-      { name: "Staffline", workers: 12 },
+      { name: "Staffmark", workers: 12 },
       { name: "Blue Arrow", workers: 8 },
       { name: "Pertemps", workers: 3 },
     ],
@@ -38,7 +38,7 @@ const departments: Department[] = [
     actual: 15,
     agencies: [
       { name: "Pertemps", workers: 10 },
-      { name: "Staffline", workers: 5 },
+      { name: "Staffmark", workers: 5 },
     ],
     status: "on-track",
     trend: "stable",
@@ -53,7 +53,7 @@ const departments: Department[] = [
     actual: 8,
     agencies: [
       { name: "Blue Arrow", workers: 5 },
-      { name: "Staffline", workers: 3 },
+      { name: "Staffmark", workers: 3 },
     ],
     status: "failing",
     trend: "down",
@@ -67,7 +67,7 @@ const departments: Department[] = [
     required: 12,
     actual: 12,
     agencies: [
-      { name: "Staffline", workers: 8 },
+      { name: "Staffmark", workers: 8 },
       { name: "Pertemps", workers: 4 },
     ],
     status: "on-track",
@@ -96,7 +96,7 @@ const departments: Department[] = [
     required: 18,
     actual: 17,
     agencies: [
-      { name: "Staffline", workers: 10 },
+      { name: "Staffmark", workers: 10 },
       { name: "Blue Arrow", workers: 7 },
     ],
     status: "at-risk",

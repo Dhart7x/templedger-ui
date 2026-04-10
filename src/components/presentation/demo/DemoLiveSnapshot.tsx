@@ -15,14 +15,14 @@ interface Worker {
 }
 
 const workers: Worker[] = [
-  { id: "1", name: "John Patel", department: "Warehouse Operative", agency: "Staffline", site: "The Vault", status: "on-site", clockIn: "06:02", shift: "Morning" },
-  { id: "2", name: "Maria Santos", department: "Warehouse Operative", agency: "KPI", site: "The Vault", status: "on-site", clockIn: "06:00", shift: "Morning" },
-  { id: "3", name: "Ahmed Khan", department: "MHE", agency: "The Results People", site: "The Vault", status: "overtime", clockIn: "05:58", shift: "Morning" },
-  { id: "4", name: "Lucy Brown", department: "Warehouse Operative", agency: "Staffline", site: "The Cube", status: "on-site", clockIn: "06:01", shift: "Morning" },
-  { id: "5", name: "Tomasz Nowak", department: "MHE", agency: "Staffline", site: "The Vault", status: "late", clockIn: "06:45", shift: "Morning" },
-  { id: "6", name: "Priya Sharma", department: "Warehouse Operative", agency: "KPI", site: "The Vault", status: "on-site", clockIn: "06:00", shift: "Morning" },
-  { id: "7", name: "James Wilson", department: "MHE", agency: "The Results People", site: "Ellesmere Port", status: "no-show", shift: "Morning" },
-  { id: "8", name: "Fatima Ali", department: "Warehouse Operative", agency: "Staffline", site: "The Vault", status: "on-site", clockIn: "06:03", shift: "Morning" },
+  { id: "1", name: "John Patel", department: "Warehouse Operative", agency: "Staffmark", site: "Baltimore, MD", status: "on-site", clockIn: "06:02", shift: "Morning" },
+  { id: "2", name: "Maria Santos", department: "Warehouse Operative", agency: "Elite Staffing", site: "Baltimore, MD", status: "on-site", clockIn: "06:00", shift: "Morning" },
+  { id: "3", name: "Ahmed Khan", department: "MHE", agency: "Elwood Staffing", site: "Baltimore, MD", status: "overtime", clockIn: "05:58", shift: "Morning" },
+  { id: "4", name: "Lucy Brown", department: "Warehouse Operative", agency: "Staffmark", site: "Las Vegas, NV", status: "on-site", clockIn: "06:01", shift: "Morning" },
+  { id: "5", name: "Tomasz Nowak", department: "MHE", agency: "Staffmark", site: "Baltimore, MD", status: "late", clockIn: "06:45", shift: "Morning" },
+  { id: "6", name: "Priya Sharma", department: "Warehouse Operative", agency: "Elite Staffing", site: "Baltimore, MD", status: "on-site", clockIn: "06:00", shift: "Morning" },
+  { id: "7", name: "James Wilson", department: "MHE", agency: "Elwood Staffing", site: "Dallas Fort-Worth, TX", status: "no-show", shift: "Morning" },
+  { id: "8", name: "Fatima Ali", department: "Warehouse Operative", agency: "Staffmark", site: "Baltimore, MD", status: "on-site", clockIn: "06:03", shift: "Morning" },
 ];
 
 const departmentSummary = [
@@ -54,8 +54,8 @@ const DemoLiveSnapshot = () => {
   };
 
   const issues = [
-    { type: "no-show", text: "James Wilson (MHE) - No-show at Ellesmere Port", urgent: true, workerId: "7", workerName: "James Wilson", department: "MHE", status: "blocked", executionStatus: "blocked" },
-    { type: "late", text: "Tomasz Nowak (MHE) - 45 min late at The Vault", urgent: false, workerId: "5", workerName: "Tomasz Nowak", department: "MHE", status: "active", executionStatus: "at-risk" },
+    { type: "no-show", text: "James Wilson (MHE) - No-show at Dallas Fort-Worth, TX", urgent: true, workerId: "7", workerName: "James Wilson", department: "MHE", status: "blocked", executionStatus: "blocked" },
+    { type: "late", text: "Tomasz Nowak (MHE) - 45 min late at Baltimore, MD", urgent: false, workerId: "5", workerName: "Tomasz Nowak", department: "MHE", status: "active", executionStatus: "at-risk" },
     { type: "headcount", text: "MHE department 2 workers short", urgent: true, workerId: "", workerName: "", department: "", status: "", executionStatus: "" },
   ];
 
@@ -65,8 +65,8 @@ const DemoLiveSnapshot = () => {
         id: issue.workerId,
         name: issue.workerName,
         department: issue.department,
-        agency: "Staffline",
-        site: "The Vault",
+        agency: "Staffmark",
+        site: "Baltimore, MD",
         status: issue.status as "on-site" | "late" | "no-show" | "overtime",
         shift: "Morning"
       });

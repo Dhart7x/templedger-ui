@@ -50,8 +50,8 @@ const invoices: Invoice[] = [
   {
     id: "1",
     invoiceNumber: "INV-2025-0234",
-    agency: "Staffline",
-    site: "The Vault",
+    agency: "Staffmark",
+    site: "Baltimore, MD",
     weekEnding: "9 Feb 2025",
     amount: 87450,
     workers: 85,
@@ -68,8 +68,8 @@ const invoices: Invoice[] = [
   {
     id: "2",
     invoiceNumber: "INV-2025-0235",
-    agency: "KPI",
-    site: "The Vault",
+    agency: "Elite Staffing",
+    site: "Baltimore, MD",
     weekEnding: "9 Feb 2025",
     amount: 54740,
     workers: 58,
@@ -84,8 +84,8 @@ const invoices: Invoice[] = [
   {
     id: "3",
     invoiceNumber: "INV-2025-0236",
-    agency: "The Results People",
-    site: "Ellesmere Port",
+    agency: "Elwood Staffing",
+    site: "Dallas Fort-Worth, TX",
     weekEnding: "9 Feb 2025",
     amount: 42100,
     workers: 40,
@@ -99,8 +99,8 @@ const invoices: Invoice[] = [
   {
     id: "4",
     invoiceNumber: "INV-2025-0220",
-    agency: "Staffline",
-    site: "The Vault",
+    agency: "Staffmark",
+    site: "Baltimore, MD",
     weekEnding: "2 Feb 2025",
     amount: 83230,
     workers: 82,
@@ -115,8 +115,8 @@ const invoices: Invoice[] = [
   {
     id: "5",
     invoiceNumber: "INV-2025-0221",
-    agency: "The Results People",
-    site: "The Cube",
+    agency: "Elwood Staffing",
+    site: "Las Vegas, NV",
     weekEnding: "2 Feb 2025",
     amount: 36680,
     workers: 35,
@@ -130,8 +130,8 @@ const invoices: Invoice[] = [
   {
     id: "6",
     invoiceNumber: "INV-2025-0222",
-    agency: "KPI",
-    site: "Ellesmere Port",
+    agency: "Elite Staffing",
+    site: "Dallas Fort-Worth, TX",
     weekEnding: "2 Feb 2025",
     amount: 48900,
     workers: 50,
@@ -144,8 +144,8 @@ const invoices: Invoice[] = [
   {
     id: "7",
     invoiceNumber: "INV-2025-0206",
-    agency: "Staffline",
-    site: "The Vault",
+    agency: "Staffmark",
+    site: "Baltimore, MD",
     weekEnding: "26 Jan 2025",
     amount: 79800,
     workers: 80,
@@ -158,8 +158,8 @@ const invoices: Invoice[] = [
   {
     id: "8",
     invoiceNumber: "INV-2025-0207",
-    agency: "KPI",
-    site: "The Cube",
+    agency: "Elite Staffing",
+    site: "Las Vegas, NV",
     weekEnding: "26 Jan 2025",
     amount: 51200,
     workers: 55,
@@ -278,7 +278,7 @@ const ClientBilling = ({ onViewWorker }: ClientBillingProps) => {
       <div className="grid grid-cols-3 gap-3">
         <div className="bg-card border border-border rounded-xl p-4">
           <p className="text-xs text-muted-foreground mb-1">Total Invoiced</p>
-          <p className="text-xl font-bold text-foreground">£{totalAmount.toLocaleString()}</p>
+          <p className="text-xl font-bold text-foreground">${totalAmount.toLocaleString()}</p>
         </div>
         <div className="bg-card border border-border rounded-xl p-4">
           <p className="text-xs text-muted-foreground mb-1">Total Hours</p>
@@ -338,7 +338,7 @@ const ClientBilling = ({ onViewWorker }: ClientBillingProps) => {
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="text-base font-bold text-foreground">£{invoice.amount.toLocaleString()}</span>
+                        <span className="text-base font-bold text-foreground">${invoice.amount.toLocaleString()}</span>
                         <ChevronRight className={`w-4 h-4 text-muted-foreground transition-transform ${isExpanded ? "rotate-90" : ""}`} />
                       </div>
                     </button>
@@ -400,8 +400,8 @@ const ClientBilling = ({ onViewWorker }: ClientBillingProps) => {
                                   </td>
                                   <td className="py-2 text-muted-foreground">{w.department}</td>
                                   <td className="py-2 text-right text-foreground">{w.hours}h</td>
-                                  <td className="py-2 text-right text-muted-foreground">£{w.rate.toFixed(2)}</td>
-                                  <td className="py-2 text-right font-medium text-foreground">£{w.amount.toFixed(2)}</td>
+                                  <td className="py-2 text-right text-muted-foreground">${w.rate.toFixed(2)}</td>
+                                  <td className="py-2 text-right font-medium text-foreground">${w.amount.toFixed(2)}</td>
                                 </tr>
                               ))}
                             </tbody>

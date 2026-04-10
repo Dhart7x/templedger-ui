@@ -48,7 +48,7 @@ interface Agency {
 const agencies: Agency[] = [
   {
     id: "1",
-    name: "Staffline",
+    name: "Staffmark",
     activeWorkers: 32,
     totalWorkers: 85,
     performance: {
@@ -60,14 +60,14 @@ const agencies: Agency[] = [
     rating: 4.5,
     status: "active",
     sites: [
-      { name: "The Vault", workers: 25, departments: [{ name: "Warehouse Operative", workers: 15 }, { name: "MHE", workers: 10 }] },
-      { name: "The Cube", workers: 18, departments: [{ name: "Warehouse Operative", workers: 12 }, { name: "MHE", workers: 6 }] },
-      { name: "Ellesmere Port", workers: 7, departments: [{ name: "Warehouse Operative", workers: 5 }, { name: "MHE", workers: 2 }] },
+      { name: "Baltimore, MD", workers: 25, departments: [{ name: "Warehouse Operative", workers: 15 }, { name: "MHE", workers: 10 }] },
+      { name: "Las Vegas, NV", workers: 18, departments: [{ name: "Warehouse Operative", workers: 12 }, { name: "MHE", workers: 6 }] },
+      { name: "Dallas Fort-Worth, TX", workers: 7, departments: [{ name: "Warehouse Operative", workers: 5 }, { name: "MHE", workers: 2 }] },
     ],
   },
   {
     id: "2",
-    name: "KPI",
+    name: "Elite Staffing",
     activeWorkers: 18,
     totalWorkers: 45,
     performance: {
@@ -79,13 +79,13 @@ const agencies: Agency[] = [
     rating: 4.8,
     status: "active",
     sites: [
-      { name: "The Vault", workers: 12, departments: [{ name: "Warehouse Operative", workers: 8 }, { name: "MHE", workers: 4 }] },
-      { name: "Ellesmere Port", workers: 15, departments: [{ name: "Warehouse Operative", workers: 10 }, { name: "MHE", workers: 5 }] },
+      { name: "Baltimore, MD", workers: 12, departments: [{ name: "Warehouse Operative", workers: 8 }, { name: "MHE", workers: 4 }] },
+      { name: "Dallas Fort-Worth, TX", workers: 15, departments: [{ name: "Warehouse Operative", workers: 10 }, { name: "MHE", workers: 5 }] },
     ],
   },
   {
     id: "3",
-    name: "The Results People",
+    name: "Elwood Staffing",
     activeWorkers: 12,
     totalWorkers: 30,
     performance: {
@@ -97,8 +97,8 @@ const agencies: Agency[] = [
     rating: 3.8,
     status: "active",
     sites: [
-      { name: "The Vault", workers: 5, departments: [{ name: "Warehouse Operative", workers: 3 }, { name: "MHE", workers: 2 }] },
-      { name: "The Cube", workers: 12, departments: [{ name: "Warehouse Operative", workers: 8 }, { name: "MHE", workers: 4 }] },
+      { name: "Baltimore, MD", workers: 5, departments: [{ name: "Warehouse Operative", workers: 3 }, { name: "MHE", workers: 2 }] },
+      { name: "Las Vegas, NV", workers: 12, departments: [{ name: "Warehouse Operative", workers: 8 }, { name: "MHE", workers: 4 }] },
     ],
   },
 ];
@@ -391,19 +391,19 @@ const ClientAgencies = ({ onViewWorker }: ClientAgenciesProps) => {
                 <div className="grid grid-cols-2 gap-3 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Warehouse Operative</span>
-                    <span className="font-medium">£{selectedAgency.rateCard.warehouseOp.toFixed(2)}/hr</span>
+                    <span className="font-medium">${selectedAgency.rateCard.warehouseOp.toFixed(2)}/hr</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Picker</span>
-                    <span className="font-medium">£{selectedAgency.rateCard.picker.toFixed(2)}/hr</span>
+                    <span className="font-medium">${selectedAgency.rateCard.picker.toFixed(2)}/hr</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Forklift Driver</span>
-                    <span className="font-medium">£{selectedAgency.rateCard.forklift.toFixed(2)}/hr</span>
+                    <span className="font-medium">${selectedAgency.rateCard.forklift.toFixed(2)}/hr</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Loader</span>
-                    <span className="font-medium">£{selectedAgency.rateCard.loader.toFixed(2)}/hr</span>
+                    <span className="font-medium">${selectedAgency.rateCard.loader.toFixed(2)}/hr</span>
                   </div>
                 </div>
               </div>

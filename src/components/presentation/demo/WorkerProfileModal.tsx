@@ -48,9 +48,9 @@ const getWorkerData = (name: string) => {
   }> = {
     "Marcus Johnson": {
       name: "Marcus Johnson",
-      agency: "Staffline",
+      agency: "Staffmark",
       role: "Warehouse Operative",
-      site: "The Vault",
+      site: "Baltimore, MD",
       department: "Warehouse Operative",
       shift: "Early (06:00-14:00)",
       clockIn: "05:58",
@@ -71,16 +71,16 @@ const getWorkerData = (name: string) => {
         { type: "Tax ID", name: "Social Security Number", status: "verified", icon: "ni", verifiedDate: "Mar 2024" },
       ],
       recentShifts: [
-        { date: "Today", site: "The Vault", department: "Warehouse Operative", hours: 8, status: "In Progress" },
-        { date: "Yesterday", site: "The Vault", department: "Warehouse Operative", hours: 8, status: "Completed" },
-        { date: "Mon 3 Feb", site: "The Vault", department: "MHE", hours: 8, status: "Completed" },
+        { date: "Today", site: "Baltimore, MD", department: "Warehouse Operative", hours: 8, status: "In Progress" },
+        { date: "Yesterday", site: "Baltimore, MD", department: "Warehouse Operative", hours: 8, status: "Completed" },
+        { date: "Mon 3 Feb", site: "Baltimore, MD", department: "MHE", hours: 8, status: "Completed" },
       ],
     },
     "Sarah Williams": {
       name: "Sarah Williams",
-      agency: "Staffline",
+      agency: "Staffmark",
       role: "Warehouse Operative",
-      site: "The Vault",
+      site: "Baltimore, MD",
       department: "Warehouse Operative",
       shift: "Mid (10:00-18:00)",
       clockIn: "10:15",
@@ -101,18 +101,18 @@ const getWorkerData = (name: string) => {
         { type: "Tax ID", name: "Social Security Number", status: "verified", icon: "ni", verifiedDate: "Nov 2023" },
       ],
       recentShifts: [
-        { date: "Today", site: "The Vault", department: "Warehouse Operative", hours: 8, status: "In Progress" },
-        { date: "Yesterday", site: "The Vault", department: "Warehouse Operative", hours: 8, status: "Completed" },
-        { date: "Mon 3 Feb", site: "The Cube", department: "Warehouse Operative", hours: 8, status: "Completed" },
+        { date: "Today", site: "Baltimore, MD", department: "Warehouse Operative", hours: 8, status: "In Progress" },
+        { date: "Yesterday", site: "Baltimore, MD", department: "Warehouse Operative", hours: 8, status: "Completed" },
+        { date: "Mon 3 Feb", site: "Las Vegas, NV", department: "Warehouse Operative", hours: 8, status: "Completed" },
       ],
     },
   };
 
   return workers[name] || {
     name,
-    agency: "Staffline",
+    agency: "Staffmark",
     role: "Warehouse Operative",
-    site: "The Vault",
+    site: "Baltimore, MD",
     department: "Warehouse Operative",
     shift: "Early (06:00-14:00)",
     clockIn: "06:02",
@@ -126,8 +126,8 @@ const getWorkerData = (name: string) => {
     etaPublicTransport: "40 min",
     compliance: defaultCompliance,
     recentShifts: [
-      { date: "Today", site: "The Vault", department: "Warehouse Operative", hours: 8, status: "In Progress" },
-      { date: "Yesterday", site: "The Vault", department: "Warehouse Operative", hours: 8, status: "Completed" },
+      { date: "Today", site: "Baltimore, MD", department: "Warehouse Operative", hours: 8, status: "In Progress" },
+      { date: "Yesterday", site: "Baltimore, MD", department: "Warehouse Operative", hours: 8, status: "Completed" },
     ],
   };
 };
