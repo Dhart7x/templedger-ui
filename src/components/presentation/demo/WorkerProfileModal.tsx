@@ -19,13 +19,12 @@ interface ComplianceDocument {
 // Mock worker data - in a real app this would come from context/API
 const getWorkerData = (name: string) => {
   const defaultCompliance: ComplianceDocument[] = [
-    { type: "ID Document", name: "Passport / Driving License", status: "verified", expiry: "Dec 2030", icon: "passport", verifiedDate: "Jan 2024" },
-    { type: "Address", name: "Proof of Address", status: "verified", icon: "address", verifiedDate: "Jan 2024" },
-    { type: "Right to Work", name: "Right to Work", status: "verified", expiry: "Nov 2025", icon: "right-to-work", verifiedDate: "Jan 2024" },
-    { type: "References", name: "References (2)", status: "verified", icon: "reference", verifiedDate: "Jan 2024" },
-    { type: "DBS", name: "Criminal Record Check", status: "verified", expiry: "Jan 2027", icon: "dbs", verifiedDate: "Jan 2024" },
-    { type: "Bank", name: "Bank Details", status: "verified", icon: "bank", verifiedDate: "Jan 2024" },
-    { type: "NI", name: "NI Number", status: "verified", icon: "ni", verifiedDate: "Jan 2024" },
+    { type: "ID Document", name: "US Passport", status: "verified", expiry: "Dec 2030", icon: "passport", verifiedDate: "Jan 2024" },
+    { type: "Address", name: "Permanent Residence Card", status: "verified", icon: "address", verifiedDate: "Jan 2024" },
+    { type: "Work Authorization", name: "I9 Verification", status: "verified", expiry: "Nov 2025", icon: "right-to-work", verifiedDate: "Jan 2024" },
+    { type: "Visa", name: "Visa Verification", status: "verified", icon: "reference", verifiedDate: "Jan 2024" },
+    { type: "Background Check", name: "Background Check", status: "verified", expiry: "Jan 2027", icon: "dbs", verifiedDate: "Jan 2024" },
+    { type: "Tax ID", name: "Social Security Number", status: "verified", icon: "ni", verifiedDate: "Jan 2024" },
   ];
 
   const workers: Record<string, {
@@ -64,13 +63,12 @@ const getWorkerData = (name: string) => {
       etaCar: "18 min",
       etaPublicTransport: "45 min",
       compliance: [
-        { type: "ID Document", name: "Passport", status: "verified", expiry: "Dec 2028", icon: "passport", verifiedDate: "Mar 2024" },
-        { type: "Address", name: "Proof of Address", status: "verified", icon: "address", verifiedDate: "Mar 2024" },
-        { type: "Right to Work", name: "Right to Work (British Citizen)", status: "verified", expiry: "Dec 2026", icon: "right-to-work", verifiedDate: "Mar 2024" },
-        { type: "References", name: "References (2)", status: "verified", icon: "reference", verifiedDate: "Mar 2024" },
-        { type: "DBS", name: "Basic DBS Check", status: "verified", expiry: "Mar 2027", icon: "dbs", verifiedDate: "Mar 2024" },
-        { type: "Bank", name: "Bank Details", status: "verified", icon: "bank", verifiedDate: "Mar 2024" },
-        { type: "NI", name: "NI Number", status: "verified", icon: "ni", verifiedDate: "Mar 2024" },
+        { type: "ID Document", name: "US Passport", status: "verified", expiry: "Dec 2028", icon: "passport", verifiedDate: "Mar 2024" },
+        { type: "Address", name: "Permanent Residence Card", status: "verified", icon: "address", verifiedDate: "Mar 2024" },
+        { type: "Work Authorization", name: "I9 Verification (US Citizen)", status: "verified", expiry: "Dec 2026", icon: "right-to-work", verifiedDate: "Mar 2024" },
+        { type: "Visa", name: "Visa Verification", status: "verified", icon: "reference", verifiedDate: "Mar 2024" },
+        { type: "Background Check", name: "Background Check", status: "verified", expiry: "Mar 2027", icon: "dbs", verifiedDate: "Mar 2024" },
+        { type: "Tax ID", name: "Social Security Number", status: "verified", icon: "ni", verifiedDate: "Mar 2024" },
       ],
       recentShifts: [
         { date: "Today", site: "The Vault", department: "Warehouse Operative", hours: 8, status: "In Progress" },
@@ -95,13 +93,12 @@ const getWorkerData = (name: string) => {
       etaCar: "25 min",
       etaPublicTransport: "55 min",
       compliance: [
-        { type: "ID Document", name: "Driving License", status: "verified", expiry: "Aug 2030", icon: "passport", verifiedDate: "Nov 2023" },
-        { type: "Address", name: "Proof of Address", status: "verified", icon: "address", verifiedDate: "Nov 2023" },
-        { type: "Right to Work", name: "Right to Work (EU Settled Status)", status: "expiring", expiry: "Feb 2025", icon: "right-to-work", verifiedDate: "Nov 2023" },
-        { type: "References", name: "References (2)", status: "verified", icon: "reference", verifiedDate: "Nov 2023" },
-        { type: "DBS", name: "Criminal Record Check", status: "verified", expiry: "Nov 2026", icon: "dbs", verifiedDate: "Nov 2023" },
-        { type: "Bank", name: "Bank Details", status: "verified", icon: "bank", verifiedDate: "Nov 2023" },
-        { type: "NI", name: "NI Number", status: "verified", icon: "ni", verifiedDate: "Nov 2023" },
+        { type: "ID Document", name: "US Passport", status: "verified", expiry: "Aug 2030", icon: "passport", verifiedDate: "Nov 2023" },
+        { type: "Address", name: "Permanent Residence Card", status: "verified", icon: "address", verifiedDate: "Nov 2023" },
+        { type: "Work Authorization", name: "I9 Verification (Work Visa)", status: "expiring", expiry: "Feb 2025", icon: "right-to-work", verifiedDate: "Nov 2023" },
+        { type: "Visa", name: "Visa Verification", status: "verified", icon: "reference", verifiedDate: "Nov 2023" },
+        { type: "Background Check", name: "Background Check", status: "verified", expiry: "Nov 2026", icon: "dbs", verifiedDate: "Nov 2023" },
+        { type: "Tax ID", name: "Social Security Number", status: "verified", icon: "ni", verifiedDate: "Nov 2023" },
       ],
       recentShifts: [
         { date: "Today", site: "The Vault", department: "Warehouse Operative", hours: 8, status: "In Progress" },
