@@ -48,7 +48,7 @@ const SlideRootCause = () => {
                   initial={{ scale: 0.8, rotate: -10 }}
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ duration: 0.4, delay: 0.3 + index * 0.12 }}
-                  className="w-8 h-8 md:w-10 md:h-10 rounded-lg trust-gradient flex items-center justify-center flex-shrink-0"
+                  className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-primary flex items-center justify-center flex-shrink-0"
                 >
                   <item.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
                 </motion.div>

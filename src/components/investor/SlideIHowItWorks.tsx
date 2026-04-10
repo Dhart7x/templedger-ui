@@ -150,7 +150,7 @@
                      transition={{ duration: 0.3, delay: 0.2 + index * 0.08 }}
                      className="flex items-start gap-3"
                    >
-                     <div className="w-5 h-5 rounded-full trust-gradient flex items-center justify-center flex-shrink-0 mt-0.5">
+                     <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
                        <span className="text-[9px] font-bold text-foreground">{index + 1}</span>
                      </div>
                      <span className="text-sm text-foreground">{step}</span>
@@ -192,7 +192,7 @@
              <Button
                size="lg"
                onClick={handleLaunchDemo}
-               className="text-sm px-6 py-4 rounded-xl trust-gradient hover:opacity-90 transition-opacity group"
+               className="text-sm px-6 py-4 rounded-xl bg-primary hover:opacity-90 transition-opacity group"
              >
                <Play className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
                Interactive Demo
@@ -227,14 +227,14 @@
              className="w-full max-w-md"
            >
              <div className="flex flex-col items-center mb-8">
-               <div className="w-16 h-16 rounded-2xl trust-gradient flex items-center justify-center mb-4">
+               <div className="w-16 h-16 rounded-lg bg-primary flex items-center justify-center mb-4">
                  <Shield className="w-8 h-8 text-foreground" />
                </div>
                <h1 className="text-2xl font-bold text-foreground">Temp Ledger</h1>
                <p className="text-sm text-muted-foreground mt-1">Demo Environment</p>
              </div>
  
-             <div className="bg-card border border-border rounded-xl p-6 shadow-xl">
+             <div className="bg-card border border-border rounded-xl p-6">
                <h2 className="text-lg font-semibold text-foreground mb-6 text-center">
                  Sign in to Demo
                </h2>
@@ -276,7 +276,7 @@
  
                  <Button
                    onClick={handleEnterDemo}
-                   className="w-full mt-6 trust-gradient hover:opacity-90 transition-opacity"
+                   className="w-full mt-6 bg-primary hover:opacity-90 transition-opacity"
                    size="lg"
                  >
                    Enter Demo
@@ -407,7 +407,7 @@
          initial={{ opacity: 0, y: 20 }}
          animate={{ opacity: 1, y: 0 }}
          transition={{ duration: 0.3 }}
-         className="flex-1 flex overflow-hidden m-4 rounded-lg border border-border shadow-xl"
+         className="flex-1 flex overflow-hidden m-4 rounded-lg border border-border"
        >
          {viewMode === "labour-user" ? (
            <>

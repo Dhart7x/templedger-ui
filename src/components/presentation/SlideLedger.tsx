@@ -14,15 +14,6 @@ const ledgerSteps = [
 const SlideLedger = () => {
   return (
     <Slide className="relative overflow-hidden">
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="absolute inset-0 overflow-hidden pointer-events-none"
-      >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
-      </motion.div>
-
       <div className="relative z-10 max-w-5xl mx-auto w-full">
         {/* Header */}
         <motion.div
@@ -68,9 +59,9 @@ const SlideLedger = () => {
                       type: "spring",
                       stiffness: 300
                     }}
-                    className="w-10 h-10 md:w-12 md:h-12 rounded-full trust-gradient flex items-center justify-center z-10 flex-shrink-0"
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary flex items-center justify-center z-10 flex-shrink-0"
                   >
-                    <span className="text-sm md:text-base font-bold text-foreground">{index + 1}</span>
+                    <span className="text-sm md:text-base font-bold text-primary-foreground">{index + 1}</span>
                   </motion.div>
                   <div className="flex-1 p-3 md:p-4 rounded-lg bg-card border border-border">
                     <span className="text-sm md:text-base text-foreground font-medium">{step}</span>

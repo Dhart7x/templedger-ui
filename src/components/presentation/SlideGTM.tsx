@@ -78,17 +78,17 @@ const SlideGTM = () => {
               </div>
 
               {/* Top node - Agencies adopt (12 o'clock) */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-primary text-primary-foreground shadow-lg">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-primary text-primary-foreground">
                 <span className="text-[9px] md:text-xs font-medium whitespace-nowrap">Agencies adopt</span>
               </div>
 
               {/* Bottom-right node - Clients demand (5 o'clock position) */}
-              <div className="absolute bottom-[15%] right-0 translate-x-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-accent text-accent-foreground shadow-lg">
+              <div className="absolute bottom-[15%] right-0 translate-x-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-accent text-accent-foreground">
                 <span className="text-[9px] md:text-xs font-medium whitespace-nowrap">Clients demand</span>
               </div>
 
               {/* Bottom-left node - Lenders require (7 o'clock position) */}
-              <div className="absolute bottom-[15%] left-0 -translate-x-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-accent text-accent-foreground shadow-lg">
+              <div className="absolute bottom-[15%] left-0 -translate-x-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-accent text-accent-foreground">
                 <span className="text-[9px] md:text-xs font-medium whitespace-nowrap">Lenders require</span>
               </div>
 
@@ -138,7 +138,7 @@ const SlideGTM = () => {
                 className="p-3 md:p-4 rounded-xl bg-card border border-border"
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg trust-gradient flex items-center justify-center">
+                  <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-primary flex items-center justify-center">
                     <item.icon className="w-3.5 h-3.5 md:w-4 md:h-4 text-foreground" />
                   </div>
                   <span className="text-xs md:text-sm font-semibold text-foreground">{item.title}</span>

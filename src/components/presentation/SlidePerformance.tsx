@@ -17,15 +17,6 @@ const metrics = [
 const SlidePerformance = () => {
   return (
     <Slide className="relative overflow-hidden">
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="absolute inset-0 overflow-hidden pointer-events-none"
-      >
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl" />
-      </motion.div>
-
       <div className="relative z-10 max-w-5xl mx-auto w-full md:h-full md:flex md:flex-col">
         {/* Header */}
         <motion.div
@@ -58,7 +49,7 @@ const SlidePerformance = () => {
                     initial={{ scale: 0.8 }}
                     animate={{ scale: 1 }}
                     transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
-                    className="w-6 h-6 md:w-10 md:h-10 rounded-md md:rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0"
+                    className="w-6 h-6 md:w-10 md:h-10 rounded-md md:rounded-lg bg-muted flex items-center justify-center flex-shrink-0"
                   >
                     <item.icon className="w-3 h-3 md:w-5 md:h-5 text-primary" />
                   </motion.div>

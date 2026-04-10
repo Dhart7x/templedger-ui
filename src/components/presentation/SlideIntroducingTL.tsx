@@ -43,7 +43,7 @@ const SlideIntroducingTL = ({ onDemoStateChange }: SlideIntroducingTLProps) => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-2 md:mb-3"
         >
-          Introducing <span className="trust-gradient-text">Temp Ledger</span>
+          Introducing <span className="bg-primary-text">Temp Ledger</span>
         </motion.h2>
 
         {/* Subtitle */}
@@ -65,7 +65,7 @@ const SlideIntroducingTL = ({ onDemoStateChange }: SlideIntroducingTLProps) => {
           <Button
             size="lg"
             onClick={handleLaunchDemo}
-            className="text-base md:text-lg px-8 py-6 md:px-10 md:py-8 rounded-xl trust-gradient hover:opacity-90 transition-opacity group"
+            className="text-base md:text-lg px-8 py-6 md:px-10 md:py-8 rounded-xl bg-primary hover:opacity-90 transition-opacity group"
           >
             <Play className="w-5 h-5 md:w-6 md:h-6 mr-3 group-hover:scale-110 transition-transform" />
             Launch Demo

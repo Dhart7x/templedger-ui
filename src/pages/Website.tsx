@@ -62,7 +62,7 @@
              transition={{ duration: 0.8 }}
            >
              <div className="flex items-center justify-center gap-3 mb-8">
-               <div className="w-10 h-10 rounded-lg trust-gradient flex items-center justify-center">
+               <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
                  <Shield className="w-5 h-5 text-foreground" />
                </div>
                <span className="text-xl font-semibold text-foreground">Temp Ledger</span>
@@ -230,7 +230,7 @@
        <section className="min-h-screen flex flex-col justify-center px-6 py-24 bg-card/30 border-t border-border/30">
          <div className="max-w-3xl mx-auto">
            <motion.div {...fadeInUp} className="text-center mb-12">
-             <div className="w-14 h-14 rounded-xl trust-gradient flex items-center justify-center mx-auto mb-6">
+             <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center mx-auto mb-6">
                <BarChart3 className="w-7 h-7 text-foreground" />
              </div>
              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">

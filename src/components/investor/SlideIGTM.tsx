@@ -32,7 +32,7 @@ const SlideIGTM = () => {
               transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
               className="flex items-center gap-4 p-4 mb-3 rounded-xl bg-card border border-border"
             >
-              <div className="w-10 h-10 rounded-lg trust-gradient flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
                 <item.icon className="w-5 h-5 text-foreground" />
               </div>
               <span className="text-foreground">{item.text}</span>

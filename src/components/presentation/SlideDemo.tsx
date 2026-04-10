@@ -54,10 +54,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   const [activeClientView, setActiveClientView] = useState("live-snapshot");
   const [activeAgencyView, setActiveAgencyView] = useState("live-snapshot");
   const [selectedWorkerName, setSelectedWorkerName] = useState<string | null>(null);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const saved = localStorage.getItem("demo-theme");
-    return saved ? saved === "dark" : true;
-  });
+  const isDarkMode = true;
   const { notifications, bookings } = useDemoContext();
 
   const handleViewWorker = (workerName: string) => {
@@ -107,14 +104,14 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
             className="w-full max-w-md"
           >
             <div className="flex flex-col items-center mb-8">
-              <div className="w-16 h-16 rounded-2xl trust-gradient flex items-center justify-center mb-4">
+              <div className="w-16 h-16 rounded-lg bg-primary flex items-center justify-center mb-4">
                 <Shield className="w-8 h-8 text-foreground" />
               </div>
               <h1 className="text-2xl font-bold text-foreground">Temp Ledger</h1>
               <p className="text-sm text-muted-foreground mt-1">Demo Environment</p>
             </div>
 
-            <div className="bg-card border border-border rounded-xl p-6 shadow-xl">
+            <div className="bg-card border border-border rounded-xl p-6">
               <h2 className="text-lg font-semibold text-foreground mb-6 text-center">
                 Sign in to Demo
               </h2>
@@ -160,7 +157,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
 
                 <Button
                   onClick={handleEnterDemo}
-                  className="w-full mt-6 trust-gradient hover:opacity-90 transition-opacity"
+                  className="w-full mt-6 bg-primary hover:opacity-90 transition-opacity"
                   size="lg"
                 >
                   Enter Demo
@@ -233,7 +230,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
 
   // Main demo UI
   return (
-    <div className={`w-full h-full flex flex-col ${isDarkMode ? "" : "light"}`} style={{ background: "hsl(var(--background))", color: "hsl(var(--foreground))" }}>
+    <div className="w-full h-full flex flex-col" style={{ background: "hsl(var(--background))", color: "hsl(var(--foreground))" }}>
       {/* Demo Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/30">
         <div className="flex items-center gap-3">
@@ -274,7 +271,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
 
         {/* Right side controls */}
         <div className="flex items-center gap-3">
-          <ThemeToggle onThemeChange={setIsDarkMode} />
+          
           
           {/* Notification Bell */}
           <button
@@ -303,7 +300,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="flex-1 flex overflow-hidden m-4 rounded-lg border border-border shadow-xl"
+        className="flex-1 flex overflow-hidden m-4 rounded-lg border border-border"
       >
         {viewMode === "client" ? (
           <>

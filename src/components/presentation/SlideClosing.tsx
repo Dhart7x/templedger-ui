@@ -22,7 +22,7 @@ const SlideClosing = () => {
           <p className="text-sm md:text-xl text-foreground">
             Staffing only works when execution is visible, enforced, and shared.
           </p>
-          <p className="text-base md:text-xl trust-gradient-text font-semibold">
+          <p className="text-base md:text-xl bg-primary-text font-semibold">
             Temp Ledger makes that the default.
           </p>
         </motion.div>
