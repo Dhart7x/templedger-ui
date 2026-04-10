@@ -45,44 +45,44 @@ interface NewWorker {
 }
 
 const liveWorkers: LiveWorker[] = [
-  { id: "1", name: "John Patel", agency: "Staffline", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:02", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 32, attendance: 98, rating: 4.7 },
-  { id: "2", name: "Maria Santos", agency: "KPI", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:00", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 40, attendance: 100, rating: 4.9 },
-  { id: "3", name: "Ahmed Khan", agency: "The Results People", site: "The Vault", department: "MHE", role: "MHE Operative", clockIn: "05:58", shift: "06:00–14:00", hoursToday: 5.6, hoursWeek: 44, attendance: 95, rating: 4.5 },
-  { id: "4", name: "Lucy Brown", agency: "Staffline", site: "The Cube", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:01", shift: "06:00–14:00", hoursToday: 5.4, hoursWeek: 38, attendance: 97, rating: 4.8 },
-  { id: "5", name: "Priya Sharma", agency: "KPI", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:00", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 40, attendance: 100, rating: 5.0 },
-  { id: "6", name: "Marcus Johnson", agency: "Staffline", site: "The Vault", department: "MHE", role: "MHE Operative", clockIn: "05:55", shift: "06:00–14:00", hoursToday: 5.7, hoursWeek: 42, attendance: 99, rating: 4.9 },
-  { id: "7", name: "Fatima Ali", agency: "KPI", site: "Ellesmere Port", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:03", shift: "06:00–14:00", hoursToday: 5.3, hoursWeek: 35, attendance: 96, rating: 4.6 },
-  { id: "8", name: "Daniel Kim", agency: "The Results People", site: "The Vault", department: "MHE", role: "MHE Operative", clockIn: "06:01", shift: "06:00–14:00", hoursToday: 5.4, hoursWeek: 36, attendance: 97, rating: 4.7 },
-  { id: "9", name: "Elena Rodriguez", agency: "Staffline", site: "The Cube", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "14:02", shift: "14:00–22:00", hoursToday: 2.0, hoursWeek: 28, attendance: 93, rating: 4.3 },
-  { id: "10", name: "Robert Taylor", agency: "KPI", site: "Runcorn", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "13:58", shift: "14:00–22:00", hoursToday: 2.1, hoursWeek: 30, attendance: 94, rating: 4.4 },
+  { id: "1", name: "John Patel", agency: "Staffline", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:02", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 32, attendance: 98, rating: 4.7 },
+  { id: "2", name: "Maria Santos", agency: "KPI", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:00", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 40, attendance: 100, rating: 4.9 },
+  { id: "3", name: "Ahmed Khan", agency: "The Results People", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", clockIn: "05:58", shift: "06:00–14:00", hoursToday: 5.6, hoursWeek: 44, attendance: 95, rating: 4.5 },
+  { id: "4", name: "Lucy Brown", agency: "Staffline", site: "Las Vegas, NV", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:01", shift: "06:00–14:00", hoursToday: 5.4, hoursWeek: 38, attendance: 97, rating: 4.8 },
+  { id: "5", name: "Priya Sharma", agency: "KPI", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:00", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 40, attendance: 100, rating: 5.0 },
+  { id: "6", name: "Marcus Johnson", agency: "Staffline", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", clockIn: "05:55", shift: "06:00–14:00", hoursToday: 5.7, hoursWeek: 42, attendance: 99, rating: 4.9 },
+  { id: "7", name: "Fatima Ali", agency: "KPI", site: "Dallas Fort-Worth, TX", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:03", shift: "06:00–14:00", hoursToday: 5.3, hoursWeek: 35, attendance: 96, rating: 4.6 },
+  { id: "8", name: "Daniel Kim", agency: "The Results People", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", clockIn: "06:01", shift: "06:00–14:00", hoursToday: 5.4, hoursWeek: 36, attendance: 97, rating: 4.7 },
+  { id: "9", name: "Elena Rodriguez", agency: "Staffline", site: "Las Vegas, NV", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "14:02", shift: "14:00–22:00", hoursToday: 2.0, hoursWeek: 28, attendance: 93, rating: 4.3 },
+  { id: "10", name: "Robert Taylor", agency: "KPI", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "13:58", shift: "14:00–22:00", hoursToday: 2.1, hoursWeek: 30, attendance: 94, rating: 4.4 },
 ];
 
 const standbyWorkers: StandbyWorker[] = [
-  { id: "S1", name: "Emma Wilson", agency: "KPI", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["M", "L"], lastShift: "2 days ago", attendance: 97, rating: 4.7, distance: { miles: 3.2, carTime: "12 min", publicTransportTime: "25 min" } },
-  { id: "S2", name: "Michael Brown", agency: "Staffline", site: "The Vault", department: "MHE", role: "MHE Operative", preferredShifts: ["L", "N"], lastShift: "3 days ago", attendance: 94, rating: 4.4, distance: { miles: 5.1, carTime: "18 min", publicTransportTime: "35 min" } },
-  { id: "S3", name: "David Chen", agency: "The Results People", site: "The Cube", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E", "M"], lastShift: "1 day ago", attendance: 96, rating: 4.6, distance: { miles: 2.8, carTime: "10 min", publicTransportTime: "22 min" } },
-  { id: "S4", name: "Rachel Green", agency: "KPI", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E", "M"], lastShift: "Today", attendance: 95, rating: 4.5, distance: { miles: 4.5, carTime: "15 min", publicTransportTime: "30 min" } },
-  { id: "S5", name: "Tom Hardy", agency: "Staffline", site: "The Vault", department: "MHE", role: "MHE Operative", preferredShifts: ["E", "M", "L"], lastShift: "5 days ago", attendance: 98, rating: 4.9, distance: { miles: 6.2, carTime: "22 min", publicTransportTime: "45 min" } },
-  { id: "S6", name: "Angela Martinez", agency: "The Results People", site: "Ellesmere Port", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["M", "L"], lastShift: "1 week ago", attendance: 93, rating: 4.3, distance: { miles: 4.0, carTime: "14 min", publicTransportTime: "28 min" } },
-  { id: "S7", name: "Kevin Wright", agency: "KPI", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E", "M"], lastShift: "2 days ago", attendance: 99, rating: 4.8, distance: { miles: 2.5, carTime: "8 min", publicTransportTime: "18 min" } },
-  { id: "S8", name: "Sophie Turner", agency: "Staffline", site: "The Cube", department: "MHE", role: "MHE Operative", preferredShifts: ["M", "L", "N"], lastShift: "4 days ago", attendance: 91, rating: 4.1, distance: { miles: 7.3, carTime: "25 min", publicTransportTime: "50 min" } },
-  { id: "S9", name: "Nathan Brooks", agency: "The Results People", site: "Bedford", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E"], lastShift: "Yesterday", attendance: 95, rating: 4.5, distance: { miles: 3.8, carTime: "13 min", publicTransportTime: "26 min" } },
-  { id: "S10", name: "Olivia Parker", agency: "KPI", site: "Runcorn", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E", "M", "L"], lastShift: "Today", attendance: 97, rating: 4.7, distance: { miles: 1.9, carTime: "6 min", publicTransportTime: "12 min" } },
+  { id: "S1", name: "Emma Wilson", agency: "KPI", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["M", "L"], lastShift: "2 days ago", attendance: 97, rating: 4.7, distance: { miles: 3.2, carTime: "12 min", publicTransportTime: "25 min" } },
+  { id: "S2", name: "Michael Brown", agency: "Staffline", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", preferredShifts: ["L", "N"], lastShift: "3 days ago", attendance: 94, rating: 4.4, distance: { miles: 5.1, carTime: "18 min", publicTransportTime: "35 min" } },
+  { id: "S3", name: "David Chen", agency: "The Results People", site: "Las Vegas, NV", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E", "M"], lastShift: "1 day ago", attendance: 96, rating: 4.6, distance: { miles: 2.8, carTime: "10 min", publicTransportTime: "22 min" } },
+  { id: "S4", name: "Rachel Green", agency: "KPI", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E", "M"], lastShift: "Today", attendance: 95, rating: 4.5, distance: { miles: 4.5, carTime: "15 min", publicTransportTime: "30 min" } },
+  { id: "S5", name: "Tom Hardy", agency: "Staffline", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", preferredShifts: ["E", "M", "L"], lastShift: "5 days ago", attendance: 98, rating: 4.9, distance: { miles: 6.2, carTime: "22 min", publicTransportTime: "45 min" } },
+  { id: "S6", name: "Angela Martinez", agency: "The Results People", site: "Dallas Fort-Worth, TX", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["M", "L"], lastShift: "1 week ago", attendance: 93, rating: 4.3, distance: { miles: 4.0, carTime: "14 min", publicTransportTime: "28 min" } },
+  { id: "S7", name: "Kevin Wright", agency: "KPI", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E", "M"], lastShift: "2 days ago", attendance: 99, rating: 4.8, distance: { miles: 2.5, carTime: "8 min", publicTransportTime: "18 min" } },
+  { id: "S8", name: "Sophie Turner", agency: "Staffline", site: "Las Vegas, NV", department: "MHE", role: "MHE Operative", preferredShifts: ["M", "L", "N"], lastShift: "4 days ago", attendance: 91, rating: 4.1, distance: { miles: 7.3, carTime: "25 min", publicTransportTime: "50 min" } },
+  { id: "S9", name: "Nathan Brooks", agency: "The Results People", site: "Las Vegas, NV", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E"], lastShift: "Yesterday", attendance: 95, rating: 4.5, distance: { miles: 3.8, carTime: "13 min", publicTransportTime: "26 min" } },
+  { id: "S10", name: "Olivia Parker", agency: "KPI", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E", "M", "L"], lastShift: "Today", attendance: 97, rating: 4.7, distance: { miles: 1.9, carTime: "6 min", publicTransportTime: "12 min" } },
 ];
 
 const newWorkers: NewWorker[] = [
-  { id: "N1", name: "Ryan Hughes", agency: "Staffline", site: "The Vault", role: "Warehouse Operative", registeredDate: "2025-02-08", experience: ["Warehouse Operative"], preferredShifts: ["M", "L"], status: "pending-induction" },
-  { id: "N2", name: "Sophie Turner", agency: "KPI", site: "The Vault", role: "Warehouse Operative", registeredDate: "2025-02-07", experience: [], preferredShifts: ["E", "M", "L"], status: "documents-pending" },
-  { id: "N3", name: "Alex Foster", agency: "The Results People", site: "The Cube", role: "Warehouse Operative", registeredDate: "2025-02-06", experience: ["Warehouse Operative"], preferredShifts: ["E", "M"], status: "ready" },
-  { id: "N4", name: "Maya Singh", agency: "Staffline", site: "The Vault", role: "MHE Operative", registeredDate: "2025-02-05", experience: ["MHE"], preferredShifts: ["M"], status: "pending-induction" },
-  { id: "N5", name: "Jordan Blake", agency: "KPI", site: "Ellesmere Port", role: "MHE Operative", registeredDate: "2025-02-04", experience: ["MHE", "Warehouse Operative"], preferredShifts: ["E", "M", "L"], status: "ready" },
-  { id: "N6", name: "Casey Morgan", agency: "The Results People", site: "Runcorn", role: "Warehouse Operative", registeredDate: "2025-02-03", experience: [], preferredShifts: ["L", "N"], status: "documents-pending" },
-  { id: "N7", name: "Taylor Reed", agency: "Staffline", site: "The Vault", role: "Warehouse Operative", registeredDate: "2025-02-01", experience: ["Warehouse Operative"], preferredShifts: ["E"], status: "ready" },
-  { id: "N8", name: "Morgan Chen", agency: "KPI", site: "The Cube", role: "Warehouse Operative", registeredDate: "2025-01-28", experience: ["Warehouse Operative"], preferredShifts: ["M", "L"], status: "ready" },
-  { id: "N9", name: "Jamie Scott", agency: "Staffline", site: "Bedford", role: "MHE Operative", registeredDate: "2025-01-25", experience: [], preferredShifts: ["N"], status: "pending-induction" },
-  { id: "N10", name: "Sam Roberts", agency: "The Results People", site: "The Vault", role: "Warehouse Operative", registeredDate: "2025-01-20", experience: ["Warehouse Operative"], preferredShifts: ["E", "M"], status: "ready" },
-  { id: "N11", name: "Drew Campbell", agency: "KPI", site: "Ellesmere Port", role: "Warehouse Operative", registeredDate: "2025-01-15", experience: [], preferredShifts: ["M"], status: "documents-pending" },
-  { id: "N12", name: "Pat Sullivan", agency: "Staffline", site: "The Cube", role: "MHE Operative", registeredDate: "2025-01-10", experience: ["MHE"], preferredShifts: ["E", "M"], status: "ready" },
+  { id: "N1", name: "Ryan Hughes", agency: "Staffline", site: "Baltimore, MD", role: "Warehouse Operative", registeredDate: "2025-02-08", experience: ["Warehouse Operative"], preferredShifts: ["M", "L"], status: "pending-induction" },
+  { id: "N2", name: "Sophie Turner", agency: "KPI", site: "Baltimore, MD", role: "Warehouse Operative", registeredDate: "2025-02-07", experience: [], preferredShifts: ["E", "M", "L"], status: "documents-pending" },
+  { id: "N3", name: "Alex Foster", agency: "The Results People", site: "Las Vegas, NV", role: "Warehouse Operative", registeredDate: "2025-02-06", experience: ["Warehouse Operative"], preferredShifts: ["E", "M"], status: "ready" },
+  { id: "N4", name: "Maya Singh", agency: "Staffline", site: "Baltimore, MD", role: "MHE Operative", registeredDate: "2025-02-05", experience: ["MHE"], preferredShifts: ["M"], status: "pending-induction" },
+  { id: "N5", name: "Jordan Blake", agency: "KPI", site: "Dallas Fort-Worth, TX", role: "MHE Operative", registeredDate: "2025-02-04", experience: ["MHE", "Warehouse Operative"], preferredShifts: ["E", "M", "L"], status: "ready" },
+  { id: "N6", name: "Casey Morgan", agency: "The Results People", site: "Baltimore, MD", role: "Warehouse Operative", registeredDate: "2025-02-03", experience: [], preferredShifts: ["L", "N"], status: "documents-pending" },
+  { id: "N7", name: "Taylor Reed", agency: "Staffline", site: "Baltimore, MD", role: "Warehouse Operative", registeredDate: "2025-02-01", experience: ["Warehouse Operative"], preferredShifts: ["E"], status: "ready" },
+  { id: "N8", name: "Morgan Chen", agency: "KPI", site: "Las Vegas, NV", role: "Warehouse Operative", registeredDate: "2025-01-28", experience: ["Warehouse Operative"], preferredShifts: ["M", "L"], status: "ready" },
+  { id: "N9", name: "Jamie Scott", agency: "Staffline", site: "Las Vegas, NV", role: "MHE Operative", registeredDate: "2025-01-25", experience: [], preferredShifts: ["N"], status: "pending-induction" },
+  { id: "N10", name: "Sam Roberts", agency: "The Results People", site: "Baltimore, MD", role: "Warehouse Operative", registeredDate: "2025-01-20", experience: ["Warehouse Operative"], preferredShifts: ["E", "M"], status: "ready" },
+  { id: "N11", name: "Drew Campbell", agency: "KPI", site: "Dallas Fort-Worth, TX", role: "Warehouse Operative", registeredDate: "2025-01-15", experience: [], preferredShifts: ["M"], status: "documents-pending" },
+  { id: "N12", name: "Pat Sullivan", agency: "Staffline", site: "Las Vegas, NV", role: "MHE Operative", registeredDate: "2025-01-10", experience: ["MHE"], preferredShifts: ["E", "M"], status: "ready" },
 ];
 
 interface ClientWorkersProps {
@@ -224,11 +224,11 @@ const ClientWorkers = ({ onViewWorker }: ClientWorkersProps) => {
               </select>
               <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Sites</option>
-                <option value="The Vault">The Vault</option>
-                <option value="The Cube">The Cube</option>
-                <option value="Ellesmere Port">Ellesmere Port</option>
-                <option value="Runcorn">Runcorn</option>
-                <option value="Bedford">Bedford</option>
+                <option value="Baltimore, MD">Baltimore, MD</option>
+                <option value="Las Vegas, NV">Las Vegas, NV</option>
+                <option value="Dallas Fort-Worth, TX">Dallas Fort-Worth, TX</option>
+                <option value="Baltimore, MD">Baltimore, MD</option>
+                <option value="Las Vegas, NV">Las Vegas, NV</option>
               </select>
             </div>
           </div>
@@ -312,11 +312,11 @@ const ClientWorkers = ({ onViewWorker }: ClientWorkersProps) => {
               </select>
               <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Sites</option>
-                <option value="The Vault">The Vault</option>
-                <option value="The Cube">The Cube</option>
-                <option value="Ellesmere Port">Ellesmere Port</option>
-                <option value="Runcorn">Runcorn</option>
-                <option value="Bedford">Bedford</option>
+                <option value="Baltimore, MD">Baltimore, MD</option>
+                <option value="Las Vegas, NV">Las Vegas, NV</option>
+                <option value="Dallas Fort-Worth, TX">Dallas Fort-Worth, TX</option>
+                <option value="Baltimore, MD">Baltimore, MD</option>
+                <option value="Las Vegas, NV">Las Vegas, NV</option>
               </select>
             </div>
           </div>
@@ -406,11 +406,11 @@ const ClientWorkers = ({ onViewWorker }: ClientWorkersProps) => {
               </select>
               <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Sites</option>
-                <option value="The Vault">The Vault</option>
-                <option value="The Cube">The Cube</option>
-                <option value="Ellesmere Port">Ellesmere Port</option>
-                <option value="Runcorn">Runcorn</option>
-                <option value="Bedford">Bedford</option>
+                <option value="Baltimore, MD">Baltimore, MD</option>
+                <option value="Las Vegas, NV">Las Vegas, NV</option>
+                <option value="Dallas Fort-Worth, TX">Dallas Fort-Worth, TX</option>
+                <option value="Baltimore, MD">Baltimore, MD</option>
+                <option value="Las Vegas, NV">Las Vegas, NV</option>
               </select>
               <div className="flex items-center bg-card border border-border rounded">
                 {(["week", "month", "quarter", "year"] as const).map((t) => (

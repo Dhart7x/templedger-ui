@@ -31,7 +31,7 @@ interface DepartmentSpend {
 
 const overallSpend: SiteSpend[] = [
   {
-    category: "The Vault",
+    category: "Baltimore, MD",
     data: {
       week: { amount: 85500, hours: 6840, workers: 95, change: 5.2, overtimeHours: 540 },
       month: { amount: 342000, hours: 27360, workers: 102, change: 3.8, overtimeHours: 2160 },
@@ -39,7 +39,7 @@ const overallSpend: SiteSpend[] = [
     },
   },
   {
-    category: "The Cube",
+    category: "Las Vegas, NV",
     data: {
       week: { amount: 54600, hours: 4368, workers: 72, change: -2.1, overtimeHours: 288 },
       month: { amount: 218400, hours: 17472, workers: 78, change: -1.5, overtimeHours: 1152 },
@@ -47,7 +47,7 @@ const overallSpend: SiteSpend[] = [
     },
   },
   {
-    category: "Ellesmere Port",
+    category: "Dallas Fort-Worth, TX",
     data: {
       week: { amount: 44800, hours: 3584, workers: 68, change: 8.4, overtimeHours: 360 },
       month: { amount: 179200, hours: 14336, workers: 74, change: 6.2, overtimeHours: 1440 },
@@ -65,9 +65,9 @@ const agencySpend: AgencySpendData[] = [
       year: { amount: 4665600, hours: 373248, workers: 105, change: 4.8, overtimeHours: 31104 },
     },
     sites: [
-      { name: "The Vault", amount: 55500, hours: 4440, departments: [{ name: "Warehouse Operative", amount: 33300, hours: 2664, overtimeHours: 266 }, { name: "MHE", amount: 22200, hours: 1776, overtimeHours: 178 }] },
-      { name: "The Cube", amount: 30600, hours: 2448, departments: [{ name: "Warehouse Operative", amount: 18360, hours: 1469, overtimeHours: 147 }, { name: "MHE", amount: 12240, hours: 979, overtimeHours: 98 }] },
-      { name: "Ellesmere Port", amount: 11100, hours: 888, departments: [{ name: "Warehouse Operative", amount: 6660, hours: 533, overtimeHours: 53 }, { name: "MHE", amount: 4440, hours: 355, overtimeHours: 36 }] },
+      { name: "Baltimore, MD", amount: 55500, hours: 4440, departments: [{ name: "Warehouse Operative", amount: 33300, hours: 2664, overtimeHours: 266 }, { name: "MHE", amount: 22200, hours: 1776, overtimeHours: 178 }] },
+      { name: "Las Vegas, NV", amount: 30600, hours: 2448, departments: [{ name: "Warehouse Operative", amount: 18360, hours: 1469, overtimeHours: 147 }, { name: "MHE", amount: 12240, hours: 979, overtimeHours: 98 }] },
+      { name: "Dallas Fort-Worth, TX", amount: 11100, hours: 888, departments: [{ name: "Warehouse Operative", amount: 6660, hours: 533, overtimeHours: 53 }, { name: "MHE", amount: 4440, hours: 355, overtimeHours: 36 }] },
     ],
   },
   {
@@ -78,8 +78,8 @@ const agencySpend: AgencySpendData[] = [
       year: { amount: 2620800, hours: 209664, workers: 72, change: 2.5, overtimeHours: 16773 },
     },
     sites: [
-      { name: "The Vault", amount: 25200, hours: 2016, departments: [{ name: "Warehouse Operative", amount: 15120, hours: 1210, overtimeHours: 121 }, { name: "MHE", amount: 10080, hours: 806, overtimeHours: 81 }] },
-      { name: "Ellesmere Port", amount: 29400, hours: 2352, departments: [{ name: "Warehouse Operative", amount: 17640, hours: 1411, overtimeHours: 141 }, { name: "MHE", amount: 11760, hours: 941, overtimeHours: 94 }] },
+      { name: "Baltimore, MD", amount: 25200, hours: 2016, departments: [{ name: "Warehouse Operative", amount: 15120, hours: 1210, overtimeHours: 121 }, { name: "MHE", amount: 10080, hours: 806, overtimeHours: 81 }] },
+      { name: "Dallas Fort-Worth, TX", amount: 29400, hours: 2352, departments: [{ name: "Warehouse Operative", amount: 17640, hours: 1411, overtimeHours: 141 }, { name: "MHE", amount: 11760, hours: 941, overtimeHours: 94 }] },
     ],
   },
   {
@@ -90,8 +90,8 @@ const agencySpend: AgencySpendData[] = [
       year: { amount: 1281600, hours: 102528, workers: 48, change: 1.5, overtimeHours: 9216 },
     },
     sites: [
-      { name: "The Vault", amount: 9600, hours: 768, departments: [{ name: "Warehouse Operative", amount: 5760, hours: 461, overtimeHours: 46 }, { name: "MHE", amount: 3840, hours: 307, overtimeHours: 31 }] },
-      { name: "The Cube", amount: 17100, hours: 1368, departments: [{ name: "Warehouse Operative", amount: 10260, hours: 821, overtimeHours: 82 }, { name: "MHE", amount: 6840, hours: 547, overtimeHours: 55 }] },
+      { name: "Baltimore, MD", amount: 9600, hours: 768, departments: [{ name: "Warehouse Operative", amount: 5760, hours: 461, overtimeHours: 46 }, { name: "MHE", amount: 3840, hours: 307, overtimeHours: 31 }] },
+      { name: "Las Vegas, NV", amount: 17100, hours: 1368, departments: [{ name: "Warehouse Operative", amount: 10260, hours: 821, overtimeHours: 82 }, { name: "MHE", amount: 6840, hours: 547, overtimeHours: 55 }] },
     ],
   },
 ];

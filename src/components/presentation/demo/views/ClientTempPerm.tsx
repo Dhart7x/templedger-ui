@@ -20,19 +20,19 @@ interface TempPermCandidate {
 }
 
 const candidates: TempPermCandidate[] = [
-  { id: "1", name: "Maria Santos", agency: "KPI", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 18, attendance: 100, punctuality: 98, departments: ["Warehouse Operative", "MHE"], rating: 4.9, eligible: true, hoursWorked: 2880 },
-  { id: "2", name: "John Patel", agency: "Staffline", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 14, attendance: 98, punctuality: 95, departments: ["Warehouse Operative", "MHE"], rating: 4.7, eligible: true, hoursWorked: 2240 },
-  { id: "3", name: "Lucy Brown", agency: "Staffline", site: "The Cube", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 24, attendance: 97, punctuality: 96, departments: ["Warehouse Operative", "MHE"], rating: 4.8, eligible: true, hoursWorked: 3840 },
-  { id: "4", name: "Ahmed Khan", agency: "The Results People", site: "The Vault", department: "MHE", role: "MHE Operative", timeServed: 12, attendance: 95, punctuality: 91, departments: ["MHE"], rating: 4.5, eligible: true, hoursWorked: 1920 },
-  { id: "5", name: "Priya Sharma", agency: "KPI", site: "The Vault", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 10, attendance: 100, punctuality: 100, departments: ["Warehouse Operative"], rating: 5.0, eligible: true, hoursWorked: 1600 },
-  { id: "6", name: "Marcus Johnson", agency: "Staffline", site: "The Vault", department: "MHE", role: "MHE Operative", timeServed: 16, attendance: 99, punctuality: 97, departments: ["MHE", "Warehouse Operative"], rating: 4.9, eligible: true, hoursWorked: 2560 },
-  { id: "7", name: "Fatima Ali", agency: "KPI", site: "Ellesmere Port", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 15, attendance: 96, punctuality: 94, departments: ["Warehouse Operative"], rating: 4.6, eligible: true, hoursWorked: 2400 },
-  { id: "8", name: "Daniel Kim", agency: "The Results People", site: "The Vault", department: "MHE", role: "MHE Operative", timeServed: 11, attendance: 97, punctuality: 95, departments: ["MHE", "Warehouse Operative"], rating: 4.7, eligible: true, hoursWorked: 1760 },
-  { id: "9", name: "Elena Rodriguez", agency: "Staffline", site: "The Cube", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 13, attendance: 93, punctuality: 90, departments: ["Warehouse Operative"], rating: 4.3, eligible: true, hoursWorked: 2080 },
-  { id: "10", name: "Kevin Wright", agency: "KPI", site: "Runcorn", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 20, attendance: 99, punctuality: 98, departments: ["Warehouse Operative", "MHE"], rating: 4.8, eligible: true, hoursWorked: 3200 },
-  { id: "11", name: "Tomasz Nowak", agency: "Staffline", site: "The Vault", department: "MHE", role: "MHE Operative", timeServed: 6, attendance: 85, punctuality: 80, departments: ["MHE"], rating: 3.5, eligible: false, hoursWorked: 960 },
-  { id: "12", name: "Sophie Turner", agency: "The Results People", site: "Ellesmere Port", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 4, attendance: 88, punctuality: 82, departments: ["Warehouse Operative"], rating: 3.8, eligible: false, hoursWorked: 640 },
-  { id: "13", name: "James Wilson", agency: "KPI", site: "The Cube", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 8, attendance: 91, punctuality: 88, departments: ["Warehouse Operative"], rating: 4.0, eligible: false, hoursWorked: 1280 },
+  { id: "1", name: "Maria Santos", agency: "KPI", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 18, attendance: 100, punctuality: 98, departments: ["Warehouse Operative", "MHE"], rating: 4.9, eligible: true, hoursWorked: 2880 },
+  { id: "2", name: "John Patel", agency: "Staffline", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 14, attendance: 98, punctuality: 95, departments: ["Warehouse Operative", "MHE"], rating: 4.7, eligible: true, hoursWorked: 2240 },
+  { id: "3", name: "Lucy Brown", agency: "Staffline", site: "Las Vegas, NV", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 24, attendance: 97, punctuality: 96, departments: ["Warehouse Operative", "MHE"], rating: 4.8, eligible: true, hoursWorked: 3840 },
+  { id: "4", name: "Ahmed Khan", agency: "The Results People", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", timeServed: 12, attendance: 95, punctuality: 91, departments: ["MHE"], rating: 4.5, eligible: true, hoursWorked: 1920 },
+  { id: "5", name: "Priya Sharma", agency: "KPI", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 10, attendance: 100, punctuality: 100, departments: ["Warehouse Operative"], rating: 5.0, eligible: true, hoursWorked: 1600 },
+  { id: "6", name: "Marcus Johnson", agency: "Staffline", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", timeServed: 16, attendance: 99, punctuality: 97, departments: ["MHE", "Warehouse Operative"], rating: 4.9, eligible: true, hoursWorked: 2560 },
+  { id: "7", name: "Fatima Ali", agency: "KPI", site: "Dallas Fort-Worth, TX", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 15, attendance: 96, punctuality: 94, departments: ["Warehouse Operative"], rating: 4.6, eligible: true, hoursWorked: 2400 },
+  { id: "8", name: "Daniel Kim", agency: "The Results People", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", timeServed: 11, attendance: 97, punctuality: 95, departments: ["MHE", "Warehouse Operative"], rating: 4.7, eligible: true, hoursWorked: 1760 },
+  { id: "9", name: "Elena Rodriguez", agency: "Staffline", site: "Las Vegas, NV", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 13, attendance: 93, punctuality: 90, departments: ["Warehouse Operative"], rating: 4.3, eligible: true, hoursWorked: 2080 },
+  { id: "10", name: "Kevin Wright", agency: "KPI", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 20, attendance: 99, punctuality: 98, departments: ["Warehouse Operative", "MHE"], rating: 4.8, eligible: true, hoursWorked: 3200 },
+  { id: "11", name: "Tomasz Nowak", agency: "Staffline", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", timeServed: 6, attendance: 85, punctuality: 80, departments: ["MHE"], rating: 3.5, eligible: false, hoursWorked: 960 },
+  { id: "12", name: "Sophie Turner", agency: "The Results People", site: "Dallas Fort-Worth, TX", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 4, attendance: 88, punctuality: 82, departments: ["Warehouse Operative"], rating: 3.8, eligible: false, hoursWorked: 640 },
+  { id: "13", name: "James Wilson", agency: "KPI", site: "Las Vegas, NV", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 8, attendance: 91, punctuality: 88, departments: ["Warehouse Operative"], rating: 4.0, eligible: false, hoursWorked: 1280 },
 ];
 
 interface ClientTempPermProps {
@@ -102,11 +102,11 @@ const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
             className="text-xs bg-card border border-border rounded px-2 py-1.5"
           >
             <option value="all">All Sites</option>
-            <option value="The Vault">The Vault</option>
-            <option value="The Cube">The Cube</option>
-            <option value="Ellesmere Port">Ellesmere Port</option>
-            <option value="Runcorn">Runcorn</option>
-            <option value="Bedford">Bedford</option>
+            <option value="Baltimore, MD">Baltimore, MD</option>
+            <option value="Las Vegas, NV">Las Vegas, NV</option>
+            <option value="Dallas Fort-Worth, TX">Dallas Fort-Worth, TX</option>
+            <option value="Baltimore, MD">Baltimore, MD</option>
+            <option value="Las Vegas, NV">Las Vegas, NV</option>
           </select>
           <select
             value={departmentFilter}

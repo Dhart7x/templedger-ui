@@ -22,7 +22,7 @@ const ClientBookings = () => {
     role: "Warehouse Operative",
     quantity: 1,
     shift: "06:00–14:00",
-    location: "The Vault - Zone A",
+    location: "Baltimore, MD - Zone A",
     useIntelligentAllocation: false,
   });
 
@@ -65,7 +65,7 @@ const ClientBookings = () => {
       role: "Warehouse Operative",
       quantity: 1,
       shift: "06:00–14:00",
-      location: "The Vault - Zone A",
+      location: "Baltimore, MD - Zone A",
       useIntelligentAllocation: false,
     });
   };
@@ -261,12 +261,12 @@ const ClientBookings = () => {
                   className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm"
                   disabled={isAllocating}
                 >
-                  <option>The Vault - Zone A</option>
-                  <option>The Vault - Zone B</option>
-                  <option>The Cube - Zone A</option>
-                  <option>Ellesmere Port - Zone A</option>
-                  <option>Runcorn - Zone A</option>
-                  <option>Bedford - Zone A</option>
+                  <option>Baltimore, MD - Zone A</option>
+                  <option>Baltimore, MD - Zone B</option>
+                  <option>Las Vegas, NV - Zone A</option>
+                  <option>Dallas Fort-Worth, TX - Zone A</option>
+                  <option>Baltimore, MD - Zone A</option>
+                  <option>Las Vegas, NV - Zone A</option>
                 </select>
               </div>
               
