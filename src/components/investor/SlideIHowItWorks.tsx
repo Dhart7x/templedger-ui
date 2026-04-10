@@ -234,7 +234,7 @@
                <p className="text-sm text-muted-foreground mt-1">Demo Environment</p>
              </div>
  
-             <div className="bg-card border border-border rounded-xl p-6 shadow-xl">
+             <div className="bg-card border border-border rounded-xl p-6">
                <h2 className="text-lg font-semibold text-foreground mb-6 text-center">
                  Sign in to Demo
                </h2>
@@ -407,7 +407,7 @@
          initial={{ opacity: 0, y: 20 }}
          animate={{ opacity: 1, y: 0 }}
          transition={{ duration: 0.3 }}
-         className="flex-1 flex overflow-hidden m-4 rounded-lg border border-border shadow-xl"
+         className="flex-1 flex overflow-hidden m-4 rounded-lg border border-border"
        >
          {viewMode === "labour-user" ? (
            <>

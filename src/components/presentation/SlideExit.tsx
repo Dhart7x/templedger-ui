@@ -53,12 +53,12 @@ const SlideExit = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="p-6 rounded-xl bg-gradient-to-br from-card to-secondary/30 border border-border"
+          className="p-6 rounded-xl bg-card border border-border"
         >
           <div className="flex items-center justify-center gap-2 mb-3">
             <TrendingUp className="w-5 h-5 text-accent" />
           </div>
-          <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
+          <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
             8×–15× ARR
           </div>
           <p className="text-xs text-muted-foreground max-w-md mx-auto">

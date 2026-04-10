@@ -78,17 +78,17 @@ const SlideGTM = () => {
               </div>
 
               {/* Top node - Agencies adopt (12 o'clock) */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-primary text-primary-foreground shadow-lg">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-primary text-primary-foreground">
                 <span className="text-[9px] md:text-xs font-medium whitespace-nowrap">Agencies adopt</span>
               </div>
 
               {/* Bottom-right node - Clients demand (5 o'clock position) */}
-              <div className="absolute bottom-[15%] right-0 translate-x-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-accent text-accent-foreground shadow-lg">
+              <div className="absolute bottom-[15%] right-0 translate-x-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-accent text-accent-foreground">
                 <span className="text-[9px] md:text-xs font-medium whitespace-nowrap">Clients demand</span>
               </div>
 
               {/* Bottom-left node - Lenders require (7 o'clock position) */}
-              <div className="absolute bottom-[15%] left-0 -translate-x-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-accent text-accent-foreground shadow-lg">
+              <div className="absolute bottom-[15%] left-0 -translate-x-1/2 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-accent text-accent-foreground">
                 <span className="text-[9px] md:text-xs font-medium whitespace-nowrap">Lenders require</span>
               </div>
 
