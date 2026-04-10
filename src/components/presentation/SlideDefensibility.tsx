@@ -21,7 +21,7 @@ const SlideDefensibility = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="p-6 md:p-8 rounded-2xl bg-card border border-border"
+          className="p-6 md:p-8 rounded-lg bg-card border border-border"
         >
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary mb-4">
             <Lock className="w-7 h-7 text-foreground" />

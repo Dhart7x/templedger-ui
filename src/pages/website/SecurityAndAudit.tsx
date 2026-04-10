@@ -23,7 +23,7 @@ const SecurityAndAudit = () => {
       <section className="pt-16 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div {...fadeInUp}>
-            <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mx-auto mb-8">
+            <div className="w-16 h-16 rounded-lg bg-primary flex items-center justify-center mx-auto mb-8">
               <Shield className="w-8 h-8 text-foreground" />
             </div>
             <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6">

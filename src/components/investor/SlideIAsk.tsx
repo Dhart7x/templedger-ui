@@ -11,7 +11,7 @@ const SlideIAsk = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mx-auto mb-8">
+          <div className="w-16 h-16 rounded-lg bg-primary flex items-center justify-center mx-auto mb-8">
             <Target className="w-8 h-8 text-foreground" />
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-8">
