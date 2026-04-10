@@ -24,7 +24,7 @@
          className="max-w-4xl mx-auto w-full"
        >
          <div className="flex items-center justify-center gap-3 mb-3">
-           <div className="w-10 h-10 rounded-lg trust-gradient flex items-center justify-center">
+           <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
              <Shield className="w-5 h-5 text-foreground" />
            </div>
            <h2 className="text-2xl md:text-4xl font-bold text-foreground">Temp Ledger</h2>

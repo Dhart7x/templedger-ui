@@ -32,7 +32,7 @@ const SlideAsk = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="p-4 md:p-10 rounded-2xl bg-card border border-border mb-4 md:mb-8"
         >
-          <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-xl trust-gradient mb-3 md:mb-6">
+          <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-xl bg-primary mb-3 md:mb-6">
             <Rocket className="w-6 h-6 md:w-8 md:h-8 text-foreground" />
           </div>
           <p className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-2 md:mb-4">

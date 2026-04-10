@@ -79,7 +79,7 @@ const HowItWorks = () => {
               transition={{ duration: 0.5 }}
               className="p-6 rounded-xl bg-card border border-border"
             >
-              <div className="w-12 h-12 rounded-xl trust-gradient flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center mb-4">
                 <CheckCircle className="w-6 h-6 text-foreground" />
               </div>
               <h3 className="text-lg font-semibold text-foreground mb-3">Execution Gating</h3>
@@ -95,7 +95,7 @@ const HowItWorks = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="p-6 rounded-xl bg-card border border-border"
             >
-              <div className="w-12 h-12 rounded-xl trust-gradient flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center mb-4">
                 <FileText className="w-6 h-6 text-foreground" />
               </div>
               <h3 className="text-lg font-semibold text-foreground mb-3">Immutable Audit Log</h3>
@@ -111,7 +111,7 @@ const HowItWorks = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="p-6 rounded-xl bg-card border border-border"
             >
-              <div className="w-12 h-12 rounded-xl trust-gradient flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center mb-4">
                 <Users className="w-6 h-6 text-foreground" />
               </div>
               <h3 className="text-lg font-semibold text-foreground mb-3">Human Approval</h3>

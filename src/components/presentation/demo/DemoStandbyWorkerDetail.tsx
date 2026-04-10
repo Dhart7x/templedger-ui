@@ -272,7 +272,7 @@
        {/* Actions */}
        <div className="flex items-center justify-end gap-2 pt-4 border-t border-border">
          <Button variant="outline" onClick={onBack}>Back to List</Button>
-         <Button className="trust-gradient">Deploy to Shift</Button>
+         <Button className="bg-primary">Deploy to Shift</Button>
        </div>
      </div>
    );

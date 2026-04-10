@@ -42,7 +42,7 @@ const WebsiteLayout = ({ children }: WebsiteLayoutProps) => {
             onClick={() => navigate("/website")}
             className="flex items-center gap-2 group"
           >
-            <div className="w-8 h-8 rounded-lg trust-gradient flex items-center justify-center transition-transform group-hover:scale-105">
+            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center transition-transform group-hover:scale-105">
               <Shield className="w-4 h-4 text-foreground" />
             </div>
             <span className="font-semibold text-foreground text-sm hidden sm:inline">Temp Ledger</span>

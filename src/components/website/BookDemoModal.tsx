@@ -181,7 +181,7 @@
                  animate={{ opacity: 1, y: 0 }}
                  className="text-center py-8"
                >
-                 <div className="w-12 h-12 rounded-full trust-gradient flex items-center justify-center mx-auto mb-4">
+                 <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center mx-auto mb-4">
                    <Calendar className="w-6 h-6 text-foreground" />
                  </div>
                  <h3 className="text-lg font-semibold text-foreground mb-2">

@@ -19,7 +19,7 @@ const SlideISolution = () => {
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="w-16 h-16 rounded-2xl trust-gradient flex items-center justify-center mx-auto mb-8"
+          className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mx-auto mb-8"
         >
           <Shield className="w-8 h-8 text-foreground" />
         </motion.div>

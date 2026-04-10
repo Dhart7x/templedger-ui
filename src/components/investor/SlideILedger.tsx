@@ -34,7 +34,7 @@ const SlideILedger = () => {
               transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
               className="flex items-center gap-4 p-4 mb-3 rounded-xl bg-card border border-border"
             >
-              <div className="w-8 h-8 rounded-lg trust-gradient flex items-center justify-center flex-shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
                 <span className="text-sm font-bold text-foreground">{i + 1}</span>
               </div>
               <span className="text-foreground font-medium">{item}</span>

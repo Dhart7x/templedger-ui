@@ -91,7 +91,7 @@ const SalesDeck = () => {
             >
               <Home className="w-4 h-4 text-muted-foreground" />
             </button>
-            <span className="font-semibold text-sm trust-gradient-text">Temp Ledger</span>
+            <span className="font-semibold text-sm bg-primary-text">Temp Ledger</span>
           </div>
           <div className="text-xs text-muted-foreground">
             {safeCurrentSlide + 1} / {slides.length}

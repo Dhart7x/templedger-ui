@@ -58,7 +58,7 @@ const SlideSolution = () => {
                   transition={{ duration: 0.3, delay: 0.3 + index * 0.04 }}
                   className="flex items-center gap-1 px-1.5 py-1 rounded bg-card border border-border"
                 >
-                  <div className="w-3.5 h-3.5 rounded-full trust-gradient flex items-center justify-center flex-shrink-0">
+                  <div className="w-3.5 h-3.5 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
                     <span className="text-[7px] font-bold text-foreground">{index + 1}</span>
                   </div>
                   <span className="text-[9px] font-medium text-foreground leading-tight truncate">
@@ -92,7 +92,7 @@ const SlideSolution = () => {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.5 + index * 0.08, type: "spring" }}
-                      className="w-5 h-5 md:w-6 md:h-6 rounded-full trust-gradient flex items-center justify-center flex-shrink-0"
+                      className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0"
                     >
                       <span className="text-[10px] md:text-xs font-bold text-foreground">{index + 1}</span>
                     </motion.div>

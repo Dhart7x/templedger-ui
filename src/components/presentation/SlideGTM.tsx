@@ -138,7 +138,7 @@ const SlideGTM = () => {
                 className="p-3 md:p-4 rounded-xl bg-card border border-border"
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg trust-gradient flex items-center justify-center">
+                  <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-primary flex items-center justify-center">
                     <item.icon className="w-3.5 h-3.5 md:w-4 md:h-4 text-foreground" />
                   </div>
                   <span className="text-xs md:text-sm font-semibold text-foreground">{item.title}</span>

@@ -17,7 +17,7 @@
          transition={{ duration: 0.5 }}
          className="max-w-3xl mx-auto w-full text-center"
        >
-         <div className="w-14 h-14 rounded-xl trust-gradient flex items-center justify-center mx-auto mb-6">
+         <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center mx-auto mb-6">
            <DollarSign className="w-7 h-7 text-foreground" />
          </div>
  

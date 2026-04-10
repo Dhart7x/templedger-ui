@@ -41,7 +41,7 @@ const SlideAgencyBenefits = () => {
                   initial={{ scale: 0.8 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.3, delay: 0.3 + index * 0.08 }}
-                  className="w-8 h-8 md:w-10 md:h-10 rounded-lg trust-gradient flex items-center justify-center flex-shrink-0"
+                  className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-primary flex items-center justify-center flex-shrink-0"
                 >
                   <item.icon className="w-4 h-4 md:w-5 md:h-5 text-foreground" />
                 </motion.div>

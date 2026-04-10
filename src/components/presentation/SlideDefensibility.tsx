@@ -23,7 +23,7 @@ const SlideDefensibility = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="p-6 md:p-8 rounded-2xl bg-card border border-border"
         >
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl trust-gradient mb-4">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary mb-4">
             <Lock className="w-7 h-7 text-foreground" />
           </div>
           <p className="text-lg md:text-xl font-bold text-primary">

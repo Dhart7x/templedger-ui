@@ -23,7 +23,7 @@ const SecurityAndAudit = () => {
       <section className="pt-16 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div {...fadeInUp}>
-            <div className="w-16 h-16 rounded-2xl trust-gradient flex items-center justify-center mx-auto mb-8">
+            <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mx-auto mb-8">
               <Shield className="w-8 h-8 text-foreground" />
             </div>
             <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
@@ -63,7 +63,7 @@ const SecurityAndAudit = () => {
                 transition={{ duration: 0.4, delay: i * 0.1 }}
                 className="p-6 rounded-xl bg-card border border-border"
               >
-                <div className="w-12 h-12 rounded-xl trust-gradient flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center mb-4">
                   <feature.icon className="w-6 h-6 text-foreground" />
                 </div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">{feature.title}</h3>

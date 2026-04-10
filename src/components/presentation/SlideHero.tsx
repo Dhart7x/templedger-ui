@@ -12,7 +12,7 @@ const SlideHero = () => {
           transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
           className="text-3xl md:text-6xl lg:text-7xl font-bold mb-3 md:mb-4"
         >
-          <span className="trust-gradient-text">Temp Ledger</span>
+          <span className="bg-primary-text">Temp Ledger</span>
         </motion.h1>
 
         {/* Subtitle */}

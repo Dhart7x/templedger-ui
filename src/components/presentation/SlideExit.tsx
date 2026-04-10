@@ -40,7 +40,7 @@ const SlideExit = () => {
                 transition={{ duration: 0.3, delay: 0.2 + index * 0.08 }}
                 className="p-4 rounded-lg bg-card border border-border text-center hover:border-primary/30 transition-all"
               >
-                <div className="w-8 h-8 rounded-md trust-gradient flex items-center justify-center mx-auto mb-2">
+                <div className="w-8 h-8 rounded-md bg-primary flex items-center justify-center mx-auto mb-2">
                   <item.icon className="w-4 h-4 text-foreground" />
                 </div>
                 <span className="text-xs font-medium text-foreground">{item.label}</span>
