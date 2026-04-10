@@ -267,7 +267,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
               onClick={() => setViewMode("agency")}
               className={viewMode === "agency" ? "bg-primary/10 text-primary" : ""}
             >
-              Agency View (Staffline)
+              Agency View (Staffmark)
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

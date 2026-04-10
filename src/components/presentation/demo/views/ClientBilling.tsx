@@ -50,7 +50,7 @@ const invoices: Invoice[] = [
   {
     id: "1",
     invoiceNumber: "INV-2025-0234",
-    agency: "Staffline",
+    agency: "Staffmark",
     site: "Baltimore, MD",
     weekEnding: "9 Feb 2025",
     amount: 87450,
@@ -68,7 +68,7 @@ const invoices: Invoice[] = [
   {
     id: "2",
     invoiceNumber: "INV-2025-0235",
-    agency: "KPI",
+    agency: "Elite Staffing",
     site: "Baltimore, MD",
     weekEnding: "9 Feb 2025",
     amount: 54740,
@@ -84,7 +84,7 @@ const invoices: Invoice[] = [
   {
     id: "3",
     invoiceNumber: "INV-2025-0236",
-    agency: "The Results People",
+    agency: "Elwood Staffing",
     site: "Dallas Fort-Worth, TX",
     weekEnding: "9 Feb 2025",
     amount: 42100,
@@ -99,7 +99,7 @@ const invoices: Invoice[] = [
   {
     id: "4",
     invoiceNumber: "INV-2025-0220",
-    agency: "Staffline",
+    agency: "Staffmark",
     site: "Baltimore, MD",
     weekEnding: "2 Feb 2025",
     amount: 83230,
@@ -115,7 +115,7 @@ const invoices: Invoice[] = [
   {
     id: "5",
     invoiceNumber: "INV-2025-0221",
-    agency: "The Results People",
+    agency: "Elwood Staffing",
     site: "Las Vegas, NV",
     weekEnding: "2 Feb 2025",
     amount: 36680,
@@ -130,7 +130,7 @@ const invoices: Invoice[] = [
   {
     id: "6",
     invoiceNumber: "INV-2025-0222",
-    agency: "KPI",
+    agency: "Elite Staffing",
     site: "Dallas Fort-Worth, TX",
     weekEnding: "2 Feb 2025",
     amount: 48900,
@@ -144,7 +144,7 @@ const invoices: Invoice[] = [
   {
     id: "7",
     invoiceNumber: "INV-2025-0206",
-    agency: "Staffline",
+    agency: "Staffmark",
     site: "Baltimore, MD",
     weekEnding: "26 Jan 2025",
     amount: 79800,
@@ -158,7 +158,7 @@ const invoices: Invoice[] = [
   {
     id: "8",
     invoiceNumber: "INV-2025-0207",
-    agency: "KPI",
+    agency: "Elite Staffing",
     site: "Las Vegas, NV",
     weekEnding: "26 Jan 2025",
     amount: 51200,

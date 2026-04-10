@@ -48,7 +48,7 @@ const getWorkerData = (name: string) => {
   }> = {
     "Marcus Johnson": {
       name: "Marcus Johnson",
-      agency: "Staffline",
+      agency: "Staffmark",
       role: "Warehouse Operative",
       site: "Baltimore, MD",
       department: "Warehouse Operative",
@@ -78,7 +78,7 @@ const getWorkerData = (name: string) => {
     },
     "Sarah Williams": {
       name: "Sarah Williams",
-      agency: "Staffline",
+      agency: "Staffmark",
       role: "Warehouse Operative",
       site: "Baltimore, MD",
       department: "Warehouse Operative",
@@ -110,7 +110,7 @@ const getWorkerData = (name: string) => {
 
   return workers[name] || {
     name,
-    agency: "Staffline",
+    agency: "Staffmark",
     role: "Warehouse Operative",
     site: "Baltimore, MD",
     department: "Warehouse Operative",

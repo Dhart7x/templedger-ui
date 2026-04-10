@@ -48,7 +48,7 @@ interface Agency {
 const agencies: Agency[] = [
   {
     id: "1",
-    name: "Staffline",
+    name: "Staffmark",
     activeWorkers: 32,
     totalWorkers: 85,
     performance: {
@@ -67,7 +67,7 @@ const agencies: Agency[] = [
   },
   {
     id: "2",
-    name: "KPI",
+    name: "Elite Staffing",
     activeWorkers: 18,
     totalWorkers: 45,
     performance: {
@@ -85,7 +85,7 @@ const agencies: Agency[] = [
   },
   {
     id: "3",
-    name: "The Results People",
+    name: "Elwood Staffing",
     activeWorkers: 12,
     totalWorkers: 30,
     performance: {

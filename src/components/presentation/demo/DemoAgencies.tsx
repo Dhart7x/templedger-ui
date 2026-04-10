@@ -15,9 +15,9 @@ interface Agency {
 }
 
 const agencies: Agency[] = [
-  { id: "1", name: "Staffline", fulfilment: 94, responseTime: "1.2h", noShowRate: 3.2, latenessRate: 4.1, attrition: 8, workersOnSite: 156, weeklySpend: 28450, trend: "down" },
-  { id: "2", name: "KPI", fulfilment: 72, responseTime: "3.8h", noShowRate: 1.8, latenessRate: 2.5, attrition: 12, workersOnSite: 89, weeklySpend: 18200, trend: "down" },
-  { id: "3", name: "The Results People", fulfilment: 88, responseTime: "2.1h", noShowRate: 2.4, latenessRate: 3.2, attrition: 6, workersOnSite: 67, weeklySpend: 14800, trend: "up" },
+  { id: "1", name: "Staffmark", fulfilment: 94, responseTime: "1.2h", noShowRate: 3.2, latenessRate: 4.1, attrition: 8, workersOnSite: 156, weeklySpend: 28450, trend: "down" },
+  { id: "2", name: "Elite Staffing", fulfilment: 72, responseTime: "3.8h", noShowRate: 1.8, latenessRate: 2.5, attrition: 12, workersOnSite: 89, weeklySpend: 18200, trend: "down" },
+  { id: "3", name: "Elwood Staffing", fulfilment: 88, responseTime: "2.1h", noShowRate: 2.4, latenessRate: 3.2, attrition: 6, workersOnSite: 67, weeklySpend: 14800, trend: "up" },
 ];
 
 const DemoAgencies = () => {

@@ -26,7 +26,7 @@
  
    // Mock confirmed workers based on agency data
    const mockWorkers: Record<string, Worker[]> = {
-     "Staffline": [
+     "Staffmark": [
        { workerId: "W001", workerName: "Sarah Mitchell", status: "confirmed" },
        { workerId: "W002", workerName: "James Cooper", status: "confirmed" },
        { workerId: "W006", workerName: "Michael Brown", status: "confirmed" },

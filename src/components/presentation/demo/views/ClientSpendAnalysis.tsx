@@ -58,7 +58,7 @@ const overallSpend: SiteSpend[] = [
 
 const agencySpend: AgencySpendData[] = [
   {
-    name: "Staffline",
+    name: "Staffmark",
     data: {
       week: { amount: 97200, hours: 7776, workers: 85, change: 4.5, overtimeHours: 648 },
       month: { amount: 388800, hours: 31104, workers: 92, change: 3.2, overtimeHours: 2592 },
@@ -71,7 +71,7 @@ const agencySpend: AgencySpendData[] = [
     ],
   },
   {
-    name: "KPI",
+    name: "Elite Staffing",
     data: {
       week: { amount: 54600, hours: 4368, workers: 58, change: 2.1, overtimeHours: 349 },
       month: { amount: 218400, hours: 17472, workers: 64, change: 1.8, overtimeHours: 1398 },
@@ -83,7 +83,7 @@ const agencySpend: AgencySpendData[] = [
     ],
   },
   {
-    name: "The Results People",
+    name: "Elwood Staffing",
     data: {
       week: { amount: 26700, hours: 2136, workers: 35, change: -1.2, overtimeHours: 192 },
       month: { amount: 106800, hours: 8544, workers: 40, change: -0.8, overtimeHours: 768 },

@@ -28,7 +28,7 @@ const payrollData: PayrollEntry[] = [
   {
     id: "1",
     worker: "John Patel",
-    agency: "Staffline",
+    agency: "Staffmark",
     site: "Baltimore, MD",
     department: "Warehouse Operative",
     scheduledHours: 40,
@@ -42,7 +42,7 @@ const payrollData: PayrollEntry[] = [
   {
     id: "2",
     worker: "Maria Santos",
-    agency: "KPI",
+    agency: "Elite Staffing",
     site: "Baltimore, MD",
     department: "Warehouse Operative",
     scheduledHours: 40,
@@ -56,7 +56,7 @@ const payrollData: PayrollEntry[] = [
   {
     id: "3",
     worker: "Ahmed Khan",
-    agency: "The Results People",
+    agency: "Elwood Staffing",
     site: "Baltimore, MD",
     department: "MHE",
     scheduledHours: 40,
@@ -70,7 +70,7 @@ const payrollData: PayrollEntry[] = [
   {
     id: "4",
     worker: "Lucy Brown",
-    agency: "Staffline",
+    agency: "Staffmark",
     site: "Las Vegas, NV",
     department: "Warehouse Operative",
     scheduledHours: 40,
@@ -84,7 +84,7 @@ const payrollData: PayrollEntry[] = [
   {
     id: "5",
     worker: "Tomasz Nowak",
-    agency: "Staffline",
+    agency: "Staffmark",
     site: "Baltimore, MD",
     department: "MHE",
     scheduledHours: 40,

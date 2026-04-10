@@ -3,7 +3,7 @@ import { Plus, Check, X, MessageSquare, Clock, Users, Building2, Sparkles, Send,
 import { Button } from "@/components/ui/button";
 import { useDemoContext } from "../DemoContext";
 
-const agencies = ["Staffline", "KPI", "The Results People"];
+const agencies = ["Staffmark", "Elite Staffing", "Elwood Staffing"];
 const rationales = [
   "This agency has {count} trained temps on standby within 3 miles of site",
   "Best availability match with {count} workers ready for immediate deployment",
@@ -57,7 +57,7 @@ const ClientBookings = () => {
       site: site,
       shift: newBooking.shift,
       date: "Mon 10 Feb",
-      suggestedAgency: allocationResult?.agency || (newBooking.useIntelligentAllocation ? "Staffline" : undefined),
+      suggestedAgency: allocationResult?.agency || (newBooking.useIntelligentAllocation ? "Staffmark" : undefined),
     });
     setShowNewBooking(false);
     setAllocationResult(null);

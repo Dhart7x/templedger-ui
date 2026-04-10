@@ -16,7 +16,7 @@ const weekOptions = [
 ];
 
 const departments = ["All Departments", "Warehouse Operative", "MHE"];
-const agencyOptions = ["All Agencies", "Staffline", "KPI", "The Results People"];
+const agencyOptions = ["All Agencies", "Staffmark", "Elite Staffing", "Elwood Staffing"];
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 interface WorkerSlot {
@@ -32,9 +32,9 @@ interface ShiftCell {
 
 // Generate workers for filled weeks
 const workerNames: Record<string, string[]> = {
-  Staffline: ["Marcus Johnson", "Sarah Williams", "Tomasz Nowak", "David Thompson", "Priya Sharma", "Ahmed Hassan", "Emma Richardson", "Robert Garcia"],
+  Staffmark: ["Marcus Johnson", "Sarah Williams", "Tomasz Nowak", "David Thompson", "Priya Sharma", "Ahmed Hassan", "Emma Richardson", "Robert Garcia"],
   KPI: ["Rachel Adams", "Mike Stevens", "Lisa Chen", "Mark Edwards", "Kevin Morris", "Fatima Al-Rashid"],
-  "The Results People": ["James Wilson", "Andrei Petrov", "Sophie Turner", "Daniel Brown", "Amy Clarke"],
+  "Elwood Staffing": ["James Wilson", "Andrei Petrov", "Sophie Turner", "Daniel Brown", "Amy Clarke"],
 };
 
 const buildCell = (required: number, isFuture: boolean): ShiftCell => {
@@ -184,7 +184,7 @@ const UploadPanel = () => {
         <div className="space-y-2">
           {[
             { name: "schedule_wk5_feb.xlsx", week: "Week of 3–9 Feb 2025", dept: "All Departments", agency: "All Agencies", date: "31 Jan 2025" },
-            { name: "warehouse_schedule.csv", week: "Week of 27 Jan – 2 Feb 2025", dept: "Warehouse", agency: "Staffline", date: "24 Jan 2025" },
+            { name: "warehouse_schedule.csv", week: "Week of 27 Jan – 2 Feb 2025", dept: "Warehouse", agency: "Staffmark", date: "24 Jan 2025" },
           ].map((file, i) => (
             <div key={i} className="flex items-center justify-between p-3 bg-card border border-border rounded-lg">
               <div className="flex items-center gap-3">
@@ -219,13 +219,13 @@ const smartPrefLabels: Record<SmartPref, { label: string; icon: React.ReactNode;
 
 const smartSuggestions: Record<SmartPref, string> = {
   cheapest: "Elite Personnel",
-  "top-performer": "Staffline",
+  "top-performer": "Staffmark",
 };
 
 const EditPopover = ({ cell, role, department, day, shift, onClose, onSubmit }: EditPopoverProps) => {
   const [delta, setDelta] = useState(0);
   const [method, setMethod] = useState<"manual" | "smart">("manual");
-  const [selectedAgency, setSelectedAgency] = useState("Staffline");
+  const [selectedAgency, setSelectedAgency] = useState("Staffmark");
   const [smartPref, setSmartPref] = useState<SmartPref>("cheapest");
   const [showSuggestion, setShowSuggestion] = useState(false);
 

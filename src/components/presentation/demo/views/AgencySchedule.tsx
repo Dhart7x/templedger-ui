@@ -16,7 +16,7 @@ const weekOptions = [
 ];
 
 const departments = ["All Departments", "Warehouse", "Picking", "Packing", "Loading", "Quality"];
-const agencyOptions = ["All Agencies", "Staffline", "Pertemps", "Blue Arrow", "Elite Personnel"];
+const agencyOptions = ["All Agencies", "Staffmark", "Pertemps", "Blue Arrow", "Elite Personnel"];
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 interface WorkerSlot {
@@ -31,7 +31,7 @@ interface ShiftCell {
 }
 
 const workerNames: Record<string, string[]> = {
-  Staffline: ["Marcus Johnson", "Sarah Williams", "Tomasz Nowak", "David Thompson", "Priya Sharma", "Ahmed Hassan", "Emma Richardson", "Robert Garcia"],
+  Staffmark: ["Marcus Johnson", "Sarah Williams", "Tomasz Nowak", "David Thompson", "Priya Sharma", "Ahmed Hassan", "Emma Richardson", "Robert Garcia"],
   Pertemps: ["Rachel Adams", "Mike Stevens", "Lisa Chen", "Mark Edwards", "Kevin Morris", "Fatima Al-Rashid"],
   "Blue Arrow": ["James Wilson", "Andrei Petrov", "Sophie Turner", "Daniel Brown", "Amy Clarke"],
   "Elite Personnel": ["Chris Martin", "Laura White", "Ben Foster"],
@@ -95,11 +95,11 @@ const AgencyUploadPanel = () => {
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault(); setIsDragging(false);
     const file = e.dataTransfer.files[0];
-    if (file) setUploadedFile({ name: file.name, week: selectedWeek, department: selectedDept, agency: "Staffline", uploadedAt: new Date() });
+    if (file) setUploadedFile({ name: file.name, week: selectedWeek, department: selectedDept, agency: "Staffmark", uploadedAt: new Date() });
   }, [selectedWeek, selectedDept]);
   const handleFileSelect = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) setUploadedFile({ name: file.name, week: selectedWeek, department: selectedDept, agency: "Staffline", uploadedAt: new Date() });
+    if (file) setUploadedFile({ name: file.name, week: selectedWeek, department: selectedDept, agency: "Staffmark", uploadedAt: new Date() });
   }, [selectedWeek, selectedDept]);
 
   const handleSubmit = () => {
