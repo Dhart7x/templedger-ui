@@ -54,10 +54,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   const [activeClientView, setActiveClientView] = useState("live-snapshot");
   const [activeAgencyView, setActiveAgencyView] = useState("live-snapshot");
   const [selectedWorkerName, setSelectedWorkerName] = useState<string | null>(null);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const saved = localStorage.getItem("demo-theme");
-    return saved ? saved === "dark" : true;
-  });
+  const isDarkMode = true;
   const { notifications, bookings } = useDemoContext();
 
   const handleViewWorker = (workerName: string) => {
@@ -274,7 +271,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
 
         {/* Right side controls */}
         <div className="flex items-center gap-3">
-          <ThemeToggle onThemeChange={setIsDarkMode} />
+          
           
           {/* Notification Bell */}
           <button
