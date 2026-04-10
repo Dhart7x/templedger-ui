@@ -4,13 +4,6 @@ import Slide from "./Slide";
 const SlideHero = () => {
   return (
     <Slide className="relative overflow-hidden">
-      {/* Background gradient */}
-        <motion.div 
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-        />
-
       <div className="flex flex-col items-center justify-center text-center relative z-10">
         {/* Title with gradient */}
         <motion.h1

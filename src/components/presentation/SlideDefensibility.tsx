@@ -26,7 +26,7 @@ const SlideDefensibility = () => {
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl trust-gradient mb-4">
             <Lock className="w-7 h-7 text-foreground" />
           </div>
-          <p className="text-lg md:text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <p className="text-lg md:text-xl font-bold text-primary">
             Owning the canonical, auditable execution record of contingent labour.
           </p>
         </motion.div>

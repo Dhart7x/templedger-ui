@@ -33,7 +33,7 @@ const SlideConclusion = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="p-6 rounded-xl bg-card border border-border mb-6"
         >
-          <p className="text-lg md:text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <p className="text-lg md:text-xl font-bold text-primary">
             In a market where trust erodes quietly, Temp Ledger turns execution into evidence.
           </p>
         </motion.div>
