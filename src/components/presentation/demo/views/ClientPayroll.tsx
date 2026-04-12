@@ -439,7 +439,11 @@ const ClientPayroll = () => {
                               ) : (
                                 <Clock className="w-3.5 h-3.5 shrink-0" />
                               )}
-                              <span>{reason}</span>
+                              <span>
+                                {entry.linkedExceptionId
+                                  ? `Blocked — Exception #${entry.linkedExceptionId}: ${reason}`
+                                  : reason}
+                              </span>
                               {isPending && (
                                 <Button
                                   variant="outline"
