@@ -44,14 +44,6 @@ interface PayrollEntry {
   steps: Record<PipelineStep, boolean>;
   blockReason?: string;
   linkedExceptionId?: string;
-  department: string;
-  hourlyRate: number;
-  scheduledHours: number;
-  clockedHours: number;
-  overtimeHours: number;
-  steps: Record<PipelineStep, boolean>;
-  blockReason?: string;
-  linkedExceptionId?: string;
 }
 
 function deriveStatus(steps: Record<PipelineStep, boolean>): "verified" | "pending" | "blocked" {
