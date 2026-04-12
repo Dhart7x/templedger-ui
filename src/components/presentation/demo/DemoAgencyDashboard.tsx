@@ -1,9 +1,19 @@
 import { Users, MapPin, Clock, AlertTriangle, FileWarning, DollarSign, UserPlus } from "lucide-react";
 import { agencyStats, agencyDeployments, agencyIssues } from "./agencyDemoData";
 
+// Aggregate stats across all agencies
+const allStats = Object.values(agencyStats);
+const totalDeployed = allStats.reduce((s, a) => s + a.deployedNow, 0);
+const totalUpcoming = allStats.reduce((s, a) => s + a.upcomingShifts, 0);
+const totalIssues = allStats.reduce((s, a) => s + a.openIssues, 0);
+const totalNewReg = allStats.reduce((s, a) => s + a.newRegistrationsThisWeek, 0);
+const blockedWorkers = 6; // 2 per agency
+
 const DemoAgencyDashboard = () => {
   const onSiteNow = agencyDeployments.filter(d => d.status === "on-site");
   const criticalIssues = agencyIssues.filter(i => i.severity === "critical");
+  const atRiskPayroll = criticalIssues.length;
+  const atRiskBilling = criticalIssues.length;
 
   return (
     <div className="p-4 md:p-6 space-y-6">
@@ -22,7 +32,7 @@ const DemoAgencyDashboard = () => {
             </div>
             <span className="text-xs text-muted-foreground">Deployed Now</span>
           </div>
-          <div className="text-2xl font-bold text-foreground">{agencyStats.deployedNow}</div>
+          <div className="text-2xl font-bold text-foreground">{totalDeployed}</div>
         </div>
 
         <div className="bg-card border border-border rounded-lg p-3">
@@ -32,7 +42,7 @@ const DemoAgencyDashboard = () => {
             </div>
             <span className="text-xs text-muted-foreground">Upcoming</span>
           </div>
-          <div className="text-2xl font-bold text-foreground">{agencyStats.upcomingShifts}</div>
+          <div className="text-2xl font-bold text-foreground">{totalUpcoming}</div>
         </div>
 
         <div className="bg-card border border-border rounded-lg p-3">
@@ -42,7 +52,7 @@ const DemoAgencyDashboard = () => {
             </div>
             <span className="text-xs text-muted-foreground">Open Issues</span>
           </div>
-          <div className="text-2xl font-bold text-destructive">{agencyStats.openIssues}</div>
+          <div className="text-2xl font-bold text-destructive">{totalIssues}</div>
         </div>
 
         <div className="bg-card border border-border rounded-lg p-3">
@@ -52,7 +62,7 @@ const DemoAgencyDashboard = () => {
             </div>
             <span className="text-xs text-muted-foreground">Blocked</span>
           </div>
-          <div className="text-2xl font-bold text-amber-500">{agencyStats.blocked}</div>
+          <div className="text-2xl font-bold text-amber-500">{blockedWorkers}</div>
         </div>
 
         <div className="bg-card border border-border rounded-lg p-3">
@@ -62,7 +72,7 @@ const DemoAgencyDashboard = () => {
             </div>
             <span className="text-xs text-muted-foreground">Registrations</span>
           </div>
-          <div className="text-2xl font-bold text-primary">{agencyStats.registrationsThisWeek}</div>
+          <div className="text-2xl font-bold text-primary">{totalNewReg}</div>
           <div className="text-xs text-muted-foreground">This week</div>
         </div>
       </div>
@@ -121,8 +131,8 @@ const DemoAgencyDashboard = () => {
           <span className="text-sm font-semibold text-foreground">Pay & Billing Risk</span>
         </div>
         <p className="text-xs text-muted-foreground">
-          <span className="text-amber-600 font-medium">{agencyStats.atRiskPayroll} workers</span> have unresolved issues that will block payroll. 
-          <span className="text-amber-600 font-medium"> {agencyStats.atRiskBilling} workers</span> cannot be invoiced until execution steps are verified.
+          <span className="text-amber-600 font-medium">{atRiskPayroll} workers</span> have unresolved issues that will block payroll. 
+          <span className="text-amber-600 font-medium"> {atRiskBilling} workers</span> cannot be invoiced until execution steps are verified.
         </p>
       </div>
     </div>

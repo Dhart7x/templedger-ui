@@ -3,48 +3,9 @@ import { Plus, Check, X, MessageSquare, Clock, Users, Building2, Sparkles, Send,
 import { Button } from "@/components/ui/button";
 import { useDemoContext } from "../DemoContext";
 import { toast } from "sonner";
+import { agencyStats } from "../agencyDemoData";
 
 type AllocationPriority = "cost" | "speed" | "performance";
-
-interface AgencyData {
-  name: string;
-  id: string;
-  rateCard: { "Warehouse Operative": number; "MHE Operative": number };
-  availableWorkers: number;
-  avgEtaMinutes: number;
-  attendanceScore: number;
-  punctualityScore: number;
-}
-
-const agencyData: AgencyData[] = [
-  {
-    name: "Staffmark",
-    id: "AG001",
-    rateCard: { "Warehouse Operative": 18.50, "MHE Operative": 22.75 },
-    availableWorkers: 14,
-    avgEtaMinutes: 18,
-    attendanceScore: 94.2,
-    punctualityScore: 91.8,
-  },
-  {
-    name: "Elite Staffing",
-    id: "AG002",
-    rateCard: { "Warehouse Operative": 17.25, "MHE Operative": 21.00 },
-    availableWorkers: 9,
-    avgEtaMinutes: 12,
-    attendanceScore: 97.1,
-    punctualityScore: 95.4,
-  },
-  {
-    name: "Elwood Staffing",
-    id: "AG003",
-    rateCard: { "Warehouse Operative": 19.00, "MHE Operative": 23.50 },
-    availableWorkers: 11,
-    avgEtaMinutes: 24,
-    attendanceScore: 91.6,
-    punctualityScore: 88.3,
-  },
-];
 
 interface AllocationEntry {
   agency: string;
@@ -54,62 +15,65 @@ interface AllocationEntry {
   detail: string;
 }
 
+const agencyNames: Record<string, string> = { AG001: "Staffmark", AG002: "Elite Staffing", AG003: "Elwood Staffing" };
+
 function computeAllocation(
   priority: AllocationPriority,
-  role: string,
+  _role: string,
   quantity: number
 ): AllocationEntry[] {
-  const roleKey = role as keyof AgencyData["rateCard"];
+  const ids = ["AG001", "AG002", "AG003"];
 
-  const scored = agencyData.map((a) => {
+  const scored = ids.map(id => {
+    const s = agencyStats[id];
+    const name = agencyNames[id];
     let score: number;
     let detail: string;
     let rationale: string;
 
     switch (priority) {
       case "cost": {
-        const rate = a.rateCard[roleKey] ?? a.rateCard["Warehouse Operative"];
-        score = 1 / rate; // lower rate = higher score
-        detail = `$${rate.toFixed(2)}/hr`;
-        rationale = `Best rate at $${rate.toFixed(2)}/hr for ${role}`;
+        score = 1 / s.avgHourlyRate;
+        detail = `$${s.avgHourlyRate.toFixed(2)}/hr avg rate`;
+        const others = ids.filter(o => o !== id).map(o => agencyStats[o].avgHourlyRate);
+        const cheapestOther = Math.min(...others);
+        const saving = (cheapestOther - s.avgHourlyRate).toFixed(2);
+        rationale = `${name} has the lowest charge rate at $${s.avgHourlyRate.toFixed(2)}/hr — saving $${saving} vs next cheapest agency.`;
         break;
       }
       case "speed": {
-        score = a.availableWorkers / Math.max(a.avgEtaMinutes, 1);
-        detail = `${a.availableWorkers} workers · ${a.avgEtaMinutes} min avg ETA`;
-        rationale = `${a.availableWorkers} workers available, ${a.avgEtaMinutes} min avg arrival`;
+        score = s.standbyWorkers / Math.max(s.avgEtaMinutes, 1);
+        detail = `${s.standbyWorkers} standby · ${s.avgEtaMinutes} min avg ETA`;
+        rationale = `${name} has ${s.standbyWorkers} workers on standby with an average of ${s.avgEtaMinutes} minutes to site — fastest of your three agencies.`;
         break;
       }
       case "performance": {
-        score = (a.attendanceScore + a.punctualityScore) / 2;
-        detail = `${a.attendanceScore}% attendance · ${a.punctualityScore}% punctuality`;
-        rationale = `${a.attendanceScore}% attendance, ${a.punctualityScore}% punctuality`;
+        score = (s.fillRate + s.attendancePct) / 2;
+        detail = `${s.fillRate}% fill rate · ${s.attendancePct}% attendance`;
+        rationale = `${name} has a ${s.fillRate}% fill rate and ${s.attendancePct}% attendance this month — strongest performance across your panel.`;
         break;
       }
     }
 
-    return { agency: a.name, score, detail, rationale };
+    return { agency: name, score, detail, rationale };
   });
 
   scored.sort((a, b) => b.score - a.score);
 
-  // Distribute proportionally
-  const totalScore = scored.reduce((s, e) => s + e.score, 0);
-  let remaining = quantity;
-  const result: AllocationEntry[] = [];
-
-  for (let i = 0; i < scored.length && remaining > 0; i++) {
-    const proportion = scored[i].score / totalScore;
-    let count = i === scored.length - 1 || remaining <= 1
-      ? remaining
-      : Math.max(1, Math.round(quantity * proportion));
-    count = Math.min(count, remaining);
-    if (count > 0) {
-      result.push({ ...scored[i], count });
-      remaining -= count;
-    }
+  if (quantity <= 1) {
+    return [{ ...scored[0], count: 1 }];
   }
 
+  // Split across top 2 agencies proportionally
+  const top2 = scored.slice(0, 2);
+  const totalScore = top2.reduce((s, e) => s + e.score, 0);
+  const primary = Math.max(1, Math.round(quantity * (top2[0].score / totalScore)));
+  const secondary = quantity - primary;
+
+  const result: AllocationEntry[] = [{ ...top2[0], count: primary }];
+  if (secondary > 0) {
+    result.push({ ...top2[1], count: secondary });
+  }
   return result;
 }
 
@@ -190,13 +154,15 @@ const ClientBookings = () => {
   const handleOverrideChange = (agency: string, delta: number) => {
     if (!allocationResult) return;
     const current = { ...overrideCounts };
-    // Initialize from result if not set
     allocationResult.forEach(e => {
       if (current[e.agency] === undefined) current[e.agency] = e.count;
     });
+    // Add all 3 agencies if not present
+    Object.values(agencyNames).forEach(name => {
+      if (current[name] === undefined) current[name] = 0;
+    });
     const newVal = Math.max(0, (current[agency] || 0) + delta);
     current[agency] = newVal;
-    // Ensure total = quantity
     const total = Object.values(current).reduce((s, v) => s + v, 0);
     if (total <= newBooking.quantity && total >= 0) {
       setOverrideCounts(current);
@@ -205,10 +171,18 @@ const ClientBookings = () => {
 
   const applyOverride = () => {
     if (!allocationResult) return;
-    const updated = allocationResult.map(e => ({
-      ...e,
-      count: overrideCounts[e.agency] ?? e.count,
-    })).filter(e => e.count > 0);
+    // Build from override counts for all agencies
+    const allAgencies = Object.values(agencyNames);
+    const updated = allAgencies.map(name => {
+      const existing = allocationResult.find(e => e.agency === name);
+      return {
+        agency: name,
+        count: overrideCounts[name] ?? existing?.count ?? 0,
+        rationale: existing?.rationale ?? "",
+        score: existing?.score ?? 0,
+        detail: existing?.detail ?? "",
+      };
+    }).filter(e => e.count > 0);
     setAllocationResult(updated);
     setIsOverriding(false);
     setOverrideCounts({});
@@ -289,28 +263,19 @@ const ClientBookings = () => {
                   {getStatusBadge(booking.status)}
                 </div>
                 <div className="flex items-center gap-4 text-xs text-muted-foreground mb-2">
-                  <span className="flex items-center gap-1">
-                    <Users className="w-3 h-3" />
-                    {booking.quantity} worker{booking.quantity > 1 ? "s" : ""}
-                  </span>
+                  <span className="flex items-center gap-1"><Users className="w-3 h-3" />{booking.quantity} worker{booking.quantity > 1 ? "s" : ""}</span>
                   <span>{booking.site} • {booking.location}</span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
-                    {booking.shift}
-                  </span>
+                  <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{booking.shift}</span>
                   <span>{booking.date}</span>
                 </div>
-
                 {booking.status === "pending" && booking.suggestedAgency && (
                   <div className="flex items-center gap-2 mt-3">
                     <div className="flex items-center gap-1.5 bg-primary/10 text-primary px-2 py-1 rounded text-xs">
-                      <Sparkles className="w-3 h-3" />
-                      Suggested: {booking.suggestedAgency}
+                      <Sparkles className="w-3 h-3" />Suggested: {booking.suggestedAgency}
                     </div>
                     <span className="text-xs text-muted-foreground">Based on availability and performance</span>
                   </div>
                 )}
-
                 {booking.agency && booking.status === "accepted" && (
                   <div className="flex items-center gap-1.5 mt-2 text-xs">
                     <Building2 className="w-3 h-3 text-muted-foreground" />
@@ -318,34 +283,25 @@ const ClientBookings = () => {
                     <span className="font-medium">{booking.agency}</span>
                   </div>
                 )}
-
                 {booking.agencyNotes && (
                   <div className="mt-3 p-2 bg-muted/50 rounded-lg border border-border">
                     <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
-                      <MessageSquare className="w-3 h-3" />
-                      Agency Note
+                      <MessageSquare className="w-3 h-3" />Agency Note
                     </div>
                     <p className="text-sm">{booking.agencyNotes}</p>
                   </div>
                 )}
               </div>
-
               {booking.status === "info-requested" && (
                 <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm" className="gap-1 text-xs h-8">
-                    <Send className="w-3 h-3" />
-                    Reply
-                  </Button>
+                  <Button variant="outline" size="sm" className="gap-1 text-xs h-8"><Send className="w-3 h-3" />Reply</Button>
                 </div>
               )}
             </div>
           </div>
         ))}
-
         {filteredBookings.length === 0 && (
-          <div className="text-center py-12 text-muted-foreground">
-            <p className="text-sm">No bookings found</p>
-          </div>
+          <div className="text-center py-12 text-muted-foreground"><p className="text-sm">No bookings found</p></div>
         )}
       </div>
 
@@ -357,12 +313,7 @@ const ClientBookings = () => {
             <div className="space-y-4">
               <div>
                 <label className="text-sm text-muted-foreground">Role</label>
-                <select
-                  value={newBooking.role}
-                  onChange={(e) => setNewBooking({ ...newBooking, role: e.target.value })}
-                  className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm"
-                  disabled={isAllocating}
-                >
+                <select value={newBooking.role} onChange={(e) => setNewBooking({ ...newBooking, role: e.target.value })} className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm" disabled={isAllocating}>
                   <option>Warehouse Operative</option>
                   <option>MHE Operative</option>
                 </select>
@@ -370,23 +321,11 @@ const ClientBookings = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="text-sm text-muted-foreground">Quantity</label>
-                  <input
-                    type="number"
-                    value={newBooking.quantity}
-                    onChange={(e) => setNewBooking({ ...newBooking, quantity: Math.max(1, parseInt(e.target.value) || 1) })}
-                    min="1"
-                    className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm"
-                    disabled={isAllocating}
-                  />
+                  <input type="number" value={newBooking.quantity} onChange={(e) => setNewBooking({ ...newBooking, quantity: Math.max(1, parseInt(e.target.value) || 1) })} min="1" className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm" disabled={isAllocating} />
                 </div>
                 <div>
                   <label className="text-sm text-muted-foreground">Shift</label>
-                  <select
-                    value={newBooking.shift}
-                    onChange={(e) => setNewBooking({ ...newBooking, shift: e.target.value })}
-                    className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm"
-                    disabled={isAllocating}
-                  >
+                  <select value={newBooking.shift} onChange={(e) => setNewBooking({ ...newBooking, shift: e.target.value })} className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm" disabled={isAllocating}>
                     <option>06:00–14:00</option>
                     <option>14:00–22:00</option>
                     <option>22:00–06:00</option>
@@ -395,12 +334,7 @@ const ClientBookings = () => {
               </div>
               <div>
                 <label className="text-sm text-muted-foreground">Location</label>
-                <select
-                  value={newBooking.location}
-                  onChange={(e) => setNewBooking({ ...newBooking, location: e.target.value })}
-                  className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm"
-                  disabled={isAllocating}
-                >
+                <select value={newBooking.location} onChange={(e) => setNewBooking({ ...newBooking, location: e.target.value })} className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm" disabled={isAllocating}>
                   <option>Baltimore, MD - Zone A</option>
                   <option>Baltimore, MD - Zone B</option>
                   <option>Las Vegas, NV - Zone A</option>
@@ -408,11 +342,10 @@ const ClientBookings = () => {
                 </select>
               </div>
 
-              {/* Intelligent Allocation Section */}
+              {/* Intelligent Allocation */}
               <div className="pt-2 space-y-3">
                 {!isAllocating && !allocationResult && (
                   <>
-                    {/* Priority Selector */}
                     <div>
                       <label className="text-xs text-muted-foreground uppercase tracking-wider mb-2 block">Allocation Priority</label>
                       <div className="flex gap-1 p-1 bg-muted rounded-lg">
@@ -424,21 +357,18 @@ const ClientBookings = () => {
                               key={opt.key}
                               onClick={() => setAllocationPriority(opt.key)}
                               className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium transition-colors ${
-                                isActive
-                                  ? "bg-primary text-primary-foreground shadow-sm"
-                                  : "text-muted-foreground hover:text-foreground"
+                                isActive ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
                               }`}
                             >
-                              <Icon className="w-3.5 h-3.5" />
-                              {opt.label}
+                              <Icon className="w-3.5 h-3.5" />{opt.label}
                             </button>
                           );
                         })}
                       </div>
                       <p className="text-[10px] text-muted-foreground mt-1.5">
-                        {allocationPriority === "cost" && "Prioritise agencies with the lowest rate card for this role"}
-                        {allocationPriority === "speed" && "Prioritise agencies with most available workers nearest to site"}
-                        {allocationPriority === "performance" && "Prioritise agencies with highest attendance & punctuality scores"}
+                        {allocationPriority === "cost" && "Prioritise agencies with the lowest avg hourly rate"}
+                        {allocationPriority === "speed" && "Prioritise agencies with lowest avg ETA to site"}
+                        {allocationPriority === "performance" && "Prioritise agencies with highest fill rate & attendance"}
                       </p>
                     </div>
 
@@ -457,9 +387,7 @@ const ClientBookings = () => {
                     <Loader2 className="w-8 h-8 text-primary animate-spin" />
                     <div className="text-center">
                       <p className="font-medium text-primary">Optimising allocation...</p>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Scoring agencies by {priorityLabel}
-                      </p>
+                      <p className="text-xs text-muted-foreground mt-1">Scoring agencies by {priorityLabel}</p>
                     </div>
                   </div>
                 )}
@@ -477,13 +405,13 @@ const ClientBookings = () => {
                         onClick={() => {
                           const counts: Record<string, number> = {};
                           allocationResult.forEach(e => { counts[e.agency] = e.count; });
+                          Object.values(agencyNames).forEach(name => { if (counts[name] === undefined) counts[name] = 0; });
                           setOverrideCounts(counts);
                           setIsOverriding(true);
                         }}
                         className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
                       >
-                        <Pencil className="w-3 h-3" />
-                        Override
+                        <Pencil className="w-3 h-3" />Override
                       </button>
                     </div>
 
@@ -511,6 +439,7 @@ const ClientBookings = () => {
                               )}
                             </div>
                             <p className="text-[11px] text-muted-foreground mt-0.5 truncate">{entry.detail}</p>
+                            <p className="text-[10px] text-muted-foreground/70 mt-0.5 line-clamp-2">{entry.rationale}</p>
                           </div>
                           {i === 0 && <Check className="w-4 h-4 text-green-500 shrink-0" />}
                         </div>
@@ -538,49 +467,31 @@ const ClientBookings = () => {
                       </p>
                     </div>
                     <div className="px-4 pb-3 space-y-2">
-                      {agencyData.map((a) => {
-                        const count = overrideCounts[a.name] ?? 0;
+                      {Object.values(agencyNames).map((name) => {
+                        const count = overrideCounts[name] ?? 0;
                         return (
-                          <div key={a.name} className="flex items-center justify-between p-2 rounded-lg bg-muted/50 border border-border">
-                            <span className="text-sm font-medium">{a.name}</span>
+                          <div key={name} className="flex items-center justify-between p-2 rounded-lg bg-muted/50 border border-border">
+                            <span className="text-sm font-medium">{name}</span>
                             <div className="flex items-center gap-2">
                               <button
-                                onClick={() => handleOverrideChange(a.name, -1)}
+                                onClick={() => handleOverrideChange(name, -1)}
                                 className="w-6 h-6 rounded bg-background border border-border flex items-center justify-center text-xs hover:bg-muted transition-colors"
                                 disabled={count <= 0}
-                              >
-                                −
-                              </button>
+                              >−</button>
                               <span className="w-6 text-center text-sm font-semibold">{count}</span>
                               <button
-                                onClick={() => handleOverrideChange(a.name, 1)}
+                                onClick={() => handleOverrideChange(name, 1)}
                                 className="w-6 h-6 rounded bg-background border border-border flex items-center justify-center text-xs hover:bg-muted transition-colors"
                                 disabled={Object.values(overrideCounts).reduce((s, v) => s + v, 0) >= newBooking.quantity}
-                              >
-                                +
-                              </button>
+                              >+</button>
                             </div>
                           </div>
                         );
                       })}
                     </div>
                     <div className="flex gap-2 px-4 pb-3">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="flex-1 text-xs"
-                        onClick={() => setIsOverriding(false)}
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        size="sm"
-                        className="flex-1 text-xs"
-                        onClick={applyOverride}
-                        disabled={Object.values(overrideCounts).reduce((s, v) => s + v, 0) !== newBooking.quantity}
-                      >
-                        Apply Split
-                      </Button>
+                      <Button variant="outline" size="sm" className="flex-1 text-xs" onClick={() => setIsOverriding(false)}>Cancel</Button>
+                      <Button size="sm" className="flex-1 text-xs" onClick={applyOverride} disabled={Object.values(overrideCounts).reduce((s, v) => s + v, 0) !== newBooking.quantity}>Apply Split</Button>
                     </div>
                   </div>
                 )}
@@ -589,8 +500,7 @@ const ClientBookings = () => {
             <div className="flex justify-end gap-2 mt-6">
               <Button variant="outline" onClick={resetModal} disabled={isAllocating}>Cancel</Button>
               <Button onClick={handleCreateBooking} className="gap-2" disabled={isAllocating}>
-                <Send className="w-4 h-4" />
-                Submit Booking
+                <Send className="w-4 h-4" />Submit Booking
               </Button>
             </div>
           </div>

@@ -1,5 +1,20 @@
 import { useState } from "react";
-import { Building2, TrendingUp, Clock, Users, Star, FileText, ChevronDown, ChevronUp, MapPin, Briefcase } from "lucide-react";
+import { Building2, TrendingUp, Clock, Users, Star, FileText, ChevronDown, ChevronUp, MapPin, Briefcase, Zap, DollarSign, UserPlus } from "lucide-react";
+import { agencyStats, agencyWorkers } from "../agencyDemoData";
+
+// ─── Derive data from agencyDemoData ─────────────────────────────────────────
+
+function meanRating(agencyId: string): number {
+  const rated = agencyWorkers.filter(w => w.agencyId === agencyId && w.completedShifts > 0);
+  if (rated.length === 0) return 0;
+  return Math.round((rated.reduce((s, w) => s + w.rating, 0) / rated.length) * 10) / 10;
+}
+
+function meanRateForDept(agencyId: string, dept: string): number {
+  const ws = agencyWorkers.filter(w => w.agencyId === agencyId && w.department === dept && w.completedShifts > 0);
+  if (ws.length === 0) return 0;
+  return Math.round((ws.reduce((s, w) => s + w.hourlyRate, 0) / ws.length) * 100) / 100;
+}
 
 interface PerformanceByPeriod {
   week: {
@@ -9,6 +24,10 @@ interface PerformanceByPeriod {
     punctuality: number;
     attrition: number;
     newRegistrations: number;
+    fillRate: number;
+    avgEta: string;
+    avgRate: string;
+    standbyWorkers: number;
   };
   month: {
     responseTime: string;
@@ -17,6 +36,10 @@ interface PerformanceByPeriod {
     punctuality: number;
     attrition: number;
     newRegistrations: number;
+    fillRate: number;
+    avgEta: string;
+    avgRate: string;
+    standbyWorkers: number;
   };
   year: {
     responseTime: string;
@@ -25,6 +48,10 @@ interface PerformanceByPeriod {
     punctuality: number;
     attrition: number;
     newRegistrations: number;
+    fillRate: number;
+    avgEta: string;
+    avgRate: string;
+    standbyWorkers: number;
   };
 }
 
@@ -36,28 +63,33 @@ interface Agency {
   performance: PerformanceByPeriod;
   rateCard: {
     warehouseOp: number;
+    mhe: number;
     picker: number;
-    forklift: number;
     loader: number;
+    forklift: number;
   };
   rating: number;
   status: "active" | "on-hold";
   sites: { name: string; workers: number; departments: { name: string; workers: number }[] }[];
 }
 
+const s1 = agencyStats["AG001"];
+const s2 = agencyStats["AG002"];
+const s3 = agencyStats["AG003"];
+
 const agencies: Agency[] = [
   {
-    id: "1",
+    id: "AG001",
     name: "Staffmark",
-    activeWorkers: 32,
-    totalWorkers: 85,
+    activeWorkers: s1.deployedNow,
+    totalWorkers: 15,
     performance: {
-      week: { responseTime: "12 min", timeToFill: "4.2 hrs", attendance: 94, punctuality: 91, attrition: 8, newRegistrations: 12 },
-      month: { responseTime: "15 min", timeToFill: "4.8 hrs", attendance: 92, punctuality: 89, attrition: 10, newRegistrations: 42 },
-      year: { responseTime: "14 min", timeToFill: "4.5 hrs", attendance: 93, punctuality: 90, attrition: 9, newRegistrations: 156 },
+      week: { responseTime: `${s1.avgResponseMinutes} min`, timeToFill: "4.2 hrs", attendance: s1.attendancePct, punctuality: s1.punctualityPct, attrition: s1.attritionPct, newRegistrations: s1.newRegistrationsThisWeek, fillRate: s1.fillRate, avgEta: `${s1.avgEtaMinutes} min`, avgRate: `$${s1.avgHourlyRate.toFixed(2)}`, standbyWorkers: s1.standbyWorkers },
+      month: { responseTime: "16 min", timeToFill: "4.8 hrs", attendance: 90.5, punctuality: 89.2, attrition: 10.1, newRegistrations: 9, fillRate: 89, avgEta: `${s1.avgEtaMinutes} min`, avgRate: `$${s1.avgHourlyRate.toFixed(2)}`, standbyWorkers: s1.standbyWorkers },
+      year: { responseTime: "15 min", timeToFill: "4.5 hrs", attendance: 91.0, punctuality: 89.8, attrition: 9.6, newRegistrations: 38, fillRate: 90, avgEta: `${s1.avgEtaMinutes} min`, avgRate: `$${s1.avgHourlyRate.toFixed(2)}`, standbyWorkers: s1.standbyWorkers },
     },
-    rateCard: { warehouseOp: 12.5, picker: 12.0, forklift: 15.0, loader: 12.5 },
-    rating: 4.5,
+    rateCard: { warehouseOp: meanRateForDept("AG001", "Warehouse Operative"), mhe: meanRateForDept("AG001", "MHE"), picker: meanRateForDept("AG001", "Picker"), loader: meanRateForDept("AG001", "Loader"), forklift: meanRateForDept("AG001", "Forklift") },
+    rating: meanRating("AG001"),
     status: "active",
     sites: [
       { name: "Baltimore, MD", workers: 25, departments: [{ name: "Warehouse Operative", workers: 15 }, { name: "MHE", workers: 10 }] },
@@ -66,17 +98,17 @@ const agencies: Agency[] = [
     ],
   },
   {
-    id: "2",
+    id: "AG002",
     name: "Elite Staffing",
-    activeWorkers: 18,
-    totalWorkers: 45,
+    activeWorkers: s2.deployedNow,
+    totalWorkers: 15,
     performance: {
-      week: { responseTime: "8 min", timeToFill: "3.8 hrs", attendance: 96, punctuality: 94, attrition: 5, newRegistrations: 8 },
-      month: { responseTime: "10 min", timeToFill: "4.0 hrs", attendance: 95, punctuality: 93, attrition: 6, newRegistrations: 28 },
-      year: { responseTime: "9 min", timeToFill: "3.9 hrs", attendance: 95, punctuality: 93, attrition: 6, newRegistrations: 112 },
+      week: { responseTime: `${s2.avgResponseMinutes} min`, timeToFill: "3.8 hrs", attendance: s2.attendancePct, punctuality: s2.punctualityPct, attrition: s2.attritionPct, newRegistrations: s2.newRegistrationsThisWeek, fillRate: s2.fillRate, avgEta: `${s2.avgEtaMinutes} min`, avgRate: `$${s2.avgHourlyRate.toFixed(2)}`, standbyWorkers: s2.standbyWorkers },
+      month: { responseTime: "10 min", timeToFill: "4.0 hrs", attendance: 93.2, punctuality: 92.0, attrition: 5.8, newRegistrations: 10, fillRate: 95, avgEta: `${s2.avgEtaMinutes} min`, avgRate: `$${s2.avgHourlyRate.toFixed(2)}`, standbyWorkers: s2.standbyWorkers },
+      year: { responseTime: "9 min", timeToFill: "3.9 hrs", attendance: 93.5, punctuality: 92.4, attrition: 5.4, newRegistrations: 42, fillRate: 95, avgEta: `${s2.avgEtaMinutes} min`, avgRate: `$${s2.avgHourlyRate.toFixed(2)}`, standbyWorkers: s2.standbyWorkers },
     },
-    rateCard: { warehouseOp: 13.0, picker: 12.5, forklift: 15.5, loader: 13.0 },
-    rating: 4.8,
+    rateCard: { warehouseOp: meanRateForDept("AG002", "Warehouse Operative"), mhe: meanRateForDept("AG002", "MHE"), picker: meanRateForDept("AG002", "Picker"), loader: meanRateForDept("AG002", "Loader"), forklift: meanRateForDept("AG002", "Forklift") },
+    rating: meanRating("AG002"),
     status: "active",
     sites: [
       { name: "Baltimore, MD", workers: 12, departments: [{ name: "Warehouse Operative", workers: 8 }, { name: "MHE", workers: 4 }] },
@@ -84,17 +116,17 @@ const agencies: Agency[] = [
     ],
   },
   {
-    id: "3",
+    id: "AG003",
     name: "Elwood Staffing",
-    activeWorkers: 12,
-    totalWorkers: 30,
+    activeWorkers: s3.deployedNow,
+    totalWorkers: 15,
     performance: {
-      week: { responseTime: "18 min", timeToFill: "5.5 hrs", attendance: 89, punctuality: 86, attrition: 12, newRegistrations: 3 },
-      month: { responseTime: "22 min", timeToFill: "6.2 hrs", attendance: 87, punctuality: 84, attrition: 14, newRegistrations: 10 },
-      year: { responseTime: "20 min", timeToFill: "5.8 hrs", attendance: 88, punctuality: 85, attrition: 13, newRegistrations: 48 },
+      week: { responseTime: `${s3.avgResponseMinutes} min`, timeToFill: "5.5 hrs", attendance: s3.attendancePct, punctuality: s3.punctualityPct, attrition: s3.attritionPct, newRegistrations: s3.newRegistrationsThisWeek, fillRate: s3.fillRate, avgEta: `${s3.avgEtaMinutes} min`, avgRate: `$${s3.avgHourlyRate.toFixed(2)}`, standbyWorkers: s3.standbyWorkers },
+      month: { responseTime: "24 min", timeToFill: "6.2 hrs", attendance: 84.8, punctuality: 83.5, attrition: 14.2, newRegistrations: 8, fillRate: 82, avgEta: `${s3.avgEtaMinutes} min`, avgRate: `$${s3.avgHourlyRate.toFixed(2)}`, standbyWorkers: s3.standbyWorkers },
+      year: { responseTime: "23 min", timeToFill: "5.8 hrs", attendance: 85.2, punctuality: 83.9, attrition: 13.9, newRegistrations: 32, fillRate: 83, avgEta: `${s3.avgEtaMinutes} min`, avgRate: `$${s3.avgHourlyRate.toFixed(2)}`, standbyWorkers: s3.standbyWorkers },
     },
-    rateCard: { warehouseOp: 11.8, picker: 11.5, forklift: 14.5, loader: 12.0 },
-    rating: 3.8,
+    rateCard: { warehouseOp: meanRateForDept("AG003", "Warehouse Operative"), mhe: meanRateForDept("AG003", "MHE"), picker: meanRateForDept("AG003", "Picker"), loader: meanRateForDept("AG003", "Loader"), forklift: meanRateForDept("AG003", "Forklift") },
+    rating: meanRating("AG003"),
     status: "active",
     sites: [
       { name: "Baltimore, MD", workers: 5, departments: [{ name: "Warehouse Operative", workers: 3 }, { name: "MHE", workers: 2 }] },
@@ -102,6 +134,8 @@ const agencies: Agency[] = [
     ],
   },
 ];
+
+// ─── Component ───────────────────────────────────────────────────────────────
 
 interface ClientAgenciesProps {
   onViewWorker?: (workerName: string) => void;
@@ -118,14 +152,19 @@ const ClientAgencies = ({ onViewWorker }: ClientAgenciesProps) => {
     );
   };
 
-  const getPerformanceColor = (value: number, type: "attendance" | "punctuality" | "attrition") => {
+  const getPerformanceColor = (value: number, type: "attendance" | "punctuality" | "attrition" | "fillRate") => {
     if (type === "attrition") {
       if (value <= 5) return "text-green-500";
       if (value <= 10) return "text-amber-500";
       return "text-destructive";
     }
-    if (value >= 95) return "text-green-500";
-    if (value >= 90) return "text-amber-500";
+    if (type === "fillRate") {
+      if (value >= 95) return "text-green-500";
+      if (value >= 88) return "text-amber-500";
+      return "text-destructive";
+    }
+    if (value >= 93) return "text-green-500";
+    if (value >= 88) return "text-amber-500";
     return "text-destructive";
   };
 
@@ -168,7 +207,7 @@ const ClientAgencies = ({ onViewWorker }: ClientAgenciesProps) => {
         <div className="bg-card border border-border rounded-lg p-3">
           <div className="flex items-center gap-2 mb-1">
             <Users className="w-4 h-4 text-green-500" />
-            <span className="text-xs text-muted-foreground">Active Workers</span>
+            <span className="text-xs text-muted-foreground">Deployed Now</span>
           </div>
           <p className="text-xl font-bold text-green-500">{agencies.reduce((a, ag) => a + ag.activeWorkers, 0)}</p>
         </div>
@@ -178,7 +217,7 @@ const ClientAgencies = ({ onViewWorker }: ClientAgenciesProps) => {
             <span className="text-xs text-muted-foreground">Avg Attendance</span>
           </div>
           <p className="text-xl font-bold text-primary">
-            {Math.round(agencies.reduce((a, ag) => a + currentMetrics(ag).attendance, 0) / agencies.length)}%
+            {(agencies.reduce((a, ag) => a + currentMetrics(ag).attendance, 0) / agencies.length).toFixed(1)}%
           </p>
         </div>
         <div className="bg-card border border-border rounded-lg p-3">
@@ -187,15 +226,12 @@ const ClientAgencies = ({ onViewWorker }: ClientAgenciesProps) => {
             <span className="text-xs text-muted-foreground">Avg Response</span>
           </div>
           <p className="text-xl font-bold">
-            {Math.round(
-              agencies.reduce((a, ag) => a + parseInt(currentMetrics(ag).responseTime), 0) / agencies.length
-            )}{" "}
-            min
+            {Math.round(agencies.reduce((a, ag) => a + parseInt(currentMetrics(ag).responseTime), 0) / agencies.length)} min
           </p>
         </div>
       </div>
 
-      {/* Agency List - Stacked */}
+      {/* Agency List */}
       <div className="space-y-3">
         {agencies.map((agency) => {
           const isExpanded = expandedAgencies.includes(agency.id);
@@ -203,10 +239,7 @@ const ClientAgencies = ({ onViewWorker }: ClientAgenciesProps) => {
           return (
             <div key={agency.id} className="bg-card border border-border rounded-lg overflow-hidden">
               {/* Agency Header */}
-              <div
-                className="p-4 cursor-pointer hover:bg-muted/30 transition-colors"
-                onClick={() => toggleAgency(agency.id)}
-              >
+              <div className="p-4 cursor-pointer hover:bg-muted/30 transition-colors" onClick={() => toggleAgency(agency.id)}>
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <div>
@@ -218,58 +251,57 @@ const ClientAgencies = ({ onViewWorker }: ClientAgenciesProps) => {
                         </div>
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        {agency.activeWorkers} active / {agency.totalWorkers} total workers
+                        {agency.activeWorkers} deployed / {agency.totalWorkers} total workers
                       </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
                     <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSelectedAgency(agency);
-                      }}
+                      onClick={(e) => { e.stopPropagation(); setSelectedAgency(agency); }}
                       className="text-xs text-primary hover:underline"
                     >
                       View Details
                     </button>
-                    {isExpanded ? (
-                      <ChevronUp className="w-5 h-5 text-muted-foreground" />
-                    ) : (
-                      <ChevronDown className="w-5 h-5 text-muted-foreground" />
-                    )}
+                    {isExpanded ? <ChevronUp className="w-5 h-5 text-muted-foreground" /> : <ChevronDown className="w-5 h-5 text-muted-foreground" />}
                   </div>
                 </div>
 
-                {/* Performance Metrics Row */}
-                <div className="grid grid-cols-6 gap-3">
+                {/* Performance Metrics Row — 9 columns */}
+                <div className="grid grid-cols-3 md:grid-cols-9 gap-3">
                   <div>
                     <p className="text-xs text-muted-foreground">Attendance</p>
-                    <p className={`text-sm font-semibold ${getPerformanceColor(metrics.attendance, "attendance")}`}>
-                      {metrics.attendance}%
-                    </p>
+                    <p className={`text-sm font-semibold ${getPerformanceColor(metrics.attendance, "attendance")}`}>{metrics.attendance}%</p>
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground">Punctuality</p>
-                    <p className={`text-sm font-semibold ${getPerformanceColor(metrics.punctuality, "punctuality")}`}>
-                      {metrics.punctuality}%
-                    </p>
+                    <p className={`text-sm font-semibold ${getPerformanceColor(metrics.punctuality, "punctuality")}`}>{metrics.punctuality}%</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Fill Rate</p>
+                    <p className={`text-sm font-semibold ${getPerformanceColor(metrics.fillRate, "fillRate")}`}>{metrics.fillRate}%</p>
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground">Attrition</p>
-                    <p className={`text-sm font-semibold ${getPerformanceColor(metrics.attrition, "attrition")}`}>
-                      {metrics.attrition}%
-                    </p>
+                    <p className={`text-sm font-semibold ${getPerformanceColor(metrics.attrition, "attrition")}`}>{metrics.attrition}%</p>
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground">Response Time</p>
+                    <p className="text-xs text-muted-foreground">Response</p>
                     <p className="text-sm font-semibold">{metrics.responseTime}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground">Time-to-Fill</p>
-                    <p className="text-sm font-semibold">{metrics.timeToFill}</p>
+                    <p className="text-xs text-muted-foreground">Avg ETA</p>
+                    <p className="text-sm font-semibold">{metrics.avgEta}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground">New Registered</p>
+                    <p className="text-xs text-muted-foreground">Avg Rate</p>
+                    <p className="text-sm font-semibold">{metrics.avgRate}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Standby</p>
+                    <p className="text-sm font-semibold text-primary">{metrics.standbyWorkers}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">New Reg</p>
                     <p className="text-sm font-semibold text-primary">+{metrics.newRegistrations}</p>
                   </div>
                 </div>
@@ -319,9 +351,7 @@ const ClientAgencies = ({ onViewWorker }: ClientAgenciesProps) => {
                 <h2 className="text-lg font-semibold">{selectedAgency.name}</h2>
                 <p className="text-xs text-muted-foreground">{selectedAgency.totalWorkers} workers registered</p>
               </div>
-              <button onClick={() => setSelectedAgency(null)} className="text-muted-foreground hover:text-foreground">
-                ×
-              </button>
+              <button onClick={() => setSelectedAgency(null)} className="text-muted-foreground hover:text-foreground">×</button>
             </div>
 
             {/* Performance Metrics */}
@@ -334,9 +364,7 @@ const ClientAgencies = ({ onViewWorker }: ClientAgenciesProps) => {
                       key={period}
                       onClick={() => setTimePeriod(period)}
                       className={`px-3 py-1 text-xs capitalize transition-colors ${
-                        timePeriod === period
-                          ? "bg-primary text-primary-foreground rounded-lg"
-                          : "text-muted-foreground hover:text-foreground"
+                        timePeriod === period ? "bg-primary text-primary-foreground rounded-lg" : "text-muted-foreground hover:text-foreground"
                       }`}
                     >
                       {period}
@@ -359,27 +387,35 @@ const ClientAgencies = ({ onViewWorker }: ClientAgenciesProps) => {
                 </div>
                 <div className="bg-muted/30 rounded-lg p-3">
                   <p className="text-xs text-muted-foreground">Attendance</p>
-                  <p
-                    className={`text-lg font-bold ${getPerformanceColor(currentMetrics(selectedAgency).attendance, "attendance")}`}
-                  >
+                  <p className={`text-lg font-bold ${getPerformanceColor(currentMetrics(selectedAgency).attendance, "attendance")}`}>
                     {currentMetrics(selectedAgency).attendance}%
                   </p>
                 </div>
                 <div className="bg-muted/30 rounded-lg p-3">
                   <p className="text-xs text-muted-foreground">Punctuality</p>
-                  <p
-                    className={`text-lg font-bold ${getPerformanceColor(currentMetrics(selectedAgency).punctuality, "punctuality")}`}
-                  >
+                  <p className={`text-lg font-bold ${getPerformanceColor(currentMetrics(selectedAgency).punctuality, "punctuality")}`}>
                     {currentMetrics(selectedAgency).punctuality}%
                   </p>
                 </div>
                 <div className="bg-muted/30 rounded-lg p-3">
                   <p className="text-xs text-muted-foreground">Attrition</p>
-                  <p
-                    className={`text-lg font-bold ${getPerformanceColor(currentMetrics(selectedAgency).attrition, "attrition")}`}
-                  >
+                  <p className={`text-lg font-bold ${getPerformanceColor(currentMetrics(selectedAgency).attrition, "attrition")}`}>
                     {currentMetrics(selectedAgency).attrition}%
                   </p>
+                </div>
+                <div className="bg-muted/30 rounded-lg p-3">
+                  <p className="text-xs text-muted-foreground">Fill Rate</p>
+                  <p className={`text-lg font-bold ${getPerformanceColor(currentMetrics(selectedAgency).fillRate, "fillRate")}`}>
+                    {currentMetrics(selectedAgency).fillRate}%
+                  </p>
+                </div>
+                <div className="bg-muted/30 rounded-lg p-3">
+                  <p className="text-xs text-muted-foreground">Avg Worker ETA</p>
+                  <p className="text-lg font-bold">{currentMetrics(selectedAgency).avgEta}</p>
+                </div>
+                <div className="bg-muted/30 rounded-lg p-3">
+                  <p className="text-xs text-muted-foreground">Avg Hourly Rate</p>
+                  <p className="text-lg font-bold">{currentMetrics(selectedAgency).avgRate}</p>
                 </div>
               </div>
             </div>
@@ -389,27 +425,23 @@ const ClientAgencies = ({ onViewWorker }: ClientAgenciesProps) => {
               <h3 className="text-sm font-semibold mb-3">Rate Card</h3>
               <div className="bg-muted/30 rounded-lg p-4">
                 <div className="grid grid-cols-2 gap-3 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Warehouse Operative</span>
-                    <span className="font-medium">${selectedAgency.rateCard.warehouseOp.toFixed(2)}/hr</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Picker</span>
-                    <span className="font-medium">${selectedAgency.rateCard.picker.toFixed(2)}/hr</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Forklift Driver</span>
-                    <span className="font-medium">${selectedAgency.rateCard.forklift.toFixed(2)}/hr</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Loader</span>
-                    <span className="font-medium">${selectedAgency.rateCard.loader.toFixed(2)}/hr</span>
-                  </div>
+                  {[
+                    { label: "Warehouse Operative", val: selectedAgency.rateCard.warehouseOp },
+                    { label: "MHE", val: selectedAgency.rateCard.mhe },
+                    { label: "Picker", val: selectedAgency.rateCard.picker },
+                    { label: "Loader", val: selectedAgency.rateCard.loader },
+                    { label: "Forklift", val: selectedAgency.rateCard.forklift },
+                  ].filter(r => r.val > 0).map(r => (
+                    <div key={r.label} className="flex justify-between">
+                      <span className="text-muted-foreground">{r.label}</span>
+                      <span className="font-medium">${r.val.toFixed(2)}/hr</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
 
-            {/* Contracts */}
+            {/* Documents */}
             <div>
               <h3 className="text-sm font-semibold mb-3">Documents</h3>
               <div className="space-y-2">
