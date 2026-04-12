@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { DollarSign, Clock, CheckCircle, AlertTriangle, Users, Check, X, MessageSquare, ChevronRight, ShieldCheck } from "lucide-react";
+import { DollarSign, Clock, CheckCircle, AlertTriangle, Users, Check, X, MessageSquare, ChevronRight, ShieldCheck, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { payrollExceptions } from "./ClientExceptions";
 
 /* ─── Agency margin config ─── */
 const agencyMargins: Record<string, number> = {
@@ -35,6 +36,15 @@ interface PayrollEntry {
   worker: string;
   agency: string;
   site: string;
+  department: string;
+  hourlyRate: number;
+  scheduledHours: number;
+  clockedHours: number;
+  overtimeHours: number;
+  steps: Record<PipelineStep, boolean>;
+  blockReason?: string;
+  linkedExceptionId?: string;
+}
   department: string;
   hourlyRate: number;
   scheduledHours: number;
