@@ -117,38 +117,38 @@ const payrollData: PayrollEntry[] = [
     hourlyRate: 18.50, scheduledHours: 40, clockedHours: 43, overtimeHours: 3,
     steps: { scheduled: true, clockedIn: true, clockedOut: true, managerApproved: false, verified: false },
     blockReason: "Awaiting manager approval",
-  },
+    linkedExceptionId: "EX-004",
   {
     id: "PR008", worker: "Priya Chakraborty", agency: "Elite Staffing", site: "Baltimore, MD", department: "MHE",
     hourlyRate: 21.00, scheduledHours: 40, clockedHours: 41, overtimeHours: 1,
     steps: { scheduled: true, clockedIn: true, clockedOut: true, managerApproved: false, verified: false },
     blockReason: "Awaiting manager approval",
-  },
+    linkedExceptionId: "EX-005",
   {
     id: "PR009", worker: "Derek Okafor", agency: "Elwood Staffing", site: "Dallas Fort-Worth, TX", department: "Warehouse Operative",
     hourlyRate: 19.00, scheduledHours: 40, clockedHours: 40, overtimeHours: 0,
     steps: { scheduled: true, clockedIn: true, clockedOut: true, managerApproved: false, verified: false },
     blockReason: "Awaiting manager approval",
-  },
+    linkedExceptionId: "EX-006",
   // --- Blocked entries ---
   {
     id: "PR010", worker: "Hannah Liu", agency: "Staffmark", site: "Baltimore, MD", department: "Warehouse Operative",
     hourlyRate: 18.50, scheduledHours: 40, clockedHours: 38, overtimeHours: 0,
     steps: { scheduled: true, clockedIn: true, clockedOut: false, managerApproved: false, verified: false },
     blockReason: "Clock-out missing",
-  },
+    linkedExceptionId: "EX-002",
   {
     id: "PR011", worker: "Carlos Mendez", agency: "Elite Staffing", site: "Las Vegas, NV", department: "MHE",
     hourlyRate: 21.00, scheduledHours: 40, clockedHours: 0, overtimeHours: 0,
     steps: { scheduled: true, clockedIn: false, clockedOut: false, managerApproved: false, verified: false },
     blockReason: "No clock-in recorded",
-  },
+    linkedExceptionId: "EX-001",
   {
     id: "PR012", worker: "Natasha Volkov", agency: "Elwood Staffing", site: "Dallas Fort-Worth, TX", department: "Warehouse Operative",
     hourlyRate: 19.00, scheduledHours: 40, clockedHours: 36, overtimeHours: 0,
     steps: { scheduled: true, clockedIn: true, clockedOut: false, managerApproved: false, verified: false },
     blockReason: "Clock-out missing",
-  },
+    linkedExceptionId: "EX-003",
 ];
 
 /* ─── Component ─── */
