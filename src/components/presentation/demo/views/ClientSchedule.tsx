@@ -378,6 +378,87 @@ const WorkerListPopover = ({ cell, role, day, shift, onClose, onWorkerClick, onE
   );
 };
 
+// ─── Coverage Alert Popover ──────────────────────────────────────────────────
+
+interface CoverageAlertPopoverProps {
+  cell: ShiftCell;
+  department: string;
+  shift: string;
+  day: string;
+  onClose: () => void;
+}
+
+const CoverageAlertPopover = ({ cell, department, shift, day, onClose }: CoverageAlertPopoverProps) => {
+  const gap = cell.required - cell.workers.length;
+  const filled = cell.workers.length;
+
+  return (
+    <div className="absolute z-50 top-full left-1/2 -translate-x-1/2 mt-1 w-72 bg-card border border-border rounded-xl shadow-xl overflow-hidden" onClick={e => e.stopPropagation()}>
+      {/* Section 1 — Gap summary */}
+      <div className="flex items-center justify-between p-3 bg-amber-500/10 border-b border-border">
+        <div>
+          <div className="flex items-center gap-1.5 mb-1">
+            <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
+            <span className="text-[11px] font-semibold text-amber-500">Coverage gap</span>
+          </div>
+          <p className="text-[10px] text-muted-foreground">{department} · {shift} · {day}</p>
+        </div>
+        <div className="text-right">
+          <p className="text-xl font-bold text-amber-500">{gap}</p>
+          <p className="text-[9px] text-muted-foreground">positions unfilled</p>
+        </div>
+      </div>
+
+      {/* Section 2 — Assigned agency */}
+      <div className="p-3 border-b border-border">
+        <p className="text-[9px] uppercase tracking-[0.12em] text-muted-foreground mb-1.5">ASSIGNED AGENCY</p>
+        <div>
+          <p className="text-xs font-medium text-foreground">Staffmark</p>
+          <div className="mt-1.5 w-full bg-muted rounded-full h-1.5">
+            <div className="bg-amber-500 h-1.5 rounded-full" style={{ width: `${(filled / cell.required) * 100}%` }} />
+          </div>
+          <p className="text-[10px] text-muted-foreground mt-1 text-right">{filled} / {cell.required} confirmed</p>
+        </div>
+      </div>
+
+      {/* Section 3 — Alternative agencies */}
+      <div className="p-3">
+        <p className="text-[9px] uppercase tracking-[0.12em] text-muted-foreground mb-2">AGENCIES THAT CAN COVER</p>
+        <div className="space-y-2">
+          {/* Option A — Best match */}
+          <div className="relative p-2.5 rounded-lg bg-green-500/10 border border-green-500/20">
+            <span className="absolute top-1.5 right-1.5 text-[9px] bg-green-500/15 text-green-600 rounded px-1.5 py-0.5">Best match</span>
+            <p className="text-xs font-medium text-foreground">Elite Staffing</p>
+            <p className="text-[10px] text-muted-foreground mt-0.5">6 workers available · avg 3.2 miles away</p>
+            <div className="flex items-center justify-between mt-1">
+              <span className="text-[10px] text-amber-400">★ 4.8</span>
+            </div>
+          </div>
+          {/* Option B */}
+          <div className="p-2.5 rounded-lg border border-border">
+            <p className="text-xs font-medium text-foreground">Elwood Staffing</p>
+            <p className="text-[10px] text-muted-foreground mt-0.5">3 workers available · avg 6.1 miles away</p>
+            <div className="flex items-center justify-between mt-1">
+              <span className="text-[10px] text-amber-400">★ 3.8</span>
+            </div>
+          </div>
+        </div>
+        <Button
+          size="sm"
+          variant="outline"
+          className="w-full text-xs gap-1 mt-3"
+          onClick={() => {
+            toast.success("Staffmark has been alerted. Elite Staffing flagged as backup.");
+            onClose();
+          }}
+        >
+          <Send className="w-3 h-3" /> Alert Staffmark of gap
+        </Button>
+      </div>
+    </div>
+  );
+};
+
 // ─── View Schedule ───────────────────────────────────────────────────────────
 
 const ViewSchedule = () => {
