@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { DollarSign, Clock, CheckCircle, AlertTriangle, Users, Check, X, MessageSquare, ChevronRight, ShieldCheck } from "lucide-react";
+import { DollarSign, Clock, CheckCircle, AlertTriangle, Users, Check, X, MessageSquare, ChevronRight, ShieldCheck, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { payrollExceptions } from "./ClientExceptions";
 
 /* ─── Agency margin config ─── */
 const agencyMargins: Record<string, number> = {
@@ -42,6 +43,7 @@ interface PayrollEntry {
   overtimeHours: number;
   steps: Record<PipelineStep, boolean>;
   blockReason?: string;
+  linkedExceptionId?: string;
 }
 
 function deriveStatus(steps: Record<PipelineStep, boolean>): "verified" | "pending" | "blocked" {
@@ -114,38 +116,38 @@ const payrollData: PayrollEntry[] = [
     id: "PR007", worker: "Tyler Washington", agency: "Staffmark", site: "Las Vegas, NV", department: "Warehouse Operative",
     hourlyRate: 18.50, scheduledHours: 40, clockedHours: 43, overtimeHours: 3,
     steps: { scheduled: true, clockedIn: true, clockedOut: true, managerApproved: false, verified: false },
-    blockReason: "Awaiting manager approval",
+    blockReason: "Awaiting manager approval", linkedExceptionId: "EX-004",
   },
   {
     id: "PR008", worker: "Priya Chakraborty", agency: "Elite Staffing", site: "Baltimore, MD", department: "MHE",
     hourlyRate: 21.00, scheduledHours: 40, clockedHours: 41, overtimeHours: 1,
     steps: { scheduled: true, clockedIn: true, clockedOut: true, managerApproved: false, verified: false },
-    blockReason: "Awaiting manager approval",
+    blockReason: "Awaiting manager approval", linkedExceptionId: "EX-005",
   },
   {
     id: "PR009", worker: "Derek Okafor", agency: "Elwood Staffing", site: "Dallas Fort-Worth, TX", department: "Warehouse Operative",
     hourlyRate: 19.00, scheduledHours: 40, clockedHours: 40, overtimeHours: 0,
     steps: { scheduled: true, clockedIn: true, clockedOut: true, managerApproved: false, verified: false },
-    blockReason: "Awaiting manager approval",
+    blockReason: "Awaiting manager approval", linkedExceptionId: "EX-006",
   },
   // --- Blocked entries ---
   {
     id: "PR010", worker: "Hannah Liu", agency: "Staffmark", site: "Baltimore, MD", department: "Warehouse Operative",
     hourlyRate: 18.50, scheduledHours: 40, clockedHours: 38, overtimeHours: 0,
     steps: { scheduled: true, clockedIn: true, clockedOut: false, managerApproved: false, verified: false },
-    blockReason: "Clock-out missing",
+    blockReason: "Clock-out missing", linkedExceptionId: "EX-002",
   },
   {
     id: "PR011", worker: "Carlos Mendez", agency: "Elite Staffing", site: "Las Vegas, NV", department: "MHE",
     hourlyRate: 21.00, scheduledHours: 40, clockedHours: 0, overtimeHours: 0,
     steps: { scheduled: true, clockedIn: false, clockedOut: false, managerApproved: false, verified: false },
-    blockReason: "No clock-in recorded",
+    blockReason: "No clock-in recorded", linkedExceptionId: "EX-001",
   },
   {
     id: "PR012", worker: "Natasha Volkov", agency: "Elwood Staffing", site: "Dallas Fort-Worth, TX", department: "Warehouse Operative",
     hourlyRate: 19.00, scheduledHours: 40, clockedHours: 36, overtimeHours: 0,
     steps: { scheduled: true, clockedIn: true, clockedOut: false, managerApproved: false, verified: false },
-    blockReason: "Clock-out missing",
+    blockReason: "Clock-out missing", linkedExceptionId: "EX-003",
   },
 ];
 
@@ -342,7 +344,11 @@ const ClientPayroll = () => {
                       </>
                     ) : (
                       <td colSpan={4} className="px-4 py-3 text-center">
-                        <span className="text-[10px] text-muted-foreground italic">{reason}</span>
+                        <span className="text-[10px] text-muted-foreground italic">
+                          {entry.linkedExceptionId
+                            ? `Blocked — Exception #${entry.linkedExceptionId}`
+                            : reason}
+                        </span>
                       </td>
                     )}
                     <td className="px-4 py-3 text-center">
@@ -433,7 +439,11 @@ const ClientPayroll = () => {
                               ) : (
                                 <Clock className="w-3.5 h-3.5 shrink-0" />
                               )}
-                              <span>{reason}</span>
+                              <span>
+                                {entry.linkedExceptionId
+                                  ? `Blocked — Exception #${entry.linkedExceptionId}: ${reason}`
+                                  : reason}
+                              </span>
                               {isPending && (
                                 <Button
                                   variant="outline"
