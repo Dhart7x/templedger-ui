@@ -547,6 +547,8 @@ const ViewSchedule = () => {
                         const isShort = filled < req && filled > 0;
                         const isEmpty = filled === 0 && req > 0;
                         const cellKey = `${row.role}-${shift.key}-${day}`;
+                        const isFutureWeek = weekInfo.isFuture;
+                        const hasCoverageGap = isFutureWeek && req > 0;
 
                         return (
                           <td
@@ -558,12 +560,40 @@ const ViewSchedule = () => {
                               else { setActiveCell(cellKey); setEditCell(null); }
                             }}
                           >
+                            {/* Pulsing coverage alert badge */}
+                            {hasCoverageGap && (
+                              <span className="absolute top-1 right-1 w-2 h-2">
+                                <span
+                                  className="absolute inset-0 rounded-full animate-ping"
+                                  style={{
+                                    backgroundColor: isShort ? "rgba(249,115,22,0.4)" : "rgba(245,158,11,0.4)",
+                                    animationDuration: "1.8s",
+                                  }}
+                                />
+                                <span
+                                  className="absolute inset-0 rounded-full"
+                                  style={{ backgroundColor: isShort ? "#f97316" : "#f59e0b" }}
+                                />
+                              </span>
+                            )}
                             <div className="flex flex-col items-center">
                               <span className={`text-xs font-semibold ${isFull ? "text-green-600" : isShort ? "text-amber-600" : isEmpty ? "text-destructive" : "text-muted-foreground"}`}>{filled}</span>
                               <span className="text-[9px] text-muted-foreground">/ {req}</span>
                             </div>
-                            {/* Worker list popover */}
-                            {activeCell === cellKey && !editCell && cell.workers.length > 0 && (
+
+                            {/* Coverage alert popover for future weeks with gaps */}
+                            {activeCell === cellKey && !editCell && isFutureWeek && req > 0 && (
+                              <CoverageAlertPopover
+                                cell={cell}
+                                department={row.department}
+                                shift={shift.label}
+                                day={day}
+                                onClose={() => setActiveCell(null)}
+                              />
+                            )}
+
+                            {/* Worker list popover — past weeks only */}
+                            {activeCell === cellKey && !editCell && !isFutureWeek && cell.workers.length > 0 && (
                               <WorkerListPopover
                                 cell={cell}
                                 role={row.role}
@@ -576,8 +606,8 @@ const ViewSchedule = () => {
                               />
                             )}
 
-                            {/* Edit popover — for empty cells or when edit mode triggered */}
-                            {activeCell === cellKey && !editCell && cell.workers.length === 0 && (
+                            {/* Edit popover — past weeks, empty cells */}
+                            {activeCell === cellKey && !editCell && !isFutureWeek && cell.workers.length === 0 && (
                               <EditPopover
                                 cell={cell}
                                 role={row.role}
