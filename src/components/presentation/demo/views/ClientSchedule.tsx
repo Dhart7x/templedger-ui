@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
-import { Calendar, Upload, FileSpreadsheet, Eye, ChevronDown, X, CheckCircle, Users, Building2, Zap, DollarSign, TrendingUp, Send, ChevronRight, Minus, Plus } from "lucide-react";
+import { Calendar, Upload, FileSpreadsheet, Eye, ChevronDown, X, CheckCircle, Users, Building2, Zap, DollarSign, TrendingUp, Send, ChevronRight, Minus, Plus, AlertTriangle } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useDemoContext } from "../DemoContext";
@@ -377,6 +378,87 @@ const WorkerListPopover = ({ cell, role, day, shift, onClose, onWorkerClick, onE
   );
 };
 
+// ─── Coverage Alert Popover ──────────────────────────────────────────────────
+
+interface CoverageAlertPopoverProps {
+  cell: ShiftCell;
+  department: string;
+  shift: string;
+  day: string;
+  onClose: () => void;
+}
+
+const CoverageAlertPopover = ({ cell, department, shift, day, onClose }: CoverageAlertPopoverProps) => {
+  const gap = cell.required - cell.workers.length;
+  const filled = cell.workers.length;
+
+  return (
+    <div className="absolute z-50 top-full left-1/2 -translate-x-1/2 mt-1 w-72 bg-card border border-border rounded-xl shadow-xl overflow-hidden" onClick={e => e.stopPropagation()}>
+      {/* Section 1 — Gap summary */}
+      <div className="flex items-center justify-between p-3 bg-amber-500/10 border-b border-border">
+        <div>
+          <div className="flex items-center gap-1.5 mb-1">
+            <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
+            <span className="text-[11px] font-semibold text-amber-500">Coverage gap</span>
+          </div>
+          <p className="text-[10px] text-muted-foreground">{department} · {shift} · {day}</p>
+        </div>
+        <div className="text-right">
+          <p className="text-xl font-bold text-amber-500">{gap}</p>
+          <p className="text-[9px] text-muted-foreground">positions unfilled</p>
+        </div>
+      </div>
+
+      {/* Section 2 — Assigned agency */}
+      <div className="p-3 border-b border-border">
+        <p className="text-[9px] uppercase tracking-[0.12em] text-muted-foreground mb-1.5">ASSIGNED AGENCY</p>
+        <div>
+          <p className="text-xs font-medium text-foreground">Staffmark</p>
+          <div className="mt-1.5 w-full bg-muted rounded-full h-1.5">
+            <div className="bg-amber-500 h-1.5 rounded-full" style={{ width: `${(filled / cell.required) * 100}%` }} />
+          </div>
+          <p className="text-[10px] text-muted-foreground mt-1 text-right">{filled} / {cell.required} confirmed</p>
+        </div>
+      </div>
+
+      {/* Section 3 — Alternative agencies */}
+      <div className="p-3">
+        <p className="text-[9px] uppercase tracking-[0.12em] text-muted-foreground mb-2">AGENCIES THAT CAN COVER</p>
+        <div className="space-y-2">
+          {/* Option A — Best match */}
+          <div className="relative p-2.5 rounded-lg bg-green-500/10 border border-green-500/20">
+            <span className="absolute top-1.5 right-1.5 text-[9px] bg-green-500/15 text-green-600 rounded px-1.5 py-0.5">Best match</span>
+            <p className="text-xs font-medium text-foreground">Elite Staffing</p>
+            <p className="text-[10px] text-muted-foreground mt-0.5">6 workers available · avg 3.2 miles away</p>
+            <div className="flex items-center justify-between mt-1">
+              <span className="text-[10px] text-amber-400">★ 4.8</span>
+            </div>
+          </div>
+          {/* Option B */}
+          <div className="p-2.5 rounded-lg border border-border">
+            <p className="text-xs font-medium text-foreground">Elwood Staffing</p>
+            <p className="text-[10px] text-muted-foreground mt-0.5">3 workers available · avg 6.1 miles away</p>
+            <div className="flex items-center justify-between mt-1">
+              <span className="text-[10px] text-amber-400">★ 3.8</span>
+            </div>
+          </div>
+        </div>
+        <Button
+          size="sm"
+          variant="outline"
+          className="w-full text-xs gap-1 mt-3"
+          onClick={() => {
+            toast.success("Staffmark has been alerted. Elite Staffing flagged as backup.");
+            onClose();
+          }}
+        >
+          <Send className="w-3 h-3" /> Alert Staffmark of gap
+        </Button>
+      </div>
+    </div>
+  );
+};
+
 // ─── View Schedule ───────────────────────────────────────────────────────────
 
 const ViewSchedule = () => {
@@ -465,6 +547,8 @@ const ViewSchedule = () => {
                         const isShort = filled < req && filled > 0;
                         const isEmpty = filled === 0 && req > 0;
                         const cellKey = `${row.role}-${shift.key}-${day}`;
+                        const isFutureWeek = weekInfo.isFuture;
+                        const hasCoverageGap = isFutureWeek && req > 0;
 
                         return (
                           <td
@@ -476,12 +560,40 @@ const ViewSchedule = () => {
                               else { setActiveCell(cellKey); setEditCell(null); }
                             }}
                           >
+                            {/* Pulsing coverage alert badge */}
+                            {hasCoverageGap && (
+                              <span className="absolute top-1 right-1 w-2 h-2">
+                                <span
+                                  className="absolute inset-0 rounded-full animate-ping"
+                                  style={{
+                                    backgroundColor: isShort ? "rgba(249,115,22,0.4)" : "rgba(245,158,11,0.4)",
+                                    animationDuration: "1.8s",
+                                  }}
+                                />
+                                <span
+                                  className="absolute inset-0 rounded-full"
+                                  style={{ backgroundColor: isShort ? "#f97316" : "#f59e0b" }}
+                                />
+                              </span>
+                            )}
                             <div className="flex flex-col items-center">
                               <span className={`text-xs font-semibold ${isFull ? "text-green-600" : isShort ? "text-amber-600" : isEmpty ? "text-destructive" : "text-muted-foreground"}`}>{filled}</span>
                               <span className="text-[9px] text-muted-foreground">/ {req}</span>
                             </div>
-                            {/* Worker list popover */}
-                            {activeCell === cellKey && !editCell && cell.workers.length > 0 && (
+
+                            {/* Coverage alert popover for future weeks with gaps */}
+                            {activeCell === cellKey && !editCell && isFutureWeek && req > 0 && (
+                              <CoverageAlertPopover
+                                cell={cell}
+                                department={row.department}
+                                shift={shift.label}
+                                day={day}
+                                onClose={() => setActiveCell(null)}
+                              />
+                            )}
+
+                            {/* Worker list popover — past weeks only */}
+                            {activeCell === cellKey && !editCell && !isFutureWeek && cell.workers.length > 0 && (
                               <WorkerListPopover
                                 cell={cell}
                                 role={row.role}
@@ -494,8 +606,8 @@ const ViewSchedule = () => {
                               />
                             )}
 
-                            {/* Edit popover — for empty cells or when edit mode triggered */}
-                            {activeCell === cellKey && !editCell && cell.workers.length === 0 && (
+                            {/* Edit popover — past weeks, empty cells */}
+                            {activeCell === cellKey && !editCell && !isFutureWeek && cell.workers.length === 0 && (
                               <EditPopover
                                 cell={cell}
                                 role={row.role}
