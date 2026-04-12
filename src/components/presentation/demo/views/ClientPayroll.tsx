@@ -344,7 +344,11 @@ const ClientPayroll = () => {
                       </>
                     ) : (
                       <td colSpan={4} className="px-4 py-3 text-center">
-                        <span className="text-[10px] text-muted-foreground italic">{reason}</span>
+                        <span className="text-[10px] text-muted-foreground italic">
+                          {entry.linkedExceptionId
+                            ? `Blocked — Exception #${entry.linkedExceptionId}`
+                            : reason}
+                        </span>
                       </td>
                     )}
                     <td className="px-4 py-3 text-center">
