@@ -1,5 +1,6 @@
 import { ReactNode, useState } from "react";
-import { Shield, Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import tempLedgerLogo from "@/assets/templedger-logo.png";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -42,8 +43,8 @@ const WebsiteLayout = ({ children }: WebsiteLayoutProps) => {
             onClick={() => navigate("/website")}
             className="flex items-center gap-2 group"
           >
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center transition-transform group-hover:scale-105">
-              <Shield className="w-4 h-4 text-foreground" />
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105">
+              <img src={tempLedgerLogo} alt="Temp Ledger" className="w-8 h-8 object-contain" />
             </div>
             <span className="font-semibold text-foreground text-sm hidden sm:inline">Temp Ledger</span>
           </button>

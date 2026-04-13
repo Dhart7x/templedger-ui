@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { Shield } from "lucide-react";
 import Slide from "../presentation/Slide";
+import tempLedgerLogo from "@/assets/templedger-logo.png";
 
 const SlideTitle = () => {
   return (
@@ -19,9 +19,9 @@ const SlideTitle = () => {
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.6 }}
-          className="w-20 h-20 rounded-lg bg-primary flex items-center justify-center mx-auto mb-8"
+          className="w-20 h-20 rounded-lg flex items-center justify-center mx-auto mb-8"
         >
-          <Shield className="w-10 h-10 text-foreground" />
+          <img src={tempLedgerLogo} alt="Temp Ledger" className="w-16 h-16 object-contain" />
         </motion.div>
 
         <motion.h1
