@@ -203,23 +203,11 @@
      );
    }
  
-   // Login screen
-   if (demoState === "login") {
-     return (
-       <div className="w-full h-full flex flex-col bg-background">
-         <div className="absolute top-6 left-6 z-30">
-           <Button
-             variant="outline"
-             size="sm"
-             onClick={handleExitDemo}
-             className="gap-2 bg-card/80 border-border hover:border-primary/50"
-           >
-             <ArrowLeft className="w-4 h-4" />
-             Back to Slides
-           </Button>
-         </div>
- 
-         <div className="flex-1 flex items-center justify-center px-4">
+    // Login screen
+    if (demoState === "login") {
+      return (
+        <div className="w-full h-full flex flex-col bg-background">
+          <div className="flex-1 flex items-center justify-center px-4">
            <motion.div
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: 1, y: 0 }}
@@ -353,22 +341,12 @@
      }
    };
  
-   // Main demo UI
-   return (
-     <div className="w-full h-full flex flex-col bg-background">
-       <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/30">
-         <div className="flex items-center gap-3">
-           <Button
-             variant="outline"
-             size="sm"
-             onClick={handleExitDemo}
-             className="gap-2 bg-card/80 border-border hover:border-primary/50"
-           >
-             <ArrowLeft className="w-4 h-4" />
-             Back to Slides
-           </Button>
- 
-           {unreadCount > 0 && (
+    // Main demo UI
+    return (
+      <div className="w-full h-full flex flex-col bg-background">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/30">
+          <div>
+            {unreadCount > 0 && (
              <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/30 rounded-lg">
                <Bell className="w-4 h-4 text-primary" />
                <span className="text-xs font-medium text-primary">{unreadCount} new</span>

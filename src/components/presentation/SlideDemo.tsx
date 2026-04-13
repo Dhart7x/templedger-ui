@@ -221,17 +221,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
     <div className="w-full h-full flex flex-col" style={{ background: "hsl(var(--background))", color: "hsl(var(--foreground))" }}>
       {/* Demo Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/30">
-        <div className="flex items-center gap-3">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleExitDemo}
-            className="gap-2 bg-card/80 border-border hover:border-primary/50"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Slides
-          </Button>
-        </div>
+        <div />
 
         {/* View Mode Dropdown */}
         <DropdownMenu>
