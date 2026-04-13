@@ -85,18 +85,6 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   if (demoState === "login") {
     return (
       <div className="w-full h-full flex flex-col bg-background">
-        <div className="absolute top-6 left-6 z-30">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleExitDemo}
-            className="gap-2 bg-card/80 border-border hover:border-primary/50"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Slides
-          </Button>
-        </div>
-
         <div className="flex-1 flex items-center justify-center px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
