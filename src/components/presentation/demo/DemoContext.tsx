@@ -99,8 +99,13 @@ export interface LiveException {
   trafficSeverity?: "moderate" | "severe";
   affectedWorkers?: number;
   timestamp: string;
-  status: "open" | "resolving" | "resolved";
+  status: "open" | "resolving" | "resolved" | "actioned";
   resolution?: ExceptionResolution;
+  description?: string;
+  actionedAt?: string;
+  actionedBy?: string;
+  actionNote?: string;
+  agingHours?: number;
 }
 
 // ============= CONTEXT INTERFACE =============
