@@ -514,13 +514,13 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
                         <Button
                           variant="outline"
                           size="sm"
-                          className="w-full mt-3 text-xs h-8 gap-1.5"
+                          className="mt-3 text-xs px-2 py-1 h-auto gap-1 text-muted-foreground border-muted-foreground/30 hover:text-primary hover:border-primary/50"
                           onClick={(e) => {
                             e.stopPropagation();
                             handleMarkAsActioned(exception.id);
                           }}
                         >
-                          <CheckSquare className="w-3.5 h-3.5" />
+                          <CheckSquare className="w-3 h-3" />
                           Mark as Actioned
                         </Button>
                       )}
