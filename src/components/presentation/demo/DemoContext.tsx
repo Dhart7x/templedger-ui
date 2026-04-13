@@ -407,8 +407,7 @@ const initialExceptions: LiveException[] = [
     affectedWorkers: 12,
     timestamp: new Date().toISOString(),
     status: "open",
-
-
+  },
   {
     id: "exc-18",
     workerId: "traffic-cube",
