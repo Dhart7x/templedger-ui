@@ -80,7 +80,8 @@ export type ExceptionType =
   | "overtime" 
   | "clocked-in-not-out" 
   | "rtw-expired" 
-  | "traffic-alert";
+  | "traffic-alert"
+  | "not-scheduled";
 
 export interface LiveException {
   id: string;
