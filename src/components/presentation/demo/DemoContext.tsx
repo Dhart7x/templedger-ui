@@ -80,7 +80,8 @@ export type ExceptionType =
   | "overtime" 
   | "clocked-in-not-out" 
   | "rtw-expired" 
-  | "traffic-alert";
+  | "traffic-alert"
+  | "not-scheduled";
 
 export interface LiveException {
   id: string;
@@ -98,8 +99,13 @@ export interface LiveException {
   trafficSeverity?: "moderate" | "severe";
   affectedWorkers?: number;
   timestamp: string;
-  status: "open" | "resolving" | "resolved";
+  status: "open" | "resolving" | "resolved" | "actioned";
   resolution?: ExceptionResolution;
+  description?: string;
+  actionedAt?: string;
+  actionedBy?: string;
+  actionNote?: string;
+  agingHours?: number;
 }
 
 // ============= CONTEXT INTERFACE =============
@@ -373,6 +379,20 @@ const initialExceptions: LiveException[] = [
     rtwExpiryDate: "2026-02-05",
     timestamp: new Date().toISOString(),
     status: "open",
+  },
+  {
+    id: "exc-ns-001",
+    workerId: "w-kevin-wright",
+    workerName: "Kevin Wright",
+    type: "not-scheduled",
+    site: "Baltimore, MD",
+    department: "Warehouse Operative",
+    agency: "Elite Staffing",
+    shift: "06:00–14:00",
+    timestamp: new Date().toISOString(),
+    status: "open",
+    description: "Worker clocked in at 07:14 but has no scheduled shift for today.",
+    agingHours: 3,
   },
   {
     id: "exc-17",

@@ -1,4 +1,4 @@
-import { Eye, Calendar, ClipboardList, Building2, Users, DollarSign, FileText, TrendingUp, UserCheck, MessageCircle, AlertTriangle } from "lucide-react";
+import { Eye, Calendar, ClipboardList, Building2, Users, DollarSign, FileText, TrendingUp, UserCheck, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ClientSidebarProps {
@@ -13,7 +13,7 @@ const navItems = [
   { id: "bookings", label: "Bookings", icon: ClipboardList, badge: "3" },
   { id: "agencies", label: "Agencies", icon: Building2 },
   { id: "workers", label: "Workers", icon: Users },
-  { id: "exceptions", label: "Exceptions", icon: AlertTriangle, badge: "12" },
+  
   { id: "payroll", label: "Payroll", icon: DollarSign },
   { id: "billing", label: "Billing", icon: FileText },
   { id: "spend-analysis", label: "Spend Analysis", icon: TrendingUp },

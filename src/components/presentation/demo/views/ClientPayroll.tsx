@@ -1,474 +1,317 @@
-import React, { useState } from "react";
-import { DollarSign, Clock, CheckCircle, AlertTriangle, Users, Check, X, MessageSquare, ChevronRight, ShieldCheck, ExternalLink } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { CheckCircle, AlertTriangle, ChevronDown } from "lucide-react";
 import { toast } from "sonner";
-import { payrollExceptions } from "./ClientExceptions";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
-/* ─── Agency margin config ─── */
-const agencyMargins: Record<string, number> = {
-  "Staffmark": 15,
-  "Elite Staffing": 18,
-  "Elwood Staffing": 12,
-};
-
-const agencyRateCards: Record<string, Record<string, number>> = {
-  "Staffmark": { "Warehouse Operative": 18.50, "MHE": 22.75 },
-  "Elite Staffing": { "Warehouse Operative": 17.25, "MHE": 21.00 },
-  "Elwood Staffing": { "Warehouse Operative": 19.00, "MHE": 23.50 },
-};
-
-const EMPLOYER_TAX_RATE = 0.138;
-
-/* ─── Pipeline steps ─── */
-type PipelineStep = "scheduled" | "clockedIn" | "clockedOut" | "managerApproved" | "verified";
-
-const pipelineSteps: { key: PipelineStep; label: string }[] = [
-  { key: "scheduled", label: "Scheduled" },
-  { key: "clockedIn", label: "Clocked In" },
-  { key: "clockedOut", label: "Clocked Out" },
-  { key: "managerApproved", label: "Manager Approved" },
-  { key: "verified", label: "Verified" },
+/* ─── Verification steps ─── */
+const verificationSteps = [
+  "Scheduled",
+  "Clocked In",
+  "Clocked Out",
+  "Manager Approved",
+  "Verified",
 ];
 
 /* ─── Types ─── */
-interface PayrollEntry {
+interface VerifiedEntry {
+  worker: string;
+  agency: string;
+  department: string;
+  days: { day: string; hours: number }[];
+  totalHours: number;
+  stepsCompleted: number; // out of 5
+  hourlyRate: number;
+}
+
+interface ExceptionEntry {
   id: string;
   worker: string;
   agency: string;
-  site: string;
   department: string;
-  hourlyRate: number;
-  scheduledHours: number;
-  clockedHours: number;
-  overtimeHours: number;
-  steps: Record<PipelineStep, boolean>;
-  blockReason?: string;
-  linkedExceptionId?: string;
+  exceptionType: string;
+  exceptionColor: string;
+  failingStep: string;
+  stepsCompleted: boolean[];
+  status: "open" | "in-review";
 }
 
-function deriveStatus(steps: Record<PipelineStep, boolean>): "verified" | "pending" | "blocked" {
-  if (steps.verified) return "verified";
-  // Find first incomplete step
-  for (const s of pipelineSteps) {
-    if (!steps[s.key]) {
-      // If we're past scheduled but missing a middle step, it's blocked
-      if (s.key === "clockedOut" || s.key === "clockedIn") return "blocked";
-      return "pending";
-    }
-  }
-  return "verified";
-}
-
-function getBlockingReason(steps: Record<PipelineStep, boolean>): string {
-  if (!steps.scheduled) return "Shift not scheduled";
-  if (!steps.clockedIn) return "No clock-in recorded";
-  if (!steps.clockedOut) return "Clock-out missing";
-  if (!steps.managerApproved) return "Awaiting manager approval";
-  if (!steps.verified) return "Awaiting final verification";
-  return "";
-}
-
-function calcCosts(entry: PayrollEntry) {
-  const totalHours = entry.clockedHours;
-  const rate = entry.hourlyRate;
-  const basePay = totalHours * rate;
-  const employerTax = basePay * EMPLOYER_TAX_RATE;
-  const marginPct = agencyMargins[entry.agency] ?? 15;
-  const agencyMargin = basePay * (marginPct / 100);
-  const totalBillable = basePay + employerTax + agencyMargin;
-  return { basePay, employerTax, agencyMargin, marginPct, totalBillable };
-}
-
-/* ─── Data: 12 realistic payroll entries ─── */
-const payrollData: PayrollEntry[] = [
-  {
-    id: "PR001", worker: "Marcus Rivera", agency: "Staffmark", site: "Baltimore, MD", department: "Warehouse Operative",
-    hourlyRate: 18.50, scheduledHours: 40, clockedHours: 40, overtimeHours: 0,
-    steps: { scheduled: true, clockedIn: true, clockedOut: true, managerApproved: true, verified: true },
-  },
-  {
-    id: "PR002", worker: "Diane Kowalski", agency: "Staffmark", site: "Baltimore, MD", department: "MHE",
-    hourlyRate: 22.75, scheduledHours: 40, clockedHours: 42, overtimeHours: 2,
-    steps: { scheduled: true, clockedIn: true, clockedOut: true, managerApproved: true, verified: true },
-  },
-  {
-    id: "PR003", worker: "Jordan Ellis", agency: "Elite Staffing", site: "Las Vegas, NV", department: "Warehouse Operative",
-    hourlyRate: 17.25, scheduledHours: 40, clockedHours: 38, overtimeHours: 0,
-    steps: { scheduled: true, clockedIn: true, clockedOut: true, managerApproved: true, verified: true },
-  },
-  {
-    id: "PR004", worker: "Aaliyah Brooks", agency: "Elite Staffing", site: "Baltimore, MD", department: "Warehouse Operative",
-    hourlyRate: 17.25, scheduledHours: 40, clockedHours: 40, overtimeHours: 0,
-    steps: { scheduled: true, clockedIn: true, clockedOut: true, managerApproved: true, verified: true },
-  },
-  {
-    id: "PR005", worker: "Kenneth Tran", agency: "Elwood Staffing", site: "Dallas Fort-Worth, TX", department: "MHE",
-    hourlyRate: 23.50, scheduledHours: 40, clockedHours: 44, overtimeHours: 4,
-    steps: { scheduled: true, clockedIn: true, clockedOut: true, managerApproved: true, verified: true },
-  },
-  {
-    id: "PR006", worker: "Sofia Hernandez", agency: "Elwood Staffing", site: "Baltimore, MD", department: "Warehouse Operative",
-    hourlyRate: 19.00, scheduledHours: 40, clockedHours: 40, overtimeHours: 0,
-    steps: { scheduled: true, clockedIn: true, clockedOut: true, managerApproved: true, verified: true },
-  },
-  // --- Pending entries ---
-  {
-    id: "PR007", worker: "Tyler Washington", agency: "Staffmark", site: "Las Vegas, NV", department: "Warehouse Operative",
-    hourlyRate: 18.50, scheduledHours: 40, clockedHours: 43, overtimeHours: 3,
-    steps: { scheduled: true, clockedIn: true, clockedOut: true, managerApproved: false, verified: false },
-    blockReason: "Awaiting manager approval", linkedExceptionId: "EX-004",
-  },
-  {
-    id: "PR008", worker: "Priya Chakraborty", agency: "Elite Staffing", site: "Baltimore, MD", department: "MHE",
-    hourlyRate: 21.00, scheduledHours: 40, clockedHours: 41, overtimeHours: 1,
-    steps: { scheduled: true, clockedIn: true, clockedOut: true, managerApproved: false, verified: false },
-    blockReason: "Awaiting manager approval", linkedExceptionId: "EX-005",
-  },
-  {
-    id: "PR009", worker: "Derek Okafor", agency: "Elwood Staffing", site: "Dallas Fort-Worth, TX", department: "Warehouse Operative",
-    hourlyRate: 19.00, scheduledHours: 40, clockedHours: 40, overtimeHours: 0,
-    steps: { scheduled: true, clockedIn: true, clockedOut: true, managerApproved: false, verified: false },
-    blockReason: "Awaiting manager approval", linkedExceptionId: "EX-006",
-  },
-  // --- Blocked entries ---
-  {
-    id: "PR010", worker: "Hannah Liu", agency: "Staffmark", site: "Baltimore, MD", department: "Warehouse Operative",
-    hourlyRate: 18.50, scheduledHours: 40, clockedHours: 38, overtimeHours: 0,
-    steps: { scheduled: true, clockedIn: true, clockedOut: false, managerApproved: false, verified: false },
-    blockReason: "Clock-out missing", linkedExceptionId: "EX-002",
-  },
-  {
-    id: "PR011", worker: "Carlos Mendez", agency: "Elite Staffing", site: "Las Vegas, NV", department: "MHE",
-    hourlyRate: 21.00, scheduledHours: 40, clockedHours: 0, overtimeHours: 0,
-    steps: { scheduled: true, clockedIn: false, clockedOut: false, managerApproved: false, verified: false },
-    blockReason: "No clock-in recorded", linkedExceptionId: "EX-001",
-  },
-  {
-    id: "PR012", worker: "Natasha Volkov", agency: "Elwood Staffing", site: "Dallas Fort-Worth, TX", department: "Warehouse Operative",
-    hourlyRate: 19.00, scheduledHours: 40, clockedHours: 36, overtimeHours: 0,
-    steps: { scheduled: true, clockedIn: true, clockedOut: false, managerApproved: false, verified: false },
-    blockReason: "Clock-out missing", linkedExceptionId: "EX-003",
-  },
+/* ─── Seeded Data ─── */
+const verifiedEntries: VerifiedEntry[] = [
+  { worker: "John Patel", agency: "Staffmark", department: "Warehouse Operative", days: [{ day: "Mon", hours: 8 }, { day: "Tue", hours: 8 }, { day: "Wed", hours: 8 }], totalHours: 24, stepsCompleted: 5, hourlyRate: 12.50 },
+  { worker: "Maria Santos", agency: "Elite Staffing", department: "Warehouse Operative", days: [{ day: "Mon", hours: 8 }, { day: "Tue", hours: 8 }, { day: "Wed", hours: 10 }], totalHours: 26, stepsCompleted: 5, hourlyRate: 13.00 },
+  { worker: "Lucy Brown", agency: "Staffmark", department: "Warehouse Operative", days: [{ day: "Mon", hours: 8 }, { day: "Tue", hours: 8 }], totalHours: 16, stepsCompleted: 5, hourlyRate: 12.50 },
+  { worker: "Marcus Johnson", agency: "Staffmark", department: "MHE", days: [{ day: "Mon", hours: 8 }, { day: "Tue", hours: 8 }, { day: "Wed", hours: 8 }], totalHours: 24, stepsCompleted: 5, hourlyRate: 13.50 },
+  { worker: "Priya Sharma", agency: "Elite Staffing", department: "Warehouse Operative", days: [{ day: "Mon", hours: 8 }, { day: "Tue", hours: 8 }, { day: "Wed", hours: 8 }], totalHours: 24, stepsCompleted: 5, hourlyRate: 13.00 },
+  { worker: "Ahmed Khan", agency: "Elwood Staffing", department: "MHE", days: [{ day: "Mon", hours: 8 }, { day: "Tue", hours: 8 }], totalHours: 16, stepsCompleted: 5, hourlyRate: 12.00 },
 ];
+
+const exceptionEntries: ExceptionEntry[] = [
+  { id: "EX-001", worker: "Tomasz Nowak", agency: "Staffmark", department: "MHE", exceptionType: "No Clock-Out", exceptionColor: "text-orange-500 bg-orange-500/10", failingStep: "✗ Clock-out missing", stepsCompleted: [true, true, false, false, false], status: "open" },
+  { id: "EX-002", worker: "Rachel Adams", agency: "Elite Staffing", department: "Warehouse Operative", exceptionType: "Manager Approval Missing", exceptionColor: "text-amber-500 bg-amber-500/10", failingStep: "✗ Manager Approved", stepsCompleted: [true, true, true, false, false], status: "open" },
+  { id: "EX-NS-001", worker: "Kevin Wright", agency: "Elite Staffing", department: "Warehouse Operative", exceptionType: "Not Scheduled", exceptionColor: "text-purple-500 bg-purple-500/10", failingStep: "✗ Scheduled (worker not on roster)", stepsCompleted: [false, false, false, false, false], status: "open" },
+  { id: "EX-003", worker: "Daniel Brown", agency: "Elwood Staffing", department: "MHE", exceptionType: "No Clock-In", exceptionColor: "text-destructive bg-destructive/10", failingStep: "✗ Clock-in missing", stepsCompleted: [true, false, false, false, false], status: "open" },
+];
+
+const resolveOptions = [
+  "Override with scheduled hours",
+  "Mark as no-show",
+  "Request agency response",
+  "Escalate",
+];
+
+/* ─── Derived totals ─── */
+const totalVerifiedHours = verifiedEntries.reduce((s, e) => s + e.totalHours, 0);
+const totalVerifiedWorkers = verifiedEntries.length;
+const avgRate = 13.00;
+const estimatedPayroll = totalVerifiedHours * avgRate;
+
+const agencyBreakdown = [
+  { name: "Staffmark", hours: verifiedEntries.filter(e => e.agency === "Staffmark").reduce((s, e) => s + e.totalHours, 0) },
+  { name: "Elite Staffing", hours: verifiedEntries.filter(e => e.agency === "Elite Staffing").reduce((s, e) => s + e.totalHours, 0) },
+  { name: "Elwood Staffing", hours: verifiedEntries.filter(e => e.agency === "Elwood Staffing").reduce((s, e) => s + e.totalHours, 0) },
+];
+const maxAgencyHours = Math.max(...agencyBreakdown.map(a => a.hours));
 
 /* ─── Component ─── */
 const ClientPayroll = () => {
-  const [weekFilter, setWeekFilter] = useState("current");
-  const [expandedRow, setExpandedRow] = useState<string | null>(null);
-  const [statusFilter, setStatusFilter] = useState<"all" | "verified" | "pending" | "blocked">("all");
+  const [exceptions, setExceptions] = useState(exceptionEntries);
+  const [resolveDropdown, setResolveDropdown] = useState<string | null>(null);
+  const [verified, setVerified] = useState(verifiedEntries);
 
-  const enriched = payrollData.map(e => ({
-    ...e,
-    status: deriveStatus(e.steps),
-    costs: calcCosts(e),
-  }));
+  const handleResolve = (exId: string, option: string) => {
+    setResolveDropdown(null);
+    if (option === "Override with scheduled hours") {
+      const ex = exceptions.find(e => e.id === exId);
+      if (ex) {
+        setVerified(prev => [...prev, {
+          worker: ex.worker,
+          agency: ex.agency,
+          department: ex.department,
+          days: [{ day: "Mon", hours: 8 }, { day: "Tue", hours: 8 }],
+          totalHours: 16,
+          stepsCompleted: 5,
+          hourlyRate: 12.50,
+        }]);
+        setExceptions(prev => prev.filter(e => e.id !== exId));
+        toast.success(`${ex.worker} moved to verified with scheduled hours.`);
+      }
+    } else {
+      setExceptions(prev => prev.map(e => e.id === exId ? { ...e, status: "in-review" as const } : e));
+      toast.info(`${option} — exception now in review.`);
+    }
+  };
 
-  const filtered = statusFilter === "all" ? enriched : enriched.filter(e => e.status === statusFilter);
-
-  const verified = enriched.filter(e => e.status === "verified");
-  const totalVerifiedHours = verified.reduce((s, e) => s + e.clockedHours, 0);
-  const totalVerifiedPay = verified.reduce((s, e) => s + e.costs.basePay, 0);
-  const totalBillable = verified.reduce((s, e) => s + e.costs.totalBillable, 0);
-  const pendingCount = enriched.filter(e => e.status === "pending").length;
-  const blockedCount = enriched.filter(e => e.status === "blocked").length;
-
-  const fmt = (n: number) => `$${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const currentVerifiedHours = verified.reduce((s, e) => s + e.totalHours, 0);
+  const currentEstPayroll = currentVerifiedHours * avgRate;
 
   return (
-    <div className="p-4 md:p-6 space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-lg md:text-xl font-bold text-foreground">Payroll</h1>
-          <p className="text-xs text-muted-foreground">Week ending 9 Feb 2025</p>
+    <div className="flex h-full">
+      {/* LEFT PANEL — 58% */}
+      <div className="w-[58%] border-r border-border overflow-y-auto p-5">
+        {/* Header */}
+        <div className="mb-5">
+          <h2 className="font-mono text-sm font-semibold" style={{ color: "#ede7d9" }}>
+            Live Payroll Feed
+          </h2>
+          <p className="text-[11px] mt-0.5" style={{ color: "#52524e" }}>
+            Shifts completing in real time · Week of 10 Feb 2025
+          </p>
         </div>
-        <select
-          value={weekFilter}
-          onChange={(e) => setWeekFilter(e.target.value)}
-          className="text-xs bg-card border border-border rounded px-2 py-1.5"
-        >
-          <option value="current">Week ending 9 Feb</option>
-          <option value="prev1">Week ending 2 Feb</option>
-          <option value="prev2">Week ending 26 Jan</option>
-        </select>
-      </div>
 
-      {/* Summary Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <ShieldCheck className="w-4 h-4 text-green-500" />
-            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Verified Hours</span>
+        {/* SUB-SECTION A — Verified */}
+        <div className="border-l-2 border-green-500 pl-4 mb-6">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-[10px] uppercase tracking-[0.14em] font-medium text-green-500">
+              Verified
+            </span>
+            <span className="text-[10px] bg-green-500/15 text-green-600 px-2 py-0.5 rounded">
+              {verified.length}
+            </span>
           </div>
-          <p className="text-xl font-bold">{totalVerifiedHours}h</p>
-          <p className="text-[10px] text-muted-foreground">{verified.length} of {enriched.length} workers</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <DollarSign className="w-4 h-4 text-green-500" />
-            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Verified Pay</span>
-          </div>
-          <p className="text-xl font-bold text-green-500">{fmt(totalVerifiedPay)}</p>
-          <p className="text-[10px] text-muted-foreground">Base pay only</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <DollarSign className="w-4 h-4 text-primary" />
-            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Total Billable</span>
-          </div>
-          <p className="text-xl font-bold text-primary">{fmt(totalBillable)}</p>
-          <p className="text-[10px] text-muted-foreground">Pay + tax + margin</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <Clock className="w-4 h-4 text-amber-500" />
-            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Pending</span>
-          </div>
-          <p className="text-xl font-bold text-amber-500">{pendingCount}</p>
-          <p className="text-[10px] text-muted-foreground">Awaiting approval</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <AlertTriangle className="w-4 h-4 text-destructive" />
-            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Blocked</span>
-          </div>
-          <p className="text-xl font-bold text-destructive">{blockedCount}</p>
-          <p className="text-[10px] text-muted-foreground">Missing data</p>
-        </div>
-      </div>
-
-      {/* Pipeline Legend */}
-      <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
-        <span className="font-medium mr-1">Pipeline:</span>
-        {pipelineSteps.map((s, i) => (
-          <React.Fragment key={s.key}>
-            <span className="bg-muted px-2 py-0.5 rounded">{s.label}</span>
-            {i < pipelineSteps.length - 1 && <ChevronRight className="w-3 h-3" />}
-          </React.Fragment>
-        ))}
-      </div>
-
-      {/* Status Filter */}
-      <div className="flex items-center gap-2">
-        {(["all", "verified", "pending", "blocked"] as const).map((key) => (
-          <button
-            key={key}
-            onClick={() => setStatusFilter(key)}
-            className={`px-3 py-1.5 text-xs rounded-lg transition-colors ${
-              statusFilter === key
-                ? "bg-primary text-primary-foreground"
-                : "bg-card border border-border text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            {key === "all" ? "All" : key === "verified" ? "Verified" : key === "pending" ? "Pending" : "Blocked"}
-            {key === "pending" && pendingCount > 0 && (
-              <span className="ml-1.5 bg-amber-500/20 text-amber-500 px-1 py-0.5 rounded text-[10px]">{pendingCount}</span>
-            )}
-            {key === "blocked" && blockedCount > 0 && (
-              <span className="ml-1.5 bg-destructive/20 text-destructive px-1 py-0.5 rounded text-[10px]">{blockedCount}</span>
-            )}
-          </button>
-        ))}
-      </div>
-
-      {/* Payroll Table */}
-      <div className="bg-card border border-border rounded-lg overflow-hidden">
-        <table className="w-full text-sm">
-          <thead className="bg-muted/50">
-            <tr>
-              <th className="text-left px-4 py-3 font-medium text-muted-foreground">Worker</th>
-              <th className="text-left px-4 py-3 font-medium text-muted-foreground">Agency</th>
-              <th className="text-right px-4 py-3 font-medium text-muted-foreground">Hours</th>
-              <th className="text-center px-4 py-3 font-medium text-muted-foreground">Pipeline</th>
-              <th className="text-right px-4 py-3 font-medium text-muted-foreground">Base Pay</th>
-              <th className="text-right px-4 py-3 font-medium text-muted-foreground">Tax</th>
-              <th className="text-right px-4 py-3 font-medium text-muted-foreground">Margin</th>
-              <th className="text-right px-4 py-3 font-medium text-muted-foreground">Billable</th>
-              <th className="text-center px-4 py-3 font-medium text-muted-foreground">Status</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-border">
-            {filtered.map((entry) => {
-              const isVerified = entry.status === "verified";
-              const isBlocked = entry.status === "blocked";
-              const isPending = entry.status === "pending";
-              const reason = getBlockingReason(entry.steps);
-
-              return (
-                <React.Fragment key={entry.id}>
-                  <tr
-                    className={`cursor-pointer transition-colors ${
-                      isBlocked ? "bg-destructive/5 opacity-60" :
-                      isPending ? "opacity-70" : ""
-                    } ${expandedRow === entry.id ? "bg-muted/40" : "hover:bg-muted/30"}`}
-                    onClick={() => setExpandedRow(expandedRow === entry.id ? null : entry.id)}
-                  >
-                    <td className="px-4 py-3">
-                      <p className="font-medium">{entry.worker}</p>
-                      <p className="text-[10px] text-muted-foreground">{entry.site} · {entry.department}</p>
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground text-xs">{entry.agency}</td>
-                    <td className="px-4 py-3 text-right">
-                      <span className="font-medium">{entry.clockedHours}h</span>
-                      {entry.overtimeHours > 0 && (
-                        <span className="text-primary text-[10px] ml-1">(+{entry.overtimeHours} OT)</span>
+          <div className="space-y-2">
+            {verified.map((entry, idx) => (
+              <div key={idx} className="flex items-center justify-between py-2">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="text-[13px] font-medium truncate" style={{ color: "#ede7d9" }}>
+                    {entry.worker}
+                  </span>
+                  <span className="text-[11px]" style={{ color: "#52524e" }}>·</span>
+                  <span className="text-[11px] truncate" style={{ color: "#52524e" }}>{entry.agency}</span>
+                  <span className="text-[11px]" style={{ color: "#52524e" }}>·</span>
+                  <span className="text-[11px] truncate" style={{ color: "#52524e" }}>{entry.department}</span>
+                </div>
+                <div className="flex items-center gap-3 shrink-0">
+                  <div className="text-right">
+                    <span className="text-[13px] font-bold text-green-500">{entry.totalHours}h</span>
+                    <div className="text-[9px]" style={{ color: "#52524e" }}>
+                      {entry.days.map(d => `${d.day} ${d.hours}h`).join(" ")}
+                      {entry.totalHours > entry.days.reduce((s, d) => s + (d.day === "Wed" && d.hours > 8 ? 8 : d.hours), 0) && entry.days.some(d => d.hours > 8) && (
+                        <span className="text-primary ml-1">({entry.days.find(d => d.hours > 8)!.hours - 8}h OT)</span>
                       )}
-                    </td>
-                    <td className="px-4 py-3">
-                      <div className="flex items-center justify-center gap-0.5">
-                        {pipelineSteps.map((s, i) => (
-                          <React.Fragment key={s.key}>
-                            <div
-                              className={`w-2 h-2 rounded-full ${
-                                entry.steps[s.key]
-                                  ? "bg-green-500"
-                                  : isBlocked && s.key === pipelineSteps.find(ps => !entry.steps[ps.key])?.key
-                                    ? "bg-destructive"
-                                    : "bg-muted-foreground/30"
-                              }`}
-                              title={`${s.label}: ${entry.steps[s.key] ? "✓" : "✗"}`}
-                            />
-                            {i < pipelineSteps.length - 1 && (
-                              <div className={`w-2 h-px ${entry.steps[s.key] ? "bg-green-500/50" : "bg-muted-foreground/20"}`} />
-                            )}
-                          </React.Fragment>
-                        ))}
-                      </div>
-                    </td>
-                    {isVerified ? (
-                      <>
-                        <td className="px-4 py-3 text-right text-xs">{fmt(entry.costs.basePay)}</td>
-                        <td className="px-4 py-3 text-right text-xs text-muted-foreground">{fmt(entry.costs.employerTax)}</td>
-                        <td className="px-4 py-3 text-right text-xs text-muted-foreground">{fmt(entry.costs.agencyMargin)}</td>
-                        <td className="px-4 py-3 text-right text-xs font-semibold">{fmt(entry.costs.totalBillable)}</td>
-                      </>
-                    ) : (
-                      <td colSpan={4} className="px-4 py-3 text-center">
-                        <span className="text-[10px] text-muted-foreground italic">
-                          {entry.linkedExceptionId
-                            ? `Blocked — Exception #${entry.linkedExceptionId}`
-                            : reason}
-                        </span>
-                      </td>
-                    )}
-                    <td className="px-4 py-3 text-center">
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-medium ${
-                        isVerified ? "bg-green-500/20 text-green-500" :
-                        isPending ? "bg-amber-500/20 text-amber-500" :
-                        "bg-destructive/20 text-destructive"
-                      }`}>
-                        {isVerified ? "Verified" : isPending ? "Pending" : "Blocked"}
+                    </div>
+                  </div>
+                  <TooltipProvider>
+                    <div className="flex items-center gap-0.5">
+                      {verificationSteps.map((step, si) => (
+                        <Tooltip key={si}>
+                          <TooltipTrigger asChild>
+                            <div className={`w-1.5 h-1.5 rounded-full ${
+                              si < entry.stepsCompleted ? "bg-green-500" : "bg-muted-foreground/30"
+                            }`} />
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="text-[10px]">{step}</TooltipContent>
+                        </Tooltip>
+                      ))}
+                    </div>
+                  </TooltipProvider>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* SUB-SECTION B — Exceptions */}
+        <div className="border-l-2 border-destructive pl-4">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-3">
+              <span className="text-[10px] uppercase tracking-[0.14em] font-medium text-destructive">
+                Exceptions
+              </span>
+              <span className="text-[10px] bg-destructive/15 text-destructive px-2 py-0.5 rounded">
+                {exceptions.length}
+              </span>
+            </div>
+            <span className="text-[9px]" style={{ color: "#52524e" }}>Unresolved live issues</span>
+          </div>
+          <div className="space-y-2">
+            {exceptions.map((entry) => (
+              <div key={entry.id} className="flex items-center justify-between py-2 relative">
+                <div className="flex items-center gap-2 min-w-0">
+                  <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+                    entry.exceptionType.includes("No Clock") ? "bg-destructive" : "bg-amber-500"
+                  }`} />
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[13px] font-medium truncate" style={{ color: "#ede7d9" }}>
+                        {entry.worker}
                       </span>
-                    </td>
-                  </tr>
-
-                  {/* Expanded detail */}
-                  {expandedRow === entry.id && (
-                    <tr>
-                      <td colSpan={9} className="px-4 py-4 bg-muted/20 border-t border-border">
-                        <div className="space-y-4">
-                          {/* Pipeline detail */}
-                          <div>
-                            <p className="text-xs font-medium mb-2">Verification Pipeline — {entry.worker}</p>
-                            <div className="flex items-center gap-2">
-                              {pipelineSteps.map((s, i) => {
-                                const done = entry.steps[s.key];
-                                const isBlocker = !done && pipelineSteps.findIndex(ps => !entry.steps[ps.key]) === i;
-                                return (
-                                  <React.Fragment key={s.key}>
-                                    <div className={`flex items-center gap-1.5 rounded-lg border px-3 py-2 text-xs ${
-                                      done ? "border-green-500/30 bg-green-500/10" :
-                                      isBlocker ? "border-destructive/30 bg-destructive/10" :
-                                      "border-border bg-muted/30"
-                                    }`}>
-                                      {done ? (
-                                        <CheckCircle className="w-3.5 h-3.5 text-green-500 shrink-0" />
-                                      ) : isBlocker ? (
-                                        <AlertTriangle className="w-3.5 h-3.5 text-destructive shrink-0" />
-                                      ) : (
-                                        <div className="w-3.5 h-3.5 rounded-full border border-muted-foreground/30 shrink-0" />
-                                      )}
-                                      <span className={
-                                        done ? "text-green-500" : isBlocker ? "text-destructive" : "text-muted-foreground"
-                                      }>{s.label}</span>
-                                    </div>
-                                    {i < pipelineSteps.length - 1 && (
-                                      <ChevronRight className={`w-3 h-3 shrink-0 ${done ? "text-green-500/50" : "text-muted-foreground/30"}`} />
-                                    )}
-                                  </React.Fragment>
-                                );
-                              })}
-                            </div>
-                          </div>
-
-                          {/* Cost breakdown for verified */}
-                          {isVerified && (
-                            <div className="grid grid-cols-4 gap-3">
-                              <div className="bg-muted/30 rounded-lg p-3">
-                                <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Base Pay</p>
-                                <p className="text-sm font-semibold">{fmt(entry.costs.basePay)}</p>
-                                <p className="text-[10px] text-muted-foreground">{entry.clockedHours}h × ${entry.hourlyRate.toFixed(2)}/hr</p>
-                              </div>
-                              <div className="bg-muted/30 rounded-lg p-3">
-                                <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Employer Tax (13.8%)</p>
-                                <p className="text-sm font-semibold">{fmt(entry.costs.employerTax)}</p>
-                                <p className="text-[10px] text-muted-foreground">FICA + state contributions</p>
-                              </div>
-                              <div className="bg-muted/30 rounded-lg p-3">
-                                <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Agency Margin ({entry.costs.marginPct}%)</p>
-                                <p className="text-sm font-semibold">{fmt(entry.costs.agencyMargin)}</p>
-                                <p className="text-[10px] text-muted-foreground">{entry.agency}</p>
-                              </div>
-                              <div className="bg-primary/10 border border-primary/20 rounded-lg p-3">
-                                <p className="text-[10px] text-primary uppercase tracking-wider mb-1">Total Billable</p>
-                                <p className="text-sm font-bold text-primary">{fmt(entry.costs.totalBillable)}</p>
-                                <p className="text-[10px] text-muted-foreground">All-in cost</p>
-                              </div>
-                            </div>
-                          )}
-
-                          {/* Blocking reason for non-verified */}
-                          {!isVerified && (
-                            <div className={`flex items-center gap-2 text-xs rounded-lg px-3 py-2 ${
-                              isBlocked
-                                ? "text-destructive bg-destructive/10 border border-destructive/20"
-                                : "text-amber-500 bg-amber-500/10 border border-amber-500/20"
-                            }`}>
-                              {isBlocked ? (
-                                <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
-                              ) : (
-                                <Clock className="w-3.5 h-3.5 shrink-0" />
-                              )}
-                              <span>
-                                {entry.linkedExceptionId
-                                  ? `Blocked — Exception #${entry.linkedExceptionId}: ${reason}`
-                                  : reason}
-                              </span>
-                              {isPending && (
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="ml-auto h-6 text-[10px] gap-1"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    toast.success(`Approval request sent for ${entry.worker}`);
-                                  }}
-                                >
-                                  <MessageSquare className="w-3 h-3" />
-                                  Chase Approval
-                                </Button>
-                              )}
-                            </div>
-                          )}
+                      <span className="text-[11px]" style={{ color: "#52524e" }}>·</span>
+                      <span className="text-[11px] truncate" style={{ color: "#52524e" }}>{entry.agency}</span>
+                      <span className="text-[11px]" style={{ color: "#52524e" }}>·</span>
+                      <span className="text-[11px] truncate" style={{ color: "#52524e" }}>{entry.department}</span>
+                    </div>
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded ${entry.exceptionColor}`}>
+                        {entry.exceptionType}
+                      </span>
+                      <span className="text-[10px] text-destructive">{entry.failingStep}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="text-[11px] text-destructive">Blocked — {entry.id}</span>
+                  {entry.status === "in-review" ? (
+                    <span className="text-[10px] text-amber-500 bg-amber-500/10 px-1.5 py-0.5 rounded">In Review</span>
+                  ) : (
+                    <div className="relative">
+                      <button
+                        onClick={() => setResolveDropdown(resolveDropdown === entry.id ? null : entry.id)}
+                        className="text-xs border border-border rounded px-2 py-1 text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors"
+                      >
+                        Resolve
+                      </button>
+                      {resolveDropdown === entry.id && (
+                        <div className="absolute right-0 top-full mt-1 z-50 bg-card border border-border rounded-lg shadow-lg w-52 overflow-hidden">
+                          {resolveOptions.map((opt) => (
+                            <button
+                              key={opt}
+                              onClick={() => handleResolve(entry.id, opt)}
+                              className="w-full text-left px-3 py-2 text-xs hover:bg-muted/50 text-foreground transition-colors"
+                            >
+                              {opt}
+                            </button>
+                          ))}
                         </div>
-                      </td>
-                    </tr>
+                      )}
+                    </div>
                   )}
-                </React.Fragment>
-              );
-            })}
-          </tbody>
-        </table>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* RIGHT PANEL — 42% */}
+      <div className="w-[42%] overflow-y-auto p-5">
+        {/* Header */}
+        <div className="mb-5">
+          <h2 className="font-mono text-sm font-semibold" style={{ color: "#ede7d9" }}>
+            Week to Date
+          </h2>
+          <p className="text-[11px] mt-0.5" style={{ color: "#52524e" }}>
+            As of Wednesday 8pm · Wk 10 Feb
+          </p>
+        </div>
+
+        {/* Verified Summary */}
+        <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4 mb-3">
+          <div className="mb-3">
+            <span className="font-mono text-[32px] font-bold text-green-500">{currentVerifiedHours}</span>
+            <p className="text-[11px]" style={{ color: "#52524e" }}>verified hours</p>
+          </div>
+          <div className="mb-3">
+            <span className="font-mono text-[22px]" style={{ color: "#ede7d9" }}>{verified.length}</span>
+            <p className="text-[11px]" style={{ color: "#52524e" }}>workers on verified payroll</p>
+          </div>
+          <div>
+            <span className="font-mono text-lg" style={{ color: "#ede7d9" }}>
+              £{currentEstPayroll.toLocaleString("en-GB", { minimumFractionDigits: 0 })}
+            </span>
+            <p className="text-[11px]" style={{ color: "#52524e" }}>estimated payroll this week</p>
+            <p className="text-[9px]" style={{ color: "#52524e" }}>(final on Friday close)</p>
+          </div>
+        </div>
+
+        {/* Exceptions Summary */}
+        <div className="bg-destructive/5 border border-destructive/20 rounded-lg p-4 mb-3">
+          <div className="mb-3">
+            <span className="font-mono text-[32px] font-bold text-destructive">{exceptions.length}</span>
+            <p className="text-[11px]" style={{ color: "#52524e" }}>payroll exceptions</p>
+          </div>
+          <div className="mb-3">
+            <span className="font-mono text-[22px]" style={{ color: "#ede7d9" }}>{exceptions.length * 16}</span>
+            <p className="text-[11px]" style={{ color: "#52524e" }}>hours pending resolution</p>
+          </div>
+          <div className="bg-destructive/10 border border-destructive/20 rounded-md p-2.5">
+            <p className="text-[11px] leading-relaxed" style={{ color: "#52524e" }}>
+              Unresolved exceptions will not appear on the verified invoice. Resolve before week close to include on billing.
+            </p>
+          </div>
+        </div>
+
+        {/* Agency Breakdown */}
+        <div>
+          <p className="text-[10px] uppercase tracking-[0.12em] mb-2" style={{ color: "#52524e" }}>
+            Verified hours by agency
+          </p>
+          <div className="space-y-3">
+            {agencyBreakdown.map((agency) => (
+              <div key={agency.name}>
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-xs" style={{ color: "#ede7d9" }}>{agency.name}</span>
+                  <span className="font-mono text-xs text-green-500">{agency.hours}h</span>
+                </div>
+                <div className="h-1.5 bg-muted rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-green-500 rounded-full transition-all"
+                    style={{ width: `${(agency.hours / maxAgencyHours) * 100}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
