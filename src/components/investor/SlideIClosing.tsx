@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import Slide from "../presentation/Slide";
-import tempLedgerLogo from "@/assets/templedger-logo.png";
 
 const SlideIClosing = () => {
   return (
@@ -15,14 +14,6 @@ const SlideIClosing = () => {
       </motion.div>
 
       <div className="relative z-10 max-w-4xl mx-auto w-full text-center">
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className="w-20 h-20 rounded-lg flex items-center justify-center mx-auto mb-8"
-        >
-          <img src={tempLedgerLogo} alt="Temp Ledger" className="w-16 h-16 object-contain" />
-        </motion.div>
 
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Play, ChevronDown, ArrowLeft, Eye, EyeOff, Bell, User } from "lucide-react";
-import tempLedgerLogo from "@/assets/templedger-logo.png";
 import ThemeToggle from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import Slide from "./Slide";
@@ -106,9 +105,6 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
             className="w-full max-w-md"
           >
             <div className="flex flex-col items-center mb-8">
-              <div className="w-20 h-20 rounded-lg flex items-center justify-center mb-4">
-                <img src={tempLedgerLogo} alt="Temp Ledger" className="w-20 h-20 object-contain" />
-              </div>
               <h1 className="text-2xl font-bold text-foreground">Temp Ledger</h1>
               <p className="text-sm text-muted-foreground mt-1">Demo Environment</p>
             </div>
