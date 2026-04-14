@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Home } from "lucide-react";
 import SlideHero from "@/slides/end-user/SlideHero";
 import SlideRootCause from "@/slides/end-user/SlideRootCause";
 import SlideWhatYouDontHave from "@/slides/end-user/SlideWhatYouDontHave";

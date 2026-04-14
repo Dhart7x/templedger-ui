@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Home } from "lucide-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import HeroSlide from "@/slides/agency/HeroSlide";
 import RealitySlide from "@/slides/agency/RealitySlide";
@@ -90,6 +91,14 @@ const AgencyDeck = () => {
           <ChevronRight className="w-8 h-8" />
         </button>
       )}
+
+      <a
+        href="/"
+        className="fixed top-6 left-6 z-50 flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
+      >
+        <Home className="w-3.5 h-3.5" />
+        <span>Home</span>
+      </a>
 
       {current > 0 && (
         <div

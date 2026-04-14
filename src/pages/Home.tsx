@@ -47,20 +47,22 @@ const Home = () => {
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-40">
-              <DropdownMenuItem onClick={() => navigate("/deck/agency")} className="cursor-pointer">
-                Agency
+              <DropdownMenuItem asChild className="cursor-pointer">
+                <a href="/deck/agency" target="_blank" rel="noopener noreferrer">Agency</a>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate("/deck/end-user")} className="cursor-pointer">
-                End User
+              <DropdownMenuItem asChild className="cursor-pointer">
+                <a href="/deck/end-user" target="_blank" rel="noopener noreferrer">End User</a>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <button
-            onClick={() => navigate("/demo")}
+          <a
+            href="/demo"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-sm text-muted-foreground hover:text-primary transition-colors px-4 py-2 rounded-md border border-border hover:border-primary/50"
           >
             Demo
-          </button>
+          </a>
         </div>
       </header>
 
