@@ -93,6 +93,14 @@ const EndUserDeck = () => {
         </button>
       )}
 
+      <a
+        href="/"
+        className="fixed top-6 left-6 z-50 flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
+      >
+        <Home className="w-3.5 h-3.5" />
+        <span>Home</span>
+      </a>
+
       {current > 0 && (
         <div
           className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 font-sans"
