@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { ChevronDown } from "lucide-react";
 import { ChevronDown } from "lucide-react";
 import {
   DropdownMenu,
@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const Home = () => {
-  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen w-full bg-background relative overflow-hidden">
