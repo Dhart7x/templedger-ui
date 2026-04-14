@@ -1,5 +1,12 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { ChevronDown } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -31,12 +38,30 @@ const Home = () => {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between bg-background/80 backdrop-blur-md border-b border-border/50">
         <span className="font-semibold text-foreground text-sm tracking-wide">Temp Ledger</span>
-        <button
-          onClick={() => navigate("/demo")}
-          className="text-sm text-muted-foreground hover:text-primary transition-colors px-4 py-2 rounded-md border border-border hover:border-primary/50"
-        >
-          Demo
-        </button>
+        <div className="flex items-center gap-3">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors px-4 py-2 rounded-md border border-border hover:border-primary/50">
+                Deck
+                <ChevronDown className="w-3.5 h-3.5" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-40">
+              <DropdownMenuItem onClick={() => navigate("/deck/agency")} className="cursor-pointer">
+                Agency
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate("/deck/end-user")} className="cursor-pointer">
+                End User
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <button
+            onClick={() => navigate("/demo")}
+            className="text-sm text-muted-foreground hover:text-primary transition-colors px-4 py-2 rounded-md border border-border hover:border-primary/50"
+          >
+            Demo
+          </button>
+        </div>
       </header>
 
       {/* Hero */}
