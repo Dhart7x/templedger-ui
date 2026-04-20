@@ -9,6 +9,7 @@ import SalesDeck from "./pages/SalesDeck";
 import AgencyDeck from "./pages/AgencyDeck";
 import EndUserDeck from "./pages/EndUserDeck";
 import NotFound from "./pages/NotFound";
+import AccessGate from "./components/AccessGate";
 
 const queryClient = new QueryClient();
 
@@ -20,9 +21,9 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/demo" element={<SalesDeck />} />
-          <Route path="/deck/agency" element={<AgencyDeck />} />
-          <Route path="/deck/end-user" element={<EndUserDeck />} />
+          <Route path="/demo" element={<AccessGate><SalesDeck /></AccessGate>} />
+          <Route path="/deck/agency" element={<AccessGate><AgencyDeck /></AccessGate>} />
+          <Route path="/deck/end-user" element={<AccessGate><EndUserDeck /></AccessGate>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
