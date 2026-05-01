@@ -76,7 +76,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   };
 
   const handleExitDemo = () => {
-    setDemoState("login");
+    setDemoState("demo");
     setActiveClientView("live-snapshot");
     setActiveAgencyView("live-snapshot");
     onDemoStateChange?.(false);
