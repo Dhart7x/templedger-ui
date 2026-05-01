@@ -877,6 +877,22 @@ const ViewSchedule = () => {
     ? schedule
     : schedule.filter(r => r.department === selectedDept);
 
+  // Resolve active cell payload for the modal (rendered at root, outside the table)
+  const activeCellInfo = (() => {
+    if (!activeCell) return null;
+    for (const row of schedule) {
+      for (const sh of row.shifts) {
+        for (const day of days) {
+          const key = `${row.role}-${sh.key}-${day}`;
+          if (key === activeCell) {
+            return { cell: sh.cells[day], shift: sh.label, day };
+          }
+        }
+      }
+    }
+    return null;
+  })();
+
   const handleSubmitChange = (delta: number, agency: string, method: "manual" | "smart", pref?: SmartPref, role?: string, dept?: string, day?: string, shift?: string) => {
     const action = delta > 0 ? "increase" : "reduction";
     const methodLabel = method === "smart" ? `Smart Scheduling (${pref})` : "Manual selection";
