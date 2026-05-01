@@ -630,7 +630,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
             {/* Intervene */}
             <div style={{ padding: "20px 24px" }}>
               <button
-                onClick={() => setStage(2)}
+                onClick={() => setModalStage("allocate")}
                 className="w-full flex items-center justify-center transition-colors"
                 style={{
                   background: "rgba(245,158,11,0.1)",
