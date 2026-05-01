@@ -130,10 +130,12 @@ function SlideOutcome() {
   ];
   return (
     <SlideFrame>
-      <Eyebrow>THE OUTCOME</Eyebrow>
-      <H1>The consequences probably sound familiar.</H1>
-      <Sub>You've adapted to them. You shouldn't have to.</Sub>
-      <ul className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3">
+      <div className="-mt-8">
+        <Eyebrow>THE OUTCOME</Eyebrow>
+        <H1>The consequences probably sound familiar.</H1>
+        <Sub>You've adapted to them. You shouldn't have to.</Sub>
+      </div>
+      <ul className="mt-6 flex flex-col gap-2.5">
         {items.map((b, i) => (
           <li key={i} className="flex gap-3 items-start">
             <span
