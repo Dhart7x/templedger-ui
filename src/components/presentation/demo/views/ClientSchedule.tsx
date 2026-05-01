@@ -980,18 +980,6 @@ const ViewSchedule = () => {
                               <span className={`text-xs font-semibold ${isFull ? "text-green-600" : isShort ? "text-amber-600" : isEmpty ? "text-destructive" : "text-muted-foreground"}`}>{filled}</span>
                               <span className="text-[9px] text-muted-foreground">/ {req}</span>
                             </div>
-
-                            {/* Unified full-screen Shift Snapshot modal */}
-                            {activeCell === cellKey && req > 0 && (
-                              <ShiftSnapshotModal
-                                cell={cell}
-                                shift={shift.label}
-                                day={day}
-                                weekLabel={weekInfo.label}
-                                isFutureWeek={isFutureWeek}
-                                onClose={() => setActiveCell(null)}
-                              />
-                            )}
                           </td>
                         );
                       })}
