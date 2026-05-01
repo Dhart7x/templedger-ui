@@ -50,7 +50,7 @@ interface SlideDemoProps {
 }
 
 const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
-  const [demoState, setDemoState] = useState<DemoState>("login");
+  const [demoState, setDemoState] = useState<DemoState>("demo");
   const [showPassword, setShowPassword] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>("client");
   const [activeClientView, setActiveClientView] = useState("live-snapshot");
@@ -76,7 +76,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   };
 
   const handleExitDemo = () => {
-    setDemoState("login");
+    setDemoState("demo");
     setActiveClientView("live-snapshot");
     setActiveAgencyView("live-snapshot");
     onDemoStateChange?.(false);
