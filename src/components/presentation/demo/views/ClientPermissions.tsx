@@ -204,24 +204,24 @@ const ClientPermissions = () => {
         );
       })}
 
-      <button
-        onClick={handleSave}
-        className="fixed bottom-0 left-0 right-0 md:left-auto"
-        style={{
-          background: "#7d8f46",
-          color: "#111210",
-          fontFamily: "'IBM Plex Mono', monospace",
-          fontSize: "13px",
-          fontWeight: 600,
-          padding: "14px",
-          width: "100%",
-          maxWidth: "100%",
-          border: "none",
-          cursor: "pointer",
-        }}
-      >
-        Save Permissions
-      </button>
+      <div className="mt-2">
+        <button
+          onClick={handleSave}
+          style={{
+            background: "#7d8f46",
+            color: "#111210",
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: "12px",
+            fontWeight: 600,
+            padding: "8px 16px",
+            borderRadius: "6px",
+            border: "none",
+            cursor: "pointer",
+          }}
+        >
+          Save Permissions
+        </button>
+      </div>
     </div>
   );
 };

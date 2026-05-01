@@ -12,13 +12,12 @@ const navItems = [
   { id: "schedule", label: "Schedule", icon: Calendar },
   { id: "bookings", label: "Bookings", icon: ClipboardList, badge: "3" },
   { id: "agencies", label: "Agencies", icon: Building2 },
-  { id: "permissions", label: "Permissions", icon: Shield },
   { id: "workers", label: "Workers", icon: Users },
-  
   { id: "payroll", label: "Payroll", icon: DollarSign },
   { id: "billing", label: "Billing", icon: FileText },
   { id: "spend-analysis", label: "Spend Analysis", icon: TrendingUp },
   { id: "temp-perm", label: "Temp-Perm", icon: UserCheck },
+  { id: "permissions", label: "Permissions", icon: Shield },
 ];
 
 const ClientSidebar = ({ activeView, onViewChange, notificationCount = 0 }: ClientSidebarProps) => {
