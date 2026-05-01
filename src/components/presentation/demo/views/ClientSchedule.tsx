@@ -835,7 +835,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                 </span>
               </button>
               <button
-                onClick={() => setStage(1)}
+                onClick={() => setModalStage("snapshot")}
                 className="w-full text-center transition-colors"
                 style={{
                   fontFamily: "Inter, sans-serif",
