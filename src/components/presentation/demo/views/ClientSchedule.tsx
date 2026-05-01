@@ -273,7 +273,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
   const isShortageFuture = isFutureWeek && gap > 0;
   const isFullFuture = isFutureWeek && gap === 0 && required > 0;
 
-  const [stage, setStage] = useState<1 | 2>(1);
+  const [modalStage, setModalStage] = useState<"snapshot" | "allocate">("snapshot");
   const [criteria, setCriteria] = useState<AllocCriteria>("Available Workers");
   const [submitting, setSubmitting] = useState(false);
 
@@ -468,7 +468,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
               );
             })}
           </div>
-        ) : stage === 1 ? (
+        ) : modalStage === "snapshot" ? (
           // ── Stage 1: shortage banner + agency snapshot + intervene ──
           <div style={{ animation: "fadeIn 0.3s ease" }}>
             {/* Shortage banner */}
@@ -630,7 +630,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
             {/* Intervene */}
             <div style={{ padding: "20px 24px" }}>
               <button
-                onClick={() => setStage(2)}
+                onClick={() => setModalStage("allocate")}
                 className="w-full flex items-center justify-center transition-colors"
                 style={{
                   background: "rgba(245,158,11,0.1)",
@@ -835,7 +835,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                 </span>
               </button>
               <button
-                onClick={() => setStage(1)}
+                onClick={() => setModalStage("snapshot")}
                 className="w-full text-center transition-colors"
                 style={{
                   fontFamily: "Inter, sans-serif",
@@ -876,6 +876,22 @@ const ViewSchedule = () => {
   const visibleRows = selectedDept === "All Departments"
     ? schedule
     : schedule.filter(r => r.department === selectedDept);
+
+  // Resolve active cell payload for the modal (rendered at root, outside the table)
+  const activeCellInfo = (() => {
+    if (!activeCell) return null;
+    for (const row of schedule) {
+      for (const sh of row.shifts) {
+        for (const day of days) {
+          const key = `${row.role}-${sh.key}-${day}`;
+          if (key === activeCell) {
+            return { cell: sh.cells[day], shift: sh.label, day };
+          }
+        }
+      }
+    }
+    return null;
+  })();
 
   const handleSubmitChange = (delta: number, agency: string, method: "manual" | "smart", pref?: SmartPref, role?: string, dept?: string, day?: string, shift?: string) => {
     const action = delta > 0 ? "increase" : "reduction";
@@ -980,18 +996,6 @@ const ViewSchedule = () => {
                               <span className={`text-xs font-semibold ${isFull ? "text-green-600" : isShort ? "text-amber-600" : isEmpty ? "text-destructive" : "text-muted-foreground"}`}>{filled}</span>
                               <span className="text-[9px] text-muted-foreground">/ {req}</span>
                             </div>
-
-                            {/* Unified full-screen Shift Snapshot modal */}
-                            {activeCell === cellKey && req > 0 && (
-                              <ShiftSnapshotModal
-                                cell={cell}
-                                shift={shift.label}
-                                day={day}
-                                weekLabel={weekInfo.label}
-                                isFutureWeek={isFutureWeek}
-                                onClose={() => setActiveCell(null)}
-                              />
-                            )}
                           </td>
                         );
                       })}
@@ -1024,6 +1028,19 @@ const ViewSchedule = () => {
 
       {/* Worker Profile Modal */}
       {profileWorker && <WorkerProfileModal workerName={profileWorker} onClose={() => setProfileWorker(null)} />}
+
+      {/* Shift Snapshot Modal — rendered at root so cell click cannot interfere with internal events */}
+      {activeCell && activeCellInfo && activeCellInfo.cell.required > 0 && (
+        <ShiftSnapshotModal
+          key={activeCell}
+          cell={activeCellInfo.cell}
+          shift={activeCellInfo.shift}
+          day={activeCellInfo.day}
+          weekLabel={weekInfo.label}
+          isFutureWeek={weekInfo.isFuture}
+          onClose={() => setActiveCell(null)}
+        />
+      )}
     </div>
   );
 };
