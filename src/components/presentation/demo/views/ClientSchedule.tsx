@@ -468,7 +468,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
               );
             })}
           </div>
-        ) : stage === 1 ? (
+        ) : modalStage === "snapshot" ? (
           // ── Stage 1: shortage banner + agency snapshot + intervene ──
           <div style={{ animation: "fadeIn 0.3s ease" }}>
             {/* Shortage banner */}
