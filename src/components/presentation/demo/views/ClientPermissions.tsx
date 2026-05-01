@@ -104,27 +104,6 @@ const ClientPermissions = () => {
 
   return (
     <div className="flex flex-col justify-start pt-6 px-6 max-w-4xl pb-24 relative">
-      <h1
-        style={{
-          fontFamily: "'IBM Plex Mono', monospace",
-          fontSize: "16px",
-          fontWeight: 600,
-          color: "#ede7d9",
-        }}
-      >
-        Shift Manager Permissions
-      </h1>
-      <p
-        style={{
-          fontFamily: "Inter, sans-serif",
-          fontSize: "13px",
-          color: "rgba(237,231,217,0.5)",
-          marginBottom: "24px",
-          marginTop: "4px",
-        }}
-      >
-        Set what shift managers can do within the platform — by department. HR controls all permissions centrally.
-      </p>
 
       {depts.map((dept, di) => {
         const allOn = Object.values(dept.state).every(Boolean);
