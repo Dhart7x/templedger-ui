@@ -1028,6 +1028,19 @@ const ViewSchedule = () => {
 
       {/* Worker Profile Modal */}
       {profileWorker && <WorkerProfileModal workerName={profileWorker} onClose={() => setProfileWorker(null)} />}
+
+      {/* Shift Snapshot Modal — rendered at root so cell click cannot interfere with internal events */}
+      {activeCell && activeCellInfo && activeCellInfo.cell.required > 0 && (
+        <ShiftSnapshotModal
+          key={activeCell}
+          cell={activeCellInfo.cell}
+          shift={activeCellInfo.shift}
+          day={activeCellInfo.day}
+          weekLabel={weekInfo.label}
+          isFutureWeek={weekInfo.isFuture}
+          onClose={() => setActiveCell(null)}
+        />
+      )}
     </div>
   );
 };
