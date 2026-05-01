@@ -30,6 +30,7 @@ import ClientBilling from "./demo/views/ClientBilling";
 import ClientSpendAnalysis from "./demo/views/ClientSpendAnalysis";
 import ClientTempPerm from "./demo/views/ClientTempPerm";
 import ClientExceptions from "./demo/views/ClientExceptions";
+import ClientPermissions from "./demo/views/ClientPermissions";
 
 // Agency views
 import AgencyLiveSnapshot from "./demo/views/AgencyLiveSnapshot";
@@ -169,6 +170,8 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
         return <ClientAgencies onViewWorker={handleViewWorker} />;
       case "workers":
         return <ClientWorkers onViewWorker={handleViewWorker} />;
+      case "permissions":
+        return <ClientPermissions />;
       case "exceptions":
         return <ClientExceptions />;
       case "payroll":
