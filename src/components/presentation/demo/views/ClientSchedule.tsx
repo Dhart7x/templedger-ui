@@ -270,8 +270,8 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
   const filled = cell.workers.length;
   const required = cell.required;
   const gap = Math.max(0, required - filled);
-  const isShortageFuture = isFutureWeek && gap > 0;
-  const isFullFuture = isFutureWeek && gap === 0 && required > 0;
+  const isShortageFuture = gap > 0;
+  const isFullFuture = gap === 0 && required > 0;
 
   const [modalStage, setModalStage] = useState<"snapshot" | "allocate">("snapshot");
   const [criteria, setCriteria] = useState<AllocCriteria>("Available Workers");
