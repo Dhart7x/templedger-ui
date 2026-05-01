@@ -981,28 +981,15 @@ const ViewSchedule = () => {
                               <span className="text-[9px] text-muted-foreground">/ {req}</span>
                             </div>
 
-                            {/* Unified Shift Snapshot popover for all cells */}
-                            {activeCell === cellKey && !editCell && req > 0 && (
-                              <ShiftSnapshotPopover
+                            {/* Unified full-screen Shift Snapshot modal */}
+                            {activeCell === cellKey && req > 0 && (
+                              <ShiftSnapshotModal
                                 cell={cell}
-                                department={row.department}
                                 shift={shift.label}
                                 day={day}
+                                weekLabel={weekInfo.label}
                                 isFutureWeek={isFutureWeek}
-                                cellKey={cellKey}
                                 onClose={() => setActiveCell(null)}
-                              />
-                            )}
-
-                            {editCell === cellKey && (
-                              <EditPopover
-                                cell={cell}
-                                role={row.role}
-                                department={row.department}
-                                day={day}
-                                shift={shift.label}
-                                onClose={() => setEditCell(null)}
-                                onSubmit={(d, ag, m, p) => handleSubmitChange(d, ag, m, p, row.role, row.department, day, shift.label)}
                               />
                             )}
                           </td>
