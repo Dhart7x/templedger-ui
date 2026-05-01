@@ -388,12 +388,58 @@ interface CoverageAlertPopoverProps {
   onClose: () => void;
 }
 
+type AllocPriority = "Availability" | "Performance" | "Balanced";
+
+const agencySnapshot = [
+  { name: "Staffmark", status: "amber" as const, available: 2, perf: 4.2, newReg: 0 },
+  { name: "Elite Staffing", status: "green" as const, available: 6, perf: 4.8, newReg: 3 },
+  { name: "Elwood Staffing", status: "red" as const, available: 0, perf: 3.8, newReg: 0 },
+];
+
+const recommendations: Record<AllocPriority, { agency: string; reason: string }> = {
+  Availability: {
+    agency: "Elite Staffing",
+    reason:
+      "6 workers available including 3 newly registered — strongest immediate coverage for this slot.",
+  },
+  Performance: {
+    agency: "Elite Staffing",
+    reason: "Highest performance score (★4.8) across your agency panel for this shift type.",
+  },
+  Balanced: {
+    agency: "Elite Staffing",
+    reason:
+      "Best combination of availability (6 workers) and performance (★4.8). Staffmark available as backup with 2 workers on standby.",
+  },
+};
+
+const statusDot = (status: "green" | "amber" | "red") => {
+  const color = status === "green" ? "#7d8f46" : status === "amber" ? "#d4a747" : "#c0573a";
+  return <span className="inline-block rounded-full" style={{ width: 6, height: 6, background: color }} />;
+};
+
 const CoverageAlertPopover = ({ cell, department, shift, day, onClose }: CoverageAlertPopoverProps) => {
   const gap = cell.required - cell.workers.length;
   const filled = cell.workers.length;
+  const [priority, setPriority] = useState<AllocPriority>("Availability");
+  const [submitting, setSubmitting] = useState(false);
+
+  const rec = recommendations[priority];
+
+  const handleSubmit = () => {
+    setSubmitting(true);
+    setTimeout(() => {
+      toast.success(`Booking submitted to ${rec.agency} — 6 workers requested for ${shift} on ${day}.`);
+      setTimeout(() => {
+        toast(`Staffmark notified — this slot was allocated to ${rec.agency} based on availability.`);
+      }, 1000);
+      setSubmitting(false);
+      onClose();
+    }, 1500);
+  };
 
   return (
-    <div className="absolute z-50 top-full left-1/2 -translate-x-1/2 mt-1 w-72 bg-card border border-border rounded-xl shadow-xl overflow-hidden" onClick={e => e.stopPropagation()}>
+    <div className="absolute z-50 top-full left-1/2 -translate-x-1/2 mt-1 w-80 bg-card border border-border rounded-xl shadow-xl overflow-hidden max-h-[80vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
       {/* Section 1 — Gap summary */}
       <div className="flex items-center justify-between p-3 bg-amber-500/10 border-b border-border">
         <div>
@@ -421,38 +467,87 @@ const CoverageAlertPopover = ({ cell, department, shift, day, onClose }: Coverag
         </div>
       </div>
 
-      {/* Section 3 — Alternative agencies */}
-      <div className="p-3">
-        <p className="text-[9px] uppercase tracking-[0.12em] text-muted-foreground mb-2">AGENCIES THAT CAN COVER</p>
+      {/* Section 3 — Agency Snapshot */}
+      <div className="p-3 border-b border-border">
+        <p className="text-[9px] uppercase tracking-[0.12em] text-muted-foreground mb-2">AGENCY SNAPSHOT</p>
         <div className="space-y-2">
-          {/* Option A — Best match */}
-          <div className="relative p-2.5 rounded-lg bg-green-500/10 border border-green-500/20">
-            <span className="absolute top-1.5 right-1.5 text-[9px] bg-green-500/15 text-green-600 rounded px-1.5 py-0.5">Best match</span>
-            <p className="text-xs font-medium text-foreground">Elite Staffing</p>
-            <p className="text-[10px] text-muted-foreground mt-0.5">6 workers available · avg 3.2 miles away</p>
-            <div className="flex items-center justify-between mt-1">
-              <span className="text-[10px] text-amber-400">★ 4.8</span>
+          {agencySnapshot.map(a => (
+            <div key={a.name} className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2 flex-1 min-w-0">
+                {statusDot(a.status)}
+                <span className="text-[12px] font-medium" style={{ color: "#ede7d9" }}>{a.name}</span>
+                {a.newReg > 0 && (
+                  <span className="text-[9px] bg-primary/15 text-primary rounded px-1.5 py-0.5">
+                    {a.newReg} new
+                  </span>
+                )}
+              </div>
+              <div className="flex items-center gap-2 text-[11px]" style={{ color: "#52524e" }}>
+                <span>{a.available} avail</span>
+                <span>★ {a.perf.toFixed(1)}</span>
+              </div>
             </div>
-          </div>
-          {/* Option B */}
-          <div className="p-2.5 rounded-lg border border-border">
-            <p className="text-xs font-medium text-foreground">Elwood Staffing</p>
-            <p className="text-[10px] text-muted-foreground mt-0.5">3 workers available · avg 6.1 miles away</p>
-            <div className="flex items-center justify-between mt-1">
-              <span className="text-[10px] text-amber-400">★ 3.8</span>
-            </div>
-          </div>
+          ))}
         </div>
+      </div>
+
+      {/* Section 4 — Intelligent Allocation */}
+      <div className="p-3">
+        <p className="text-[9px] uppercase tracking-[0.12em] text-muted-foreground mb-2">INTELLIGENT ALLOCATION</p>
+        <div className="flex gap-1.5 mb-2">
+          {(["Availability", "Performance", "Balanced"] as AllocPriority[]).map(p => (
+            <button
+              key={p}
+              onClick={() => setPriority(p)}
+              className={`text-[10px] px-2.5 py-1 rounded-full transition-colors ${
+                priority === p
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-muted text-muted-foreground hover:bg-muted/70"
+              }`}
+            >
+              {p}
+            </button>
+          ))}
+        </div>
+
+        <div
+          key={priority}
+          className="bg-card/60 border border-border rounded-md p-3 transition-opacity duration-200"
+          style={{ animation: "fadeIn 0.2s ease" }}
+        >
+          <p className="text-[9px] uppercase tracking-wider" style={{ color: "#7d8f46" }}>Recommended</p>
+          <p
+            className="mt-0.5"
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: "13px",
+              fontWeight: 600,
+              color: "#ede7d9",
+            }}
+          >
+            {rec.agency}
+          </p>
+          <p
+            className="mt-1"
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontSize: "11px",
+              color: "rgba(237,231,217,0.65)",
+              lineHeight: 1.5,
+            }}
+          >
+            {rec.reason}
+          </p>
+        </div>
+
         <Button
           size="sm"
-          variant="outline"
-          className="w-full text-xs gap-1 mt-3"
-          onClick={() => {
-            toast.success("Staffmark has been alerted. Elite Staffing flagged as backup.");
-            onClose();
-          }}
+          className="w-full text-xs font-medium gap-1.5 mt-3 rounded-lg py-2"
+          onClick={handleSubmit}
+          disabled={submitting}
         >
-          <Send className="w-3 h-3" /> Alert Staffmark of gap
+          <Send className="w-3 h-3" />
+          {submitting ? "Submitting..." : `Submit Booking to ${rec.agency}`}
         </Button>
       </div>
     </div>
