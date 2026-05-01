@@ -834,41 +834,16 @@ const ViewSchedule = () => {
                               <span className="text-[9px] text-muted-foreground">/ {req}</span>
                             </div>
 
-                            {/* Coverage alert popover for future weeks with gaps */}
-                            {activeCell === cellKey && !editCell && isFutureWeek && req > 0 && (
-                              <CoverageAlertPopover
+                            {/* Unified Shift Snapshot popover for all cells */}
+                            {activeCell === cellKey && !editCell && req > 0 && (
+                              <ShiftSnapshotPopover
                                 cell={cell}
                                 department={row.department}
                                 shift={shift.label}
                                 day={day}
+                                isFutureWeek={isFutureWeek}
+                                cellKey={cellKey}
                                 onClose={() => setActiveCell(null)}
-                              />
-                            )}
-
-                            {/* Worker list popover — past weeks only */}
-                            {activeCell === cellKey && !editCell && !isFutureWeek && cell.workers.length > 0 && (
-                              <WorkerListPopover
-                                cell={cell}
-                                role={row.role}
-                                day={day}
-                                shift={shift.label}
-                                agencyFilter={selectedAgency}
-                                onClose={() => setActiveCell(null)}
-                                onWorkerClick={(name) => { setActiveCell(null); setProfileWorker(name); }}
-                                onEditRequirements={() => { setActiveCell(null); setEditCell(cellKey); }}
-                              />
-                            )}
-
-                            {/* Edit popover — past weeks, empty cells */}
-                            {activeCell === cellKey && !editCell && !isFutureWeek && cell.workers.length === 0 && (
-                              <EditPopover
-                                cell={cell}
-                                role={row.role}
-                                department={row.department}
-                                day={day}
-                                shift={shift.label}
-                                onClose={() => setActiveCell(null)}
-                                onSubmit={(d, ag, m, p) => handleSubmitChange(d, ag, m, p, row.role, row.department, day, shift.label)}
                               />
                             )}
 
