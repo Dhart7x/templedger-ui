@@ -4,8 +4,8 @@ import { Lock } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-const ALLOWED_EMAIL = "michael@templedger.com";
-const ALLOWED_PASSWORD = "Extract1";
+const ALLOWED_EMAIL = "templedgerdemo";
+const ALLOWED_PASSWORD = "123!";
 const STORAGE_KEY = "tl_access_granted";
 
 interface AccessGateProps {
@@ -14,7 +14,7 @@ interface AccessGateProps {
 
 const AccessGate = ({ children }: AccessGateProps) => {
   const [granted, setGranted] = useState(false);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("templedgerdemo");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
@@ -27,7 +27,7 @@ const AccessGate = ({ children }: AccessGateProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (
-      email.trim().toLowerCase() === ALLOWED_EMAIL &&
+      email.trim().toLowerCase() === ALLOWED_EMAIL.toLowerCase() &&
       password === ALLOWED_PASSWORD
     ) {
       sessionStorage.setItem(STORAGE_KEY, "true");
@@ -65,14 +65,14 @@ const AccessGate = ({ children }: AccessGateProps) => {
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="access-email" className="text-foreground">Email</Label>
+            <Label htmlFor="access-email" className="text-foreground">Username</Label>
             <Input
               id="access-email"
-              type="email"
-              autoComplete="email"
+              type="text"
+              autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
+              placeholder="templedgerdemo"
               required
             />
           </div>
