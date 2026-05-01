@@ -201,132 +201,47 @@ const UploadPanel = () => {
   );
 };
 
-// ─── Edit Popover ────────────────────────────────────────────────────────────
-
-interface EditPopoverProps {
-  cell: ShiftCell;
-  role: string;
-  department: string;
-  day: string;
-  shift: string;
-  onClose: () => void;
-  onSubmit: (delta: number, agency: string, method: "manual" | "smart", pref?: SmartPref) => void;
-}
-
-const smartPrefLabels: Record<SmartPref, { label: string; icon: React.ReactNode; desc: string }> = {
-  cheapest: { label: "Cheapest Rate", icon: <DollarSign className="w-4 h-4" />, desc: "Lowest hourly cost" },
-  "top-performer": { label: "Top Performer Last Week", icon: <TrendingUp className="w-4 h-4" />, desc: "Best KPIs from previous week" },
-};
-
-const smartSuggestions: Record<SmartPref, string> = {
-  cheapest: "Elite Personnel",
-  "top-performer": "Staffmark",
-};
-
-const EditPopover = ({ cell, role, department, day, shift, onClose, onSubmit }: EditPopoverProps) => {
-  const [delta, setDelta] = useState(0);
-  const [method, setMethod] = useState<"manual" | "smart">("manual");
-  const [selectedAgency, setSelectedAgency] = useState("Staffmark");
-  const [smartPref, setSmartPref] = useState<SmartPref>("cheapest");
-  const [showSuggestion, setShowSuggestion] = useState(false);
-
-  const newRequired = Math.max(0, cell.required + delta);
-  const suggestedAgency = smartSuggestions[smartPref];
-
-  const handleRunSmart = () => setShowSuggestion(true);
-
-  return (
-    <div className="absolute z-50 top-full left-1/2 -translate-x-1/2 mt-1 w-72 bg-card border border-border rounded-xl shadow-xl p-4 space-y-3" onClick={e => e.stopPropagation()}>
-      <div className="flex items-center justify-between">
-        <h4 className="text-xs font-semibold text-foreground">{day} • {shift} Shift</h4>
-        <button onClick={onClose} className="p-0.5 rounded hover:bg-muted"><X className="w-3.5 h-3.5 text-muted-foreground" /></button>
-      </div>
-      <p className="text-[10px] text-muted-foreground">{role} – {department}</p>
-
-      {/* Adjust quantity */}
-      <div className="flex items-center justify-between bg-muted/30 rounded-lg p-2.5">
-        <span className="text-xs text-muted-foreground">Required</span>
-        <div className="flex items-center gap-2">
-          <button onClick={() => setDelta(d => d - 1)} className="w-6 h-6 rounded bg-background border border-border flex items-center justify-center hover:bg-muted"><Minus className="w-3 h-3" /></button>
-          <span className={`text-sm font-bold min-w-[28px] text-center ${delta !== 0 ? "text-primary" : "text-foreground"}`}>{newRequired}</span>
-          <button onClick={() => setDelta(d => d + 1)} className="w-6 h-6 rounded bg-background border border-border flex items-center justify-center hover:bg-muted"><Plus className="w-3 h-3" /></button>
-        </div>
-      </div>
-      {delta !== 0 && <p className="text-[10px] text-primary font-medium">{delta > 0 ? `+${delta} additional` : `${delta} reduction`} from {cell.required}</p>}
-
-      {delta !== 0 && (
-        <>
-          {/* Method tabs */}
-          <div className="flex gap-1 bg-muted/40 rounded-lg p-0.5">
-            <button onClick={() => { setMethod("manual"); setShowSuggestion(false); }} className={`flex-1 text-xs py-1.5 rounded-md transition-colors ${method === "manual" ? "bg-background shadow-sm font-semibold text-foreground" : "font-medium text-muted-foreground"}`}>Select Agency</button>
-            <button onClick={() => setMethod("smart")} className={`flex-1 text-xs py-1.5 rounded-md transition-colors flex items-center justify-center gap-1 ${method === "smart" ? "bg-background shadow-sm font-semibold text-foreground" : "font-medium text-muted-foreground"}`}><Zap className="w-3.5 h-3.5" /> Smart Allocate</button>
-          </div>
-
-          {method === "manual" ? (
-            <div className="space-y-1.5">
-              <label className="text-xs text-muted-foreground">Agency</label>
-              <div className="relative">
-                <select value={selectedAgency} onChange={e => setSelectedAgency(e.target.value)} className="w-full bg-background border border-border rounded-lg px-2.5 py-2 text-xs appearance-none cursor-pointer">
-                  {agencyOptions.filter(a => a !== "All Agencies").map(a => <option key={a}>{a}</option>)}
-                </select>
-                <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground pointer-events-none" />
-              </div>
-            </div>
-          ) : (
-            <div className="space-y-2">
-              <label className="text-xs text-muted-foreground font-medium">Preference</label>
-              <div className="space-y-1.5">
-                {(Object.keys(smartPrefLabels) as SmartPref[]).map(pref => (
-                  <button
-                    key={pref}
-                    onClick={() => { setSmartPref(pref); setShowSuggestion(false); }}
-                    className={`w-full flex items-center gap-2.5 p-2.5 rounded-lg text-left transition-colors ${smartPref === pref ? "bg-primary/10 border border-primary/30" : "bg-muted/20 border border-transparent hover:bg-muted/40"}`}
-                  >
-                    <div className={`p-1.5 rounded-md ${smartPref === pref ? "text-primary bg-primary/10" : "text-muted-foreground"}`}>{smartPrefLabels[pref].icon}</div>
-                    <div>
-                      <p className="text-xs font-medium">{smartPrefLabels[pref].label}</p>
-                      <p className="text-[10px] text-muted-foreground">{smartPrefLabels[pref].desc}</p>
-                    </div>
-                  </button>
-                ))}
-              </div>
-              {!showSuggestion ? (
-                <Button size="sm" variant="outline" className="w-full text-xs gap-1.5" onClick={handleRunSmart}>
-                  <Zap className="w-3.5 h-3.5" /> Find Best Agency
-                </Button>
-              ) : (
-                <div className="bg-primary/5 border border-primary/20 rounded-lg p-3 space-y-1">
-                  <p className="text-xs font-medium text-primary flex items-center gap-1"><CheckCircle className="w-3.5 h-3.5" /> Recommended</p>
-                  <p className="text-sm font-semibold text-foreground">{suggestedAgency}</p>
-                  <p className="text-[10px] text-muted-foreground">
-                    {smartPref === "cheapest" ? "$11.20/hr – lowest available rate" : "98% fulfilment, 96% punctuality last week"}
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
-
-          <Button
-            size="sm"
-            className="w-full text-xs gap-1.5"
-            onClick={() => onSubmit(delta, method === "smart" ? suggestedAgency : selectedAgency, method, method === "smart" ? smartPref : undefined)}
-          >
-            <Send className="w-3.5 h-3.5" /> Submit to Agency
-          </Button>
-        </>
-      )}
-    </div>
-  );
-};
-
-// ─── Shift Snapshot Popover ──────────────────────────────────────────────────
+// ─── Shift Snapshot Modal (full-screen) ──────────────────────────────────────
 
 type AllocCriteria = "Available Workers" | "Agency Performance";
 
-const snapshotAgencies = [
-  { name: "Staffmark", status: "amber" as const, available: 2, perf: 4.2, newReg: 0 },
-  { name: "Elite Staffing", status: "green" as const, available: 6, perf: 4.8, newReg: 3 },
-  { name: "Elwood Staffing", status: "red" as const, available: 0, perf: 3.8, newReg: 0 },
+const currentWeekAgencies = [
+  { name: "Staffmark", workers: 8, perf: 4.2 },
+  { name: "Elite Staffing", workers: 5, perf: 4.8 },
+  { name: "Elwood Staffing", workers: 3, perf: 3.8 },
+];
+
+const futureSnapshotAgencies = [
+  {
+    name: "Staffmark",
+    dot: "#f59e0b",
+    availability: "Limited",
+    availabilityColor: "#f59e0b",
+    workers: 2,
+    perf: 4.2,
+    newReg: 0,
+    status: "Only 2 workers available for this slot — may not cover the gap.",
+  },
+  {
+    name: "Elite Staffing",
+    dot: "#22c55e",
+    availability: "Available",
+    availabilityColor: "#22c55e",
+    workers: 6,
+    perf: 4.8,
+    newReg: 3,
+    status: "6 workers available including 3 newly registered and ready to deploy.",
+  },
+  {
+    name: "Elwood Staffing",
+    dot: "#ef4444",
+    availability: "Unavailable",
+    availabilityColor: "#ef4444",
+    workers: 0,
+    perf: 3.8,
+    newReg: 0,
+    status: "No workers available for this shift slot.",
+  },
 ];
 
 const recommendationFor = (criteria: AllocCriteria) =>
@@ -334,70 +249,61 @@ const recommendationFor = (criteria: AllocCriteria) =>
     ? {
         agency: "Elite Staffing",
         reason:
-          "6 workers available including 3 newly registered — strongest immediate coverage for this requirement.",
+          "Elite Staffing has 6 workers available for this slot including 3 newly registered workers ready to deploy — the strongest immediate coverage across your agency panel.",
       }
     : {
         agency: "Elite Staffing",
         reason:
-          "Highest performance score (★ 4.8) and 6 workers available. Staffmark available as backup with 2 workers on standby.",
+          "Elite Staffing carries the highest performance score (★ 4.8) across your panel with 6 workers available. Staffmark available as backup with 2 workers on standby.",
       };
 
-const statusDot = (status: "green" | "amber" | "red") => {
-  const color = status === "green" ? "#7d8f46" : status === "amber" ? "#d4a747" : "#c0573a";
-  return <span className="inline-block rounded-full" style={{ width: 6, height: 6, background: color }} />;
-};
-
-const agencyShareSplit = (filled: number, seed: string) => {
-  const code = seed.charCodeAt(0) + seed.charCodeAt(seed.length - 1);
-  const patterns = [
-    [0.5, 0.3, 0.2],
-    [0.4, 0.4, 0.2],
-    [0.6, 0.25, 0.15],
-    [0.35, 0.45, 0.2],
-  ];
-  const p = patterns[code % patterns.length];
-  const a = Math.round(filled * p[0]);
-  const b = Math.round(filled * p[1]);
-  const c = Math.max(0, filled - a - b);
-  return [
-    { name: "Staffmark", count: a },
-    { name: "Elite Staffing", count: b },
-    { name: "Elwood Staffing", count: c },
-  ];
-};
-
-interface ShiftSnapshotPopoverProps {
+interface ShiftSnapshotModalProps {
   cell: ShiftCell;
-  department: string;
   shift: string;
   day: string;
+  weekLabel: string;
   isFutureWeek: boolean;
-  cellKey: string;
   onClose: () => void;
 }
 
-const ShiftSnapshotPopover = ({ cell, shift, day, isFutureWeek, cellKey, onClose }: ShiftSnapshotPopoverProps) => {
+const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose }: ShiftSnapshotModalProps) => {
   const filled = cell.workers.length;
   const required = cell.required;
   const gap = Math.max(0, required - filled);
   const isShortageFuture = isFutureWeek && gap > 0;
   const isFullFuture = isFutureWeek && gap === 0 && required > 0;
 
-  const [showAllocation, setShowAllocation] = useState(false);
+  const [stage, setStage] = useState<1 | 2>(1);
   const [criteria, setCriteria] = useState<AllocCriteria>("Available Workers");
   const [submitting, setSubmitting] = useState(false);
 
   const rec = recommendationFor(criteria);
 
+  // Display values: future weeks show required in the badge (since filled is 0)
+  const displayFilled = isFutureWeek ? required - gap : filled;
+  const badgeColor =
+    required === 0
+      ? "rgba(237,231,217,0.4)"
+      : displayFilled === 0
+        ? "#ef4444"
+        : displayFilled < required
+          ? "#f59e0b"
+          : "#7d8f46";
+
+  // Past/current breakdown derived from seeded current-week agency mix
+  const totalWorkers = currentWeekAgencies.reduce((a, x) => a + x.workers, 0);
+
   const handleSubmit = () => {
     setSubmitting(true);
     setTimeout(() => {
       toast.success(
-        `Booking submitted to ${rec.agency} — ${gap} workers requested for ${shift} on ${day}.`
+        `Booking submitted to ${rec.agency} — ${gap} workers requested for ${shift} on ${day}.`,
+        { icon: <CheckCircle className="w-4 h-4" /> }
       );
       setTimeout(() => {
         toast(
-          `Staffmark notified — this slot was reallocated to ${rec.agency} based on ${criteria}.`
+          `Staffmark notified — this booking was reallocated to ${rec.agency} based on ${criteria}.`,
+          { icon: <Bell className="w-4 h-4" /> }
         );
       }, 1000);
       setSubmitting(false);
@@ -405,173 +311,485 @@ const ShiftSnapshotPopover = ({ cell, shift, day, isFutureWeek, cellKey, onClose
     }, 1500);
   };
 
-  const breakdownFilled = isFutureWeek ? required : filled;
-  const breakdown = agencyShareSplit(breakdownFilled, cellKey);
-
-  const badgeColor = required === 0
-    ? "#52524e"
-    : (isFutureWeek ? required : filled) === 0
-      ? "#ef4444"
-      : (isFutureWeek ? required : filled) < required
-        ? "#f59e0b"
-        : "#7d8f46";
+  const stopProp = (e: React.MouseEvent) => e.stopPropagation();
 
   return (
     <div
-      className="absolute z-50 top-full left-1/2 shadow-xl overflow-hidden"
-      style={{
-        transform: "translateX(-50%)",
-        marginTop: 6,
-        width: 300,
-        background: "#1a1b18",
-        border: "0.5px solid #2a2b27",
-        borderRadius: 12,
-      }}
-      onClick={(e) => e.stopPropagation()}
+      className="fixed inset-0 z-50 flex items-center justify-center"
+      style={{ background: "rgba(0,0,0,0.7)" }}
+      onClick={onClose}
     >
-      {isShortageFuture ? (
-        <>
-          <div
-            className="flex items-start justify-between"
-            style={{
-              padding: "12px 14px",
-              background: "rgba(245,158,11,0.08)",
-              borderBottom: "0.5px solid #2a2b27",
-            }}
-          >
-            <div>
-              <div className="flex items-center gap-1.5">
-                <AlertTriangle className="w-3.5 h-3.5" style={{ color: "#f59e0b" }} />
-                <span style={{ fontSize: 11, fontWeight: 600, color: "#f59e0b" }}>Coverage gap</span>
-              </div>
-              <p style={{ fontSize: 10, color: "rgba(237,231,217,0.5)", marginTop: 2 }}>
-                {shift} · {day}
-              </p>
-            </div>
-            <div className="text-right flex flex-col items-end">
-              <button onClick={onClose} className="mb-1 p-0.5 rounded hover:bg-white/5">
-                <X className="w-3 h-3" style={{ color: "rgba(237,231,217,0.5)" }} />
-              </button>
+      <div
+        className="shadow-2xl overflow-y-auto"
+        style={{
+          width: 560,
+          maxHeight: "80vh",
+          background: "#1a1b18",
+          border: "0.5px solid #2a2b27",
+          borderRadius: 16,
+        }}
+        onClick={stopProp}
+      >
+        {/* Header */}
+        <div
+          className="flex items-center justify-between"
+          style={{
+            padding: "20px 24px",
+            background: "rgba(255,255,255,0.02)",
+            borderBottom: "0.5px solid #2a2b27",
+          }}
+        >
+          <div>
+            <p
+              style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: 15,
+                fontWeight: 600,
+                color: "#ede7d9",
+              }}
+            >
+              {shift} Shift
+            </p>
+            <p
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: 12,
+                color: "rgba(237,231,217,0.5)",
+                marginTop: 2,
+              }}
+            >
+              {day} · {weekLabel}
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            {isFullFuture && (
               <span
                 style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontSize: 20,
-                  fontWeight: 700,
-                  color: "#f59e0b",
-                  lineHeight: 1,
+                  fontSize: 10,
+                  color: "#7d8f46",
+                  background: "rgba(125,143,70,0.12)",
+                  padding: "3px 8px",
+                  borderRadius: 6,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  fontWeight: 600,
                 }}
               >
-                {gap}
+                Fully covered
               </span>
-              <span style={{ fontSize: 9, color: "rgba(237,231,217,0.4)", marginTop: 2 }}>
-                positions unfilled
-              </span>
+            )}
+            <span
+              style={{
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontSize: 14,
+                fontWeight: 600,
+                color: badgeColor,
+              }}
+            >
+              {displayFilled} / {required} filled
+            </span>
+            <button
+              onClick={onClose}
+              className="w-8 h-8 rounded-full hover:bg-muted flex items-center justify-center transition-colors"
+            >
+              <X className="w-4 h-4" style={{ color: "rgba(237,231,217,0.6)" }} />
+            </button>
+          </div>
+        </div>
+
+        {/* Body */}
+        {!isShortageFuture ? (
+          // ── Past / Current / Full-future: read-only breakdown ──
+          <div style={{ padding: "20px 24px" }}>
+            <p
+              style={{
+                fontSize: 10,
+                textTransform: "uppercase",
+                letterSpacing: "0.16em",
+                color: "rgba(237,231,217,0.4)",
+                marginBottom: 16,
+              }}
+            >
+              AGENCY COVERAGE
+            </p>
+
+            {currentWeekAgencies.map((a) => {
+              const pct = (a.workers / Math.max(1, totalWorkers)) * 100;
+              return (
+                <div
+                  key={a.name}
+                  style={{
+                    background: "rgba(255,255,255,0.02)",
+                    border: "0.5px solid #2a2b27",
+                    borderRadius: 10,
+                    padding: "14px 16px",
+                    marginBottom: 10,
+                  }}
+                >
+                  <div className="flex items-center justify-between">
+                    <span
+                      style={{
+                        fontFamily: "'IBM Plex Mono', monospace",
+                        fontSize: 13,
+                        fontWeight: 600,
+                        color: "#ede7d9",
+                      }}
+                    >
+                      {a.name}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: 12,
+                        color: "rgba(237,231,217,0.5)",
+                      }}
+                    >
+                      {a.workers} confirmed
+                    </span>
+                  </div>
+                  <div className="bg-muted h-1.5 rounded-full overflow-hidden" style={{ marginTop: 8 }}>
+                    <div
+                      className="h-1.5 rounded-full"
+                      style={{ width: `${pct}%`, background: "#7d8f46" }}
+                    />
+                  </div>
+                  <p
+                    className="text-right"
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: 11,
+                      color: "rgba(237,231,217,0.4)",
+                      marginTop: 8,
+                    }}
+                  >
+                    ★ {a.perf.toFixed(1)} · {a.workers} workers on shift
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        ) : stage === 1 ? (
+          // ── Stage 1: shortage banner + agency snapshot + intervene ──
+          <div style={{ animation: "fadeIn 0.3s ease" }}>
+            {/* Shortage banner */}
+            <div
+              className="flex items-center justify-between"
+              style={{
+                padding: "16px 24px",
+                background: "rgba(245,158,11,0.08)",
+                borderBottom: "0.5px solid #2a2b27",
+              }}
+            >
+              <div>
+                <div className="flex items-center gap-2">
+                  <AlertTriangle className="w-4 h-4" style={{ color: "#f59e0b" }} />
+                  <span
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: "#f59e0b",
+                    }}
+                  >
+                    Coverage gap detected
+                  </span>
+                </div>
+                <p
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: 11,
+                    color: "rgba(237,231,217,0.5)",
+                    marginTop: 2,
+                  }}
+                >
+                  Action required before this shift date
+                </p>
+              </div>
+              <div className="text-right">
+                <p
+                  style={{
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: 28,
+                    fontWeight: 700,
+                    color: "#f59e0b",
+                    lineHeight: 1,
+                  }}
+                >
+                  {gap}
+                </p>
+                <p
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: 10,
+                    color: "rgba(237,231,217,0.4)",
+                    marginTop: 4,
+                  }}
+                >
+                  positions unfilled
+                </p>
+              </div>
+            </div>
+
+            {/* Agency snapshot */}
+            <div style={{ padding: "20px 24px", borderBottom: "0.5px solid #2a2b27" }}>
+              <p
+                style={{
+                  fontSize: 10,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.16em",
+                  color: "rgba(237,231,217,0.4)",
+                  marginBottom: 16,
+                }}
+              >
+                WHICH AGENCIES ARE STRUGGLING
+              </p>
+
+              {futureSnapshotAgencies.map((a) => (
+                <div
+                  key={a.name}
+                  style={{
+                    background: "rgba(255,255,255,0.02)",
+                    border: "0.5px solid #2a2b27",
+                    borderRadius: 10,
+                    padding: "14px 16px",
+                    marginBottom: 10,
+                  }}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span
+                        className="inline-block rounded-full"
+                        style={{ width: 8, height: 8, background: a.dot }}
+                      />
+                      <span
+                        style={{
+                          fontFamily: "'IBM Plex Mono', monospace",
+                          fontSize: 13,
+                          fontWeight: 600,
+                          color: "#ede7d9",
+                        }}
+                      >
+                        {a.name}
+                      </span>
+                    </div>
+                    <span
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: 11,
+                        color: a.availabilityColor,
+                        fontWeight: 500,
+                      }}
+                    >
+                      {a.availability}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center" style={{ gap: 16, marginTop: 8 }}>
+                    <span
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: 11,
+                        color: "rgba(237,231,217,0.5)",
+                      }}
+                    >
+                      {a.workers} workers available
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: 11,
+                        color: "rgba(237,231,217,0.5)",
+                      }}
+                    >
+                      ★ {a.perf.toFixed(1)} performance
+                    </span>
+                    {a.newReg > 0 && (
+                      <span
+                        className="bg-primary/15 text-primary rounded"
+                        style={{ fontSize: 10, padding: "2px 8px" }}
+                      >
+                        {a.newReg} newly registered
+                      </span>
+                    )}
+                  </div>
+
+                  <p
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: 11,
+                      color: "rgba(237,231,217,0.55)",
+                      marginTop: 6,
+                    }}
+                  >
+                    {a.status}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Intervene */}
+            <div style={{ padding: "20px 24px" }}>
+              <button
+                onClick={() => setStage(2)}
+                className="w-full flex items-center justify-center transition-colors"
+                style={{
+                  background: "rgba(245,158,11,0.1)",
+                  border: "0.5px solid rgba(245,158,11,0.3)",
+                  borderRadius: 10,
+                  padding: 14,
+                  gap: 8,
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(245,158,11,0.18)")}
+                onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(245,158,11,0.1)")}
+              >
+                <Zap className="w-4 h-4" style={{ color: "#f59e0b" }} />
+                <span
+                  style={{
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: 14,
+                    fontWeight: 600,
+                    color: "#f59e0b",
+                  }}
+                >
+                  Intervene — Reallocate This Slot
+                </span>
+              </button>
+              <p
+                className="text-center"
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: 11,
+                  color: "rgba(237,231,217,0.3)",
+                  marginTop: 8,
+                }}
+              >
+                Use intelligent allocation to move this booking to a better suited agency.
+              </p>
             </div>
           </div>
-
-          {!showAllocation ? (
-            <div style={{ padding: "12px 14px", borderBottom: "0.5px solid #2a2b27", animation: "fadeIn 0.2s ease" }}>
+        ) : (
+          // ── Stage 2: intelligent allocation ──
+          <div style={{ animation: "fadeIn 0.3s ease" }}>
+            {/* Criteria */}
+            <div style={{ padding: "20px 24px", borderBottom: "0.5px solid #2a2b27" }}>
               <p
                 style={{
-                  fontSize: 9,
+                  fontSize: 10,
                   textTransform: "uppercase",
-                  letterSpacing: "0.12em",
+                  letterSpacing: "0.16em",
                   color: "rgba(237,231,217,0.4)",
-                  marginBottom: 10,
+                  marginBottom: 14,
                 }}
               >
-                AGENCY SNAPSHOT
+                ALLOCATION CRITERIA
               </p>
-              <div className="space-y-2">
-                {snapshotAgencies.map((a) => (
-                  <div key={a.name} className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2 flex-1 min-w-0">
-                      {statusDot(a.status)}
-                      <span style={{ fontSize: 12, fontWeight: 500, color: "#ede7d9" }}>{a.name}</span>
-                      {a.newReg > 0 && (
-                        <span className="bg-primary/15 text-primary rounded" style={{ fontSize: 9, padding: "1px 6px" }}>
-                          {a.newReg} new
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-2" style={{ fontSize: 11, color: "rgba(237,231,217,0.5)" }}>
-                      <span>{a.available} avail</span>
-                      <span>★ {a.perf.toFixed(1)}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <button
-                onClick={() => setShowAllocation(true)}
-                className="w-full flex items-center justify-center gap-1.5 transition-colors"
-                style={{
-                  marginTop: 10,
-                  background: "rgba(245,158,11,0.15)",
-                  border: "0.5px solid rgba(245,158,11,0.3)",
-                  color: "#f59e0b",
-                  fontSize: 12,
-                  fontWeight: 500,
-                  borderRadius: 8,
-                  padding: 7,
-                }}
-              >
-                <Zap className="w-3 h-3" />
-                Intervene
-              </button>
-            </div>
-          ) : (
-            <div style={{ padding: "12px 14px", animation: "fadeIn 0.2s ease" }}>
-              <p
-                style={{
-                  fontSize: 9,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.12em",
-                  color: "rgba(237,231,217,0.4)",
-                  marginBottom: 8,
-                }}
-              >
-                INTELLIGENT ALLOCATION
-              </p>
-              <div className="flex" style={{ gap: 6 }}>
-                {(["Available Workers", "Agency Performance"] as AllocCriteria[]).map((c) => {
-                  const selected = criteria === c;
+              <div className="flex" style={{ gap: 12 }}>
+                {([
+                  {
+                    key: "Available Workers" as const,
+                    icon: <Users className="w-4 h-4" style={{ color: "#7d8f46" }} />,
+                    desc: "Prioritise the agency with the most workers ready to fill this slot.",
+                  },
+                  {
+                    key: "Agency Performance" as const,
+                    icon: <BarChart2 className="w-4 h-4" style={{ color: "#7d8f46" }} />,
+                    desc: "Prioritise the agency with the strongest performance record for this shift type.",
+                  },
+                ]).map((c) => {
+                  const selected = criteria === c.key;
                   return (
                     <button
-                      key={c}
-                      onClick={() => setCriteria(c)}
-                      className={`text-xs transition-colors ${
-                        selected
-                          ? "bg-primary/20 border border-primary/40 text-primary"
-                          : "bg-muted text-muted-foreground border border-transparent"
-                      }`}
-                      style={{ borderRadius: 999, padding: "4px 10px", flex: 1 }}
+                      key={c.key}
+                      onClick={() => setCriteria(c.key)}
+                      className="flex-1 text-left transition-colors"
+                      style={{
+                        border: `0.5px solid ${selected ? "#7d8f46" : "#2a2b27"}`,
+                        background: selected ? "rgba(125,143,70,0.08)" : "rgba(255,255,255,0.02)",
+                        borderRadius: 10,
+                        padding: 16,
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 6,
+                        cursor: "pointer",
+                      }}
                     >
-                      {c}
+                      {c.icon}
+                      <span
+                        style={{
+                          fontFamily: "'IBM Plex Mono', monospace",
+                          fontSize: 13,
+                          fontWeight: 600,
+                          color: "#ede7d9",
+                        }}
+                      >
+                        {c.key}
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: 11,
+                          color: "rgba(237,231,217,0.5)",
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        {c.desc}
+                      </span>
                     </button>
                   );
                 })}
               </div>
+            </div>
 
+            {/* Recommendation */}
+            <div style={{ padding: "20px 24px", borderBottom: "0.5px solid #2a2b27" }}>
+              <p
+                style={{
+                  fontSize: 10,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.16em",
+                  color: "rgba(237,231,217,0.4)",
+                  marginBottom: 14,
+                }}
+              >
+                RECOMMENDATION
+              </p>
               <div
                 key={criteria}
                 style={{
                   background: "rgba(125,143,70,0.06)",
-                  border: "0.5px solid rgba(125,143,70,0.2)",
-                  borderRadius: 8,
-                  padding: "10px 12px",
-                  marginTop: 8,
+                  border: "0.5px solid rgba(125,143,70,0.25)",
+                  borderRadius: 12,
+                  padding: "16px 18px",
                   animation: "fadeIn 0.2s ease",
                 }}
               >
-                <p style={{ fontSize: 9, textTransform: "uppercase", color: "#7d8f46", marginBottom: 3 }}>
-                  Recommended
-                </p>
+                <div className="flex items-center justify-between">
+                  <span
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: 10,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.12em",
+                      color: "rgba(237,231,217,0.4)",
+                    }}
+                  >
+                    Recommended agency
+                  </span>
+                  <span
+                    className="bg-primary/15 text-primary rounded"
+                    style={{ fontSize: 10, padding: "2px 8px" }}
+                  >
+                    {criteria}
+                  </span>
+                </div>
                 <p
                   style={{
                     fontFamily: "'IBM Plex Mono', monospace",
-                    fontSize: 13,
-                    fontWeight: 600,
+                    fontSize: 18,
+                    fontWeight: 700,
                     color: "#ede7d9",
+                    marginTop: 6,
                   }}
                 >
                   {rec.agency}
@@ -579,135 +797,64 @@ const ShiftSnapshotPopover = ({ cell, shift, day, isFutureWeek, cellKey, onClose
                 <p
                   style={{
                     fontFamily: "Inter, sans-serif",
-                    fontSize: 11,
-                    color: "rgba(237,231,217,0.6)",
-                    lineHeight: 1.55,
-                    marginTop: 4,
+                    fontSize: 13,
+                    color: "rgba(237,231,217,0.65)",
+                    lineHeight: 1.6,
+                    marginTop: 8,
                   }}
                 >
                   {rec.reason}
                 </p>
               </div>
+            </div>
 
+            {/* Submit */}
+            <div style={{ padding: "20px 24px" }}>
               <button
                 onClick={handleSubmit}
                 disabled={submitting}
-                className="w-full bg-primary flex items-center justify-center gap-1.5 transition-opacity disabled:opacity-70"
+                className="w-full flex items-center justify-center transition-opacity disabled:opacity-70"
                 style={{
-                  marginTop: 10,
-                  color: "#111210",
-                  fontSize: 12,
-                  fontWeight: 600,
-                  borderRadius: 8,
-                  padding: 8,
+                  background: "#7d8f46",
+                  borderRadius: 10,
+                  padding: 14,
+                  gap: 8,
+                  cursor: submitting ? "default" : "pointer",
                 }}
               >
-                <Send className="w-3 h-3" />
-                {submitting ? "Submitting..." : `Submit to ${rec.agency}`}
-              </button>
-            </div>
-          )}
-        </>
-      ) : (
-        <>
-          <div
-            className="flex items-center justify-between"
-            style={{
-              padding: "12px 14px",
-              borderBottom: "0.5px solid #2a2b27",
-              background: "rgba(255,255,255,0.02)",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "'IBM Plex Mono', monospace",
-                fontSize: 12,
-                fontWeight: 600,
-                color: "#ede7d9",
-              }}
-            >
-              {shift} · {day}
-            </span>
-            <div className="flex items-center gap-2">
-              {isFullFuture && (
+                <Send className="w-4 h-4" style={{ color: "#111210" }} />
                 <span
                   style={{
-                    fontSize: 9,
-                    color: "#7d8f46",
-                    background: "rgba(125,143,70,0.12)",
-                    padding: "2px 6px",
-                    borderRadius: 4,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: 14,
+                    fontWeight: 600,
+                    color: "#111210",
                   }}
                 >
-                  Fully covered
+                  {submitting ? "Submitting..." : `Submit to ${rec.agency}`}
                 </span>
-              )}
-              <span
+              </button>
+              <button
+                onClick={() => setStage(1)}
+                className="w-full text-center transition-colors"
                 style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: 12,
-                  color: badgeColor,
+                  color: "rgba(237,231,217,0.35)",
+                  marginTop: 10,
+                  cursor: "pointer",
+                  background: "transparent",
+                  border: "none",
                 }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(237,231,217,0.6)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(237,231,217,0.35)")}
               >
-                {isFutureWeek ? required : filled} / {required}
-              </span>
-              <button onClick={onClose} className="p-0.5 rounded hover:bg-white/5">
-                <X className="w-3 h-3" style={{ color: "rgba(237,231,217,0.5)" }} />
+                ← Back to agency snapshot
               </button>
             </div>
           </div>
-
-          <div style={{ padding: "12px 14px" }}>
-            <p
-              style={{
-                fontSize: 9,
-                textTransform: "uppercase",
-                letterSpacing: "0.12em",
-                color: "rgba(237,231,217,0.4)",
-                marginBottom: 8,
-              }}
-            >
-              AGENCY COVERAGE
-            </p>
-            <div className="space-y-2.5">
-              {breakdown.map((a) => {
-                const total = Math.max(1, breakdownFilled);
-                const pct = (a.count / total) * 100;
-                return (
-                  <div key={a.name}>
-                    <div className="flex items-center justify-between">
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: 12,
-                          fontWeight: 500,
-                          color: "#ede7d9",
-                        }}
-                      >
-                        {a.name}
-                      </span>
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: 11,
-                          color: "rgba(237,231,217,0.5)",
-                        }}
-                      >
-                        {a.count} confirmed
-                      </span>
-                    </div>
-                    <div className="bg-muted h-1 rounded mt-1.5 overflow-hidden">
-                      <div className="h-1 rounded" style={{ width: `${pct}%`, background: "#7d8f46" }} />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </>
-      )}
+        )}
+      </div>
     </div>
   );
 };
