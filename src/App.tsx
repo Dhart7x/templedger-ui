@@ -6,8 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import SalesDeck from "./pages/SalesDeck";
-import AgencyDeck from "./pages/AgencyDeck";
-import EndUserDeck from "./pages/EndUserDeck";
+import NewSalesDeck from "./pages/NewSalesDeck";
 import NotFound from "./pages/NotFound";
 import AccessGate from "./components/AccessGate";
 
@@ -22,8 +21,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/demo" element={<AccessGate><SalesDeck /></AccessGate>} />
-          <Route path="/deck/agency" element={<AccessGate><AgencyDeck /></AccessGate>} />
-          <Route path="/deck/end-user" element={<AccessGate><EndUserDeck /></AccessGate>} />
+          <Route path="/sales-deck" element={<AccessGate><NewSalesDeck /></AccessGate>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
