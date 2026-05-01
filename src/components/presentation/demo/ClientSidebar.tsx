@@ -1,4 +1,4 @@
-import { Eye, Calendar, ClipboardList, Building2, Users, DollarSign, FileText, TrendingUp, UserCheck, MessageCircle } from "lucide-react";
+import { Eye, Calendar, ClipboardList, Building2, Users, DollarSign, FileText, TrendingUp, UserCheck, MessageCircle, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ClientSidebarProps {
@@ -12,6 +12,7 @@ const navItems = [
   { id: "schedule", label: "Schedule", icon: Calendar },
   { id: "bookings", label: "Bookings", icon: ClipboardList, badge: "3" },
   { id: "agencies", label: "Agencies", icon: Building2 },
+  { id: "permissions", label: "Permissions", icon: Shield },
   { id: "workers", label: "Workers", icon: Users },
   
   { id: "payroll", label: "Payroll", icon: DollarSign },
