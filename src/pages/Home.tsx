@@ -1,5 +1,39 @@
 import { useState, useEffect, useRef, FormEvent } from "react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+
+const StepNumber = ({ value }: { value: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    if (!inView) return;
+    const start = performance.now();
+    const duration = 600;
+    let raf = 0;
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      setN(Math.round(t * value));
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, value]);
+  return (
+    <div
+      ref={ref}
+      style={{
+        fontWeight: 800,
+        fontSize: 48,
+        color: "#2D6A4F",
+        opacity: 0.15,
+        lineHeight: 1,
+        marginBottom: 16,
+      }}
+    >
+      {String(n).padStart(2, "0")}
+    </div>
+  );
+};
 import { ChevronRight, Monitor, Presentation, TrendingUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -284,7 +318,10 @@ const Home = () => {
       </div>
 
       {/* NAV */}
-      <nav
+      <motion.nav
+        initial={{ y: -56 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.4, delay: 0.05, ease: "easeOut" }}
         style={{
           position: "fixed",
           top: 0,
@@ -332,8 +369,10 @@ const Home = () => {
             </a>
           ))}
         </div>
-        <button
+        <motion.button
           onClick={scrollToContact}
+          whileHover={{ scale: 1.03, boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}
+          transition={{ duration: 0.15 }}
           style={{
             background: "#FFFFFF",
             color: C.primary,
@@ -347,19 +386,17 @@ const Home = () => {
           }}
         >
           Request Access
-        </button>
-      </nav>
+        </motion.button>
+      </motion.nav>
 
       <div style={{ paddingTop: 56 }}>
         {/* SECTION 1 — HERO */}
         <section style={{ background: C.bg, padding: "96px 48px 80px" }}>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}
-          >
-            <span
+          <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
               style={{
                 display: "inline-block",
                 background: C.primaryLight,
@@ -374,7 +411,7 @@ const Home = () => {
               }}
             >
               Agency Management Platform
-            </span>
+            </motion.span>
             <h1
               style={{
                 fontWeight: 800,
@@ -385,9 +422,24 @@ const Home = () => {
                 marginBottom: 20,
               }}
             >
-              The cost of your agency spend isn't the number on the invoice.
+              {"The cost of your agency spend isn't the number on the invoice."
+                .split(" ")
+                .map((word, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2 + i * 0.06, ease: "easeOut" }}
+                    style={{ display: "inline-block", marginRight: "0.25em" }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
             </h1>
-            <p
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
               style={{
                 fontWeight: 400,
                 fontSize: 20,
@@ -398,9 +450,13 @@ const Home = () => {
               }}
             >
               You know the spend. You don't know the cost.
-            </p>
-            <button
+            </motion.p>
+            <motion.button
               onClick={scrollToContact}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.9 }}
+              whileHover={{ scale: 1.03 }}
               style={{
                 background: C.primary,
                 color: "#FFFFFF",
@@ -414,11 +470,16 @@ const Home = () => {
               }}
             >
               Request Access
-            </button>
-            <p style={{ marginTop: 14, fontSize: 12, color: C.mutedLight }}>
+            </motion.button>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4, delay: 1.1 }}
+              style={{ marginTop: 14, fontSize: 12, color: C.mutedLight }}
+            >
               Serving businesses in logistics, warehousing, food production and manufacturing.
-            </p>
-          </motion.div>
+            </motion.p>
+          </div>
         </section>
 
         {/* SECTION 2 — THE INVOICE VISUAL */}
@@ -444,7 +505,11 @@ const Home = () => {
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, alignItems: "stretch" }}>
               {/* LEFT PANEL */}
-              <div
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
                 style={{
                   background: "#FFFFFF",
                   border: "0.5px solid #E5E0DA",
@@ -518,10 +583,14 @@ const Home = () => {
                     Confirmed
                   </span>
                 </div>
-              </div>
+              </motion.div>
 
               {/* RIGHT PANEL */}
-              <div
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
                 style={{
                   background: "#FFFFFF",
                   border: "1.5px solid #2D6A4F",
@@ -571,8 +640,12 @@ const Home = () => {
                     "Ramp time for replacements brought in at short notice",
                     "Workers on site that were never scheduled",
                   ].map((d, i) => (
-                    <div
+                    <motion.div
                       key={i}
+                      initial={{ opacity: 0, x: 16 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-80px" }}
+                      transition={{ duration: 0.35, delay: 0.4 + i * 0.07, ease: "easeOut" }}
                       style={{
                         minHeight: 52,
                         display: "flex",
@@ -588,7 +661,7 @@ const Home = () => {
                       <span style={{ fontFamily: FONT, fontWeight: 600, fontSize: 13, color: "#C4391A" }}>
                         Unquantified
                       </span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
                 <div
@@ -610,7 +683,7 @@ const Home = () => {
                     Unknown
                   </span>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             <p
@@ -672,14 +745,14 @@ const Home = () => {
                 <motion.div
                   key={i}
                   className="tl-card"
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.04 }}
+                  initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.4, delay: i * 0.05, ease: "easeOut" }}
+                  whileHover={{ scale: 1.02, backgroundColor: "#EBF4EF", boxShadow: "0 4px 16px rgba(45,106,79,0.08)" }}
                   style={{
                     background: C.bg,
                     padding: 24,
-                    transition: "background 0.15s ease",
                   }}
                 >
                   <div
@@ -733,10 +806,10 @@ const Home = () => {
               {costs.map((c, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.08 }}
+                  initial={{ opacity: 0, x: -32 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.5, delay: i * 0.12, ease: "easeOut" }}
                   style={{
                     background: C.surface,
                     border: `0.5px solid ${C.border}`,
@@ -782,7 +855,11 @@ const Home = () => {
               <span style={{ width: 24, height: 2, background: "rgba(255,255,255,0.3)" }} />
               THE OUTCOME
             </div>
-            <h2
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
               style={{
                 fontFamily: FONT,
                 fontWeight: 800,
@@ -794,8 +871,12 @@ const Home = () => {
               }}
             >
               This is what changes.
-            </h2>
-            <p
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
               style={{
                 fontFamily: FONT,
                 fontWeight: 400,
@@ -805,7 +886,7 @@ const Home = () => {
               }}
             >
               The impact compounds with every shift, every week.
-            </p>
+            </motion.p>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
               {/* LEFT COLUMN */}
@@ -844,8 +925,12 @@ const Home = () => {
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   {upItems.map((item, i) => (
-                    <div
+                    <motion.div
                       key={i}
+                      initial={{ opacity: 0, x: -24 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-80px" }}
+                      transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" }}
                       style={{
                         background: "rgba(255,255,255,0.07)",
                         border: "0.5px solid rgba(255,255,255,0.1)",
@@ -876,7 +961,7 @@ const Home = () => {
                       >
                         {item.b}
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -918,8 +1003,12 @@ const Home = () => {
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   {downItems.map((item, i) => (
-                    <div
+                    <motion.div
                       key={i}
+                      initial={{ opacity: 0, x: 24 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-80px" }}
+                      transition={{ duration: 0.4, delay: 0.2 + i * 0.08, ease: "easeOut" }}
                       style={{
                         background: "rgba(255,255,255,0.07)",
                         border: "0.5px solid rgba(255,255,255,0.1)",
@@ -950,7 +1039,7 @@ const Home = () => {
                       >
                         {item.b}
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -1008,25 +1097,21 @@ const Home = () => {
                 overflow: "hidden",
               }}
             >
-              {steps.map((s) => (
-                <div key={s.n} style={{ background: C.bg, padding: 32 }}>
-                  <div
-                    style={{
-                      fontWeight: 800,
-                      fontSize: 48,
-                      color: C.primary,
-                      opacity: 0.15,
-                      lineHeight: 1,
-                      marginBottom: 16,
-                    }}
-                  >
-                    {s.n}
-                  </div>
+              {steps.map((s, idx) => (
+                <motion.div
+                  key={s.n}
+                  initial={{ opacity: 0, y: 32 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.5, delay: idx * 0.12, ease: "easeOut" }}
+                  style={{ background: C.bg, padding: 32 }}
+                >
+                  <StepNumber value={idx + 1} />
                   <div style={{ fontWeight: 700, fontSize: 16, color: C.fg, marginBottom: 8 }}>
                     {s.t}
                   </div>
                   <div style={{ fontSize: 13, color: C.muted, lineHeight: 1.65 }}>{s.b}</div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
@@ -1063,47 +1148,65 @@ const Home = () => {
                 </div>
               ) : (
                 <form onSubmit={onSubmit}>
-                  <input
-                    className="tl-input"
-                    style={inputStyle}
-                    placeholder="Your name"
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    required
-                  />
-                  <input
-                    className="tl-input"
-                    style={inputStyle}
-                    placeholder="Company"
-                    value={form.company}
-                    onChange={(e) => setForm({ ...form, company: e.target.value })}
-                    required
-                  />
-                  <input
-                    className="tl-input"
-                    style={inputStyle}
-                    type="email"
-                    placeholder="Work email"
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    required
-                  />
-                  <select
-                    className="tl-input tl-select"
-                    style={{ ...inputStyle, marginBottom: 24 }}
-                    value={form.role}
-                    onChange={(e) => setForm({ ...form, role: e.target.value })}
-                    required
-                  >
-                    <option value="">Your role</option>
-                    <option>CFO / Finance Director</option>
-                    <option>Operations Director</option>
-                    <option>Head of HR / People</option>
-                    <option>Procurement Director</option>
-                    <option>Other</option>
-                  </select>
-                  <button
+                  {[
+                    <input
+                      key="name"
+                      className="tl-input"
+                      style={inputStyle}
+                      placeholder="Your name"
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      required
+                    />,
+                    <input
+                      key="company"
+                      className="tl-input"
+                      style={inputStyle}
+                      placeholder="Company"
+                      value={form.company}
+                      onChange={(e) => setForm({ ...form, company: e.target.value })}
+                      required
+                    />,
+                    <input
+                      key="email"
+                      className="tl-input"
+                      style={inputStyle}
+                      type="email"
+                      placeholder="Work email"
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      required
+                    />,
+                    <select
+                      key="role"
+                      className="tl-input tl-select"
+                      style={{ ...inputStyle, marginBottom: 24 }}
+                      value={form.role}
+                      onChange={(e) => setForm({ ...form, role: e.target.value })}
+                      required
+                    >
+                      <option value="">Your role</option>
+                      <option>CFO / Finance Director</option>
+                      <option>Operations Director</option>
+                      <option>Head of HR / People</option>
+                      <option>Procurement Director</option>
+                      <option>Other</option>
+                    </select>,
+                  ].map((field, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-80px" }}
+                      transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" }}
+                    >
+                      {field}
+                    </motion.div>
+                  ))}
+                  <motion.button
                     type="submit"
+                    whileHover={{ scale: 1.02, backgroundColor: "#1A3D2E" }}
+                    transition={{ duration: 0.15 }}
                     style={{
                       width: "100%",
                       background: C.primary,
@@ -1118,7 +1221,7 @@ const Home = () => {
                     }}
                   >
                     Request Access
-                  </button>
+                  </motion.button>
                 </form>
               )}
             </div>
