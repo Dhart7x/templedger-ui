@@ -206,7 +206,7 @@ const Home = () => {
     },
     {
       n: "03",
-      t: "Configured to your operation in 90 days.",
+      t: "Configured in 90 days.",
       b: "We handle setup, agency onboarding and hardware installation. You provide one point of contact. Proven on one shift before anything scales.",
     },
   ];
