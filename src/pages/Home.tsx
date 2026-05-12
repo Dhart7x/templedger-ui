@@ -568,7 +568,7 @@ const Home = () => {
               THE REAL COST
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, alignItems: "stretch" }}>
+            <div className="tl-invoice-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, alignItems: "stretch" }}>
               {/* LEFT PANEL */}
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
@@ -773,7 +773,7 @@ const Home = () => {
         <section className="tl-section-problem" style={{ background: C.surface, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>The Problem</SectionTag>
-            <h2
+            <h2 className="tl-section-h2"
               style={{
                 fontWeight: 800,
                 fontSize: 36,
@@ -844,7 +844,7 @@ const Home = () => {
         <section className="tl-section-cost" style={{ background: C.bg, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>The Cost</SectionTag>
-            <h2
+            <h2 className="tl-section-h2"
               style={{
                 fontWeight: 800,
                 fontSize: 36,
@@ -867,7 +867,7 @@ const Home = () => {
             >
               Every problem in that list has a cost consequence. None of them appear on any invoice.
             </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <div className="tl-cost-stack" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               {costs.map((c, i) => (
                 <motion.div
                   key={i}
@@ -953,7 +953,7 @@ const Home = () => {
               The impact compounds with every shift, every week.
             </motion.p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, alignItems: "stretch" }}>
+            <div className="tl-outcome-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, alignItems: "stretch" }}>
               {/* LEFT COLUMN */}
               <div>
                 <div
@@ -988,7 +988,7 @@ const Home = () => {
                     WHAT GOES UP
                   </span>
                 </div>
-                <div style={{ display: "grid", gridTemplateRows: "repeat(5, 1fr)", gap: 10 }}>
+                <div className="tl-outcome-col-inner" style={{ display: "grid", gridTemplateRows: "repeat(5, 1fr)", gap: 10 }}>
                   {upItems.map((item, i) => (
                     <motion.div
                       key={i}
@@ -1070,7 +1070,7 @@ const Home = () => {
                     WHAT COMES DOWN
                   </span>
                 </div>
-                <div style={{ display: "grid", gridTemplateRows: "repeat(5, 1fr)", gap: 10 }}>
+                <div className="tl-outcome-col-inner" style={{ display: "grid", gridTemplateRows: "repeat(5, 1fr)", gap: 10 }}>
                   {downItems.map((item, i) => (
                     <motion.div
                       key={i}
@@ -1145,7 +1145,7 @@ const Home = () => {
         <section className="tl-section-how" style={{ background: C.surface, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>How It Works</SectionTag>
-            <h2
+            <h2 className="tl-section-h2"
               style={{
                 fontWeight: 800,
                 fontSize: 36,
@@ -1193,7 +1193,7 @@ const Home = () => {
         {/* SECTION 6 — CONTACT */}
         <section id="contact" className="tl-section-contact" style={{ background: "#2D6A4F", padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
-            <h2
+            <h2 className="tl-section-h2 tl-contact-h2"
               style={{
                 fontWeight: 800,
                 fontSize: 36,
