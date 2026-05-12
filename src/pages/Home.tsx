@@ -729,22 +729,6 @@ const Home = () => {
                 </div>
               </motion.div>
             </div>
-
-            <p
-              style={{
-                fontFamily: FONT,
-                fontWeight: 400,
-                fontSize: 13,
-                color: "#9B9590",
-                marginTop: 20,
-                textAlign: "center",
-                fontStyle: "italic",
-              }}
-            >
-              None of the costs on the right appear on any invoice.
-              <br />
-              They never will.
-            </p>
           </div>
         </section>
 
