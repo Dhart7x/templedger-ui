@@ -442,24 +442,27 @@ const Home = () => {
               THE REAL COST
             </div>
 
-            <div style={{ display: "flex", gap: 24, alignItems: "stretch" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, alignItems: "stretch" }}>
               {/* LEFT PANEL */}
               <div
                 style={{
-                  flex: 1,
                   background: "#FFFFFF",
                   border: "0.5px solid #E5E0DA",
                   borderRadius: 12,
                   overflow: "hidden",
+                  padding: 0,
                   display: "flex",
                   flexDirection: "column",
                 }}
               >
                 <div
                   style={{
+                    height: 48,
                     background: "#F8F5EF",
                     borderBottom: "0.5px solid #E5E0DA",
-                    padding: "14px 20px",
+                    display: "flex",
+                    alignItems: "center",
+                    padding: "0 20px",
                     fontFamily: FONT,
                     fontWeight: 700,
                     fontSize: 10,
@@ -472,64 +475,44 @@ const Home = () => {
                 </div>
                 <div
                   style={{
-                    padding: "16px 20px 0",
+                    height: 80,
+                    padding: "14px 20px",
+                    borderBottom: "0.5px solid #F0EBE0",
                     fontFamily: FONT,
                     fontWeight: 400,
                     fontSize: 12,
                     color: "#9B9590",
                     lineHeight: 1.7,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
                   }}
                 >
-                  Agency: Staffmark
-                  <br />
-                  Period: Week ending 14 Feb
-                  <br />
-                  Reference: INV-2025-0142
+                  <div>Agency: Staffmark</div>
+                  <div>Period: Week ending 14 Feb</div>
+                  <div>Reference: INV-2025-0142</div>
                 </div>
-                <div
-                  style={{
-                    margin: "14px 20px",
-                    height: 0.5,
-                    background: "#F0EBE0",
-                  }}
-                />
-                <div style={{ padding: "0 20px", flex: 1 }}>
+                <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
                   {[
-                    { d: "Regular hours worked", a: "312 hrs" },
-                    { d: "Agreed charge rate", a: "Confirmed" },
+                    { d: "Agency hours", a: "Confirmed" },
+                    { d: "Employer costs", a: "Confirmed" },
                     { d: "Agency margin", a: "Confirmed" },
-                    { d: "Holiday pay accrual", a: "Included" },
-                    { d: "Statutory contributions", a: "Included" },
                   ].map((row, i) => (
                     <div
                       key={i}
                       style={{
+                        minHeight: 52,
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
-                        minHeight: 44,
+                        padding: "0 20px",
                         borderBottom: "0.5px solid #F8F5EF",
-                        padding: 0,
                       }}
                     >
-                      <span
-                        style={{
-                          fontFamily: FONT,
-                          fontWeight: 400,
-                          fontSize: 13,
-                          color: "#6B6460",
-                        }}
-                      >
+                      <span style={{ fontFamily: FONT, fontWeight: 500, fontSize: 13, color: "#6B6460" }}>
                         {row.d}
                       </span>
-                      <span
-                        style={{
-                          fontFamily: FONT,
-                          fontWeight: 600,
-                          fontSize: 13,
-                          color: "#0D0D0B",
-                        }}
-                      >
+                      <span style={{ fontFamily: FONT, fontWeight: 600, fontSize: 13, color: "#0D0D0B" }}>
                         {row.a}
                       </span>
                     </div>
@@ -537,32 +520,20 @@ const Home = () => {
                 </div>
                 <div
                   style={{
-                    marginTop: 4,
-                    padding: "14px 20px",
+                    height: 56,
+                    padding: "0 20px",
                     borderTop: "1px solid #E5E0DA",
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
+                    background: "#FAFAF6",
+                    marginTop: "auto",
                   }}
                 >
-                  <span
-                    style={{
-                      fontFamily: FONT,
-                      fontWeight: 700,
-                      fontSize: 13,
-                      color: "#0D0D0B",
-                    }}
-                  >
+                  <span style={{ fontFamily: FONT, fontWeight: 700, fontSize: 13, color: "#0D0D0B" }}>
                     Invoice total
                   </span>
-                  <span
-                    style={{
-                      fontFamily: FONT,
-                      fontWeight: 800,
-                      fontSize: 20,
-                      color: "#0D0D0B",
-                    }}
-                  >
+                  <span style={{ fontFamily: FONT, fontWeight: 800, fontSize: 18, color: "#0D0D0B" }}>
                     Confirmed
                   </span>
                 </div>
@@ -571,19 +542,22 @@ const Home = () => {
               {/* RIGHT PANEL */}
               <div
                 style={{
-                  flex: 1,
                   background: "#FFFFFF",
                   border: "1.5px solid #2D6A4F",
                   borderRadius: 12,
                   overflow: "hidden",
+                  padding: 0,
                   display: "flex",
                   flexDirection: "column",
                 }}
               >
                 <div
                   style={{
+                    height: 48,
                     background: "#2D6A4F",
-                    padding: "14px 20px",
+                    display: "flex",
+                    alignItems: "center",
+                    padding: "0 20px",
                     fontFamily: FONT,
                     fontWeight: 700,
                     fontSize: 10,
@@ -596,157 +570,81 @@ const Home = () => {
                 </div>
                 <div
                   style={{
-                    padding: "16px 20px 0",
+                    height: 80,
+                    padding: "14px 20px",
+                    borderBottom: "0.5px solid #F0EBE0",
                     fontFamily: FONT,
                     fontWeight: 400,
                     fontSize: 12,
                     color: "#9B9590",
                     lineHeight: 1.7,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
                   }}
                 >
-                  Agency: Staffmark
-                  <br />
-                  Period: Week ending 14 Feb
-                  <br />
-                  Reference: INV-2025-0142
+                  <div>Agency: Staffmark</div>
+                  <div>Period: Week ending 14 Feb</div>
+                  <div>Reference: INV-2025-0142</div>
                 </div>
                 <div
                   style={{
-                    margin: "14px 20px",
-                    height: 0.5,
-                    background: "#F0EBE0",
-                  }}
-                />
-                <div style={{ padding: "0 20px" }}>
-                  {[
-                    { d: "Regular hours worked", a: "312 hrs" },
-                    { d: "Agreed charge rate", a: "Confirmed" },
-                    { d: "Agency margin", a: "Confirmed" },
-                    { d: "Holiday pay accrual", a: "Included" },
-                    { d: "Statutory contributions", a: "Included" },
-                  ].map((row, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        minHeight: 44,
-                        borderBottom: "0.5px solid #F8F5EF",
-                        padding: 0,
-                      }}
-                    >
-                      <span
-                        style={{
-                          fontFamily: FONT,
-                          fontWeight: 400,
-                          fontSize: 13,
-                          color: "#6B6460",
-                        }}
-                      >
-                        {row.d}
-                      </span>
-                      <span
-                        style={{
-                          fontFamily: FONT,
-                          fontWeight: 600,
-                          fontSize: 13,
-                          color: "#0D0D0B",
-                        }}
-                      >
-                        {row.a}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-                <div
-                  style={{
-                    margin: "8px 20px",
-                    borderTop: "1.5px dashed #E5E0DA",
-                  }}
-                />
-                <div
-                  style={{
-                    padding: "8px 20px 4px",
+                    padding: "10px 20px 6px",
                     fontFamily: FONT,
                     fontWeight: 700,
                     fontSize: 10,
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
                     color: "#C4391A",
+                    borderBottom: "0.5px solid #FEF0EE",
                   }}
                 >
                   NOT ON ANY INVOICE
                 </div>
-                <div style={{ padding: "0 20px", flex: 1 }}>
+                <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
                   {[
-                    { d: "Overtime triggered by gaps nobody saw coming", a: "Unquantified" },
-                    { d: "Management hours spent fixing problems", a: "Unquantified" },
-                    { d: "Attrition from workers who left over a pay dispute", a: "Unquantified" },
-                    { d: "Ramp time for replacements brought in at short notice", a: "Unquantified" },
-                    { d: "Workers on site that were never scheduled", a: "Unquantified" },
-                  ].map((row, i) => (
+                    "Overtime triggered by gaps nobody saw coming",
+                    "Management hours spent fixing problems",
+                    "Attrition from workers who left over a pay dispute",
+                    "Ramp time for replacements brought in at short notice",
+                    "Workers on site that were never scheduled",
+                  ].map((d, i) => (
                     <div
                       key={i}
                       style={{
+                        minHeight: 52,
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
-                        minHeight: 44,
+                        padding: "0 20px",
                         borderBottom: "0.5px solid #FEF0EE",
-                        padding: 0,
                       }}
                     >
-                      <span
-                        style={{
-                          fontFamily: FONT,
-                          fontWeight: 400,
-                          fontSize: 13,
-                          color: "#6B6460",
-                        }}
-                      >
-                        {row.d}
+                      <span style={{ fontFamily: FONT, fontWeight: 500, fontSize: 13, color: "#6B6460" }}>
+                        {d}
                       </span>
-                      <span
-                        style={{
-                          fontFamily: FONT,
-                          fontWeight: 600,
-                          fontSize: 13,
-                          color: "#C4391A",
-                        }}
-                      >
-                        {row.a}
+                      <span style={{ fontFamily: FONT, fontWeight: 600, fontSize: 13, color: "#C4391A" }}>
+                        Unquantified
                       </span>
                     </div>
                   ))}
                 </div>
                 <div
                   style={{
-                    padding: "14px 20px",
-                    borderTop: "1px solid #E5E0DA",
+                    height: 56,
+                    padding: "0 20px",
+                    borderTop: "1px solid #fcd5cc",
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
+                    background: "#FEF7F5",
+                    marginTop: "auto",
                   }}
                 >
-                  <span
-                    style={{
-                      fontFamily: FONT,
-                      fontWeight: 700,
-                      fontSize: 13,
-                      color: "#0D0D0B",
-                    }}
-                  >
+                  <span style={{ fontFamily: FONT, fontWeight: 700, fontSize: 13, color: "#0D0D0B" }}>
                     Actual cost to your business
                   </span>
-                  <span
-                    style={{
-                      fontFamily: FONT,
-                      fontWeight: 800,
-                      fontSize: 20,
-                      color: "#C4391A",
-                    }}
-                  >
+                  <span style={{ fontFamily: FONT, fontWeight: 800, fontSize: 18, color: "#C4391A" }}>
                     Unknown
                   </span>
                 </div>
