@@ -473,25 +473,6 @@ const Home = () => {
                 >
                   WHAT THE INVOICE SHOWS
                 </div>
-                <div
-                  style={{
-                    height: 80,
-                    padding: "14px 20px",
-                    borderBottom: "0.5px solid #F0EBE0",
-                    fontFamily: FONT,
-                    fontWeight: 400,
-                    fontSize: 12,
-                    color: "#9B9590",
-                    lineHeight: 1.7,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div>Agency: Staffmark</div>
-                  <div>Period: Week ending 14 Feb</div>
-                  <div>Reference: INV-2025-0142</div>
-                </div>
                 <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
                   {[
                     { d: "Agency hours", a: "Confirmed" },
@@ -567,25 +548,6 @@ const Home = () => {
                   }}
                 >
                   WHAT IT ACTUALLY COST YOU
-                </div>
-                <div
-                  style={{
-                    height: 80,
-                    padding: "14px 20px",
-                    borderBottom: "0.5px solid #F0EBE0",
-                    fontFamily: FONT,
-                    fontWeight: 400,
-                    fontSize: 12,
-                    color: "#9B9590",
-                    lineHeight: 1.7,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div>Agency: Staffmark</div>
-                  <div>Period: Week ending 14 Feb</div>
-                  <div>Reference: INV-2025-0142</div>
                 </div>
                 <div
                   style={{
