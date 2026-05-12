@@ -546,77 +546,7 @@ const Home = () => {
           </motion.div>
         </section>
 
-        {/* PROOF */}
-        <section style={{ background: C.bg, padding: "80px 48px" }}>
-          <motion.div {...fadeIn} style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                gap: 16,
-                marginBottom: 56,
-              }}
-            >
-              {[
-                { n: "6 / 6", l: "POC prospects confirmed purchase intent" },
-                { n: "$390M", l: "Serviceable market across US and UK" },
-                { n: "23", l: "Clients to reach $5M ARR at average spend" },
-              ].map((s, i) => (
-                <div
-                  key={i}
-                  style={{
-                    background: C.surface,
-                    border: `0.5px solid ${C.border}`,
-                    borderRadius: 10,
-                    padding: 24,
-                  }}
-                >
-                  <div
-                    style={{
-                      fontWeight: 800,
-                      fontSize: 36,
-                      color: C.primary,
-                      letterSpacing: "-0.02em",
-                      marginBottom: 6,
-                    }}
-                  >
-                    {s.n}
-                  </div>
-                  <div style={{ fontSize: 12, color: C.mutedLight, lineHeight: 1.5 }}>{s.l}</div>
-                </div>
-              ))}
-            </div>
-            <div
-              style={{
-                background: C.surface,
-                borderLeft: `4px solid ${C.primary}`,
-                borderRadius: "0 10px 10px 0",
-                padding: "28px 32px",
-                textAlign: "left",
-                maxWidth: 760,
-                margin: "0 auto",
-              }}
-            >
-              <div
-                style={{
-                  fontWeight: 500,
-                  fontSize: 18,
-                  color: C.fg,
-                  fontStyle: "italic",
-                  lineHeight: 1.65,
-                  marginBottom: 12,
-                }}
-              >
-                "If I were still there, this would be the only way in the door for staffing companies."
-              </div>
-              <div style={{ fontSize: 12, color: C.mutedLight }}>
-                Former Head of Operations · Largest temp labor user in the UK · 6,000+ workers under management
-              </div>
-            </div>
-          </motion.div>
-        </section>
-
-        {/* CONTACT */}
+        {/* SECTION 6 — CONTACT */}
         <section id="contact" style={{ background: "#0D0D0B", padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
             <h2
