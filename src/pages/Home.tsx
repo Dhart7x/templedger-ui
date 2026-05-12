@@ -785,7 +785,7 @@ const Home = () => {
             >
               Every business using agencies at scale lives with the same problems.
             </h2>
-            <p
+            <p className="tl-section-sub"
               style={{
                 fontSize: 15,
                 color: C.muted,
@@ -857,7 +857,7 @@ const Home = () => {
             >
               The invisible cost is significant. And it compounds every week.
             </h2>
-            <p
+            <p className="tl-section-sub"
               style={{
                 fontSize: 15,
                 color: C.muted,
@@ -1158,7 +1158,7 @@ const Home = () => {
             >
               Controlled from day one. One shift at a time.
             </h2>
-            <p style={{ fontSize: 15, color: C.muted, lineHeight: 1.65, marginBottom: 48 }}>
+            <p className="tl-section-sub" style={{ fontSize: 15, color: C.muted, lineHeight: 1.65, marginBottom: 48 }}>
               No disruption. No rip and replace. Proven before it scales.
             </p>
             <div
