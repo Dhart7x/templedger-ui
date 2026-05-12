@@ -214,7 +214,7 @@ const Home = () => {
       <style>{`
         body { font-family: ${FONT}; }
         .tl-card:hover { background: ${C.primaryLight} !important; }
-        .tl-input::placeholder { color: rgba(255,255,255,0.3); }
+        .tl-input::placeholder { color: rgba(255,255,255,0.4); }
         .tl-input:focus { border-color: ${C.primary} !important; }
         .tl-select option { color: ${C.fg}; }
       `}</style>
