@@ -39,7 +39,7 @@ const SectionTag = ({ children, dark = false }: { children: React.ReactNode; dar
       color: dark ? "rgba(255,255,255,0.5)" : C.primary,
     }}
   >
-    <span style={{ width: 24, height: 2, background: dark ? "rgba(255,255,255,0.3)" : C.primary }} />
+    <span style={{ width: 24, height: 2, background: dark ? "rgba(255,255,255,0.25)" : C.primary }} />
     {children}
   </div>
 );
@@ -84,22 +84,37 @@ const Home = () => {
     "Compliance is never guaranteed.",
   ];
 
+  const costs = [
+    {
+      t: "The cost of not knowing.",
+      b: "Shifts, gaps, performance, attendance — all happening in real time with no shared record. Decisions made on assumption. Overtime booked because nobody saw the gap coming. Agencies overused because nobody tracked their fill rate. Every assumption has a cost.",
+    },
+    {
+      t: "The cost of disconnection.",
+      b: "Agencies operate in their own system. Their data stays theirs. You get a summary. You make decisions on a summary. The gap between the summary and reality is where the cost lives — in attrition, in ramp time, in agency relationships managed on gut feel rather than evidence.",
+    },
+    {
+      t: "The cost of reactivity.",
+      b: "Overtime, attrition, ramp time, last-minute gap filling. All symptoms of a system that shows you problems after they have already happened. The cost is not just the event itself. It is every downstream consequence of finding out too late.",
+    },
+  ];
+
   const outcomes = [
     {
       t: "Every shift covered the way it should be.",
-      b: "The right workers from the right agencies in the right roles. Gaps identified and filled before they become problems on the floor.",
+      b: "Gaps visible before they become failures on the floor. The right workers from the right agencies in the right roles — because decisions are made on live data, not last week's summary.",
     },
     {
-      t: "Every agency accountable.",
-      b: "Performance derived from a shared system — not from what they tell you. The agencies that deliver get more. The ones that don't know exactly why.",
+      t: "Every agency accountable to the same standard.",
+      b: "Performance derived from a shared system — not from what agencies tell you. The ones that deliver get more work. The ones that don't know exactly why. Rate negotiations backed by evidence.",
     },
     {
-      t: "Every cost line verified.",
-      b: "Payroll is accurate because the data it comes from is verified at source. Invoices reflect reality. Disputes become a thing of the past.",
+      t: "Overtime as the exception, not the default.",
+      b: "Gaps identified early enough to fill properly. Booking distribution optimized by performance and availability, not habit. Every avoided overtime event is direct margin recovery.",
     },
     {
-      t: "Complete operational visibility.",
-      b: "Exceptions surface in real time. Gaps are visible before they become failures. Your operation runs on information, not assumption.",
+      t: "Attrition you can actually influence.",
+      b: "Workers stay when their experience is consistent and their pay is right. Less churn means less ramp time, lower recruitment cost and a workforce that knows your operation.",
     },
   ];
 
@@ -107,17 +122,17 @@ const Home = () => {
     {
       n: "01",
       t: "Deploy on site",
-      b: "We install our biometric terminals alongside what you already have. No integration required. Your operation keeps running.",
+      b: "We install alongside what you already have. No integration required. No disruption to your operation.",
     },
     {
       n: "02",
       t: "Onboard your agencies",
-      b: "Your agencies join the platform. Both sides operate in one shared system from the very first shift. We coordinate everything.",
+      b: "Your agencies join the platform. Both sides in one shared system from the very first shift. We coordinate everything.",
     },
     {
       n: "03",
       t: "Verified from day one",
-      b: "Attendance, compliance, payroll and billing — all verified from the first shift. Proven on one department before it scales.",
+      b: "Attendance, performance, payroll and billing — all verified from the first shift. Proven on one department before it scales.",
     },
   ];
 
@@ -127,7 +142,7 @@ const Home = () => {
         body { font-family: ${FONT}; }
         .tl-card:hover { background: ${C.primaryLight} !important; }
         .tl-input::placeholder { color: rgba(255,255,255,0.3); }
-        .tl-input:focus { border-color: rgba(255,255,255,0.3); }
+        .tl-input:focus { border-color: ${C.primary} !important; }
         .tl-select option { color: ${C.fg}; }
       `}</style>
 
@@ -144,7 +159,7 @@ const Home = () => {
           height: 32,
           background: "rgba(255,255,255,0.08)",
           borderRadius: 6,
-          color: "rgba(255,255,255,0.4)",
+          color: "rgba(255,255,255,0.3)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -165,7 +180,6 @@ const Home = () => {
           height: 56,
           padding: "0 48px",
           background: C.primary,
-          boxShadow: "0 1px 0 rgba(0,0,0,0.08)",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -224,7 +238,7 @@ const Home = () => {
       </nav>
 
       <div style={{ paddingTop: 56 }}>
-        {/* HERO */}
+        {/* SECTION 1 — HERO */}
         <section style={{ background: C.bg, padding: "96px 48px 80px" }}>
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -251,7 +265,7 @@ const Home = () => {
             <h1
               style={{
                 fontWeight: 800,
-                fontSize: 56,
+                fontSize: 54,
                 color: C.fg,
                 letterSpacing: "-0.03em",
                 lineHeight: 1.08,
@@ -263,9 +277,10 @@ const Home = () => {
             <p
               style={{
                 fontWeight: 400,
-                fontSize: 18,
+                fontSize: 20,
                 color: C.muted,
-                lineHeight: 1.65,
+                fontStyle: "italic",
+                lineHeight: 1.5,
                 marginBottom: 36,
               }}
             >
@@ -293,18 +308,18 @@ const Home = () => {
           </motion.div>
         </section>
 
-        {/* PROBLEM */}
+        {/* SECTION 2 — THE PROBLEM */}
         <section style={{ background: C.surface, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>The Problem</SectionTag>
             <h2
               style={{
                 fontWeight: 800,
-                fontSize: 38,
+                fontSize: 36,
                 color: C.fg,
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
-                marginBottom: 12,
+                marginBottom: 10,
               }}
             >
               Every business using agencies at scale lives with the same problems.
@@ -315,7 +330,7 @@ const Home = () => {
                 color: C.muted,
                 lineHeight: 1.65,
                 marginBottom: 48,
-                maxWidth: 560,
+                maxWidth: 520,
               }}
             >
               They surface every week. They compound over time. Most of the cost is invisible.
@@ -364,52 +379,53 @@ const Home = () => {
           </motion.div>
         </section>
 
-        {/* COST */}
+        {/* SECTION 3 — THE COST */}
         <section style={{ background: C.bg, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>The Cost</SectionTag>
             <h2
               style={{
                 fontWeight: 800,
-                fontSize: 38,
+                fontSize: 36,
                 color: C.fg,
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
-                marginBottom: 12,
+                marginBottom: 10,
               }}
             >
               The invisible cost is significant. And it compounds every week.
             </h2>
-            <p style={{ fontSize: 15, color: C.muted, lineHeight: 1.65, maxWidth: 560 }}>
-              Every problem in that list has a price tag. None of them appear on any invoice.
-            </p>
-            <div
+            <p
               style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                gap: 40,
-                marginTop: 48,
+                fontSize: 15,
+                color: C.muted,
+                lineHeight: 1.65,
+                marginBottom: 48,
+                maxWidth: 560,
               }}
             >
-              {[
-                {
-                  t: "You can't see it coming",
-                  b: "By the time a gap reaches your operation, a non-compliant worker reaches your site, or a pay dispute reaches your workforce — the cost is already incurred.",
-                },
-                {
-                  t: "You can't measure it",
-                  b: "Nobody has ever added up what agency inefficiency actually costs an operation like yours. The firefighting hours. The overtime events. The attrition. The admin. The invoices paid under protest.",
-                },
-                {
-                  t: "You can't fix what you can't see",
-                  b: "Every week the same problems recur. Because the structure that produces them — two sides, no shared system, no shared truth — never changes.",
-                },
-              ].map((c, i) => (
-                <div key={i}>
+              Every problem in that list has a cost consequence. None of them appear on any invoice.
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              {costs.map((c, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.08 }}
+                  style={{
+                    background: C.surface,
+                    border: `0.5px solid ${C.border}`,
+                    borderLeft: `4px solid ${C.primary}`,
+                    borderRadius: "0 10px 10px 0",
+                    padding: "28px 32px",
+                  }}
+                >
                   <div
                     style={{
-                      fontWeight: 700,
-                      fontSize: 16,
+                      fontWeight: 800,
+                      fontSize: 18,
                       color: C.fg,
                       marginBottom: 10,
                     }}
@@ -417,39 +433,24 @@ const Home = () => {
                     {c.t}
                   </div>
                   <div style={{ fontSize: 14, color: C.muted, lineHeight: 1.7 }}>{c.b}</div>
-                </div>
+                </motion.div>
               ))}
-            </div>
-            <div
-              style={{
-                background: C.primaryLight,
-                borderLeft: `4px solid ${C.primary}`,
-                borderRadius: "0 10px 10px 0",
-                padding: "24px 28px",
-                marginTop: 48,
-                fontWeight: 700,
-                fontSize: 18,
-                color: C.fg,
-                lineHeight: 1.5,
-              }}
-            >
-              Compounded across a financial year, the invisible cost is significant.
             </div>
           </motion.div>
         </section>
 
-        {/* OUTCOME */}
+        {/* SECTION 4 — THE OUTCOME */}
         <section style={{ background: C.primary, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag dark>The Outcome</SectionTag>
             <h2
               style={{
                 fontWeight: 800,
-                fontSize: 38,
+                fontSize: 36,
                 color: "#FFFFFF",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
-                marginBottom: 12,
+                marginBottom: 10,
               }}
             >
               This is what your operation looks like when it works.
@@ -493,18 +494,18 @@ const Home = () => {
           </motion.div>
         </section>
 
-        {/* HOW IT WORKS */}
+        {/* SECTION 5 — HOW IT WORKS */}
         <section style={{ background: C.surface, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>How It Works</SectionTag>
             <h2
               style={{
                 fontWeight: 800,
-                fontSize: 38,
+                fontSize: 36,
                 color: C.fg,
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
-                marginBottom: 12,
+                marginBottom: 10,
               }}
             >
               Controlled from day one. One shift at a time.
@@ -552,7 +553,7 @@ const Home = () => {
             <h2
               style={{
                 fontWeight: 800,
-                fontSize: 38,
+                fontSize: 36,
                 color: "#FFFFFF",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
@@ -564,7 +565,7 @@ const Home = () => {
             <p
               style={{
                 fontSize: 15,
-                color: "rgba(255,255,255,0.45)",
+                color: "rgba(255,255,255,0.4)",
                 marginBottom: 40,
               }}
             >
@@ -572,7 +573,7 @@ const Home = () => {
             </p>
             <div style={{ maxWidth: 480, margin: "0 auto" }}>
               {submitted ? (
-                <div style={{ fontWeight: 500, fontSize: 16, color: "#FFFFFF" }}>
+                <div style={{ fontWeight: 500, fontSize: 16, color: "#FFFFFF", textAlign: "center" }}>
                   We'll be in touch shortly.
                 </div>
               ) : (
@@ -658,7 +659,7 @@ const Home = () => {
               fontSize: 12,
               letterSpacing: "0.1em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.25)",
+              color: "rgba(255,255,255,0.2)",
             }}
           >
             TEMP LEDGER
