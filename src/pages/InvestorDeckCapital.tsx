@@ -647,12 +647,12 @@ const InvestorDeckCapital = () => {
 
   return (
     <>
-      <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
       <div className="h-screen w-screen overflow-hidden relative" style={{ background: C.bg }}>
         <a
           href="/"
-          className="fixed top-4 left-4 z-[60] flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md border"
-          style={{ background: "rgba(17,18,16,0.8)", color: C.muted, borderColor: C.border, fontFamily: FONT_SANS }}
+          className="fixed top-4 left-4 z-[60] flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md"
+          style={{ background: C.bg, color: C.olive, border: `0.5px solid ${C.border}`, fontFamily: FONT_SANS, fontWeight: 600 }}
         >
           <Home className="w-3.5 h-3.5" />
           <span>Home</span>
@@ -668,6 +668,7 @@ const InvestorDeckCapital = () => {
               exit={{ x: dir < 0 ? "100%" : "-100%", opacity: 0 }}
               transition={{ type: "tween", duration: 0.4, ease: "easeInOut" }}
               className="absolute inset-0"
+              style={{ ["--slide-bg" as string]: i % 2 === 0 ? C.bg : C.surface }}
             >
               <Current />
             </motion.div>
@@ -677,7 +678,7 @@ const InvestorDeckCapital = () => {
             onClick={prev}
             disabled={i === 0}
             className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all z-10"
-            style={{ background: "rgba(26,27,24,0.9)", border: `0.5px solid ${C.border}`, color: C.muted }}
+            style={{ background: C.bg, border: `0.5px solid ${C.border}`, color: C.olive }}
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
@@ -685,7 +686,7 @@ const InvestorDeckCapital = () => {
             onClick={next}
             disabled={i === slides.length - 1}
             className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all z-10"
-            style={{ background: "rgba(26,27,24,0.9)", border: `0.5px solid ${C.border}`, color: C.muted }}
+            style={{ background: C.bg, border: `0.5px solid ${C.border}`, color: C.olive }}
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -693,7 +694,7 @@ const InvestorDeckCapital = () => {
           {i > 0 && (
             <div
               className="absolute bottom-4 right-6 z-10"
-              style={{ fontFamily: FONT_MONO, fontSize: 11, color: C.muted, letterSpacing: "0.1em" }}
+              style={{ fontFamily: FONT_SANS, fontSize: 11, color: C.olive, fontWeight: 700, letterSpacing: "0.1em" }}
             >
               {String(i + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
             </div>
