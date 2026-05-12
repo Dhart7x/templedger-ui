@@ -158,29 +158,103 @@ const Home = () => {
         .tl-select option { color: ${C.fg}; }
       `}</style>
 
-      {/* Hidden access arrow */}
-      <button
-        onClick={() => navigate("/demo")}
-        aria-label="Internal access"
+      {/* Hidden access menu */}
+      <div
         style={{
           position: "fixed",
           top: 12,
           left: 12,
           zIndex: 60,
-          width: 32,
-          height: 32,
-          background: "rgba(255,255,255,0.08)",
-          borderRadius: 6,
-          color: "rgba(255,255,255,0.3)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          border: "none",
-          cursor: "pointer",
         }}
+        ref={menuRef}
       >
-        <ChevronRight size={16} />
-      </button>
+        <button
+          onClick={() => setDropdownOpen((o) => !o)}
+          aria-label="Internal access"
+          style={{
+            width: 32,
+            height: 32,
+            background: "rgba(255,255,255,0.08)",
+            borderRadius: 6,
+            color: "rgba(255,255,255,0.3)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            border: "none",
+            cursor: "pointer",
+            transform: dropdownOpen ? "rotate(90deg)" : "rotate(0deg)",
+            transition: "transform 0.2s ease",
+          }}
+        >
+          <ChevronRight size={16} />
+        </button>
+
+        {dropdownOpen && (
+          <div
+            style={{
+              position: "absolute",
+              top: 40,
+              left: 0,
+              background: "#1A3D2E",
+              border: "0.5px solid rgba(255,255,255,0.12)",
+              borderRadius: 8,
+              padding: 6,
+              width: 160,
+              zIndex: 100,
+              boxShadow: "0 8px 24px rgba(0,0,0,0.3)",
+            }}
+          >
+            {[
+              { label: "Demo", path: "/demo", Icon: Monitor },
+              { label: "Sales Deck", path: "/sales-deck", Icon: Presentation },
+              { label: "Capital", path: "/capital", Icon: TrendingUp },
+            ].map((item) => (
+              <button
+                key={item.path}
+                onClick={() => {
+                  navigate(item.path);
+                  setDropdownOpen(false);
+                }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  width: "100%",
+                  padding: "9px 14px",
+                  borderRadius: 6,
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                  color: "rgba(255,255,255,0.7)",
+                  fontFamily: FONT,
+                  fontWeight: 600,
+                  fontSize: 12,
+                  textDecoration: "none",
+                  textAlign: "left",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+                  e.currentTarget.style.color = "#FFFFFF";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.color = "rgba(255,255,255,0.7)";
+                }}
+              >
+                <item.Icon
+                  style={{
+                    width: 14,
+                    height: 14,
+                    marginRight: 8,
+                    color: "rgba(255,255,255,0.4)",
+                    flexShrink: 0,
+                  }}
+                />
+                {item.label}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* NAV */}
       <nav
