@@ -1140,15 +1140,6 @@ const Home = () => {
             >
               Ready to take control of your contingent workforce?
             </h2>
-            <p
-              style={{
-                fontSize: 15,
-                color: "rgba(255,255,255,0.4)",
-                marginBottom: 40,
-              }}
-            >
-              TempLedger makes that the default.
-            </p>
             <div style={{ maxWidth: 480, margin: "0 auto" }}>
               {submitted ? (
                 <div style={{ fontWeight: 500, fontSize: 16, color: "#FFFFFF", textAlign: "center" }}>
