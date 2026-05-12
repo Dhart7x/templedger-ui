@@ -1148,47 +1148,65 @@ const Home = () => {
                 </div>
               ) : (
                 <form onSubmit={onSubmit}>
-                  <input
-                    className="tl-input"
-                    style={inputStyle}
-                    placeholder="Your name"
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    required
-                  />
-                  <input
-                    className="tl-input"
-                    style={inputStyle}
-                    placeholder="Company"
-                    value={form.company}
-                    onChange={(e) => setForm({ ...form, company: e.target.value })}
-                    required
-                  />
-                  <input
-                    className="tl-input"
-                    style={inputStyle}
-                    type="email"
-                    placeholder="Work email"
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    required
-                  />
-                  <select
-                    className="tl-input tl-select"
-                    style={{ ...inputStyle, marginBottom: 24 }}
-                    value={form.role}
-                    onChange={(e) => setForm({ ...form, role: e.target.value })}
-                    required
-                  >
-                    <option value="">Your role</option>
-                    <option>CFO / Finance Director</option>
-                    <option>Operations Director</option>
-                    <option>Head of HR / People</option>
-                    <option>Procurement Director</option>
-                    <option>Other</option>
-                  </select>
-                  <button
+                  {[
+                    <input
+                      key="name"
+                      className="tl-input"
+                      style={inputStyle}
+                      placeholder="Your name"
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      required
+                    />,
+                    <input
+                      key="company"
+                      className="tl-input"
+                      style={inputStyle}
+                      placeholder="Company"
+                      value={form.company}
+                      onChange={(e) => setForm({ ...form, company: e.target.value })}
+                      required
+                    />,
+                    <input
+                      key="email"
+                      className="tl-input"
+                      style={inputStyle}
+                      type="email"
+                      placeholder="Work email"
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      required
+                    />,
+                    <select
+                      key="role"
+                      className="tl-input tl-select"
+                      style={{ ...inputStyle, marginBottom: 24 }}
+                      value={form.role}
+                      onChange={(e) => setForm({ ...form, role: e.target.value })}
+                      required
+                    >
+                      <option value="">Your role</option>
+                      <option>CFO / Finance Director</option>
+                      <option>Operations Director</option>
+                      <option>Head of HR / People</option>
+                      <option>Procurement Director</option>
+                      <option>Other</option>
+                    </select>,
+                  ].map((field, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-80px" }}
+                      transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" }}
+                    >
+                      {field}
+                    </motion.div>
+                  ))}
+                  <motion.button
                     type="submit"
+                    whileHover={{ scale: 1.02, backgroundColor: "#1A3D2E" }}
+                    transition={{ duration: 0.15 }}
                     style={{
                       width: "100%",
                       background: C.primary,
@@ -1203,7 +1221,7 @@ const Home = () => {
                     }}
                   >
                     Request Access
-                  </button>
+                  </motion.button>
                 </form>
               )}
             </div>
