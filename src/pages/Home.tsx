@@ -745,14 +745,14 @@ const Home = () => {
                 <motion.div
                   key={i}
                   className="tl-card"
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.04 }}
+                  initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.4, delay: i * 0.05, ease: "easeOut" }}
+                  whileHover={{ scale: 1.02, backgroundColor: "#EBF4EF", boxShadow: "0 4px 16px rgba(45,106,79,0.08)" }}
                   style={{
                     background: C.bg,
                     padding: 24,
-                    transition: "background 0.15s ease",
                   }}
                 >
                   <div
