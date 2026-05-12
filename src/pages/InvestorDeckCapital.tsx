@@ -536,11 +536,11 @@ const S14 = () => (
         </div>
       </div>
     </div>
-    <div style={{ background: C.card, borderLeft: `3px solid ${C.olive}`, borderRadius: "0 8px 8px 0", padding: "16px 20px" }}>
-      <div style={{ fontFamily: FONT_MONO, fontSize: 14, fontWeight: 500, color: C.fg, fontStyle: "italic", lineHeight: 1.5, marginBottom: 8 }}>
+    <div style={{ background: C.surface, borderLeft: `3px solid ${C.olive}`, borderRadius: "0 8px 8px 0", padding: "16px 20px" }}>
+      <div style={{ fontFamily: FONT_SANS, fontSize: 14, fontWeight: 500, color: C.fg, fontStyle: "italic", lineHeight: 1.5, marginBottom: 8 }}>
         "If I were still there, this would be the only way in the door for staffing companies."
       </div>
-      <div style={{ fontFamily: FONT_SANS, fontSize: 11, color: C.muted }}>
+      <div style={{ fontFamily: FONT_SANS, fontSize: 11, color: C.mutedLight }}>
         — Former Head of Operations, largest temp labor user in the UK (6,000+ temp workers under management)
       </div>
     </div>
