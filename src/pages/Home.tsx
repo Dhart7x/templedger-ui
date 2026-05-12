@@ -127,7 +127,7 @@ const Home = () => {
     "Problems surface too late.",
     "Your agency workforce is a black box.",
     "Internal policies exist. The system to enforce them doesn't.",
-    "Compliance is never guaranteed.",
+    "Your operations team spends half its time chasing agencies.",
   ];
 
   const costs = [
