@@ -378,6 +378,7 @@ const Home = () => {
 
       {/* NAV */}
       <motion.nav
+        className="tl-nav"
         initial={{ y: -56 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.4, delay: 0.05, ease: "easeOut" }}
@@ -448,9 +449,9 @@ const Home = () => {
         </motion.button>
       </motion.nav>
 
-      <div style={{ paddingTop: 56 }}>
+      <div className="tl-nav-spacer" style={{ paddingTop: 56 }}>
         {/* SECTION 1 — HERO */}
-        <section style={{ background: C.bg, padding: "96px 48px 80px" }}>
+        <section className="tl-hero" style={{ background: C.bg, padding: "96px 48px 80px" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <motion.span
               initial={{ opacity: 0, y: 20 }}
@@ -542,7 +543,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 2 — THE INVOICE VISUAL */}
-        <section style={{ background: "#FFFFFF", padding: "80px 48px" }}>
+        <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "80px 48px" }}>
           <div style={{ maxWidth: 1000, margin: "0 auto" }}>
             <div
               style={{
@@ -764,7 +765,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 3 — THE PROBLEM */}
-        <section style={{ background: C.surface, padding: "80px 48px" }}>
+        <section className="tl-section-problem" style={{ background: C.surface, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>The Problem</SectionTag>
             <h2
@@ -835,7 +836,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 3 — THE COST */}
-        <section style={{ background: C.bg, padding: "80px 48px" }}>
+        <section className="tl-section-cost" style={{ background: C.bg, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>The Cost</SectionTag>
             <h2
@@ -895,7 +896,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 4 — THE OUTCOME */}
-        <section style={{ background: "#2D6A4F", padding: "80px 48px" }}>
+        <section className="tl-section-outcome" style={{ background: "#2D6A4F", padding: "80px 48px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <div
               style={{
@@ -1136,7 +1137,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 5 — HOW IT WORKS */}
-        <section style={{ background: C.surface, padding: "80px 48px" }}>
+        <section className="tl-section-how" style={{ background: C.surface, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>How It Works</SectionTag>
             <h2
@@ -1185,7 +1186,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 6 — CONTACT */}
-        <section id="contact" style={{ background: "#2D6A4F", padding: "80px 48px" }}>
+        <section id="contact" className="tl-section-contact" style={{ background: "#2D6A4F", padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
             <h2
               style={{
@@ -1287,7 +1288,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 7 — FOOTER */}
-        <footer
+        <footer className="tl-footer"
           style={{
             background: "#0D0D0B",
             borderTop: "0.5px solid rgba(255,255,255,0.08)",
