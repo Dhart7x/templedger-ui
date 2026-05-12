@@ -1204,12 +1204,12 @@ const Home = () => {
                   ))}
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.02, backgroundColor: "#1A3D2E" }}
+                    whileHover={{ scale: 1.02, backgroundColor: "#E8E8E8" }}
                     transition={{ duration: 0.15 }}
                     style={{
                       width: "100%",
-                      background: C.primary,
-                      color: "#FFFFFF",
+                      background: "#FFFFFF",
+                      color: "#2D6A4F",
                       fontWeight: 700,
                       fontSize: 14,
                       borderRadius: 8,
