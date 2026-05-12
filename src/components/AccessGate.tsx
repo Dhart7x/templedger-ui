@@ -28,10 +28,11 @@ const AccessGate = ({ children }: AccessGateProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (
-      email.trim().toLowerCase() === ALLOWED_EMAIL.toLowerCase() &&
-      password === ALLOWED_PASSWORD
-    ) {
+    const u = email.trim().toLowerCase();
+    const ok = ALLOWED_CREDENTIALS.some(
+      (c) => c.user.toLowerCase() === u && c.pass === password,
+    );
+    if (ok) {
       sessionStorage.setItem(STORAGE_KEY, "true");
       setGranted(true);
       setError("");
