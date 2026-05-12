@@ -10,7 +10,7 @@ const C = {
   bg: "#111210",
   fg: "#ede7d9",
   olive: "#7d8f46",
-  muted: "#52524e",
+  muted: "rgba(237,231,217,0.5)", // captions / secondary labels only
   card: "#1a1b18",
   border: "#2a2b27",
   green: "#22c55e",
@@ -22,9 +22,9 @@ const FONT_SANS = "'Inter', system-ui, sans-serif";
 // ============================================================
 // Shared primitives
 // ============================================================
-const SlideShell = ({ children, justify = "start", padTop = "pt-16" }: { children: ReactNode; justify?: "start" | "center"; padTop?: string }) => (
+const SlideShell = ({ children, justify = "start", padTop = "pt-14", padBottom = "pb-10" }: { children: ReactNode; justify?: "start" | "center"; padTop?: string; padBottom?: string }) => (
   <div
-    className={`w-screen h-screen overflow-hidden flex flex-col ${justify === "center" ? "justify-center items-center" : `justify-start ${padTop}`} px-20`}
+    className={`w-screen h-screen overflow-hidden flex flex-col ${justify === "center" ? "justify-center items-center" : `justify-start ${padTop} ${padBottom}`} px-20`}
     style={{ background: C.bg, color: C.fg, fontFamily: FONT_SANS }}
   >
     {children}
@@ -50,9 +50,9 @@ const Card = ({ children, style }: { children: ReactNode; style?: React.CSSPrope
 );
 
 const Bullet = ({ children }: { children: ReactNode }) => (
-  <div style={{ display: "flex", gap: 10, alignItems: "flex-start", marginBottom: 6 }}>
-    <div style={{ width: 5, height: 5, background: C.olive, marginTop: 7, flexShrink: 0 }} />
-    <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.muted, lineHeight: 1.6 }}>{children}</div>
+  <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 6 }}>
+    <div style={{ width: 5, height: 5, background: C.olive, borderRadius: 1, flexShrink: 0 }} />
+    <div style={{ fontFamily: FONT_SANS, fontSize: 13, color: C.fg, lineHeight: 1.6 }}>{children}</div>
   </div>
 );
 
@@ -73,13 +73,13 @@ const S1 = () => (
     <div style={{ fontFamily: FONT_SANS, fontSize: 10, color: C.muted, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 24, textAlign: "center" }}>
       Agency Management Platform
     </div>
-    <h1 style={{ fontFamily: FONT_MONO, fontWeight: 700, fontSize: 44, color: C.fg, lineHeight: 1.1, maxWidth: 700, textAlign: "center" }}>
-      The financial control layer<br />for temp labor.
+    <h1 style={{ fontFamily: FONT_MONO, fontWeight: 700, fontSize: 44, color: C.fg, lineHeight: 1.1, maxWidth: 760, textAlign: "center" }}>
+      The unified system for<br />temp labor orchestration.
     </h1>
-    <p style={{ fontFamily: FONT_SANS, fontSize: 14, color: C.muted, marginTop: 16, marginBottom: 36, textAlign: "center" }}>
-      One platform. Every agency.<br />Payroll and billing verified by default.
+    <p style={{ fontFamily: FONT_SANS, fontSize: 22, fontWeight: 300, color: C.fg, marginTop: 20, marginBottom: 36, textAlign: "center" }}>
+      Have it <em>your</em> way.
     </p>
-    <div style={{ display: "flex", gap: 16, maxWidth: 520, width: "100%" }}>
+    <div style={{ display: "flex", gap: 16, maxWidth: 520, width: "100%", alignItems: "flex-start" }}>
       <Card style={{ flex: 1 }}>
         <div style={{ fontFamily: FONT_SANS, fontSize: 10, color: C.muted, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 6 }}>Pre-Seed Raise</div>
         <div style={{ fontFamily: FONT_MONO, fontSize: 28, fontWeight: 700, color: C.olive }}>$1,500,000</div>
@@ -98,7 +98,7 @@ const S1 = () => (
 const Founder = ({ name, bullets }: { name: string; bullets: string[] }) => (
   <div style={{ flex: 1 }}>
     <div style={{ fontFamily: FONT_MONO, fontSize: 18, fontWeight: 700, color: C.fg, marginBottom: 2 }}>{name}</div>
-    <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.olive, marginBottom: 12 }}>Co-Founder</div>
+    <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.olive, marginBottom: 16 }}>Co-Founder</div>
     {bullets.map((b, i) => <Bullet key={i}>{b}</Bullet>)}
   </div>
 );
@@ -108,7 +108,7 @@ const S2 = () => (
     <Eyebrow>02 &nbsp;&nbsp;The Team</Eyebrow>
     <H1>Built by founders who operated<br />inside this market.</H1>
     <Divider />
-    <div style={{ display: "flex", gap: 40, flex: 1 }}>
+    <div style={{ display: "flex", gap: 40, flex: 1, alignItems: "flex-start" }}>
       <Founder name="Michael Gadsby" bullets={[
         "Founded Staffing Match from a council flat in the UK",
         "Grew organically to £100M ($125M) — zero external capital",
@@ -132,43 +132,31 @@ const S2 = () => (
 // SLIDE 3 — PROBLEM
 // ============================================================
 const S3 = () => {
-  const rows = [
-    ["Attendance", "Live view", "Nothing"],
-    ["Compliance", "Live view", "What agencies tell them"],
-    ["Performance", "Full history", "Self-reported data"],
-    ["Invoice accuracy", "Their calculation", "No way to verify"],
+  const bullets = [
+    "Problems surface too late.",
+    "Shifts fail without warning.",
+    "Agency workforce — a black box.",
+    "Compliance is never guaranteed.",
+    "Agency booking distribution is never optimized.",
+    "Payroll accuracy is the objective, not the default.",
+    "Invoice disputes from unverified payroll.",
+    "Performance is self-reported.",
   ];
   return (
     <SlideShell>
       <Eyebrow>03 &nbsp;&nbsp;The Problem</Eyebrow>
-      <H1>A structural gap the market<br />has accepted as normal.</H1>
+      <H1>Zero transparency, visibility,<br />or control over their<br />contingent workforce.</H1>
+      <div style={{ fontFamily: FONT_SANS, fontSize: 14, color: "rgba(237,231,217,0.6)", marginBottom: 24 }}>
+        The direct result of two sides operating in separate systems.
+      </div>
       <Divider />
-      <div style={{ display: "flex", gap: 40, flex: 1 }}>
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 12 }}>
-          <p style={{ fontFamily: FONT_SANS, fontSize: 13, color: C.muted, lineHeight: 1.7 }}>
-            Every platform an agency buys is designed around their own operations — their CRM, their workflow, their margin. The labor user was never part of that design.
-          </p>
-          <p style={{ fontFamily: FONT_SANS, fontSize: 13, color: C.muted, lineHeight: 1.7 }}>
-            The result is two sides operating in entirely separate systems. No shared record. No shared visibility. No shared truth.
-          </p>
-          <p style={{ fontFamily: FONT_MONO, fontSize: 15, fontWeight: 600, color: C.olive, marginTop: 16 }}>
-            Without synchronization, failure is built into the model.
-          </p>
-        </div>
-        <div style={{ flex: 1, background: C.card, border: `0.5px solid ${C.border}`, borderRadius: 10, overflow: "hidden", height: "fit-content" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1.2fr", background: "rgba(125,143,70,0.08)" }}>
-            {["", "Agency systems", "Labor user has"].map((h, i) => (
-              <div key={i} style={{ padding: "10px 14px", fontFamily: FONT_MONO, fontSize: 11, color: C.olive }}>{h}</div>
-            ))}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", maxWidth: 720 }}>
+        {bullets.map((b, i) => (
+          <div key={i} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: i === bullets.length - 1 ? 0 : 18 }}>
+            <div style={{ width: 5, height: 5, background: C.olive, borderRadius: 1, flexShrink: 0 }} />
+            <div style={{ fontFamily: FONT_MONO, fontSize: 15, fontWeight: 600, color: C.fg }}>{b}</div>
           </div>
-          {rows.map((r, i) => (
-            <div key={i} style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1.2fr", borderBottom: `0.5px solid ${C.border}` }}>
-              <div style={{ padding: "10px 14px", fontFamily: FONT_SANS, fontSize: 12, color: C.fg, fontWeight: 500 }}>{r[0]}</div>
-              <div style={{ padding: "10px 14px", fontFamily: FONT_SANS, fontSize: 12, color: C.muted }}>{r[1]}</div>
-              <div style={{ padding: "10px 14px", fontFamily: FONT_SANS, fontSize: 12, color: C.red, fontWeight: 500 }}>{r[2]}</div>
-            </div>
-          ))}
-        </div>
+        ))}
       </div>
     </SlideShell>
   );
@@ -178,10 +166,10 @@ const S3 = () => {
 // SLIDE 4 — SOLUTION
 // ============================================================
 const SolCard = ({ label, title, body }: { label: string; title: string; body: string }) => (
-  <Card style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+  <Card style={{ flex: 1, display: "flex", flexDirection: "column", height: "fit-content" }}>
     <div style={{ fontFamily: FONT_SANS, fontSize: 10, color: C.olive, letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 8 }}>{label}</div>
     <div style={{ fontFamily: FONT_MONO, fontSize: 13, fontWeight: 700, color: C.fg, marginBottom: 8 }}>{title}</div>
-    <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.muted, lineHeight: 1.6 }}>{body}</div>
+    <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.fg, lineHeight: 1.6 }}>{body}</div>
   </Card>
 );
 const S4 = () => (
@@ -192,7 +180,7 @@ const S4 = () => (
       It is a financial control tool that happens to live in HR's domain.
     </div>
     <Divider />
-    <div style={{ display: "flex", gap: 14, flex: 1 }}>
+    <div style={{ display: "flex", gap: 14, flex: 1, alignItems: "flex-start" }}>
       <SolCard label="Verify" title="T&A Hardware" body="Proprietary biometric terminals on site. Every clock event verified at source. Payroll accurate by default." />
       <SolCard label="Orchestrate" title="Intelligent Allocation" body="Agency selection from real-time availability, proximity and verified performance. One shared system. No intermediary." />
       <SolCard label="Control" title="Live Operations" body="Real-time exceptions dashboard. Authorization tiers set by HR. Every agency action visible the moment it happens." />
@@ -225,16 +213,16 @@ const S5 = () => {
         </div>
         {rows.map((r, i) => (
           <div key={i} style={{ display: "grid", gridTemplateColumns: cols, borderBottom: `0.5px solid ${C.border}` }}>
-            <div style={{ padding: "10px 14px", fontFamily: FONT_SANS, fontSize: 12, color: C.fg, fontWeight: 600 }}>{r.name}</div>
-            <div style={{ padding: "10px 14px", fontFamily: FONT_SANS, fontSize: 12, color: C.muted }}>{r.rev}</div>
-            <div style={{ padding: "10px 14px", fontFamily: FONT_SANS, fontSize: 12, color: C.muted }}>{r.model}</div>
-            <div style={{ padding: "10px 14px", fontFamily: FONT_SANS, fontSize: 12, color: C.muted }}>{r.why}</div>
+            <div style={{ padding: "10px 14px", fontFamily: FONT_MONO, fontSize: 14, color: C.fg, fontWeight: 600 }}>{r.name}</div>
+            <div style={{ padding: "10px 14px", fontFamily: FONT_SANS, fontSize: 12, color: C.fg }}>{r.rev}</div>
+            <div style={{ padding: "10px 14px", fontFamily: FONT_SANS, fontSize: 12, color: C.fg }}>{r.model}</div>
+            <div style={{ padding: "10px 14px", fontFamily: FONT_SANS, fontSize: 12, color: C.fg }}>{r.why}</div>
           </div>
         ))}
       </div>
       <Card style={{ marginTop: 14 }}>
         <div style={{ fontFamily: FONT_MONO, fontSize: 12, fontWeight: 600, color: C.olive, marginBottom: 6 }}>The hardware moat they cannot cross</div>
-        <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.muted, lineHeight: 1.6 }}>
+        <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.fg, lineHeight: 1.6 }}>
           TempLedger owns the clock-in event at source. Verified payroll, irrefutable invoices and compliance all flow from that hardware event. MSPs cannot build a platform that eliminates their own revenue model.
         </div>
       </Card>
@@ -247,17 +235,10 @@ const S5 = () => {
 // SLIDE 6 — MARKET
 // ============================================================
 const StatCard = ({ label, value, valueColor, sub }: { label: string; value: string; valueColor: string; sub: string }) => (
-  <Card style={{ flex: 1 }}>
+  <Card style={{ flex: 1, height: "fit-content" }}>
     <div style={{ fontFamily: FONT_SANS, fontSize: 10, color: C.muted, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 6 }}>{label}</div>
     <div style={{ fontFamily: FONT_MONO, fontSize: 44, fontWeight: 700, color: valueColor, marginBottom: 8 }}>{value}</div>
-    <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.muted, lineHeight: 1.6, whiteSpace: "pre-line" }}>{sub}</div>
-  </Card>
-);
-const MiniStat = ({ label, value, desc }: { label: string; value: string; desc: string }) => (
-  <Card style={{ flex: 1, padding: 14 }}>
-    <div style={{ fontFamily: FONT_SANS, fontSize: 10, color: C.muted, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4 }}>{label}</div>
-    <div style={{ fontFamily: FONT_MONO, fontSize: 20, fontWeight: 700, color: C.fg, marginBottom: 4 }}>{value}</div>
-    <div style={{ fontFamily: FONT_SANS, fontSize: 11, color: C.muted }}>{desc}</div>
+    <div style={{ fontFamily: FONT_SANS, fontSize: 13, color: C.fg, lineHeight: 1.6, whiteSpace: "pre-line" }}>{sub}</div>
   </Card>
 );
 const S6 = () => (
@@ -265,19 +246,13 @@ const S6 = () => (
     <Eyebrow>06 &nbsp;&nbsp;Market Opportunity</Eyebrow>
     <H1>Blue collar temp labor.<br />A large, underserved market.</H1>
     <Divider />
-    <div style={{ display: "flex", gap: 14, marginBottom: 14 }}>
+    <div style={{ display: "flex", gap: 14, alignItems: "flex-start", flex: 1 }}>
       <StatCard label="Total Addressable Market" value="$1.2B" valueColor={C.olive}
-        sub={"US + UK + EU + Australia\nManufacturing, logistics, food production, warehousing and distribution\n0.6–1.5% of qualifying annual spend"} />
+        sub={"US, UK, EU and Australia.\nManufacturing, logistics, food production and warehousing."} />
       <StatCard label="Serviceable Addressable Market" value="$390M" valueColor={C.fg}
-        sub={"US and UK — Year 1 to 3\n1,500–1,700 qualifying US employers\n400–500 qualifying UK employers\n$5M–$100M annual agency spend band"} />
+        sub={"US and UK.\nThe markets TempLedger enters first."} />
       <StatCard label="Serviceable Obtainable Market" value="$16M ARR" valueColor={C.green}
-        sub={"Year 5 — 73 clients\n$220K average ARR per client\n4.1% SAM penetration\nConstrained by capacity, not demand"} />
-    </div>
-    <div style={{ display: "flex", gap: 10 }}>
-      <MiniStat label="US" value="$350M" desc="Primary market. Existing network." />
-      <MiniStat label="UK" value="$120M" desc="Primary market. Deep relationships." />
-      <MiniStat label="EU" value="$550M" desc="Germany, Netherlands, Belgium, France." />
-      <MiniStat label="Australia" value="$180M" desc="Mature temp labor market." />
+        sub={"Year 5. 73 clients.\n$220K average ARR.\nConstrained by capacity, not demand."} />
     </div>
     <ClosingLine>23 clients at average spend = $5M ARR.</ClosingLine>
   </SlideShell>
@@ -300,15 +275,15 @@ const S7 = () => {
       <Eyebrow>07 &nbsp;&nbsp;Business Model</Eyebrow>
       <H1>One sale. Both sides adopted.</H1>
       <Divider />
-      <div style={{ display: "flex", gap: 40, flex: 1 }}>
+      <div style={{ display: "flex", gap: 40, flex: 1, alignItems: "flex-start" }}>
         <div style={{ flex: 1 }}>
           <div style={{ fontFamily: FONT_MONO, fontSize: 14, fontWeight: 600, color: C.olive, marginBottom: 8 }}>The Mandate Dynamic</div>
-          <p style={{ fontFamily: FONT_SANS, fontSize: 13, color: C.muted, lineHeight: 1.7, marginBottom: 12 }}>
+          <p style={{ fontFamily: FONT_SANS, fontSize: 13, color: C.fg, lineHeight: 1.7, marginBottom: 12 }}>
             TempLedger is sold to the labor user. The labor user mandates agency adoption as a condition of the commercial relationship. Agencies adopt or lose the client. One sale covers both sides of the platform.
           </p>
           <div style={{ height: 1, background: C.border, margin: "16px 0" }} />
           <div style={{ fontFamily: FONT_MONO, fontSize: 14, fontWeight: 600, color: C.olive, marginBottom: 8 }}>Unit Economics</div>
-          <div style={{ fontFamily: FONT_SANS, fontSize: 13, color: C.muted, lineHeight: 1.8 }}>
+          <div style={{ fontFamily: FONT_SANS, fontSize: 13, color: C.fg, lineHeight: 1.8 }}>
             Average client: 500 temps/day<br />Annual labor spend: $20M<br />Rate: 1.1%
           </div>
           <div style={{ fontFamily: FONT_MONO, fontSize: 18, fontWeight: 700, color: C.olive, marginTop: 10 }}>
@@ -324,7 +299,7 @@ const S7 = () => {
           {rows.map((r, i) => (
             <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 0.6fr 1.2fr", borderBottom: `0.5px solid ${C.border}` }}>
               <div style={{ padding: "10px 14px", fontFamily: FONT_SANS, fontSize: 12, color: C.fg, fontWeight: 500 }}>{r[0]}</div>
-              <div style={{ padding: "10px 14px", fontFamily: FONT_SANS, fontSize: 12, color: C.muted }}>{r[1]}</div>
+              <div style={{ padding: "10px 14px", fontFamily: FONT_SANS, fontSize: 12, color: C.fg }}>{r[1]}</div>
               <div style={{ padding: "10px 14px", fontFamily: FONT_SANS, fontSize: 12, color: C.olive, fontWeight: 500 }}>{r[2]}</div>
             </div>
           ))}
@@ -340,7 +315,7 @@ const S7 = () => {
 const ImpactCard = ({ dir, metric, body }: { dir: "up" | "down"; metric: string; body: string }) => {
   const color = dir === "up" ? C.green : C.red;
   return (
-    <div style={{ background: C.card, border: `0.5px solid ${C.border}`, borderRadius: 8, padding: 12, display: "flex", flexDirection: "column" }}>
+    <div style={{ background: C.card, border: `0.5px solid ${C.border}`, borderRadius: 8, padding: "12px 14px", height: "fit-content" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8, minHeight: 32, flexShrink: 0 }}>
         <div style={{
           width: 0, height: 0,
@@ -348,15 +323,15 @@ const ImpactCard = ({ dir, metric, body }: { dir: "up" | "down"; metric: string;
           borderRight: "5px solid transparent",
           ...(dir === "up" ? { borderBottom: `8px solid ${color}` } : { borderTop: `8px solid ${color}` }),
         }} />
-        <div style={{ fontFamily: FONT_MONO, fontSize: 13, fontWeight: 600, color }}>{metric}</div>
+        <div style={{ fontFamily: FONT_MONO, fontSize: 14, fontWeight: 600, color }}>{metric}</div>
       </div>
-      <div style={{ height: 0.5, background: C.border, margin: "8px 0" }} />
-      <div style={{ fontFamily: FONT_SANS, fontSize: 11, color: C.muted, lineHeight: 1.55 }}>{body}</div>
+      <div style={{ height: 0.5, background: C.border, margin: "8px 0", flexShrink: 0 }} />
+      <div style={{ fontFamily: FONT_SANS, fontSize: 11, color: C.fg, lineHeight: 1.55 }}>{body}</div>
     </div>
   );
 };
 const S8 = () => {
-  const items: Array<[ "up" | "down", string, string ]> = [
+  const items: Array<["up" | "down", string, string]> = [
     ["up", "Operational visibility", "Exceptions and shift gaps surface in real time before they reach payroll."],
     ["down", "Compliance exposure", "Non-compliant workers blocked at source. Liability falls on you if unmanaged."],
     ["up", "Retention", "Accurate payroll removes the friction that drives temp attrition."],
@@ -368,17 +343,17 @@ const S8 = () => {
     ["up", "Agency accountability", "Performance derived from the system. Not self-reported. Not disputable."],
   ];
   return (
-    <div className="w-screen h-screen overflow-hidden flex flex-col justify-start pt-14 px-20" style={{ background: C.bg, color: C.fg, fontFamily: FONT_SANS }}>
+    <SlideShell>
       <Eyebrow>08 &nbsp;&nbsp;The Commercial Impact</Eyebrow>
       <H1 size={30}>This is what changes.</H1>
       <div style={{ fontFamily: FONT_MONO, fontSize: 16, fontWeight: 500, color: C.olive, marginBottom: 10 }}>
         The impact compounds with every shift, every day.
       </div>
       <Divider />
-      <div style={{ flex: 1, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridTemplateRows: "repeat(3, 1fr)", gap: 10 }}>
+      <div style={{ flex: 1, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, alignItems: "start" }}>
         {items.map((it, i) => <ImpactCard key={i} dir={it[0]} metric={it[1]} body={it[2]} />)}
       </div>
-    </div>
+    </SlideShell>
   );
 };
 
@@ -390,17 +365,18 @@ const S9 = () => (
     <Eyebrow>09 &nbsp;&nbsp;Go-To-Market Strategy</Eyebrow>
     <H1>Consultancy entry.<br />Infrastructure outcome.</H1>
     <Divider />
-    <div style={{ display: "flex", gap: 14 }}>
+    <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
       <SolCard label="Stage 1 — Identify" title="CFOs and Ops Directors" body="Target businesses with $5M–$100M in annual agency labor spend. Outreach framed around financial control — not software." />
       <SolCard label="Stage 2 — Deploy" title="3 months · $5,000/month" body="Hardware installed. Platform configured. Proved on one shift before it scales. Fee credited against first month on platform." />
       <SolCard label="Stage 3 — Scale" title="Monthly fee · Mandate active" body="Client live. Monthly fee based on spend tier. Agencies mandated. Each client becomes a reference for the next." />
     </div>
     <Card style={{ marginTop: 14 }}>
       <div style={{ fontFamily: FONT_MONO, fontSize: 12, fontWeight: 700, color: C.olive, marginBottom: 6 }}>Why consultancy entry works</div>
-      <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.muted, lineHeight: 1.6 }}>
-        TempLedger is not an HR tool. It is a financial control tool that happens to live in HR's domain. CFOs and Ops Directors own the P&L. They are not territorial about the current process. They open the door.
+      <div style={{ fontFamily: FONT_SANS, fontSize: 13, color: C.fg, lineHeight: 1.7 }}>
+        TempLedger is not an HR tool. It is a financial control tool that happens to live in HR's domain. We sell to the person who owns the P&L — not the person who owns the process.
       </div>
     </Card>
+    <div style={{ flex: 1 }} />
   </SlideShell>
 );
 
@@ -410,13 +386,13 @@ const S9 = () => (
 const Principle = ({ title, body }: { title: string; body: string }) => (
   <div>
     <div style={{ fontFamily: FONT_SANS, fontSize: 13, fontWeight: 600, color: C.fg, marginBottom: 4 }}>{title}</div>
-    <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.muted, lineHeight: 1.6 }}>{body}</div>
+    <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.fg, lineHeight: 1.6 }}>{body}</div>
   </div>
 );
 const PhaseCard = ({ title, body }: { title: string; body: string }) => (
-  <div style={{ background: C.card, border: `0.5px solid ${C.border}`, borderRadius: 8, padding: 12 }}>
+  <div style={{ background: C.card, border: `0.5px solid ${C.border}`, borderRadius: 8, padding: 12, height: "fit-content" }}>
     <div style={{ fontFamily: FONT_MONO, fontSize: 12, fontWeight: 700, color: C.olive, marginBottom: 6 }}>{title}</div>
-    <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.muted, lineHeight: 1.55 }}>{body}</div>
+    <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.fg, lineHeight: 1.55 }}>{body}</div>
   </div>
 );
 const S10 = () => (
@@ -424,7 +400,7 @@ const S10 = () => (
     <Eyebrow>10 &nbsp;&nbsp;Implementation</Eyebrow>
     <H1>One shift or department<br />at a time.</H1>
     <Divider />
-    <div style={{ display: "flex", gap: 40, flex: 1 }}>
+    <div style={{ display: "flex", gap: 40, flex: 1, alignItems: "flex-start" }}>
       <div style={{ flex: 1 }}>
         <div style={{ fontFamily: FONT_MONO, fontSize: 14, fontWeight: 700, color: C.olive, marginBottom: 12 }}>Three principles</div>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -453,15 +429,16 @@ const S11 = () => (
     <Eyebrow>11 &nbsp;&nbsp;Product Roadmap</Eyebrow>
     <H1>Hardware closes the loop.<br />Data compounds everything.</H1>
     <Divider />
-    <div style={{ display: "flex", gap: 12, flex: 1 }}>
+    <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
       <SolCard label="Phase 1 · Months 1–8" title="Foundation" body="Production platform. Biometric T&A terminal: tablet kiosk with facial recognition. Intelligent allocation live." />
       <SolCard label="Phase 2 · Months 9–14" title="Worker App" body="iOS and Android. One-tap shift acceptance. Agencies stop chasing confirmations manually." />
       <SolCard label="Phase 3 · Months 15–24" title="Intelligence Layer" body="ML trained on accumulated data. Predictive no-show flagging. Anomaly detection for fraud signals." />
       <SolCard label="Phase 4 · Series A" title="Hardware Evolution" body="Phase 2: ruggedised Android terminal. Phase 3: proprietary TempLedger device. Data integrity moat at the hardware layer." />
     </div>
-    <div style={{ marginTop: 16, fontFamily: FONT_SANS, fontSize: 13, color: C.muted, lineHeight: 1.6 }}>
+    <div style={{ marginTop: 16, fontFamily: FONT_SANS, fontSize: 13, color: C.fg, lineHeight: 1.6 }}>
       The hardware is not a feature. It is the reason the data is trustworthy. Every layer depends on owning that first event.
     </div>
+    <div style={{ flex: 1 }} />
   </SlideShell>
 );
 
@@ -469,9 +446,9 @@ const S11 = () => (
 // SLIDE 12 — DATA & ML
 // ============================================================
 const SmallCard = ({ title, body }: { title: string; body: string }) => (
-  <div style={{ background: C.card, border: `0.5px solid ${C.border}`, borderRadius: 8, padding: 12 }}>
+  <div style={{ background: C.card, border: `0.5px solid ${C.border}`, borderRadius: 8, padding: 12, height: "fit-content" }}>
     <div style={{ fontFamily: FONT_MONO, fontSize: 12, fontWeight: 700, color: C.olive, marginBottom: 4 }}>{title}</div>
-    <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.muted, lineHeight: 1.55 }}>{body}</div>
+    <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.fg, lineHeight: 1.55 }}>{body}</div>
   </div>
 );
 const S12 = () => (
@@ -479,7 +456,7 @@ const S12 = () => (
     <Eyebrow>12 &nbsp;&nbsp;Data and Machine Learning</Eyebrow>
     <H1>The platform accumulates an asset<br />no competitor can buy.</H1>
     <Divider />
-    <div style={{ display: "flex", gap: 40, flex: 1 }}>
+    <div style={{ display: "flex", gap: 40, flex: 1, alignItems: "flex-start" }}>
       <div style={{ flex: 1 }}>
         <div style={{ fontFamily: FONT_MONO, fontSize: 14, fontWeight: 700, color: C.olive, marginBottom: 10 }}>What the model learns</div>
         {[
@@ -490,7 +467,7 @@ const S12 = () => (
           "Booking lead times correlating with successful fill rates",
         ].map((b, i) => <Bullet key={i}>{b}</Bullet>)}
         <div style={{ fontFamily: FONT_MONO, fontSize: 14, fontWeight: 700, color: C.olive, marginTop: 16, marginBottom: 8 }}>What that produces</div>
-        <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.muted, lineHeight: 1.7 }}>
+        <div style={{ fontFamily: FONT_SANS, fontSize: 13, color: C.fg, lineHeight: 1.7 }}>
           Predictive scheduling. Proactive alerts before problems occur. Allocation recommendations that improve continuously. The model improves with every client added.
         </div>
       </div>
@@ -515,7 +492,7 @@ const S13 = () => (
     <Eyebrow>13 &nbsp;&nbsp;Expansion — Invoice Finance</Eyebrow>
     <H1>The verified invoice opens<br />a second market.</H1>
     <Divider />
-    <div style={{ display: "flex", gap: 14, flex: 1 }}>
+    <div style={{ display: "flex", gap: 14, flex: 1, alignItems: "flex-start" }}>
       <SolCard label="The Problem" title="Unverifiable debt" body="IF providers advancing cash against invoices have no way to independently verify accuracy. In high-volume temp labor this credit risk is material and currently unmanaged." />
       <SolCard label="The Distribution Channel" title="Mandated adoption" body="IF providers direct clients to TempLedger because verified invoices reduce audit cost and default risk. The lender mandates adoption. TempLedger gains a client without a sales cycle." />
       <SolCard label="The Revenue Line" title="Data access fee" body="A second revenue line charged to IF providers for verified invoice confirmation. Same verified data, two buyers, two completely different commercial relationships." />
@@ -532,7 +509,7 @@ const S14 = () => (
     <Eyebrow>14 &nbsp;&nbsp;Traction</Eyebrow>
     <H1>The market has already<br />told us it is ready.</H1>
     <Divider />
-    <div style={{ display: "flex", gap: 40 }}>
+    <div style={{ display: "flex", gap: 40, flex: 1, alignItems: "flex-start" }}>
       <div style={{ flex: 1 }}>
         <div style={{ fontFamily: FONT_MONO, fontSize: 14, fontWeight: 700, color: C.olive, marginBottom: 10 }}>Product</div>
         {[
@@ -544,7 +521,7 @@ const S14 = () => (
       </div>
       <div style={{ flex: 1 }}>
         <div style={{ fontFamily: FONT_MONO, fontSize: 14, fontWeight: 700, color: C.olive, marginBottom: 10 }}>Market Validation</div>
-        <div style={{ fontFamily: FONT_SANS, fontSize: 13, color: C.muted, marginBottom: 8 }}>
+        <div style={{ fontFamily: FONT_SANS, fontSize: 13, color: C.fg, marginBottom: 8 }}>
           6 labor users demonstrated the POC across the US and UK.
         </div>
         <div style={{ fontFamily: FONT_MONO, fontSize: 16, fontWeight: 700, color: C.olive }}>
@@ -552,7 +529,7 @@ const S14 = () => (
         </div>
       </div>
     </div>
-    <div style={{ marginTop: 20, background: C.card, borderLeft: `3px solid ${C.olive}`, borderRadius: "0 8px 8px 0", padding: "16px 20px" }}>
+    <div style={{ background: C.card, borderLeft: `3px solid ${C.olive}`, borderRadius: "0 8px 8px 0", padding: "16px 20px" }}>
       <div style={{ fontFamily: FONT_MONO, fontSize: 14, fontWeight: 500, color: C.fg, fontStyle: "italic", lineHeight: 1.5, marginBottom: 8 }}>
         "If I were still there, this would be the only way in the door for staffing companies."
       </div>
@@ -570,28 +547,28 @@ const S14 = () => (
 // SLIDE 15 — RAISE
 // ============================================================
 const RaiseCard = ({ title, bullets }: { title: string; bullets: string[] }) => (
-  <Card style={{ flex: 1 }}>
+  <Card style={{ flex: 1, height: "fit-content" }}>
     <div style={{ fontFamily: FONT_MONO, fontSize: 13, fontWeight: 700, color: C.olive, marginBottom: 10 }}>{title}</div>
     {bullets.map((b, i) => (
-      <div key={i} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 4 }}>
-        <div style={{ width: 4, height: 4, background: C.olive, marginTop: 6, flexShrink: 0 }} />
-        <div style={{ fontFamily: FONT_SANS, fontSize: 11, color: C.muted, lineHeight: 1.5 }}>{b}</div>
+      <div key={i} style={{ display: "flex", gap: 10, alignItems: "center", marginBottom: 6 }}>
+        <div style={{ width: 5, height: 5, background: C.olive, borderRadius: 1, flexShrink: 0 }} />
+        <div style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.fg, lineHeight: 1.5 }}>{b}</div>
       </div>
     ))}
   </Card>
 );
 const Milestone = ({ time, label }: { time: string; label: string }) => (
-  <div style={{ flex: 1, background: C.card, border: `0.5px solid ${C.border}`, borderRadius: 8, padding: 12, textAlign: "center" }}>
+  <div style={{ flex: 1, background: C.card, border: `0.5px solid ${C.border}`, borderRadius: 8, padding: 12, textAlign: "center", height: "fit-content" }}>
     <div style={{ fontFamily: FONT_SANS, fontSize: 10, color: C.muted, marginBottom: 4 }}>{time}</div>
     <div style={{ fontFamily: FONT_MONO, fontSize: 11, fontWeight: 700, color: C.olive }}>{label}</div>
   </div>
 );
 const S15 = () => (
-  <div className="w-screen h-screen overflow-hidden flex flex-col justify-start pt-14 px-20" style={{ background: C.bg, color: C.fg, fontFamily: FONT_SANS }}>
+  <SlideShell>
     <Eyebrow>15 &nbsp;&nbsp;The Raise</Eyebrow>
     <div style={{ fontFamily: FONT_MONO, fontWeight: 700, fontSize: 44, color: C.fg, marginBottom: 8 }}>$1,500,000 Pre-Seed</div>
     <Divider />
-    <div style={{ display: "flex", gap: 14 }}>
+    <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
       <RaiseCard title="Software · 50% · $750K" bullets={[
         "Production platform architecture",
         "Real-time event processing",
@@ -612,17 +589,18 @@ const S15 = () => (
         "Sector conference presence",
       ]} />
     </div>
-    <div style={{ display: "flex", gap: 10, marginTop: 16 }}>
+    <div style={{ display: "flex", gap: 10, marginTop: 16, alignItems: "flex-start" }}>
       <Milestone time="Month 6" label="Platform live" />
       <Milestone time="Month 8" label="First paying client" />
       <Milestone time="Month 12" label="3 clients live" />
       <Milestone time="Month 14" label="$500K ARR" />
       <Milestone time="Month 18" label="Series A ready" />
     </div>
-    <div style={{ marginTop: 14, fontFamily: FONT_SANS, fontSize: 12, color: C.muted, fontStyle: "italic", textAlign: "center" }}>
-      We are not raising to find product-market fit. Six conversations have confirmed it. We are raising to build what the market asked for.
+    <div style={{ flex: 1 }} />
+    <div style={{ marginTop: 14, fontFamily: FONT_SANS, fontSize: 12, color: C.fg, fontStyle: "italic", textAlign: "center" }}>
+      We are not raising to find product-market fit. Six conversations have already confirmed it. We are raising to build what the market asked for.
     </div>
-  </div>
+  </SlideShell>
 );
 
 // ============================================================
@@ -662,7 +640,7 @@ const InvestorDeckCapital = () => {
 
   return (
     <>
-      <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       <div className="h-screen w-screen overflow-hidden relative" style={{ background: C.bg }}>
         <a
           href="/"
