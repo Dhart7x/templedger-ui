@@ -4,8 +4,10 @@ import { Lock } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-const ALLOWED_EMAIL = "templedgerdemo";
-const ALLOWED_PASSWORD = "123!";
+const ALLOWED_CREDENTIALS: Array<{ user: string; pass: string }> = [
+  { user: "templedger", pass: "fuckMSP" },
+  { user: "templedgerdemo", pass: "123!" },
+];
 const STORAGE_KEY = "tl_access_granted";
 
 interface AccessGateProps {
