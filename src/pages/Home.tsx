@@ -870,7 +870,7 @@ const Home = () => {
                 marginBottom: 10,
               }}
             >
-              This is what changes.
+              For TempLedger users, this is what changes.
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 24 }}
@@ -888,7 +888,7 @@ const Home = () => {
               The impact compounds with every shift, every week.
             </motion.p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, alignItems: "stretch" }}>
               {/* LEFT COLUMN */}
               <div>
                 <div
@@ -923,7 +923,7 @@ const Home = () => {
                     WHAT GOES UP
                   </span>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                <div style={{ display: "grid", gridTemplateRows: "repeat(5, 1fr)", gap: 10 }}>
                   {upItems.map((item, i) => (
                     <motion.div
                       key={i}
@@ -932,6 +932,10 @@ const Home = () => {
                       viewport={{ once: true, margin: "-80px" }}
                       transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" }}
                       style={{
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-start",
                         background: "rgba(255,255,255,0.07)",
                         border: "0.5px solid rgba(255,255,255,0.1)",
                         borderLeft: "3px solid #4ade80",
@@ -955,7 +959,7 @@ const Home = () => {
                           fontFamily: FONT,
                           fontWeight: 400,
                           fontSize: 12,
-                          color: "rgba(255,255,255,0.55)",
+                          color: "rgba(255,255,255,0.85)",
                           lineHeight: 1.55,
                         }}
                       >
@@ -1001,7 +1005,7 @@ const Home = () => {
                     WHAT COMES DOWN
                   </span>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                <div style={{ display: "grid", gridTemplateRows: "repeat(5, 1fr)", gap: 10 }}>
                   {downItems.map((item, i) => (
                     <motion.div
                       key={i}
@@ -1010,6 +1014,10 @@ const Home = () => {
                       viewport={{ once: true, margin: "-80px" }}
                       transition={{ duration: 0.4, delay: 0.2 + i * 0.08, ease: "easeOut" }}
                       style={{
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "flex-start",
                         background: "rgba(255,255,255,0.07)",
                         border: "0.5px solid rgba(255,255,255,0.1)",
                         borderLeft: "3px solid #f87171",
@@ -1033,7 +1041,7 @@ const Home = () => {
                           fontFamily: FONT,
                           fontWeight: 400,
                           fontSize: 12,
-                          color: "rgba(255,255,255,0.55)",
+                          color: "rgba(255,255,255,0.85)",
                           lineHeight: 1.55,
                         }}
                       >
