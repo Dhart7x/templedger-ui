@@ -468,15 +468,17 @@ const Home = () => {
               You know the spend. You don't know the cost.
             </p>
 
-            <div style={{ display: "flex", gap: 24, alignItems: "flex-start" }}>
+            <div style={{ display: "flex", gap: 24, alignItems: "stretch" }}>
               {/* LEFT PANEL */}
               <div
                 style={{
+                  flex: 1,
                   background: "#FFFFFF",
                   border: "0.5px solid #E5E0DA",
                   borderRadius: 12,
                   overflow: "hidden",
-                  flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
                 <div
@@ -486,41 +488,54 @@ const Home = () => {
                     padding: "14px 20px",
                     fontFamily: FONT,
                     fontWeight: 700,
-                    fontSize: 11,
-                    letterSpacing: "0.12em",
+                    fontSize: 10,
+                    letterSpacing: "0.14em",
                     textTransform: "uppercase",
                     color: "#9B9590",
                   }}
                 >
-                  WHAT THE INVOICE SAYS
+                  WHAT THE INVOICE SHOWS
                 </div>
-                <div style={{ padding: 20 }}>
-                  <div
-                    style={{
-                      fontFamily: FONT,
-                      fontWeight: 400,
-                      fontSize: 12,
-                      color: "#9B9590",
-                      marginBottom: 20,
-                    }}
-                  >
-                    Agency: Staffmark
-                    <br />
-                    Week ending: 14 Feb 2025
-                  </div>
+                <div
+                  style={{
+                    padding: "16px 20px 0",
+                    fontFamily: FONT,
+                    fontWeight: 400,
+                    fontSize: 12,
+                    color: "#9B9590",
+                    lineHeight: 1.7,
+                  }}
+                >
+                  Agency: Staffmark
+                  <br />
+                  Period: Week ending 14 Feb
+                  <br />
+                  Reference: INV-2025-0142
+                </div>
+                <div
+                  style={{
+                    margin: "14px 20px",
+                    height: 0.5,
+                    background: "#F0EBE0",
+                  }}
+                />
+                <div style={{ padding: "0 20px", flex: 1 }}>
                   {[
-                    { d: "Regular hours (312 hrs × $18.50)", a: "$5,772" },
-                    { d: "Agency margin (12%)", a: "$693" },
-                    { d: "Holiday pay accrual", a: "$346" },
-                    { d: "Employer NI contribution", a: "$521" },
+                    { d: "Regular hours worked", a: "312 hrs" },
+                    { d: "Agreed charge rate", a: "Confirmed" },
+                    { d: "Agency margin", a: "Confirmed" },
+                    { d: "Holiday pay accrual", a: "Included" },
+                    { d: "Statutory contributions", a: "Included" },
                   ].map((row, i) => (
                     <div
                       key={i}
                       style={{
                         display: "flex",
                         justifyContent: "space-between",
-                        padding: "10px 0",
-                        borderBottom: "0.5px solid #F0EBE0",
+                        alignItems: "center",
+                        minHeight: 44,
+                        borderBottom: "0.5px solid #F8F5EF",
+                        padding: 0,
                       }}
                     >
                       <span
@@ -545,46 +560,50 @@ const Home = () => {
                       </span>
                     </div>
                   ))}
-                  <div
+                </div>
+                <div
+                  style={{
+                    marginTop: 4,
+                    padding: "14px 20px",
+                    borderTop: "1px solid #E5E0DA",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <span
                     style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      paddingTop: 14,
-                      marginTop: 4,
+                      fontFamily: FONT,
+                      fontWeight: 700,
+                      fontSize: 13,
+                      color: "#0D0D0B",
                     }}
                   >
-                    <span
-                      style={{
-                        fontFamily: FONT,
-                        fontWeight: 700,
-                        fontSize: 13,
-                        color: "#0D0D0B",
-                      }}
-                    >
-                      Total invoice
-                    </span>
-                    <span
-                      style={{
-                        fontFamily: FONT,
-                        fontWeight: 800,
-                        fontSize: 18,
-                        color: "#0D0D0B",
-                      }}
-                    >
-                      $7,332
-                    </span>
-                  </div>
+                    Invoice total
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 800,
+                      fontSize: 20,
+                      color: "#0D0D0B",
+                    }}
+                  >
+                    Confirmed
+                  </span>
                 </div>
               </div>
 
               {/* RIGHT PANEL */}
               <div
                 style={{
+                  flex: 1,
                   background: "#FFFFFF",
                   border: "1.5px solid #2D6A4F",
                   borderRadius: 12,
                   overflow: "hidden",
-                  flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
                 <div
@@ -593,41 +612,54 @@ const Home = () => {
                     padding: "14px 20px",
                     fontFamily: FONT,
                     fontWeight: 700,
-                    fontSize: 11,
-                    letterSpacing: "0.12em",
+                    fontSize: 10,
+                    letterSpacing: "0.14em",
                     textTransform: "uppercase",
                     color: "rgba(255,255,255,0.8)",
                   }}
                 >
                   WHAT IT ACTUALLY COST YOU
                 </div>
-                <div style={{ padding: 20 }}>
-                  <div
-                    style={{
-                      fontFamily: FONT,
-                      fontWeight: 400,
-                      fontSize: 12,
-                      color: "#9B9590",
-                      marginBottom: 20,
-                    }}
-                  >
-                    Agency: Staffmark
-                    <br />
-                    Week ending: 14 Feb 2025
-                  </div>
+                <div
+                  style={{
+                    padding: "16px 20px 0",
+                    fontFamily: FONT,
+                    fontWeight: 400,
+                    fontSize: 12,
+                    color: "#9B9590",
+                    lineHeight: 1.7,
+                  }}
+                >
+                  Agency: Staffmark
+                  <br />
+                  Period: Week ending 14 Feb
+                  <br />
+                  Reference: INV-2025-0142
+                </div>
+                <div
+                  style={{
+                    margin: "14px 20px",
+                    height: 0.5,
+                    background: "#F0EBE0",
+                  }}
+                />
+                <div style={{ padding: "0 20px" }}>
                   {[
-                    { d: "Regular hours (312 hrs × $18.50)", a: "$5,772" },
-                    { d: "Agency margin (12%)", a: "$693" },
-                    { d: "Holiday pay accrual", a: "$346" },
-                    { d: "Employer NI contribution", a: "$521" },
+                    { d: "Regular hours worked", a: "312 hrs" },
+                    { d: "Agreed charge rate", a: "Confirmed" },
+                    { d: "Agency margin", a: "Confirmed" },
+                    { d: "Holiday pay accrual", a: "Included" },
+                    { d: "Statutory contributions", a: "Included" },
                   ].map((row, i) => (
                     <div
                       key={i}
                       style={{
                         display: "flex",
                         justifyContent: "space-between",
-                        padding: "10px 0",
-                        borderBottom: "0.5px solid #F0EBE0",
+                        alignItems: "center",
+                        minHeight: 44,
+                        borderBottom: "0.5px solid #F8F5EF",
+                        padding: 0,
                       }}
                     >
                       <span
@@ -652,36 +684,43 @@ const Home = () => {
                       </span>
                     </div>
                   ))}
-                  <div
-                    style={{
-                      fontFamily: FONT,
-                      fontWeight: 700,
-                      fontSize: 10,
-                      letterSpacing: "0.14em",
-                      textTransform: "uppercase",
-                      color: "#2D6A4F",
-                      marginTop: 12,
-                      marginBottom: 8,
-                      paddingTop: 12,
-                      borderTop: "1px dashed #E5E0DA",
-                    }}
-                  >
-                    COSTS NOT ON ANY INVOICE
-                  </div>
+                </div>
+                <div
+                  style={{
+                    margin: "8px 20px",
+                    borderTop: "1.5px dashed #E5E0DA",
+                  }}
+                />
+                <div
+                  style={{
+                    padding: "8px 20px 4px",
+                    fontFamily: FONT,
+                    fontWeight: 700,
+                    fontSize: 10,
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    color: "#C4391A",
+                  }}
+                >
+                  NOT ON ANY INVOICE
+                </div>
+                <div style={{ padding: "0 20px", flex: 1 }}>
                   {[
-                    { d: "Overtime triggered by gaps nobody saw coming", a: "+$1,240" },
-                    { d: "Management hours spent fixing problems", a: "+$680" },
-                    { d: "Attrition cost from workers who left over a pay dispute", a: "+$1,900" },
-                    { d: "Ramp time for replacements brought in at short notice", a: "+$760" },
-                    { d: "15 workers on site that weren't scheduled", a: "+$420" },
+                    { d: "Overtime triggered by gaps nobody saw coming", a: "Unquantified" },
+                    { d: "Management hours spent fixing problems", a: "Unquantified" },
+                    { d: "Attrition from workers who left over a pay dispute", a: "Unquantified" },
+                    { d: "Ramp time for replacements brought in at short notice", a: "Unquantified" },
+                    { d: "Workers on site that were never scheduled", a: "Unquantified" },
                   ].map((row, i) => (
                     <div
                       key={i}
                       style={{
                         display: "flex",
                         justifyContent: "space-between",
-                        padding: "10px 0",
-                        borderBottom: "0.5px solid #F0EBE0",
+                        alignItems: "center",
+                        minHeight: 44,
+                        borderBottom: "0.5px solid #FEF0EE",
+                        padding: 0,
                       }}
                     >
                       <span
@@ -706,35 +745,36 @@ const Home = () => {
                       </span>
                     </div>
                   ))}
-                  <div
+                </div>
+                <div
+                  style={{
+                    padding: "14px 20px",
+                    borderTop: "1px solid #E5E0DA",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <span
                     style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      paddingTop: 14,
-                      marginTop: 4,
+                      fontFamily: FONT,
+                      fontWeight: 700,
+                      fontSize: 13,
+                      color: "#0D0D0B",
                     }}
                   >
-                    <span
-                      style={{
-                        fontFamily: FONT,
-                        fontWeight: 700,
-                        fontSize: 13,
-                        color: "#0D0D0B",
-                      }}
-                    >
-                      Actual cost to your business
-                    </span>
-                    <span
-                      style={{
-                        fontFamily: FONT,
-                        fontWeight: 800,
-                        fontSize: 18,
-                        color: "#C4391A",
-                      }}
-                    >
-                      $13,004
-                    </span>
-                  </div>
+                    Actual cost to your business
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 800,
+                      fontSize: 20,
+                      color: "#C4391A",
+                    }}
+                  >
+                    Unknown
+                  </span>
                 </div>
               </div>
             </div>
