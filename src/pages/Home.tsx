@@ -1126,7 +1126,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 6 — CONTACT */}
-        <section id="contact" style={{ background: "#0D0D0B", padding: "80px 48px" }}>
+        <section id="contact" style={{ background: "#2D6A4F", padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
             <h2
               style={{
