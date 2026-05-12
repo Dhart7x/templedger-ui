@@ -773,7 +773,7 @@ const Home = () => {
                 maxWidth: 520,
               }}
             >
-              They surface every week. They compound over time. Most of the cost is invisible.
+              They surface every week. They compound. The cost is invisible.
             </p>
             <div
               className="tl-problem-grid"
