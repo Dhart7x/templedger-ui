@@ -474,6 +474,7 @@ const Home = () => {
               Agency Management Platform
             </motion.span>
             <h1
+              className="tl-hero-h1"
               style={{
                 fontWeight: 800,
                 fontSize: 54,
