@@ -505,7 +505,11 @@ const Home = () => {
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, alignItems: "stretch" }}>
               {/* LEFT PANEL */}
-              <div
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
                 style={{
                   background: "#FFFFFF",
                   border: "0.5px solid #E5E0DA",
