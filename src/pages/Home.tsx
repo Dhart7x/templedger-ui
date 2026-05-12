@@ -1003,8 +1003,12 @@ const Home = () => {
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   {downItems.map((item, i) => (
-                    <div
+                    <motion.div
                       key={i}
+                      initial={{ opacity: 0, x: 24 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-80px" }}
+                      transition={{ duration: 0.4, delay: 0.2 + i * 0.08, ease: "easeOut" }}
                       style={{
                         background: "rgba(255,255,255,0.07)",
                         border: "0.5px solid rgba(255,255,255,0.1)",
@@ -1035,7 +1039,7 @@ const Home = () => {
                       >
                         {item.b}
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
