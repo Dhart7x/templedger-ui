@@ -194,7 +194,7 @@ const Home = () => {
   const steps = [
     {
       n: "01",
-      t: "Deploy on site",
+      t: "Implemented on site",
       b: "We install alongside what you already have. No integration required. No disruption to your operation.",
     },
     {
@@ -204,8 +204,8 @@ const Home = () => {
     },
     {
       n: "03",
-      t: "Verified from day one",
-      b: "Attendance, performance, payroll and billing — all verified from the first shift. Proven on one department before it scales.",
+      t: "Configured to your operation in 90 days.",
+      b: "We handle setup, agency onboarding and hardware installation. You provide one point of contact. Proven on one shift before anything scales.",
     },
   ];
 
