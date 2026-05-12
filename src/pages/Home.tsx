@@ -1,6 +1,6 @@
-import { useState, FormEvent } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import { motion } from "framer-motion";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Monitor, Presentation, TrendingUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const FONT = "'Plus Jakarta Sans', system-ui, sans-serif";
