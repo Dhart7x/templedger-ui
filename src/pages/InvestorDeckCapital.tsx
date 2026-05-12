@@ -7,16 +7,21 @@ import { useNavigate } from "react-router-dom";
 // Design tokens
 // ============================================================
 const C = {
-  bg: "#111210",
-  fg: "#ede7d9",
-  olive: "#7d8f46",
-  muted: "rgba(237,231,217,0.5)", // captions / secondary labels only
-  card: "#1a1b18",
-  border: "#2a2b27",
+  bg: "#FFFFFF",
+  surface: "#F8F5EF",
+  fg: "#0D0D0B",
+  olive: "#2D6A4F", // primary (kept name to avoid touching every reference)
+  primaryLight: "#EBF4EF",
+  muted: "#6B6460", // secondary text
+  mutedLight: "#9B9590", // tertiary / captions
+  card: "#FFFFFF",
+  border: "#E5E0DA",
   green: "#22c55e",
   red: "#ef4444",
+  greenText: "#16803C",
+  redText: "#DC2626",
 };
-const FONT_MONO = "'IBM Plex Mono', ui-monospace, monospace";
+const FONT_MONO = "'Inter', system-ui, sans-serif";
 const FONT_SANS = "'Inter', system-ui, sans-serif";
 
 // ============================================================
@@ -25,24 +30,25 @@ const FONT_SANS = "'Inter', system-ui, sans-serif";
 const SlideShell = ({ children, justify = "start", padTop = "pt-14", padBottom = "pb-10" }: { children: ReactNode; justify?: "start" | "center"; padTop?: string; padBottom?: string }) => (
   <div
     className={`w-screen h-screen overflow-hidden flex flex-col ${justify === "center" ? "justify-center items-center" : `justify-start ${padTop} ${padBottom}`} px-20`}
-    style={{ background: C.bg, color: C.fg, fontFamily: FONT_SANS }}
+    style={{ background: "var(--slide-bg, #FFFFFF)", color: C.fg, fontFamily: FONT_SANS }}
   >
     {children}
   </div>
 );
 
 const Eyebrow = ({ children }: { children: ReactNode }) => (
-  <div style={{ fontFamily: FONT_SANS, fontSize: 10, color: C.olive, letterSpacing: "0.24em", textTransform: "uppercase", marginBottom: 8 }}>
+  <div style={{ display: "flex", alignItems: "center", gap: 8, fontFamily: FONT_SANS, fontSize: 10, fontWeight: 700, color: C.olive, letterSpacing: "0.16em", textTransform: "uppercase", marginBottom: 10 }}>
+    <span style={{ width: 20, height: 2, background: C.olive, display: "inline-block" }} />
     {children}
   </div>
 );
 
 const H1 = ({ children, size = 34 }: { children: ReactNode; size?: number }) => (
-  <h1 style={{ fontFamily: FONT_MONO, fontWeight: 700, fontSize: size, color: C.fg, lineHeight: 1.15, marginBottom: 8 }}>{children}</h1>
+  <h1 style={{ fontFamily: FONT_SANS, fontWeight: 800, fontSize: size, color: C.fg, lineHeight: 1.15, letterSpacing: "-0.025em", marginBottom: 8 }}>{children}</h1>
 );
 
 const Divider = () => (
-  <div style={{ height: 1, background: C.olive, opacity: 0.25, marginBottom: 20, marginTop: 4 }} />
+  <div style={{ height: 1, background: C.border, marginBottom: 20, marginTop: 4 }} />
 );
 
 const Card = ({ children, style }: { children: ReactNode; style?: React.CSSProperties }) => (
@@ -57,7 +63,7 @@ const Bullet = ({ children }: { children: ReactNode }) => (
 );
 
 const ClosingLine = ({ children }: { children: ReactNode }) => (
-  <div style={{ marginTop: "auto", paddingTop: 12, borderTop: `0.5px solid ${C.border}`, fontFamily: FONT_SANS, fontSize: 12, color: C.muted, fontStyle: "italic", textAlign: "center" }}>
+  <div style={{ marginTop: "auto", paddingTop: 12, fontFamily: FONT_SANS, fontSize: 13, color: C.olive, fontStyle: "italic", fontWeight: 600, textAlign: "center" }}>
     {children}
   </div>
 );
@@ -146,7 +152,7 @@ const S3 = () => {
     <SlideShell>
       <Eyebrow>03 &nbsp;&nbsp;The Problem</Eyebrow>
       <H1>Zero transparency, visibility,<br />or control over their<br />contingent workforce.</H1>
-      <div style={{ fontFamily: FONT_SANS, fontSize: 14, color: "rgba(237,231,217,0.6)", marginBottom: 24 }}>
+      <div style={{ fontFamily: FONT_SANS, fontSize: 14, color: C.muted, marginBottom: 24 }}>
         The direct result of two sides operating in separate systems.
       </div>
       <Divider />
@@ -206,7 +212,7 @@ const S5 = () => {
       <H1 size={30}>The incumbents built the problem.<br />They cannot build the solution.</H1>
       <Divider />
       <div style={{ background: C.card, border: `0.5px solid ${C.border}`, borderRadius: 10, overflow: "hidden", width: "100%" }}>
-        <div style={{ display: "grid", gridTemplateColumns: cols, background: "rgba(125,143,70,0.08)" }}>
+        <div style={{ display: "grid", gridTemplateColumns: cols, background: C.surface }}>
           {["Competitor", "Revenue", "Model", "Why they cannot build TempLedger"].map((h, i) => (
             <div key={i} style={{ padding: "10px 14px", fontFamily: FONT_MONO, fontSize: 11, color: C.olive }}>{h}</div>
           ))}
@@ -291,7 +297,7 @@ const S7 = () => {
           </div>
         </div>
         <div style={{ flex: 1, background: C.card, border: `0.5px solid ${C.border}`, borderRadius: 10, overflow: "hidden", height: "fit-content" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 0.6fr 1.2fr", background: "rgba(125,143,70,0.08)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 0.6fr 1.2fr", background: C.surface }}>
             {["Annual Spend", "Rate", "Monthly Fee"].map((h, i) => (
               <div key={i} style={{ padding: "10px 14px", fontFamily: FONT_MONO, fontSize: 11, color: C.olive }}>{h}</div>
             ))}
@@ -313,7 +319,8 @@ const S7 = () => {
 // SLIDE 8 — IMPACT
 // ============================================================
 const ImpactCard = ({ dir, metric, body }: { dir: "up" | "down"; metric: string; body: string }) => {
-  const color = dir === "up" ? C.green : C.red;
+  const arrowColor = dir === "up" ? C.green : C.red;
+  const metricColor = dir === "up" ? C.greenText : C.redText;
   return (
     <div style={{ background: C.card, border: `0.5px solid ${C.border}`, borderRadius: 8, padding: "12px 14px", height: "fit-content" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8, minHeight: 32, flexShrink: 0 }}>
@@ -321,12 +328,12 @@ const ImpactCard = ({ dir, metric, body }: { dir: "up" | "down"; metric: string;
           width: 0, height: 0,
           borderLeft: "5px solid transparent",
           borderRight: "5px solid transparent",
-          ...(dir === "up" ? { borderBottom: `8px solid ${color}` } : { borderTop: `8px solid ${color}` }),
+          ...(dir === "up" ? { borderBottom: `8px solid ${arrowColor}` } : { borderTop: `8px solid ${arrowColor}` }),
         }} />
-        <div style={{ fontFamily: FONT_MONO, fontSize: 14, fontWeight: 600, color }}>{metric}</div>
+        <div style={{ fontFamily: FONT_SANS, fontSize: 14, fontWeight: 700, color: metricColor }}>{metric}</div>
       </div>
       <div style={{ height: 0.5, background: C.border, margin: "8px 0", flexShrink: 0 }} />
-      <div style={{ fontFamily: FONT_SANS, fontSize: 11, color: C.fg, lineHeight: 1.55 }}>{body}</div>
+      <div style={{ fontFamily: FONT_SANS, fontSize: 11, color: C.muted, lineHeight: 1.55 }}>{body}</div>
     </div>
   );
 };
@@ -529,11 +536,11 @@ const S14 = () => (
         </div>
       </div>
     </div>
-    <div style={{ background: C.card, borderLeft: `3px solid ${C.olive}`, borderRadius: "0 8px 8px 0", padding: "16px 20px" }}>
-      <div style={{ fontFamily: FONT_MONO, fontSize: 14, fontWeight: 500, color: C.fg, fontStyle: "italic", lineHeight: 1.5, marginBottom: 8 }}>
+    <div style={{ background: C.surface, borderLeft: `3px solid ${C.olive}`, borderRadius: "0 8px 8px 0", padding: "16px 20px" }}>
+      <div style={{ fontFamily: FONT_SANS, fontSize: 14, fontWeight: 500, color: C.fg, fontStyle: "italic", lineHeight: 1.5, marginBottom: 8 }}>
         "If I were still there, this would be the only way in the door for staffing companies."
       </div>
-      <div style={{ fontFamily: FONT_SANS, fontSize: 11, color: C.muted }}>
+      <div style={{ fontFamily: FONT_SANS, fontSize: 11, color: C.mutedLight }}>
         — Former Head of Operations, largest temp labor user in the UK (6,000+ temp workers under management)
       </div>
     </div>
@@ -640,12 +647,12 @@ const InvestorDeckCapital = () => {
 
   return (
     <>
-      <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
       <div className="h-screen w-screen overflow-hidden relative" style={{ background: C.bg }}>
         <a
           href="/"
-          className="fixed top-4 left-4 z-[60] flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md border"
-          style={{ background: "rgba(17,18,16,0.8)", color: C.muted, borderColor: C.border, fontFamily: FONT_SANS }}
+          className="fixed top-4 left-4 z-[60] flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md"
+          style={{ background: C.bg, color: C.olive, border: `0.5px solid ${C.border}`, fontFamily: FONT_SANS, fontWeight: 600 }}
         >
           <Home className="w-3.5 h-3.5" />
           <span>Home</span>
@@ -661,6 +668,7 @@ const InvestorDeckCapital = () => {
               exit={{ x: dir < 0 ? "100%" : "-100%", opacity: 0 }}
               transition={{ type: "tween", duration: 0.4, ease: "easeInOut" }}
               className="absolute inset-0"
+              style={{ ["--slide-bg" as string]: i % 2 === 0 ? C.bg : C.surface }}
             >
               <Current />
             </motion.div>
@@ -670,7 +678,7 @@ const InvestorDeckCapital = () => {
             onClick={prev}
             disabled={i === 0}
             className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all z-10"
-            style={{ background: "rgba(26,27,24,0.9)", border: `0.5px solid ${C.border}`, color: C.muted }}
+            style={{ background: C.bg, border: `0.5px solid ${C.border}`, color: C.olive }}
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
@@ -678,7 +686,7 @@ const InvestorDeckCapital = () => {
             onClick={next}
             disabled={i === slides.length - 1}
             className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all z-10"
-            style={{ background: "rgba(26,27,24,0.9)", border: `0.5px solid ${C.border}`, color: C.muted }}
+            style={{ background: C.bg, border: `0.5px solid ${C.border}`, color: C.olive }}
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -686,7 +694,7 @@ const InvestorDeckCapital = () => {
           {i > 0 && (
             <div
               className="absolute bottom-4 right-6 z-10"
-              style={{ fontFamily: FONT_MONO, fontSize: 11, color: C.muted, letterSpacing: "0.1em" }}
+              style={{ fontFamily: FONT_SANS, fontSize: 11, color: C.olive, fontWeight: 700, letterSpacing: "0.1em" }}
             >
               {String(i + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
             </div>
