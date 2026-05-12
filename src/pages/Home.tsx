@@ -394,7 +394,343 @@ const Home = () => {
           </motion.div>
         </section>
 
-        {/* SECTION 2 — THE PROBLEM */}
+        {/* SECTION 2 — THE INVOICE VISUAL */}
+        <section style={{ background: "#FFFFFF", padding: "80px 48px" }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                marginBottom: 16,
+                fontFamily: FONT,
+                fontWeight: 700,
+                fontSize: 10,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#2D6A4F",
+              }}
+            >
+              <div style={{ width: 24, height: 2, background: "#2D6A4F" }} />
+              THE REAL COST
+            </div>
+            <h2
+              style={{
+                fontFamily: FONT,
+                fontWeight: 800,
+                fontSize: 36,
+                color: "#0D0D0B",
+                letterSpacing: "-0.022em",
+                lineHeight: 1.2,
+                marginBottom: 10,
+              }}
+            >
+              The cost of your agency spend isn't the number on the invoice.
+            </h2>
+            <p
+              style={{
+                fontFamily: FONT,
+                fontWeight: 400,
+                fontSize: 15,
+                color: "#6B6460",
+                lineHeight: 1.65,
+                marginBottom: 48,
+                maxWidth: 520,
+              }}
+            >
+              You know the spend. You don't know the cost.
+            </p>
+
+            <div style={{ display: "flex", gap: 24, alignItems: "flex-start" }}>
+              {/* LEFT PANEL */}
+              <div
+                style={{
+                  background: "#FFFFFF",
+                  border: "0.5px solid #E5E0DA",
+                  borderRadius: 12,
+                  overflow: "hidden",
+                  flex: 1,
+                }}
+              >
+                <div
+                  style={{
+                    background: "#F8F5EF",
+                    borderBottom: "0.5px solid #E5E0DA",
+                    padding: "14px 20px",
+                    fontFamily: FONT,
+                    fontWeight: 700,
+                    fontSize: 11,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: "#9B9590",
+                  }}
+                >
+                  WHAT THE INVOICE SAYS
+                </div>
+                <div style={{ padding: 20 }}>
+                  <div
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 400,
+                      fontSize: 12,
+                      color: "#9B9590",
+                      marginBottom: 20,
+                    }}
+                  >
+                    Agency: Staffmark
+                    <br />
+                    Week ending: 14 Feb 2025
+                  </div>
+                  {[
+                    { d: "Regular hours (312 hrs × $18.50)", a: "$5,772" },
+                    { d: "Agency margin (12%)", a: "$693" },
+                    { d: "Holiday pay accrual", a: "$346" },
+                    { d: "Employer NI contribution", a: "$521" },
+                  ].map((row, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        padding: "10px 0",
+                        borderBottom: "0.5px solid #F0EBE0",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: FONT,
+                          fontWeight: 400,
+                          fontSize: 13,
+                          color: "#6B6460",
+                        }}
+                      >
+                        {row.d}
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: FONT,
+                          fontWeight: 600,
+                          fontSize: 13,
+                          color: "#0D0D0B",
+                        }}
+                      >
+                        {row.a}
+                      </span>
+                    </div>
+                  ))}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      paddingTop: 14,
+                      marginTop: 4,
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: FONT,
+                        fontWeight: 700,
+                        fontSize: 13,
+                        color: "#0D0D0B",
+                      }}
+                    >
+                      Total invoice
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: FONT,
+                        fontWeight: 800,
+                        fontSize: 18,
+                        color: "#0D0D0B",
+                      }}
+                    >
+                      $7,332
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* RIGHT PANEL */}
+              <div
+                style={{
+                  background: "#FFFFFF",
+                  border: "1.5px solid #2D6A4F",
+                  borderRadius: 12,
+                  overflow: "hidden",
+                  flex: 1,
+                }}
+              >
+                <div
+                  style={{
+                    background: "#2D6A4F",
+                    padding: "14px 20px",
+                    fontFamily: FONT,
+                    fontWeight: 700,
+                    fontSize: 11,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: "rgba(255,255,255,0.8)",
+                  }}
+                >
+                  WHAT IT ACTUALLY COST YOU
+                </div>
+                <div style={{ padding: 20 }}>
+                  <div
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 400,
+                      fontSize: 12,
+                      color: "#9B9590",
+                      marginBottom: 20,
+                    }}
+                  >
+                    Agency: Staffmark
+                    <br />
+                    Week ending: 14 Feb 2025
+                  </div>
+                  {[
+                    { d: "Regular hours (312 hrs × $18.50)", a: "$5,772" },
+                    { d: "Agency margin (12%)", a: "$693" },
+                    { d: "Holiday pay accrual", a: "$346" },
+                    { d: "Employer NI contribution", a: "$521" },
+                  ].map((row, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        padding: "10px 0",
+                        borderBottom: "0.5px solid #F0EBE0",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: FONT,
+                          fontWeight: 400,
+                          fontSize: 13,
+                          color: "#6B6460",
+                        }}
+                      >
+                        {row.d}
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: FONT,
+                          fontWeight: 600,
+                          fontSize: 13,
+                          color: "#0D0D0B",
+                        }}
+                      >
+                        {row.a}
+                      </span>
+                    </div>
+                  ))}
+                  <div
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 700,
+                      fontSize: 10,
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                      color: "#2D6A4F",
+                      marginTop: 12,
+                      marginBottom: 8,
+                      paddingTop: 12,
+                      borderTop: "1px dashed #E5E0DA",
+                    }}
+                  >
+                    COSTS NOT ON ANY INVOICE
+                  </div>
+                  {[
+                    { d: "Overtime triggered by gaps nobody saw coming", a: "+$1,240" },
+                    { d: "Management hours spent fixing problems", a: "+$680" },
+                    { d: "Attrition cost from workers who left over a pay dispute", a: "+$1,900" },
+                    { d: "Ramp time for replacements brought in at short notice", a: "+$760" },
+                    { d: "15 workers on site that weren't scheduled", a: "+$420" },
+                  ].map((row, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        padding: "10px 0",
+                        borderBottom: "0.5px solid #F0EBE0",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: FONT,
+                          fontWeight: 400,
+                          fontSize: 13,
+                          color: "#6B6460",
+                        }}
+                      >
+                        {row.d}
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: FONT,
+                          fontWeight: 600,
+                          fontSize: 13,
+                          color: "#C4391A",
+                        }}
+                      >
+                        {row.a}
+                      </span>
+                    </div>
+                  ))}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      paddingTop: 14,
+                      marginTop: 4,
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: FONT,
+                        fontWeight: 700,
+                        fontSize: 13,
+                        color: "#0D0D0B",
+                      }}
+                    >
+                      Actual cost to your business
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: FONT,
+                        fontWeight: 800,
+                        fontSize: 18,
+                        color: "#C4391A",
+                      }}
+                    >
+                      $13,004
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p
+              style={{
+                fontFamily: FONT,
+                fontWeight: 400,
+                fontSize: 13,
+                color: "#9B9590",
+                marginTop: 20,
+                textAlign: "center",
+                fontStyle: "italic",
+              }}
+            >
+              None of the costs on the right appear on any invoice.
+              <br />
+              They never will.
+            </p>
+          </div>
+        </section>
+
+        {/* SECTION 3 — THE PROBLEM */}
         <section style={{ background: C.surface, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>The Problem</SectionTag>
