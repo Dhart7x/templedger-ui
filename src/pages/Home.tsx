@@ -111,22 +111,49 @@ const Home = () => {
     },
   ];
 
-  const outcomes = [
+  const upItems = [
     {
-      t: "Every shift covered the way it should be.",
-      b: "Gaps visible before they become failures on the floor. The right workers from the right agencies in the right roles — because decisions are made on live data, not last week's summary.",
+      t: "Operational visibility",
+      b: "Exceptions and shift gaps surface before they reach payroll or the shop floor.",
     },
     {
-      t: "Every agency accountable to the same standard.",
-      b: "Performance derived from a shared system — not from what agencies tell you. The ones that deliver get more work. The ones that don't know exactly why. Rate negotiations backed by evidence.",
+      t: "Retention",
+      b: "Accurate pay removes the friction that drives temps to leave. Less churn. Lower replacement cost.",
     },
     {
-      t: "Overtime as the exception, not the default.",
-      b: "Gaps identified early enough to fill properly. Booking distribution optimized by performance and availability, not habit. Every avoided overtime event is direct margin recovery.",
+      t: "Productivity",
+      b: "Right people, right agency, right shift. Output stays consistent and your operation keeps moving.",
     },
     {
-      t: "Attrition you can actually influence.",
-      b: "Workers stay when their experience is consistent and their pay is right. Less churn means less ramp time, lower recruitment cost and a workforce that knows your operation.",
+      t: "Workforce stability",
+      b: "Proven workers identified and converted earlier. Fewer replacements. Less ramp time.",
+    },
+    {
+      t: "Agency accountability",
+      b: "Performance derived from the system. Not self-reported. Every decision backed by data.",
+    },
+  ];
+
+  const downItems = [
+    {
+      t: "Compliance exposure",
+      b: "Non-compliant workers blocked before they reach a shift. The risk stays with the agency.",
+    },
+    {
+      t: "Overtime",
+      b: "Gaps caught early enough to fill properly. Every avoided event is direct margin recovery.",
+    },
+    {
+      t: "Reconciliation overhead",
+      b: "Payroll, invoices and admin chasing drops to near zero. Every week.",
+    },
+    {
+      t: "Fraud risk",
+      b: "Unscheduled clock-ins and unexplained overtime flagged live. Nowhere to hide.",
+    },
+    {
+      t: "Management burden",
+      b: "Fewer firefighting hours. Fewer escalations. Fewer decisions made without the right information.",
     },
   ];
 
