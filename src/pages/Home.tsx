@@ -106,8 +106,8 @@ const Home = () => {
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
-    background: "rgba(255,255,255,0.06)",
-    border: "0.5px solid rgba(255,255,255,0.12)",
+    background: "rgba(255,255,255,0.12)",
+    border: "0.5px solid rgba(255,255,255,0.2)",
     borderRadius: 8,
     padding: "12px 16px",
     color: "#FFFFFF",
@@ -214,7 +214,7 @@ const Home = () => {
       <style>{`
         body { font-family: ${FONT}; }
         .tl-card:hover { background: ${C.primaryLight} !important; }
-        .tl-input::placeholder { color: rgba(255,255,255,0.3); }
+        .tl-input::placeholder { color: rgba(255,255,255,0.4); }
         .tl-input:focus { border-color: ${C.primary} !important; }
         .tl-select option { color: ${C.fg}; }
       `}</style>
@@ -1126,7 +1126,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 6 — CONTACT */}
-        <section id="contact" style={{ background: "#0D0D0B", padding: "80px 48px" }}>
+        <section id="contact" style={{ background: "#2D6A4F", padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
             <h2
               style={{
@@ -1140,15 +1140,6 @@ const Home = () => {
             >
               Ready to take control of your contingent workforce?
             </h2>
-            <p
-              style={{
-                fontSize: 15,
-                color: "rgba(255,255,255,0.4)",
-                marginBottom: 40,
-              }}
-            >
-              TempLedger makes that the default.
-            </p>
             <div style={{ maxWidth: 480, margin: "0 auto" }}>
               {submitted ? (
                 <div style={{ fontWeight: 500, fontSize: 16, color: "#FFFFFF", textAlign: "center" }}>
@@ -1213,12 +1204,12 @@ const Home = () => {
                   ))}
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.02, backgroundColor: "#1A3D2E" }}
+                    whileHover={{ scale: 1.02, backgroundColor: "#E8E8E8" }}
                     transition={{ duration: 0.15 }}
                     style={{
                       width: "100%",
-                      background: C.primary,
-                      color: "#FFFFFF",
+                      background: "#FFFFFF",
+                      color: "#2D6A4F",
                       fontWeight: 700,
                       fontSize: 14,
                       borderRadius: 8,
