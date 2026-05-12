@@ -111,22 +111,49 @@ const Home = () => {
     },
   ];
 
-  const outcomes = [
+  const upItems = [
     {
-      t: "Every shift covered the way it should be.",
-      b: "Gaps visible before they become failures on the floor. The right workers from the right agencies in the right roles — because decisions are made on live data, not last week's summary.",
+      t: "Operational visibility",
+      b: "Exceptions and shift gaps surface before they reach payroll or the shop floor.",
     },
     {
-      t: "Every agency accountable to the same standard.",
-      b: "Performance derived from a shared system — not from what agencies tell you. The ones that deliver get more work. The ones that don't know exactly why. Rate negotiations backed by evidence.",
+      t: "Retention",
+      b: "Accurate pay removes the friction that drives temps to leave. Less churn. Lower replacement cost.",
     },
     {
-      t: "Overtime as the exception, not the default.",
-      b: "Gaps identified early enough to fill properly. Booking distribution optimized by performance and availability, not habit. Every avoided overtime event is direct margin recovery.",
+      t: "Productivity",
+      b: "Right people, right agency, right shift. Output stays consistent and your operation keeps moving.",
     },
     {
-      t: "Attrition you can actually influence.",
-      b: "Workers stay when their experience is consistent and their pay is right. Less churn means less ramp time, lower recruitment cost and a workforce that knows your operation.",
+      t: "Workforce stability",
+      b: "Proven workers identified and converted earlier. Fewer replacements. Less ramp time.",
+    },
+    {
+      t: "Agency accountability",
+      b: "Performance derived from the system. Not self-reported. Every decision backed by data.",
+    },
+  ];
+
+  const downItems = [
+    {
+      t: "Compliance exposure",
+      b: "Non-compliant workers blocked before they reach a shift. The risk stays with the agency.",
+    },
+    {
+      t: "Overtime",
+      b: "Gaps caught early enough to fill properly. Every avoided event is direct margin recovery.",
+    },
+    {
+      t: "Reconciliation overhead",
+      b: "Payroll, invoices and admin chasing drops to near zero. Every week.",
+    },
+    {
+      t: "Fraud risk",
+      b: "Unscheduled clock-ins and unexplained overtime flagged live. Nowhere to hide.",
+    },
+    {
+      t: "Management burden",
+      b: "Fewer firefighting hours. Fewer escalations. Fewer decisions made without the right information.",
     },
   ];
 
@@ -862,11 +889,28 @@ const Home = () => {
         </section>
 
         {/* SECTION 4 — THE OUTCOME */}
-        <section style={{ background: C.primary, padding: "80px 48px" }}>
-          <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <SectionTag dark>The Outcome</SectionTag>
+        <section style={{ background: "#2D6A4F", padding: "80px 48px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                marginBottom: 16,
+                fontFamily: FONT,
+                fontWeight: 700,
+                fontSize: 10,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.5)",
+              }}
+            >
+              <span style={{ width: 24, height: 2, background: "rgba(255,255,255,0.3)" }} />
+              THE OUTCOME
+            </div>
             <h2
               style={{
+                fontFamily: FONT,
                 fontWeight: 800,
                 fontSize: 36,
                 color: "#FFFFFF",
@@ -875,45 +919,190 @@ const Home = () => {
                 marginBottom: 10,
               }}
             >
-              This is what your operation looks like when it works.
+              This is what changes.
             </h2>
             <p
               style={{
+                fontFamily: FONT,
+                fontWeight: 400,
                 fontSize: 15,
                 color: "rgba(255,255,255,0.55)",
                 marginBottom: 48,
-                lineHeight: 1.65,
               }}
             >
-              Not a different operation. The same one — with complete visibility, accountability and control.
+              The impact compounds with every shift, every week.
             </p>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(2, 1fr)",
-                gap: 16,
-              }}
-            >
-              {outcomes.map((o, i) => (
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+              {/* LEFT COLUMN */}
+              <div>
                 <div
-                  key={i}
                   style={{
-                    background: "rgba(255,255,255,0.08)",
-                    border: "0.5px solid rgba(255,255,255,0.12)",
-                    borderRadius: 12,
-                    padding: 28,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    marginBottom: 16,
+                    paddingBottom: 12,
+                    borderBottom: "0.5px solid rgba(255,255,255,0.12)",
                   }}
                 >
-                  <div style={{ fontWeight: 700, fontSize: 16, color: "#FFFFFF", marginBottom: 10 }}>
-                    {o.t}
-                  </div>
-                  <div style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", lineHeight: 1.7 }}>
-                    {o.b}
-                  </div>
+                  <div
+                    style={{
+                      width: 0,
+                      height: 0,
+                      borderLeft: "6px solid transparent",
+                      borderRight: "6px solid transparent",
+                      borderBottom: "10px solid #4ade80",
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 700,
+                      fontSize: 11,
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                      color: "#4ade80",
+                    }}
+                  >
+                    WHAT GOES UP
+                  </span>
                 </div>
-              ))}
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  {upItems.map((item, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        background: "rgba(255,255,255,0.07)",
+                        border: "0.5px solid rgba(255,255,255,0.1)",
+                        borderLeft: "3px solid #4ade80",
+                        borderRadius: "0 8px 8px 0",
+                        padding: "16px 18px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontFamily: FONT,
+                          fontWeight: 700,
+                          fontSize: 14,
+                          color: "#FFFFFF",
+                          marginBottom: 4,
+                        }}
+                      >
+                        {item.t}
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: FONT,
+                          fontWeight: 400,
+                          fontSize: 12,
+                          color: "rgba(255,255,255,0.55)",
+                          lineHeight: 1.55,
+                        }}
+                      >
+                        {item.b}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* RIGHT COLUMN */}
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    marginBottom: 16,
+                    paddingBottom: 12,
+                    borderBottom: "0.5px solid rgba(255,255,255,0.12)",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 0,
+                      height: 0,
+                      borderTop: "10px solid #f87171",
+                      borderLeft: "6px solid transparent",
+                      borderRight: "6px solid transparent",
+                      borderBottom: "none",
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 700,
+                      fontSize: 11,
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                      color: "#f87171",
+                    }}
+                  >
+                    WHAT COMES DOWN
+                  </span>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  {downItems.map((item, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        background: "rgba(255,255,255,0.07)",
+                        border: "0.5px solid rgba(255,255,255,0.1)",
+                        borderLeft: "3px solid #f87171",
+                        borderRadius: "0 8px 8px 0",
+                        padding: "16px 18px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontFamily: FONT,
+                          fontWeight: 700,
+                          fontSize: 14,
+                          color: "#FFFFFF",
+                          marginBottom: 4,
+                        }}
+                      >
+                        {item.t}
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: FONT,
+                          fontWeight: 400,
+                          fontSize: 12,
+                          color: "rgba(255,255,255,0.55)",
+                          lineHeight: 1.55,
+                        }}
+                      >
+                        {item.b}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </motion.div>
+
+            <div
+              style={{
+                marginTop: 32,
+                paddingTop: 24,
+                borderTop: "0.5px solid rgba(255,255,255,0.12)",
+                textAlign: "center",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: FONT,
+                  fontWeight: 500,
+                  fontSize: 15,
+                  color: "rgba(255,255,255,0.45)",
+                  fontStyle: "italic",
+                }}
+              >
+                Compounded across a financial year, the invisible cost is significant.
+              </span>
+            </div>
+          </div>
         </section>
 
         {/* SECTION 5 — HOW IT WORKS */}
