@@ -152,7 +152,7 @@ const S3 = () => {
     <SlideShell>
       <Eyebrow>03 &nbsp;&nbsp;The Problem</Eyebrow>
       <H1>Zero transparency, visibility,<br />or control over their<br />contingent workforce.</H1>
-      <div style={{ fontFamily: FONT_SANS, fontSize: 14, color: "rgba(237,231,217,0.6)", marginBottom: 24 }}>
+      <div style={{ fontFamily: FONT_SANS, fontSize: 14, color: C.muted, marginBottom: 24 }}>
         The direct result of two sides operating in separate systems.
       </div>
       <Divider />
@@ -212,7 +212,7 @@ const S5 = () => {
       <H1 size={30}>The incumbents built the problem.<br />They cannot build the solution.</H1>
       <Divider />
       <div style={{ background: C.card, border: `0.5px solid ${C.border}`, borderRadius: 10, overflow: "hidden", width: "100%" }}>
-        <div style={{ display: "grid", gridTemplateColumns: cols, background: "rgba(125,143,70,0.08)" }}>
+        <div style={{ display: "grid", gridTemplateColumns: cols, background: C.surface }}>
           {["Competitor", "Revenue", "Model", "Why they cannot build TempLedger"].map((h, i) => (
             <div key={i} style={{ padding: "10px 14px", fontFamily: FONT_MONO, fontSize: 11, color: C.olive }}>{h}</div>
           ))}
@@ -297,7 +297,7 @@ const S7 = () => {
           </div>
         </div>
         <div style={{ flex: 1, background: C.card, border: `0.5px solid ${C.border}`, borderRadius: 10, overflow: "hidden", height: "fit-content" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 0.6fr 1.2fr", background: "rgba(125,143,70,0.08)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 0.6fr 1.2fr", background: C.surface }}>
             {["Annual Spend", "Rate", "Monthly Fee"].map((h, i) => (
               <div key={i} style={{ padding: "10px 14px", fontFamily: FONT_MONO, fontSize: 11, color: C.olive }}>{h}</div>
             ))}
