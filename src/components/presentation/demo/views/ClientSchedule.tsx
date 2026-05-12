@@ -288,7 +288,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
         ? "#ef4444"
         : displayFilled < required
           ? "#f59e0b"
-          : "#7d8f46";
+          : "#2D6A4F";
 
   // Past/current breakdown derived from seeded current-week agency mix
   const totalWorkers = currentWeekAgencies.reduce((a, x) => a + x.workers, 0);
@@ -324,8 +324,8 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
         style={{
           width: 560,
           maxHeight: "80vh",
-          background: "#1a1b18",
-          border: "0.5px solid #2a2b27",
+          background: "#FFFFFF",
+          border: "0.5px solid #E5E0DA",
           borderRadius: 16,
         }}
         onClick={stopProp}
@@ -336,16 +336,16 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
           style={{
             padding: "20px 24px",
             background: "rgba(255,255,255,0.02)",
-            borderBottom: "0.5px solid #2a2b27",
+            borderBottom: "0.5px solid #E5E0DA",
           }}
         >
           <div>
             <p
               style={{
-                fontFamily: "'IBM Plex Mono', monospace",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: 15,
                 fontWeight: 600,
-                color: "#ede7d9",
+                color: "#0D0D0B",
               }}
             >
               {shift} Shift
@@ -366,7 +366,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
               <span
                 style={{
                   fontSize: 10,
-                  color: "#7d8f46",
+                  color: "#2D6A4F",
                   background: "rgba(125,143,70,0.12)",
                   padding: "3px 8px",
                   borderRadius: 6,
@@ -380,7 +380,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
             )}
             <span
               style={{
-                fontFamily: "'IBM Plex Mono', monospace",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: 14,
                 fontWeight: 600,
                 color: badgeColor,
@@ -420,7 +420,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                   key={a.name}
                   style={{
                     background: "rgba(255,255,255,0.02)",
-                    border: "0.5px solid #2a2b27",
+                    border: "0.5px solid #E5E0DA",
                     borderRadius: 10,
                     padding: "14px 16px",
                     marginBottom: 10,
@@ -429,10 +429,10 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                   <div className="flex items-center justify-between">
                     <span
                       style={{
-                        fontFamily: "'IBM Plex Mono', monospace",
+                        fontFamily: "'Inter', sans-serif",
                         fontSize: 13,
                         fontWeight: 600,
-                        color: "#ede7d9",
+                        color: "#0D0D0B",
                       }}
                     >
                       {a.name}
@@ -450,7 +450,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                   <div className="bg-muted h-1.5 rounded-full overflow-hidden" style={{ marginTop: 8 }}>
                     <div
                       className="h-1.5 rounded-full"
-                      style={{ width: `${pct}%`, background: "#7d8f46" }}
+                      style={{ width: `${pct}%`, background: "#2D6A4F" }}
                     />
                   </div>
                   <p
@@ -477,7 +477,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
               style={{
                 padding: "16px 24px",
                 background: "rgba(245,158,11,0.08)",
-                borderBottom: "0.5px solid #2a2b27",
+                borderBottom: "0.5px solid #E5E0DA",
               }}
             >
               <div>
@@ -508,7 +508,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
               <div className="text-right">
                 <p
                   style={{
-                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontFamily: "'Inter', sans-serif",
                     fontSize: 28,
                     fontWeight: 700,
                     color: "#f59e0b",
@@ -531,7 +531,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
             </div>
 
             {/* Agency snapshot */}
-            <div style={{ padding: "20px 24px", borderBottom: "0.5px solid #2a2b27" }}>
+            <div style={{ padding: "20px 24px", borderBottom: "0.5px solid #E5E0DA" }}>
               <p
                 style={{
                   fontSize: 10,
@@ -549,7 +549,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                   key={a.name}
                   style={{
                     background: "rgba(255,255,255,0.02)",
-                    border: "0.5px solid #2a2b27",
+                    border: "0.5px solid #E5E0DA",
                     borderRadius: 10,
                     padding: "14px 16px",
                     marginBottom: 10,
@@ -563,10 +563,10 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                       />
                       <span
                         style={{
-                          fontFamily: "'IBM Plex Mono', monospace",
+                          fontFamily: "'Inter', sans-serif",
                           fontSize: 13,
                           fontWeight: 600,
-                          color: "#ede7d9",
+                          color: "#0D0D0B",
                         }}
                       >
                         {a.name}
@@ -646,7 +646,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                 <Zap className="w-4 h-4" style={{ color: "#f59e0b" }} />
                 <span
                   style={{
-                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontFamily: "'Inter', sans-serif",
                     fontSize: 14,
                     fontWeight: 600,
                     color: "#f59e0b",
@@ -672,7 +672,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
           // ── Stage 2: intelligent allocation ──
           <div style={{ animation: "fadeIn 0.3s ease" }}>
             {/* Criteria */}
-            <div style={{ padding: "20px 24px", borderBottom: "0.5px solid #2a2b27" }}>
+            <div style={{ padding: "20px 24px", borderBottom: "0.5px solid #E5E0DA" }}>
               <p
                 style={{
                   fontSize: 10,
@@ -688,12 +688,12 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                 {([
                   {
                     key: "Available Workers" as const,
-                    icon: <Users className="w-4 h-4" style={{ color: "#7d8f46" }} />,
+                    icon: <Users className="w-4 h-4" style={{ color: "#2D6A4F" }} />,
                     desc: "Prioritise the agency with the most workers ready to fill this slot.",
                   },
                   {
                     key: "Agency Performance" as const,
-                    icon: <BarChart2 className="w-4 h-4" style={{ color: "#7d8f46" }} />,
+                    icon: <BarChart2 className="w-4 h-4" style={{ color: "#2D6A4F" }} />,
                     desc: "Prioritise the agency with the strongest performance record for this shift type.",
                   },
                 ]).map((c) => {
@@ -704,7 +704,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                       onClick={() => setCriteria(c.key)}
                       className="flex-1 text-left transition-colors"
                       style={{
-                        border: `0.5px solid ${selected ? "#7d8f46" : "#2a2b27"}`,
+                        border: `0.5px solid ${selected ? "#2D6A4F" : "#E5E0DA"}`,
                         background: selected ? "rgba(125,143,70,0.08)" : "rgba(255,255,255,0.02)",
                         borderRadius: 10,
                         padding: 16,
@@ -717,10 +717,10 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                       {c.icon}
                       <span
                         style={{
-                          fontFamily: "'IBM Plex Mono', monospace",
+                          fontFamily: "'Inter', sans-serif",
                           fontSize: 13,
                           fontWeight: 600,
-                          color: "#ede7d9",
+                          color: "#0D0D0B",
                         }}
                       >
                         {c.key}
@@ -742,7 +742,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
             </div>
 
             {/* Recommendation */}
-            <div style={{ padding: "20px 24px", borderBottom: "0.5px solid #2a2b27" }}>
+            <div style={{ padding: "20px 24px", borderBottom: "0.5px solid #E5E0DA" }}>
               <p
                 style={{
                   fontSize: 10,
@@ -785,10 +785,10 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                 </div>
                 <p
                   style={{
-                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontFamily: "'Inter', sans-serif",
                     fontSize: 18,
                     fontWeight: 700,
-                    color: "#ede7d9",
+                    color: "#0D0D0B",
                     marginTop: 6,
                   }}
                 >
@@ -815,20 +815,20 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                 disabled={submitting}
                 className="w-full flex items-center justify-center transition-opacity disabled:opacity-70"
                 style={{
-                  background: "#7d8f46",
+                  background: "#2D6A4F",
                   borderRadius: 10,
                   padding: 14,
                   gap: 8,
                   cursor: submitting ? "default" : "pointer",
                 }}
               >
-                <Send className="w-4 h-4" style={{ color: "#111210" }} />
+                <Send className="w-4 h-4" style={{ color: "#FFFFFF" }} />
                 <span
                   style={{
-                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontFamily: "'Inter', sans-serif",
                     fontSize: 14,
                     fontWeight: 600,
-                    color: "#111210",
+                    color: "#FFFFFF",
                   }}
                 >
                   {submitting ? "Submitting..." : `Submit to ${rec.agency}`}

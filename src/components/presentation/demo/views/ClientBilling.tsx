@@ -201,8 +201,8 @@ const ClientBilling = ({ onViewChange }: ClientBillingProps) => {
     <div className="p-4 md:p-6 space-y-6">
       {/* Header */}
       <div>
-        <h1 className="font-mono text-base font-semibold" style={{ color: "#ede7d9" }}>Billing</h1>
-        <p className="text-xs mt-0.5" style={{ color: "#52524e" }}>
+        <h1 className="font-mono text-base font-semibold" style={{ color: "#0D0D0B" }}>Billing</h1>
+        <p className="text-xs mt-0.5" style={{ color: "#6B6460" }}>
           Built from verified payroll · Week of 10 Feb 2025 · Invoiced per site
         </p>
       </div>
@@ -210,7 +210,7 @@ const ClientBilling = ({ onViewChange }: ClientBillingProps) => {
       {/* Verified Banner */}
       <div className="bg-green-500/[0.08] border border-green-500/20 rounded-lg px-4 py-3 flex items-center gap-3">
         <CheckCircle className="w-4 h-4 text-green-500 shrink-0" />
-        <p className="text-xs" style={{ color: "#ede7d9" }}>
+        <p className="text-xs" style={{ color: "#0D0D0B" }}>
           Verified payroll has been received for 6 workers across 3 agencies. Invoices are ready per site.
         </p>
       </div>
@@ -249,10 +249,10 @@ const ClientBilling = ({ onViewChange }: ClientBillingProps) => {
                     className="w-full flex items-center justify-between p-4 text-left hover:bg-muted/20 transition-colors"
                   >
                     <div>
-                      <span className="font-mono text-sm font-semibold" style={{ color: "#ede7d9" }}>
+                      <span className="font-mono text-sm font-semibold" style={{ color: "#0D0D0B" }}>
                         {site.name}
                       </span>
-                      <div className="flex items-center gap-3 mt-0.5 text-xs" style={{ color: "#52524e" }}>
+                      <div className="flex items-center gap-3 mt-0.5 text-xs" style={{ color: "#6B6460" }}>
                         <span>{site.totalHours}h</span>
                         <span>·</span>
                         <span>{site.workerCount} workers</span>
@@ -261,7 +261,7 @@ const ClientBilling = ({ onViewChange }: ClientBillingProps) => {
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className="font-mono text-sm font-semibold" style={{ color: "#7d8f46" }}>
+                      <span className="font-mono text-sm font-semibold" style={{ color: "#2D6A4F" }}>
                         £{site.totalAmount.toLocaleString()}
                       </span>
                       <ChevronRight className={`w-4 h-4 text-muted-foreground transition-transform ${isSiteExpanded ? "rotate-90" : ""}`} />
@@ -294,12 +294,12 @@ const ClientBilling = ({ onViewChange }: ClientBillingProps) => {
                               onClick={() => setExpandedDept(isDeptExpanded ? null : deptKey)}
                               className="w-full flex items-center justify-between py-2 px-3 rounded-lg bg-card/60 border-l-2 border-primary/30 hover:bg-muted/20 transition-colors"
                             >
-                              <span className="text-[13px] font-medium" style={{ color: "#ede7d9" }}>
+                              <span className="text-[13px] font-medium" style={{ color: "#0D0D0B" }}>
                                 {dept.name}
                               </span>
                               <div className="flex items-center gap-3">
-                                <span className="text-[11px]" style={{ color: "#52524e" }}>{dept.totalHours}h</span>
-                                <span className="font-mono text-xs" style={{ color: "#7d8f46" }}>
+                                <span className="text-[11px]" style={{ color: "#6B6460" }}>{dept.totalHours}h</span>
+                                <span className="font-mono text-xs" style={{ color: "#2D6A4F" }}>
                                   £{dept.totalAmount.toLocaleString()}
                                 </span>
                                 <ChevronDown className={`w-3.5 h-3.5 text-muted-foreground transition-transform ${isDeptExpanded ? "rotate-180" : ""}`} />
@@ -312,13 +312,13 @@ const ClientBilling = ({ onViewChange }: ClientBillingProps) => {
                                 {dept.workers.map((worker, idx) => (
                                   <div key={idx} className="flex items-center justify-between py-1.5 px-2">
                                     <div className="flex items-center gap-2">
-                                      <span className="text-xs" style={{ color: "#ede7d9" }}>{worker.name}</span>
-                                      <span className="text-[11px]" style={{ color: "#52524e" }}>{worker.agency}</span>
+                                      <span className="text-xs" style={{ color: "#0D0D0B" }}>{worker.name}</span>
+                                      <span className="text-[11px]" style={{ color: "#6B6460" }}>{worker.agency}</span>
                                     </div>
                                     <div className="flex items-center gap-4">
-                                      <span className="font-mono text-xs" style={{ color: "#ede7d9" }}>{worker.hours}h</span>
-                                      <span className="text-[11px]" style={{ color: "#52524e" }}>£{worker.rate.toFixed(2)}/h</span>
-                                      <span className="font-mono text-xs" style={{ color: "#7d8f46" }}>£{worker.total}</span>
+                                      <span className="font-mono text-xs" style={{ color: "#0D0D0B" }}>{worker.hours}h</span>
+                                      <span className="text-[11px]" style={{ color: "#6B6460" }}>£{worker.rate.toFixed(2)}/h</span>
+                                      <span className="font-mono text-xs" style={{ color: "#2D6A4F" }}>£{worker.total}</span>
                                     </div>
                                   </div>
                                 ))}
@@ -336,11 +336,11 @@ const ClientBilling = ({ onViewChange }: ClientBillingProps) => {
 
           {/* Grand Total */}
           <div className="bg-card border-t border-border p-4 rounded-xl">
-            <p className="text-[13px]" style={{ color: "#52524e" }}>Total verified billing this week</p>
-            <p className="font-mono text-2xl font-bold mt-1" style={{ color: "#7d8f46" }}>
+            <p className="text-[13px]" style={{ color: "#6B6460" }}>Total verified billing this week</p>
+            <p className="font-mono text-2xl font-bold mt-1" style={{ color: "#2D6A4F" }}>
               £{grandTotalAmount.toLocaleString()}
             </p>
-            <p className="text-[11px] mt-0.5" style={{ color: "#52524e" }}>
+            <p className="text-[11px] mt-0.5" style={{ color: "#6B6460" }}>
               {grandTotalHours} verified hours · 6 workers · 3 agencies
             </p>
           </div>
@@ -349,13 +349,13 @@ const ClientBilling = ({ onViewChange }: ClientBillingProps) => {
           <div className="bg-destructive/5 border border-destructive/20 rounded-lg px-4 py-3 flex items-start gap-3">
             <AlertTriangle className="w-3.5 h-3.5 text-destructive mt-0.5 shrink-0" />
             <div>
-              <p className="text-xs" style={{ color: "#52524e" }}>
+              <p className="text-xs" style={{ color: "#6B6460" }}>
                 4 workers have unresolved payroll exceptions and are excluded from this billing run. Resolve exceptions in Payroll to include.
               </p>
               <button
                 onClick={() => onViewChange?.("payroll")}
                 className="text-xs mt-1 cursor-pointer hover:underline"
-                style={{ color: "#7d8f46" }}
+                style={{ color: "#2D6A4F" }}
               >
                 View exceptions →
               </button>
@@ -390,7 +390,7 @@ const ClientBilling = ({ onViewChange }: ClientBillingProps) => {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-sm font-semibold" style={{ color: "#7d8f46" }}>
+                    <span className="font-mono text-sm font-semibold" style={{ color: "#2D6A4F" }}>
                       £{inv.totalAmount.toLocaleString()}
                     </span>
                     <span className="inline-flex items-center gap-1 text-[10px] font-medium text-green-600 bg-green-500/10 px-1.5 py-0.5 rounded">

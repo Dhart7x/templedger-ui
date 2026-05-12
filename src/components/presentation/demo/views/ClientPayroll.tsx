@@ -110,10 +110,10 @@ const ClientPayroll = () => {
       <div className="w-[58%] border-r border-border overflow-y-auto p-5">
         {/* Header */}
         <div className="mb-5">
-          <h2 className="font-mono text-sm font-semibold" style={{ color: "#ede7d9" }}>
+          <h2 className="font-mono text-sm font-semibold" style={{ color: "#0D0D0B" }}>
             Live Payroll Feed
           </h2>
-          <p className="text-[11px] mt-0.5" style={{ color: "#52524e" }}>
+          <p className="text-[11px] mt-0.5" style={{ color: "#6B6460" }}>
             Shifts completing in real time · Week of 10 Feb 2025
           </p>
         </div>
@@ -132,18 +132,18 @@ const ClientPayroll = () => {
             {verified.map((entry, idx) => (
               <div key={idx} className="flex items-center justify-between py-2">
                 <div className="flex items-center gap-1.5 min-w-0">
-                  <span className="text-[13px] font-medium truncate" style={{ color: "#ede7d9" }}>
+                  <span className="text-[13px] font-medium truncate" style={{ color: "#0D0D0B" }}>
                     {entry.worker}
                   </span>
-                  <span className="text-[11px]" style={{ color: "#52524e" }}>·</span>
-                  <span className="text-[11px] truncate" style={{ color: "#52524e" }}>{entry.agency}</span>
-                  <span className="text-[11px]" style={{ color: "#52524e" }}>·</span>
-                  <span className="text-[11px] truncate" style={{ color: "#52524e" }}>{entry.department}</span>
+                  <span className="text-[11px]" style={{ color: "#6B6460" }}>·</span>
+                  <span className="text-[11px] truncate" style={{ color: "#6B6460" }}>{entry.agency}</span>
+                  <span className="text-[11px]" style={{ color: "#6B6460" }}>·</span>
+                  <span className="text-[11px] truncate" style={{ color: "#6B6460" }}>{entry.department}</span>
                 </div>
                 <div className="flex items-center gap-3 shrink-0">
                   <div className="text-right">
                     <span className="text-[13px] font-bold text-green-500">{entry.totalHours}h</span>
-                    <div className="text-[9px]" style={{ color: "#52524e" }}>
+                    <div className="text-[9px]" style={{ color: "#6B6460" }}>
                       {entry.days.map(d => `${d.day} ${d.hours}h`).join(" ")}
                       {entry.totalHours > entry.days.reduce((s, d) => s + (d.day === "Wed" && d.hours > 8 ? 8 : d.hours), 0) && entry.days.some(d => d.hours > 8) && (
                         <span className="text-primary ml-1">({entry.days.find(d => d.hours > 8)!.hours - 8}h OT)</span>
@@ -181,7 +181,7 @@ const ClientPayroll = () => {
                 {exceptions.length}
               </span>
             </div>
-            <span className="text-[9px]" style={{ color: "#52524e" }}>Unresolved live issues</span>
+            <span className="text-[9px]" style={{ color: "#6B6460" }}>Unresolved live issues</span>
           </div>
           <div className="space-y-2">
             {exceptions.map((entry) => (
@@ -192,13 +192,13 @@ const ClientPayroll = () => {
                   }`} />
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5">
-                      <span className="text-[13px] font-medium truncate" style={{ color: "#ede7d9" }}>
+                      <span className="text-[13px] font-medium truncate" style={{ color: "#0D0D0B" }}>
                         {entry.worker}
                       </span>
-                      <span className="text-[11px]" style={{ color: "#52524e" }}>·</span>
-                      <span className="text-[11px] truncate" style={{ color: "#52524e" }}>{entry.agency}</span>
-                      <span className="text-[11px]" style={{ color: "#52524e" }}>·</span>
-                      <span className="text-[11px] truncate" style={{ color: "#52524e" }}>{entry.department}</span>
+                      <span className="text-[11px]" style={{ color: "#6B6460" }}>·</span>
+                      <span className="text-[11px] truncate" style={{ color: "#6B6460" }}>{entry.agency}</span>
+                      <span className="text-[11px]" style={{ color: "#6B6460" }}>·</span>
+                      <span className="text-[11px] truncate" style={{ color: "#6B6460" }}>{entry.department}</span>
                     </div>
                     <div className="flex items-center gap-2 mt-0.5">
                       <span className={`text-[10px] px-1.5 py-0.5 rounded ${entry.exceptionColor}`}>
@@ -246,10 +246,10 @@ const ClientPayroll = () => {
       <div className="w-[42%] overflow-y-auto p-5">
         {/* Header */}
         <div className="mb-5">
-          <h2 className="font-mono text-sm font-semibold" style={{ color: "#ede7d9" }}>
+          <h2 className="font-mono text-sm font-semibold" style={{ color: "#0D0D0B" }}>
             Week to Date
           </h2>
-          <p className="text-[11px] mt-0.5" style={{ color: "#52524e" }}>
+          <p className="text-[11px] mt-0.5" style={{ color: "#6B6460" }}>
             As of Wednesday 8pm · Wk 10 Feb
           </p>
         </div>
@@ -258,18 +258,18 @@ const ClientPayroll = () => {
         <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4 mb-3">
           <div className="mb-3">
             <span className="font-mono text-[32px] font-bold text-green-500">{currentVerifiedHours}</span>
-            <p className="text-[11px]" style={{ color: "#52524e" }}>verified hours</p>
+            <p className="text-[11px]" style={{ color: "#6B6460" }}>verified hours</p>
           </div>
           <div className="mb-3">
-            <span className="font-mono text-[22px]" style={{ color: "#ede7d9" }}>{verified.length}</span>
-            <p className="text-[11px]" style={{ color: "#52524e" }}>workers on verified payroll</p>
+            <span className="font-mono text-[22px]" style={{ color: "#0D0D0B" }}>{verified.length}</span>
+            <p className="text-[11px]" style={{ color: "#6B6460" }}>workers on verified payroll</p>
           </div>
           <div>
-            <span className="font-mono text-lg" style={{ color: "#ede7d9" }}>
+            <span className="font-mono text-lg" style={{ color: "#0D0D0B" }}>
               £{currentEstPayroll.toLocaleString("en-GB", { minimumFractionDigits: 0 })}
             </span>
-            <p className="text-[11px]" style={{ color: "#52524e" }}>estimated payroll this week</p>
-            <p className="text-[9px]" style={{ color: "#52524e" }}>(final on Friday close)</p>
+            <p className="text-[11px]" style={{ color: "#6B6460" }}>estimated payroll this week</p>
+            <p className="text-[9px]" style={{ color: "#6B6460" }}>(final on Friday close)</p>
           </div>
         </div>
 
@@ -277,14 +277,14 @@ const ClientPayroll = () => {
         <div className="bg-destructive/5 border border-destructive/20 rounded-lg p-4 mb-3">
           <div className="mb-3">
             <span className="font-mono text-[32px] font-bold text-destructive">{exceptions.length}</span>
-            <p className="text-[11px]" style={{ color: "#52524e" }}>payroll exceptions</p>
+            <p className="text-[11px]" style={{ color: "#6B6460" }}>payroll exceptions</p>
           </div>
           <div className="mb-3">
-            <span className="font-mono text-[22px]" style={{ color: "#ede7d9" }}>{exceptions.length * 16}</span>
-            <p className="text-[11px]" style={{ color: "#52524e" }}>hours pending resolution</p>
+            <span className="font-mono text-[22px]" style={{ color: "#0D0D0B" }}>{exceptions.length * 16}</span>
+            <p className="text-[11px]" style={{ color: "#6B6460" }}>hours pending resolution</p>
           </div>
           <div className="bg-destructive/10 border border-destructive/20 rounded-md p-2.5">
-            <p className="text-[11px] leading-relaxed" style={{ color: "#52524e" }}>
+            <p className="text-[11px] leading-relaxed" style={{ color: "#6B6460" }}>
               Unresolved exceptions will not appear on the verified invoice. Resolve before week close to include on billing.
             </p>
           </div>
@@ -292,14 +292,14 @@ const ClientPayroll = () => {
 
         {/* Agency Breakdown */}
         <div>
-          <p className="text-[10px] uppercase tracking-[0.12em] mb-2" style={{ color: "#52524e" }}>
+          <p className="text-[10px] uppercase tracking-[0.12em] mb-2" style={{ color: "#6B6460" }}>
             Verified hours by agency
           </p>
           <div className="space-y-3">
             {agencyBreakdown.map((agency) => (
               <div key={agency.name}>
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs" style={{ color: "#ede7d9" }}>{agency.name}</span>
+                  <span className="text-xs" style={{ color: "#0D0D0B" }}>{agency.name}</span>
                   <span className="font-mono text-xs text-green-500">{agency.hours}h</span>
                 </div>
                 <div className="h-1.5 bg-muted rounded-full overflow-hidden">
