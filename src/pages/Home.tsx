@@ -210,13 +210,70 @@ const Home = () => {
   ];
 
   return (
-    <div style={{ background: C.bg, color: C.fg, fontFamily: FONT, minHeight: "100vh" }}>
+    <div style={{ background: C.bg, color: C.fg, fontFamily: FONT, minHeight: "100vh", overflowX: "hidden" }}>
       <style>{`
-        body { font-family: ${FONT}; }
+        body { font-family: ${FONT}; overflow-x: hidden; }
+        html { overflow-x: hidden; }
         .tl-card:hover { background: ${C.primaryLight} !important; }
         .tl-input::placeholder { color: rgba(255,255,255,0.4); }
         .tl-input:focus { border-color: ${C.primary} !important; }
         .tl-select option { color: ${C.fg}; }
+
+        @media (max-width: 768px) {
+          /* NAV */
+          .tl-nav { padding: 0 16px !important; height: 48px !important; }
+          .tl-nav-links { display: none !important; }
+          .tl-nav-cta { padding: 6px 12px !important; font-size: 11px !important; }
+          .tl-nav-spacer { padding-top: 48px !important; }
+
+          /* HERO */
+          .tl-hero { padding: 64px 20px 48px !important; }
+          .tl-hero-h1 { font-size: 32px !important; }
+          .tl-hero-sub { font-size: 16px !important; }
+          .tl-hero-cta { width: 100% !important; }
+          .tl-hero-muted { font-size: 11px !important; }
+
+          /* INVOICE */
+          .tl-section-invoice { padding: 56px 20px !important; }
+          .tl-invoice-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+
+          /* PROBLEM */
+          .tl-section-problem { padding: 56px 20px !important; }
+          .tl-problem-grid { grid-template-columns: 1fr 1fr !important; gap: 1px !important; }
+          .tl-problem-card { padding: 16px !important; }
+          .tl-problem-statement { font-size: 13px !important; }
+
+          /* COST */
+          .tl-section-cost { padding: 56px 20px !important; }
+          .tl-cost-stack { gap: 12px !important; }
+
+          /* OUTCOME */
+          .tl-section-outcome { padding: 56px 20px !important; }
+          .tl-outcome-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+          .tl-outcome-col-inner { grid-template-rows: unset !important; display: flex !important; flex-direction: column !important; }
+
+          /* HOW IT WORKS */
+          .tl-section-how { padding: 56px 20px !important; }
+          .tl-steps-grid { grid-template-columns: 1fr !important; gap: 1px !important; }
+          .tl-step-number { font-size: 36px !important; }
+
+          /* CONTACT */
+          .tl-section-contact { padding: 56px 20px !important; }
+          .tl-contact-h2 { font-size: 28px !important; }
+
+          /* FOOTER */
+          .tl-footer { flex-direction: column !important; gap: 8px !important; padding: 20px 16px !important; text-align: center !important; }
+          .tl-footer > * { font-size: 10px !important; text-align: center !important; }
+
+          /* GLOBAL TYPOGRAPHY */
+          .tl-section-h2 { font-size: 26px !important; letter-spacing: -0.02em !important; }
+          .tl-section-tag { font-size: 9px !important; }
+          .tl-section-sub { font-size: 13px !important; max-width: 100% !important; }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .tl-problem-grid { grid-template-columns: repeat(3, 1fr) !important; }
+        }
       `}</style>
 
       {/* Hidden access menu */}
