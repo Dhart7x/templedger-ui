@@ -407,7 +407,7 @@ const Home = () => {
         >
           TEMP LEDGER
         </div>
-        <div style={{ display: "flex", gap: 32 }}>
+        <div className="tl-nav-links" style={{ display: "flex", gap: 32 }}>
           {["Resources", "Contact"].map((l) => (
             <a
               key={l}
