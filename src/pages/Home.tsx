@@ -679,7 +679,7 @@ const Home = () => {
                     Unknown
                   </span>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             <p
