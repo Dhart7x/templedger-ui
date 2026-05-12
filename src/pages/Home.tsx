@@ -52,6 +52,18 @@ const Home = () => {
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", company: "", email: "", role: "" });
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
