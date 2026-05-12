@@ -1097,25 +1097,21 @@ const Home = () => {
                 overflow: "hidden",
               }}
             >
-              {steps.map((s) => (
-                <div key={s.n} style={{ background: C.bg, padding: 32 }}>
-                  <div
-                    style={{
-                      fontWeight: 800,
-                      fontSize: 48,
-                      color: C.primary,
-                      opacity: 0.15,
-                      lineHeight: 1,
-                      marginBottom: 16,
-                    }}
-                  >
-                    {s.n}
-                  </div>
+              {steps.map((s, idx) => (
+                <motion.div
+                  key={s.n}
+                  initial={{ opacity: 0, y: 32 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.5, delay: idx * 0.12, ease: "easeOut" }}
+                  style={{ background: C.bg, padding: 32 }}
+                >
+                  <StepNumber value={idx + 1} />
                   <div style={{ fontWeight: 700, fontSize: 16, color: C.fg, marginBottom: 8 }}>
                     {s.t}
                   </div>
                   <div style={{ fontSize: 13, color: C.muted, lineHeight: 1.65 }}>{s.b}</div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
