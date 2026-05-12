@@ -797,6 +797,7 @@ const Home = () => {
               They surface every week. They compound over time. Most of the cost is invisible.
             </p>
             <div
+              className="tl-problem-grid"
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(3, 1fr)",
@@ -809,7 +810,7 @@ const Home = () => {
               {problems.map((p, i) => (
                 <motion.div
                   key={i}
-                  className="tl-card"
+                  className="tl-card tl-problem-card"
                   initial={{ opacity: 0, y: 20, scale: 0.97 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true, margin: "-60px" }}
@@ -831,7 +832,7 @@ const Home = () => {
                   >
                     {String(i + 1).padStart(2, "0")}
                   </div>
-                  <div style={{ fontWeight: 700, fontSize: 14, color: C.fg, lineHeight: 1.4 }}>
+                  <div className="tl-problem-statement" style={{ fontWeight: 700, fontSize: 14, color: C.fg, lineHeight: 1.4 }}>
                     {p}
                   </div>
                 </motion.div>
@@ -1161,6 +1162,7 @@ const Home = () => {
               No disruption. No rip and replace. Proven before it scales.
             </p>
             <div
+              className="tl-steps-grid"
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(3, 1fr)",
