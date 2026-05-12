@@ -10,6 +10,7 @@ import NewSalesDeck from "./pages/NewSalesDeck";
 import InvestorDeck from "./pages/InvestorDeckCapital";
 import NotFound from "./pages/NotFound";
 import AccessGate from "./components/AccessGate";
+import CapitalGate from "./components/CapitalGate";
 
 const queryClient = new QueryClient();
 
@@ -24,7 +25,7 @@ const App = () => (
             <Route path="/" element={<Home />} />
             <Route path="/demo" element={<SalesDeck />} />
             <Route path="/sales-deck" element={<NewSalesDeck />} />
-            <Route path="/capital" element={<InvestorDeck />} />
+            <Route path="/capital" element={<CapitalGate><InvestorDeck /></CapitalGate>} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
