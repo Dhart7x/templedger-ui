@@ -7,16 +7,21 @@ import { useNavigate } from "react-router-dom";
 // Design tokens
 // ============================================================
 const C = {
-  bg: "#111210",
-  fg: "#ede7d9",
-  olive: "#7d8f46",
-  muted: "rgba(237,231,217,0.5)", // captions / secondary labels only
-  card: "#1a1b18",
-  border: "#2a2b27",
+  bg: "#FFFFFF",
+  surface: "#F8F5EF",
+  fg: "#0D0D0B",
+  olive: "#2D6A4F", // primary (kept name to avoid touching every reference)
+  primaryLight: "#EBF4EF",
+  muted: "#6B6460", // secondary text
+  mutedLight: "#9B9590", // tertiary / captions
+  card: "#FFFFFF",
+  border: "#E5E0DA",
   green: "#22c55e",
   red: "#ef4444",
+  greenText: "#16803C",
+  redText: "#DC2626",
 };
-const FONT_MONO = "'IBM Plex Mono', ui-monospace, monospace";
+const FONT_MONO = "'Inter', system-ui, sans-serif";
 const FONT_SANS = "'Inter', system-ui, sans-serif";
 
 // ============================================================
@@ -25,24 +30,25 @@ const FONT_SANS = "'Inter', system-ui, sans-serif";
 const SlideShell = ({ children, justify = "start", padTop = "pt-14", padBottom = "pb-10" }: { children: ReactNode; justify?: "start" | "center"; padTop?: string; padBottom?: string }) => (
   <div
     className={`w-screen h-screen overflow-hidden flex flex-col ${justify === "center" ? "justify-center items-center" : `justify-start ${padTop} ${padBottom}`} px-20`}
-    style={{ background: C.bg, color: C.fg, fontFamily: FONT_SANS }}
+    style={{ background: "var(--slide-bg, #FFFFFF)", color: C.fg, fontFamily: FONT_SANS }}
   >
     {children}
   </div>
 );
 
 const Eyebrow = ({ children }: { children: ReactNode }) => (
-  <div style={{ fontFamily: FONT_SANS, fontSize: 10, color: C.olive, letterSpacing: "0.24em", textTransform: "uppercase", marginBottom: 8 }}>
+  <div style={{ display: "flex", alignItems: "center", gap: 8, fontFamily: FONT_SANS, fontSize: 10, fontWeight: 700, color: C.olive, letterSpacing: "0.16em", textTransform: "uppercase", marginBottom: 10 }}>
+    <span style={{ width: 20, height: 2, background: C.olive, display: "inline-block" }} />
     {children}
   </div>
 );
 
 const H1 = ({ children, size = 34 }: { children: ReactNode; size?: number }) => (
-  <h1 style={{ fontFamily: FONT_MONO, fontWeight: 700, fontSize: size, color: C.fg, lineHeight: 1.15, marginBottom: 8 }}>{children}</h1>
+  <h1 style={{ fontFamily: FONT_SANS, fontWeight: 800, fontSize: size, color: C.fg, lineHeight: 1.15, letterSpacing: "-0.025em", marginBottom: 8 }}>{children}</h1>
 );
 
 const Divider = () => (
-  <div style={{ height: 1, background: C.olive, opacity: 0.25, marginBottom: 20, marginTop: 4 }} />
+  <div style={{ height: 1, background: C.border, marginBottom: 20, marginTop: 4 }} />
 );
 
 const Card = ({ children, style }: { children: ReactNode; style?: React.CSSProperties }) => (
@@ -57,7 +63,7 @@ const Bullet = ({ children }: { children: ReactNode }) => (
 );
 
 const ClosingLine = ({ children }: { children: ReactNode }) => (
-  <div style={{ marginTop: "auto", paddingTop: 12, borderTop: `0.5px solid ${C.border}`, fontFamily: FONT_SANS, fontSize: 12, color: C.muted, fontStyle: "italic", textAlign: "center" }}>
+  <div style={{ marginTop: "auto", paddingTop: 12, fontFamily: FONT_SANS, fontSize: 13, color: C.olive, fontStyle: "italic", fontWeight: 600, textAlign: "center" }}>
     {children}
   </div>
 );
