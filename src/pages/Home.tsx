@@ -537,15 +537,6 @@ const Home = () => {
             >
               Request Access
             </motion.button>
-            <motion.p
-              className="tl-hero-muted"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 1.1 }}
-              style={{ marginTop: 14, fontSize: 12, color: C.mutedLight }}
-            >
-              Serving businesses in logistics, warehousing, food production and manufacturing.
-            </motion.p>
           </div>
         </section>
 
