@@ -855,7 +855,11 @@ const Home = () => {
               <span style={{ width: 24, height: 2, background: "rgba(255,255,255,0.3)" }} />
               THE OUTCOME
             </div>
-            <h2
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
               style={{
                 fontFamily: FONT,
                 fontWeight: 800,
@@ -867,8 +871,12 @@ const Home = () => {
               }}
             >
               This is what changes.
-            </h2>
-            <p
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
               style={{
                 fontFamily: FONT,
                 fontWeight: 400,
@@ -878,7 +886,7 @@ const Home = () => {
               }}
             >
               The impact compounds with every shift, every week.
-            </p>
+            </motion.p>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
               {/* LEFT COLUMN */}
