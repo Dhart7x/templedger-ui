@@ -659,7 +659,7 @@ const Home = () => {
                         {d}
                       </span>
                       <span style={{ fontFamily: FONT, fontWeight: 600, fontSize: 13, color: "#C4391A" }}>
-                        Unquantified
+                        Unknown
                       </span>
                     </motion.div>
                   ))}
