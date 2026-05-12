@@ -319,7 +319,8 @@ const S7 = () => {
 // SLIDE 8 — IMPACT
 // ============================================================
 const ImpactCard = ({ dir, metric, body }: { dir: "up" | "down"; metric: string; body: string }) => {
-  const color = dir === "up" ? C.green : C.red;
+  const arrowColor = dir === "up" ? C.green : C.red;
+  const metricColor = dir === "up" ? C.greenText : C.redText;
   return (
     <div style={{ background: C.card, border: `0.5px solid ${C.border}`, borderRadius: 8, padding: "12px 14px", height: "fit-content" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8, minHeight: 32, flexShrink: 0 }}>
@@ -327,12 +328,12 @@ const ImpactCard = ({ dir, metric, body }: { dir: "up" | "down"; metric: string;
           width: 0, height: 0,
           borderLeft: "5px solid transparent",
           borderRight: "5px solid transparent",
-          ...(dir === "up" ? { borderBottom: `8px solid ${color}` } : { borderTop: `8px solid ${color}` }),
+          ...(dir === "up" ? { borderBottom: `8px solid ${arrowColor}` } : { borderTop: `8px solid ${arrowColor}` }),
         }} />
-        <div style={{ fontFamily: FONT_MONO, fontSize: 14, fontWeight: 600, color }}>{metric}</div>
+        <div style={{ fontFamily: FONT_SANS, fontSize: 14, fontWeight: 700, color: metricColor }}>{metric}</div>
       </div>
       <div style={{ height: 0.5, background: C.border, margin: "8px 0", flexShrink: 0 }} />
-      <div style={{ fontFamily: FONT_SANS, fontSize: 11, color: C.fg, lineHeight: 1.55 }}>{body}</div>
+      <div style={{ fontFamily: FONT_SANS, fontSize: 11, color: C.muted, lineHeight: 1.55 }}>{body}</div>
     </div>
   );
 };
