@@ -21,6 +21,7 @@ const StepNumber = ({ value }: { value: number }) => {
   return (
     <div
       ref={ref}
+      className="tl-step-number"
       style={{
         fontWeight: 800,
         fontSize: 48,
