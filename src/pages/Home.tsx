@@ -318,7 +318,10 @@ const Home = () => {
       </div>
 
       {/* NAV */}
-      <nav
+      <motion.nav
+        initial={{ y: -56 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.4, delay: 0.05, ease: "easeOut" }}
         style={{
           position: "fixed",
           top: 0,
@@ -366,8 +369,10 @@ const Home = () => {
             </a>
           ))}
         </div>
-        <button
+        <motion.button
           onClick={scrollToContact}
+          whileHover={{ scale: 1.03, boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}
+          transition={{ duration: 0.15 }}
           style={{
             background: "#FFFFFF",
             color: C.primary,
@@ -381,19 +386,17 @@ const Home = () => {
           }}
         >
           Request Access
-        </button>
-      </nav>
+        </motion.button>
+      </motion.nav>
 
       <div style={{ paddingTop: 56 }}>
         {/* SECTION 1 — HERO */}
         <section style={{ background: C.bg, padding: "96px 48px 80px" }}>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}
-          >
-            <span
+          <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
               style={{
                 display: "inline-block",
                 background: C.primaryLight,
@@ -408,7 +411,7 @@ const Home = () => {
               }}
             >
               Agency Management Platform
-            </span>
+            </motion.span>
             <h1
               style={{
                 fontWeight: 800,
@@ -419,9 +422,24 @@ const Home = () => {
                 marginBottom: 20,
               }}
             >
-              The cost of your agency spend isn't the number on the invoice.
+              {"The cost of your agency spend isn't the number on the invoice."
+                .split(" ")
+                .map((word, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2 + i * 0.06, ease: "easeOut" }}
+                    style={{ display: "inline-block", marginRight: "0.25em" }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
             </h1>
-            <p
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
               style={{
                 fontWeight: 400,
                 fontSize: 20,
@@ -432,9 +450,13 @@ const Home = () => {
               }}
             >
               You know the spend. You don't know the cost.
-            </p>
-            <button
+            </motion.p>
+            <motion.button
               onClick={scrollToContact}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.9 }}
+              whileHover={{ scale: 1.03 }}
               style={{
                 background: C.primary,
                 color: "#FFFFFF",
@@ -448,11 +470,16 @@ const Home = () => {
               }}
             >
               Request Access
-            </button>
-            <p style={{ marginTop: 14, fontSize: 12, color: C.mutedLight }}>
+            </motion.button>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4, delay: 1.1 }}
+              style={{ marginTop: 14, fontSize: 12, color: C.mutedLight }}
+            >
               Serving businesses in logistics, warehousing, food production and manufacturing.
-            </p>
-          </motion.div>
+            </motion.p>
+          </div>
         </section>
 
         {/* SECTION 2 — THE INVOICE VISUAL */}
