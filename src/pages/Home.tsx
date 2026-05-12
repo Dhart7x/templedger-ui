@@ -640,8 +640,12 @@ const Home = () => {
                     "Ramp time for replacements brought in at short notice",
                     "Workers on site that were never scheduled",
                   ].map((d, i) => (
-                    <div
+                    <motion.div
                       key={i}
+                      initial={{ opacity: 0, x: 16 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-80px" }}
+                      transition={{ duration: 0.35, delay: 0.4 + i * 0.07, ease: "easeOut" }}
                       style={{
                         minHeight: 52,
                         display: "flex",
@@ -657,7 +661,7 @@ const Home = () => {
                       <span style={{ fontFamily: FONT, fontWeight: 600, fontSize: 13, color: "#C4391A" }}>
                         Unquantified
                       </span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
                 <div
