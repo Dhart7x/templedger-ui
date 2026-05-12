@@ -21,6 +21,7 @@ const StepNumber = ({ value }: { value: number }) => {
   return (
     <div
       ref={ref}
+      className="tl-step-number"
       style={{
         fontWeight: 800,
         fontSize: 48,
@@ -60,6 +61,7 @@ const fadeIn = {
 
 const SectionTag = ({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) => (
   <div
+    className="tl-section-tag"
     style={{
       display: "flex",
       alignItems: "center",
@@ -210,13 +212,70 @@ const Home = () => {
   ];
 
   return (
-    <div style={{ background: C.bg, color: C.fg, fontFamily: FONT, minHeight: "100vh" }}>
+    <div style={{ background: C.bg, color: C.fg, fontFamily: FONT, minHeight: "100vh", overflowX: "hidden" }}>
       <style>{`
-        body { font-family: ${FONT}; }
+        body { font-family: ${FONT}; overflow-x: hidden; }
+        html { overflow-x: hidden; }
         .tl-card:hover { background: ${C.primaryLight} !important; }
         .tl-input::placeholder { color: rgba(255,255,255,0.4); }
         .tl-input:focus { border-color: ${C.primary} !important; }
         .tl-select option { color: ${C.fg}; }
+
+        @media (max-width: 768px) {
+          /* NAV */
+          .tl-nav { padding: 0 16px !important; height: 48px !important; }
+          .tl-nav-links { display: none !important; }
+          .tl-nav-cta { padding: 6px 12px !important; font-size: 11px !important; }
+          .tl-nav-spacer { padding-top: 48px !important; }
+
+          /* HERO */
+          .tl-hero { padding: 64px 20px 48px !important; }
+          .tl-hero-h1 { font-size: 32px !important; }
+          .tl-hero-sub { font-size: 16px !important; }
+          .tl-hero-cta { width: 100% !important; }
+          .tl-hero-muted { font-size: 11px !important; }
+
+          /* INVOICE */
+          .tl-section-invoice { padding: 56px 20px !important; }
+          .tl-invoice-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+
+          /* PROBLEM */
+          .tl-section-problem { padding: 56px 20px !important; }
+          .tl-problem-grid { grid-template-columns: 1fr 1fr !important; gap: 1px !important; }
+          .tl-problem-card { padding: 16px !important; }
+          .tl-problem-statement { font-size: 13px !important; }
+
+          /* COST */
+          .tl-section-cost { padding: 56px 20px !important; }
+          .tl-cost-stack { gap: 12px !important; }
+
+          /* OUTCOME */
+          .tl-section-outcome { padding: 56px 20px !important; }
+          .tl-outcome-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+          .tl-outcome-col-inner { grid-template-rows: unset !important; display: flex !important; flex-direction: column !important; }
+
+          /* HOW IT WORKS */
+          .tl-section-how { padding: 56px 20px !important; }
+          .tl-steps-grid { grid-template-columns: 1fr !important; gap: 1px !important; }
+          .tl-step-number { font-size: 36px !important; }
+
+          /* CONTACT */
+          .tl-section-contact { padding: 56px 20px !important; }
+          .tl-contact-h2 { font-size: 28px !important; }
+
+          /* FOOTER */
+          .tl-footer { flex-direction: column !important; gap: 8px !important; padding: 20px 16px !important; text-align: center !important; }
+          .tl-footer > * { font-size: 10px !important; text-align: center !important; }
+
+          /* GLOBAL TYPOGRAPHY */
+          .tl-section-h2 { font-size: 26px !important; letter-spacing: -0.02em !important; }
+          .tl-section-tag { font-size: 9px !important; }
+          .tl-section-sub { font-size: 13px !important; max-width: 100% !important; }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .tl-problem-grid { grid-template-columns: repeat(3, 1fr) !important; }
+        }
       `}</style>
 
       {/* Hidden access menu */}
@@ -319,6 +378,7 @@ const Home = () => {
 
       {/* NAV */}
       <motion.nav
+        className="tl-nav"
         initial={{ y: -56 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.4, delay: 0.05, ease: "easeOut" }}
@@ -347,7 +407,7 @@ const Home = () => {
         >
           TEMP LEDGER
         </div>
-        <div style={{ display: "flex", gap: 32 }}>
+        <div className="tl-nav-links" style={{ display: "flex", gap: 32 }}>
           {["Resources", "Contact"].map((l) => (
             <a
               key={l}
@@ -370,6 +430,7 @@ const Home = () => {
           ))}
         </div>
         <motion.button
+          className="tl-nav-cta"
           onClick={scrollToContact}
           whileHover={{ scale: 1.03, boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}
           transition={{ duration: 0.15 }}
@@ -389,9 +450,9 @@ const Home = () => {
         </motion.button>
       </motion.nav>
 
-      <div style={{ paddingTop: 56 }}>
+      <div className="tl-nav-spacer" style={{ paddingTop: 56 }}>
         {/* SECTION 1 — HERO */}
-        <section style={{ background: C.bg, padding: "96px 48px 80px" }}>
+        <section className="tl-hero" style={{ background: C.bg, padding: "96px 48px 80px" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <motion.span
               initial={{ opacity: 0, y: 20 }}
@@ -413,6 +474,7 @@ const Home = () => {
               Agency Management Platform
             </motion.span>
             <h1
+              className="tl-hero-h1"
               style={{
                 fontWeight: 800,
                 fontSize: 54,
@@ -437,6 +499,7 @@ const Home = () => {
                 ))}
             </h1>
             <motion.p
+              className="tl-hero-sub"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
@@ -452,6 +515,7 @@ const Home = () => {
               You know the spend. You don't know the cost.
             </motion.p>
             <motion.button
+              className="tl-hero-cta"
               onClick={scrollToContact}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -472,6 +536,7 @@ const Home = () => {
               Request Access
             </motion.button>
             <motion.p
+              className="tl-hero-muted"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: 1.1 }}
@@ -483,7 +548,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 2 — THE INVOICE VISUAL */}
-        <section style={{ background: "#FFFFFF", padding: "80px 48px" }}>
+        <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "80px 48px" }}>
           <div style={{ maxWidth: 1000, margin: "0 auto" }}>
             <div
               style={{
@@ -503,7 +568,7 @@ const Home = () => {
               THE REAL COST
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, alignItems: "stretch" }}>
+            <div className="tl-invoice-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, alignItems: "stretch" }}>
               {/* LEFT PANEL */}
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
@@ -705,10 +770,10 @@ const Home = () => {
         </section>
 
         {/* SECTION 3 — THE PROBLEM */}
-        <section style={{ background: C.surface, padding: "80px 48px" }}>
+        <section className="tl-section-problem" style={{ background: C.surface, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>The Problem</SectionTag>
-            <h2
+            <h2 className="tl-section-h2"
               style={{
                 fontWeight: 800,
                 fontSize: 36,
@@ -720,7 +785,7 @@ const Home = () => {
             >
               Every business using agencies at scale lives with the same problems.
             </h2>
-            <p
+            <p className="tl-section-sub"
               style={{
                 fontSize: 15,
                 color: C.muted,
@@ -732,6 +797,7 @@ const Home = () => {
               They surface every week. They compound over time. Most of the cost is invisible.
             </p>
             <div
+              className="tl-problem-grid"
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(3, 1fr)",
@@ -744,7 +810,7 @@ const Home = () => {
               {problems.map((p, i) => (
                 <motion.div
                   key={i}
-                  className="tl-card"
+                  className="tl-card tl-problem-card"
                   initial={{ opacity: 0, y: 20, scale: 0.97 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true, margin: "-60px" }}
@@ -766,7 +832,7 @@ const Home = () => {
                   >
                     {String(i + 1).padStart(2, "0")}
                   </div>
-                  <div style={{ fontWeight: 700, fontSize: 14, color: C.fg, lineHeight: 1.4 }}>
+                  <div className="tl-problem-statement" style={{ fontWeight: 700, fontSize: 14, color: C.fg, lineHeight: 1.4 }}>
                     {p}
                   </div>
                 </motion.div>
@@ -776,10 +842,10 @@ const Home = () => {
         </section>
 
         {/* SECTION 3 — THE COST */}
-        <section style={{ background: C.bg, padding: "80px 48px" }}>
+        <section className="tl-section-cost" style={{ background: C.bg, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>The Cost</SectionTag>
-            <h2
+            <h2 className="tl-section-h2"
               style={{
                 fontWeight: 800,
                 fontSize: 36,
@@ -791,7 +857,7 @@ const Home = () => {
             >
               The invisible cost is significant. And it compounds every week.
             </h2>
-            <p
+            <p className="tl-section-sub"
               style={{
                 fontSize: 15,
                 color: C.muted,
@@ -802,7 +868,7 @@ const Home = () => {
             >
               Every problem in that list has a cost consequence. None of them appear on any invoice.
             </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <div className="tl-cost-stack" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               {costs.map((c, i) => (
                 <motion.div
                   key={i}
@@ -836,7 +902,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 4 — THE OUTCOME */}
-        <section style={{ background: "#2D6A4F", padding: "80px 48px" }}>
+        <section className="tl-section-outcome" style={{ background: "#2D6A4F", padding: "80px 48px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <div
               style={{
@@ -888,7 +954,7 @@ const Home = () => {
               The impact compounds with every shift, every week.
             </motion.p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, alignItems: "stretch" }}>
+            <div className="tl-outcome-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, alignItems: "stretch" }}>
               {/* LEFT COLUMN */}
               <div>
                 <div
@@ -923,7 +989,7 @@ const Home = () => {
                     WHAT GOES UP
                   </span>
                 </div>
-                <div style={{ display: "grid", gridTemplateRows: "repeat(5, 1fr)", gap: 10 }}>
+                <div className="tl-outcome-col-inner" style={{ display: "grid", gridTemplateRows: "repeat(5, 1fr)", gap: 10 }}>
                   {upItems.map((item, i) => (
                     <motion.div
                       key={i}
@@ -1005,7 +1071,7 @@ const Home = () => {
                     WHAT COMES DOWN
                   </span>
                 </div>
-                <div style={{ display: "grid", gridTemplateRows: "repeat(5, 1fr)", gap: 10 }}>
+                <div className="tl-outcome-col-inner" style={{ display: "grid", gridTemplateRows: "repeat(5, 1fr)", gap: 10 }}>
                   {downItems.map((item, i) => (
                     <motion.div
                       key={i}
@@ -1077,10 +1143,10 @@ const Home = () => {
         </section>
 
         {/* SECTION 5 — HOW IT WORKS */}
-        <section style={{ background: C.surface, padding: "80px 48px" }}>
+        <section className="tl-section-how" style={{ background: C.surface, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>How It Works</SectionTag>
-            <h2
+            <h2 className="tl-section-h2"
               style={{
                 fontWeight: 800,
                 fontSize: 36,
@@ -1092,10 +1158,11 @@ const Home = () => {
             >
               Controlled from day one. One shift at a time.
             </h2>
-            <p style={{ fontSize: 15, color: C.muted, lineHeight: 1.65, marginBottom: 48 }}>
+            <p className="tl-section-sub" style={{ fontSize: 15, color: C.muted, lineHeight: 1.65, marginBottom: 48 }}>
               No disruption. No rip and replace. Proven before it scales.
             </p>
             <div
+              className="tl-steps-grid"
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(3, 1fr)",
@@ -1126,9 +1193,9 @@ const Home = () => {
         </section>
 
         {/* SECTION 6 — CONTACT */}
-        <section id="contact" style={{ background: "#2D6A4F", padding: "80px 48px" }}>
+        <section id="contact" className="tl-section-contact" style={{ background: "#2D6A4F", padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
-            <h2
+            <h2 className="tl-section-h2 tl-contact-h2"
               style={{
                 fontWeight: 800,
                 fontSize: 36,
@@ -1228,7 +1295,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 7 — FOOTER */}
-        <footer
+        <footer className="tl-footer"
           style={{
             background: "#0D0D0B",
             borderTop: "0.5px solid rgba(255,255,255,0.08)",
