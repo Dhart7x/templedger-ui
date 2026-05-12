@@ -35,7 +35,7 @@ const StepNumber = ({ value }: { value: number }) => {
     </div>
   );
 };
-import { ChevronRight, Monitor, Presentation, TrendingUp } from "lucide-react";
+import { ChevronDown, Monitor, Presentation, TrendingUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const FONT = "'Plus Jakarta Sans', system-ui, sans-serif";
