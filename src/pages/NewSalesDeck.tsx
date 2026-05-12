@@ -3,21 +3,27 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Home, Calendar, Monitor, Layers } from "lucide-react";
 
 const COLORS = {
-  bg: "#111210",
-  fg: "#ede7d9",
-  primary: "#7d8f46",
-  muted: "#52524e",
-  border: "#2a2b27",
-  card: "#1a1b18",
+  bg: "#FFFFFF",
+  surface: "#F8F5EF",
+  fg: "#0D0D0B",
+  fgSecondary: "#6B6460",
+  fgMuted: "#9B9590",
+  primary: "#2D6A4F",
+  primaryLight: "#EBF4EF",
+  border: "#E5E0DA",
+  card: "#FFFFFF",
 };
 
-const fontMono = "'IBM Plex Mono', monospace";
 const fontBody = "'Inter', sans-serif";
+const fontMono = "'Inter', sans-serif";
 
 // ---------- Slide shell ----------
-function SlideFrame({ children }: { children: ReactNode }) {
+function SlideFrame({ children, surface = false }: { children: ReactNode; surface?: boolean }) {
   return (
-    <div className="w-full h-full flex items-center justify-center px-8 md:px-20 lg:px-32 py-16">
+    <div
+      className="w-full h-full flex items-center justify-center px-8 md:px-20 lg:px-32 py-16"
+      style={{ background: surface ? COLORS.surface : COLORS.bg }}
+    >
       <div className="w-full max-w-[1200px]">{children}</div>
     </div>
   );
@@ -26,9 +32,16 @@ function SlideFrame({ children }: { children: ReactNode }) {
 function Eyebrow({ children }: { children: ReactNode }) {
   return (
     <span
-      className="block mb-4 text-[11px] tracking-[0.28em] uppercase"
-      style={{ fontFamily: fontBody, color: COLORS.primary }}
+      className="inline-flex items-center gap-2 mb-4 uppercase"
+      style={{
+        fontFamily: fontBody,
+        color: COLORS.primary,
+        fontSize: 10,
+        fontWeight: 700,
+        letterSpacing: "0.16em",
+      }}
     >
+      <span style={{ width: 20, height: 2, background: COLORS.primary, display: "inline-block" }} />
       {children}
     </span>
   );
@@ -37,8 +50,8 @@ function Eyebrow({ children }: { children: ReactNode }) {
 function H1({ children }: { children: ReactNode }) {
   return (
     <h1
-      className="font-bold text-[40px] md:text-[52px] leading-[1.1] mb-4"
-      style={{ fontFamily: fontMono, color: COLORS.fg }}
+      className="text-[40px] md:text-[52px] leading-[1.1] mb-4"
+      style={{ fontFamily: fontBody, color: COLORS.fg, fontWeight: 800, letterSpacing: "-0.025em" }}
     >
       {children}
     </h1>
@@ -49,7 +62,7 @@ function Sub({ children }: { children: ReactNode }) {
   return (
     <p
       className="text-[18px] md:text-[20px] leading-[1.5]"
-      style={{ fontFamily: fontMono, color: COLORS.primary }}
+      style={{ fontFamily: fontBody, color: COLORS.primary, fontWeight: 700 }}
     >
       {children}
     </p>
@@ -62,26 +75,49 @@ function SlideHero() {
     <SlideFrame>
       <div className="flex flex-col items-center text-center">
         <span
-          className="text-[12px] tracking-[0.4em] mb-6"
-          style={{ fontFamily: fontBody, color: COLORS.muted }}
+          className="mb-6 uppercase"
+          style={{
+            fontFamily: fontBody,
+            color: COLORS.fgSecondary,
+            fontSize: 12,
+            letterSpacing: "0.4em",
+            fontWeight: 600,
+          }}
         >
           TEMP LABOR ORCHESTRATION
         </span>
         <h1
-          className="font-bold text-[44px] md:text-[64px] tracking-[0.3em] mb-6"
-          style={{ fontFamily: fontMono, color: COLORS.primary }}
+          className="text-[44px] md:text-[64px] mb-6"
+          style={{
+            fontFamily: fontBody,
+            color: COLORS.primary,
+            fontWeight: 800,
+            letterSpacing: "0.3em",
+          }}
         >
           TEMP LEDGER
         </h1>
-        <div className="w-12 h-px mb-6" style={{ background: COLORS.muted }} />
+        <div className="w-12 h-px mb-6" style={{ background: COLORS.primary }} />
         <p
           className="text-[18px] md:text-[20px]"
-          style={{ fontFamily: fontBody, color: COLORS.muted }}
+          style={{ fontFamily: fontBody, color: COLORS.fgSecondary }}
         >
           Visibility. Accountability. Control.
         </p>
       </div>
     </SlideFrame>
+  );
+}
+
+function Bullet({ children }: { children: ReactNode }) {
+  return (
+    <li className="flex gap-3 items-start">
+      <span
+        className="w-1.5 h-1.5 mt-2.5 flex-shrink-0"
+        style={{ background: COLORS.primary, borderRadius: 1 }}
+      />
+      <span style={{ fontFamily: fontBody, color: COLORS.fg, fontWeight: 500 }}>{children}</span>
+    </li>
   );
 }
 
@@ -92,24 +128,13 @@ function SlideProblem() {
     "Without synchronization, failure is built into the model.",
   ];
   return (
-    <SlideFrame>
+    <SlideFrame surface>
       <Eyebrow>THE PROBLEM</Eyebrow>
       <H1>You do your best to manage your agencies.</H1>
       <Sub>Doing that effectively is structurally impossible.</Sub>
-      <ul className="mt-12 space-y-5">
+      <ul className="mt-12 space-y-5 text-[16px] md:text-[18px]">
         {bullets.map((b, i) => (
-          <li key={i} className="flex gap-3 items-start">
-            <span
-              className="w-1.5 h-1.5 mt-2.5 flex-shrink-0"
-              style={{ background: COLORS.primary }}
-            />
-            <span
-              className="text-[16px] md:text-[18px]"
-              style={{ fontFamily: fontBody, color: COLORS.fg, opacity: 0.85 }}
-            >
-              {b}
-            </span>
-          </li>
+          <Bullet key={i}>{b}</Bullet>
         ))}
       </ul>
     </SlideFrame>
@@ -135,20 +160,9 @@ function SlideOutcome() {
         <H1>The consequences probably sound familiar.</H1>
         <Sub>You've adapted to them. You shouldn't have to.</Sub>
       </div>
-      <ul className="mt-6 flex flex-col gap-2.5">
+      <ul className="mt-6 flex flex-col gap-2.5 text-[15px]">
         {items.map((b, i) => (
-          <li key={i} className="flex gap-3 items-start">
-            <span
-              className="w-1.5 h-1.5 mt-2.5 flex-shrink-0"
-              style={{ background: COLORS.primary }}
-            />
-            <span
-              className="text-[15px]"
-              style={{ fontFamily: fontMono, color: COLORS.fg }}
-            >
-              {b}
-            </span>
-          </li>
+          <Bullet key={i}>{b}</Bullet>
         ))}
       </ul>
     </SlideFrame>
@@ -168,32 +182,40 @@ function SlideChanges() {
     { dir: "up", title: "Agency accountability", desc: "Performance derived from the system. Not self-reported." },
   ];
   return (
-    <SlideFrame>
+    <SlideFrame surface>
       <H1>This is what changes.</H1>
       <Sub>The impact compounds with every shift, every day.</Sub>
       <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
         {cards.map((c, i) => {
           const up = c.dir === "up";
           const arrow = up ? "▲" : "▼";
-          const color = up ? "#7fc28a" : "#e07b7b";
+          const arrowColor = up ? "#22c55e" : "#ef4444";
+          const titleColor = up ? "#16803C" : "#DC2626";
           return (
             <div
               key={i}
-              className="rounded-lg p-5"
-              style={{ background: COLORS.card, border: `1px solid ${COLORS.border}` }}
+              className="p-5"
+              style={{
+                background: COLORS.card,
+                border: `0.5px solid ${COLORS.border}`,
+                borderRadius: 10,
+              }}
             >
-              <div className="flex items-start gap-2 pb-3 mb-3" style={{ borderBottom: `1px solid ${COLORS.border}` }}>
-                <span style={{ color, fontFamily: fontMono, fontSize: 14 }}>{arrow}</span>
+              <div
+                className="flex items-start gap-2 pb-3 mb-3"
+                style={{ borderBottom: `0.5px solid ${COLORS.border}` }}
+              >
+                <span style={{ color: arrowColor, fontFamily: fontBody, fontSize: 14 }}>{arrow}</span>
                 <span
-                  className="text-[14px] font-semibold leading-tight"
-                  style={{ fontFamily: fontMono, color }}
+                  className="text-[14px] leading-tight"
+                  style={{ fontFamily: fontBody, color: titleColor, fontWeight: 700 }}
                 >
                   {c.title}
                 </span>
               </div>
               <p
-                className="text-[13px] leading-[1.5]"
-                style={{ fontFamily: fontBody, color: COLORS.fg, opacity: 0.7 }}
+                className="text-[13px] leading-[1.65]"
+                style={{ fontFamily: fontBody, color: COLORS.fgSecondary, fontWeight: 400 }}
               >
                 {c.desc}
               </p>
@@ -249,18 +271,27 @@ function SlideImplementation() {
           return (
             <div
               key={i}
-              className="rounded-lg p-6"
-              style={{ background: COLORS.card, border: `1px solid ${COLORS.border}` }}
+              className="p-6"
+              style={{
+                background: COLORS.card,
+                border: `0.5px solid ${COLORS.border}`,
+                borderRadius: 10,
+              }}
             >
               <div
                 className="w-10 h-10 rounded-md flex items-center justify-center mb-6"
-                style={{ background: "rgba(125,143,70,0.12)", border: `1px solid ${COLORS.border}` }}
+                style={{ background: COLORS.primaryLight, border: `0.5px solid ${COLORS.border}` }}
               >
                 <Icon size={18} style={{ color: COLORS.primary }} />
               </div>
               <h3
-                className="text-[16px] font-bold mb-4 pb-3"
-                style={{ fontFamily: fontMono, color: COLORS.fg, borderBottom: `1px solid ${COLORS.border}` }}
+                className="text-[16px] mb-4 pb-3"
+                style={{
+                  fontFamily: fontBody,
+                  color: COLORS.fg,
+                  fontWeight: 700,
+                  borderBottom: `0.5px solid ${COLORS.border}`,
+                }}
               >
                 {c.title}
               </h3>
@@ -269,11 +300,11 @@ function SlideImplementation() {
                   <li key={j} className="flex gap-3 items-start">
                     <span
                       className="w-1 h-1 mt-2 flex-shrink-0"
-                      style={{ background: COLORS.primary }}
+                      style={{ background: COLORS.primary, borderRadius: 1 }}
                     />
                     <span
-                      className="text-[13.5px] leading-[1.5]"
-                      style={{ fontFamily: fontBody, color: COLORS.fg, opacity: 0.75 }}
+                      className="text-[13.5px] leading-[1.65]"
+                      style={{ fontFamily: fontBody, color: COLORS.fg, fontWeight: 500 }}
                     >
                       {it}
                     </span>
@@ -321,9 +352,10 @@ function SlidePricing() {
   const inputClass = "w-full rounded-md px-3 py-2 text-[15px] outline-none";
   const inputStyle = {
     background: COLORS.bg,
-    border: `1px solid ${COLORS.border}`,
+    border: `0.5px solid ${COLORS.border}`,
     color: COLORS.fg,
-    fontFamily: fontMono,
+    fontFamily: fontBody,
+    fontWeight: 500,
   } as const;
 
   const stop = (e: React.KeyboardEvent | React.MouseEvent) => e.stopPropagation();
@@ -336,25 +368,28 @@ function SlidePricing() {
   ];
 
   return (
-    <SlideFrame>
+    <SlideFrame surface>
       <Eyebrow>PRICING</Eyebrow>
       <H1>Simple. Aligned to your spend.</H1>
       <Sub>Priced as a percentage of your annual agency labor spend, billed monthly.</Sub>
 
       <div
-        className="mt-8 rounded-xl p-7"
-        style={{ background: COLORS.card, border: `1px solid ${COLORS.border}` }}
+        className="mt-8 p-7"
+        style={{ background: COLORS.card, border: `0.5px solid ${COLORS.border}`, borderRadius: 10 }}
       >
         <span
-          className="block mb-5 text-[14px] font-semibold"
-          style={{ fontFamily: fontMono, color: COLORS.fg }}
+          className="block mb-5 text-[14px]"
+          style={{ fontFamily: fontBody, color: COLORS.fg, fontWeight: 700 }}
         >
           Calculate your investment
         </span>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block mb-1.5 text-[12px]" style={{ fontFamily: fontBody, color: COLORS.fg, opacity: 0.7 }}>
+            <label
+              className="block mb-1.5 text-[12px]"
+              style={{ fontFamily: fontBody, color: COLORS.fgSecondary, fontWeight: 500 }}
+            >
               Daily headcount
             </label>
             <input
@@ -368,7 +403,10 @@ function SlidePricing() {
             />
           </div>
           <div>
-            <label className="block mb-1.5 text-[12px]" style={{ fontFamily: fontBody, color: COLORS.fg, opacity: 0.7 }}>
+            <label
+              className="block mb-1.5 text-[12px]"
+              style={{ fontFamily: fontBody, color: COLORS.fgSecondary, fontWeight: 500 }}
+            >
               Charge rate / hour ($)
             </label>
             <input
@@ -382,7 +420,10 @@ function SlidePricing() {
             />
           </div>
           <div>
-            <label className="block mb-1.5 text-[12px]" style={{ fontFamily: fontBody, color: COLORS.fg, opacity: 0.7 }}>
+            <label
+              className="block mb-1.5 text-[12px]"
+              style={{ fontFamily: fontBody, color: COLORS.fgSecondary, fontWeight: 500 }}
+            >
               Avg weekly hours
             </label>
             <input
@@ -394,7 +435,10 @@ function SlidePricing() {
               onClick={stop}
               onKeyDown={stop}
             />
-            <span className="block mt-1 text-[11px]" style={{ fontFamily: fontBody, color: COLORS.muted }}>
+            <span
+              className="block mt-1 text-[11px]"
+              style={{ fontFamily: fontBody, color: COLORS.fgMuted }}
+            >
               Default 35 hrs
             </span>
           </div>
@@ -403,33 +447,39 @@ function SlidePricing() {
         {result && (
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { label: "ANNUAL LABOR SPEND", value: `$${result.annualSpend.toLocaleString()}`, highlight: false },
+              { label: "ANNUAL LABOR SPEND", value: `$${result.annualSpend.toLocaleString()}`, highlight: false, accent: false },
               { label: "YOUR RATE", value: `${(result.rate * 100).toFixed(2)}%`, highlight: false, accent: true },
-              { label: "MONTHLY INVESTMENT", value: `$${result.monthlyFee.toLocaleString()} / mo`, highlight: true },
+              { label: "MONTHLY INVESTMENT", value: `$${result.monthlyFee.toLocaleString()} / mo`, highlight: true, accent: false },
             ].map((card, i) => (
               <div
                 key={i}
-                className="rounded-lg p-4"
+                className="p-4"
                 style={{
                   background: card.highlight ? COLORS.primary : COLORS.bg,
-                  border: `1px solid ${card.highlight ? COLORS.primary : COLORS.border}`,
+                  border: `0.5px solid ${card.highlight ? COLORS.primary : COLORS.border}`,
+                  borderRadius: 10,
                 }}
               >
                 <span
-                  className="block mb-2 text-[10px] tracking-[0.18em]"
+                  className="block mb-2 uppercase"
                   style={{
                     fontFamily: fontBody,
-                    color: card.highlight ? "#1a1b18" : COLORS.muted,
-                    opacity: card.highlight ? 0.7 : 1,
+                    color: card.highlight ? "#FFFFFF" : COLORS.fgMuted,
+                    fontSize: 10,
+                    letterSpacing: "0.12em",
+                    fontWeight: 700,
+                    opacity: card.highlight ? 0.85 : 1,
                   }}
                 >
                   {card.label}
                 </span>
                 <span
-                  className="block text-[24px] font-bold"
+                  className="block text-[24px]"
                   style={{
-                    fontFamily: fontMono,
-                    color: card.highlight ? "#1a1b18" : card.accent ? COLORS.primary : COLORS.fg,
+                    fontFamily: fontBody,
+                    color: card.highlight ? "#FFFFFF" : card.accent ? COLORS.primary : COLORS.fg,
+                    fontWeight: 800,
+                    letterSpacing: "-0.025em",
                   }}
                 >
                   {card.value}
@@ -440,8 +490,8 @@ function SlidePricing() {
         )}
 
         <p
-          className="mt-4 text-center text-[12px] italic"
-          style={{ fontFamily: fontBody, color: COLORS.muted }}
+          className="mt-4 text-center text-[13px] italic"
+          style={{ fontFamily: fontBody, color: COLORS.primary, fontWeight: 600 }}
         >
           Billed monthly. No setup fees. No long-term lock-in.
         </p>
@@ -452,15 +502,25 @@ function SlidePricing() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {passCost.map((p, i) => {
             const up = p.dir === "up";
-            const color = up ? "#7fc28a" : "#e07b7b";
+            const arrowColor = up ? "#22c55e" : "#ef4444";
+            const labelColor = up ? "#16803C" : "#DC2626";
             return (
               <div
                 key={i}
-                className="rounded-lg px-4 py-3 flex items-center gap-2"
-                style={{ background: COLORS.card, border: `1px solid ${COLORS.border}` }}
+                className="px-4 py-3 flex items-center gap-2"
+                style={{
+                  background: COLORS.card,
+                  border: `0.5px solid ${COLORS.border}`,
+                  borderRadius: 10,
+                }}
               >
-                <span style={{ color, fontFamily: fontMono, fontSize: 12 }}>{up ? "▲" : "▼"}</span>
-                <span className="text-[13px]" style={{ fontFamily: fontMono, color }}>
+                <span style={{ color: arrowColor, fontFamily: fontBody, fontSize: 12 }}>
+                  {up ? "▲" : "▼"}
+                </span>
+                <span
+                  className="text-[13px]"
+                  style={{ fontFamily: fontBody, color: labelColor, fontWeight: 700 }}
+                >
                   {p.label}
                 </span>
               </div>
@@ -477,13 +537,16 @@ function SlideClosing() {
     <SlideFrame>
       <div className="flex flex-col items-center text-center">
         <h1
-          className="font-bold text-[40px] md:text-[56px] leading-[1.15] mb-6"
-          style={{ fontFamily: fontMono, color: COLORS.fg }}
+          className="text-[40px] md:text-[56px] leading-[1.15] mb-6"
+          style={{ fontFamily: fontBody, color: COLORS.fg, fontWeight: 800, letterSpacing: "-0.025em" }}
         >
           Take control of your<br />contingent workforce.
         </h1>
-        <div className="w-12 h-px my-4" style={{ background: COLORS.muted }} />
-        <p className="text-[16px]" style={{ fontFamily: fontBody, color: COLORS.muted }}>
+        <div className="w-12 h-px my-4" style={{ background: COLORS.primary }} />
+        <p
+          className="text-[16px] italic"
+          style={{ fontFamily: fontBody, color: COLORS.primary, fontWeight: 600 }}
+        >
           Visibility. Accountability. Control.
         </p>
       </div>
@@ -533,10 +596,11 @@ export default function NewSalesDeck() {
         href="/"
         className="fixed top-4 left-4 z-50 flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md transition-colors"
         style={{
-          color: COLORS.muted,
-          background: "rgba(17,18,16,0.8)",
-          border: `1px solid ${COLORS.border}`,
+          color: COLORS.primary,
+          background: COLORS.bg,
+          border: `0.5px solid ${COLORS.border}`,
           fontFamily: fontBody,
+          fontWeight: 600,
         }}
       >
         <Home className="w-3.5 h-3.5" />
@@ -561,7 +625,7 @@ export default function NewSalesDeck() {
         <button
           onClick={() => go(-1)}
           className="fixed left-4 top-1/2 -translate-y-1/2 z-40 w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-          style={{ background: COLORS.card, border: `1px solid ${COLORS.border}`, color: COLORS.fg }}
+          style={{ background: COLORS.bg, border: `0.5px solid ${COLORS.border}`, color: COLORS.primary }}
           aria-label="Previous"
         >
           <ChevronLeft className="w-5 h-5" />
@@ -572,7 +636,7 @@ export default function NewSalesDeck() {
         <button
           onClick={() => go(1)}
           className="fixed right-4 top-1/2 -translate-y-1/2 z-40 w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-          style={{ background: COLORS.card, border: `1px solid ${COLORS.border}`, color: COLORS.fg }}
+          style={{ background: COLORS.bg, border: `0.5px solid ${COLORS.border}`, color: COLORS.primary }}
           aria-label="Next"
         >
           <ChevronRight className="w-5 h-5" />
@@ -583,7 +647,7 @@ export default function NewSalesDeck() {
         <button
           onClick={() => go(1)}
           className="fixed right-4 top-1/2 -translate-y-1/2 z-40 w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-          style={{ background: COLORS.card, border: `1px solid ${COLORS.border}`, color: COLORS.fg }}
+          style={{ background: COLORS.bg, border: `0.5px solid ${COLORS.border}`, color: COLORS.primary }}
           aria-label="Next"
         >
           <ChevronRight className="w-5 h-5" />
@@ -594,10 +658,11 @@ export default function NewSalesDeck() {
         <div
           className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 text-[11px] tracking-[0.2em] px-3 py-1.5 rounded-md"
           style={{
-            color: COLORS.muted,
-            background: "rgba(17,18,16,0.8)",
-            border: `1px solid ${COLORS.border}`,
-            fontFamily: fontMono,
+            color: COLORS.primary,
+            background: COLORS.bg,
+            border: `0.5px solid ${COLORS.border}`,
+            fontFamily: fontBody,
+            fontWeight: 700,
           }}
         >
           {String(index + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
