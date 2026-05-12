@@ -292,21 +292,23 @@ const Home = () => {
           onClick={() => setDropdownOpen((o) => !o)}
           aria-label="Internal access"
           style={{
-            width: 32,
-            height: 32,
-            background: "rgba(255,255,255,0.08)",
-            borderRadius: 6,
-            color: "rgba(255,255,255,0.3)",
+            width: 20,
+            height: 20,
+            background: "transparent",
+            borderRadius: 0,
+            color: "rgba(255,255,255,0.2)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             border: "none",
             cursor: "pointer",
-            transform: dropdownOpen ? "rotate(90deg)" : "rotate(0deg)",
-            transition: "transform 0.2s ease",
+            padding: 4,
+            transition: "color 0.15s ease",
           }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.4)"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.2)"; }}
         >
-          <ChevronRight size={16} />
+          <ChevronDown size={14} />
         </button>
 
         {dropdownOpen && (
