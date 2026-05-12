@@ -583,10 +583,14 @@ const Home = () => {
                     Confirmed
                   </span>
                 </div>
-              </div>
+              </motion.div>
 
               {/* RIGHT PANEL */}
-              <div
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
                 style={{
                   background: "#FFFFFF",
                   border: "1.5px solid #2D6A4F",
