@@ -1,14 +1,9 @@
-import { useState, useEffect, ReactNode } from "react";
-import { motion } from "framer-motion";
-import { Lock } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useState, useEffect, ReactNode, useRef } from "react";
 
-const ALLOWED_CREDENTIALS: Array<{ user: string; pass: string }> = [
-  { user: "templedger", pass: "fuckMSP" },
-  { user: "templedgerdemo", pass: "123!" },
-];
-const STORAGE_KEY = "tl_access_granted";
+const STORAGE_KEY = "tl_access";
+const STORAGE_VALUE = "granted";
+const ACCESS_CODE = "templedger101";
+const FONT = "'Plus Jakarta Sans', system-ui, sans-serif";
 
 interface AccessGateProps {
   children: ReactNode;
@@ -16,102 +11,221 @@ interface AccessGateProps {
 
 const AccessGate = ({ children }: AccessGateProps) => {
   const [granted, setGranted] = useState(false);
-  const [email, setEmail] = useState("templedgerdemo");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [code, setCode] = useState("");
+  const [error, setError] = useState(false);
+  const [shake, setShake] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const errorTimer = useRef<number | null>(null);
 
   useEffect(() => {
-    if (sessionStorage.getItem(STORAGE_KEY) === "true") {
+    if (sessionStorage.getItem(STORAGE_KEY) === STORAGE_VALUE) {
       setGranted(true);
     }
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const u = email.trim().toLowerCase();
-    const ok = ALLOWED_CREDENTIALS.some(
-      (c) => c.user.toLowerCase() === u && c.pass === password,
-    );
-    if (ok) {
-      sessionStorage.setItem(STORAGE_KEY, "true");
+  const submit = () => {
+    if (code.trim().toLowerCase() === ACCESS_CODE) {
+      sessionStorage.setItem(STORAGE_KEY, STORAGE_VALUE);
       setGranted(true);
-      setError("");
     } else {
-      setError("Invalid email or password");
+      setError(true);
+      setShake(true);
+      window.setTimeout(() => setShake(false), 320);
+      if (errorTimer.current) window.clearTimeout(errorTimer.current);
+      errorTimer.current = window.setTimeout(() => setError(false), 2000);
     }
   };
 
   if (granted) return <>{children}</>;
 
   return (
-    <div className="min-h-screen w-full bg-background relative overflow-hidden flex items-center justify-center px-6">
-      {/* Ambient background glows */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-primary/6 rounded-full blur-[100px]" />
-      </div>
-
-      <motion.form
-        onSubmit={handleSubmit}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="relative z-10 w-full max-w-md bg-card/80 backdrop-blur-md border border-border rounded-2xl p-8 shadow-2xl"
+    <>
+      <style>{`
+        @keyframes tl-shake {
+          0%, 100% { transform: translateX(0); }
+          20% { transform: translateX(-8px); }
+          40% { transform: translateX(8px); }
+          60% { transform: translateX(-6px); }
+          80% { transform: translateX(6px); }
+        }
+        @keyframes tl-fade-in {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+      `}</style>
+      <div
+        aria-hidden
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 40,
+          filter: "blur(8px)",
+          pointerEvents: "none",
+        }}
       >
-        <div className="flex flex-col items-center mb-6">
-          <div className="w-12 h-12 rounded-xl bg-primary/20 border border-primary/30 flex items-center justify-center mb-4">
-            <Lock className="w-5 h-5 text-primary" />
+        {children}
+      </div>
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 50,
+          background: "rgba(0,0,0,0.55)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontFamily: FONT,
+        }}
+      >
+        <div
+          style={{
+            background: "#FFFFFF",
+            borderRadius: 16,
+            padding: "40px 36px",
+            width: 360,
+            boxShadow: "0 32px 64px rgba(0,0,0,0.25)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+            animation: shake ? "tl-shake 0.3s ease" : undefined,
+          }}
+        >
+          <div
+            style={{
+              fontFamily: FONT,
+              fontWeight: 800,
+              fontSize: 14,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "#2D6A4F",
+              marginBottom: 4,
+            }}
+          >
+            TEMP LEDGER
           </div>
-          <h1 className="text-xl font-semibold text-foreground">Restricted Access</h1>
-          <p className="text-sm text-muted-foreground mt-1">Sign in to continue</p>
-        </div>
-
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="access-email" className="text-foreground">Username</Label>
-            <Input
-              id="access-email"
-              type="text"
-              autoComplete="username"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="templedgerdemo"
-              required
-            />
+          <div
+            style={{
+              fontFamily: FONT,
+              fontWeight: 400,
+              fontSize: 12,
+              color: "#9B9590",
+              marginBottom: 32,
+            }}
+          >
+            Agency Management Platform
           </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="access-password" className="text-foreground">Password</Label>
-            <Input
-              id="access-password"
-              type="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+          <div
+            style={{
+              width: 32,
+              height: 1.5,
+              background: "#E5E0DA",
+              margin: "0 auto 32px",
+            }}
+          />
+          <div
+            style={{
+              fontFamily: FONT,
+              fontWeight: 500,
+              fontSize: 14,
+              color: "#6B6460",
+              marginBottom: 16,
+            }}
+          >
+            Enter access code to continue
           </div>
-
+          <input
+            ref={inputRef}
+            type="text"
+            autoFocus
+            value={code}
+            onChange={(e) => {
+              setCode(e.target.value);
+              if (error) setError(false);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                submit();
+              }
+            }}
+            style={{
+              width: "100%",
+              background: "#F8F5EF",
+              border: `1px solid ${error ? "#DC2626" : "#E5E0DA"}`,
+              borderRadius: 10,
+              padding: "14px 18px",
+              fontFamily: FONT,
+              fontWeight: 700,
+              fontSize: 18,
+              letterSpacing: "0.25em",
+              color: "#0D0D0B",
+              textAlign: "center",
+              textTransform: "lowercase",
+              outline: "none",
+              transition: "border-color 0.2s",
+              boxSizing: "border-box",
+            }}
+            onFocus={(e) => {
+              if (!error) e.currentTarget.style.borderColor = "#2D6A4F";
+            }}
+            onBlur={(e) => {
+              if (!error) e.currentTarget.style.borderColor = "#E5E0DA";
+            }}
+          />
           {error && (
-            <p className="text-sm text-destructive">{error}</p>
+            <div
+              style={{
+                fontFamily: FONT,
+                fontWeight: 400,
+                fontSize: 12,
+                color: "#DC2626",
+                marginTop: 8,
+                animation: "tl-fade-in 0.2s ease",
+                alignSelf: "flex-start",
+              }}
+            >
+              Incorrect code. Try again.
+            </div>
           )}
-
           <button
-            type="submit"
-            className="w-full py-2.5 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
+            type="button"
+            onClick={submit}
+            style={{
+              marginTop: 14,
+              width: "100%",
+              background: "#2D6A4F",
+              color: "#FFFFFF",
+              fontFamily: FONT,
+              fontWeight: 700,
+              fontSize: 14,
+              borderRadius: 8,
+              padding: 12,
+              border: "none",
+              cursor: "pointer",
+              transition: "background 0.15s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#1A3D2E")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "#2D6A4F")}
           >
-            Sign in
+            Enter
           </button>
-
-          <a
-            href="/"
-            className="block text-center text-xs text-muted-foreground hover:text-primary transition-colors"
+          <div
+            style={{
+              fontFamily: FONT,
+              fontWeight: 400,
+              fontSize: 11,
+              color: "#C0B8B0",
+              marginTop: 20,
+            }}
           >
-            ← Back to home
-          </a>
+            Private access only.
+          </div>
         </div>
-      </motion.form>
-    </div>
+      </div>
+    </>
   );
 };
 
