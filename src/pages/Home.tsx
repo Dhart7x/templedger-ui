@@ -46,6 +46,14 @@ const Home = () => {
           >
             Demo
           </a>
+          <a
+            href="/capital"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-muted-foreground hover:text-primary transition-colors px-4 py-2 rounded-md border border-border hover:border-primary/50"
+          >
+            Capital
+          </a>
         </div>
       </header>
 

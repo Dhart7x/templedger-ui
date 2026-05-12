@@ -4,8 +4,10 @@ import { Lock } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-const ALLOWED_EMAIL = "templedgerdemo";
-const ALLOWED_PASSWORD = "123!";
+const ALLOWED_CREDENTIALS: Array<{ user: string; pass: string }> = [
+  { user: "templedger", pass: "fuckMSP" },
+  { user: "templedgerdemo", pass: "123!" },
+];
 const STORAGE_KEY = "tl_access_granted";
 
 interface AccessGateProps {
@@ -26,10 +28,11 @@ const AccessGate = ({ children }: AccessGateProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (
-      email.trim().toLowerCase() === ALLOWED_EMAIL.toLowerCase() &&
-      password === ALLOWED_PASSWORD
-    ) {
+    const u = email.trim().toLowerCase();
+    const ok = ALLOWED_CREDENTIALS.some(
+      (c) => c.user.toLowerCase() === u && c.pass === password,
+    );
+    if (ok) {
       sessionStorage.setItem(STORAGE_KEY, "true");
       setGranted(true);
       setError("");
