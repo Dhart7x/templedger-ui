@@ -221,7 +221,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
 
   // Main demo UI
   return (
-    <div className="w-full h-full flex flex-col" style={{ background: "hsl(var(--background))", color: "hsl(var(--foreground))" }}>
+    <div className="demo-theme w-full h-full flex flex-col" style={{ background: "hsl(var(--background))", color: "hsl(var(--foreground))" }}>
       {/* Demo Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/30">
         <div />

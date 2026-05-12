@@ -60,7 +60,7 @@ const Toggle = ({ on, onClick }: ToggleProps) => (
     type="button"
     onClick={onClick}
     className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-200 focus:outline-none"
-    style={{ backgroundColor: on ? "#7d8f46" : "#2a2b27" }}
+    style={{ backgroundColor: on ? "#2D6A4F" : "#E5E0DA" }}
     aria-pressed={on}
   >
     <span
@@ -112,8 +112,8 @@ const ClientPermissions = () => {
           <div
             key={dept.name}
             style={{
-              background: "#1a1b18",
-              border: "0.5px solid #2a2b27",
+              background: "#FFFFFF",
+              border: "0.5px solid #E5E0DA",
               borderRadius: "10px",
               padding: "20px 24px",
               marginBottom: "16px",
@@ -122,10 +122,10 @@ const ClientPermissions = () => {
             <div className="flex items-center justify-between">
               <div
                 style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: "14px",
                   fontWeight: 600,
-                  color: "#ede7d9",
+                  color: "#0D0D0B",
                 }}
               >
                 {dept.name}
@@ -136,7 +136,7 @@ const ClientPermissions = () => {
                     fontFamily: "Inter, sans-serif",
                     fontSize: "11px",
                     color: allOn
-                      ? "#7d8f46"
+                      ? "#2D6A4F"
                       : anyOn
                       ? "rgba(237,231,217,0.5)"
                       : "rgba(237,231,217,0.35)",
@@ -148,7 +148,7 @@ const ClientPermissions = () => {
               </div>
             </div>
 
-            <div style={{ height: 0, borderTop: "0.5px solid #2a2b27", margin: "14px 0" }} />
+            <div style={{ height: 0, borderTop: "0.5px solid #E5E0DA", margin: "14px 0" }} />
 
             <div className="space-y-4">
               {PERMISSIONS.map((p) => (
@@ -158,7 +158,7 @@ const ClientPermissions = () => {
                       style={{
                         fontFamily: "Inter, sans-serif",
                         fontSize: "13px",
-                        color: "#ede7d9",
+                        color: "#0D0D0B",
                       }}
                     >
                       {p.label}
@@ -187,9 +187,9 @@ const ClientPermissions = () => {
         <button
           onClick={handleSave}
           style={{
-            background: "#7d8f46",
-            color: "#111210",
-            fontFamily: "'IBM Plex Mono', monospace",
+            background: "#2D6A4F",
+            color: "#FFFFFF",
+            fontFamily: "'Inter', sans-serif",
             fontSize: "12px",
             fontWeight: 600,
             padding: "8px 16px",

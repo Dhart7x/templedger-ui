@@ -100,3 +100,56 @@
     letter-spacing: 0.1em;
   }
 }
+
+/* Scoped light theme for the Demo UI only.
+   Overrides semantic tokens + fonts within the demo container,
+   without affecting decks, website, or other surfaces. */
+.demo-theme {
+  --background: 0 0% 100%;
+  --foreground: 60 9% 5%;
+  --card: 0 0% 100%;
+  --card-foreground: 60 9% 5%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 60 9% 5%;
+  --primary: 152 41% 30%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 40 33% 95%;
+  --secondary-foreground: 60 9% 5%;
+  --muted: 40 33% 95%;
+  --muted-foreground: 24 5% 40%;
+  --accent: 150 27% 94%;
+  --accent-foreground: 152 41% 30%;
+  --destructive: 0 73% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 36 18% 88%;
+  --input: 36 18% 88%;
+  --ring: 152 41% 30%;
+  --sidebar-background: 40 33% 95%;
+  --sidebar-foreground: 24 5% 40%;
+  --sidebar-primary: 152 41% 30%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 150 27% 94%;
+  --sidebar-accent-foreground: 152 41% 30%;
+  --sidebar-border: 36 18% 88%;
+  --sidebar-ring: 152 41% 30%;
+
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.demo-theme h1,
+.demo-theme h2,
+.demo-theme h3,
+.demo-theme h4,
+.demo-theme h5,
+.demo-theme h6 {
+  font-family: 'Inter', system-ui, sans-serif;
+  letter-spacing: -0.015em;
+}
+
+.demo-theme .font-mono,
+.demo-theme .font-mono-display,
+.demo-theme .font-mono-data {
+  font-family: 'Inter', system-ui, sans-serif !important;
+}
