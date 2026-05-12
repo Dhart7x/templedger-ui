@@ -138,7 +138,7 @@ const AccessGate = ({ children }: AccessGateProps) => {
           </div>
           <input
             ref={inputRef}
-            type="text"
+            type="password"
             autoFocus
             value={code}
             onChange={(e) => {

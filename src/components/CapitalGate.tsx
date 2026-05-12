@@ -136,7 +136,7 @@ const CapitalGate = ({ children }: CapitalGateProps) => {
             Enter access code to continue
           </div>
           <input
-            type="text"
+            type="password"
             autoFocus
             value={code}
             onChange={(e) => {
