@@ -499,6 +499,7 @@ const Home = () => {
                 ))}
             </h1>
             <motion.p
+              className="tl-hero-sub"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
@@ -535,6 +536,7 @@ const Home = () => {
               Request Access
             </motion.button>
             <motion.p
+              className="tl-hero-muted"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: 1.1 }}
