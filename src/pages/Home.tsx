@@ -106,8 +106,8 @@ const Home = () => {
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
-    background: "rgba(255,255,255,0.06)",
-    border: "0.5px solid rgba(255,255,255,0.12)",
+    background: "rgba(255,255,255,0.12)",
+    border: "0.5px solid rgba(255,255,255,0.2)",
     borderRadius: 8,
     padding: "12px 16px",
     color: "#FFFFFF",
