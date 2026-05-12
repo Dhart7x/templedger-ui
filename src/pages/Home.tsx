@@ -1,5 +1,39 @@
 import { useState, useEffect, useRef, FormEvent } from "react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+
+const StepNumber = ({ value }: { value: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    if (!inView) return;
+    const start = performance.now();
+    const duration = 600;
+    let raf = 0;
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      setN(Math.round(t * value));
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, value]);
+  return (
+    <div
+      ref={ref}
+      style={{
+        fontWeight: 800,
+        fontSize: 48,
+        color: "#2D6A4F",
+        opacity: 0.15,
+        lineHeight: 1,
+        marginBottom: 16,
+      }}
+    >
+      {String(n).padStart(2, "0")}
+    </div>
+  );
+};
 import { ChevronRight, Monitor, Presentation, TrendingUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
