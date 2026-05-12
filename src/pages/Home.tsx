@@ -639,7 +639,7 @@ const Home = () => {
           </motion.div>
         </section>
 
-        {/* FOOTER */}
+        {/* SECTION 7 — FOOTER */}
         <footer
           style={{
             background: "#0D0D0B",
