@@ -429,7 +429,7 @@ const Home = () => {
                 display: "flex",
                 alignItems: "center",
                 gap: 10,
-                marginBottom: 16,
+                marginBottom: 24,
                 fontFamily: FONT,
                 fontWeight: 700,
                 fontSize: 10,
@@ -441,32 +441,6 @@ const Home = () => {
               <div style={{ width: 24, height: 2, background: "#2D6A4F" }} />
               THE REAL COST
             </div>
-            <h2
-              style={{
-                fontFamily: FONT,
-                fontWeight: 800,
-                fontSize: 36,
-                color: "#0D0D0B",
-                letterSpacing: "-0.022em",
-                lineHeight: 1.2,
-                marginBottom: 10,
-              }}
-            >
-              The cost of your agency spend isn't the number on the invoice.
-            </h2>
-            <p
-              style={{
-                fontFamily: FONT,
-                fontWeight: 400,
-                fontSize: 15,
-                color: "#6B6460",
-                lineHeight: 1.65,
-                marginBottom: 48,
-                maxWidth: 520,
-              }}
-            >
-              You know the spend. You don't know the cost.
-            </p>
 
             <div style={{ display: "flex", gap: 24, alignItems: "stretch" }}>
               {/* LEFT PANEL */}
