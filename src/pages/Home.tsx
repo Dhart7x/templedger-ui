@@ -607,9 +607,9 @@ const Home = () => {
                 </div>
                 <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
                   {[
-                    { d: "Agency hours", a: "Confirmed" },
-                    { d: "Employer costs", a: "Confirmed" },
-                    { d: "Agency margin", a: "Confirmed" },
+                    { d: "Agency hours", a: "$$$" },
+                    { d: "Employer costs", a: "$$$" },
+                    { d: "Agency margin", a: "$$$" },
                   ].map((row, i) => (
                     <div
                       key={i}
@@ -646,9 +646,9 @@ const Home = () => {
                   <span style={{ fontFamily: FONT, fontWeight: 700, fontSize: 13, color: "#0D0D0B" }}>
                     Invoice total
                   </span>
-                  <span style={{ fontFamily: FONT, fontWeight: 800, fontSize: 18, color: "#0D0D0B" }}>
-                    Confirmed
-                  </span>
+                    <span style={{ fontFamily: FONT, fontWeight: 800, fontSize: 18, color: "#0D0D0B" }}>
+                      $$$
+                    </span>
                 </div>
               </motion.div>
 
@@ -684,20 +684,6 @@ const Home = () => {
                   }}
                 >
                   WHAT IT ACTUALLY COST YOU
-                </div>
-                <div
-                  style={{
-                    padding: "10px 20px 6px",
-                    fontFamily: FONT,
-                    fontWeight: 700,
-                    fontSize: 10,
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                    color: "#C4391A",
-                    borderBottom: "0.5px solid #FEF0EE",
-                  }}
-                >
-                  NOT ON ANY INVOICE
                 </div>
                 <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
                   {[
@@ -747,7 +733,7 @@ const Home = () => {
                     Actual cost to your business
                   </span>
                   <span style={{ fontFamily: FONT, fontWeight: 800, fontSize: 18, color: "#C4391A" }}>
-                    Unknown
+                    You guessed it.
                   </span>
                 </div>
               </motion.div>
