@@ -10,6 +10,7 @@ import NewSalesDeck from "./pages/NewSalesDeck";
 import InvestorDeck from "./pages/InvestorDeckCapital";
 import NotFound from "./pages/NotFound";
 import AccessGate from "./components/AccessGate";
+import CapitalGate from "./components/CapitalGate";
 
 const queryClient = new QueryClient();
 
