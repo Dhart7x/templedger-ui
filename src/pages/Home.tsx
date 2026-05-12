@@ -60,6 +60,7 @@ const fadeIn = {
 
 const SectionTag = ({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) => (
   <div
+    className="tl-section-tag"
     style={{
       display: "flex",
       alignItems: "center",
