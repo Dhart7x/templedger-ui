@@ -115,6 +115,10 @@ const scrollToContact = () => {
   document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
 };
 
+const scrollToHowItWorks = () => {
+  document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
+};
+
 const Home = () => {
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
