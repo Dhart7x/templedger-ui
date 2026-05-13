@@ -1434,7 +1434,7 @@ const Home = () => {
                 marginBottom: 10,
               }}
             >
-              This isn't a software subscription you configure yourself.
+              This isn't off the shelf, one-size-fits-all software.
             </h2>
             <p className="tl-section-sub" style={{ fontSize: 15, color: C.muted, lineHeight: 1.65, marginBottom: 48 }}>
               TempLedger is implemented by a team of forward deployed experts embedded in your operation from day one. You provide one point of contact. We handle everything else.
