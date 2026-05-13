@@ -717,7 +717,7 @@ const Home = () => {
                 marginRight: -48,
                 marginTop: 0,
                 marginBottom: 0,
-                padding: "72px 48px",
+                padding: "72px 48px 48px",
                 borderRadius: 16,
                 boxShadow: "none",
               }}
@@ -793,7 +793,7 @@ const Home = () => {
                     display: "flex",
                     flexDirection: "column",
                     gap: 10,
-                    padding: "32px 0",
+                    padding: "10px 0",
                     borderBottom: i === arr.length - 1 ? "none" : "0.5px solid rgba(255,255,255,0.08)",
                   }}
                 >
@@ -826,48 +826,6 @@ const Home = () => {
                 </motion.div>
               ))}
 
-              {/* Closing line */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.4, delay: 0.6 }}
-                style={{
-                  marginTop: 48,
-                  paddingTop: 32,
-                  borderTop: "0.5px solid rgba(255,255,255,0.1)",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-                className="tl-cost-closing"
-              >
-                <span
-                  style={{
-                    fontFamily: FONT,
-                    fontWeight: 400,
-                    fontSize: 13,
-                    color: "rgba(255,255,255,0.35)",
-                    maxWidth: 400,
-                    lineHeight: 1.6,
-                  }}
-                >
-                  None of this is the result of poor management. It is the direct consequence of two sides operating without a shared system.
-                </span>
-                <span
-                  className="tl-cost-closing-right"
-                  style={{
-                    fontFamily: FONT,
-                    fontWeight: 800,
-                    fontSize: 15,
-                    color: "rgba(255,255,255,0.9)",
-                    textAlign: "right",
-                    whiteSpace: "pre-line",
-                  }}
-                >
-                  {`Every week.\nOn every site.\nAcross every agency.`}
-                </span>
-              </motion.div>
               </div>
             </div>
           </div>
