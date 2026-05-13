@@ -66,8 +66,9 @@ const TypingDollars = ({
   );
 };
 
-import { ChevronDown, Monitor, Presentation, TrendingUp } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { X } from "lucide-react";
+import SalesDeck from "./SalesDeck";
+import NewSalesDeck from "./NewSalesDeck";
 
 const FONT = "'Plus Jakarta Sans', system-ui, sans-serif";
 
@@ -120,21 +121,18 @@ const scrollToHowItWorks = () => {
 };
 
 const Home = () => {
-  const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", company: "", email: "", role: "" });
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const [deckOpen, setDeckOpen] = useState(false);
+  const [demoOpen, setDemoOpen] = useState(false);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    if (deckOpen || demoOpen) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => { document.body.style.overflow = prev; };
+    }
+  }, [deckOpen, demoOpen]);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -328,105 +326,6 @@ const Home = () => {
 
       `}</style>
 
-      {/* Hidden access menu */}
-      <div
-        style={{
-          position: "fixed",
-          top: 12,
-          left: 12,
-          zIndex: 60,
-        }}
-        ref={menuRef}
-      >
-        <button
-          onClick={() => setDropdownOpen((o) => !o)}
-          aria-label="Internal access"
-          style={{
-            width: 20,
-            height: 20,
-            background: "transparent",
-            borderRadius: 0,
-            color: "rgba(255,255,255,0.2)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            border: "none",
-            cursor: "pointer",
-            padding: 4,
-            transition: "color 0.15s ease",
-          }}
-          onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.4)"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.2)"; }}
-        >
-          <ChevronDown size={14} />
-        </button>
-
-        {dropdownOpen && (
-          <div
-            style={{
-              position: "absolute",
-              top: 40,
-              left: 0,
-              background: "#1A3D2E",
-              border: "0.5px solid rgba(255,255,255,0.12)",
-              borderRadius: 8,
-              padding: 6,
-              width: 160,
-              zIndex: 100,
-              boxShadow: "0 8px 24px rgba(0,0,0,0.3)",
-            }}
-          >
-            {[
-              { label: "Demo", path: "/demo", Icon: Monitor },
-              { label: "Sales Deck", path: "/sales-deck", Icon: Presentation },
-              { label: "Capital", path: "/capital", Icon: TrendingUp },
-            ].map((item) => (
-              <button
-                key={item.path}
-                onClick={() => {
-                  navigate(item.path);
-                  setDropdownOpen(false);
-                }}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  width: "100%",
-                  padding: "9px 14px",
-                  borderRadius: 6,
-                  background: "transparent",
-                  border: "none",
-                  cursor: "pointer",
-                  color: "rgba(255,255,255,0.7)",
-                  fontFamily: FONT,
-                  fontWeight: 600,
-                  fontSize: 12,
-                  textDecoration: "none",
-                  textAlign: "left",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(255,255,255,0.08)";
-                  e.currentTarget.style.color = "#FFFFFF";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "rgba(255,255,255,0.7)";
-                }}
-              >
-                <item.Icon
-                  style={{
-                    width: 14,
-                    height: 14,
-                    marginRight: 8,
-                    color: "rgba(255,255,255,0.4)",
-                    flexShrink: 0,
-                  }}
-                />
-                {item.label}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
 
       {/* NAV */}
       <motion.nav
@@ -487,26 +386,163 @@ const Home = () => {
             </a>
           ))}
         </div>
-        <motion.button
-          className="tl-nav-cta"
-          onClick={scrollToContact}
-          whileHover={{ scale: 1.03, boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}
-          transition={{ duration: 0.15 }}
-          style={{
-            background: "#FFFFFF",
-            color: C.primary,
-            fontWeight: 700,
-            fontSize: 12,
-            borderRadius: 6,
-            padding: "8px 18px",
-            border: "none",
-            cursor: "pointer",
-            fontFamily: FONT,
-          }}
-        >
-          Request Access
-        </motion.button>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          {[
+            { label: "Deck", onClick: () => setDeckOpen(true) },
+            { label: "Demo", onClick: () => setDemoOpen(true) },
+          ].map((b) => (
+            <button
+              key={b.label}
+              onClick={b.onClick}
+              style={{
+                fontFamily: FONT,
+                fontWeight: 700,
+                fontSize: 12,
+                background: "transparent",
+                border: "0.5px solid rgba(255,255,255,0.3)",
+                color: "rgba(255,255,255,0.8)",
+                borderRadius: 6,
+                padding: "7px 16px",
+                cursor: "pointer",
+                transition: "border-color 0.15s, color 0.15s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.6)";
+                e.currentTarget.style.color = "#FFFFFF";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)";
+                e.currentTarget.style.color = "rgba(255,255,255,0.8)";
+              }}
+            >
+              {b.label}
+            </button>
+          ))}
+          <motion.button
+            className="tl-nav-cta"
+            onClick={scrollToContact}
+            whileHover={{ scale: 1.03, boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}
+            transition={{ duration: 0.15 }}
+            style={{
+              background: "#FFFFFF",
+              color: C.primary,
+              fontWeight: 700,
+              fontSize: 12,
+              borderRadius: 6,
+              padding: "8px 18px",
+              border: "none",
+              cursor: "pointer",
+              fontFamily: FONT,
+            }}
+          >
+            Request Access
+          </motion.button>
+        </div>
       </motion.nav>
+
+      {/* Deck Modal */}
+      {deckOpen && (
+        <>
+          <div
+            onClick={() => setDeckOpen(false)}
+            style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(0,0,0,0.85)" }}
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 101,
+              width: "100vw",
+              height: "100vh",
+              overflow: "hidden",
+              background: "#000",
+            }}
+          >
+            <NewSalesDeck />
+            <button
+              onClick={() => setDeckOpen(false)}
+              aria-label="Close"
+              style={{
+                position: "fixed",
+                top: 16,
+                right: 16,
+                zIndex: 102,
+                width: 36,
+                height: 36,
+                background: "rgba(255,255,255,0.1)",
+                borderRadius: "50%",
+                border: "none",
+                color: "#FFFFFF",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "background 0.15s",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.2)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.1)"; }}
+            >
+              <X size={16} />
+            </button>
+          </motion.div>
+        </>
+      )}
+
+      {/* Demo Modal */}
+      {demoOpen && (
+        <>
+          <div
+            onClick={() => setDemoOpen(false)}
+            style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(0,0,0,0.85)" }}
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 101,
+              width: "100vw",
+              height: "100vh",
+              overflow: "hidden",
+              background: "#000",
+            }}
+          >
+            <SalesDeck />
+            <button
+              onClick={() => setDemoOpen(false)}
+              aria-label="Close"
+              style={{
+                position: "fixed",
+                top: 16,
+                right: 16,
+                zIndex: 102,
+                width: 36,
+                height: 36,
+                background: "rgba(255,255,255,0.1)",
+                borderRadius: "50%",
+                border: "none",
+                color: "#FFFFFF",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "background 0.15s",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.2)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.1)"; }}
+            >
+              <X size={16} />
+            </button>
+          </motion.div>
+        </>
+      )}
 
       <div className="tl-nav-spacer" style={{ paddingTop: 56 }}>
         {/* SECTION 1 — HERO */}
