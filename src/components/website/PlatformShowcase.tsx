@@ -7,6 +7,7 @@ import AllocationRecommendationPreview from "./platformPreviews/AllocationRecomm
 import SchedulePreview from "./platformPreviews/SchedulePreview";
 import PermissionsPreview from "./platformPreviews/PermissionsPreview";
 import DirectHirePreview from "./platformPreviews/DirectHirePreview";
+import AgencyPerformancePreview from "./platformPreviews/AgencyPerformancePreview";
 
 interface Props {
   onOpenDemo: () => void;
