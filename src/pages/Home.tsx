@@ -445,24 +445,30 @@ const Home = () => {
           TEMP LEDGER
         </div>
         <div className="tl-nav-links" style={{ display: "flex", gap: 32 }}>
-          {["Resources", "Contact"].map((l) => (
+          {[
+            { label: "How It Works", action: scrollToHowItWorks },
+            { label: "Resources", action: () => {} },
+            { label: "Contact", action: scrollToContact },
+          ].map((l) => (
             <a
-              key={l}
-              href={l === "Contact" ? "#contact" : "#"}
+              key={l.label}
+              href="#"
               onClick={(e) => {
-                if (l === "Contact") {
-                  e.preventDefault();
-                  scrollToContact();
-                }
+                e.preventDefault();
+                l.action();
               }}
               style={{
+                fontFamily: FONT,
                 fontWeight: 500,
                 fontSize: 13,
                 color: "rgba(255,255,255,0.65)",
                 textDecoration: "none",
+                transition: "color 0.15s",
               }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = "#FFFFFF"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.65)"; }}
             >
-              {l}
+              {l.label}
             </a>
           ))}
         </div>
