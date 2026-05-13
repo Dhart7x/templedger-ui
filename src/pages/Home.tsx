@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, FormEvent } from "react";
 import { motion, useInView } from "framer-motion";
+import PlatformShowcase from "@/components/website/PlatformShowcase";
 
 const StepNumber = ({ value }: { value: number }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -311,6 +312,13 @@ const Home = () => {
           .tl-section-introducing h2 { font-size: 28px !important; }
           .tl-pillars { grid-template-columns: 1fr !important; }
           .tl-pillar-word { font-size: 26px !important; }
+
+          /* PLATFORM SHOWCASE */
+          .tl-section-platform { padding: 56px 20px !important; }
+          .tl-section-platform h2 { font-size: 26px !important; }
+          .tl-platform-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+          .tl-platform-preview { height: 360px !important; }
+          .tl-platform-bottom { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
 
           /* OUTCOME */
           .tl-section-outcome { padding: 48px 20px !important; }
@@ -1042,6 +1050,9 @@ const Home = () => {
           </div>
         </section>
 
+
+        {/* SECTION — PLATFORM SHOWCASE */}
+        <PlatformShowcase onOpenDemo={() => setDemoGateOpen(true)} />
 
         {/* SECTION 4 — THE OUTCOME */}
         <section className="tl-section-outcome" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #5B21B6 40%, #4C1D95 70%, #3B1578 100%)", padding: "80px 48px", margin: 0, width: "100%" }}>
