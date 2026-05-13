@@ -268,7 +268,7 @@ const Home = () => {
           .tl-nav-spacer { padding-top: 48px !important; }
 
           /* HERO */
-          .tl-hero { padding: 72px 20px 48px !important; }
+          .tl-hero { padding: 52px 20px 48px !important; }
           .tl-hero-h1 { font-size: 32px !important; }
           .tl-hero-sub { font-size: 15px !important; }
           .tl-hero-cta { width: 100% !important; }
