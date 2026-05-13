@@ -313,6 +313,13 @@ const Home = () => {
           .tl-pillars { grid-template-columns: 1fr !important; }
           .tl-pillar-word { font-size: 26px !important; }
 
+          /* PLATFORM SHOWCASE */
+          .tl-section-platform { padding: 56px 20px !important; }
+          .tl-section-platform h2 { font-size: 26px !important; }
+          .tl-platform-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+          .tl-platform-preview { height: 360px !important; }
+          .tl-platform-bottom { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
+
           /* OUTCOME */
           .tl-section-outcome { padding: 48px 20px !important; }
           .tl-outcome-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
