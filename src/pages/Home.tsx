@@ -464,7 +464,7 @@ const Home = () => {
               width: "100vw",
               height: "100vh",
               overflow: "hidden",
-              background: "#000",
+              background: "#0D0D0B",
             }}
           >
             <SalesDeck />
@@ -661,7 +661,7 @@ const Home = () => {
                 >
                   AGENCY INVOICE
                 </span>
-                <span style={{ fontFamily: FONT, fontWeight: 400, fontSize: 11, color: "#C0B8B0" }}>
+                <span style={{ fontFamily: FONT, fontWeight: 400, fontSize: 11, color: "#9B9590" }}>
                 </span>
               </div>
               {[
@@ -693,7 +693,7 @@ const Home = () => {
                 style={{
                   padding: "14px 20px",
                   borderTop: "1px solid #E5E0DA",
-                  background: "#FAFAF6",
+                  background: "#F8F5EF",
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
@@ -1143,7 +1143,7 @@ const Home = () => {
                     style={{
                       display: "grid",
                       gridTemplateColumns: "1fr 1fr 1fr",
-                      background: i % 2 === 0 ? "#FFFFFF" : "#FAFAF6",
+                      background: i % 2 === 0 ? "#FFFFFF" : "#F8F5EF",
                       borderBottom: i === arr.length - 1 ? "none" : "0.5px solid #E5E0DA",
                     }}
                   >
@@ -1264,7 +1264,7 @@ const Home = () => {
                       height: 0,
                       borderLeft: "6px solid transparent",
                       borderRight: "6px solid transparent",
-                      borderBottom: "10px solid #4ade80",
+                      borderBottom: "10px solid #FFFFFF",
                     }}
                   />
                   <span
@@ -1274,7 +1274,7 @@ const Home = () => {
                       fontSize: 11,
                       letterSpacing: "0.14em",
                       textTransform: "uppercase",
-                      color: "#4ade80",
+                      color: "#FFFFFF",
                     }}
                   >
                     WHAT GOES UP
@@ -1295,7 +1295,7 @@ const Home = () => {
                         justifyContent: "flex-start",
                         background: "rgba(255,255,255,0.07)",
                         border: "0.5px solid rgba(255,255,255,0.1)",
-                        borderLeft: "3px solid #4ade80",
+                        borderLeft: "3px solid #FFFFFF",
                         borderRadius: "0 8px 8px 0",
                         padding: "16px 18px",
                       }}
@@ -1343,7 +1343,7 @@ const Home = () => {
                     style={{
                       width: 0,
                       height: 0,
-                      borderTop: "10px solid #f87171",
+                      borderTop: "10px solid #C4391A",
                       borderLeft: "6px solid transparent",
                       borderRight: "6px solid transparent",
                       borderBottom: "none",
@@ -1356,7 +1356,7 @@ const Home = () => {
                       fontSize: 11,
                       letterSpacing: "0.14em",
                       textTransform: "uppercase",
-                      color: "#f87171",
+                      color: "#C4391A",
                     }}
                   >
                     WHAT COMES DOWN
@@ -1377,7 +1377,7 @@ const Home = () => {
                         justifyContent: "flex-start",
                         background: "rgba(255,255,255,0.07)",
                         border: "0.5px solid rgba(255,255,255,0.1)",
-                        borderLeft: "3px solid #f87171",
+                        borderLeft: "3px solid #C4391A",
                         borderRadius: "0 8px 8px 0",
                         padding: "16px 18px",
                       }}

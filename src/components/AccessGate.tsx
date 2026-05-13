@@ -154,7 +154,7 @@ const AccessGate = ({ children }: AccessGateProps) => {
             style={{
               width: "100%",
               background: "#F8F5EF",
-              border: `1px solid ${error ? "#DC2626" : "#E5E0DA"}`,
+              border: `1px solid ${error ? "#C4391A" : "#E5E0DA"}`,
               borderRadius: 10,
               padding: "14px 18px",
               fontFamily: FONT,
@@ -181,7 +181,7 @@ const AccessGate = ({ children }: AccessGateProps) => {
                 fontFamily: FONT,
                 fontWeight: 400,
                 fontSize: 12,
-                color: "#DC2626",
+                color: "#C4391A",
                 marginTop: 8,
                 animation: "tl-fade-in 0.2s ease",
                 alignSelf: "flex-start",
@@ -217,7 +217,7 @@ const AccessGate = ({ children }: AccessGateProps) => {
               fontFamily: FONT,
               fontWeight: 400,
               fontSize: 11,
-              color: "#C0B8B0",
+              color: "#9B9590",
               marginTop: 20,
             }}
           >
