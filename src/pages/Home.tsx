@@ -1031,9 +1031,10 @@ const Home = () => {
             </div>
           </motion.div>
         </section>
+        </div>
 
         {/* SECTION 3c — THE ALTERNATIVE */}
-        <section className="tl-section-alternative" style={{ background: "#F8F5EF", padding: "80px 48px" }}>
+        <section className="tl-section-alternative" style={{ background: "#F8F5EF", padding: "80px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <motion.div
               initial={{ opacity: 0, y: 24 }}
