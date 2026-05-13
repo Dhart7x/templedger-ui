@@ -276,7 +276,11 @@ const Home = () => {
           .tl-problem-card { padding: 16px !important; }
           .tl-problem-statement { font-size: 13px !important; }
 
-          /* COST */
+          /* REVEAL */
+          .tl-section-reveal { padding: 56px 20px !important; }
+          .tl-section-reveal h2 { font-size: 26px !important; }
+          .tl-section-reveal .tl-reveal-block { font-size: 14px !important; }
+          .tl-section-reveal .tl-reveal-close { font-size: 15px !important; }
           .tl-section-cost { padding: 56px 20px !important; }
           .tl-cost-stack { gap: 12px !important; }
 
