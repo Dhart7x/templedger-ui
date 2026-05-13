@@ -31,7 +31,7 @@ interface ShiftCell {
 }
 
 const workerNames: Record<string, string[]> = {
-  Workforce Direct: ["Priya Sharma", "Leon Kowalski", "Fatima Al-Hassan", "Fatima Al-Hassan", "Priya Sharma", "Chris Donnelly", "Yuki Tanaka", "Daniel Reeves"],
+  "Workforce Direct": ["Priya Sharma", "Leon Kowalski", "Fatima Al-Hassan", "Fatima Al-Hassan", "Priya Sharma", "Chris Donnelly", "Yuki Tanaka", "Daniel Reeves"],
   Pertemps: ["Emma Johansson", "Rico Fernandez", "Aisha Nwosu", "James Okafor", "Sarah Mitchell", "Ana Pereira"],
   "Blue Arrow": ["Daniel Reeves", "Priya Sharma", "Tom Brady", "Diane Foster", "Marcus Webb"],
   "Elite Personnel": ["Chris Martin", "Laura White", "Ben Foster"],

@@ -33,7 +33,7 @@ interface ShiftCell {
 
 // Generate workers for filled weeks
 const workerNames: Record<string, string[]> = {
-  Workforce Direct: ["Priya Sharma", "Leon Kowalski", "Fatima Al-Hassan", "Fatima Al-Hassan", "Priya Sharma", "Chris Donnelly", "Yuki Tanaka", "Daniel Reeves"],
+  "Workforce Direct": ["Priya Sharma", "Leon Kowalski", "Fatima Al-Hassan", "Fatima Al-Hassan", "Priya Sharma", "Chris Donnelly", "Yuki Tanaka", "Daniel Reeves"],
   "Pinnacle Staffing": ["Emma Johansson", "Rico Fernandez", "Aisha Nwosu", "James Okafor", "Sarah Mitchell", "Ana Pereira"],
   "Meridian Recruitment": ["Daniel Reeves", "Priya Sharma", "Tom Brady", "Diane Foster", "Marcus Webb"],
 };
