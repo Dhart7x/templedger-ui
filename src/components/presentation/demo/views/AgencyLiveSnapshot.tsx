@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { 
-  MapPin, Clock, AlertTriangle, CheckCircle, Filter, TrendingUp, 
+  MapPin, Users, Clock, AlertTriangle, CheckCircle, Filter, TrendingUp, 
   Send, Car, LogOut, ShieldAlert, MessageSquare, Info
 } from "lucide-react";
 import { useDemoContext, ExceptionType } from "../DemoContext";
@@ -334,6 +334,35 @@ const AgencyLiveSnapshot = ({ onViewWorker }: AgencyLiveSnapshotProps) => {
                           </>
                         )}
                       </div>
+
+                      {/* Overtime contextual note */}
+                      {exception.type === "overtime" && (
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 8,
+                            marginTop: 6,
+                            padding: "8px 12px",
+                            background: "#EDE9FE",
+                            borderRadius: 6,
+                            borderLeft: "3px solid #4C1D95",
+                          }}
+                        >
+                          <Users className="w-3.5 h-3.5" style={{ color: "#4C1D95", flexShrink: 0 }} />
+                          <span
+                            style={{
+                              fontFamily: "Inter, sans-serif",
+                              fontWeight: 500,
+                              fontSize: 12,
+                              color: "#4C1D95",
+                              lineHeight: 1.5,
+                            }}
+                          >
+                            29 available workers to cover this shift within 3 miles of site.
+                          </span>
+                        </div>
+                      )}
 
                       {/* Resolution Status */}
                       {exception.resolution && (

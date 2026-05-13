@@ -428,6 +428,35 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
                         <p className="mt-1.5 text-xs text-muted-foreground italic">{exception.description}</p>
                       )}
 
+                      {/* Overtime contextual note */}
+                      {exception.type === "overtime" && (
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 8,
+                            marginTop: 6,
+                            padding: "8px 12px",
+                            background: "#EDE9FE",
+                            borderRadius: 6,
+                            borderLeft: "3px solid #4C1D95",
+                          }}
+                        >
+                          <Users className="w-3.5 h-3.5" style={{ color: "#4C1D95", flexShrink: 0 }} />
+                          <span
+                            style={{
+                              fontFamily: "Inter, sans-serif",
+                              fontWeight: 500,
+                              fontSize: 12,
+                              color: "#4C1D95",
+                              lineHeight: 1.5,
+                            }}
+                          >
+                            29 available workers to cover this shift within 3 miles of site.
+                          </span>
+                        </div>
+                      )}
+
                       {/* Resolution Status */}
                       {exception.resolution && (
                         <div className="mt-3 p-3 bg-muted/50 rounded-lg border border-border">

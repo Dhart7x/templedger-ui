@@ -327,6 +327,18 @@ const initialExceptions: LiveException[] = [
     overtimeMinutes: 90,
     timestamp: new Date().toISOString(),
     status: "open",
+  {
+    id: "exc-12a",
+    workerId: "w-marcus-webb",
+    workerName: "Marcus Webb",
+    type: "overtime",
+    site: "Baltimore, MD",
+    department: "Outbound Dispatch",
+    agency: "Pinnacle Staffing",
+    shift: "14:00–22:00",
+    overtimeMinutes: 65,
+    timestamp: new Date().toISOString(),
+    status: "open",
   },
   {
     id: "exc-13",
