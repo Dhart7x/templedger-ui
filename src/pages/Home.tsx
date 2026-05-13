@@ -748,9 +748,16 @@ const Home = () => {
               className="tl-hidden-costs"
               style={{
                 background: "#1A3D2E",
-                margin: "0 -48px",
-                padding: "72px 48px",
+                width: "100vw",
+                position: "relative",
+                left: "50%",
+                right: "50%",
+                marginLeft: "-50vw",
+                marginRight: "-50vw",
+                marginBottom: 0,
+                padding: "72px 48px 72px",
                 borderRadius: "16px 16px 0 0",
+                boxShadow: "none",
               }}
             >
               {/* Header block */}
