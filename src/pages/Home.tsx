@@ -250,6 +250,14 @@ const Home = () => {
         .tl-input:focus { border-color: ${C.primary} !important; }
         .tl-select option { color: ${C.fg}; }
 
+        @keyframes chevronPulse {
+          0%, 100% { opacity: 0.4; }
+          50% { opacity: 1; }
+        }
+        .tl-chevron-pulse {
+          animation: chevronPulse 1.2s ease-in-out infinite;
+        }
+
         @media (max-width: 768px) {
           /* NAV */
           .tl-nav { padding: 0 16px !important; height: 48px !important; }
