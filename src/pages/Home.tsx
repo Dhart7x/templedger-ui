@@ -217,7 +217,7 @@ const Home = () => {
     {
       n: "01",
       t: "We embed in your operation",
-      b: "Before anything is built or configured, we come on site. We understand your workforce structure, your agencies, your current process and where it breaks down. Discovery first. Always.",
+      b: "Before anything is configured, we come on site. We understand your agencies, your workforce structure and where your current process breaks down.",
     },
     {
       n: "02",
