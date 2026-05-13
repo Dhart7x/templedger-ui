@@ -1386,6 +1386,55 @@ const Home = () => {
           </div>
         </section>
 
+        {/* SECTION 3 — THE COST */}
+        <section className="tl-section-cost" style={{ background: "transparent", padding: "80px 48px", margin: 0, width: "100%" }}>
+          <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <SectionTag dark>The Cost</SectionTag>
+            <h2 className="tl-section-h2"
+              style={{
+                fontWeight: 800,
+                fontSize: 36,
+                color: "#FFFFFF",
+                letterSpacing: "-0.022em",
+                lineHeight: 1.2,
+                marginBottom: 24,
+              }}
+            >
+              The invisible cost is significant. And it compounds every week.
+            </h2>
+            <div className="tl-cost-stack" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              {costs.map((c, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -32 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.5, delay: i * 0.12, ease: "easeOut" }}
+                  style={{
+                    background: C.surface,
+                    border: `0.5px solid ${C.border}`,
+                    borderLeft: `4px solid ${C.primary}`,
+                    borderRadius: "0 10px 10px 0",
+                    padding: "28px 32px",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontWeight: 800,
+                      fontSize: 18,
+                      color: C.fg,
+                      marginBottom: 10,
+                    }}
+                  >
+                    {c.t}
+                  </div>
+                  <div style={{ fontSize: 14, color: C.muted, lineHeight: 1.7 }}>{c.b}</div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </section>
+
         {/* SECTION 5 — HOW IT WORKS */}
         <section id="how-it-works" className="tl-section-how" style={{ background: C.surface, padding: "80px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
