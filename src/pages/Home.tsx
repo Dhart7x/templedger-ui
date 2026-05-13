@@ -578,7 +578,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 2 — THE INVOICE VISUAL */}
-        <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "80px 48px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 900, margin: "0 auto" }}>
             <div
               style={{
