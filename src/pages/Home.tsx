@@ -526,27 +526,8 @@ const Home = () => {
 
       <div className="tl-nav-spacer" style={{ paddingTop: 56, background: "#4C1D95", margin: 0 }}>
         {/* SECTION 1 — HERO */}
-        <section className="tl-hero" style={{ background: "linear-gradient(to bottom, #4C1D95 0%, #5B21B6 40%, rgba(91,33,182,0.5) 75%, rgba(91,33,182,0) 100%)", padding: "96px 48px 80px", margin: 0, width: "100%" }}>
+        <section className="tl-hero" style={{ background: "linear-gradient(to bottom, #4C1D95 0%, #5B21B6 40%, rgba(91,33,182,0.5) 75%, rgba(91,33,182,0) 100%)", padding: "76px 48px 80px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-              style={{
-                display: "inline-block",
-                background: C.primaryLight,
-                color: C.primary,
-                fontWeight: 700,
-                fontSize: 11,
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-                borderRadius: 20,
-                padding: "4px 14px",
-                marginBottom: 28,
-              }}
-            >
-              Agency Management Platform
-            </motion.span>
             <h1
               className="tl-hero-h1"
               style={{
