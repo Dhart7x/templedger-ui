@@ -308,6 +308,8 @@ const Home = () => {
           /* HOW IT WORKS */
           .tl-section-how { padding: 56px 20px !important; }
           .tl-steps-grid { grid-template-columns: 1fr !important; gap: 1px !important; }
+          .tl-step-card { grid-template-rows: auto auto auto !important; height: auto !important; }
+          .tl-step-title { min-height: unset !important; }
           .tl-section-how .tl-section-sub { font-size: 13px !important; }
 
           /* CONTACT */
