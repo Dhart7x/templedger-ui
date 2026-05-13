@@ -1473,8 +1473,17 @@ const Home = () => {
                 fontSize: 36,
                 color: C.fg,
                 letterSpacing: "-0.022em",
-                lineHeight: 1.2,
+                lineHeight: 1.25,
                 marginBottom: 10,
+                whiteSpace: "normal",
+                overflow: "visible",
+                wordBreak: "normal",
+                overflowWrap: "break-word",
+                height: "auto",
+                minHeight: "unset",
+                maxHeight: "none",
+                paddingTop: 4,
+                paddingBottom: 4,
               }}
             >
               This isn't off the shelf, one-size-fits-all software.
