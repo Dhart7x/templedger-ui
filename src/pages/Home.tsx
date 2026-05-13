@@ -499,7 +499,8 @@ const Home = () => {
 
       <div className="tl-nav-spacer" style={{ paddingTop: 56 }}>
         {/* SECTION 1 — HERO */}
-        <section className="tl-hero" style={{ background: C.bg, padding: "96px 48px 80px", margin: 0, width: "100%" }}>
+        <section className="tl-hero" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #5B21B6 35%, rgba(91,33,182,0) 100%)", padding: "96px 48px 80px", margin: 0, width: "100%" }}>
+          <div aria-hidden style={{ position: "absolute", left: 0, right: 0, height: 80, marginTop: 0, background: "linear-gradient(180deg, rgba(91,33,182,0.06) 0%, #FFFFFF 100%)", pointerEvents: "none" }} />
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <motion.span
               initial={{ opacity: 0, y: 20 }}
@@ -1234,7 +1235,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 4 — THE OUTCOME */}
-        <section className="tl-section-outcome" style={{ background: "#4C1D95", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-outcome" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #5B21B6 60%, #4C1D95 100%)", padding: "80px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <div
               style={{
