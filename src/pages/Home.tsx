@@ -308,6 +308,8 @@ const Home = () => {
           /* HOW IT WORKS */
           .tl-section-how { padding: 56px 20px !important; }
           .tl-steps-grid { grid-template-columns: 1fr !important; gap: 1px !important; }
+          .tl-step-card { grid-template-rows: auto auto auto !important; height: auto !important; }
+          .tl-step-title { min-height: unset !important; }
           .tl-section-how .tl-section-sub { font-size: 13px !important; }
 
           /* CONTACT */
@@ -1467,19 +1469,28 @@ const Home = () => {
                 display: "grid",
                 gridTemplateColumns: "repeat(4, 1fr)",
                 gap: 1,
-                background: C.border,
+                background: "#E5E0DA",
                 borderRadius: 12,
                 overflow: "hidden",
+                alignItems: "stretch",
               }}
             >
               {steps.map((s, idx) => (
                 <motion.div
                   key={s.n}
+                  className="tl-step-card"
                   initial={{ opacity: 0, y: 32 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.5, delay: idx * 0.12, ease: "easeOut" }}
-                  style={{ background: C.bg, padding: 28, display: "flex", flexDirection: "column" }}
+                  style={{
+                    background: "#FFFFFF",
+                    padding: 28,
+                    display: "grid",
+                    gridTemplateRows: "auto auto 1fr",
+                    gap: 0,
+                    height: "100%",
+                  }}
                 >
                   <div
                     style={{
@@ -1490,14 +1501,38 @@ const Home = () => {
                       opacity: 0.15,
                       lineHeight: 1,
                       marginBottom: 14,
+                      display: "block",
                     }}
                   >
                     {s.n}
                   </div>
-                  <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 15, color: C.fg, marginBottom: 8 }}>
+                  <div
+                    className="tl-step-title"
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 700,
+                      fontSize: 15,
+                      color: "#0D0D0B",
+                      lineHeight: 1.3,
+                      marginBottom: 12,
+                      minHeight: "2.6em",
+                      display: "block",
+                    }}
+                  >
                     {s.t}
                   </div>
-                  <div style={{ fontFamily: FONT, fontSize: 13, color: C.muted, lineHeight: 1.65 }}>{s.b}</div>
+                  <div
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 400,
+                      fontSize: 13,
+                      color: "#6B6460",
+                      lineHeight: 1.65,
+                      alignSelf: "start",
+                    }}
+                  >
+                    {s.b}
+                  </div>
                 </motion.div>
               ))}
             </div>
