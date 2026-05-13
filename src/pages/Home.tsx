@@ -872,6 +872,74 @@ const Home = () => {
           </motion.div>
         </section>
 
+        {/* SECTION 3b — THE REVEAL */}
+        <section className="tl-section-reveal" style={{ background: "#0D0D0B", padding: "72px 48px" }}>
+          <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              style={{
+                fontFamily: FONT,
+                fontWeight: 800,
+                fontSize: 36,
+                color: "#FFFFFF",
+                letterSpacing: "-0.022em",
+                lineHeight: 1.2,
+                marginBottom: 32,
+              }}
+            >
+              There's a reason this keeps happening.
+            </motion.h2>
+            <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 640, margin: "0 auto" }}>
+              {[
+                "Agency worker data lives inside agency CRMs — systems built for the agency, not for you.",
+                "Time and attendance sits in a separate system entirely. No shared record of what was scheduled, who showed up, or whether anything that followed was accurate.",
+                "You are not managing agencies. You are reacting to whatever information they choose to share. And by the time you have it, it is already too late to act on it.",
+              ].map((text, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -24 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.45, delay: i * 0.1, ease: "easeOut" }}
+                  style={{
+                    borderLeft: "3px solid #2D6A4F",
+                    borderRadius: "0 8px 8px 0",
+                    background: "rgba(255,255,255,0.04)",
+                    padding: "20px 24px",
+                    textAlign: "left",
+                    fontFamily: FONT,
+                    fontWeight: 400,
+                    fontSize: 15,
+                    color: "rgba(255,255,255,0.7)",
+                    lineHeight: 1.75,
+                  }}
+                >
+                  {text}
+                </motion.div>
+              ))}
+            </div>
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
+              style={{
+                fontFamily: FONT,
+                fontWeight: 700,
+                fontSize: 17,
+                color: "#FFFFFF",
+                textAlign: "center",
+                marginTop: 36,
+              }}
+            >
+              Without synchronization, failure is built into the model.
+            </motion.p>
+          </div>
+        </section>
+
         {/* SECTION 3 — THE COST */}
         <section className="tl-section-cost" style={{ background: C.bg, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
