@@ -273,9 +273,6 @@ const Home = () => {
           .tl-hidden-costs { margin: 0 -20px !important; padding: 40px 20px !important; }
           .tl-hidden-costs .tl-hidden-stmt { font-size: 22px !important; }
 
-          .tl-hidden-stmt { transition: color 0.2s ease; }
-          .tl-hidden-stmt:hover { color: #C4391A !important; }
-
           /* PROBLEM */
           .tl-section-problem { padding: 56px 20px !important; }
           .tl-problem-grid { grid-template-columns: 1fr 1fr !important; gap: 1px !important; }
