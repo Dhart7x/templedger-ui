@@ -909,6 +909,7 @@ const Home = () => {
                   {`Every week.\nOn every site.\nAcross every agency.`}
                 </span>
               </motion.div>
+              </div>
             </div>
           </div>
         </section>
