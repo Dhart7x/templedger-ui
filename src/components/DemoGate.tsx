@@ -225,7 +225,7 @@ const DemoGate = ({ onClose, onSuccess }: DemoGateProps) => {
                 style={{
                   width: "100%",
                   background: "#F8F5EF",
-                  border: `1px solid ${error ? "#DC2626" : "#E5E0DA"}`,
+                  border: `1px solid ${error ? "#C4391A" : "#E5E0DA"}`,
                   borderRadius: 10,
                   padding: "14px 18px",
                   fontFamily: FONT,
@@ -247,7 +247,7 @@ const DemoGate = ({ onClose, onSuccess }: DemoGateProps) => {
                     fontFamily: FONT,
                     fontWeight: 400,
                     fontSize: 12,
-                    color: "#DC2626",
+                    color: "#C4391A",
                     marginTop: 8,
                   }}
                 >
