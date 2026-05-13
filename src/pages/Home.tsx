@@ -1505,7 +1505,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 6 — CONTACT */}
-        <section id="contact" className="tl-section-contact" style={{ background: "#2D6A4F", padding: "80px 48px" }}>
+        <section id="contact" className="tl-section-contact" style={{ background: "#2D6A4F", padding: "80px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
             <h2 className="tl-section-h2 tl-contact-h2"
               style={{
