@@ -731,23 +731,7 @@ const Home = () => {
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 style={{ marginBottom: 48 }}
               >
-                <div
-                  style={{
-                    fontFamily: FONT,
-                    fontWeight: 700,
-                    fontSize: 10,
-                    letterSpacing: "0.18em",
-                    textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.4)",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 10,
-                  }}
-                >
-                  <div style={{ width: 24, height: 2, background: "rgba(255,255,255,0.2)" }} />
-                  THE REAL COST
-                </div>
-                <div style={{ marginTop: 12, maxWidth: 560 }}>
+                <div style={{ marginTop: 0, maxWidth: 560 }}>
                   <div
                     style={{
                       fontFamily: FONT,
