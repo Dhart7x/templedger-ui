@@ -876,7 +876,7 @@ const Home = () => {
 
 
         {/* MERGED DARK BLOCK — REVEAL + COST */}
-        <div style={{ background: "#2E1065", width: "100%", margin: 0, padding: 0 }}>
+        <div style={{ background: "linear-gradient(180deg, #2E1065 0%, #1A0A3D 50%, #0D0520 100%)", width: "100%", margin: 0, padding: 0 }}>
         {/* SECTION 3b — THE REVEAL */}
         <section className="tl-section-reveal" style={{ background: "transparent", padding: "72px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
@@ -1235,7 +1235,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 4 — THE OUTCOME */}
-        <section className="tl-section-outcome" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #5B21B6 60%, #4C1D95 100%)", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-outcome" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #5B21B6 40%, #4C1D95 70%, #3B1578 100%)", padding: "80px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <div
               style={{
@@ -1571,7 +1571,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 6 — CONTACT */}
-        <section id="contact" className="tl-section-contact" style={{ background: "#4C1D95", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section id="contact" className="tl-section-contact" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #3B1578 40%, #2E1065 70%, #1A0A3D 100%)", padding: "80px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
             <h2 className="tl-section-h2 tl-contact-h2"
               style={{
@@ -1675,7 +1675,7 @@ const Home = () => {
         {/* SECTION 7 — FOOTER */}
         <footer className="tl-footer"
           style={{
-            background: "#2E1065",
+            background: "#1A0A3D",
             borderTop: "0.5px solid rgba(255,255,255,0.08)",
             padding: "24px 48px",
             display: "flex",
