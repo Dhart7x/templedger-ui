@@ -2,10 +2,10 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DemoProvider } from "@/components/presentation/demo/DemoContext";
 import ClientLiveSnapshot from "@/components/presentation/demo/views/ClientLiveSnapshot";
-import ClientBookings from "@/components/presentation/demo/views/ClientBookings";
 import ClientPayroll from "@/components/presentation/demo/views/ClientPayroll";
-import ClientSchedule from "@/components/presentation/demo/views/ClientSchedule";
-import ClientPermissions from "@/components/presentation/demo/views/ClientPermissions";
+import AllocationRecommendationPreview from "./platformPreviews/AllocationRecommendationPreview";
+import SchedulePreview from "./platformPreviews/SchedulePreview";
+import PermissionsPreview from "./platformPreviews/PermissionsPreview";
 
 interface Props {
   onOpenDemo: () => void;
