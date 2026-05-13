@@ -958,22 +958,11 @@ const Home = () => {
                 color: "#FFFFFF",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
-                marginBottom: 10,
+                marginBottom: 24,
               }}
             >
               The invisible cost is significant. And it compounds every week.
             </h2>
-            <p className="tl-section-sub"
-              style={{
-                fontSize: 15,
-                color: "rgba(255,255,255,0.6)",
-                lineHeight: 1.65,
-                marginBottom: 48,
-                maxWidth: 560,
-              }}
-            >
-              Every problem in that list has a cost consequence. None of them appear on any invoice.
-            </p>
             <div className="tl-cost-stack" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               {costs.map((c, i) => (
                 <motion.div
