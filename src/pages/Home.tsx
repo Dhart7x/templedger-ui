@@ -716,6 +716,18 @@ const Home = () => {
                 />
               </div>
             </motion.div>
+            {/* HARD WHITE SPACER — guarantees 80px white gap before purple block */}
+            <div
+              style={{
+                height: '80px',
+                width: '100%',
+                background: '#FFFFFF',
+                display: 'block',
+                flexShrink: 0,
+                position: 'relative',
+                zIndex: 2,
+              }}
+            />
             {/* ELEMENT 3 — HIDDEN COSTS */}
             <div
               className="tl-hidden-costs"
