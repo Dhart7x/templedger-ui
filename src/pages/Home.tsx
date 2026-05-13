@@ -35,6 +35,37 @@ const StepNumber = ({ value }: { value: number }) => {
     </div>
   );
 };
+
+const TypingDollars = ({
+  delay,
+  style,
+}: {
+  delay: number;
+  style?: React.CSSProperties;
+}) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!inView) return;
+    const timers: number[] = [];
+    timers.push(
+      window.setTimeout(() => {
+        [1, 2, 3].forEach((n, i) => {
+          timers.push(window.setTimeout(() => setCount(n), i * 150));
+        });
+      }, delay * 1000)
+    );
+    return () => timers.forEach((t) => clearTimeout(t));
+  }, [inView, delay]);
+  return (
+    <span ref={ref} style={style}>
+      {"$".repeat(count)}
+      <span style={{ opacity: 0 }}>{"$".repeat(3 - count)}</span>
+    </span>
+  );
+};
+
 import { ChevronDown, Monitor, Presentation, TrendingUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -581,6 +612,7 @@ const Home = () => {
                   padding: 0,
                   display: "flex",
                   flexDirection: "column",
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
                 }}
               >
                 <div
@@ -603,9 +635,9 @@ const Home = () => {
                 </div>
                 <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
                   {[
-                    { d: "Agency hours", a: "$$$" },
-                    { d: "Employer costs", a: "$$$" },
-                    { d: "Agency margin", a: "$$$" },
+                    { d: "Agency hours" },
+                    { d: "Employer costs" },
+                    { d: "Agency margin" },
                   ].map((row, i) => (
                     <div
                       key={i}
@@ -621,9 +653,10 @@ const Home = () => {
                       <span style={{ fontFamily: FONT, fontWeight: 500, fontSize: 13, color: "#6B6460" }}>
                         {row.d}
                       </span>
-                      <span style={{ fontFamily: FONT, fontWeight: 600, fontSize: 13, color: "#0D0D0B" }}>
-                        {row.a}
-                      </span>
+                      <TypingDollars
+                        delay={0.7 + i * 0.3}
+                        style={{ fontFamily: FONT, fontWeight: 700, fontSize: 13, color: "#0D0D0B" }}
+                      />
                     </div>
                   ))}
                 </div>
@@ -642,9 +675,10 @@ const Home = () => {
                   <span style={{ fontFamily: FONT, fontWeight: 700, fontSize: 13, color: "#0D0D0B" }}>
                     Invoice total
                   </span>
-                    <span style={{ fontFamily: FONT, fontWeight: 800, fontSize: 18, color: "#0D0D0B" }}>
-                      $$$
-                    </span>
+                  <TypingDollars
+                    delay={0.7 + 3 * 0.3}
+                    style={{ fontFamily: FONT, fontWeight: 800, fontSize: 18, color: "#0D0D0B" }}
+                  />
                 </div>
               </motion.div>
 
@@ -653,21 +687,22 @@ const Home = () => {
                 initial={{ opacity: 0, x: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
                 style={{
-                  background: "#FFFFFF",
-                  border: "1.5px solid #2D6A4F",
+                  background: "#0D0D0B",
+                  border: "1.5px solid #C4391A",
                   borderRadius: 12,
                   overflow: "hidden",
                   padding: 0,
                   display: "flex",
                   flexDirection: "column",
+                  boxShadow: "0 4px 32px rgba(196,57,26,0.15)",
                 }}
               >
                 <div
                   style={{
                     height: 48,
-                    background: "#2D6A4F",
+                    background: "#C4391A",
                     display: "flex",
                     alignItems: "center",
                     padding: "0 20px",
@@ -676,12 +711,33 @@ const Home = () => {
                     fontSize: 10,
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.8)",
+                    color: "#FFFFFF",
                   }}
                 >
                   WHAT IT ACTUALLY COST YOU
                 </div>
                 <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+                  {["Agency hours", "Employer costs", "Agency margin"].map((d, i) => (
+                    <div
+                      key={`base-${i}`}
+                      style={{
+                        minHeight: 52,
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        padding: "0 20px",
+                        background: "transparent",
+                        borderBottom: "0.5px solid rgba(255,255,255,0.06)",
+                      }}
+                    >
+                      <span style={{ fontFamily: FONT, fontWeight: 500, fontSize: 13, color: "rgba(255,255,255,0.4)" }}>
+                        {d}
+                      </span>
+                      <span style={{ fontFamily: FONT, fontWeight: 600, fontSize: 13, color: "rgba(255,255,255,0.4)" }}>
+                        $$$
+                      </span>
+                    </div>
+                  ))}
                   {[
                     "Overtime from gaps nobody saw",
                     "Management time fixing avoidable problems",
@@ -690,21 +746,22 @@ const Home = () => {
                     "Unscheduled workers on your site",
                   ].map((d, i) => (
                     <motion.div
-                      key={i}
+                      key={`hidden-${i}`}
                       initial={{ opacity: 0, x: 16 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true, margin: "-80px" }}
-                      transition={{ duration: 0.35, delay: 0.4 + i * 0.07, ease: "easeOut" }}
+                      transition={{ duration: 0.35, delay: 0.5 + 0.2 + i * 0.08, ease: "easeOut" }}
                       style={{
                         minHeight: 52,
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
                         padding: "0 20px",
-                        borderBottom: "0.5px solid #FEF0EE",
+                        background: "transparent",
+                        borderBottom: "0.5px solid rgba(196,57,26,0.15)",
                       }}
                     >
-                      <span style={{ fontFamily: FONT, fontWeight: 500, fontSize: 13, color: "#6B6460" }}>
+                      <span style={{ fontFamily: FONT, fontWeight: 500, fontSize: 13, color: "rgba(255,255,255,0.75)" }}>
                         {d}
                       </span>
                       <span style={{ fontFamily: FONT, fontWeight: 600, fontSize: 13, color: "#C4391A" }}>
@@ -717,20 +774,26 @@ const Home = () => {
                   style={{
                     height: 56,
                     padding: "0 20px",
-                    borderTop: "1px solid #fcd5cc",
+                    borderTop: "1px solid rgba(196,57,26,0.3)",
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    background: "#FEF7F5",
+                    background: "rgba(196,57,26,0.1)",
                     marginTop: "auto",
                   }}
                 >
-                  <span style={{ fontFamily: FONT, fontWeight: 700, fontSize: 13, color: "#0D0D0B" }}>
+                  <span style={{ fontFamily: FONT, fontWeight: 700, fontSize: 13, color: "#FFFFFF" }}>
                     Actual cost to your business
                   </span>
-                  <span style={{ fontFamily: FONT, fontWeight: 800, fontSize: 18, color: "#C4391A" }}>
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, margin: "-80px" }}
+                    transition={{ duration: 0.4, delay: 1.2 + 0.2, ease: "easeOut" }}
+                    style={{ fontFamily: FONT, fontWeight: 800, fontSize: 18, color: "#C4391A", display: "inline-block" }}
+                  >
                     You guessed it.
-                  </span>
+                  </motion.span>
                 </div>
               </motion.div>
             </div>
