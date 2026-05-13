@@ -432,58 +432,6 @@ const Home = () => {
         </div>
       </motion.nav>
 
-      {/* Deck Modal */}
-      {deckOpen && (
-        <>
-          <div
-            onClick={() => setDeckOpen(false)}
-            style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(0,0,0,0.85)" }}
-          />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            style={{
-              position: "fixed",
-              inset: 0,
-              zIndex: 101,
-              width: "100vw",
-              height: "100vh",
-              overflow: "hidden",
-              background: "#000",
-            }}
-          >
-            <NewSalesDeck />
-            <button
-              onClick={() => setDeckOpen(false)}
-              aria-label="Close"
-              style={{
-                position: "fixed",
-                top: 16,
-                right: 16,
-                zIndex: 102,
-                width: 36,
-                height: 36,
-                background: "rgba(255,255,255,0.1)",
-                borderRadius: "50%",
-                border: "none",
-                color: "#FFFFFF",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                transition: "background 0.15s",
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.2)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.1)"; }}
-            >
-              <X size={16} />
-            </button>
-          </motion.div>
-        </>
-      )}
-
       {/* Demo Modal */}
       {demoOpen && (
         <>
