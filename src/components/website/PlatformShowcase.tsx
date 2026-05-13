@@ -7,6 +7,7 @@ import AllocationRecommendationPreview from "./platformPreviews/AllocationRecomm
 import SchedulePreview from "./platformPreviews/SchedulePreview";
 import PermissionsPreview from "./platformPreviews/PermissionsPreview";
 import DirectHirePreview from "./platformPreviews/DirectHirePreview";
+import AgencyPerformancePreview from "./platformPreviews/AgencyPerformancePreview";
 
 interface Props {
   onOpenDemo: () => void;
@@ -66,6 +67,15 @@ const TABS = [
     body:
       "Every temp worker builds a verified performance record inside TempLedger. Hours served, departments trained, attendance rate, compliance history — all tracked automatically. The workers worth converting are already ranked. You just have to act on it.",
     Component: DirectHirePreview,
+  },
+  {
+    id: "agencyperf",
+    nav: "Agency Performance",
+    label: "AGENCY PERFORMANCE",
+    headline: "Performance derived from the system. Not from what agencies tell you.",
+    body:
+      "Every metric — fill rate, attendance, response time, compliance rate — is generated automatically from verified data. No self-reporting. No disputes. The agencies that perform get more work. The ones that don't know exactly why.",
+    Component: AgencyPerformancePreview,
   },
 ];
 
@@ -296,7 +306,7 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
               color: "#9B9590",
             }}
           >
-            Payroll. Billing. Agency performance. Worker profiles. Direct hire pipeline. Client and agency communication. And more.
+            Payroll. Billing. Worker profiles. Direct hire pipeline. Agency performance. Client and agency communication. And more.
           </div>
           <button
             onClick={onOpenDemo}
