@@ -88,13 +88,13 @@ const agencies: Agency[] = [
       month: { responseTime: "16 min", timeToFill: "4.8 hrs", attendance: 90.5, punctuality: 89.2, attrition: 10.1, newRegistrations: 9, fillRate: 89, avgEta: `${s1.avgEtaMinutes} min`, avgRate: `$${s1.avgHourlyRate.toFixed(2)}`, standbyWorkers: s1.standbyWorkers },
       year: { responseTime: "15 min", timeToFill: "4.5 hrs", attendance: 91.0, punctuality: 89.8, attrition: 9.6, newRegistrations: 38, fillRate: 90, avgEta: `${s1.avgEtaMinutes} min`, avgRate: `$${s1.avgHourlyRate.toFixed(2)}`, standbyWorkers: s1.standbyWorkers },
     },
-    rateCard: { warehouseOp: meanRateForDept("AG001", "Inbound Warehouse"), mhe: meanRateForDept("AG001", "MHE"), picker: meanRateForDept("AG001", "Picker"), loader: meanRateForDept("AG001", "Loader"), forklift: meanRateForDept("AG001", "Forklift") },
+    rateCard: { warehouseOp: meanRateForDept("AG001", "Inbound Warehouse"), mhe: meanRateForDept("AG001", "MHE Operations"), picker: meanRateForDept("AG001", "Pick and Pack"), loader: meanRateForDept("AG001", "Outbound Dispatch"), forklift: meanRateForDept("AG001", "Forklift") },
     rating: meanRating("AG001"),
     status: "active",
     sites: [
-      { name: "Baltimore, MD", workers: 25, departments: [{ name: "Inbound Warehouse", workers: 15 }, { name: "MHE", workers: 10 }] },
-      { name: "Las Vegas, NV", workers: 18, departments: [{ name: "Inbound Warehouse", workers: 12 }, { name: "MHE", workers: 6 }] },
-      { name: "Dallas Fort-Worth, TX", workers: 7, departments: [{ name: "Inbound Warehouse", workers: 5 }, { name: "MHE", workers: 2 }] },
+      { name: "Baltimore, MD", workers: 25, departments: [{ name: "Inbound Warehouse", workers: 15 }, { name: "MHE Operations", workers: 10 }] },
+      { name: "Las Vegas, NV", workers: 18, departments: [{ name: "Inbound Warehouse", workers: 12 }, { name: "MHE Operations", workers: 6 }] },
+      { name: "Dallas Fort-Worth, TX", workers: 7, departments: [{ name: "Inbound Warehouse", workers: 5 }, { name: "MHE Operations", workers: 2 }] },
     ],
   },
   {
@@ -107,12 +107,12 @@ const agencies: Agency[] = [
       month: { responseTime: "10 min", timeToFill: "4.0 hrs", attendance: 93.2, punctuality: 92.0, attrition: 5.8, newRegistrations: 10, fillRate: 95, avgEta: `${s2.avgEtaMinutes} min`, avgRate: `$${s2.avgHourlyRate.toFixed(2)}`, standbyWorkers: s2.standbyWorkers },
       year: { responseTime: "9 min", timeToFill: "3.9 hrs", attendance: 93.5, punctuality: 92.4, attrition: 5.4, newRegistrations: 42, fillRate: 95, avgEta: `${s2.avgEtaMinutes} min`, avgRate: `$${s2.avgHourlyRate.toFixed(2)}`, standbyWorkers: s2.standbyWorkers },
     },
-    rateCard: { warehouseOp: meanRateForDept("AG002", "Inbound Warehouse"), mhe: meanRateForDept("AG002", "MHE"), picker: meanRateForDept("AG002", "Picker"), loader: meanRateForDept("AG002", "Loader"), forklift: meanRateForDept("AG002", "Forklift") },
+    rateCard: { warehouseOp: meanRateForDept("AG002", "Inbound Warehouse"), mhe: meanRateForDept("AG002", "MHE Operations"), picker: meanRateForDept("AG002", "Pick and Pack"), loader: meanRateForDept("AG002", "Outbound Dispatch"), forklift: meanRateForDept("AG002", "Forklift") },
     rating: meanRating("AG002"),
     status: "active",
     sites: [
-      { name: "Baltimore, MD", workers: 12, departments: [{ name: "Inbound Warehouse", workers: 8 }, { name: "MHE", workers: 4 }] },
-      { name: "Dallas Fort-Worth, TX", workers: 15, departments: [{ name: "Inbound Warehouse", workers: 10 }, { name: "MHE", workers: 5 }] },
+      { name: "Baltimore, MD", workers: 12, departments: [{ name: "Inbound Warehouse", workers: 8 }, { name: "MHE Operations", workers: 4 }] },
+      { name: "Dallas Fort-Worth, TX", workers: 15, departments: [{ name: "Inbound Warehouse", workers: 10 }, { name: "MHE Operations", workers: 5 }] },
     ],
   },
   {
@@ -125,12 +125,12 @@ const agencies: Agency[] = [
       month: { responseTime: "24 min", timeToFill: "6.2 hrs", attendance: 84.8, punctuality: 83.5, attrition: 14.2, newRegistrations: 8, fillRate: 82, avgEta: `${s3.avgEtaMinutes} min`, avgRate: `$${s3.avgHourlyRate.toFixed(2)}`, standbyWorkers: s3.standbyWorkers },
       year: { responseTime: "23 min", timeToFill: "5.8 hrs", attendance: 85.2, punctuality: 83.9, attrition: 13.9, newRegistrations: 32, fillRate: 83, avgEta: `${s3.avgEtaMinutes} min`, avgRate: `$${s3.avgHourlyRate.toFixed(2)}`, standbyWorkers: s3.standbyWorkers },
     },
-    rateCard: { warehouseOp: meanRateForDept("AG003", "Inbound Warehouse"), mhe: meanRateForDept("AG003", "MHE"), picker: meanRateForDept("AG003", "Picker"), loader: meanRateForDept("AG003", "Loader"), forklift: meanRateForDept("AG003", "Forklift") },
+    rateCard: { warehouseOp: meanRateForDept("AG003", "Inbound Warehouse"), mhe: meanRateForDept("AG003", "MHE Operations"), picker: meanRateForDept("AG003", "Pick and Pack"), loader: meanRateForDept("AG003", "Outbound Dispatch"), forklift: meanRateForDept("AG003", "Forklift") },
     rating: meanRating("AG003"),
     status: "active",
     sites: [
-      { name: "Baltimore, MD", workers: 5, departments: [{ name: "Inbound Warehouse", workers: 3 }, { name: "MHE", workers: 2 }] },
-      { name: "Las Vegas, NV", workers: 12, departments: [{ name: "Inbound Warehouse", workers: 8 }, { name: "MHE", workers: 4 }] },
+      { name: "Baltimore, MD", workers: 5, departments: [{ name: "Inbound Warehouse", workers: 3 }, { name: "MHE Operations", workers: 2 }] },
+      { name: "Las Vegas, NV", workers: 12, departments: [{ name: "Inbound Warehouse", workers: 8 }, { name: "MHE Operations", workers: 4 }] },
     ],
   },
 ];
@@ -427,9 +427,9 @@ const ClientAgencies = ({ onViewWorker }: ClientAgenciesProps) => {
                 <div className="grid grid-cols-2 gap-3 text-sm">
                   {[
                     { label: "Inbound Warehouse", val: selectedAgency.rateCard.warehouseOp },
-                    { label: "MHE", val: selectedAgency.rateCard.mhe },
-                    { label: "Picker", val: selectedAgency.rateCard.picker },
-                    { label: "Loader", val: selectedAgency.rateCard.loader },
+                    { label: "MHE Operations", val: selectedAgency.rateCard.mhe },
+                    { label: "Pick and Pack", val: selectedAgency.rateCard.picker },
+                    { label: "Outbound Dispatch", val: selectedAgency.rateCard.loader },
                     { label: "Forklift", val: selectedAgency.rateCard.forklift },
                   ].filter(r => r.val > 0).map(r => (
                     <div key={r.label} className="flex justify-between">

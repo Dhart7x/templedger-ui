@@ -71,7 +71,7 @@ const DemoAgencyIssues = () => {
                           id: issue.id,
                           workerId: issue.workerId,
                           workerName: issue.workerName,
-                          department: "Picking",
+                          department: "Pick and Pack",
                           type: issue.failedStep,
                         });
                       }
@@ -141,7 +141,7 @@ const DemoAgencyIssues = () => {
                           id: issue.id,
                           workerId: issue.workerId,
                           workerName: issue.workerName,
-                          department: "Warehouse",
+                          department: "Inbound Warehouse",
                           type: issue.failedStep,
                         });
                       }

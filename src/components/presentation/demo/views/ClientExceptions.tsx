@@ -50,7 +50,7 @@ const typeConfig: Record<PayrollExceptionType, { label: string; icon: typeof Ale
 export const payrollExceptions: PayrollException[] = [
   {
     id: "EX-001", type: "no-clock-in", worker: "Carlos Mendez", workerId: "PR011",
-    agency: "Pinnacle Staffing", department: "MHE", site: "Las Vegas, NV",
+    agency: "Pinnacle Staffing", department: "MHE Operations", site: "Las Vegas, NV",
     date: "Mon 3 Feb", shift: "06:00–14:00", scheduledHours: 8, clockedHours: null,
     blocksPayroll: true, blocksInvoice: true, linkedPayrollId: "PR011",
     createdAt: "2025-02-03T14:30:00Z", agingMinutes: 2880,
@@ -82,7 +82,7 @@ export const payrollExceptions: PayrollException[] = [
   },
   {
     id: "EX-005", type: "manager-approval-missing", worker: "Priya Chakraborty", workerId: "PR008",
-    agency: "Pinnacle Staffing", department: "MHE", site: "Baltimore, MD",
+    agency: "Pinnacle Staffing", department: "MHE Operations", site: "Baltimore, MD",
     date: "Mon 3 Feb – Fri 7 Feb", shift: "14:00–22:00", scheduledHours: 40, clockedHours: 41,
     blocksPayroll: true, blocksInvoice: true, linkedPayrollId: "PR008",
     createdAt: "2025-02-08T09:15:00Z", agingMinutes: 705,

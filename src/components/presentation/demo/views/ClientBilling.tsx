@@ -61,7 +61,7 @@ const billingSites: BillingSite[] = [
         ],
       },
       {
-        name: "MHE",
+        name: "MHE Operations",
         totalHours: 40,
         totalAmount: 516,
         workers: [

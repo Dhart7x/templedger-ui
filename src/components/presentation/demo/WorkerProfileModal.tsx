@@ -73,7 +73,7 @@ const getWorkerData = (name: string) => {
       recentShifts: [
         { date: "Today", site: "Baltimore, MD", department: "Inbound Warehouse", hours: 8, status: "In Progress" },
         { date: "Yesterday", site: "Baltimore, MD", department: "Inbound Warehouse", hours: 8, status: "Completed" },
-        { date: "Mon 3 Feb", site: "Baltimore, MD", department: "MHE", hours: 8, status: "Completed" },
+        { date: "Mon 3 Feb", site: "Baltimore, MD", department: "MHE Operations", hours: 8, status: "Completed" },
       ],
     },
     "Leon Kowalski": {

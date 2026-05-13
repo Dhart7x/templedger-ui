@@ -33,7 +33,7 @@ interface Event {
 
 const workers: Worker[] = [
   { id: "1", name: "Tom Brady", role: "Inbound Warehouse", status: "approved" },
-  { id: "2", name: "Rico Fernandez", role: "Picker", status: "approved" },
+  { id: "2", name: "Rico Fernandez", role: "Pick and Pack", status: "approved" },
   { id: "3", name: "Sarah Mitchell", role: "MHE Operations", status: "override" },
   { id: "4", name: "Leon Kowalski", role: "Team Lead", status: "approved" },
   { id: "5", name: "Fatima Al-Hassan", role: "Inbound Warehouse", status: "exception" },

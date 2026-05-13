@@ -16,7 +16,7 @@ const weekOptions = [
   { label: "Week of 3–9 Mar 2025", key: "wk5", isFuture: true },
 ];
 
-const departments = ["All Departments", "Inbound Warehouse", "MHE"];
+const departments = ["All Departments", "Inbound Warehouse", "MHE Operations"];
 const agencyOptions = ["All Agencies", "Workforce Direct", "Pinnacle Staffing", "Meridian Recruitment"];
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -64,7 +64,7 @@ interface RoleRow {
 const buildSchedule = (isFuture: boolean): RoleRow[] => {
   const data: { dept: string; role: string; early: number; late: number; night: number }[] = [
     { dept: "Inbound Warehouse", role: "Inbound Warehouse", early: 20, late: 16, night: 6 },
-    { dept: "MHE", role: "MHE Operations", early: 10, late: 8, night: 4 },
+    { dept: "MHE Operations", role: "MHE Operations", early: 10, late: 8, night: 4 },
   ];
   return data.map(d => ({
     department: d.dept,
@@ -185,7 +185,7 @@ const UploadPanel = () => {
         <div className="space-y-2">
           {[
             { name: "schedule_wk5_feb.xlsx", week: "Week of 3–9 Feb 2025", dept: "All Departments", agency: "All Agencies", date: "31 Jan 2025" },
-            { name: "warehouse_schedule.csv", week: "Week of 27 Jan – 2 Feb 2025", dept: "Warehouse", agency: "Workforce Direct", date: "24 Jan 2025" },
+            { name: "warehouse_schedule.csv", week: "Week of 27 Jan – 2 Feb 2025", dept: "Inbound Warehouse", agency: "Workforce Direct", date: "24 Jan 2025" },
           ].map((file, i) => (
             <div key={i} className="flex items-center justify-between p-3 bg-card border border-border rounded-lg">
               <div className="flex items-center gap-3">

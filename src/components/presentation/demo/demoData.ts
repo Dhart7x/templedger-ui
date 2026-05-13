@@ -182,12 +182,12 @@ export const clients: Client[] = [
 
 export const workers: Worker[] = [
   { id: "w1", name: "Tom Brady", role: "Inbound Warehouse", clientId: "1", site: "Heathrow", status: "approved" },
-  { id: "w2", name: "Rico Fernandez", role: "Picker", clientId: "1", site: "Heathrow", status: "approved" },
+  { id: "w2", name: "Rico Fernandez", role: "Pick and Pack", clientId: "1", site: "Heathrow", status: "approved" },
   { id: "w3", name: "Sarah Mitchell", role: "MHE Operations", clientId: "2", site: "Coventry Hub", status: "override" },
   { id: "w4", name: "Leon Kowalski", role: "Team Lead", clientId: "3", site: "Birmingham DC", status: "approved" },
   { id: "w5", name: "Fatima Al-Hassan", role: "Inbound Warehouse", clientId: "5", site: "Leeds", status: "exception" },
   { id: "w6", name: "Priya Sharma", role: "Returns Processing", clientId: "4", site: "Leicester", status: "approved" },
-  { id: "w7", name: "Daniel Reeves", role: "Loader", clientId: "2", site: "Coventry Hub", status: "approved" },
+  { id: "w7", name: "Daniel Reeves", role: "Outbound Dispatch", clientId: "2", site: "Coventry Hub", status: "approved" },
   { id: "w8", name: "Tom Brady", role: "Packer", clientId: "3", site: "Birmingham DC", status: "override" },
 ];
 
@@ -500,7 +500,7 @@ export const exceptions: Exception[] = [
     weekEnding: "2026-04-14",
     workerId: "w2",
     workerName: "Rico Fernandez",
-    workerRole: "Picker",
+    workerRole: "Pick and Pack",
     site: "Heathrow",
     exceptionType: "Missing clock-out",
     aging: "4h",

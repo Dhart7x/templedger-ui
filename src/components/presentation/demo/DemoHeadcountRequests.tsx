@@ -18,7 +18,7 @@ interface HeadcountRequest {
 const requests: HeadcountRequest[] = [
   {
     id: "1",
-    department: "Warehouse",
+    department: "Inbound Warehouse",
     site: "Heathrow DC",
     shift: "Morning (06:00 - 14:00)",
     date: "Tomorrow",
@@ -32,7 +32,7 @@ const requests: HeadcountRequest[] = [
   },
   {
     id: "2",
-    department: "Loading",
+    department: "Outbound Dispatch",
     site: "Heathrow DC",
     shift: "Morning (06:00 - 14:00)",
     date: "Tomorrow",
@@ -46,7 +46,7 @@ const requests: HeadcountRequest[] = [
   },
   {
     id: "3",
-    department: "Picking",
+    department: "Pick and Pack",
     site: "Heathrow DC",
     shift: "Afternoon (14:00 - 22:00)",
     date: "Tomorrow",
@@ -60,7 +60,7 @@ const requests: HeadcountRequest[] = [
   },
   {
     id: "4",
-    department: "Warehouse",
+    department: "Inbound Warehouse",
     site: "Birmingham DC",
     shift: "Morning (06:00 - 14:00)",
     date: "Tomorrow",
@@ -73,7 +73,7 @@ const requests: HeadcountRequest[] = [
   },
   {
     id: "5",
-    department: "Quality",
+    department: "Returns Processing",
     site: "Heathrow DC",
     shift: "Morning (06:00 - 14:00)",
     date: "Wed 29 Jan",
@@ -86,7 +86,7 @@ const requests: HeadcountRequest[] = [
   },
   {
     id: "6",
-    department: "Packing",
+    department: "Pick and Pack",
     site: "Coventry Hub",
     shift: "Night (22:00 - 06:00)",
     date: "Wed 29 Jan",

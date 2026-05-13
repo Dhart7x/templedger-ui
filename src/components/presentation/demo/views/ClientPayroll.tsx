@@ -40,16 +40,16 @@ const verifiedEntries: VerifiedEntry[] = [
   { worker: "Tom Brady", agency: "Workforce Direct", department: "Inbound Warehouse", days: [{ day: "Mon", hours: 8 }, { day: "Tue", hours: 8 }, { day: "Wed", hours: 8 }], totalHours: 24, stepsCompleted: 5, hourlyRate: 12.50 },
   { worker: "Rico Fernandez", agency: "Pinnacle Staffing", department: "Inbound Warehouse", days: [{ day: "Mon", hours: 8 }, { day: "Tue", hours: 8 }, { day: "Wed", hours: 10 }], totalHours: 26, stepsCompleted: 5, hourlyRate: 13.00 },
   { worker: "Leon Kowalski", agency: "Workforce Direct", department: "Inbound Warehouse", days: [{ day: "Mon", hours: 8 }, { day: "Tue", hours: 8 }], totalHours: 16, stepsCompleted: 5, hourlyRate: 12.50 },
-  { worker: "Priya Sharma", agency: "Workforce Direct", department: "MHE", days: [{ day: "Mon", hours: 8 }, { day: "Tue", hours: 8 }, { day: "Wed", hours: 8 }], totalHours: 24, stepsCompleted: 5, hourlyRate: 13.50 },
+  { worker: "Priya Sharma", agency: "Workforce Direct", department: "MHE Operations", days: [{ day: "Mon", hours: 8 }, { day: "Tue", hours: 8 }, { day: "Wed", hours: 8 }], totalHours: 24, stepsCompleted: 5, hourlyRate: 13.50 },
   { worker: "Priya Sharma", agency: "Pinnacle Staffing", department: "Inbound Warehouse", days: [{ day: "Mon", hours: 8 }, { day: "Tue", hours: 8 }, { day: "Wed", hours: 8 }], totalHours: 24, stepsCompleted: 5, hourlyRate: 13.00 },
-  { worker: "Sarah Mitchell", agency: "Meridian Recruitment", department: "MHE", days: [{ day: "Mon", hours: 8 }, { day: "Tue", hours: 8 }], totalHours: 16, stepsCompleted: 5, hourlyRate: 12.00 },
+  { worker: "Sarah Mitchell", agency: "Meridian Recruitment", department: "MHE Operations", days: [{ day: "Mon", hours: 8 }, { day: "Tue", hours: 8 }], totalHours: 16, stepsCompleted: 5, hourlyRate: 12.00 },
 ];
 
 const exceptionEntries: ExceptionEntry[] = [
-  { id: "EX-001", worker: "Fatima Al-Hassan", agency: "Workforce Direct", department: "MHE", exceptionType: "No Clock-Out", exceptionColor: "text-orange-500 bg-orange-500/10", failingStep: "✗ Clock-out missing", stepsCompleted: [true, true, false, false, false], status: "open" },
+  { id: "EX-001", worker: "Fatima Al-Hassan", agency: "Workforce Direct", department: "MHE Operations", exceptionType: "No Clock-Out", exceptionColor: "text-orange-500 bg-orange-500/10", failingStep: "✗ Clock-out missing", stepsCompleted: [true, true, false, false, false], status: "open" },
   { id: "EX-002", worker: "Emma Johansson", agency: "Pinnacle Staffing", department: "Inbound Warehouse", exceptionType: "Manager Approval Missing", exceptionColor: "text-amber-500 bg-amber-500/10", failingStep: "✗ Manager Approved", stepsCompleted: [true, true, true, false, false], status: "open" },
   { id: "EX-NS-001", worker: "Kevin Wright", agency: "Pinnacle Staffing", department: "Inbound Warehouse", exceptionType: "Not Scheduled", exceptionColor: "text-purple-500 bg-purple-500/10", failingStep: "✗ Scheduled (worker not on roster)", stepsCompleted: [false, false, false, false, false], status: "open" },
-  { id: "EX-003", worker: "Diane Foster", agency: "Meridian Recruitment", department: "MHE", exceptionType: "No Clock-In", exceptionColor: "text-destructive bg-destructive/10", failingStep: "✗ Clock-in missing", stepsCompleted: [true, false, false, false, false], status: "open" },
+  { id: "EX-003", worker: "Diane Foster", agency: "Meridian Recruitment", department: "MHE Operations", exceptionType: "No Clock-In", exceptionColor: "text-destructive bg-destructive/10", failingStep: "✗ Clock-in missing", stepsCompleted: [true, false, false, false, false], status: "open" },
 ];
 
 const resolveOptions = [

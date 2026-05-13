@@ -7,48 +7,48 @@ import { useDemoContext } from "../DemoContext";
 
 // Extended worker data
 const liveWorkers = [
-  { id: "L1", name: "Sarah Mitchell", role: "Picker", department: "Picking", location: "Zone A", shift: "06:00–14:00", clockIn: "05:58", attendance: 98, rating: 4.8, hoursToday: 5.5, hoursWeek: 32 },
-  { id: "L2", name: "James Cooper", role: "Packer", department: "Packing", location: "Zone B", shift: "06:00–14:00", clockIn: "06:02", attendance: 95, rating: 4.5, hoursToday: 5.2, hoursWeek: 28 },
+  { id: "L1", name: "Sarah Mitchell", role: "Pick and Pack", department: "Pick and Pack", location: "Zone A", shift: "06:00–14:00", clockIn: "05:58", attendance: 98, rating: 4.8, hoursToday: 5.5, hoursWeek: 32 },
+  { id: "L2", name: "James Cooper", role: "Packer", department: "Pick and Pack", location: "Zone B", shift: "06:00–14:00", clockIn: "06:02", attendance: 95, rating: 4.5, hoursToday: 5.2, hoursWeek: 28 },
   { id: "L3", name: "Lisa Anderson", role: "Operative", department: "Goods In", location: "Zone C", shift: "06:00–14:00", clockIn: "06:12", attendance: 92, rating: 4.2, hoursToday: 5.0, hoursWeek: 24 },
-  { id: "L4", name: "Priya Sharma", role: "Forklift", department: "Loading", location: "Zone A", shift: "06:00–14:00", clockIn: "05:55", attendance: 99, rating: 4.9, hoursToday: 5.6, hoursWeek: 40 },
-  { id: "L5", name: "Priya Patel", role: "Returns Processing", department: "Quality", location: "Zone D", shift: "06:00–14:00", clockIn: "06:00", attendance: 100, rating: 5.0, hoursToday: 5.5, hoursWeek: 38 },
-  { id: "L6", name: "Daniel Kim", role: "Picker", department: "Picking", location: "Zone A", shift: "06:00–14:00", clockIn: "06:01", attendance: 96, rating: 4.6, hoursToday: 5.4, hoursWeek: 35 },
-  { id: "L7", name: "Tom Brady", role: "Packer", department: "Packing", location: "Zone B", shift: "06:00–14:00", clockIn: "05:59", attendance: 97, rating: 4.7, hoursToday: 5.5, hoursWeek: 36 },
+  { id: "L4", name: "Priya Sharma", role: "Forklift", department: "Outbound Dispatch", location: "Zone A", shift: "06:00–14:00", clockIn: "05:55", attendance: 99, rating: 4.9, hoursToday: 5.6, hoursWeek: 40 },
+  { id: "L5", name: "Priya Patel", role: "Returns Processing", department: "Returns Processing", location: "Zone D", shift: "06:00–14:00", clockIn: "06:00", attendance: 100, rating: 5.0, hoursToday: 5.5, hoursWeek: 38 },
+  { id: "L6", name: "Daniel Kim", role: "Pick and Pack", department: "Pick and Pack", location: "Zone A", shift: "06:00–14:00", clockIn: "06:01", attendance: 96, rating: 4.6, hoursToday: 5.4, hoursWeek: 35 },
+  { id: "L7", name: "Tom Brady", role: "Packer", department: "Pick and Pack", location: "Zone B", shift: "06:00–14:00", clockIn: "05:59", attendance: 97, rating: 4.7, hoursToday: 5.5, hoursWeek: 36 },
   { id: "L8", name: "Robert Taylor", role: "Returns Handler", department: "Returns", location: "Zone D", shift: "06:00–14:00", clockIn: "06:03", attendance: 94, rating: 4.4, hoursToday: 5.3, hoursWeek: 30 },
-  { id: "L9", name: "Elena Rodriguez", role: "Inbound Warehouse", department: "Warehouse", location: "Zone C", shift: "14:00–22:00", clockIn: "14:02", attendance: 93, rating: 4.3, hoursToday: 2.1, hoursWeek: 22 },
-  { id: "L10", name: "Chris Donnelly", role: "Loader", department: "Loading", location: "Zone A", shift: "14:00–22:00", clockIn: "13:58", attendance: 96, rating: 4.6, hoursToday: 2.2, hoursWeek: 26 },
+  { id: "L9", name: "Elena Rodriguez", role: "Inbound Warehouse", department: "Inbound Warehouse", location: "Zone C", shift: "14:00–22:00", clockIn: "14:02", attendance: 93, rating: 4.3, hoursToday: 2.1, hoursWeek: 22 },
+  { id: "L10", name: "Chris Donnelly", role: "Outbound Dispatch", department: "Outbound Dispatch", location: "Zone A", shift: "14:00–22:00", clockIn: "13:58", attendance: 96, rating: 4.6, hoursToday: 2.2, hoursWeek: 26 },
 ];
 
 const standbyWorkers = [
-  { id: "S1", name: "Emma Wilson", role: "Picker", department: "Picking", preferredShifts: ["M", "L"], attendance: 97, rating: 4.7, distance: { miles: 3.2, carTime: "12 min", publicTransportTime: "25 min" }, experience: ["Picking", "Returns"], lastShift: "2 days ago" },
-  { id: "S2", name: "Michael Brown", role: "Packer", department: "Packing", preferredShifts: ["L", "N"], attendance: 94, rating: 4.4, distance: { miles: 5.1, carTime: "18 min", publicTransportTime: "35 min" }, experience: ["Packing", "Quality"], lastShift: "3 days ago" },
-  { id: "S3", name: "David Chen", role: "Operative", department: "Warehouse", preferredShifts: ["E", "M"], attendance: 96, rating: 4.6, distance: { miles: 2.8, carTime: "10 min", publicTransportTime: "22 min" }, experience: ["Warehouse", "Loading"], lastShift: "1 day ago" },
-  { id: "S4", name: "Rachel Green", role: "Picker", department: "Picking", preferredShifts: ["E", "M"], attendance: 95, rating: 4.5, distance: { miles: 4.5, carTime: "15 min", publicTransportTime: "30 min" }, experience: ["Picking", "Packing"], lastShift: "Today" },
-  { id: "S5", name: "Tom Hardy", role: "Forklift", department: "Loading", preferredShifts: ["E", "M", "L"], attendance: 98, rating: 4.9, distance: { miles: 6.2, carTime: "22 min", publicTransportTime: "45 min" }, experience: ["Loading", "Warehouse"], lastShift: "5 days ago" },
-  { id: "S6", name: "Angela Martinez", role: "Returns Handler", department: "Returns", preferredShifts: ["M", "L"], attendance: 93, rating: 4.3, distance: { miles: 4.0, carTime: "14 min", publicTransportTime: "28 min" }, experience: ["Returns", "Quality"], lastShift: "1 week ago" },
-  { id: "S7", name: "Kevin Wright", role: "Returns Processing", department: "Quality", preferredShifts: ["E", "M"], attendance: 99, rating: 4.8, distance: { miles: 2.5, carTime: "8 min", publicTransportTime: "18 min" }, experience: ["Quality", "Packing"], lastShift: "2 days ago" },
-  { id: "S8", name: "Tom Brady", role: "Inbound Warehouse", department: "Warehouse", preferredShifts: ["M", "L", "N"], attendance: 91, rating: 4.1, distance: { miles: 7.3, carTime: "25 min", publicTransportTime: "50 min" }, experience: ["Warehouse"], lastShift: "4 days ago" },
-  { id: "S9", name: "Nathan Brooks", role: "Picker", department: "Picking", preferredShifts: ["E"], attendance: 95, rating: 4.5, distance: { miles: 3.8, carTime: "13 min", publicTransportTime: "26 min" }, experience: ["Picking", "Goods In"], lastShift: "Yesterday" },
-  { id: "S10", name: "Olivia Parker", role: "Packer", department: "Packing", preferredShifts: ["E", "M", "L"], attendance: 97, rating: 4.7, distance: { miles: 1.9, carTime: "6 min", publicTransportTime: "12 min" }, experience: ["Packing", "Returns", "Quality"], lastShift: "Today" },
-  { id: "S11", name: "Chris Evans", role: "Loader", department: "Loading", preferredShifts: ["N"], attendance: 92, rating: 4.2, distance: { miles: 5.5, carTime: "19 min", publicTransportTime: "38 min" }, experience: ["Loading"], lastShift: "1 week ago" },
-  { id: "S12", name: "Jessica Lee", role: "Goods In Operative", department: "Goods In", preferredShifts: ["E", "M"], attendance: 96, rating: 4.6, distance: { miles: 3.1, carTime: "11 min", publicTransportTime: "23 min" }, experience: ["Goods In", "Warehouse"], lastShift: "3 days ago" },
+  { id: "S1", name: "Emma Wilson", role: "Pick and Pack", department: "Pick and Pack", preferredShifts: ["M", "L"], attendance: 97, rating: 4.7, distance: { miles: 3.2, carTime: "12 min", publicTransportTime: "25 min" }, experience: ["Pick and Pack", "Returns"], lastShift: "2 days ago" },
+  { id: "S2", name: "Michael Brown", role: "Packer", department: "Pick and Pack", preferredShifts: ["L", "N"], attendance: 94, rating: 4.4, distance: { miles: 5.1, carTime: "18 min", publicTransportTime: "35 min" }, experience: ["Pick and Pack", "Returns Processing"], lastShift: "3 days ago" },
+  { id: "S3", name: "David Chen", role: "Operative", department: "Inbound Warehouse", preferredShifts: ["E", "M"], attendance: 96, rating: 4.6, distance: { miles: 2.8, carTime: "10 min", publicTransportTime: "22 min" }, experience: ["Inbound Warehouse", "Outbound Dispatch"], lastShift: "1 day ago" },
+  { id: "S4", name: "Rachel Green", role: "Pick and Pack", department: "Pick and Pack", preferredShifts: ["E", "M"], attendance: 95, rating: 4.5, distance: { miles: 4.5, carTime: "15 min", publicTransportTime: "30 min" }, experience: ["Pick and Pack", "Pick and Pack"], lastShift: "Today" },
+  { id: "S5", name: "Tom Hardy", role: "Forklift", department: "Outbound Dispatch", preferredShifts: ["E", "M", "L"], attendance: 98, rating: 4.9, distance: { miles: 6.2, carTime: "22 min", publicTransportTime: "45 min" }, experience: ["Outbound Dispatch", "Inbound Warehouse"], lastShift: "5 days ago" },
+  { id: "S6", name: "Angela Martinez", role: "Returns Handler", department: "Returns", preferredShifts: ["M", "L"], attendance: 93, rating: 4.3, distance: { miles: 4.0, carTime: "14 min", publicTransportTime: "28 min" }, experience: ["Returns", "Returns Processing"], lastShift: "1 week ago" },
+  { id: "S7", name: "Kevin Wright", role: "Returns Processing", department: "Returns Processing", preferredShifts: ["E", "M"], attendance: 99, rating: 4.8, distance: { miles: 2.5, carTime: "8 min", publicTransportTime: "18 min" }, experience: ["Returns Processing", "Pick and Pack"], lastShift: "2 days ago" },
+  { id: "S8", name: "Tom Brady", role: "Inbound Warehouse", department: "Inbound Warehouse", preferredShifts: ["M", "L", "N"], attendance: 91, rating: 4.1, distance: { miles: 7.3, carTime: "25 min", publicTransportTime: "50 min" }, experience: ["Inbound Warehouse"], lastShift: "4 days ago" },
+  { id: "S9", name: "Nathan Brooks", role: "Pick and Pack", department: "Pick and Pack", preferredShifts: ["E"], attendance: 95, rating: 4.5, distance: { miles: 3.8, carTime: "13 min", publicTransportTime: "26 min" }, experience: ["Pick and Pack", "Goods In"], lastShift: "Yesterday" },
+  { id: "S10", name: "Olivia Parker", role: "Packer", department: "Pick and Pack", preferredShifts: ["E", "M", "L"], attendance: 97, rating: 4.7, distance: { miles: 1.9, carTime: "6 min", publicTransportTime: "12 min" }, experience: ["Pick and Pack", "Returns", "Returns Processing"], lastShift: "Today" },
+  { id: "S11", name: "Chris Evans", role: "Outbound Dispatch", department: "Outbound Dispatch", preferredShifts: ["N"], attendance: 92, rating: 4.2, distance: { miles: 5.5, carTime: "19 min", publicTransportTime: "38 min" }, experience: ["Outbound Dispatch"], lastShift: "1 week ago" },
+  { id: "S12", name: "Jessica Lee", role: "Goods In Operative", department: "Goods In", preferredShifts: ["E", "M"], attendance: 96, rating: 4.6, distance: { miles: 3.1, carTime: "11 min", publicTransportTime: "23 min" }, experience: ["Goods In", "Inbound Warehouse"], lastShift: "3 days ago" },
 ];
 
 const newRegisteredWorkers = [
-  { id: "N1", name: "Ryan Hughes", role: "Picker", registeredDate: "2025-02-08", experience: ["Picking"], preferredShifts: ["M", "L"], status: "pending-induction" },
+  { id: "N1", name: "Ryan Hughes", role: "Pick and Pack", registeredDate: "2025-02-08", experience: ["Pick and Pack"], preferredShifts: ["M", "L"], status: "pending-induction" },
   { id: "N2", name: "Tom Brady", role: "Operative", registeredDate: "2025-02-07", experience: [], preferredShifts: ["E", "M", "L"], status: "documents-pending" },
-  { id: "N3", name: "Alex Foster", role: "Packer", registeredDate: "2025-02-06", experience: ["Packing", "Warehouse"], preferredShifts: ["E", "M"], status: "ready" },
-  { id: "N4", name: "Maya Singh", role: "Returns Processing", registeredDate: "2025-02-05", experience: ["Quality"], preferredShifts: ["M"], status: "pending-induction" },
-  { id: "N5", name: "Jordan Blake", role: "Forklift Operator", registeredDate: "2025-02-04", experience: ["Loading", "Warehouse"], preferredShifts: ["E", "M", "L"], status: "ready" },
+  { id: "N3", name: "Alex Foster", role: "Packer", registeredDate: "2025-02-06", experience: ["Pick and Pack", "Inbound Warehouse"], preferredShifts: ["E", "M"], status: "ready" },
+  { id: "N4", name: "Maya Singh", role: "Returns Processing", registeredDate: "2025-02-05", experience: ["Returns Processing"], preferredShifts: ["M"], status: "pending-induction" },
+  { id: "N5", name: "Jordan Blake", role: "Forklift Operator", registeredDate: "2025-02-04", experience: ["Outbound Dispatch", "Inbound Warehouse"], preferredShifts: ["E", "M", "L"], status: "ready" },
   { id: "N6", name: "Casey Morgan", role: "Returns Handler", registeredDate: "2025-02-03", experience: [], preferredShifts: ["L", "N"], status: "documents-pending" },
-  { id: "N7", name: "Taylor Reed", role: "Picker", registeredDate: "2025-02-01", experience: ["Picking", "Packing"], preferredShifts: ["E"], status: "ready" },
-  { id: "N8", name: "Morgan Chen", role: "Inbound Warehouse", registeredDate: "2025-01-28", experience: ["Warehouse"], preferredShifts: ["M", "L"], status: "ready" },
-  { id: "N9", name: "Jamie Scott", role: "Loader", registeredDate: "2025-01-25", experience: [], preferredShifts: ["N"], status: "pending-induction" },
+  { id: "N7", name: "Taylor Reed", role: "Pick and Pack", registeredDate: "2025-02-01", experience: ["Pick and Pack", "Pick and Pack"], preferredShifts: ["E"], status: "ready" },
+  { id: "N8", name: "Morgan Chen", role: "Inbound Warehouse", registeredDate: "2025-01-28", experience: ["Inbound Warehouse"], preferredShifts: ["M", "L"], status: "ready" },
+  { id: "N9", name: "Jamie Scott", role: "Outbound Dispatch", registeredDate: "2025-01-25", experience: [], preferredShifts: ["N"], status: "pending-induction" },
   { id: "N10", name: "Sam Roberts", role: "Goods In Operative", registeredDate: "2025-01-20", experience: ["Goods In"], preferredShifts: ["E", "M"], status: "ready" },
-  { id: "N11", name: "Drew Campbell", role: "Picker", registeredDate: "2025-01-15", experience: [], preferredShifts: ["M"], status: "documents-pending" },
-  { id: "N12", name: "Pat Sullivan", role: "Packer", registeredDate: "2025-01-10", experience: ["Packing"], preferredShifts: ["E", "M"], status: "ready" },
+  { id: "N11", name: "Drew Campbell", role: "Pick and Pack", registeredDate: "2025-01-15", experience: [], preferredShifts: ["M"], status: "documents-pending" },
+  { id: "N12", name: "Pat Sullivan", role: "Packer", registeredDate: "2025-01-10", experience: ["Pick and Pack"], preferredShifts: ["E", "M"], status: "ready" },
   { id: "N13", name: "Lee Thompson", role: "Inbound Warehouse", registeredDate: "2024-12-20", experience: [], preferredShifts: ["L", "N"], status: "pending-induction" },
-  { id: "N14", name: "Quinn Davis", role: "Picker", registeredDate: "2024-12-01", experience: ["Picking", "Returns"], preferredShifts: ["E"], status: "ready" },
+  { id: "N14", name: "Quinn Davis", role: "Pick and Pack", registeredDate: "2024-12-01", experience: ["Pick and Pack", "Returns"], preferredShifts: ["E"], status: "ready" },
 ];
 
 interface AgencyWorkersProps {
@@ -65,7 +65,7 @@ const AgencyWorkers = ({ tab = "live", onViewWorker }: AgencyWorkersProps) => {
   const [allocationModal, setAllocationModal] = useState<typeof standbyWorkers[0] | null>(null);
   const [allocation, setAllocation] = useState({
     site: "Heathrow DC",
-    department: "Picking",
+    department: "Pick and Pack",
     shift: "06:00–14:00",
     date: "Mon 10 Feb",
   });
@@ -174,11 +174,11 @@ const AgencyWorkers = ({ tab = "live", onViewWorker }: AgencyWorkersProps) => {
               className="text-xs bg-card border border-border rounded px-2 py-1.5"
             >
               <option value="all">All Departments</option>
-              <option value="Picking">Picking</option>
-              <option value="Packing">Packing</option>
-              <option value="Warehouse">Warehouse</option>
-              <option value="Loading">Loading</option>
-              <option value="Quality">Quality</option>
+              <option value="Pick and Pack">Picking</option>
+              <option value="Pick and Pack">Packing</option>
+              <option value="Inbound Warehouse">Warehouse</option>
+              <option value="Outbound Dispatch">Loading</option>
+              <option value="Returns Processing">Quality</option>
             </select>
           </div>
 
@@ -254,11 +254,11 @@ const AgencyWorkers = ({ tab = "live", onViewWorker }: AgencyWorkersProps) => {
               className="text-xs bg-card border border-border rounded px-2 py-1.5"
             >
               <option value="all">All Departments</option>
-              <option value="Picking">Picking</option>
-              <option value="Packing">Packing</option>
-              <option value="Warehouse">Warehouse</option>
-              <option value="Loading">Loading</option>
-              <option value="Quality">Quality</option>
+              <option value="Pick and Pack">Picking</option>
+              <option value="Pick and Pack">Packing</option>
+              <option value="Inbound Warehouse">Warehouse</option>
+              <option value="Outbound Dispatch">Loading</option>
+              <option value="Returns Processing">Quality</option>
             </select>
           </div>
 

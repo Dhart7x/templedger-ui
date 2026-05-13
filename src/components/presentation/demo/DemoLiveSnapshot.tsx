@@ -17,17 +17,17 @@ interface Worker {
 const workers: Worker[] = [
   { id: "1", name: "Tom Brady", department: "Inbound Warehouse", agency: "Workforce Direct", site: "Baltimore, MD", status: "on-site", clockIn: "06:02", shift: "Morning" },
   { id: "2", name: "Rico Fernandez", department: "Inbound Warehouse", agency: "Pinnacle Staffing", site: "Baltimore, MD", status: "on-site", clockIn: "06:00", shift: "Morning" },
-  { id: "3", name: "Sarah Mitchell", department: "MHE", agency: "Meridian Recruitment", site: "Baltimore, MD", status: "overtime", clockIn: "05:58", shift: "Morning" },
+  { id: "3", name: "Sarah Mitchell", department: "MHE Operations", agency: "Meridian Recruitment", site: "Baltimore, MD", status: "overtime", clockIn: "05:58", shift: "Morning" },
   { id: "4", name: "Leon Kowalski", department: "Inbound Warehouse", agency: "Workforce Direct", site: "Las Vegas, NV", status: "on-site", clockIn: "06:01", shift: "Morning" },
-  { id: "5", name: "Fatima Al-Hassan", department: "MHE", agency: "Workforce Direct", site: "Baltimore, MD", status: "late", clockIn: "06:45", shift: "Morning" },
+  { id: "5", name: "Fatima Al-Hassan", department: "MHE Operations", agency: "Workforce Direct", site: "Baltimore, MD", status: "late", clockIn: "06:45", shift: "Morning" },
   { id: "6", name: "Priya Sharma", department: "Inbound Warehouse", agency: "Pinnacle Staffing", site: "Baltimore, MD", status: "on-site", clockIn: "06:00", shift: "Morning" },
-  { id: "7", name: "Daniel Reeves", department: "MHE", agency: "Meridian Recruitment", site: "Dallas Fort-Worth, TX", status: "no-show", shift: "Morning" },
+  { id: "7", name: "Daniel Reeves", department: "MHE Operations", agency: "Meridian Recruitment", site: "Dallas Fort-Worth, TX", status: "no-show", shift: "Morning" },
   { id: "8", name: "Tom Brady", department: "Inbound Warehouse", agency: "Workforce Direct", site: "Baltimore, MD", status: "on-site", clockIn: "06:03", shift: "Morning" },
 ];
 
 const departmentSummary = [
   { name: "Inbound Warehouse", required: 40, actual: 37, status: "at-risk" },
-  { name: "MHE", required: 20, actual: 18, status: "at-risk" },
+  { name: "MHE Operations", required: 20, actual: 18, status: "at-risk" },
 ];
 
 const DemoLiveSnapshot = () => {
@@ -54,8 +54,8 @@ const DemoLiveSnapshot = () => {
   };
 
   const issues = [
-    { type: "no-show", text: "Daniel Reeves (MHE) - No-show at Dallas Fort-Worth, TX", urgent: true, workerId: "7", workerName: "Daniel Reeves", department: "MHE", status: "blocked", executionStatus: "blocked" },
-    { type: "late", text: "Fatima Al-Hassan (MHE) - 45 min late at Baltimore, MD", urgent: false, workerId: "5", workerName: "Fatima Al-Hassan", department: "MHE", status: "active", executionStatus: "at-risk" },
+    { type: "no-show", text: "Daniel Reeves (MHE) - No-show at Dallas Fort-Worth, TX", urgent: true, workerId: "7", workerName: "Daniel Reeves", department: "MHE Operations", status: "blocked", executionStatus: "blocked" },
+    { type: "late", text: "Fatima Al-Hassan (MHE) - 45 min late at Baltimore, MD", urgent: false, workerId: "5", workerName: "Fatima Al-Hassan", department: "MHE Operations", status: "active", executionStatus: "at-risk" },
     { type: "headcount", text: "MHE department 2 workers short", urgent: true, workerId: "", workerName: "", department: "", status: "", executionStatus: "" },
   ];
 

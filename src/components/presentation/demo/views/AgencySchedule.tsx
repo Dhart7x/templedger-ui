@@ -15,7 +15,7 @@ const weekOptions = [
   { label: "Week of 3–9 Mar 2025", key: "wk5", isFuture: true },
 ];
 
-const departments = ["All Departments", "Warehouse", "Picking", "Packing", "Loading", "Quality"];
+const departments = ["All Departments", "Inbound Warehouse", "Pick and Pack", "Pick and Pack", "Outbound Dispatch", "Returns Processing"];
 const agencyOptions = ["All Agencies", "Workforce Direct", "Pertemps", "Blue Arrow", "Elite Personnel"];
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -58,11 +58,11 @@ interface RoleRow {
 
 const buildSchedule = (isFuture: boolean): RoleRow[] => {
   const data: { dept: string; role: string; early: number; late: number; night: number }[] = [
-    { dept: "Warehouse", role: "Inbound Warehouse", early: 12, late: 10, night: 6 },
-    { dept: "Warehouse", role: "MHE Operations", early: 4, late: 3, night: 2 },
-    { dept: "Picking", role: "Picker", early: 8, late: 6, night: 0 },
-    { dept: "Packing", role: "Packer", early: 6, late: 4, night: 0 },
-    { dept: "Loading", role: "Loader", early: 6, late: 4, night: 2 },
+    { dept: "Inbound Warehouse", role: "Inbound Warehouse", early: 12, late: 10, night: 6 },
+    { dept: "Inbound Warehouse", role: "MHE Operations", early: 4, late: 3, night: 2 },
+    { dept: "Pick and Pack", role: "Pick and Pack", early: 8, late: 6, night: 0 },
+    { dept: "Pick and Pack", role: "Packer", early: 6, late: 4, night: 0 },
+    { dept: "Outbound Dispatch", role: "Outbound Dispatch", early: 6, late: 4, night: 2 },
   ];
   return data.map(d => ({
     department: d.dept,

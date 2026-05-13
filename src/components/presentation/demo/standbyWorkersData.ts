@@ -55,11 +55,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "20-45-18", accountNumber: "30291847", bankName: "Barclays" },
     emergencyContact: { name: "Sarah Mitchell", relationship: "Spouse", phone: "07700 112934" },
     registeredDate: "2024-01-10", lastWorked: "2026-04-10", status: "live", registrationStatus: "live", agencyId: "AG001",
-    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Loader"],
+    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Outbound Dispatch"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 44, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 3.2, carTime: "8 mins", publicTransportTime: "22 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-01-10" }, healthAndSafety: { status: "verified", expiry: "2025-11-20" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Inbound Warehouse", years: 4 }, { role: "Loader", years: 2 }],
+    experience: [{ role: "Inbound Warehouse", years: 4 }, { role: "Outbound Dispatch", years: 2 }],
     rating: 4.6, completedShifts: 142, punctualityScore: 96.3
   },
   {
@@ -69,11 +69,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "30-98-74", accountNumber: "18374620", bankName: "Lloyds" },
     emergencyContact: { name: "Sarah Mitchell", relationship: "Parent", phone: "07700 445192" },
     registeredDate: "2024-02-18", lastWorked: "2026-04-10", status: "live", registrationStatus: "live", agencyId: "AG001",
-    bestMatchDepartment: "MHE", departments: ["MHE"],
+    bestMatchDepartment: "MHE Operations", departments: ["MHE Operations"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)", "Afternoon (14:00-22:00)"], maxHoursPerWeek: 40, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "24 hours", transportMode: "public" },
     distance: { miles: 5.8, carTime: "14 mins", publicTransportTime: "35 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-02-18" }, healthAndSafety: { status: "verified", expiry: "2025-08-30" }, contract: { status: "signed" }, dbs: { status: "verified", expiry: "2026-02-15" } },
-    experience: [{ role: "MHE", years: 3 }],
+    experience: [{ role: "MHE Operations", years: 3 }],
     rating: 4.8, completedShifts: 98, punctualityScore: 98.1
   },
   {
@@ -83,11 +83,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "09-01-28", accountNumber: "55209183", bankName: "Santander" },
     emergencyContact: { name: "Chris Donnelly", relationship: "Spouse", phone: "07811 339204" },
     registeredDate: "2023-09-05", lastWorked: "2026-04-10", status: "live", registrationStatus: "live", agencyId: "AG001",
-    bestMatchDepartment: "Picker", departments: ["Picker", "Inbound Warehouse"],
+    bestMatchDepartment: "Pick and Pack", departments: ["Pick and Pack", "Inbound Warehouse"],
     preferences: { preferredShifts: ["Afternoon (14:00-22:00)"], maxHoursPerWeek: 48, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 2.1, carTime: "5 mins", publicTransportTime: "15 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2025-09-05" }, healthAndSafety: { status: "verified", expiry: "2025-12-01" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Picker", years: 5 }, { role: "Inbound Warehouse", years: 3 }],
+    experience: [{ role: "Pick and Pack", years: 5 }, { role: "Inbound Warehouse", years: 3 }],
     rating: 4.3, completedShifts: 167, punctualityScore: 93.7
   },
   {
@@ -97,11 +97,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "40-23-19", accountNumber: "72938104", bankName: "HSBC" },
     emergencyContact: { name: "Omar Al-Rashid", relationship: "Sibling", phone: "07456 881023" },
     registeredDate: "2024-04-12", lastWorked: "2026-04-10", status: "live", registrationStatus: "live", agencyId: "AG001",
-    bestMatchDepartment: "Loader", departments: ["Loader"],
+    bestMatchDepartment: "Outbound Dispatch", departments: ["Outbound Dispatch"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 36, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "walking" },
     distance: { miles: 0.8, carTime: "3 mins", publicTransportTime: "8 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-04-12" }, healthAndSafety: { status: "verified", expiry: "2026-01-15" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Loader", years: 2 }],
+    experience: [{ role: "Outbound Dispatch", years: 2 }],
     rating: 4.5, completedShifts: 64, punctualityScore: 97.0
   },
   {
@@ -111,11 +111,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "11-04-55", accountNumber: "40182937", bankName: "NatWest" },
     emergencyContact: { name: "Chris Donnelly", relationship: "Parent", phone: "07700 993210" },
     registeredDate: "2023-11-20", lastWorked: "2026-04-10", status: "live", registrationStatus: "live", agencyId: "AG001",
-    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Picker", "Loader"],
+    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Pick and Pack", "Outbound Dispatch"],
     preferences: { preferredShifts: ["Night (22:00-06:00)"], maxHoursPerWeek: 44, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 4.5, carTime: "11 mins", publicTransportTime: "28 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2025-11-20" }, healthAndSafety: { status: "verified", expiry: "2025-10-01" }, contract: { status: "signed" }, dbs: { status: "verified", expiry: "2026-05-01" } },
-    experience: [{ role: "Inbound Warehouse", years: 6 }, { role: "Picker", years: 2 }, { role: "Loader", years: 1 }],
+    experience: [{ role: "Inbound Warehouse", years: 6 }, { role: "Pick and Pack", years: 2 }, { role: "Outbound Dispatch", years: 1 }],
     rating: 4.9, completedShifts: 180, punctualityScore: 99.1
   },
   {
@@ -125,11 +125,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "20-18-33", accountNumber: "91037482", bankName: "Barclays" },
     emergencyContact: { name: "Fatima Al-Hassan", relationship: "Parent", phone: "07834 220198" },
     registeredDate: "2024-03-01", lastWorked: "2026-04-10", status: "live", registrationStatus: "live", agencyId: "AG001",
-    bestMatchDepartment: "MHE", departments: ["MHE", "Inbound Warehouse"],
+    bestMatchDepartment: "MHE Operations", departments: ["MHE Operations", "Inbound Warehouse"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)", "Afternoon (14:00-22:00)"], maxHoursPerWeek: 40, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "public" },
     distance: { miles: 6.3, carTime: "15 mins", publicTransportTime: "38 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-03-01" }, healthAndSafety: { status: "verified", expiry: "2025-09-15" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "MHE", years: 4 }, { role: "Inbound Warehouse", years: 2 }],
+    experience: [{ role: "MHE Operations", years: 4 }, { role: "Inbound Warehouse", years: 2 }],
     rating: 4.7, completedShifts: 87, punctualityScore: 95.4
   },
 
@@ -155,11 +155,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "09-06-43", accountNumber: "61829304", bankName: "Santander" },
     emergencyContact: { name: "Chris Donnelly", relationship: "Parent", phone: "07890 123847" },
     registeredDate: "2024-05-22", lastWorked: "2026-04-10", status: "live", registrationStatus: "live", agencyId: "AG002",
-    bestMatchDepartment: "Picker", departments: ["Picker", "Inbound Warehouse"],
+    bestMatchDepartment: "Pick and Pack", departments: ["Pick and Pack", "Inbound Warehouse"],
     preferences: { preferredShifts: ["Afternoon (14:00-22:00)"], maxHoursPerWeek: 38, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "public" },
     distance: { miles: 1.4, carTime: "4 mins", publicTransportTime: "12 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-05-22" }, healthAndSafety: { status: "verified", expiry: "2026-02-10" }, contract: { status: "signed" }, dbs: { status: "verified", expiry: "2026-08-01" } },
-    experience: [{ role: "Picker", years: 2 }, { role: "Inbound Warehouse", years: 1 }],
+    experience: [{ role: "Pick and Pack", years: 2 }, { role: "Inbound Warehouse", years: 1 }],
     rating: 4.2, completedShifts: 48, punctualityScore: 91.5
   },
   {
@@ -169,11 +169,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "40-11-27", accountNumber: "83019274", bankName: "HSBC" },
     emergencyContact: { name: "Daniel Reeves", relationship: "Spouse", phone: "07456 301982" },
     registeredDate: "2023-07-08", lastWorked: "2026-04-10", status: "live", registrationStatus: "live", agencyId: "AG002",
-    bestMatchDepartment: "MHE", departments: ["MHE", "Loader"],
+    bestMatchDepartment: "MHE Operations", departments: ["MHE Operations", "Outbound Dispatch"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)", "Night (22:00-06:00)"], maxHoursPerWeek: 48, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 3.7, carTime: "9 mins", publicTransportTime: "24 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2025-07-08" }, healthAndSafety: { status: "verified", expiry: "2025-06-15" }, contract: { status: "signed" }, dbs: { status: "verified", expiry: "2025-12-01" } },
-    experience: [{ role: "MHE", years: 8 }, { role: "Loader", years: 3 }],
+    experience: [{ role: "MHE Operations", years: 8 }, { role: "Outbound Dispatch", years: 3 }],
     rating: 4.9, completedShifts: 174, punctualityScore: 98.6
   },
   {
@@ -183,11 +183,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "11-22-08", accountNumber: "19384720", bankName: "Halifax" },
     emergencyContact: { name: "Fatima Al-Hassan", relationship: "Sibling", phone: "07881 394021" },
     registeredDate: "2024-01-30", lastWorked: "2026-04-10", status: "live", registrationStatus: "live", agencyId: "AG002",
-    bestMatchDepartment: "Loader", departments: ["Loader", "Picker"],
+    bestMatchDepartment: "Outbound Dispatch", departments: ["Outbound Dispatch", "Pick and Pack"],
     preferences: { preferredShifts: ["Afternoon (14:00-22:00)"], maxHoursPerWeek: 36, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "bicycle" },
     distance: { miles: 2.9, carTime: "7 mins", publicTransportTime: "18 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-01-30" }, healthAndSafety: { status: "verified", expiry: "2025-11-05" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Loader", years: 3 }, { role: "Picker", years: 1 }],
+    experience: [{ role: "Outbound Dispatch", years: 3 }, { role: "Pick and Pack", years: 1 }],
     rating: 4.1, completedShifts: 72, punctualityScore: 89.3
   },
   {
@@ -197,11 +197,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "20-30-17", accountNumber: "47291038", bankName: "Barclays" },
     emergencyContact: { name: "Yuki Tanaka", relationship: "Spouse", phone: "07765 482910" },
     registeredDate: "2024-06-10", lastWorked: "2026-04-10", status: "live", registrationStatus: "live", agencyId: "AG002",
-    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "MHE"],
+    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "MHE Operations"],
     preferences: { preferredShifts: ["Night (22:00-06:00)"], maxHoursPerWeek: 44, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 1.9, carTime: "5 mins", publicTransportTime: "14 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-06-10" }, healthAndSafety: { status: "verified", expiry: "2026-03-20" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Inbound Warehouse", years: 5 }, { role: "MHE", years: 2 }],
+    experience: [{ role: "Inbound Warehouse", years: 5 }, { role: "MHE Operations", years: 2 }],
     rating: 4.7, completedShifts: 53, punctualityScore: 96.8
   },
   {
@@ -211,11 +211,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "30-55-09", accountNumber: "58201934", bankName: "Lloyds" },
     emergencyContact: { name: "Ana Pereira", relationship: "Parent", phone: "07934 201847" },
     registeredDate: "2024-03-25", lastWorked: "2026-04-10", status: "live", registrationStatus: "live", agencyId: "AG002",
-    bestMatchDepartment: "Picker", departments: ["Picker"],
+    bestMatchDepartment: "Pick and Pack", departments: ["Pick and Pack"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 32, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "public" },
     distance: { miles: 7.2, carTime: "17 mins", publicTransportTime: "42 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-03-25" }, healthAndSafety: { status: "verified", expiry: "2025-12-18" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Picker", years: 3 }],
+    experience: [{ role: "Pick and Pack", years: 3 }],
     rating: 4.4, completedShifts: 61, punctualityScore: 93.2
   },
 
@@ -227,11 +227,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "09-14-33", accountNumber: "30472918", bankName: "Santander" },
     emergencyContact: { name: "Rico Fernandez", relationship: "Spouse", phone: "07812 394028" },
     registeredDate: "2023-06-15", lastWorked: "2026-04-10", status: "live", registrationStatus: "live", agencyId: "AG003",
-    bestMatchDepartment: "MHE", departments: ["MHE", "Inbound Warehouse", "Loader"],
+    bestMatchDepartment: "MHE Operations", departments: ["MHE Operations", "Inbound Warehouse", "Outbound Dispatch"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 48, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 2.4, carTime: "6 mins", publicTransportTime: "16 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2025-06-15" }, healthAndSafety: { status: "verified", expiry: "2025-08-01" }, contract: { status: "signed" }, dbs: { status: "verified", expiry: "2026-01-15" } },
-    experience: [{ role: "MHE", years: 10 }, { role: "Inbound Warehouse", years: 5 }, { role: "Loader", years: 3 }],
+    experience: [{ role: "MHE Operations", years: 10 }, { role: "Inbound Warehouse", years: 5 }, { role: "Outbound Dispatch", years: 3 }],
     rating: 5.0, completedShifts: 178, punctualityScore: 99.4
   },
   {
@@ -241,11 +241,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "40-28-11", accountNumber: "82019374", bankName: "HSBC" },
     emergencyContact: { name: "Tom Brady", relationship: "Parent", phone: "07723 491028" },
     registeredDate: "2024-07-01", lastWorked: "2026-04-10", status: "live", registrationStatus: "live", agencyId: "AG003",
-    bestMatchDepartment: "Picker", departments: ["Picker", "Inbound Warehouse"],
+    bestMatchDepartment: "Pick and Pack", departments: ["Pick and Pack", "Inbound Warehouse"],
     preferences: { preferredShifts: ["Afternoon (14:00-22:00)"], maxHoursPerWeek: 38, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "24 hours", transportMode: "public" },
     distance: { miles: 1.1, carTime: "3 mins", publicTransportTime: "10 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-07-01" }, healthAndSafety: { status: "verified", expiry: "2026-04-15" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Picker", years: 1 }, { role: "Inbound Warehouse", years: 1 }],
+    experience: [{ role: "Pick and Pack", years: 1 }, { role: "Inbound Warehouse", years: 1 }],
     rating: 4.0, completedShifts: 34, punctualityScore: 88.7
   },
   {
@@ -269,11 +269,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "20-67-14", accountNumber: "49201837", bankName: "Barclays" },
     emergencyContact: { name: "Diane Foster", relationship: "Sibling", phone: "07891 204837" },
     registeredDate: "2024-08-10", lastWorked: "2026-04-10", status: "live", registrationStatus: "live", agencyId: "AG003",
-    bestMatchDepartment: "Loader", departments: ["Loader", "Picker"],
+    bestMatchDepartment: "Outbound Dispatch", departments: ["Outbound Dispatch", "Pick and Pack"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)", "Afternoon (14:00-22:00)"], maxHoursPerWeek: 36, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "walking" },
     distance: { miles: 0.6, carTime: "2 mins", publicTransportTime: "6 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-08-10" }, healthAndSafety: { status: "verified", expiry: "2026-05-20" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Loader", years: 1 }],
+    experience: [{ role: "Outbound Dispatch", years: 1 }],
     rating: 3.9, completedShifts: 28, punctualityScore: 87.2
   },
   {
@@ -283,11 +283,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "30-41-22", accountNumber: "71920384", bankName: "Lloyds" },
     emergencyContact: { name: "Leon Kowalski", relationship: "Spouse", phone: "07738 102948" },
     registeredDate: "2023-08-20", lastWorked: "2026-04-10", status: "live", registrationStatus: "live", agencyId: "AG003",
-    bestMatchDepartment: "MHE", departments: ["MHE"],
+    bestMatchDepartment: "MHE Operations", departments: ["MHE Operations"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 44, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 3.8, carTime: "9 mins", publicTransportTime: "25 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2025-08-20" }, healthAndSafety: { status: "verified", expiry: "2025-07-01" }, contract: { status: "signed" }, dbs: { status: "verified", expiry: "2025-11-15" } },
-    experience: [{ role: "MHE", years: 9 }],
+    experience: [{ role: "MHE Operations", years: 9 }],
     rating: 4.8, completedShifts: 163, punctualityScore: 97.9
   },
   {
@@ -297,11 +297,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "09-33-18", accountNumber: "20384719", bankName: "Santander" },
     emergencyContact: { name: "Sarah Mitchell", relationship: "Parent", phone: "07923 841029" },
     registeredDate: "2024-02-05", lastWorked: "2026-04-10", status: "live", registrationStatus: "live", agencyId: "AG003",
-    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Picker"],
+    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Pick and Pack"],
     preferences: { preferredShifts: ["Afternoon (14:00-22:00)"], maxHoursPerWeek: 40, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "public" },
     distance: { miles: 4.4, carTime: "11 mins", publicTransportTime: "27 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-02-05" }, healthAndSafety: { status: "verified", expiry: "2025-11-25" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Inbound Warehouse", years: 3 }, { role: "Picker", years: 2 }],
+    experience: [{ role: "Inbound Warehouse", years: 3 }, { role: "Pick and Pack", years: 2 }],
     rating: 4.5, completedShifts: 76, punctualityScore: 94.1
   },
 
@@ -331,11 +331,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "30-72-15", accountNumber: "49102837", bankName: "Lloyds" },
     emergencyContact: { name: "Fiona McGregor", relationship: "Parent", phone: "07834 192047" },
     registeredDate: "2024-04-18", lastWorked: "2026-03-28", status: "standby", registrationStatus: "standby", agencyId: "AG001",
-    bestMatchDepartment: "Picker", departments: ["Picker", "Inbound Warehouse"],
+    bestMatchDepartment: "Pick and Pack", departments: ["Pick and Pack", "Inbound Warehouse"],
     preferences: { preferredShifts: ["Afternoon (14:00-22:00)"], maxHoursPerWeek: 34, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "24 hours", transportMode: "public" },
     distance: { miles: 5.5, carTime: "13 mins", publicTransportTime: "33 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-04-18" }, healthAndSafety: { status: "verified", expiry: "2026-01-10" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Picker", years: 2 }, { role: "Inbound Warehouse", years: 1 }],
+    experience: [{ role: "Pick and Pack", years: 2 }, { role: "Inbound Warehouse", years: 1 }],
     rating: 4.1, completedShifts: 45, punctualityScore: 90.4
   },
   {
@@ -345,11 +345,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "40-09-37", accountNumber: "58291034", bankName: "HSBC" },
     emergencyContact: { name: "Chris Donnelly", relationship: "Spouse", phone: "07956 301928" },
     registeredDate: "2023-11-05", lastWorked: "2026-04-05", status: "standby", registrationStatus: "standby", agencyId: "AG001",
-    bestMatchDepartment: "MHE", departments: ["MHE", "Loader"],
+    bestMatchDepartment: "MHE Operations", departments: ["MHE Operations", "Outbound Dispatch"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)", "Night (22:00-06:00)"], maxHoursPerWeek: 48, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 4.9, carTime: "12 mins", publicTransportTime: "30 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2025-11-05" }, healthAndSafety: { status: "verified", expiry: "2025-09-20" }, contract: { status: "signed" }, dbs: { status: "verified", expiry: "2026-03-10" } },
-    experience: [{ role: "MHE", years: 6 }, { role: "Loader", years: 2 }],
+    experience: [{ role: "MHE Operations", years: 6 }, { role: "Outbound Dispatch", years: 2 }],
     rating: 4.6, completedShifts: 112, punctualityScore: 95.7
   },
   {
@@ -359,11 +359,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "11-28-03", accountNumber: "72910384", bankName: "NatWest" },
     emergencyContact: { name: "Aisha Nwosu", relationship: "Parent", phone: "07812 920384" },
     registeredDate: "2024-06-28", lastWorked: "2026-03-31", status: "standby", registrationStatus: "standby", agencyId: "AG001",
-    bestMatchDepartment: "Loader", departments: ["Loader"],
+    bestMatchDepartment: "Outbound Dispatch", departments: ["Outbound Dispatch"],
     preferences: { preferredShifts: ["Afternoon (14:00-22:00)"], maxHoursPerWeek: 30, availableDays: ["Mon","Tue","Wed","Thu"], noticePeriod: "48 hours", transportMode: "bicycle" },
     distance: { miles: 3.1, carTime: "8 mins", publicTransportTime: "20 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-06-28" }, healthAndSafety: { status: "pending", expiry: "2025-03-01" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Loader", years: 1 }],
+    experience: [{ role: "Outbound Dispatch", years: 1 }],
     rating: 3.8, completedShifts: 22, punctualityScore: 85.3
   },
   {
@@ -373,11 +373,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "20-55-19", accountNumber: "18392047", bankName: "Barclays" },
     emergencyContact: { name: "Priya Sharma", relationship: "Spouse", phone: "07734 829104" },
     registeredDate: "2023-10-22", lastWorked: "2026-04-07", status: "standby", registrationStatus: "standby", agencyId: "AG001",
-    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Picker"],
+    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Pick and Pack"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 44, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 1.6, carTime: "4 mins", publicTransportTime: "12 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2025-10-22" }, healthAndSafety: { status: "verified", expiry: "2025-08-15" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Inbound Warehouse", years: 7 }, { role: "Picker", years: 3 }],
+    experience: [{ role: "Inbound Warehouse", years: 7 }, { role: "Pick and Pack", years: 3 }],
     rating: 4.7, completedShifts: 134, punctualityScore: 96.4
   },
   {
@@ -387,11 +387,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "30-18-44", accountNumber: "82930147", bankName: "Lloyds" },
     emergencyContact: { name: "Leon Kowalski", relationship: "Spouse", phone: "07891 402938" },
     registeredDate: "2024-03-15", lastWorked: "2026-03-25", status: "standby", registrationStatus: "standby", agencyId: "AG001",
-    bestMatchDepartment: "Picker", departments: ["Picker"],
+    bestMatchDepartment: "Pick and Pack", departments: ["Pick and Pack"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)", "Afternoon (14:00-22:00)"], maxHoursPerWeek: 38, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "public" },
     distance: { miles: 4.2, carTime: "10 mins", publicTransportTime: "26 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-03-15" }, healthAndSafety: { status: "verified", expiry: "2025-12-20" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Picker", years: 3 }],
+    experience: [{ role: "Pick and Pack", years: 3 }],
     rating: 4.4, completedShifts: 58, punctualityScore: 93.8
   },
   {
@@ -401,11 +401,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "09-22-51", accountNumber: "39201847", bankName: "Santander" },
     emergencyContact: { name: "Daniel Reeves", relationship: "Spouse", phone: "07623 491028" },
     registeredDate: "2023-05-10", lastWorked: "2026-04-08", status: "standby", registrationStatus: "standby", agencyId: "AG001",
-    bestMatchDepartment: "MHE", departments: ["MHE", "Inbound Warehouse"],
+    bestMatchDepartment: "MHE Operations", departments: ["MHE Operations", "Inbound Warehouse"],
     preferences: { preferredShifts: ["Night (22:00-06:00)"], maxHoursPerWeek: 44, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 2.3, carTime: "6 mins", publicTransportTime: "15 mins" },
     compliance: { rightToWork: { status: "expired", expiry: "2025-01-10" }, healthAndSafety: { status: "verified", expiry: "2025-07-20" }, contract: { status: "signed" }, dbs: { status: "verified", expiry: "2025-09-15" } },
-    experience: [{ role: "MHE", years: 12 }, { role: "Inbound Warehouse", years: 5 }],
+    experience: [{ role: "MHE Operations", years: 12 }, { role: "Inbound Warehouse", years: 5 }],
     rating: 4.8, completedShifts: 165, punctualityScore: 97.2
   },
   {
@@ -429,11 +429,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "11-47-22", accountNumber: "47382910", bankName: "NatWest" },
     emergencyContact: { name: "Chris Donnelly", relationship: "Parent", phone: "07834 201938" },
     registeredDate: "2024-02-10", lastWorked: "2026-04-01", status: "standby", registrationStatus: "standby", agencyId: "AG001",
-    bestMatchDepartment: "Loader", departments: ["Loader", "Inbound Warehouse"],
+    bestMatchDepartment: "Outbound Dispatch", departments: ["Outbound Dispatch", "Inbound Warehouse"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 40, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "24 hours", transportMode: "car" },
     distance: { miles: 5.3, carTime: "13 mins", publicTransportTime: "32 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-02-10" }, healthAndSafety: { status: "verified", expiry: "2025-11-15" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Loader", years: 4 }, { role: "Inbound Warehouse", years: 2 }],
+    experience: [{ role: "Outbound Dispatch", years: 4 }, { role: "Inbound Warehouse", years: 2 }],
     rating: 4.2, completedShifts: 67, punctualityScore: 91.6
   },
 
@@ -445,11 +445,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "20-38-14", accountNumber: "59201834", bankName: "Barclays" },
     emergencyContact: { name: "Diane Foster", relationship: "Parent", phone: "07700 384920" },
     registeredDate: "2024-01-05", lastWorked: "2026-04-03", status: "standby", registrationStatus: "standby", agencyId: "AG002",
-    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Loader"],
+    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Outbound Dispatch"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)", "Afternoon (14:00-22:00)"], maxHoursPerWeek: 44, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 1.8, carTime: "5 mins", publicTransportTime: "13 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-01-05" }, healthAndSafety: { status: "verified", expiry: "2025-09-18" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Inbound Warehouse", years: 5 }, { role: "Loader", years: 3 }],
+    experience: [{ role: "Inbound Warehouse", years: 5 }, { role: "Outbound Dispatch", years: 3 }],
     rating: 4.5, completedShifts: 103, punctualityScore: 94.9
   },
   {
@@ -459,11 +459,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "30-44-19", accountNumber: "28391047", bankName: "Lloyds" },
     emergencyContact: { name: "Tom Brady", relationship: "Parent", phone: "07812 493028" },
     registeredDate: "2024-05-12", lastWorked: "2026-03-29", status: "standby", registrationStatus: "standby", agencyId: "AG002",
-    bestMatchDepartment: "Picker", departments: ["Picker"],
+    bestMatchDepartment: "Pick and Pack", departments: ["Pick and Pack"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 34, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "public" },
     distance: { miles: 3.6, carTime: "9 mins", publicTransportTime: "23 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-05-12" }, healthAndSafety: { status: "verified", expiry: "2026-02-28" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Picker", years: 2 }],
+    experience: [{ role: "Pick and Pack", years: 2 }],
     rating: 4.0, completedShifts: 38, punctualityScore: 89.7
   },
   {
@@ -473,11 +473,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "09-18-42", accountNumber: "73920184", bankName: "Santander" },
     emergencyContact: { name: "Tom Brady", relationship: "Spouse", phone: "07934 201847" },
     registeredDate: "2023-09-15", lastWorked: "2026-04-06", status: "standby", registrationStatus: "standby", agencyId: "AG002",
-    bestMatchDepartment: "MHE", departments: ["MHE", "Inbound Warehouse"],
+    bestMatchDepartment: "MHE Operations", departments: ["MHE Operations", "Inbound Warehouse"],
     preferences: { preferredShifts: ["Night (22:00-06:00)"], maxHoursPerWeek: 48, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 6.1, carTime: "15 mins", publicTransportTime: "37 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2025-09-15" }, healthAndSafety: { status: "expired", expiry: "2025-02-01" }, contract: { status: "signed" }, dbs: { status: "verified", expiry: "2026-01-20" } },
-    experience: [{ role: "MHE", years: 7 }, { role: "Inbound Warehouse", years: 4 }],
+    experience: [{ role: "MHE Operations", years: 7 }, { role: "Inbound Warehouse", years: 4 }],
     rating: 4.6, completedShifts: 128, punctualityScore: 95.3
   },
   {
@@ -487,11 +487,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "40-15-28", accountNumber: "82910347", bankName: "HSBC" },
     emergencyContact: { name: "Marcus Webb", relationship: "Parent", phone: "07623 384920" },
     registeredDate: "2024-07-20", lastWorked: "2026-03-26", status: "standby", registrationStatus: "standby", agencyId: "AG002",
-    bestMatchDepartment: "Loader", departments: ["Loader", "Picker"],
+    bestMatchDepartment: "Outbound Dispatch", departments: ["Outbound Dispatch", "Pick and Pack"],
     preferences: { preferredShifts: ["Afternoon (14:00-22:00)"], maxHoursPerWeek: 36, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "48 hours", transportMode: "bicycle" },
     distance: { miles: 4.7, carTime: "11 mins", publicTransportTime: "29 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-07-20" }, healthAndSafety: { status: "verified", expiry: "2026-04-05" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Loader", years: 2 }, { role: "Picker", years: 1 }],
+    experience: [{ role: "Outbound Dispatch", years: 2 }, { role: "Pick and Pack", years: 1 }],
     rating: 3.9, completedShifts: 31, punctualityScore: 87.8
   },
   {
@@ -515,11 +515,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "20-72-33", accountNumber: "19384720", bankName: "Halifax" },
     emergencyContact: { name: "Emma Johansson", relationship: "Parent", phone: "07891 203847" },
     registeredDate: "2024-08-15", lastWorked: "2026-03-20", status: "standby", registrationStatus: "standby", agencyId: "AG002",
-    bestMatchDepartment: "Picker", departments: ["Picker", "Inbound Warehouse"],
+    bestMatchDepartment: "Pick and Pack", departments: ["Pick and Pack", "Inbound Warehouse"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)", "Afternoon (14:00-22:00)"], maxHoursPerWeek: 32, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "public" },
     distance: { miles: 5.2, carTime: "13 mins", publicTransportTime: "31 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-08-15" }, healthAndSafety: { status: "verified", expiry: "2026-05-01" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Picker", years: 1 }],
+    experience: [{ role: "Pick and Pack", years: 1 }],
     rating: 3.6, completedShifts: 15, punctualityScore: 82.4
   },
   {
@@ -529,11 +529,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "30-09-44", accountNumber: "63829104", bankName: "Lloyds" },
     emergencyContact: { name: "Priya Sharma", relationship: "Spouse", phone: "07712 930184" },
     registeredDate: "2023-12-10", lastWorked: "2026-04-09", status: "standby", registrationStatus: "standby", agencyId: "AG002",
-    bestMatchDepartment: "MHE", departments: ["MHE"],
+    bestMatchDepartment: "MHE Operations", departments: ["MHE Operations"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 44, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 7.8, carTime: "18 mins", publicTransportTime: "45 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2025-12-10" }, healthAndSafety: { status: "verified", expiry: "2025-10-25" }, contract: { status: "signed" }, dbs: { status: "verified", expiry: "2026-04-10" } },
-    experience: [{ role: "MHE", years: 8 }],
+    experience: [{ role: "MHE Operations", years: 8 }],
     rating: 4.8, completedShifts: 139, punctualityScore: 97.5
   },
   {
@@ -543,11 +543,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "09-44-17", accountNumber: "30291847", bankName: "Santander" },
     emergencyContact: { name: "Aisha Nwosu", relationship: "Sibling", phone: "07934 281047" },
     registeredDate: "2024-04-02", lastWorked: "2026-03-27", status: "standby", registrationStatus: "standby", agencyId: "AG002",
-    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Picker"],
+    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Pick and Pack"],
     preferences: { preferredShifts: ["Afternoon (14:00-22:00)"], maxHoursPerWeek: 38, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "walking" },
     distance: { miles: 0.9, carTime: "3 mins", publicTransportTime: "8 mins" },
     compliance: { rightToWork: { status: "pending", expiry: "2025-04-15" }, healthAndSafety: { status: "verified", expiry: "2026-01-30" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Inbound Warehouse", years: 3 }, { role: "Picker", years: 2 }],
+    experience: [{ role: "Inbound Warehouse", years: 3 }, { role: "Pick and Pack", years: 2 }],
     rating: 4.3, completedShifts: 52, punctualityScore: 92.6
   },
   {
@@ -557,11 +557,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "40-22-39", accountNumber: "91038274", bankName: "HSBC" },
     emergencyContact: { name: "Emma Johansson", relationship: "Spouse", phone: "07623 910384" },
     registeredDate: "2024-02-28", lastWorked: "2026-04-02", status: "standby", registrationStatus: "standby", agencyId: "AG002",
-    bestMatchDepartment: "Loader", departments: ["Loader"],
+    bestMatchDepartment: "Outbound Dispatch", departments: ["Outbound Dispatch"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 40, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "24 hours", transportMode: "car" },
     distance: { miles: 4.0, carTime: "10 mins", publicTransportTime: "25 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-02-28" }, healthAndSafety: { status: "verified", expiry: "2025-12-05" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Loader", years: 4 }],
+    experience: [{ role: "Outbound Dispatch", years: 4 }],
     rating: 4.4, completedShifts: 71, punctualityScore: 93.4
   },
 
@@ -573,11 +573,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "20-14-55", accountNumber: "38201947", bankName: "Barclays" },
     emergencyContact: { name: "Daniel Reeves", relationship: "Spouse", phone: "07700 821034" },
     registeredDate: "2024-01-18", lastWorked: "2026-04-05", status: "standby", registrationStatus: "standby", agencyId: "AG003",
-    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Picker"],
+    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Pick and Pack"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 40, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "car" },
     distance: { miles: 3.4, carTime: "8 mins", publicTransportTime: "21 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-01-18" }, healthAndSafety: { status: "verified", expiry: "2025-10-10" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Inbound Warehouse", years: 4 }, { role: "Picker", years: 2 }],
+    experience: [{ role: "Inbound Warehouse", years: 4 }, { role: "Pick and Pack", years: 2 }],
     rating: 4.5, completedShifts: 84, punctualityScore: 94.7
   },
   {
@@ -587,11 +587,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "30-28-11", accountNumber: "47291038", bankName: "Lloyds" },
     emergencyContact: { name: "Tom Brady", relationship: "Parent", phone: "07834 902184" },
     registeredDate: "2023-07-25", lastWorked: "2026-04-08", status: "standby", registrationStatus: "standby", agencyId: "AG003",
-    bestMatchDepartment: "MHE", departments: ["MHE", "Loader", "Inbound Warehouse"],
+    bestMatchDepartment: "MHE Operations", departments: ["MHE Operations", "Outbound Dispatch", "Inbound Warehouse"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)", "Night (22:00-06:00)"], maxHoursPerWeek: 48, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 5.6, carTime: "14 mins", publicTransportTime: "34 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2025-07-25" }, healthAndSafety: { status: "verified", expiry: "2025-05-15" }, contract: { status: "signed" }, dbs: { status: "verified", expiry: "2025-10-20" } },
-    experience: [{ role: "MHE", years: 11 }, { role: "Loader", years: 5 }, { role: "Inbound Warehouse", years: 3 }],
+    experience: [{ role: "MHE Operations", years: 11 }, { role: "Outbound Dispatch", years: 5 }, { role: "Inbound Warehouse", years: 3 }],
     rating: 4.9, completedShifts: 171, punctualityScore: 98.2
   },
   {
@@ -601,11 +601,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "09-31-27", accountNumber: "82019384", bankName: "Santander" },
     emergencyContact: { name: "Diane Foster", relationship: "Parent", phone: "07912 384029" },
     registeredDate: "2024-06-05", lastWorked: "2026-03-30", status: "standby", registrationStatus: "standby", agencyId: "AG003",
-    bestMatchDepartment: "Picker", departments: ["Picker"],
+    bestMatchDepartment: "Pick and Pack", departments: ["Pick and Pack"],
     preferences: { preferredShifts: ["Afternoon (14:00-22:00)"], maxHoursPerWeek: 34, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "public" },
     distance: { miles: 6.5, carTime: "16 mins", publicTransportTime: "39 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-06-05" }, healthAndSafety: { status: "verified", expiry: "2026-03-15" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Picker", years: 1 }],
+    experience: [{ role: "Pick and Pack", years: 1 }],
     rating: 3.8, completedShifts: 24, punctualityScore: 86.1
   },
   {
@@ -615,11 +615,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "11-55-14", accountNumber: "58392010", bankName: "NatWest" },
     emergencyContact: { name: "Emma Johansson", relationship: "Sibling", phone: "07745 392018" },
     registeredDate: "2023-11-30", lastWorked: "2026-04-07", status: "standby", registrationStatus: "standby", agencyId: "AG003",
-    bestMatchDepartment: "Loader", departments: ["Loader", "Inbound Warehouse"],
+    bestMatchDepartment: "Outbound Dispatch", departments: ["Outbound Dispatch", "Inbound Warehouse"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 44, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 2.7, carTime: "7 mins", publicTransportTime: "18 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2025-11-30" }, healthAndSafety: { status: "verified", expiry: "2025-09-22" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Loader", years: 5 }, { role: "Inbound Warehouse", years: 3 }],
+    experience: [{ role: "Outbound Dispatch", years: 5 }, { role: "Inbound Warehouse", years: 3 }],
     rating: 4.6, completedShifts: 118, punctualityScore: 95.5
   },
   {
@@ -643,11 +643,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "30-63-22", accountNumber: "39201847", bankName: "Lloyds" },
     emergencyContact: { name: "James Okafor", relationship: "Spouse", phone: "07934 820193" },
     registeredDate: "2023-10-05", lastWorked: "2026-04-06", status: "standby", registrationStatus: "standby", agencyId: "AG003",
-    bestMatchDepartment: "MHE", departments: ["MHE"],
+    bestMatchDepartment: "MHE Operations", departments: ["MHE Operations"],
     preferences: { preferredShifts: ["Night (22:00-06:00)"], maxHoursPerWeek: 44, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 4.3, carTime: "10 mins", publicTransportTime: "27 mins" },
     compliance: { rightToWork: { status: "expired", expiry: "2025-02-05" }, healthAndSafety: { status: "verified", expiry: "2025-08-18" }, contract: { status: "signed" }, dbs: { status: "verified", expiry: "2025-12-10" } },
-    experience: [{ role: "MHE", years: 7 }],
+    experience: [{ role: "MHE Operations", years: 7 }],
     rating: 4.7, completedShifts: 131, punctualityScore: 96.0
   },
   {
@@ -657,11 +657,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "09-17-44", accountNumber: "82930184", bankName: "Santander" },
     emergencyContact: { name: "Diane Foster", relationship: "Parent", phone: "07623 491820" },
     registeredDate: "2024-05-01", lastWorked: "2026-03-23", status: "standby", registrationStatus: "standby", agencyId: "AG003",
-    bestMatchDepartment: "Picker", departments: ["Picker", "Inbound Warehouse"],
+    bestMatchDepartment: "Pick and Pack", departments: ["Pick and Pack", "Inbound Warehouse"],
     preferences: { preferredShifts: ["Afternoon (14:00-22:00)"], maxHoursPerWeek: 36, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "48 hours", transportMode: "bicycle" },
     distance: { miles: 3.0, carTime: "7 mins", publicTransportTime: "19 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-05-01" }, healthAndSafety: { status: "verified", expiry: "2026-02-18" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Picker", years: 2 }, { role: "Inbound Warehouse", years: 1 }],
+    experience: [{ role: "Pick and Pack", years: 2 }, { role: "Inbound Warehouse", years: 1 }],
     rating: 4.0, completedShifts: 36, punctualityScore: 88.5
   },
   {
@@ -671,11 +671,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "40-08-33", accountNumber: "49382019", bankName: "HSBC" },
     emergencyContact: { name: "Priya Sharma", relationship: "Parent", phone: "07834 293018" },
     registeredDate: "2023-09-18", lastWorked: "2026-04-03", status: "standby", registrationStatus: "standby", agencyId: "AG003",
-    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Loader"],
+    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Outbound Dispatch"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 44, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 5.4, carTime: "13 mins", publicTransportTime: "33 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2025-09-18" }, healthAndSafety: { status: "verified", expiry: "2025-07-28" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Inbound Warehouse", years: 8 }, { role: "Loader", years: 4 }],
+    experience: [{ role: "Inbound Warehouse", years: 8 }, { role: "Outbound Dispatch", years: 4 }],
     rating: 4.8, completedShifts: 152, punctualityScore: 97.1
   },
   {
@@ -685,11 +685,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "11-29-18", accountNumber: "58291034", bankName: "Halifax" },
     emergencyContact: { name: "Priya Sharma", relationship: "Sibling", phone: "07712 492038" },
     registeredDate: "2024-04-22", lastWorked: "2026-03-21", status: "standby", registrationStatus: "standby", agencyId: "AG003",
-    bestMatchDepartment: "Loader", departments: ["Loader"],
+    bestMatchDepartment: "Outbound Dispatch", departments: ["Outbound Dispatch"],
     preferences: { preferredShifts: ["Afternoon (14:00-22:00)"], maxHoursPerWeek: 32, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "public" },
     distance: { miles: 1.3, carTime: "4 mins", publicTransportTime: "11 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2026-04-22" }, healthAndSafety: { status: "verified", expiry: "2026-01-28" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Loader", years: 2 }],
+    experience: [{ role: "Outbound Dispatch", years: 2 }],
     rating: 4.2, completedShifts: 47, punctualityScore: 91.3
   },
 
@@ -719,11 +719,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "30-15-29", accountNumber: "72019384", bankName: "Lloyds" },
     emergencyContact: { name: "Rico Fernandez", relationship: "Parent", phone: "07812 930182" },
     registeredDate: "2026-03-28", lastWorked: null, status: "standby", registrationStatus: "new-registered", agencyId: "AG001",
-    bestMatchDepartment: "Picker", departments: ["Picker"],
+    bestMatchDepartment: "Pick and Pack", departments: ["Pick and Pack"],
     preferences: { preferredShifts: ["Afternoon (14:00-22:00)"], maxHoursPerWeek: 32, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "48 hours", transportMode: "walking" },
     distance: { miles: 0.5, carTime: "2 mins", publicTransportTime: "5 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2027-03-28" }, healthAndSafety: { status: "pending", expiry: "2026-09-28" }, contract: { status: "pending" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Picker", years: 1 }],
+    experience: [{ role: "Pick and Pack", years: 1 }],
     rating: 0, completedShifts: 0, punctualityScore: 0
   },
   {
@@ -733,11 +733,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "09-28-11", accountNumber: "49102837", bankName: "Santander" },
     emergencyContact: { name: "Marcus Webb", relationship: "Parent", phone: "07934 102847" },
     registeredDate: "2026-04-01", lastWorked: null, status: "standby", registrationStatus: "new-registered", agencyId: "AG001",
-    bestMatchDepartment: "MHE", departments: ["MHE"],
+    bestMatchDepartment: "MHE Operations", departments: ["MHE Operations"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 44, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 4.6, carTime: "11 mins", publicTransportTime: "28 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2027-04-01" }, healthAndSafety: { status: "verified", expiry: "2026-10-01" }, contract: { status: "signed" }, dbs: { status: "pending", expiry: null } },
-    experience: [{ role: "MHE", years: 2 }],
+    experience: [{ role: "MHE Operations", years: 2 }],
     rating: 0, completedShifts: 0, punctualityScore: 0
   },
   {
@@ -747,7 +747,7 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "40-18-07", accountNumber: "82391047", bankName: "HSBC" },
     emergencyContact: { name: "Chris Donnelly", relationship: "Parent", phone: "07623 821034" },
     registeredDate: "2026-04-05", lastWorked: null, status: "standby", registrationStatus: "new-registered", agencyId: "AG001",
-    bestMatchDepartment: "Loader", departments: ["Loader"],
+    bestMatchDepartment: "Outbound Dispatch", departments: ["Outbound Dispatch"],
     preferences: { preferredShifts: ["Afternoon (14:00-22:00)"], maxHoursPerWeek: 30, availableDays: ["Mon","Tue","Wed","Thu"], noticePeriod: "48 hours", transportMode: "public" },
     distance: { miles: 3.9, carTime: "10 mins", publicTransportTime: "24 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2027-04-05" }, healthAndSafety: { status: "pending", expiry: "2026-10-05" }, contract: { status: "pending" }, dbs: { status: "not-required", expiry: null } },
@@ -761,7 +761,7 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "11-42-19", accountNumber: "19283047", bankName: "NatWest" },
     emergencyContact: { name: "Sarah Mitchell", relationship: "Parent", phone: "07745 291038" },
     registeredDate: "2026-03-15", lastWorked: null, status: "standby", registrationStatus: "new-registered", agencyId: "AG001",
-    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Picker"],
+    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Pick and Pack"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)", "Afternoon (14:00-22:00)"], maxHoursPerWeek: 38, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "bicycle" },
     distance: { miles: 2.5, carTime: "6 mins", publicTransportTime: "17 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2027-03-15" }, healthAndSafety: { status: "verified", expiry: "2026-09-15" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
@@ -777,7 +777,7 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "20-33-51", accountNumber: "38920147", bankName: "Barclays" },
     emergencyContact: { name: "Ana Pereira", relationship: "Parent", phone: "07700 382019" },
     registeredDate: "2026-03-18", lastWorked: null, status: "standby", registrationStatus: "new-registered", agencyId: "AG002",
-    bestMatchDepartment: "Picker", departments: ["Picker"],
+    bestMatchDepartment: "Pick and Pack", departments: ["Pick and Pack"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 34, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "public" },
     distance: { miles: 1.2, carTime: "3 mins", publicTransportTime: "10 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2027-03-18" }, healthAndSafety: { status: "pending", expiry: "2026-09-18" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
@@ -805,11 +805,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "09-39-14", accountNumber: "72910384", bankName: "Santander" },
     emergencyContact: { name: "Leon Kowalski", relationship: "Parent", phone: "07912 384920" },
     registeredDate: "2026-04-03", lastWorked: null, status: "standby", registrationStatus: "new-registered", agencyId: "AG002",
-    bestMatchDepartment: "MHE", departments: ["MHE"],
+    bestMatchDepartment: "MHE Operations", departments: ["MHE Operations"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 44, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 1.5, carTime: "4 mins", publicTransportTime: "12 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2027-04-03" }, healthAndSafety: { status: "verified", expiry: "2026-10-03" }, contract: { status: "signed" }, dbs: { status: "pending", expiry: null } },
-    experience: [{ role: "MHE", years: 2 }],
+    experience: [{ role: "MHE Operations", years: 2 }],
     rating: 0, completedShifts: 0, punctualityScore: 0
   },
   {
@@ -819,11 +819,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "40-27-11", accountNumber: "49182037", bankName: "HSBC" },
     emergencyContact: { name: "Priya Sharma", relationship: "Sibling", phone: "07623 291038" },
     registeredDate: "2026-03-30", lastWorked: null, status: "standby", registrationStatus: "new-registered", agencyId: "AG002",
-    bestMatchDepartment: "Loader", departments: ["Loader", "Inbound Warehouse"],
+    bestMatchDepartment: "Outbound Dispatch", departments: ["Outbound Dispatch", "Inbound Warehouse"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)", "Night (22:00-06:00)"], maxHoursPerWeek: 48, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 6.9, carTime: "16 mins", publicTransportTime: "41 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2027-03-30" }, healthAndSafety: { status: "pending", expiry: "2026-09-30" }, contract: { status: "pending" }, dbs: { status: "not-required", expiry: null } },
-    experience: [{ role: "Loader", years: 1 }],
+    experience: [{ role: "Outbound Dispatch", years: 1 }],
     rating: 0, completedShifts: 0, punctualityScore: 0
   },
   {
@@ -849,7 +849,7 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "20-55-07", accountNumber: "38291047", bankName: "Barclays" },
     emergencyContact: { name: "Diane Foster", relationship: "Parent", phone: "07700 293018" },
     registeredDate: "2026-03-20", lastWorked: null, status: "standby", registrationStatus: "new-registered", agencyId: "AG003",
-    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Loader"],
+    bestMatchDepartment: "Inbound Warehouse", departments: ["Inbound Warehouse", "Outbound Dispatch"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)"], maxHoursPerWeek: 40, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "24 hours", transportMode: "car" },
     distance: { miles: 3.3, carTime: "8 mins", publicTransportTime: "21 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2027-03-20" }, healthAndSafety: { status: "verified", expiry: "2026-09-20" }, contract: { status: "signed" }, dbs: { status: "not-required", expiry: null } },
@@ -863,7 +863,7 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "30-11-44", accountNumber: "59201834", bankName: "Lloyds" },
     emergencyContact: { name: "James Okafor", relationship: "Parent", phone: "07834 291028" },
     registeredDate: "2026-03-26", lastWorked: null, status: "standby", registrationStatus: "new-registered", agencyId: "AG003",
-    bestMatchDepartment: "Picker", departments: ["Picker"],
+    bestMatchDepartment: "Pick and Pack", departments: ["Pick and Pack"],
     preferences: { preferredShifts: ["Afternoon (14:00-22:00)"], maxHoursPerWeek: 32, availableDays: ["Mon","Tue","Wed","Thu","Fri"], noticePeriod: "48 hours", transportMode: "public" },
     distance: { miles: 4.8, carTime: "12 mins", publicTransportTime: "29 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2027-03-26" }, healthAndSafety: { status: "pending", expiry: "2026-09-26" }, contract: { status: "pending" }, dbs: { status: "not-required", expiry: null } },
@@ -877,11 +877,11 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "09-24-38", accountNumber: "72019384", bankName: "Santander" },
     emergencyContact: { name: "Yuki Tanaka", relationship: "Parent", phone: "07912 493820" },
     registeredDate: "2026-04-02", lastWorked: null, status: "standby", registrationStatus: "new-registered", agencyId: "AG003",
-    bestMatchDepartment: "MHE", departments: ["MHE"],
+    bestMatchDepartment: "MHE Operations", departments: ["MHE Operations"],
     preferences: { preferredShifts: ["Morning (06:00-14:00)", "Night (22:00-06:00)"], maxHoursPerWeek: 44, availableDays: ["Mon","Tue","Wed","Thu","Fri","Sat"], noticePeriod: "Same day", transportMode: "car" },
     distance: { miles: 1.7, carTime: "4 mins", publicTransportTime: "13 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2027-04-02" }, healthAndSafety: { status: "verified", expiry: "2026-10-02" }, contract: { status: "signed" }, dbs: { status: "pending", expiry: null } },
-    experience: [{ role: "MHE", years: 1 }],
+    experience: [{ role: "MHE Operations", years: 1 }],
     rating: 0, completedShifts: 0, punctualityScore: 0
   },
   {
@@ -891,7 +891,7 @@ export const standbyWorkers: StandbyWorker[] = [
     bankDetails: { sortCode: "40-33-14", accountNumber: "19283047", bankName: "HSBC" },
     emergencyContact: { name: "Daniel Reeves", relationship: "Parent", phone: "07623 910284" },
     registeredDate: "2026-04-06", lastWorked: null, status: "standby", registrationStatus: "new-registered", agencyId: "AG003",
-    bestMatchDepartment: "Loader", departments: ["Loader"],
+    bestMatchDepartment: "Outbound Dispatch", departments: ["Outbound Dispatch"],
     preferences: { preferredShifts: ["Afternoon (14:00-22:00)"], maxHoursPerWeek: 30, availableDays: ["Mon","Tue","Wed","Thu"], noticePeriod: "48 hours", transportMode: "public" },
     distance: { miles: 7.4, carTime: "17 mins", publicTransportTime: "44 mins" },
     compliance: { rightToWork: { status: "verified", expiry: "2027-04-06" }, healthAndSafety: { status: "pending", expiry: "2026-10-06" }, contract: { status: "pending" }, dbs: { status: "not-required", expiry: null } },

@@ -9,26 +9,26 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 
 // Mock data
-const departments = ["All Departments", "Warehouse", "Production", "Logistics"];
+const departments = ["All Departments", "Inbound Warehouse", "Production", "Logistics"];
 const agencies = ["All Agencies", "Workforce Direct", "Blue Arrow", "Adecco", "Reed", "Manpower", "Hays"];
 const payPeriods = ["Week 5 (Jan 27 - Feb 2)", "Week 4 (Jan 20 - 26)", "Week 3 (Jan 13 - 19)"];
 
 const workers = [
   // Warehouse workers
-  { id: "W001", name: "Daniel Reeves", department: "Warehouse", agency: "Workforce Direct" },
-  { id: "W004", name: "Emma Davis", department: "Warehouse", agency: "Workforce Direct" },
-  { id: "W006", name: "Daniel Martinez", department: "Warehouse", agency: "Blue Arrow" },
-  { id: "W007", name: "Tom Brady", department: "Warehouse", agency: "Adecco" },
-  { id: "W008", name: "Ryan O'Brien", department: "Warehouse", agency: "Reed" },
-  { id: "W009", name: "Olivia Johnson", department: "Warehouse", agency: "Manpower" },
-  { id: "W010", name: "Jack Thompson", department: "Warehouse", agency: "Hays" },
-  { id: "W011", name: "Chloe Anderson", department: "Warehouse", agency: "Workforce Direct" },
-  { id: "W012", name: "Liam Patel", department: "Warehouse", agency: "Blue Arrow" },
-  { id: "W013", name: "Grace Murphy", department: "Warehouse", agency: "Reed" },
-  { id: "W014", name: "Nathan Clarke", department: "Warehouse", agency: "Manpower" },
-  { id: "W015", name: "Mia Robinson", department: "Warehouse", agency: "Hays" },
-  { id: "W016", name: "Oscar Bennett", department: "Warehouse", agency: "Adecco" },
-  { id: "W017", name: "Isla Cooper", department: "Warehouse", agency: "Workforce Direct" },
+  { id: "W001", name: "Daniel Reeves", department: "Inbound Warehouse", agency: "Workforce Direct" },
+  { id: "W004", name: "Emma Davis", department: "Inbound Warehouse", agency: "Workforce Direct" },
+  { id: "W006", name: "Daniel Martinez", department: "Inbound Warehouse", agency: "Blue Arrow" },
+  { id: "W007", name: "Tom Brady", department: "Inbound Warehouse", agency: "Adecco" },
+  { id: "W008", name: "Ryan O'Brien", department: "Inbound Warehouse", agency: "Reed" },
+  { id: "W009", name: "Olivia Johnson", department: "Inbound Warehouse", agency: "Manpower" },
+  { id: "W010", name: "Jack Thompson", department: "Inbound Warehouse", agency: "Hays" },
+  { id: "W011", name: "Chloe Anderson", department: "Inbound Warehouse", agency: "Workforce Direct" },
+  { id: "W012", name: "Liam Patel", department: "Inbound Warehouse", agency: "Blue Arrow" },
+  { id: "W013", name: "Grace Murphy", department: "Inbound Warehouse", agency: "Reed" },
+  { id: "W014", name: "Nathan Clarke", department: "Inbound Warehouse", agency: "Manpower" },
+  { id: "W015", name: "Mia Robinson", department: "Inbound Warehouse", agency: "Hays" },
+  { id: "W016", name: "Oscar Bennett", department: "Inbound Warehouse", agency: "Adecco" },
+  { id: "W017", name: "Isla Cooper", department: "Inbound Warehouse", agency: "Workforce Direct" },
   
   // Production workers
   { id: "W002", name: "Sarah Chen", department: "Production", agency: "Blue Arrow" },

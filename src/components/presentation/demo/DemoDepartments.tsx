@@ -16,7 +16,7 @@ interface Department {
 const departments: Department[] = [
   {
     id: "1",
-    name: "Warehouse",
+    name: "Inbound Warehouse",
     site: "Heathrow DC",
     required: 25,
     actual: 23,
@@ -32,7 +32,7 @@ const departments: Department[] = [
   },
   {
     id: "2",
-    name: "Picking",
+    name: "Pick and Pack",
     site: "Heathrow DC",
     required: 15,
     actual: 15,
@@ -47,7 +47,7 @@ const departments: Department[] = [
   },
   {
     id: "3",
-    name: "Loading",
+    name: "Outbound Dispatch",
     site: "Heathrow DC",
     required: 10,
     actual: 8,
@@ -62,7 +62,7 @@ const departments: Department[] = [
   },
   {
     id: "4",
-    name: "Packing",
+    name: "Pick and Pack",
     site: "Heathrow DC",
     required: 12,
     actual: 12,
@@ -77,7 +77,7 @@ const departments: Department[] = [
   },
   {
     id: "5",
-    name: "Quality",
+    name: "Returns Processing",
     site: "Heathrow DC",
     required: 5,
     actual: 5,
@@ -91,7 +91,7 @@ const departments: Department[] = [
   },
   {
     id: "6",
-    name: "Warehouse",
+    name: "Inbound Warehouse",
     site: "Birmingham DC",
     required: 18,
     actual: 17,
