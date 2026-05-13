@@ -759,22 +759,35 @@ const Home = () => {
                   }}
                 >
                   <div style={{ width: 24, height: 2, background: "rgba(255,255,255,0.2)" }} />
-                  THE COST OF INACTION
+                  THE REAL COST
                 </div>
-                <h2
-                  style={{
-                    fontFamily: FONT,
-                    fontWeight: 800,
-                    fontSize: 32,
-                    color: "#FFFFFF",
-                    letterSpacing: "-0.022em",
-                    lineHeight: 1.2,
-                    marginTop: 12,
-                    maxWidth: 560,
-                  }}
-                >
-                  How much is all of this costing your business?
-                </h2>
+                <div style={{ marginTop: 12, maxWidth: 560 }}>
+                  <div
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 400,
+                      fontSize: 20,
+                      color: "rgba(255,255,255,0.6)",
+                      fontStyle: "italic",
+                      lineHeight: 1.4,
+                    }}
+                  >
+                    None of this is on the invoice. All of it is on your P&L.
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 800,
+                      fontSize: 36,
+                      color: "#FFFFFF",
+                      letterSpacing: "-0.022em",
+                      lineHeight: 1.2,
+                      marginTop: 10,
+                    }}
+                  >
+                    How much is all of this costing your business?
+                  </div>
+                </div>
               </motion.div>
 
               {/* Five question blocks */}
