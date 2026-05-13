@@ -760,6 +760,7 @@ const Home = () => {
                 boxShadow: "none",
               }}
             >
+              <div style={{ maxWidth: 900, margin: "0 auto" }}>
               {/* Header block */}
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
