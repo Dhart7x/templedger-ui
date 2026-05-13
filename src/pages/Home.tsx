@@ -222,17 +222,17 @@ const Home = () => {
     {
       n: "02",
       t: "We optimize before we configure",
-      b: "We identify where the inefficiencies live and how they should be resolved. The platform is then configured around what we find — not the other way around.",
+      b: "We identify where the inefficiencies live and how to resolve them. The platform is configured around what we find — not the other way around.",
     },
     {
       n: "03",
       t: "We deploy and onboard",
-      b: "Hardware on site. Agencies onboarded. Both sides in one shared system from the first shift. We coordinate everything.",
+      b: "Hardware installed on site. Agencies onboarded. Both sides in one shared system from the very first shift. We coordinate everything.",
     },
     {
       n: "04",
       t: "We stay",
-      b: "Live on one shift or department first. We maintain, refine and expand at a pace that works for your operation. We stay until you're confident. Not until we are.",
+      b: "Live on one shift first. We maintain, refine and expand at a pace that works for you. We stay until you're confident. Not until we are.",
     },
   ];
 
