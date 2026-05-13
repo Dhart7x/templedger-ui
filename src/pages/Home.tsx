@@ -1443,7 +1443,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 5 — HOW IT WORKS */}
-        <section id="how-it-works" className="tl-section-how" style={{ background: C.surface, padding: "80px 48px" }}>
+        <section id="how-it-works" className="tl-section-how" style={{ background: C.surface, padding: "80px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>How It Works</SectionTag>
             <h2 className="tl-section-h2"
