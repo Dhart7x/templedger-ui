@@ -1447,7 +1447,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 5 — HOW IT WORKS */}
-        <section className="tl-section-how" style={{ background: C.surface, padding: "80px 48px" }}>
+        <section id="how-it-works" className="tl-section-how" style={{ background: C.surface, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>How It Works</SectionTag>
             <h2 className="tl-section-h2"
@@ -1460,16 +1460,16 @@ const Home = () => {
                 marginBottom: 10,
               }}
             >
-              Controlled from day one. One shift at a time.
+              This isn't a software subscription you configure yourself.
             </h2>
             <p className="tl-section-sub" style={{ fontSize: 15, color: C.muted, lineHeight: 1.65, marginBottom: 48 }}>
-              No disruption. No rip and replace. Proven before it scales.
+              TempLedger is implemented by a team of forward deployed experts embedded in your operation from day one. You provide one point of contact. We handle everything else.
             </p>
             <div
               className="tl-steps-grid"
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
+                gridTemplateColumns: "repeat(4, 1fr)",
                 gap: 1,
                 background: C.border,
                 borderRadius: 12,
@@ -1483,13 +1483,25 @@ const Home = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.5, delay: idx * 0.12, ease: "easeOut" }}
-                  style={{ background: C.bg, padding: 32 }}
+                  style={{ background: C.bg, padding: 28, display: "flex", flexDirection: "column" }}
                 >
-                  <StepNumber value={idx + 1} />
-                  <div style={{ fontWeight: 700, fontSize: 16, color: C.fg, marginBottom: 8 }}>
+                  <div
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 800,
+                      fontSize: 44,
+                      color: "#2D6A4F",
+                      opacity: 0.15,
+                      lineHeight: 1,
+                      marginBottom: 14,
+                    }}
+                  >
+                    {s.n}
+                  </div>
+                  <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 15, color: C.fg, marginBottom: 8 }}>
                     {s.t}
                   </div>
-                  <div style={{ fontSize: 13, color: C.muted, lineHeight: 1.65 }}>{s.b}</div>
+                  <div style={{ fontFamily: FONT, fontSize: 13, color: C.muted, lineHeight: 1.65 }}>{s.b}</div>
                 </motion.div>
               ))}
             </div>
