@@ -963,14 +963,14 @@ const Home = () => {
         </section>
 
         {/* SECTION 3 — THE COST */}
-        <section className="tl-section-cost" style={{ background: C.bg, padding: "80px 48px" }}>
+        <section className="tl-section-cost" style={{ background: "#1A3D2E", padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <SectionTag>The Cost</SectionTag>
+            <SectionTag dark>The Cost</SectionTag>
             <h2 className="tl-section-h2"
               style={{
                 fontWeight: 800,
                 fontSize: 36,
-                color: C.fg,
+                color: "#FFFFFF",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
                 marginBottom: 10,
@@ -981,7 +981,7 @@ const Home = () => {
             <p className="tl-section-sub"
               style={{
                 fontSize: 15,
-                color: C.muted,
+                color: "rgba(255,255,255,0.6)",
                 lineHeight: 1.65,
                 marginBottom: 48,
                 maxWidth: 560,
