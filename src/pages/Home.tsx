@@ -434,6 +434,17 @@ const Home = () => {
         </div>
       </motion.nav>
 
+      {/* Demo Gate Modal */}
+      {demoGateOpen && (
+        <DemoGate
+          onClose={() => setDemoGateOpen(false)}
+          onSuccess={() => {
+            setDemoGateOpen(false);
+            setDemoOpen(true);
+          }}
+        />
+      )}
+
       {/* Demo Modal */}
       {demoOpen && (
         <>
