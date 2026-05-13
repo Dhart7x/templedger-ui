@@ -1406,7 +1406,7 @@ const Home = () => {
                     style={{
                       width: "100%",
                       background: "#FFFFFF",
-                      color: "#2D6A4F",
+                      color: "#1A3D2E",
                       fontWeight: 700,
                       fontSize: 14,
                       borderRadius: 8,
