@@ -683,11 +683,11 @@ const Home = () => {
                 </div>
                 <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
                   {[
-                    "Overtime triggered by gaps nobody saw coming",
-                    "Management hours spent fixing problems",
-                    "Attrition from workers who left over a pay dispute",
-                    "Ramp time for replacements brought in at short notice",
-                    "Workers on site that were never scheduled",
+                    "Overtime from gaps nobody saw",
+                    "Management time fixing avoidable problems",
+                    "Workers who left over a pay error",
+                    "Last-minute replacement ramp time",
+                    "Unscheduled workers on your site",
                   ].map((d, i) => (
                     <motion.div
                       key={i}
