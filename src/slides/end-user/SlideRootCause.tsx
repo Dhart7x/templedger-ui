@@ -21,7 +21,7 @@ export default function SlideRootCause() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.2 }}
             className="font-bold text-[38px] md:text-[52px] text-foreground leading-[1.2] mb-[32px]"
-            style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+            style={{ fontFamily: "'Inter', monospace" }}
           >
             Your agencies have a system.{"\n"}It wasn't built with you in mind.
           </motion.h2>
@@ -41,7 +41,7 @@ export default function SlideRootCause() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.75 }}
             className="font-medium text-[16px] md:text-[18px] text-primary tracking-[0.04em]"
-            style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+            style={{ fontFamily: "'Inter', monospace" }}
           >
             Two sides. Two systems. Zero shared truth.
           </motion.p>

@@ -25,7 +25,7 @@ export default function SlideWhatYouDontHave() {
           </span>
           <h2
             className="font-bold text-[38px] text-foreground leading-[1.15] mb-[10px]"
-            style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+            style={{ fontFamily: "'Inter', monospace" }}
           >
             The outcome.
           </h2>
@@ -48,7 +48,7 @@ export default function SlideWhatYouDontHave() {
                 <div className="w-[5px] h-[5px] bg-primary rounded-[1px] flex-shrink-0" />
                 <span
                   className="text-[15px] font-semibold text-foreground"
-                  style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+                  style={{ fontFamily: "'Inter', monospace" }}
                 >
                   {item}
                 </span>

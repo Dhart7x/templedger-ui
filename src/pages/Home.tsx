@@ -25,7 +25,7 @@ const StepNumber = ({ value }: { value: number }) => {
       style={{
         fontWeight: 800,
         fontSize: 48,
-        color: "#2D6A4F",
+        color: "#4C1D95",
         opacity: 0.15,
         lineHeight: 1,
         marginBottom: 16,
@@ -70,14 +70,14 @@ import { X } from "lucide-react";
 import SalesDeck from "./SalesDeck";
 import DemoGate from "@/components/DemoGate";
 
-const FONT = "'Plus Jakarta Sans', system-ui, sans-serif";
+const FONT = "'Inter', system-ui, sans-serif";
 
 const C = {
-  primary: "#2D6A4F",
-  primaryLight: "#EBF4EF",
-  primaryDark: "#1A3D2E",
+  primary: "#4C1D95",
+  primaryLight: "#EDE9FE",
+  primaryDark: "#2E1065",
   bg: "#FFFFFF",
-  surface: "#F8F5EF",
+  surface: "#FAFAF8",
   border: "#E5E0DA",
   fg: "#0D0D0B",
   muted: "#6B6460",
@@ -499,7 +499,8 @@ const Home = () => {
 
       <div className="tl-nav-spacer" style={{ paddingTop: 56 }}>
         {/* SECTION 1 — HERO */}
-        <section className="tl-hero" style={{ background: C.bg, padding: "96px 48px 80px", margin: 0, width: "100%" }}>
+        <section className="tl-hero" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #5B21B6 35%, rgba(91,33,182,0) 100%)", padding: "96px 48px 80px", margin: 0, width: "100%" }}>
+          <div aria-hidden style={{ position: "absolute", left: 0, right: 0, height: 80, marginTop: 0, background: "linear-gradient(180deg, rgba(91,33,182,0.06) 0%, #FFFFFF 100%)", pointerEvents: "none" }} />
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <motion.span
               initial={{ opacity: 0, y: 20 }}
@@ -604,10 +605,10 @@ const Home = () => {
                 fontSize: 10,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#2D6A4F",
+                color: "#4C1D95",
               }}
             >
-              <div style={{ width: 24, height: 2, background: "#2D6A4F" }} />
+              <div style={{ width: 24, height: 2, background: "#4C1D95" }} />
               THE REAL COST
             </div>
 
@@ -641,7 +642,7 @@ const Home = () => {
             >
               <div
                 style={{
-                  background: "#F8F5EF",
+                  background: "#FAFAF8",
                   borderBottom: "0.5px solid #E5E0DA",
                   padding: "14px 20px",
                   display: "flex",
@@ -677,7 +678,7 @@ const Home = () => {
                     alignItems: "center",
                     minHeight: 48,
                     padding: "0 20px",
-                    borderBottom: "0.5px solid #F8F5EF",
+                    borderBottom: "0.5px solid #FAFAF8",
                   }}
                 >
                   <span style={{ fontFamily: FONT, fontWeight: 500, fontSize: 13, color: "#6B6460" }}>
@@ -693,7 +694,7 @@ const Home = () => {
                 style={{
                   padding: "14px 20px",
                   borderTop: "1px solid #E5E0DA",
-                  background: "#F8F5EF",
+                  background: "#FAFAF8",
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
@@ -712,7 +713,7 @@ const Home = () => {
             <div
               className="tl-hidden-costs"
               style={{
-                background: "#1A3D2E",
+                background: "#2E1065",
                 marginLeft: -48,
                 marginRight: -48,
                 marginTop: 0,
@@ -875,7 +876,7 @@ const Home = () => {
 
 
         {/* MERGED DARK BLOCK — REVEAL + COST */}
-        <div style={{ background: "#1A3D2E", width: "100%", margin: 0, padding: 0 }}>
+        <div style={{ background: "#2E1065", width: "100%", margin: 0, padding: 0 }}>
         {/* SECTION 3b — THE REVEAL */}
         <section className="tl-section-reveal" style={{ background: "transparent", padding: "72px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
@@ -911,7 +912,7 @@ const Home = () => {
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.45, delay: i * 0.1, ease: "easeOut" }}
                   style={{
-                    borderLeft: "3px solid #2D6A4F",
+                    borderLeft: "3px solid #4C1D95",
                     borderRadius: "0 8px 8px 0",
                     background: "rgba(255,255,255,0.04)",
                     padding: "20px 24px",
@@ -1009,7 +1010,7 @@ const Home = () => {
         </div>
 
         {/* SECTION 3c — THE ALTERNATIVE */}
-        <section className="tl-section-alternative" style={{ background: "#F8F5EF", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-alternative" style={{ background: "#FAFAF8", padding: "80px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <motion.div
               initial={{ opacity: 0, y: 24 }}
@@ -1028,10 +1029,10 @@ const Home = () => {
                   fontSize: 10,
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
-                  color: "#2D6A4F",
+                  color: "#4C1D95",
                 }}
               >
-                <span style={{ width: 24, height: 2, background: "#2D6A4F" }} />
+                <span style={{ width: 24, height: 2, background: "#4C1D95" }} />
                 THE ALTERNATIVE
               </div>
               <h2
@@ -1075,7 +1076,7 @@ const Home = () => {
                   style={{
                     display: "grid",
                     gridTemplateColumns: "1fr 1fr 1fr",
-                    background: "#1A3D2E",
+                    background: "#2E1065",
                   }}
                 >
                   <div style={{ padding: "16px 20px" }} />
@@ -1127,7 +1128,7 @@ const Home = () => {
                     style={{
                       display: "grid",
                       gridTemplateColumns: "1fr 1fr 1fr",
-                      background: i % 2 === 0 ? "#FFFFFF" : "#F8F5EF",
+                      background: i % 2 === 0 ? "#FFFFFF" : "#FAFAF8",
                       borderBottom: i === arr.length - 1 ? "none" : "0.5px solid #E5E0DA",
                     }}
                   >
@@ -1163,7 +1164,7 @@ const Home = () => {
                         fontFamily: FONT,
                         fontWeight: 600,
                         fontSize: 13,
-                        color: "#2D6A4F",
+                        color: "#4C1D95",
                         borderLeft: "0.5px solid #E5E0DA",
                       }}
                     >
@@ -1197,10 +1198,10 @@ const Home = () => {
                 fontSize: 10,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#2D6A4F",
+                color: "#4C1D95",
               }}
             >
-              <div style={{ width: 24, height: 2, background: "#2D6A4F" }} />
+              <div style={{ width: 24, height: 2, background: "#4C1D95" }} />
               THE SOLUTION
             </div>
             <h2
@@ -1234,7 +1235,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 4 — THE OUTCOME */}
-        <section className="tl-section-outcome" style={{ background: "#2D6A4F", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-outcome" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #5B21B6 60%, #4C1D95 100%)", padding: "80px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <div
               style={{
@@ -1527,7 +1528,7 @@ const Home = () => {
                       fontFamily: FONT,
                       fontWeight: 800,
                       fontSize: 44,
-                      color: "#2D6A4F",
+                      color: "#4C1D95",
                       opacity: 0.15,
                       lineHeight: 1,
                       marginBottom: 14,
@@ -1570,7 +1571,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 6 — CONTACT */}
-        <section id="contact" className="tl-section-contact" style={{ background: "#2D6A4F", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section id="contact" className="tl-section-contact" style={{ background: "#4C1D95", padding: "80px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
             <h2 className="tl-section-h2 tl-contact-h2"
               style={{
@@ -1648,12 +1649,12 @@ const Home = () => {
                   ))}
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.02, backgroundColor: "#F8F5EF" }}
+                    whileHover={{ scale: 1.02, backgroundColor: "#FAFAF8" }}
                     transition={{ duration: 0.15 }}
                     style={{
                       width: "100%",
                       background: "#FFFFFF",
-                      color: "#1A3D2E",
+                      color: "#2E1065",
                       fontWeight: 700,
                       fontSize: 14,
                       borderRadius: 8,
@@ -1674,7 +1675,7 @@ const Home = () => {
         {/* SECTION 7 — FOOTER */}
         <footer className="tl-footer"
           style={{
-            background: "#1A3D2E",
+            background: "#2E1065",
             borderTop: "0.5px solid rgba(255,255,255,0.08)",
             padding: "24px 48px",
             display: "flex",

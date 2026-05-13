@@ -17,7 +17,7 @@ const BulletList = ({ items, containerDelay = 0.25 }: BulletListProps) => (
       >
         <span
           className="flex-shrink-0"
-          style={{ width: 5, height: 5, borderRadius: 1, backgroundColor: "#7d8f46" }}
+          style={{ width: 5, height: 5, borderRadius: 1, backgroundColor: "#4C1D95" }}
         />
         <span className="font-mono text-[15px] font-semibold text-foreground whitespace-nowrap">
           {item}

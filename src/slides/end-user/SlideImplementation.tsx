@@ -43,7 +43,7 @@ export default function SlideImplementation() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-bold text-[34px] text-foreground leading-[1.2] mb-[10px] text-center"
-            style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+            style={{ fontFamily: "'Inter', monospace" }}
           >
             Prove it on one shift.{"\n"}Then scale it.
           </motion.h2>
@@ -74,7 +74,7 @@ export default function SlideImplementation() {
                     transition={{ duration: 0.5, delay: 0.15 * i, ease: "easeOut" }}
                     className="flex-1 flex flex-col rounded-xl"
                     style={{
-                      background: "#1a1b18",
+                      background: "#2E1065",
                       border: "0.5px solid #2a2b27",
                       padding: "24px 22px",
                     }}
@@ -98,7 +98,7 @@ export default function SlideImplementation() {
                     </div>
                     <span
                       className="text-[14px] font-semibold text-foreground block mb-[10px]"
-                      style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+                      style={{ fontFamily: "'Inter', monospace" }}
                     >
                       {phase.title}
                     </span>

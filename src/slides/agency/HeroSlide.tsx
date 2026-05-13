@@ -7,7 +7,7 @@ const HeroSlide = () => (
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       className="font-mono uppercase font-medium"
-      style={{ fontSize: 16, letterSpacing: "0.35em", color: "#7d8f46" }}
+      style={{ fontSize: 16, letterSpacing: "0.35em", color: "#4C1D95" }}
     >
       TEMP LEDGER
     </motion.p>

@@ -60,7 +60,7 @@ const Toggle = ({ on, onClick }: ToggleProps) => (
     type="button"
     onClick={onClick}
     className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors duration-200 focus:outline-none"
-    style={{ backgroundColor: on ? "#2D6A4F" : "#E5E0DA" }}
+    style={{ backgroundColor: on ? "#4C1D95" : "#E5E0DA" }}
     aria-pressed={on}
   >
     <span
@@ -136,7 +136,7 @@ const ClientPermissions = () => {
                     fontFamily: "Inter, sans-serif",
                     fontSize: "11px",
                     color: allOn
-                      ? "#2D6A4F"
+                      ? "#4C1D95"
                       : anyOn
                       ? "rgba(237,231,217,0.5)"
                       : "rgba(237,231,217,0.35)",
@@ -187,7 +187,7 @@ const ClientPermissions = () => {
         <button
           onClick={handleSave}
           style={{
-            background: "#2D6A4F",
+            background: "#4C1D95",
             color: "#FFFFFF",
             fontFamily: "'Inter', sans-serif",
             fontSize: "12px",
