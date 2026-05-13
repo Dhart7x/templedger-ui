@@ -1,62 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --color-primary: #2D6A4F;
-  --color-primary-dark: #1A3D2E;
-  --color-primary-light: #EBF4EF;
+  --color-primary: #4C1D95;
+  --color-primary-mid: #5B21B6;
+  --color-primary-dark: #2E1065;
+  --color-primary-light: #EDE9FE;
+  --color-primary-glow: rgba(76,29,149,0.08);
   --color-white: #FFFFFF;
-  --color-surface: #F8F5EF;
+  --color-surface: #FAFAF8;
   --color-border: #E5E0DA;
   --color-text: #0D0D0B;
   --color-text-secondary: #6B6460;
   --color-text-muted: #9B9590;
   --color-danger: #C4391A;
+  --color-success: #16803C;
 }
 
 @layer base {
   :root {
-    --background: 0 0% 7%;
-    --foreground: 40 20% 92%;
+    --background: 0 0% 100%;
+    --foreground: 60 9% 5%;
 
-    --card: 0 0% 14%;
-    --card-foreground: 40 20% 92%;
+    --card: 0 0% 100%;
+    --card-foreground: 60 9% 5%;
 
-    --popover: 0 0% 14%;
-    --popover-foreground: 40 20% 92%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 60 9% 5%;
 
-    --primary: 72 35% 44%;
-    --primary-foreground: 0 0% 7%;
+    --primary: 263 69% 35%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 18%;
-    --secondary-foreground: 40 20% 92%;
+    --secondary: 60 11% 95%;
+    --secondary-foreground: 60 9% 5%;
 
-    --muted: 0 0% 14%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 60 11% 95%;
+    --muted-foreground: 24 5% 40%;
 
-    --accent: 72 35% 44%;
-    --accent-foreground: 0 0% 7%;
+    --accent: 252 87% 96%;
+    --accent-foreground: 263 69% 35%;
 
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 40 20% 92%;
+    --destructive: 11 78% 44%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 72 35% 44%;
+    --border: 36 18% 88%;
+    --input: 36 18% 88%;
+    --ring: 263 69% 35%;
 
     --radius: 0.375rem;
 
-    --sidebar-background: 0 0% 7%;
-    --sidebar-foreground: 40 20% 92%;
-    --sidebar-primary: 72 35% 44%;
-    --sidebar-primary-foreground: 0 0% 7%;
-    --sidebar-accent: 0 0% 14%;
-    --sidebar-accent-foreground: 40 20% 92%;
-    --sidebar-border: 0 0% 18%;
-    --sidebar-ring: 72 35% 44%;
+    --sidebar-background: 60 11% 95%;
+    --sidebar-foreground: 24 5% 40%;
+    --sidebar-primary: 263 69% 35%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 252 87% 96%;
+    --sidebar-accent-foreground: 263 69% 35%;
+    --sidebar-border: 36 18% 88%;
+    --sidebar-ring: 263 69% 35%;
   }
 }
 
@@ -75,7 +78,9 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.025em;
   }
 }
 
@@ -83,7 +88,7 @@
   .trust-gradient {
     background: hsl(var(--primary));
   }
-  
+
   .trust-gradient-text {
     color: hsl(var(--primary));
     -webkit-text-fill-color: hsl(var(--primary));
@@ -94,11 +99,11 @@
   }
 
   .font-mono-display {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
   }
 
   .font-mono-data {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Inter', system-ui, sans-serif;
   }
 
   .slide-section {
@@ -114,9 +119,7 @@
   }
 }
 
-/* Scoped light theme for the Demo UI only.
-   Overrides semantic tokens + fonts within the demo container,
-   without affecting decks, website, or other surfaces. */
+/* Scoped light theme for the Demo UI only. */
 .demo-theme {
   --background: 0 0% 100%;
   --foreground: 60 9% 5%;
@@ -124,27 +127,27 @@
   --card-foreground: 60 9% 5%;
   --popover: 0 0% 100%;
   --popover-foreground: 60 9% 5%;
-  --primary: 152 41% 30%;
+  --primary: 263 69% 35%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 40 33% 95%;
+  --secondary: 60 11% 95%;
   --secondary-foreground: 60 9% 5%;
-  --muted: 40 33% 95%;
+  --muted: 60 11% 95%;
   --muted-foreground: 24 5% 40%;
-  --accent: 150 27% 94%;
-  --accent-foreground: 152 41% 30%;
-  --destructive: 0 73% 51%;
+  --accent: 252 87% 96%;
+  --accent-foreground: 263 69% 35%;
+  --destructive: 11 78% 44%;
   --destructive-foreground: 0 0% 100%;
   --border: 36 18% 88%;
   --input: 36 18% 88%;
-  --ring: 152 41% 30%;
-  --sidebar-background: 40 33% 95%;
+  --ring: 263 69% 35%;
+  --sidebar-background: 60 11% 95%;
   --sidebar-foreground: 24 5% 40%;
-  --sidebar-primary: 152 41% 30%;
+  --sidebar-primary: 263 69% 35%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 150 27% 94%;
-  --sidebar-accent-foreground: 152 41% 30%;
+  --sidebar-accent: 252 87% 96%;
+  --sidebar-accent-foreground: 263 69% 35%;
   --sidebar-border: 36 18% 88%;
-  --sidebar-ring: 152 41% 30%;
+  --sidebar-ring: 263 69% 35%;
 
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
@@ -157,8 +160,9 @@
 .demo-theme h4,
 .demo-theme h5,
 .demo-theme h6 {
-  font-family: 'Inter', system-ui, sans-serif;
-  letter-spacing: -0.015em;
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.025em;
 }
 
 .demo-theme .font-mono,
