@@ -508,7 +508,7 @@ const Home = () => {
 
       <div className="tl-nav-spacer" style={{ paddingTop: 56 }}>
         {/* SECTION 1 — HERO */}
-        <section className="tl-hero" style={{ background: C.bg, padding: "96px 48px 80px" }}>
+        <section className="tl-hero" style={{ background: C.bg, padding: "96px 48px 80px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <motion.span
               initial={{ opacity: 0, y: 20 }}
