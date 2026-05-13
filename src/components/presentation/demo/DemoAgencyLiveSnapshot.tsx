@@ -13,20 +13,20 @@
  }
  
  const workers: Worker[] = [
-   { id: "W001", name: "Sarah Mitchell", department: "Picking", site: "Heathrow DC", status: "on-site", clockIn: "06:02", shift: "Morning" },
-   { id: "W002", name: "James Cooper", department: "Packing", site: "Heathrow DC", status: "on-site", clockIn: "06:00", shift: "Morning" },
+   { id: "W001", name: "Sarah Mitchell", department: "Pick and Pack", site: "Heathrow DC", status: "on-site", clockIn: "06:02", shift: "Morning" },
+   { id: "W002", name: "James Cooper", department: "Pick and Pack", site: "Heathrow DC", status: "on-site", clockIn: "06:00", shift: "Morning" },
    { id: "W007", name: "Lisa Anderson", department: "Goods In", site: "Heathrow DC", status: "late", clockIn: "06:15", shift: "Morning" },
-   { id: "W003", name: "Maria Santos", department: "Goods In", site: "Heathrow DC", status: "on-site", clockIn: "05:58", shift: "Morning" },
+   { id: "W003", name: "Rico Fernandez", department: "Goods In", site: "Heathrow DC", status: "on-site", clockIn: "05:58", shift: "Morning" },
    { id: "W005", name: "Emma Wilson", department: "Returns", site: "Heathrow DC", status: "on-site", clockIn: "14:01", shift: "Afternoon" },
-   { id: "W006", name: "Michael Brown", department: "Packing", site: "Heathrow DC", status: "on-site", clockIn: "06:00", shift: "Morning" },
+   { id: "W006", name: "Michael Brown", department: "Pick and Pack", site: "Heathrow DC", status: "on-site", clockIn: "06:00", shift: "Morning" },
  ];
  
  const departmentSummary = [
-   { name: "Picking", required: 4, actual: 2, status: "at-risk" as const },
-   { name: "Packing", required: 2, actual: 2, status: "on-track" as const },
+   { name: "Pick and Pack", required: 4, actual: 2, status: "at-risk" as const },
+   { name: "Pick and Pack", required: 2, actual: 2, status: "on-track" as const },
    { name: "Goods In", required: 2, actual: 2, status: "on-track" as const },
    { name: "Returns", required: 1, actual: 1, status: "on-track" as const },
-   { name: "Loading", required: 3, actual: 0, status: "failing" as const },
+   { name: "Outbound Dispatch", required: 3, actual: 0, status: "failing" as const },
  ];
  
  const DemoAgencyLiveSnapshot = () => {

@@ -58,47 +58,47 @@ const overallSpend: SiteSpend[] = [
 
 const agencySpend: AgencySpendData[] = [
   {
-    name: "Staffmark",
+    name: "Workforce Direct",
     data: {
       week: { amount: 97200, hours: 7776, workers: 85, change: 4.5, overtimeHours: 648 },
       month: { amount: 388800, hours: 31104, workers: 92, change: 3.2, overtimeHours: 2592 },
       year: { amount: 4665600, hours: 373248, workers: 105, change: 4.8, overtimeHours: 31104 },
     },
     sites: [
-      { name: "Baltimore, MD", amount: 55500, hours: 4440, departments: [{ name: "Warehouse Operative", amount: 33300, hours: 2664, overtimeHours: 266 }, { name: "MHE", amount: 22200, hours: 1776, overtimeHours: 178 }] },
-      { name: "Las Vegas, NV", amount: 30600, hours: 2448, departments: [{ name: "Warehouse Operative", amount: 18360, hours: 1469, overtimeHours: 147 }, { name: "MHE", amount: 12240, hours: 979, overtimeHours: 98 }] },
-      { name: "Dallas Fort-Worth, TX", amount: 11100, hours: 888, departments: [{ name: "Warehouse Operative", amount: 6660, hours: 533, overtimeHours: 53 }, { name: "MHE", amount: 4440, hours: 355, overtimeHours: 36 }] },
+      { name: "Baltimore, MD", amount: 55500, hours: 4440, departments: [{ name: "Inbound Warehouse", amount: 33300, hours: 2664, overtimeHours: 266 }, { name: "MHE Operations", amount: 22200, hours: 1776, overtimeHours: 178 }] },
+      { name: "Las Vegas, NV", amount: 30600, hours: 2448, departments: [{ name: "Inbound Warehouse", amount: 18360, hours: 1469, overtimeHours: 147 }, { name: "MHE Operations", amount: 12240, hours: 979, overtimeHours: 98 }] },
+      { name: "Dallas Fort-Worth, TX", amount: 11100, hours: 888, departments: [{ name: "Inbound Warehouse", amount: 6660, hours: 533, overtimeHours: 53 }, { name: "MHE Operations", amount: 4440, hours: 355, overtimeHours: 36 }] },
     ],
   },
   {
-    name: "Elite Staffing",
+    name: "Pinnacle Staffing",
     data: {
       week: { amount: 54600, hours: 4368, workers: 58, change: 2.1, overtimeHours: 349 },
       month: { amount: 218400, hours: 17472, workers: 64, change: 1.8, overtimeHours: 1398 },
       year: { amount: 2620800, hours: 209664, workers: 72, change: 2.5, overtimeHours: 16773 },
     },
     sites: [
-      { name: "Baltimore, MD", amount: 25200, hours: 2016, departments: [{ name: "Warehouse Operative", amount: 15120, hours: 1210, overtimeHours: 121 }, { name: "MHE", amount: 10080, hours: 806, overtimeHours: 81 }] },
-      { name: "Dallas Fort-Worth, TX", amount: 29400, hours: 2352, departments: [{ name: "Warehouse Operative", amount: 17640, hours: 1411, overtimeHours: 141 }, { name: "MHE", amount: 11760, hours: 941, overtimeHours: 94 }] },
+      { name: "Baltimore, MD", amount: 25200, hours: 2016, departments: [{ name: "Inbound Warehouse", amount: 15120, hours: 1210, overtimeHours: 121 }, { name: "MHE Operations", amount: 10080, hours: 806, overtimeHours: 81 }] },
+      { name: "Dallas Fort-Worth, TX", amount: 29400, hours: 2352, departments: [{ name: "Inbound Warehouse", amount: 17640, hours: 1411, overtimeHours: 141 }, { name: "MHE Operations", amount: 11760, hours: 941, overtimeHours: 94 }] },
     ],
   },
   {
-    name: "Elwood Staffing",
+    name: "Meridian Recruitment",
     data: {
       week: { amount: 26700, hours: 2136, workers: 35, change: -1.2, overtimeHours: 192 },
       month: { amount: 106800, hours: 8544, workers: 40, change: -0.8, overtimeHours: 768 },
       year: { amount: 1281600, hours: 102528, workers: 48, change: 1.5, overtimeHours: 9216 },
     },
     sites: [
-      { name: "Baltimore, MD", amount: 9600, hours: 768, departments: [{ name: "Warehouse Operative", amount: 5760, hours: 461, overtimeHours: 46 }, { name: "MHE", amount: 3840, hours: 307, overtimeHours: 31 }] },
-      { name: "Las Vegas, NV", amount: 17100, hours: 1368, departments: [{ name: "Warehouse Operative", amount: 10260, hours: 821, overtimeHours: 82 }, { name: "MHE", amount: 6840, hours: 547, overtimeHours: 55 }] },
+      { name: "Baltimore, MD", amount: 9600, hours: 768, departments: [{ name: "Inbound Warehouse", amount: 5760, hours: 461, overtimeHours: 46 }, { name: "MHE Operations", amount: 3840, hours: 307, overtimeHours: 31 }] },
+      { name: "Las Vegas, NV", amount: 17100, hours: 1368, departments: [{ name: "Inbound Warehouse", amount: 10260, hours: 821, overtimeHours: 82 }, { name: "MHE Operations", amount: 6840, hours: 547, overtimeHours: 55 }] },
     ],
   },
 ];
 
 const departmentSpend: DepartmentSpend[] = [
   {
-    name: "Warehouse Operative",
+    name: "Inbound Warehouse",
     data: {
       week: { amount: 114900, hours: 9192, workers: 167, change: 3.2, overtimeHours: 735 },
       month: { amount: 459600, hours: 36768, workers: 180, change: 2.8, overtimeHours: 2941 },
@@ -106,7 +106,7 @@ const departmentSpend: DepartmentSpend[] = [
     },
   },
   {
-    name: "MHE",
+    name: "MHE Operations",
     data: {
       week: { amount: 63600, hours: 5088, workers: 110, change: 1.5, overtimeHours: 453 },
       month: { amount: 254400, hours: 20352, workers: 118, change: 1.2, overtimeHours: 1811 },

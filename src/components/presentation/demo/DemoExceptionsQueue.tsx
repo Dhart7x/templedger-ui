@@ -19,10 +19,10 @@ interface Exception {
 }
 
 const staticExceptions: Exception[] = [
-  { id: "ISS001", type: "Compliance", agency: "Staffmark", worker: "David Chen", department: "Warehouse Operative", site: "Dallas Fort-Worth, TX", trigger: "Right to Work expired", owner: null, status: "open", priority: "P1", createdAt: "06:15", workerId: "W004" },
-  { id: "ISS002", type: "Compliance", agency: "Staffmark", worker: "Robert Taylor", department: "Warehouse Operative", site: "Dallas Fort-Worth, TX", trigger: "H&S certification expired", owner: null, status: "open", priority: "P1", createdAt: "06:18", workerId: "W008" },
-  { id: "ISS003", type: "Pending Verification", agency: "Staffmark", worker: "James Cooper", department: "Warehouse Operative", site: "Dallas Fort-Worth, TX", trigger: "Right to Work pending", owner: "Sarah Mitchell", status: "in-review", priority: "P2", createdAt: "Yesterday", workerId: "W002" },
-  { id: "ISS004", type: "Late Arrival", agency: "Staffmark", worker: "Lisa Anderson", department: "Warehouse Operative", site: "Dallas Fort-Worth, TX", trigger: "Late clock-in (12 mins)", owner: null, status: "open", priority: "P2", createdAt: "14:30", workerId: "W007" },
+  { id: "ISS001", type: "Compliance", agency: "Workforce Direct", worker: "David Chen", department: "Inbound Warehouse", site: "Dallas Fort-Worth, TX", trigger: "Right to Work expired", owner: null, status: "open", priority: "P1", createdAt: "06:15", workerId: "W004" },
+  { id: "ISS002", type: "Compliance", agency: "Workforce Direct", worker: "Robert Taylor", department: "Inbound Warehouse", site: "Dallas Fort-Worth, TX", trigger: "H&S certification expired", owner: null, status: "open", priority: "P1", createdAt: "06:18", workerId: "W008" },
+  { id: "ISS003", type: "Pending Verification", agency: "Workforce Direct", worker: "James Cooper", department: "Inbound Warehouse", site: "Dallas Fort-Worth, TX", trigger: "Right to Work pending", owner: "Sarah Mitchell", status: "in-review", priority: "P2", createdAt: "Yesterday", workerId: "W002" },
+  { id: "ISS004", type: "Late Arrival", agency: "Workforce Direct", worker: "Lisa Anderson", department: "Inbound Warehouse", site: "Dallas Fort-Worth, TX", trigger: "Late clock-in (12 mins)", owner: null, status: "open", priority: "P2", createdAt: "14:30", workerId: "W007" },
 ];
 
 const DemoExceptionsQueue = () => {

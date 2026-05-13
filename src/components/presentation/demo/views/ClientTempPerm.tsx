@@ -20,19 +20,19 @@ interface TempPermCandidate {
 }
 
 const candidates: TempPermCandidate[] = [
-  { id: "1", name: "Maria Santos", agency: "Elite Staffing", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 18, attendance: 100, punctuality: 98, departments: ["Warehouse Operative", "MHE"], rating: 4.9, eligible: true, hoursWorked: 2880 },
-  { id: "2", name: "John Patel", agency: "Staffmark", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 14, attendance: 98, punctuality: 95, departments: ["Warehouse Operative", "MHE"], rating: 4.7, eligible: true, hoursWorked: 2240 },
-  { id: "3", name: "Lucy Brown", agency: "Staffmark", site: "Las Vegas, NV", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 24, attendance: 97, punctuality: 96, departments: ["Warehouse Operative", "MHE"], rating: 4.8, eligible: true, hoursWorked: 3840 },
-  { id: "4", name: "Ahmed Khan", agency: "Elwood Staffing", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", timeServed: 12, attendance: 95, punctuality: 91, departments: ["MHE"], rating: 4.5, eligible: true, hoursWorked: 1920 },
-  { id: "5", name: "Priya Sharma", agency: "Elite Staffing", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 10, attendance: 100, punctuality: 100, departments: ["Warehouse Operative"], rating: 5.0, eligible: true, hoursWorked: 1600 },
-  { id: "6", name: "Marcus Johnson", agency: "Staffmark", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", timeServed: 16, attendance: 99, punctuality: 97, departments: ["MHE", "Warehouse Operative"], rating: 4.9, eligible: true, hoursWorked: 2560 },
-  { id: "7", name: "Fatima Ali", agency: "Elite Staffing", site: "Dallas Fort-Worth, TX", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 15, attendance: 96, punctuality: 94, departments: ["Warehouse Operative"], rating: 4.6, eligible: true, hoursWorked: 2400 },
-  { id: "8", name: "Daniel Kim", agency: "Elwood Staffing", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", timeServed: 11, attendance: 97, punctuality: 95, departments: ["MHE", "Warehouse Operative"], rating: 4.7, eligible: true, hoursWorked: 1760 },
-  { id: "9", name: "Elena Rodriguez", agency: "Staffmark", site: "Las Vegas, NV", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 13, attendance: 93, punctuality: 90, departments: ["Warehouse Operative"], rating: 4.3, eligible: true, hoursWorked: 2080 },
-  { id: "10", name: "Kevin Wright", agency: "Elite Staffing", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 20, attendance: 99, punctuality: 98, departments: ["Warehouse Operative", "MHE"], rating: 4.8, eligible: true, hoursWorked: 3200 },
-  { id: "11", name: "Tomasz Nowak", agency: "Staffmark", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", timeServed: 6, attendance: 85, punctuality: 80, departments: ["MHE"], rating: 3.5, eligible: false, hoursWorked: 960 },
-  { id: "12", name: "Sophie Turner", agency: "Elwood Staffing", site: "Dallas Fort-Worth, TX", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 4, attendance: 88, punctuality: 82, departments: ["Warehouse Operative"], rating: 3.8, eligible: false, hoursWorked: 640 },
-  { id: "13", name: "James Wilson", agency: "Elite Staffing", site: "Las Vegas, NV", department: "Warehouse Operative", role: "Warehouse Operative", timeServed: 8, attendance: 91, punctuality: 88, departments: ["Warehouse Operative"], rating: 4.0, eligible: false, hoursWorked: 1280 },
+  { id: "1", name: "Rico Fernandez", agency: "Pinnacle Staffing", site: "Baltimore, MD", department: "Inbound Warehouse", role: "Inbound Warehouse", timeServed: 18, attendance: 100, punctuality: 98, departments: ["Inbound Warehouse", "MHE Operations"], rating: 4.9, eligible: true, hoursWorked: 2880 },
+  { id: "2", name: "Tom Brady", agency: "Workforce Direct", site: "Baltimore, MD", department: "Inbound Warehouse", role: "Inbound Warehouse", timeServed: 14, attendance: 98, punctuality: 95, departments: ["Inbound Warehouse", "MHE Operations"], rating: 4.7, eligible: true, hoursWorked: 2240 },
+  { id: "3", name: "Leon Kowalski", agency: "Workforce Direct", site: "Las Vegas, NV", department: "Inbound Warehouse", role: "Inbound Warehouse", timeServed: 24, attendance: 97, punctuality: 96, departments: ["Inbound Warehouse", "MHE Operations"], rating: 4.8, eligible: true, hoursWorked: 3840 },
+  { id: "4", name: "Sarah Mitchell", agency: "Meridian Recruitment", site: "Baltimore, MD", department: "MHE Operations", role: "MHE Operations", timeServed: 12, attendance: 95, punctuality: 91, departments: ["MHE Operations"], rating: 4.5, eligible: true, hoursWorked: 1920 },
+  { id: "5", name: "Priya Sharma", agency: "Pinnacle Staffing", site: "Baltimore, MD", department: "Inbound Warehouse", role: "Inbound Warehouse", timeServed: 10, attendance: 100, punctuality: 100, departments: ["Inbound Warehouse"], rating: 5.0, eligible: true, hoursWorked: 1600 },
+  { id: "6", name: "Priya Sharma", agency: "Workforce Direct", site: "Baltimore, MD", department: "MHE Operations", role: "MHE Operations", timeServed: 16, attendance: 99, punctuality: 97, departments: ["MHE Operations", "Inbound Warehouse"], rating: 4.9, eligible: true, hoursWorked: 2560 },
+  { id: "7", name: "Tom Brady", agency: "Pinnacle Staffing", site: "Dallas Fort-Worth, TX", department: "Inbound Warehouse", role: "Inbound Warehouse", timeServed: 15, attendance: 96, punctuality: 94, departments: ["Inbound Warehouse"], rating: 4.6, eligible: true, hoursWorked: 2400 },
+  { id: "8", name: "Daniel Kim", agency: "Meridian Recruitment", site: "Baltimore, MD", department: "MHE Operations", role: "MHE Operations", timeServed: 11, attendance: 97, punctuality: 95, departments: ["MHE Operations", "Inbound Warehouse"], rating: 4.7, eligible: true, hoursWorked: 1760 },
+  { id: "9", name: "Elena Rodriguez", agency: "Workforce Direct", site: "Las Vegas, NV", department: "Inbound Warehouse", role: "Inbound Warehouse", timeServed: 13, attendance: 93, punctuality: 90, departments: ["Inbound Warehouse"], rating: 4.3, eligible: true, hoursWorked: 2080 },
+  { id: "10", name: "Kevin Wright", agency: "Pinnacle Staffing", site: "Baltimore, MD", department: "Inbound Warehouse", role: "Inbound Warehouse", timeServed: 20, attendance: 99, punctuality: 98, departments: ["Inbound Warehouse", "MHE Operations"], rating: 4.8, eligible: true, hoursWorked: 3200 },
+  { id: "11", name: "Fatima Al-Hassan", agency: "Workforce Direct", site: "Baltimore, MD", department: "MHE Operations", role: "MHE Operations", timeServed: 6, attendance: 85, punctuality: 80, departments: ["MHE Operations"], rating: 3.5, eligible: false, hoursWorked: 960 },
+  { id: "12", name: "Tom Brady", agency: "Meridian Recruitment", site: "Dallas Fort-Worth, TX", department: "Inbound Warehouse", role: "Inbound Warehouse", timeServed: 4, attendance: 88, punctuality: 82, departments: ["Inbound Warehouse"], rating: 3.8, eligible: false, hoursWorked: 640 },
+  { id: "13", name: "Daniel Reeves", agency: "Pinnacle Staffing", site: "Las Vegas, NV", department: "Inbound Warehouse", role: "Inbound Warehouse", timeServed: 8, attendance: 91, punctuality: 88, departments: ["Inbound Warehouse"], rating: 4.0, eligible: false, hoursWorked: 1280 },
 ];
 
 interface ClientTempPermProps {
@@ -114,7 +114,7 @@ const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
             className="text-xs bg-card border border-border rounded px-2 py-1.5"
           >
             <option value="all">All Departments</option>
-            <option value="warehouse operative">Warehouse Operative</option>
+            <option value="warehouse operative">Inbound Warehouse</option>
             <option value="mhe">MHE</option>
           </select>
           <select
@@ -123,9 +123,9 @@ const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
             className="text-xs bg-card border border-border rounded px-2 py-1.5"
           >
             <option value="all">All Agencies</option>
-            <option value="Staffmark">Staffmark</option>
-            <option value="Elite Staffing">Elite Staffing</option>
-            <option value="Elwood Staffing">Elwood Staffing</option>
+            <option value="Workforce Direct">Workforce Direct</option>
+            <option value="Pinnacle Staffing">Pinnacle Staffing</option>
+            <option value="Meridian Recruitment">Meridian Recruitment</option>
           </select>
         </div>
       </div>

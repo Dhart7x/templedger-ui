@@ -112,7 +112,7 @@
            </h3>
            <div className="text-center py-4">
              <div className="text-3xl font-bold text-foreground">{worker.distance.miles} miles</div>
-             <p className="text-sm text-muted-foreground">from Alo Clothing - Baltimore, MD</p>
+             <p className="text-sm text-muted-foreground">from Apex Distribution Ltd - Baltimore, MD</p>
            </div>
            <div className="grid grid-cols-2 gap-3">
              <div className="bg-muted/30 rounded-lg p-3 text-center">

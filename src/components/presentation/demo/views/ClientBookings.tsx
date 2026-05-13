@@ -15,7 +15,7 @@ interface AllocationEntry {
   detail: string;
 }
 
-const agencyNames: Record<string, string> = { AG001: "Staffmark", AG002: "Elite Staffing", AG003: "Elwood Staffing" };
+const agencyNames: Record<string, string> = { AG001: "Workforce Direct", AG002: "Pinnacle Staffing", AG003: "Meridian Recruitment" };
 
 function computeAllocation(
   priority: AllocationPriority,
@@ -93,7 +93,7 @@ const ClientBookings = () => {
   const [isOverriding, setIsOverriding] = useState(false);
   const [overrideCounts, setOverrideCounts] = useState<Record<string, number>>({});
   const [newBooking, setNewBooking] = useState({
-    role: "Warehouse Operative",
+    role: "Inbound Warehouse",
     quantity: 1,
     shift: "06:00–14:00",
     location: "Baltimore, MD - Zone A",
@@ -143,7 +143,7 @@ const ClientBookings = () => {
     setIsOverriding(false);
     setOverrideCounts({});
     setNewBooking({
-      role: "Warehouse Operative",
+      role: "Inbound Warehouse",
       quantity: 1,
       shift: "06:00–14:00",
       location: "Baltimore, MD - Zone A",
@@ -314,8 +314,8 @@ const ClientBookings = () => {
               <div>
                 <label className="text-sm text-muted-foreground">Role</label>
                 <select value={newBooking.role} onChange={(e) => setNewBooking({ ...newBooking, role: e.target.value })} className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm" disabled={isAllocating}>
-                  <option>Warehouse Operative</option>
-                  <option>MHE Operative</option>
+                  <option>Inbound Warehouse</option>
+                  <option>MHE Operations</option>
                 </select>
               </div>
               <div className="grid grid-cols-2 gap-3">

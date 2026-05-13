@@ -16,8 +16,8 @@ const weekOptions = [
   { label: "Week of 3–9 Mar 2025", key: "wk5", isFuture: true },
 ];
 
-const departments = ["All Departments", "Warehouse Operative", "MHE"];
-const agencyOptions = ["All Agencies", "Staffmark", "Elite Staffing", "Elwood Staffing"];
+const departments = ["All Departments", "Inbound Warehouse", "MHE Operations"];
+const agencyOptions = ["All Agencies", "Workforce Direct", "Pinnacle Staffing", "Meridian Recruitment"];
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 interface WorkerSlot {
@@ -33,9 +33,9 @@ interface ShiftCell {
 
 // Generate workers for filled weeks
 const workerNames: Record<string, string[]> = {
-  Staffmark: ["Marcus Johnson", "Sarah Williams", "Tomasz Nowak", "David Thompson", "Priya Sharma", "Ahmed Hassan", "Emma Richardson", "Robert Garcia"],
-  "Elite Staffing": ["Rachel Adams", "Mike Stevens", "Lisa Chen", "Mark Edwards", "Kevin Morris", "Fatima Al-Rashid"],
-  "Elwood Staffing": ["James Wilson", "Andrei Petrov", "Sophie Turner", "Daniel Brown", "Amy Clarke"],
+  "Workforce Direct": ["Priya Sharma", "Leon Kowalski", "Fatima Al-Hassan", "Fatima Al-Hassan", "Priya Sharma", "Chris Donnelly", "Yuki Tanaka", "Daniel Reeves"],
+  "Pinnacle Staffing": ["Emma Johansson", "Rico Fernandez", "Aisha Nwosu", "James Okafor", "Sarah Mitchell", "Ana Pereira"],
+  "Meridian Recruitment": ["Daniel Reeves", "Priya Sharma", "Tom Brady", "Diane Foster", "Marcus Webb"],
 };
 
 const buildCell = (required: number, isFuture: boolean): ShiftCell => {
@@ -63,8 +63,8 @@ interface RoleRow {
 
 const buildSchedule = (isFuture: boolean): RoleRow[] => {
   const data: { dept: string; role: string; early: number; late: number; night: number }[] = [
-    { dept: "Warehouse Operative", role: "Warehouse Operative", early: 20, late: 16, night: 6 },
-    { dept: "MHE", role: "MHE Operative", early: 10, late: 8, night: 4 },
+    { dept: "Inbound Warehouse", role: "Inbound Warehouse", early: 20, late: 16, night: 6 },
+    { dept: "MHE Operations", role: "MHE Operations", early: 10, late: 8, night: 4 },
   ];
   return data.map(d => ({
     department: d.dept,
@@ -185,7 +185,7 @@ const UploadPanel = () => {
         <div className="space-y-2">
           {[
             { name: "schedule_wk5_feb.xlsx", week: "Week of 3–9 Feb 2025", dept: "All Departments", agency: "All Agencies", date: "31 Jan 2025" },
-            { name: "warehouse_schedule.csv", week: "Week of 27 Jan – 2 Feb 2025", dept: "Warehouse", agency: "Staffmark", date: "24 Jan 2025" },
+            { name: "warehouse_schedule.csv", week: "Week of 27 Jan – 2 Feb 2025", dept: "Inbound Warehouse", agency: "Workforce Direct", date: "24 Jan 2025" },
           ].map((file, i) => (
             <div key={i} className="flex items-center justify-between p-3 bg-card border border-border rounded-lg">
               <div className="flex items-center gap-3">
@@ -206,14 +206,14 @@ const UploadPanel = () => {
 type AllocCriteria = "Available Workers" | "Agency Performance";
 
 const currentWeekAgencies = [
-  { name: "Staffmark", workers: 8, perf: 4.2 },
-  { name: "Elite Staffing", workers: 5, perf: 4.8 },
-  { name: "Elwood Staffing", workers: 3, perf: 3.8 },
+  { name: "Workforce Direct", workers: 8, perf: 4.2 },
+  { name: "Pinnacle Staffing", workers: 5, perf: 4.8 },
+  { name: "Meridian Recruitment", workers: 3, perf: 3.8 },
 ];
 
 const futureSnapshotAgencies = [
   {
-    name: "Staffmark",
+    name: "Workforce Direct",
     dot: "#f59e0b",
     availability: "Limited",
     availabilityColor: "#f59e0b",
@@ -223,7 +223,7 @@ const futureSnapshotAgencies = [
     status: "Only 2 workers available for this slot — may not cover the gap.",
   },
   {
-    name: "Elite Staffing",
+    name: "Pinnacle Staffing",
     dot: "#22c55e",
     availability: "Available",
     availabilityColor: "#22c55e",
@@ -233,7 +233,7 @@ const futureSnapshotAgencies = [
     status: "6 workers available including 3 newly registered and ready to deploy.",
   },
   {
-    name: "Elwood Staffing",
+    name: "Meridian Recruitment",
     dot: "#ef4444",
     availability: "Unavailable",
     availabilityColor: "#ef4444",
@@ -247,14 +247,14 @@ const futureSnapshotAgencies = [
 const recommendationFor = (criteria: AllocCriteria) =>
   criteria === "Available Workers"
     ? {
-        agency: "Elite Staffing",
+        agency: "Pinnacle Staffing",
         reason:
-          "Elite Staffing has 6 workers available for this slot including 3 newly registered workers ready to deploy — the strongest immediate coverage across your agency panel.",
+          "Pinnacle Staffing has 6 workers available for this slot including 3 newly registered workers ready to deploy — the strongest immediate coverage across your agency panel.",
       }
     : {
-        agency: "Elite Staffing",
+        agency: "Pinnacle Staffing",
         reason:
-          "Elite Staffing carries the highest performance score (★ 4.8) across your panel with 6 workers available. Staffmark available as backup with 2 workers on standby.",
+          "Pinnacle Staffing carries the highest performance score (★ 4.8) across your panel with 6 workers available. Workforce Direct available as backup with 2 workers on standby.",
       };
 
 interface ShiftSnapshotModalProps {
@@ -302,7 +302,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
       );
       setTimeout(() => {
         toast(
-          `Staffmark notified — this booking was reallocated to ${rec.agency} based on ${criteria}.`,
+          `Workforce Direct notified — this booking was reallocated to ${rec.agency} based on ${criteria}.`,
           { icon: <Bell className="w-4 h-4" /> }
         );
       }, 1000);

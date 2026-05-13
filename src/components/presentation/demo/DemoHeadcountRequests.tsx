@@ -18,21 +18,21 @@ interface HeadcountRequest {
 const requests: HeadcountRequest[] = [
   {
     id: "1",
-    department: "Warehouse",
+    department: "Inbound Warehouse",
     site: "Heathrow DC",
     shift: "Morning (06:00 - 14:00)",
     date: "Tomorrow",
     required: 25,
     fulfilled: 25,
     agencies: [
-      { name: "Staffmark", assigned: 15, confirmed: 15 },
+      { name: "Workforce Direct", assigned: 15, confirmed: 15 },
       { name: "Blue Arrow", assigned: 10, confirmed: 10 },
     ],
     status: "fulfilled",
   },
   {
     id: "2",
-    department: "Loading",
+    department: "Outbound Dispatch",
     site: "Heathrow DC",
     shift: "Morning (06:00 - 14:00)",
     date: "Tomorrow",
@@ -40,13 +40,13 @@ const requests: HeadcountRequest[] = [
     fulfilled: 8,
     agencies: [
       { name: "Blue Arrow", assigned: 6, confirmed: 5 },
-      { name: "Staffmark", assigned: 4, confirmed: 3 },
+      { name: "Workforce Direct", assigned: 4, confirmed: 3 },
     ],
     status: "partial",
   },
   {
     id: "3",
-    department: "Picking",
+    department: "Pick and Pack",
     site: "Heathrow DC",
     shift: "Afternoon (14:00 - 22:00)",
     date: "Tomorrow",
@@ -54,26 +54,26 @@ const requests: HeadcountRequest[] = [
     fulfilled: 12,
     agencies: [
       { name: "Pertemps", assigned: 10, confirmed: 8 },
-      { name: "Staffmark", assigned: 5, confirmed: 4 },
+      { name: "Workforce Direct", assigned: 5, confirmed: 4 },
     ],
     status: "partial",
   },
   {
     id: "4",
-    department: "Warehouse",
+    department: "Inbound Warehouse",
     site: "Birmingham DC",
     shift: "Morning (06:00 - 14:00)",
     date: "Tomorrow",
     required: 18,
     fulfilled: 0,
     agencies: [
-      { name: "Staffmark", assigned: 18, confirmed: 0 },
+      { name: "Workforce Direct", assigned: 18, confirmed: 0 },
     ],
     status: "pending",
   },
   {
     id: "5",
-    department: "Quality",
+    department: "Returns Processing",
     site: "Heathrow DC",
     shift: "Morning (06:00 - 14:00)",
     date: "Wed 29 Jan",
@@ -86,7 +86,7 @@ const requests: HeadcountRequest[] = [
   },
   {
     id: "6",
-    department: "Packing",
+    department: "Pick and Pack",
     site: "Coventry Hub",
     shift: "Night (22:00 - 06:00)",
     date: "Wed 29 Jan",
@@ -205,7 +205,7 @@ const DemoHeadcountRequests = () => {
             <div className="flex gap-2">
               <label className="flex items-center gap-2 bg-muted px-3 py-2 rounded cursor-pointer">
                 <input type="checkbox" className="rounded" />
-                <span className="text-sm">Staffmark</span>
+                <span className="text-sm">Workforce Direct</span>
               </label>
               <label className="flex items-center gap-2 bg-muted px-3 py-2 rounded cursor-pointer">
                 <input type="checkbox" className="rounded" />

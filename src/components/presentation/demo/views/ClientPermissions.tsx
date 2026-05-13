@@ -31,22 +31,36 @@ const PERMISSIONS = [
 type PermKey = (typeof PERMISSIONS)[number]["key"];
 type PermState = Record<PermKey, boolean>;
 
-const DEPT_DEFAULTS: { name: string; state: PermState }[] = [
+const DEPT_DEFAULTS: { name: string; manager: string; state: PermState }[] = [
   {
-    name: "Warehouse Operative",
+    name: "Inbound Warehouse",
+    manager: "Shift Manager: Rob Haines",
     state: { replacements: true, headcount: false, approveHours: true, overtime: false },
   },
   {
-    name: "MHE",
+    name: "Outbound Dispatch",
+    manager: "Shift Manager: Claire Maddox",
     state: { replacements: true, headcount: true, approveHours: true, overtime: true },
   },
   {
-    name: "Picker",
+    name: "Pick and Pack",
+    manager: "Shift Manager: Dean Obi",
     state: { replacements: false, headcount: false, approveHours: true, overtime: false },
   },
   {
-    name: "Loader",
+    name: "MHE Operations",
+    manager: "Shift Manager: Simone Carter",
     state: { replacements: true, headcount: false, approveHours: true, overtime: false },
+  },
+  {
+    name: "Cold Storage",
+    manager: "Shift Manager: Paul Krejci",
+    state: { replacements: true, headcount: false, approveHours: true, overtime: false },
+  },
+  {
+    name: "Returns Processing",
+    manager: "Shift Manager: Natalie Voss",
+    state: { replacements: false, headcount: false, approveHours: true, overtime: false },
   },
 ];
 
@@ -120,15 +134,28 @@ const ClientPermissions = () => {
             }}
           >
             <div className="flex items-center justify-between">
-              <div
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "14px",
-                  fontWeight: 600,
-                  color: "#0D0D0B",
-                }}
-              >
-                {dept.name}
+              <div>
+                <div
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: "14px",
+                    fontWeight: 600,
+                    color: "#0D0D0B",
+                  }}
+                >
+                  {dept.name}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "12px",
+                    fontWeight: 400,
+                    color: "#9B9590",
+                    marginTop: "2px",
+                  }}
+                >
+                  {dept.manager}
+                </div>
               </div>
               <div className="flex items-center gap-2">
                 <span

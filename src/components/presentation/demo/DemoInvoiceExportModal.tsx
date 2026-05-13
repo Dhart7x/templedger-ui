@@ -60,10 +60,10 @@ const financeProviders = [
 const paymentTermsOptions = [7, 14, 30, 45, 60, 90];
 
 const workers = [
-  { name: "John Patel", status: "Approved", hours: 40, amount: 520 },
-  { name: "Maria Santos", status: "Approved", hours: 38, amount: 494 },
-  { name: "Ahmed Khan", status: "Approved with override", hours: 42, amount: 567 },
-  { name: "Lucy Brown", status: "Approved", hours: 40, amount: 560 },
+  { name: "Tom Brady", status: "Approved", hours: 40, amount: 520 },
+  { name: "Rico Fernandez", status: "Approved", hours: 38, amount: 494 },
+  { name: "Sarah Mitchell", status: "Approved with override", hours: 42, amount: 567 },
+  { name: "Leon Kowalski", status: "Approved", hours: 40, amount: 560 },
 ];
 
 const DemoInvoiceExportModal = ({

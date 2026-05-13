@@ -15,8 +15,8 @@ const weekOptions = [
   { label: "Week of 3–9 Mar 2025", key: "wk5", isFuture: true },
 ];
 
-const departments = ["All Departments", "Warehouse", "Picking", "Packing", "Loading", "Quality"];
-const agencyOptions = ["All Agencies", "Staffmark", "Pertemps", "Blue Arrow", "Elite Personnel"];
+const departments = ["All Departments", "Inbound Warehouse", "Pick and Pack", "Pick and Pack", "Outbound Dispatch", "Returns Processing"];
+const agencyOptions = ["All Agencies", "Workforce Direct", "Pertemps", "Blue Arrow", "Elite Personnel"];
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 interface WorkerSlot {
@@ -31,9 +31,9 @@ interface ShiftCell {
 }
 
 const workerNames: Record<string, string[]> = {
-  Staffmark: ["Marcus Johnson", "Sarah Williams", "Tomasz Nowak", "David Thompson", "Priya Sharma", "Ahmed Hassan", "Emma Richardson", "Robert Garcia"],
-  Pertemps: ["Rachel Adams", "Mike Stevens", "Lisa Chen", "Mark Edwards", "Kevin Morris", "Fatima Al-Rashid"],
-  "Blue Arrow": ["James Wilson", "Andrei Petrov", "Sophie Turner", "Daniel Brown", "Amy Clarke"],
+  "Workforce Direct": ["Priya Sharma", "Leon Kowalski", "Fatima Al-Hassan", "Fatima Al-Hassan", "Priya Sharma", "Chris Donnelly", "Yuki Tanaka", "Daniel Reeves"],
+  Pertemps: ["Emma Johansson", "Rico Fernandez", "Aisha Nwosu", "James Okafor", "Sarah Mitchell", "Ana Pereira"],
+  "Blue Arrow": ["Daniel Reeves", "Priya Sharma", "Tom Brady", "Diane Foster", "Marcus Webb"],
   "Elite Personnel": ["Chris Martin", "Laura White", "Ben Foster"],
 };
 
@@ -58,11 +58,11 @@ interface RoleRow {
 
 const buildSchedule = (isFuture: boolean): RoleRow[] => {
   const data: { dept: string; role: string; early: number; late: number; night: number }[] = [
-    { dept: "Warehouse", role: "Warehouse Operative", early: 12, late: 10, night: 6 },
-    { dept: "Warehouse", role: "Forklift Driver", early: 4, late: 3, night: 2 },
-    { dept: "Picking", role: "Picker", early: 8, late: 6, night: 0 },
-    { dept: "Packing", role: "Packer", early: 6, late: 4, night: 0 },
-    { dept: "Loading", role: "Loader", early: 6, late: 4, night: 2 },
+    { dept: "Inbound Warehouse", role: "Inbound Warehouse", early: 12, late: 10, night: 6 },
+    { dept: "Inbound Warehouse", role: "MHE Operations", early: 4, late: 3, night: 2 },
+    { dept: "Pick and Pack", role: "Pick and Pack", early: 8, late: 6, night: 0 },
+    { dept: "Pick and Pack", role: "Packer", early: 6, late: 4, night: 0 },
+    { dept: "Outbound Dispatch", role: "Outbound Dispatch", early: 6, late: 4, night: 2 },
   ];
   return data.map(d => ({
     department: d.dept,
@@ -95,11 +95,11 @@ const AgencyUploadPanel = () => {
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault(); setIsDragging(false);
     const file = e.dataTransfer.files[0];
-    if (file) setUploadedFile({ name: file.name, week: selectedWeek, department: selectedDept, agency: "Staffmark", uploadedAt: new Date() });
+    if (file) setUploadedFile({ name: file.name, week: selectedWeek, department: selectedDept, agency: "Workforce Direct", uploadedAt: new Date() });
   }, [selectedWeek, selectedDept]);
   const handleFileSelect = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) setUploadedFile({ name: file.name, week: selectedWeek, department: selectedDept, agency: "Staffmark", uploadedAt: new Date() });
+    if (file) setUploadedFile({ name: file.name, week: selectedWeek, department: selectedDept, agency: "Workforce Direct", uploadedAt: new Date() });
   }, [selectedWeek, selectedDept]);
 
   const handleSubmit = () => {
@@ -360,7 +360,7 @@ const AgencySchedule = () => {
     <div className="p-4 md:p-6 space-y-6">
       <div>
         <h1 className="text-lg md:text-xl font-bold text-foreground">Schedule</h1>
-        <p className="text-xs text-muted-foreground">Alo Clothing • View and manage workforce schedules</p>
+        <p className="text-xs text-muted-foreground">Apex Distribution Ltd • View and manage workforce schedules</p>
       </div>
       <Tabs defaultValue="upload" className="space-y-5">
         <TabsList className="grid w-full max-w-sm grid-cols-2">

@@ -236,7 +236,7 @@ const DemoSettingsView = () => {
               <h3 className="text-sm font-medium text-foreground mb-3">Hours Approval</h3>
               <p className="text-xs text-muted-foreground mb-2">Client managers who can approve hours:</p>
               <div className="space-y-2">
-                {["Sarah Mitchell", "Mark Thompson", "Emma Jones", "Raj Patel", "John Smith"].map((name) => (
+                {["Sarah Mitchell", "James Okafor", "Sarah Mitchell", "Yuki Tanaka", "Diane Foster"].map((name) => (
                   <div key={name} className="flex items-center justify-between p-2 bg-muted/30 rounded">
                     <span className="text-sm text-foreground">{name}</span>
                     <button className="p-1 hover:bg-muted rounded"><Trash2 className="w-3 h-3 text-muted-foreground" /></button>
@@ -250,7 +250,7 @@ const DemoSettingsView = () => {
               <p className="text-xs text-muted-foreground mb-2">Finance roles who can approve overrides:</p>
               <div className="space-y-2">
                 <div className="flex items-center justify-between p-2 bg-muted/30 rounded">
-                  <span className="text-sm text-foreground">Usman Iftikhar</span>
+                  <span className="text-sm text-foreground">Rico Fernandez</span>
                   <span className="text-xs text-primary">Admin</span>
                 </div>
                 <div className="flex items-center justify-between p-2 bg-muted/30 rounded">

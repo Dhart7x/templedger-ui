@@ -15,14 +15,14 @@ interface PayrollItem {
 }
 
 const payrollItems: PayrollItem[] = [
-  { id: "1", worker: "John Patel", agency: "Staffmark", department: "Warehouse Operative", hoursWorked: 40, hoursApproved: 40, payRate: 12.50, chargeRate: 18.75, status: "ready" },
-  { id: "2", worker: "Maria Santos", agency: "Elite Staffing", department: "Warehouse Operative", hoursWorked: 38, hoursApproved: 38, payRate: 11.80, chargeRate: 17.70, status: "ready" },
-  { id: "3", worker: "Ahmed Khan", agency: "Elwood Staffing", department: "MHE", hoursWorked: 45, hoursApproved: 40, payRate: 14.00, chargeRate: 21.00, status: "at-risk", issues: ["5 overtime hours pending approval"] },
-  { id: "4", worker: "Lucy Brown", agency: "Staffmark", department: "Warehouse Operative", hoursWorked: 40, hoursApproved: 40, payRate: 15.00, chargeRate: 22.50, status: "ready" },
-  { id: "5", worker: "Tomasz Nowak", agency: "Staffmark", department: "MHE", hoursWorked: 36, hoursApproved: 0, payRate: 12.50, chargeRate: 18.75, status: "blocked", issues: ["Late arrival dispute unresolved", "Timesheet not signed off"] },
-  { id: "6", worker: "Priya Sharma", agency: "Elite Staffing", department: "Warehouse Operative", hoursWorked: 40, hoursApproved: 40, payRate: 13.50, chargeRate: 20.25, status: "ready" },
-  { id: "7", worker: "James Wilson", agency: "Elwood Staffing", department: "MHE", hoursWorked: 0, hoursApproved: 0, payRate: 12.00, chargeRate: 18.00, status: "blocked", issues: ["No-show - no hours to process"] },
-  { id: "8", worker: "Fatima Ali", agency: "Staffmark", department: "Warehouse Operative", hoursWorked: 42, hoursApproved: 40, payRate: 11.50, chargeRate: 17.25, status: "at-risk", issues: ["2 overtime hours pending approval"] },
+  { id: "1", worker: "Tom Brady", agency: "Workforce Direct", department: "Inbound Warehouse", hoursWorked: 40, hoursApproved: 40, payRate: 12.50, chargeRate: 18.75, status: "ready" },
+  { id: "2", worker: "Rico Fernandez", agency: "Pinnacle Staffing", department: "Inbound Warehouse", hoursWorked: 38, hoursApproved: 38, payRate: 11.80, chargeRate: 17.70, status: "ready" },
+  { id: "3", worker: "Sarah Mitchell", agency: "Meridian Recruitment", department: "MHE Operations", hoursWorked: 45, hoursApproved: 40, payRate: 14.00, chargeRate: 21.00, status: "at-risk", issues: ["5 overtime hours pending approval"] },
+  { id: "4", worker: "Leon Kowalski", agency: "Workforce Direct", department: "Inbound Warehouse", hoursWorked: 40, hoursApproved: 40, payRate: 15.00, chargeRate: 22.50, status: "ready" },
+  { id: "5", worker: "Fatima Al-Hassan", agency: "Workforce Direct", department: "MHE Operations", hoursWorked: 36, hoursApproved: 0, payRate: 12.50, chargeRate: 18.75, status: "blocked", issues: ["Late arrival dispute unresolved", "Timesheet not signed off"] },
+  { id: "6", worker: "Priya Sharma", agency: "Pinnacle Staffing", department: "Inbound Warehouse", hoursWorked: 40, hoursApproved: 40, payRate: 13.50, chargeRate: 20.25, status: "ready" },
+  { id: "7", worker: "Daniel Reeves", agency: "Meridian Recruitment", department: "MHE Operations", hoursWorked: 0, hoursApproved: 0, payRate: 12.00, chargeRate: 18.00, status: "blocked", issues: ["No-show - no hours to process"] },
+  { id: "8", worker: "Tom Brady", agency: "Workforce Direct", department: "Inbound Warehouse", hoursWorked: 42, hoursApproved: 40, payRate: 11.50, chargeRate: 17.25, status: "at-risk", issues: ["2 overtime hours pending approval"] },
 ];
 
 const weeks = [
