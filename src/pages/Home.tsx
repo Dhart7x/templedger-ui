@@ -155,15 +155,15 @@ const Home = () => {
   const costs = [
     {
       t: "The cost of not knowing.",
-      b: "Shifts, gaps, performance, attendance — all happening in real time with no shared record. Decisions made on assumption. Overtime booked because nobody saw the gap coming. Agencies overused because nobody tracked their fill rate. Every assumption has a cost.",
+      b: "Decisions made on assumption. Workers booked without visibility of who performed last week. Gaps that only become visible when someone fails to show up. Every assumption your operation runs on has a price attached to it.",
     },
     {
       t: "The cost of disconnection.",
-      b: "Agencies operate in their own system. Their data stays theirs. You get a summary. You make decisions on a summary. The gap between the summary and reality is where the cost lives — in attrition, in ramp time, in agency relationships managed on gut feel rather than evidence.",
+      b: "Agencies operate in their own system. Their data stays theirs. You receive a summary and make commercial decisions from it. The gap between that summary and operational reality is where the cost lives — in attrition, in ramp time, in agency relationships managed on instinct rather than evidence.",
     },
     {
       t: "The cost of reactivity.",
-      b: "Overtime, attrition, ramp time, last-minute gap filling. All symptoms of a system that shows you problems after they have already happened. The cost is not just the event itself. It is every downstream consequence of finding out too late.",
+      b: "By the time a problem reaches you it has already cost you something. The no-show that triggered overtime. The compliance breach that reached your site. The invoice that doesn't reflect what actually happened. Reactive operations don't prevent costs. They absorb them.",
     },
   ];
 
