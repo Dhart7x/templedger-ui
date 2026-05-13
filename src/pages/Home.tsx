@@ -220,18 +220,23 @@ const Home = () => {
   const steps = [
     {
       n: "01",
-      t: "Implemented on site",
-      b: "We install alongside what you already have. No integration required. No disruption to your operation.",
+      t: "We embed in your operation",
+      b: "Before anything is built or configured, we come on site. We understand your workforce structure, your agencies, your current process and where it breaks down. Discovery first. Always.",
     },
     {
       n: "02",
-      t: "Onboard your agencies",
-      b: "Your agencies join the platform. Both sides in one shared system from the very first shift. We coordinate everything.",
+      t: "We optimize before we configure",
+      b: "We identify where the inefficiencies live and how they should be resolved. The platform is then configured around what we find — not the other way around.",
     },
     {
       n: "03",
-      t: "Configured in 90 days.",
-      b: "We handle setup, agency onboarding and hardware installation. You provide one point of contact. Proven on one shift before anything scales.",
+      t: "We deploy and onboard",
+      b: "Hardware on site. Agencies onboarded. Both sides in one shared system from the first shift. We coordinate everything.",
+    },
+    {
+      n: "04",
+      t: "We stay",
+      b: "Live on one shift or department first. We maintain, refine and expand at a pace that works for your operation. We stay until you're confident. Not until we are.",
     },
   ];
 
