@@ -861,7 +861,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
 
 // ─── View Schedule ───────────────────────────────────────────────────────────
 
-const ViewSchedule = () => {
+export const ViewSchedule = () => {
   const { addNotification } = useDemoContext();
   const [selectedWeekKey, setSelectedWeekKey] = useState(weekOptions[0].key);
   const [selectedDept, setSelectedDept] = useState("All Departments");
