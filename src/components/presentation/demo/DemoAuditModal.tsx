@@ -16,10 +16,10 @@ interface DemoAuditModalProps {
 }
 
 const workers = [
-  { name: "John Patel", status: "Approved" },
-  { name: "Maria Santos", status: "Approved" },
-  { name: "Ahmed Khan", status: "Approved with override" },
-  { name: "Lucy Brown", status: "Approved" },
+  { name: "Tom Brady", status: "Approved" },
+  { name: "Rico Fernandez", status: "Approved" },
+  { name: "Sarah Mitchell", status: "Approved with override" },
+  { name: "Leon Kowalski", status: "Approved" },
 ];
 
 const DemoAuditModal = ({ open, onClose, client }: DemoAuditModalProps) => {

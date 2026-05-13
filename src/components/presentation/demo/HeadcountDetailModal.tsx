@@ -26,19 +26,19 @@
  
    // Mock confirmed workers based on agency data
    const mockWorkers: Record<string, Worker[]> = {
-     "Staffmark": [
+     "Workforce Direct": [
        { workerId: "W001", workerName: "Sarah Mitchell", status: "confirmed" },
        { workerId: "W002", workerName: "James Cooper", status: "confirmed" },
        { workerId: "W006", workerName: "Michael Brown", status: "confirmed" },
        { workerId: "W007", workerName: "Lisa Anderson", status: "pending" },
      ],
      "Blue Arrow": [
-       { workerId: "EXT005", workerName: "Ahmed Khan", status: "confirmed" },
+       { workerId: "EXT005", workerName: "Sarah Mitchell", status: "confirmed" },
        { workerId: "EXT006", workerName: "Jessica Williams", status: "confirmed" },
-       { workerId: "EXT007", workerName: "David Thompson", status: "pending" },
+       { workerId: "EXT007", workerName: "Fatima Al-Hassan", status: "pending" },
      ],
      "Pertemps": [
-       { workerId: "EXT008", workerName: "Maria Santos", status: "confirmed" },
+       { workerId: "EXT008", workerName: "Rico Fernandez", status: "confirmed" },
        { workerId: "EXT009", workerName: "Robert Chen", status: "confirmed" },
        { workerId: "EXT010", workerName: "Emma Wilson", status: "confirmed" },
      ],

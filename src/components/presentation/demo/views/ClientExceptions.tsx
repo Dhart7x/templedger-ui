@@ -50,7 +50,7 @@ const typeConfig: Record<PayrollExceptionType, { label: string; icon: typeof Ale
 export const payrollExceptions: PayrollException[] = [
   {
     id: "EX-001", type: "no-clock-in", worker: "Carlos Mendez", workerId: "PR011",
-    agency: "Elite Staffing", department: "MHE", site: "Las Vegas, NV",
+    agency: "Pinnacle Staffing", department: "MHE", site: "Las Vegas, NV",
     date: "Mon 3 Feb", shift: "06:00–14:00", scheduledHours: 8, clockedHours: null,
     blocksPayroll: true, blocksInvoice: true, linkedPayrollId: "PR011",
     createdAt: "2025-02-03T14:30:00Z", agingMinutes: 2880,
@@ -58,7 +58,7 @@ export const payrollExceptions: PayrollException[] = [
   },
   {
     id: "EX-002", type: "no-clock-out", worker: "Hannah Liu", workerId: "PR010",
-    agency: "Staffmark", department: "Warehouse Operative", site: "Baltimore, MD",
+    agency: "Workforce Direct", department: "Inbound Warehouse", site: "Baltimore, MD",
     date: "Fri 7 Feb", shift: "06:00–14:00", scheduledHours: 8, clockedHours: 7.5,
     blocksPayroll: true, blocksInvoice: true, linkedPayrollId: "PR010",
     createdAt: "2025-02-07T14:15:00Z", agingMinutes: 1440,
@@ -66,7 +66,7 @@ export const payrollExceptions: PayrollException[] = [
   },
   {
     id: "EX-003", type: "no-clock-out", worker: "Natasha Volkov", workerId: "PR012",
-    agency: "Elwood Staffing", department: "Warehouse Operative", site: "Dallas Fort-Worth, TX",
+    agency: "Meridian Recruitment", department: "Inbound Warehouse", site: "Dallas Fort-Worth, TX",
     date: "Thu 6 Feb", shift: "14:00–22:00", scheduledHours: 8, clockedHours: 6,
     blocksPayroll: true, blocksInvoice: true, linkedPayrollId: "PR012",
     createdAt: "2025-02-06T22:10:00Z", agingMinutes: 2160,
@@ -74,7 +74,7 @@ export const payrollExceptions: PayrollException[] = [
   },
   {
     id: "EX-004", type: "manager-approval-missing", worker: "Tyler Washington", workerId: "PR007",
-    agency: "Staffmark", department: "Warehouse Operative", site: "Las Vegas, NV",
+    agency: "Workforce Direct", department: "Inbound Warehouse", site: "Las Vegas, NV",
     date: "Mon 3 Feb – Fri 7 Feb", shift: "06:00–14:00", scheduledHours: 40, clockedHours: 43,
     blocksPayroll: true, blocksInvoice: true, linkedPayrollId: "PR007",
     createdAt: "2025-02-08T09:00:00Z", agingMinutes: 720,
@@ -82,7 +82,7 @@ export const payrollExceptions: PayrollException[] = [
   },
   {
     id: "EX-005", type: "manager-approval-missing", worker: "Priya Chakraborty", workerId: "PR008",
-    agency: "Elite Staffing", department: "MHE", site: "Baltimore, MD",
+    agency: "Pinnacle Staffing", department: "MHE", site: "Baltimore, MD",
     date: "Mon 3 Feb – Fri 7 Feb", shift: "14:00–22:00", scheduledHours: 40, clockedHours: 41,
     blocksPayroll: true, blocksInvoice: true, linkedPayrollId: "PR008",
     createdAt: "2025-02-08T09:15:00Z", agingMinutes: 705,
@@ -90,7 +90,7 @@ export const payrollExceptions: PayrollException[] = [
   },
   {
     id: "EX-006", type: "manager-approval-missing", worker: "Derek Okafor", workerId: "PR009",
-    agency: "Elwood Staffing", department: "Warehouse Operative", site: "Dallas Fort-Worth, TX",
+    agency: "Meridian Recruitment", department: "Inbound Warehouse", site: "Dallas Fort-Worth, TX",
     date: "Mon 3 Feb – Fri 7 Feb", shift: "06:00–14:00", scheduledHours: 40, clockedHours: 40,
     blocksPayroll: true, blocksInvoice: false, linkedPayrollId: "PR009",
     createdAt: "2025-02-08T09:30:00Z", agingMinutes: 690,
@@ -98,23 +98,23 @@ export const payrollExceptions: PayrollException[] = [
   },
   {
     id: "EX-007", type: "not-scheduled", worker: "Ramon Gutierrez", workerId: "w-ramon",
-    agency: "Staffmark", department: "Warehouse Operative", site: "Baltimore, MD",
+    agency: "Workforce Direct", department: "Inbound Warehouse", site: "Baltimore, MD",
     date: "Wed 5 Feb", shift: "22:00–06:00", scheduledHours: null, clockedHours: 7.8,
     blocksPayroll: true, blocksInvoice: true, linkedPayrollId: null,
     createdAt: "2025-02-06T06:15:00Z", agingMinutes: 3600,
     status: "open", detail: "Worker clocked in for night shift but was not on the schedule. May have been a verbal fill arrangement.",
   },
   {
-    id: "EX-008", type: "compliance-expired", worker: "Andrei Petrov", workerId: "w-andrei",
-    agency: "Elite Staffing", department: "Warehouse Operative", site: "Dallas Fort-Worth, TX",
+    id: "EX-008", type: "compliance-expired", worker: "Priya Sharma", workerId: "w-andrei",
+    agency: "Pinnacle Staffing", department: "Inbound Warehouse", site: "Dallas Fort-Worth, TX",
     date: "Ongoing", shift: "06:00–14:00", scheduledHours: 40, clockedHours: 40,
     blocksPayroll: true, blocksInvoice: true, linkedPayrollId: null,
     createdAt: "2025-02-01T08:00:00Z", agingMinutes: 10080,
     status: "open", detail: "I9 verification expired on 2025-02-01. Worker has been deployed for 7 days since expiry.",
   },
   {
-    id: "EX-009", type: "compliance-expired", worker: "Fatima Al-Rashid", workerId: "w-fatima",
-    agency: "Elwood Staffing", department: "Warehouse Operative", site: "Baltimore, MD",
+    id: "EX-009", type: "compliance-expired", worker: "Ana Pereira", workerId: "w-fatima",
+    agency: "Meridian Recruitment", department: "Inbound Warehouse", site: "Baltimore, MD",
     date: "Ongoing", shift: "06:00–14:00", scheduledHours: 40, clockedHours: 38,
     blocksPayroll: true, blocksInvoice: true, linkedPayrollId: null,
     createdAt: "2025-02-05T08:00:00Z", agingMinutes: 4320,
@@ -122,7 +122,7 @@ export const payrollExceptions: PayrollException[] = [
   },
   {
     id: "EX-010", type: "hours-mismatch", worker: "Jordan Ellis", workerId: "PR003-mismatch",
-    agency: "Elite Staffing", department: "Warehouse Operative", site: "Las Vegas, NV",
+    agency: "Pinnacle Staffing", department: "Inbound Warehouse", site: "Las Vegas, NV",
     date: "Tue 4 Feb", shift: "06:00–14:00", scheduledHours: 8, clockedHours: 6.8,
     blocksPayroll: false, blocksInvoice: false, linkedPayrollId: null,
     createdAt: "2025-02-04T14:30:00Z", agingMinutes: 5760,
@@ -130,7 +130,7 @@ export const payrollExceptions: PayrollException[] = [
   },
   {
     id: "EX-011", type: "hours-mismatch", worker: "Sofia Hernandez", workerId: "PR006-mismatch",
-    agency: "Elwood Staffing", department: "Warehouse Operative", site: "Baltimore, MD",
+    agency: "Meridian Recruitment", department: "Inbound Warehouse", site: "Baltimore, MD",
     date: "Wed 5 Feb", shift: "14:00–22:00", scheduledHours: 8, clockedHours: 8.9,
     blocksPayroll: false, blocksInvoice: false, linkedPayrollId: null,
     createdAt: "2025-02-05T22:15:00Z", agingMinutes: 4305,
@@ -138,7 +138,7 @@ export const payrollExceptions: PayrollException[] = [
   },
   {
     id: "EX-012", type: "no-clock-in", worker: "Marcus Taylor", workerId: "w-marcus-exc",
-    agency: "Staffmark", department: "Warehouse Operative", site: "Las Vegas, NV",
+    agency: "Workforce Direct", department: "Inbound Warehouse", site: "Las Vegas, NV",
     date: "Thu 6 Feb", shift: "06:00–14:00", scheduledHours: 8, clockedHours: null,
     blocksPayroll: true, blocksInvoice: true, linkedPayrollId: null,
     createdAt: "2025-02-06T14:30:00Z", agingMinutes: 2880,

@@ -45,44 +45,44 @@ interface NewWorker {
 }
 
 const liveWorkers: LiveWorker[] = [
-  { id: "1", name: "John Patel", agency: "Staffmark", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:02", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 32, attendance: 98, rating: 4.7 },
-  { id: "2", name: "Maria Santos", agency: "Elite Staffing", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:00", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 40, attendance: 100, rating: 4.9 },
-  { id: "3", name: "Ahmed Khan", agency: "Elwood Staffing", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", clockIn: "05:58", shift: "06:00–14:00", hoursToday: 5.6, hoursWeek: 44, attendance: 95, rating: 4.5 },
-  { id: "4", name: "Lucy Brown", agency: "Staffmark", site: "Las Vegas, NV", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:01", shift: "06:00–14:00", hoursToday: 5.4, hoursWeek: 38, attendance: 97, rating: 4.8 },
-  { id: "5", name: "Priya Sharma", agency: "Elite Staffing", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:00", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 40, attendance: 100, rating: 5.0 },
-  { id: "6", name: "Marcus Johnson", agency: "Staffmark", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", clockIn: "05:55", shift: "06:00–14:00", hoursToday: 5.7, hoursWeek: 42, attendance: 99, rating: 4.9 },
-  { id: "7", name: "Fatima Ali", agency: "Elite Staffing", site: "Dallas Fort-Worth, TX", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "06:03", shift: "06:00–14:00", hoursToday: 5.3, hoursWeek: 35, attendance: 96, rating: 4.6 },
-  { id: "8", name: "Daniel Kim", agency: "Elwood Staffing", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", clockIn: "06:01", shift: "06:00–14:00", hoursToday: 5.4, hoursWeek: 36, attendance: 97, rating: 4.7 },
-  { id: "9", name: "Elena Rodriguez", agency: "Staffmark", site: "Las Vegas, NV", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "14:02", shift: "14:00–22:00", hoursToday: 2.0, hoursWeek: 28, attendance: 93, rating: 4.3 },
-  { id: "10", name: "Robert Taylor", agency: "Elite Staffing", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", clockIn: "13:58", shift: "14:00–22:00", hoursToday: 2.1, hoursWeek: 30, attendance: 94, rating: 4.4 },
+  { id: "1", name: "Tom Brady", agency: "Workforce Direct", site: "Baltimore, MD", department: "Inbound Warehouse", role: "Inbound Warehouse", clockIn: "06:02", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 32, attendance: 98, rating: 4.7 },
+  { id: "2", name: "Rico Fernandez", agency: "Pinnacle Staffing", site: "Baltimore, MD", department: "Inbound Warehouse", role: "Inbound Warehouse", clockIn: "06:00", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 40, attendance: 100, rating: 4.9 },
+  { id: "3", name: "Sarah Mitchell", agency: "Meridian Recruitment", site: "Baltimore, MD", department: "MHE", role: "MHE Operations", clockIn: "05:58", shift: "06:00–14:00", hoursToday: 5.6, hoursWeek: 44, attendance: 95, rating: 4.5 },
+  { id: "4", name: "Leon Kowalski", agency: "Workforce Direct", site: "Las Vegas, NV", department: "Inbound Warehouse", role: "Inbound Warehouse", clockIn: "06:01", shift: "06:00–14:00", hoursToday: 5.4, hoursWeek: 38, attendance: 97, rating: 4.8 },
+  { id: "5", name: "Priya Sharma", agency: "Pinnacle Staffing", site: "Baltimore, MD", department: "Inbound Warehouse", role: "Inbound Warehouse", clockIn: "06:00", shift: "06:00–14:00", hoursToday: 5.5, hoursWeek: 40, attendance: 100, rating: 5.0 },
+  { id: "6", name: "Priya Sharma", agency: "Workforce Direct", site: "Baltimore, MD", department: "MHE", role: "MHE Operations", clockIn: "05:55", shift: "06:00–14:00", hoursToday: 5.7, hoursWeek: 42, attendance: 99, rating: 4.9 },
+  { id: "7", name: "Tom Brady", agency: "Pinnacle Staffing", site: "Dallas Fort-Worth, TX", department: "Inbound Warehouse", role: "Inbound Warehouse", clockIn: "06:03", shift: "06:00–14:00", hoursToday: 5.3, hoursWeek: 35, attendance: 96, rating: 4.6 },
+  { id: "8", name: "Daniel Kim", agency: "Meridian Recruitment", site: "Baltimore, MD", department: "MHE", role: "MHE Operations", clockIn: "06:01", shift: "06:00–14:00", hoursToday: 5.4, hoursWeek: 36, attendance: 97, rating: 4.7 },
+  { id: "9", name: "Elena Rodriguez", agency: "Workforce Direct", site: "Las Vegas, NV", department: "Inbound Warehouse", role: "Inbound Warehouse", clockIn: "14:02", shift: "14:00–22:00", hoursToday: 2.0, hoursWeek: 28, attendance: 93, rating: 4.3 },
+  { id: "10", name: "Robert Taylor", agency: "Pinnacle Staffing", site: "Baltimore, MD", department: "Inbound Warehouse", role: "Inbound Warehouse", clockIn: "13:58", shift: "14:00–22:00", hoursToday: 2.1, hoursWeek: 30, attendance: 94, rating: 4.4 },
 ];
 
 const standbyWorkers: StandbyWorker[] = [
-  { id: "S1", name: "Emma Wilson", agency: "Elite Staffing", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["M", "L"], lastShift: "2 days ago", attendance: 97, rating: 4.7, distance: { miles: 3.2, carTime: "12 min", publicTransportTime: "25 min" } },
-  { id: "S2", name: "Michael Brown", agency: "Staffmark", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", preferredShifts: ["L", "N"], lastShift: "3 days ago", attendance: 94, rating: 4.4, distance: { miles: 5.1, carTime: "18 min", publicTransportTime: "35 min" } },
-  { id: "S3", name: "David Chen", agency: "Elwood Staffing", site: "Las Vegas, NV", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E", "M"], lastShift: "1 day ago", attendance: 96, rating: 4.6, distance: { miles: 2.8, carTime: "10 min", publicTransportTime: "22 min" } },
-  { id: "S4", name: "Rachel Green", agency: "Elite Staffing", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E", "M"], lastShift: "Today", attendance: 95, rating: 4.5, distance: { miles: 4.5, carTime: "15 min", publicTransportTime: "30 min" } },
-  { id: "S5", name: "Tom Hardy", agency: "Staffmark", site: "Baltimore, MD", department: "MHE", role: "MHE Operative", preferredShifts: ["E", "M", "L"], lastShift: "5 days ago", attendance: 98, rating: 4.9, distance: { miles: 6.2, carTime: "22 min", publicTransportTime: "45 min" } },
-  { id: "S6", name: "Angela Martinez", agency: "Elwood Staffing", site: "Dallas Fort-Worth, TX", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["M", "L"], lastShift: "1 week ago", attendance: 93, rating: 4.3, distance: { miles: 4.0, carTime: "14 min", publicTransportTime: "28 min" } },
-  { id: "S7", name: "Kevin Wright", agency: "Elite Staffing", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E", "M"], lastShift: "2 days ago", attendance: 99, rating: 4.8, distance: { miles: 2.5, carTime: "8 min", publicTransportTime: "18 min" } },
-  { id: "S8", name: "Sophie Turner", agency: "Staffmark", site: "Las Vegas, NV", department: "MHE", role: "MHE Operative", preferredShifts: ["M", "L", "N"], lastShift: "4 days ago", attendance: 91, rating: 4.1, distance: { miles: 7.3, carTime: "25 min", publicTransportTime: "50 min" } },
-  { id: "S9", name: "Nathan Brooks", agency: "Elwood Staffing", site: "Las Vegas, NV", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E"], lastShift: "Yesterday", attendance: 95, rating: 4.5, distance: { miles: 3.8, carTime: "13 min", publicTransportTime: "26 min" } },
-  { id: "S10", name: "Olivia Parker", agency: "Elite Staffing", site: "Baltimore, MD", department: "Warehouse Operative", role: "Warehouse Operative", preferredShifts: ["E", "M", "L"], lastShift: "Today", attendance: 97, rating: 4.7, distance: { miles: 1.9, carTime: "6 min", publicTransportTime: "12 min" } },
+  { id: "S1", name: "Emma Wilson", agency: "Pinnacle Staffing", site: "Baltimore, MD", department: "Inbound Warehouse", role: "Inbound Warehouse", preferredShifts: ["M", "L"], lastShift: "2 days ago", attendance: 97, rating: 4.7, distance: { miles: 3.2, carTime: "12 min", publicTransportTime: "25 min" } },
+  { id: "S2", name: "Michael Brown", agency: "Workforce Direct", site: "Baltimore, MD", department: "MHE", role: "MHE Operations", preferredShifts: ["L", "N"], lastShift: "3 days ago", attendance: 94, rating: 4.4, distance: { miles: 5.1, carTime: "18 min", publicTransportTime: "35 min" } },
+  { id: "S3", name: "David Chen", agency: "Meridian Recruitment", site: "Las Vegas, NV", department: "Inbound Warehouse", role: "Inbound Warehouse", preferredShifts: ["E", "M"], lastShift: "1 day ago", attendance: 96, rating: 4.6, distance: { miles: 2.8, carTime: "10 min", publicTransportTime: "22 min" } },
+  { id: "S4", name: "Rachel Green", agency: "Pinnacle Staffing", site: "Baltimore, MD", department: "Inbound Warehouse", role: "Inbound Warehouse", preferredShifts: ["E", "M"], lastShift: "Today", attendance: 95, rating: 4.5, distance: { miles: 4.5, carTime: "15 min", publicTransportTime: "30 min" } },
+  { id: "S5", name: "Tom Hardy", agency: "Workforce Direct", site: "Baltimore, MD", department: "MHE", role: "MHE Operations", preferredShifts: ["E", "M", "L"], lastShift: "5 days ago", attendance: 98, rating: 4.9, distance: { miles: 6.2, carTime: "22 min", publicTransportTime: "45 min" } },
+  { id: "S6", name: "Angela Martinez", agency: "Meridian Recruitment", site: "Dallas Fort-Worth, TX", department: "Inbound Warehouse", role: "Inbound Warehouse", preferredShifts: ["M", "L"], lastShift: "1 week ago", attendance: 93, rating: 4.3, distance: { miles: 4.0, carTime: "14 min", publicTransportTime: "28 min" } },
+  { id: "S7", name: "Kevin Wright", agency: "Pinnacle Staffing", site: "Baltimore, MD", department: "Inbound Warehouse", role: "Inbound Warehouse", preferredShifts: ["E", "M"], lastShift: "2 days ago", attendance: 99, rating: 4.8, distance: { miles: 2.5, carTime: "8 min", publicTransportTime: "18 min" } },
+  { id: "S8", name: "Tom Brady", agency: "Workforce Direct", site: "Las Vegas, NV", department: "MHE", role: "MHE Operations", preferredShifts: ["M", "L", "N"], lastShift: "4 days ago", attendance: 91, rating: 4.1, distance: { miles: 7.3, carTime: "25 min", publicTransportTime: "50 min" } },
+  { id: "S9", name: "Nathan Brooks", agency: "Meridian Recruitment", site: "Las Vegas, NV", department: "Inbound Warehouse", role: "Inbound Warehouse", preferredShifts: ["E"], lastShift: "Yesterday", attendance: 95, rating: 4.5, distance: { miles: 3.8, carTime: "13 min", publicTransportTime: "26 min" } },
+  { id: "S10", name: "Olivia Parker", agency: "Pinnacle Staffing", site: "Baltimore, MD", department: "Inbound Warehouse", role: "Inbound Warehouse", preferredShifts: ["E", "M", "L"], lastShift: "Today", attendance: 97, rating: 4.7, distance: { miles: 1.9, carTime: "6 min", publicTransportTime: "12 min" } },
 ];
 
 const newWorkers: NewWorker[] = [
-  { id: "N1", name: "Ryan Hughes", agency: "Staffmark", site: "Baltimore, MD", role: "Warehouse Operative", registeredDate: "2025-02-08", experience: ["Warehouse Operative"], preferredShifts: ["M", "L"], status: "pending-induction" },
-  { id: "N2", name: "Sophie Turner", agency: "Elite Staffing", site: "Baltimore, MD", role: "Warehouse Operative", registeredDate: "2025-02-07", experience: [], preferredShifts: ["E", "M", "L"], status: "documents-pending" },
-  { id: "N3", name: "Alex Foster", agency: "Elwood Staffing", site: "Las Vegas, NV", role: "Warehouse Operative", registeredDate: "2025-02-06", experience: ["Warehouse Operative"], preferredShifts: ["E", "M"], status: "ready" },
-  { id: "N4", name: "Maya Singh", agency: "Staffmark", site: "Baltimore, MD", role: "MHE Operative", registeredDate: "2025-02-05", experience: ["MHE"], preferredShifts: ["M"], status: "pending-induction" },
-  { id: "N5", name: "Jordan Blake", agency: "Elite Staffing", site: "Dallas Fort-Worth, TX", role: "MHE Operative", registeredDate: "2025-02-04", experience: ["MHE", "Warehouse Operative"], preferredShifts: ["E", "M", "L"], status: "ready" },
-  { id: "N6", name: "Casey Morgan", agency: "Elwood Staffing", site: "Baltimore, MD", role: "Warehouse Operative", registeredDate: "2025-02-03", experience: [], preferredShifts: ["L", "N"], status: "documents-pending" },
-  { id: "N7", name: "Taylor Reed", agency: "Staffmark", site: "Baltimore, MD", role: "Warehouse Operative", registeredDate: "2025-02-01", experience: ["Warehouse Operative"], preferredShifts: ["E"], status: "ready" },
-  { id: "N8", name: "Morgan Chen", agency: "Elite Staffing", site: "Las Vegas, NV", role: "Warehouse Operative", registeredDate: "2025-01-28", experience: ["Warehouse Operative"], preferredShifts: ["M", "L"], status: "ready" },
-  { id: "N9", name: "Jamie Scott", agency: "Staffmark", site: "Las Vegas, NV", role: "MHE Operative", registeredDate: "2025-01-25", experience: [], preferredShifts: ["N"], status: "pending-induction" },
-  { id: "N10", name: "Sam Roberts", agency: "Elwood Staffing", site: "Baltimore, MD", role: "Warehouse Operative", registeredDate: "2025-01-20", experience: ["Warehouse Operative"], preferredShifts: ["E", "M"], status: "ready" },
-  { id: "N11", name: "Drew Campbell", agency: "Elite Staffing", site: "Dallas Fort-Worth, TX", role: "Warehouse Operative", registeredDate: "2025-01-15", experience: [], preferredShifts: ["M"], status: "documents-pending" },
-  { id: "N12", name: "Pat Sullivan", agency: "Staffmark", site: "Las Vegas, NV", role: "MHE Operative", registeredDate: "2025-01-10", experience: ["MHE"], preferredShifts: ["E", "M"], status: "ready" },
+  { id: "N1", name: "Ryan Hughes", agency: "Workforce Direct", site: "Baltimore, MD", role: "Inbound Warehouse", registeredDate: "2025-02-08", experience: ["Inbound Warehouse"], preferredShifts: ["M", "L"], status: "pending-induction" },
+  { id: "N2", name: "Tom Brady", agency: "Pinnacle Staffing", site: "Baltimore, MD", role: "Inbound Warehouse", registeredDate: "2025-02-07", experience: [], preferredShifts: ["E", "M", "L"], status: "documents-pending" },
+  { id: "N3", name: "Alex Foster", agency: "Meridian Recruitment", site: "Las Vegas, NV", role: "Inbound Warehouse", registeredDate: "2025-02-06", experience: ["Inbound Warehouse"], preferredShifts: ["E", "M"], status: "ready" },
+  { id: "N4", name: "Maya Singh", agency: "Workforce Direct", site: "Baltimore, MD", role: "MHE Operations", registeredDate: "2025-02-05", experience: ["MHE"], preferredShifts: ["M"], status: "pending-induction" },
+  { id: "N5", name: "Jordan Blake", agency: "Pinnacle Staffing", site: "Dallas Fort-Worth, TX", role: "MHE Operations", registeredDate: "2025-02-04", experience: ["MHE", "Inbound Warehouse"], preferredShifts: ["E", "M", "L"], status: "ready" },
+  { id: "N6", name: "Casey Morgan", agency: "Meridian Recruitment", site: "Baltimore, MD", role: "Inbound Warehouse", registeredDate: "2025-02-03", experience: [], preferredShifts: ["L", "N"], status: "documents-pending" },
+  { id: "N7", name: "Taylor Reed", agency: "Workforce Direct", site: "Baltimore, MD", role: "Inbound Warehouse", registeredDate: "2025-02-01", experience: ["Inbound Warehouse"], preferredShifts: ["E"], status: "ready" },
+  { id: "N8", name: "Morgan Chen", agency: "Pinnacle Staffing", site: "Las Vegas, NV", role: "Inbound Warehouse", registeredDate: "2025-01-28", experience: ["Inbound Warehouse"], preferredShifts: ["M", "L"], status: "ready" },
+  { id: "N9", name: "Jamie Scott", agency: "Workforce Direct", site: "Las Vegas, NV", role: "MHE Operations", registeredDate: "2025-01-25", experience: [], preferredShifts: ["N"], status: "pending-induction" },
+  { id: "N10", name: "Sam Roberts", agency: "Meridian Recruitment", site: "Baltimore, MD", role: "Inbound Warehouse", registeredDate: "2025-01-20", experience: ["Inbound Warehouse"], preferredShifts: ["E", "M"], status: "ready" },
+  { id: "N11", name: "Drew Campbell", agency: "Pinnacle Staffing", site: "Dallas Fort-Worth, TX", role: "Inbound Warehouse", registeredDate: "2025-01-15", experience: [], preferredShifts: ["M"], status: "documents-pending" },
+  { id: "N12", name: "Pat Sullivan", agency: "Workforce Direct", site: "Las Vegas, NV", role: "MHE Operations", registeredDate: "2025-01-10", experience: ["MHE"], preferredShifts: ["E", "M"], status: "ready" },
 ];
 
 interface ClientWorkersProps {
@@ -218,9 +218,9 @@ const ClientWorkers = ({ onViewWorker }: ClientWorkersProps) => {
               <Filter className="w-4 h-4 text-muted-foreground" />
               <select value={agencyFilter} onChange={(e) => setAgencyFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Agencies</option>
-                <option value="Staffmark">Staffmark</option>
-                <option value="Elite Staffing">Elite Staffing</option>
-                <option value="Elwood Staffing">Elwood Staffing</option>
+                <option value="Workforce Direct">Workforce Direct</option>
+                <option value="Pinnacle Staffing">Pinnacle Staffing</option>
+                <option value="Meridian Recruitment">Meridian Recruitment</option>
               </select>
               <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Sites</option>
@@ -306,9 +306,9 @@ const ClientWorkers = ({ onViewWorker }: ClientWorkersProps) => {
               <Filter className="w-4 h-4 text-muted-foreground" />
               <select value={agencyFilter} onChange={(e) => setAgencyFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Agencies</option>
-                <option value="Staffmark">Staffmark</option>
-                <option value="Elite Staffing">Elite Staffing</option>
-                <option value="Elwood Staffing">Elwood Staffing</option>
+                <option value="Workforce Direct">Workforce Direct</option>
+                <option value="Pinnacle Staffing">Pinnacle Staffing</option>
+                <option value="Meridian Recruitment">Meridian Recruitment</option>
               </select>
               <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Sites</option>
@@ -400,9 +400,9 @@ const ClientWorkers = ({ onViewWorker }: ClientWorkersProps) => {
               <Filter className="w-4 h-4 text-muted-foreground" />
               <select value={agencyFilter} onChange={(e) => setAgencyFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Agencies</option>
-                <option value="Staffmark">Staffmark</option>
-                <option value="Elite Staffing">Elite Staffing</option>
-                <option value="Elwood Staffing">Elwood Staffing</option>
+                <option value="Workforce Direct">Workforce Direct</option>
+                <option value="Pinnacle Staffing">Pinnacle Staffing</option>
+                <option value="Meridian Recruitment">Meridian Recruitment</option>
               </select>
               <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
                 <option value="all">All Sites</option>

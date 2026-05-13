@@ -16,7 +16,7 @@
    { id: "W001", name: "Sarah Mitchell", department: "Picking", site: "Heathrow DC", status: "on-site", clockIn: "06:02", shift: "Morning" },
    { id: "W002", name: "James Cooper", department: "Packing", site: "Heathrow DC", status: "on-site", clockIn: "06:00", shift: "Morning" },
    { id: "W007", name: "Lisa Anderson", department: "Goods In", site: "Heathrow DC", status: "late", clockIn: "06:15", shift: "Morning" },
-   { id: "W003", name: "Maria Santos", department: "Goods In", site: "Heathrow DC", status: "on-site", clockIn: "05:58", shift: "Morning" },
+   { id: "W003", name: "Rico Fernandez", department: "Goods In", site: "Heathrow DC", status: "on-site", clockIn: "05:58", shift: "Morning" },
    { id: "W005", name: "Emma Wilson", department: "Returns", site: "Heathrow DC", status: "on-site", clockIn: "14:01", shift: "Afternoon" },
    { id: "W006", name: "Michael Brown", department: "Packing", site: "Heathrow DC", status: "on-site", clockIn: "06:00", shift: "Morning" },
  ];

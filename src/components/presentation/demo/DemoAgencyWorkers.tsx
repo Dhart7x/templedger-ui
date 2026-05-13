@@ -10,7 +10,7 @@ const DemoAgencyWorkers = ({ onSelectWorker }: DemoAgencyWorkersProps) => {
   const [tab, setTab] = useState<"live" | "standby" | "new-registered">("live");
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Filter to active agency (AG001 = Staffmark in demo context)
+  // Filter to active agency (AG001 = Workforce Direct in demo context)
   const agencyId = "AG001";
   const allForAgency = agencyWorkers.filter(w => w.agencyId === agencyId);
 

@@ -73,68 +73,68 @@ export interface Allocation {
 // ────────────────────────────────────────
 
 export const agencyWorkers: AgencyWorker[] = [
-  // ═══ AG001 – Staffmark ═══
+  // ═══ AG001 – Workforce Direct ═══
   // Deployed (6)
-  { id: "AW001", name: "Trevor Pugh", agencyId: "AG001", status: "deployed", department: "Warehouse Operative", location: "Zone A", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2023-08-12", complianceStatus: "verified", distanceMiles: 2.4, etaMinutes: 10, hourlyRate: 13.00, completedShifts: 186, punctualityScore: 96, rating: 4.7 },
-  { id: "AW002", name: "Nina Kowalski", agencyId: "AG001", status: "deployed", department: "MHE", location: "Zone B", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2024-01-18", complianceStatus: "verified", distanceMiles: 3.8, etaMinutes: 15, hourlyRate: 14.50, completedShifts: 142, punctualityScore: 94, rating: 4.6 },
-  { id: "AW003", name: "Andre Williams", agencyId: "AG001", status: "deployed", department: "Picker", location: "Zone C", currentShift: "14:00–22:00", executionStatus: "at-risk", registeredDate: "2024-03-05", complianceStatus: "verified", distanceMiles: 5.1, etaMinutes: 20, hourlyRate: 12.50, completedShifts: 98, punctualityScore: 78, rating: 3.8 },
-  { id: "AW004", name: "Beth Langley", agencyId: "AG001", status: "deployed", department: "Loader", location: "Zone A", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2023-11-22", complianceStatus: "verified", distanceMiles: 1.6, etaMinutes: 5, hourlyRate: 12.80, completedShifts: 210, punctualityScore: 97, rating: 4.9 },
-  { id: "AW005", name: "Karl Nilsson", agencyId: "AG001", status: "deployed", department: "Forklift", location: "Zone D", currentShift: "14:00–22:00", executionStatus: "on-track", registeredDate: "2024-02-10", complianceStatus: "verified", distanceMiles: 4.2, etaMinutes: 15, hourlyRate: 14.00, completedShifts: 118, punctualityScore: 93, rating: 4.5 },
-  { id: "AW006", name: "Donna Pryce", agencyId: "AG001", status: "deployed", department: "Warehouse Operative", location: "Zone B", currentShift: "22:00–06:00", executionStatus: "on-track", registeredDate: "2024-04-15", complianceStatus: "verified", distanceMiles: 3.0, etaMinutes: 10, hourlyRate: 13.20, completedShifts: 74, punctualityScore: 91, rating: 4.3 },
+  { id: "AW001", name: "Yuki Tanaka", agencyId: "AG001", status: "deployed", department: "Inbound Warehouse", location: "Zone A", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2023-08-12", complianceStatus: "verified", distanceMiles: 2.4, etaMinutes: 10, hourlyRate: 13.00, completedShifts: 186, punctualityScore: 96, rating: 4.7 },
+  { id: "AW002", name: "Rico Fernandez", agencyId: "AG001", status: "deployed", department: "MHE", location: "Zone B", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2024-01-18", complianceStatus: "verified", distanceMiles: 3.8, etaMinutes: 15, hourlyRate: 14.50, completedShifts: 142, punctualityScore: 94, rating: 4.6 },
+  { id: "AW003", name: "Fatima Al-Hassan", agencyId: "AG001", status: "deployed", department: "Picker", location: "Zone C", currentShift: "14:00–22:00", executionStatus: "at-risk", registeredDate: "2024-03-05", complianceStatus: "verified", distanceMiles: 5.1, etaMinutes: 20, hourlyRate: 12.50, completedShifts: 98, punctualityScore: 78, rating: 3.8 },
+  { id: "AW004", name: "Emma Johansson", agencyId: "AG001", status: "deployed", department: "Loader", location: "Zone A", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2023-11-22", complianceStatus: "verified", distanceMiles: 1.6, etaMinutes: 5, hourlyRate: 12.80, completedShifts: 210, punctualityScore: 97, rating: 4.9 },
+  { id: "AW005", name: "Fatima Al-Hassan", agencyId: "AG001", status: "deployed", department: "Forklift", location: "Zone D", currentShift: "14:00–22:00", executionStatus: "on-track", registeredDate: "2024-02-10", complianceStatus: "verified", distanceMiles: 4.2, etaMinutes: 15, hourlyRate: 14.00, completedShifts: 118, punctualityScore: 93, rating: 4.5 },
+  { id: "AW006", name: "Emma Johansson", agencyId: "AG001", status: "deployed", department: "Inbound Warehouse", location: "Zone B", currentShift: "22:00–06:00", executionStatus: "on-track", registeredDate: "2024-04-15", complianceStatus: "verified", distanceMiles: 3.0, etaMinutes: 10, hourlyRate: 13.20, completedShifts: 74, punctualityScore: 91, rating: 4.3 },
   // Active (4)
-  { id: "AW007", name: "Ibrahim Yusuf", agencyId: "AG001", status: "active", department: "Picker", location: "Zone C", currentShift: null, executionStatus: "on-track", registeredDate: "2024-05-20", complianceStatus: "verified", distanceMiles: 6.5, etaMinutes: 25, hourlyRate: 12.00, completedShifts: 56, punctualityScore: 88, rating: 4.1 },
-  { id: "AW008", name: "Rachael Cope", agencyId: "AG001", status: "active", department: "MHE", location: "Zone B", currentShift: null, executionStatus: "on-track", registeredDate: "2024-06-01", complianceStatus: "verified", distanceMiles: 2.8, etaMinutes: 10, hourlyRate: 14.20, completedShifts: 48, punctualityScore: 92, rating: 4.4 },
-  { id: "AW009", name: "Leo Barker", agencyId: "AG001", status: "active", department: "Warehouse Operative", location: "Zone A", currentShift: null, executionStatus: "on-track", registeredDate: "2024-07-15", complianceStatus: "verified", distanceMiles: 1.9, etaMinutes: 10, hourlyRate: 12.50, completedShifts: 32, punctualityScore: 90, rating: 4.2 },
-  { id: "AW010", name: "Theresa Quinlan", agencyId: "AG001", status: "active", department: "Loader", location: "Zone D", currentShift: null, executionStatus: "on-track", registeredDate: "2024-08-10", complianceStatus: "verified", distanceMiles: 7.2, etaMinutes: 30, hourlyRate: 12.60, completedShifts: 22, punctualityScore: 85, rating: 3.9 },
+  { id: "AW007", name: "Marcus Webb", agencyId: "AG001", status: "active", department: "Picker", location: "Zone C", currentShift: null, executionStatus: "on-track", registeredDate: "2024-05-20", complianceStatus: "verified", distanceMiles: 6.5, etaMinutes: 25, hourlyRate: 12.00, completedShifts: 56, punctualityScore: 88, rating: 4.1 },
+  { id: "AW008", name: "Fatima Al-Hassan", agencyId: "AG001", status: "active", department: "MHE", location: "Zone B", currentShift: null, executionStatus: "on-track", registeredDate: "2024-06-01", complianceStatus: "verified", distanceMiles: 2.8, etaMinutes: 10, hourlyRate: 14.20, completedShifts: 48, punctualityScore: 92, rating: 4.4 },
+  { id: "AW009", name: "Tom Brady", agencyId: "AG001", status: "active", department: "Inbound Warehouse", location: "Zone A", currentShift: null, executionStatus: "on-track", registeredDate: "2024-07-15", complianceStatus: "verified", distanceMiles: 1.9, etaMinutes: 10, hourlyRate: 12.50, completedShifts: 32, punctualityScore: 90, rating: 4.2 },
+  { id: "AW010", name: "Marcus Webb", agencyId: "AG001", status: "active", department: "Loader", location: "Zone D", currentShift: null, executionStatus: "on-track", registeredDate: "2024-08-10", complianceStatus: "verified", distanceMiles: 7.2, etaMinutes: 30, hourlyRate: 12.60, completedShifts: 22, punctualityScore: 85, rating: 3.9 },
   // New Registered (3)
-  { id: "AW011", name: "Callum Briggs", agencyId: "AG001", status: "new-registered", department: "Warehouse Operative", location: "Zone A", currentShift: null, executionStatus: "on-track", registeredDate: "2026-03-28", complianceStatus: "verified", distanceMiles: 3.4, etaMinutes: 15, hourlyRate: 12.00, completedShifts: 0, punctualityScore: 0, rating: 0 },
-  { id: "AW012", name: "Martina Vasquez", agencyId: "AG001", status: "new-registered", department: "Picker", location: "Zone C", currentShift: null, executionStatus: "on-track", registeredDate: "2026-04-02", complianceStatus: "pending", distanceMiles: 4.8, etaMinutes: 20, hourlyRate: 12.00, completedShifts: 0, punctualityScore: 0, rating: 0 },
-  { id: "AW013", name: "Joel Kaminski", agencyId: "AG001", status: "new-registered", department: "MHE", location: "Zone B", currentShift: null, executionStatus: "on-track", registeredDate: "2026-04-08", complianceStatus: "pending", distanceMiles: 5.6, etaMinutes: 20, hourlyRate: 14.00, completedShifts: 0, punctualityScore: 0, rating: 0 },
+  { id: "AW011", name: "Tom Brady", agencyId: "AG001", status: "new-registered", department: "Inbound Warehouse", location: "Zone A", currentShift: null, executionStatus: "on-track", registeredDate: "2026-03-28", complianceStatus: "verified", distanceMiles: 3.4, etaMinutes: 15, hourlyRate: 12.00, completedShifts: 0, punctualityScore: 0, rating: 0 },
+  { id: "AW012", name: "Ana Pereira", agencyId: "AG001", status: "new-registered", department: "Picker", location: "Zone C", currentShift: null, executionStatus: "on-track", registeredDate: "2026-04-02", complianceStatus: "pending", distanceMiles: 4.8, etaMinutes: 20, hourlyRate: 12.00, completedShifts: 0, punctualityScore: 0, rating: 0 },
+  { id: "AW013", name: "Ana Pereira", agencyId: "AG001", status: "new-registered", department: "MHE", location: "Zone B", currentShift: null, executionStatus: "on-track", registeredDate: "2026-04-08", complianceStatus: "pending", distanceMiles: 5.6, etaMinutes: 20, hourlyRate: 14.00, completedShifts: 0, punctualityScore: 0, rating: 0 },
   // Blocked (2)
-  { id: "AW014", name: "Steve Barlow", agencyId: "AG001", status: "blocked", department: "Warehouse Operative", location: "Zone A", currentShift: null, executionStatus: "blocked", registeredDate: "2023-09-14", complianceStatus: "expired", distanceMiles: 2.1, etaMinutes: 10, hourlyRate: 12.50, completedShifts: 180, punctualityScore: 82, rating: 3.6 },
-  { id: "AW015", name: "Jenny Kildare", agencyId: "AG001", status: "blocked", department: "Forklift", location: "Zone D", currentShift: null, executionStatus: "blocked", registeredDate: "2023-07-30", complianceStatus: "expired", distanceMiles: 8.0, etaMinutes: 30, hourlyRate: 14.00, completedShifts: 220, punctualityScore: 71, rating: 3.4 },
+  { id: "AW014", name: "Rico Fernandez", agencyId: "AG001", status: "blocked", department: "Inbound Warehouse", location: "Zone A", currentShift: null, executionStatus: "blocked", registeredDate: "2023-09-14", complianceStatus: "expired", distanceMiles: 2.1, etaMinutes: 10, hourlyRate: 12.50, completedShifts: 180, punctualityScore: 82, rating: 3.6 },
+  { id: "AW015", name: "Aisha Nwosu", agencyId: "AG001", status: "blocked", department: "Forklift", location: "Zone D", currentShift: null, executionStatus: "blocked", registeredDate: "2023-07-30", complianceStatus: "expired", distanceMiles: 8.0, etaMinutes: 30, hourlyRate: 14.00, completedShifts: 220, punctualityScore: 71, rating: 3.4 },
 
-  // ═══ AG002 – Elite Staffing ═══
+  // ═══ AG002 – Pinnacle Staffing ═══
   // Deployed (6)
-  { id: "AW016", name: "Victor Andrade", agencyId: "AG002", status: "deployed", department: "MHE", location: "Zone B", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2023-10-08", complianceStatus: "verified", distanceMiles: 1.8, etaMinutes: 5, hourlyRate: 15.00, completedShifts: 194, punctualityScore: 98, rating: 4.9 },
-  { id: "AW017", name: "Grace Nkemelu", agencyId: "AG002", status: "deployed", department: "Warehouse Operative", location: "Zone A", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2024-01-25", complianceStatus: "verified", distanceMiles: 2.6, etaMinutes: 10, hourlyRate: 13.50, completedShifts: 148, punctualityScore: 96, rating: 4.8 },
-  { id: "AW018", name: "Sean Doherty", agencyId: "AG002", status: "deployed", department: "Picker", location: "Zone C", currentShift: "14:00–22:00", executionStatus: "at-risk", registeredDate: "2024-02-14", complianceStatus: "verified", distanceMiles: 4.0, etaMinutes: 15, hourlyRate: 13.00, completedShifts: 112, punctualityScore: 81, rating: 3.9 },
-  { id: "AW019", name: "Tanya Krol", agencyId: "AG002", status: "deployed", department: "Loader", location: "Zone D", currentShift: "22:00–06:00", executionStatus: "on-track", registeredDate: "2023-12-18", complianceStatus: "verified", distanceMiles: 3.2, etaMinutes: 15, hourlyRate: 13.80, completedShifts: 162, punctualityScore: 95, rating: 4.7 },
-  { id: "AW020", name: "Brendan Hales", agencyId: "AG002", status: "deployed", department: "Warehouse Operative", location: "Zone A", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2024-03-22", complianceStatus: "verified", distanceMiles: 1.2, etaMinutes: 5, hourlyRate: 13.50, completedShifts: 104, punctualityScore: 97, rating: 4.8 },
-  { id: "AW021", name: "Anita Koroma", agencyId: "AG002", status: "deployed", department: "Forklift", location: "Zone B", currentShift: "14:00–22:00", executionStatus: "on-track", registeredDate: "2024-04-10", complianceStatus: "verified", distanceMiles: 2.0, etaMinutes: 10, hourlyRate: 15.50, completedShifts: 88, punctualityScore: 94, rating: 4.6 },
+  { id: "AW016", name: "Aisha Nwosu", agencyId: "AG002", status: "deployed", department: "MHE", location: "Zone B", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2023-10-08", complianceStatus: "verified", distanceMiles: 1.8, etaMinutes: 5, hourlyRate: 15.00, completedShifts: 194, punctualityScore: 98, rating: 4.9 },
+  { id: "AW017", name: "Daniel Reeves", agencyId: "AG002", status: "deployed", department: "Inbound Warehouse", location: "Zone A", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2024-01-25", complianceStatus: "verified", distanceMiles: 2.6, etaMinutes: 10, hourlyRate: 13.50, completedShifts: 148, punctualityScore: 96, rating: 4.8 },
+  { id: "AW018", name: "Leon Kowalski", agencyId: "AG002", status: "deployed", department: "Picker", location: "Zone C", currentShift: "14:00–22:00", executionStatus: "at-risk", registeredDate: "2024-02-14", complianceStatus: "verified", distanceMiles: 4.0, etaMinutes: 15, hourlyRate: 13.00, completedShifts: 112, punctualityScore: 81, rating: 3.9 },
+  { id: "AW019", name: "Sarah Mitchell", agencyId: "AG002", status: "deployed", department: "Loader", location: "Zone D", currentShift: "22:00–06:00", executionStatus: "on-track", registeredDate: "2023-12-18", complianceStatus: "verified", distanceMiles: 3.2, etaMinutes: 15, hourlyRate: 13.80, completedShifts: 162, punctualityScore: 95, rating: 4.7 },
+  { id: "AW020", name: "Sarah Mitchell", agencyId: "AG002", status: "deployed", department: "Inbound Warehouse", location: "Zone A", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2024-03-22", complianceStatus: "verified", distanceMiles: 1.2, etaMinutes: 5, hourlyRate: 13.50, completedShifts: 104, punctualityScore: 97, rating: 4.8 },
+  { id: "AW021", name: "Chris Donnelly", agencyId: "AG002", status: "deployed", department: "Forklift", location: "Zone B", currentShift: "14:00–22:00", executionStatus: "on-track", registeredDate: "2024-04-10", complianceStatus: "verified", distanceMiles: 2.0, etaMinutes: 10, hourlyRate: 15.50, completedShifts: 88, punctualityScore: 94, rating: 4.6 },
   // Active (4)
   { id: "AW022", name: "Maisie O'Brien", agencyId: "AG002", status: "active", department: "Picker", location: "Zone C", currentShift: null, executionStatus: "on-track", registeredDate: "2024-05-10", complianceStatus: "verified", distanceMiles: 3.6, etaMinutes: 15, hourlyRate: 13.00, completedShifts: 64, punctualityScore: 93, rating: 4.5 },
-  { id: "AW023", name: "Kwame Asante", agencyId: "AG002", status: "active", department: "Warehouse Operative", location: "Zone B", currentShift: null, executionStatus: "on-track", registeredDate: "2024-06-18", complianceStatus: "verified", distanceMiles: 2.4, etaMinutes: 10, hourlyRate: 13.50, completedShifts: 42, punctualityScore: 91, rating: 4.3 },
-  { id: "AW024", name: "Laura Fenton", agencyId: "AG002", status: "active", department: "MHE", location: "Zone A", currentShift: null, executionStatus: "on-track", registeredDate: "2024-07-02", complianceStatus: "verified", distanceMiles: 1.5, etaMinutes: 5, hourlyRate: 15.00, completedShifts: 36, punctualityScore: 95, rating: 4.6 },
-  { id: "AW025", name: "Reggie Dawson", agencyId: "AG002", status: "active", department: "Loader", location: "Zone D", currentShift: null, executionStatus: "on-track", registeredDate: "2024-08-05", complianceStatus: "verified", distanceMiles: 5.4, etaMinutes: 20, hourlyRate: 13.80, completedShifts: 28, punctualityScore: 89, rating: 4.2 },
+  { id: "AW023", name: "Aisha Nwosu", agencyId: "AG002", status: "active", department: "Inbound Warehouse", location: "Zone B", currentShift: null, executionStatus: "on-track", registeredDate: "2024-06-18", complianceStatus: "verified", distanceMiles: 2.4, etaMinutes: 10, hourlyRate: 13.50, completedShifts: 42, punctualityScore: 91, rating: 4.3 },
+  { id: "AW024", name: "James Okafor", agencyId: "AG002", status: "active", department: "MHE", location: "Zone A", currentShift: null, executionStatus: "on-track", registeredDate: "2024-07-02", complianceStatus: "verified", distanceMiles: 1.5, etaMinutes: 5, hourlyRate: 15.00, completedShifts: 36, punctualityScore: 95, rating: 4.6 },
+  { id: "AW025", name: "Aisha Nwosu", agencyId: "AG002", status: "active", department: "Loader", location: "Zone D", currentShift: null, executionStatus: "on-track", registeredDate: "2024-08-05", complianceStatus: "verified", distanceMiles: 5.4, etaMinutes: 20, hourlyRate: 13.80, completedShifts: 28, punctualityScore: 89, rating: 4.2 },
   // New Registered (3)
-  { id: "AW026", name: "Olivia Tran", agencyId: "AG002", status: "new-registered", department: "Warehouse Operative", location: "Zone A", currentShift: null, executionStatus: "on-track", registeredDate: "2026-03-25", complianceStatus: "verified", distanceMiles: 2.2, etaMinutes: 10, hourlyRate: 13.00, completedShifts: 0, punctualityScore: 0, rating: 0 },
-  { id: "AW027", name: "Jaden Ifemelu", agencyId: "AG002", status: "new-registered", department: "Forklift", location: "Zone B", currentShift: null, executionStatus: "on-track", registeredDate: "2026-04-05", complianceStatus: "pending", distanceMiles: 3.0, etaMinutes: 10, hourlyRate: 15.00, completedShifts: 0, punctualityScore: 0, rating: 0 },
-  { id: "AW028", name: "Tessa Hillier", agencyId: "AG002", status: "new-registered", department: "Picker", location: "Zone C", currentShift: null, executionStatus: "on-track", registeredDate: "2026-04-10", complianceStatus: "pending", distanceMiles: 4.6, etaMinutes: 20, hourlyRate: 13.00, completedShifts: 0, punctualityScore: 0, rating: 0 },
+  { id: "AW026", name: "Sarah Mitchell", agencyId: "AG002", status: "new-registered", department: "Inbound Warehouse", location: "Zone A", currentShift: null, executionStatus: "on-track", registeredDate: "2026-03-25", complianceStatus: "verified", distanceMiles: 2.2, etaMinutes: 10, hourlyRate: 13.00, completedShifts: 0, punctualityScore: 0, rating: 0 },
+  { id: "AW027", name: "Fatima Al-Hassan", agencyId: "AG002", status: "new-registered", department: "Forklift", location: "Zone B", currentShift: null, executionStatus: "on-track", registeredDate: "2026-04-05", complianceStatus: "pending", distanceMiles: 3.0, etaMinutes: 10, hourlyRate: 15.00, completedShifts: 0, punctualityScore: 0, rating: 0 },
+  { id: "AW028", name: "Diane Foster", agencyId: "AG002", status: "new-registered", department: "Picker", location: "Zone C", currentShift: null, executionStatus: "on-track", registeredDate: "2026-04-10", complianceStatus: "pending", distanceMiles: 4.6, etaMinutes: 20, hourlyRate: 13.00, completedShifts: 0, punctualityScore: 0, rating: 0 },
   // Blocked (2)
-  { id: "AW029", name: "Derek Slade", agencyId: "AG002", status: "blocked", department: "Warehouse Operative", location: "Zone D", currentShift: null, executionStatus: "blocked", registeredDate: "2023-08-28", complianceStatus: "expired", distanceMiles: 6.8, etaMinutes: 25, hourlyRate: 13.50, completedShifts: 198, punctualityScore: 76, rating: 3.5 },
-  { id: "AW030", name: "Petra Novak", agencyId: "AG002", status: "blocked", department: "MHE", location: "Zone B", currentShift: null, executionStatus: "blocked", registeredDate: "2023-06-15", complianceStatus: "expired", distanceMiles: 9.2, etaMinutes: 35, hourlyRate: 15.00, completedShifts: 216, punctualityScore: 73, rating: 3.4 },
+  { id: "AW029", name: "Chris Donnelly", agencyId: "AG002", status: "blocked", department: "Inbound Warehouse", location: "Zone D", currentShift: null, executionStatus: "blocked", registeredDate: "2023-08-28", complianceStatus: "expired", distanceMiles: 6.8, etaMinutes: 25, hourlyRate: 13.50, completedShifts: 198, punctualityScore: 76, rating: 3.5 },
+  { id: "AW030", name: "Priya Sharma", agencyId: "AG002", status: "blocked", department: "MHE", location: "Zone B", currentShift: null, executionStatus: "blocked", registeredDate: "2023-06-15", complianceStatus: "expired", distanceMiles: 9.2, etaMinutes: 35, hourlyRate: 15.00, completedShifts: 216, punctualityScore: 73, rating: 3.4 },
 
-  // ═══ AG003 – Elwood Staffing ═══
+  // ═══ AG003 – Meridian Recruitment ═══
   // Deployed (6)
-  { id: "AW031", name: "Damien Cross", agencyId: "AG003", status: "deployed", department: "Warehouse Operative", location: "Zone A", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2023-09-30", complianceStatus: "verified", distanceMiles: 4.6, etaMinutes: 20, hourlyRate: 12.00, completedShifts: 172, punctualityScore: 90, rating: 4.3 },
-  { id: "AW032", name: "Aisha Begum", agencyId: "AG003", status: "deployed", department: "Picker", location: "Zone C", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2024-02-08", complianceStatus: "verified", distanceMiles: 6.0, etaMinutes: 25, hourlyRate: 11.80, completedShifts: 108, punctualityScore: 87, rating: 4.1 },
-  { id: "AW033", name: "Colin Burrows", agencyId: "AG003", status: "deployed", department: "MHE", location: "Zone B", currentShift: "14:00–22:00", executionStatus: "at-risk", registeredDate: "2024-01-12", complianceStatus: "verified", distanceMiles: 5.4, etaMinutes: 20, hourlyRate: 13.50, completedShifts: 130, punctualityScore: 79, rating: 3.7 },
-  { id: "AW034", name: "Elise Morrow", agencyId: "AG003", status: "deployed", department: "Loader", location: "Zone D", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2023-11-05", complianceStatus: "verified", distanceMiles: 7.8, etaMinutes: 30, hourlyRate: 12.20, completedShifts: 158, punctualityScore: 88, rating: 4.0 },
-  { id: "AW035", name: "Ray Kapoor", agencyId: "AG003", status: "deployed", department: "Warehouse Operative", location: "Zone A", currentShift: "22:00–06:00", executionStatus: "on-track", registeredDate: "2024-04-01", complianceStatus: "verified", distanceMiles: 3.6, etaMinutes: 15, hourlyRate: 12.00, completedShifts: 62, punctualityScore: 86, rating: 4.0 },
-  { id: "AW036", name: "Nkechi Eze", agencyId: "AG003", status: "deployed", department: "Forklift", location: "Zone D", currentShift: "14:00–22:00", executionStatus: "on-track", registeredDate: "2024-03-18", complianceStatus: "verified", distanceMiles: 8.4, etaMinutes: 35, hourlyRate: 13.20, completedShifts: 78, punctualityScore: 84, rating: 3.8 },
+  { id: "AW031", name: "Sarah Mitchell", agencyId: "AG003", status: "deployed", department: "Inbound Warehouse", location: "Zone A", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2023-09-30", complianceStatus: "verified", distanceMiles: 4.6, etaMinutes: 20, hourlyRate: 12.00, completedShifts: 172, punctualityScore: 90, rating: 4.3 },
+  { id: "AW032", name: "Tom Brady", agencyId: "AG003", status: "deployed", department: "Picker", location: "Zone C", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2024-02-08", complianceStatus: "verified", distanceMiles: 6.0, etaMinutes: 25, hourlyRate: 11.80, completedShifts: 108, punctualityScore: 87, rating: 4.1 },
+  { id: "AW033", name: "Emma Johansson", agencyId: "AG003", status: "deployed", department: "MHE", location: "Zone B", currentShift: "14:00–22:00", executionStatus: "at-risk", registeredDate: "2024-01-12", complianceStatus: "verified", distanceMiles: 5.4, etaMinutes: 20, hourlyRate: 13.50, completedShifts: 130, punctualityScore: 79, rating: 3.7 },
+  { id: "AW034", name: "James Okafor", agencyId: "AG003", status: "deployed", department: "Loader", location: "Zone D", currentShift: "06:00–14:00", executionStatus: "on-track", registeredDate: "2023-11-05", complianceStatus: "verified", distanceMiles: 7.8, etaMinutes: 30, hourlyRate: 12.20, completedShifts: 158, punctualityScore: 88, rating: 4.0 },
+  { id: "AW035", name: "Emma Johansson", agencyId: "AG003", status: "deployed", department: "Inbound Warehouse", location: "Zone A", currentShift: "22:00–06:00", executionStatus: "on-track", registeredDate: "2024-04-01", complianceStatus: "verified", distanceMiles: 3.6, etaMinutes: 15, hourlyRate: 12.00, completedShifts: 62, punctualityScore: 86, rating: 4.0 },
+  { id: "AW036", name: "Aisha Nwosu", agencyId: "AG003", status: "deployed", department: "Forklift", location: "Zone D", currentShift: "14:00–22:00", executionStatus: "on-track", registeredDate: "2024-03-18", complianceStatus: "verified", distanceMiles: 8.4, etaMinutes: 35, hourlyRate: 13.20, completedShifts: 78, punctualityScore: 84, rating: 3.8 },
   // Active (4)
-  { id: "AW037", name: "Heather Todd", agencyId: "AG003", status: "active", department: "Picker", location: "Zone C", currentShift: null, executionStatus: "on-track", registeredDate: "2024-05-28", complianceStatus: "verified", distanceMiles: 5.0, etaMinutes: 20, hourlyRate: 11.50, completedShifts: 44, punctualityScore: 83, rating: 3.9 },
-  { id: "AW038", name: "Jerome Baptiste", agencyId: "AG003", status: "active", department: "Warehouse Operative", location: "Zone B", currentShift: null, executionStatus: "on-track", registeredDate: "2024-06-14", complianceStatus: "verified", distanceMiles: 6.8, etaMinutes: 25, hourlyRate: 12.00, completedShifts: 36, punctualityScore: 85, rating: 4.0 },
-  { id: "AW039", name: "Sally Kerr", agencyId: "AG003", status: "active", department: "MHE", location: "Zone A", currentShift: null, executionStatus: "on-track", registeredDate: "2024-07-10", complianceStatus: "verified", distanceMiles: 4.2, etaMinutes: 15, hourlyRate: 13.50, completedShifts: 28, punctualityScore: 81, rating: 3.8 },
-  { id: "AW040", name: "Gareth Llewellyn", agencyId: "AG003", status: "active", department: "Loader", location: "Zone D", currentShift: null, executionStatus: "on-track", registeredDate: "2024-08-22", complianceStatus: "verified", distanceMiles: 10.2, etaMinutes: 40, hourlyRate: 12.00, completedShifts: 18, punctualityScore: 80, rating: 3.7 },
+  { id: "AW037", name: "Sarah Mitchell", agencyId: "AG003", status: "active", department: "Picker", location: "Zone C", currentShift: null, executionStatus: "on-track", registeredDate: "2024-05-28", complianceStatus: "verified", distanceMiles: 5.0, etaMinutes: 20, hourlyRate: 11.50, completedShifts: 44, punctualityScore: 83, rating: 3.9 },
+  { id: "AW038", name: "James Okafor", agencyId: "AG003", status: "active", department: "Inbound Warehouse", location: "Zone B", currentShift: null, executionStatus: "on-track", registeredDate: "2024-06-14", complianceStatus: "verified", distanceMiles: 6.8, etaMinutes: 25, hourlyRate: 12.00, completedShifts: 36, punctualityScore: 85, rating: 4.0 },
+  { id: "AW039", name: "Diane Foster", agencyId: "AG003", status: "active", department: "MHE", location: "Zone A", currentShift: null, executionStatus: "on-track", registeredDate: "2024-07-10", complianceStatus: "verified", distanceMiles: 4.2, etaMinutes: 15, hourlyRate: 13.50, completedShifts: 28, punctualityScore: 81, rating: 3.8 },
+  { id: "AW040", name: "Leon Kowalski", agencyId: "AG003", status: "active", department: "Loader", location: "Zone D", currentShift: null, executionStatus: "on-track", registeredDate: "2024-08-22", complianceStatus: "verified", distanceMiles: 10.2, etaMinutes: 40, hourlyRate: 12.00, completedShifts: 18, punctualityScore: 80, rating: 3.7 },
   // New Registered (3)
-  { id: "AW041", name: "Bianca Osei", agencyId: "AG003", status: "new-registered", department: "Warehouse Operative", location: "Zone A", currentShift: null, executionStatus: "on-track", registeredDate: "2026-03-22", complianceStatus: "verified", distanceMiles: 3.2, etaMinutes: 15, hourlyRate: 11.50, completedShifts: 0, punctualityScore: 0, rating: 0 },
-  { id: "AW042", name: "Francis Donoghue", agencyId: "AG003", status: "new-registered", department: "MHE", location: "Zone B", currentShift: null, executionStatus: "on-track", registeredDate: "2026-04-01", complianceStatus: "pending", distanceMiles: 7.0, etaMinutes: 30, hourlyRate: 13.00, completedShifts: 0, punctualityScore: 0, rating: 0 },
-  { id: "AW043", name: "Kezia Hamilton", agencyId: "AG003", status: "new-registered", department: "Picker", location: "Zone C", currentShift: null, executionStatus: "on-track", registeredDate: "2026-04-09", complianceStatus: "pending", distanceMiles: 5.8, etaMinutes: 25, hourlyRate: 11.50, completedShifts: 0, punctualityScore: 0, rating: 0 },
+  { id: "AW041", name: "Aisha Nwosu", agencyId: "AG003", status: "new-registered", department: "Inbound Warehouse", location: "Zone A", currentShift: null, executionStatus: "on-track", registeredDate: "2026-03-22", complianceStatus: "verified", distanceMiles: 3.2, etaMinutes: 15, hourlyRate: 11.50, completedShifts: 0, punctualityScore: 0, rating: 0 },
+  { id: "AW042", name: "Marcus Webb", agencyId: "AG003", status: "new-registered", department: "MHE", location: "Zone B", currentShift: null, executionStatus: "on-track", registeredDate: "2026-04-01", complianceStatus: "pending", distanceMiles: 7.0, etaMinutes: 30, hourlyRate: 13.00, completedShifts: 0, punctualityScore: 0, rating: 0 },
+  { id: "AW043", name: "Daniel Reeves", agencyId: "AG003", status: "new-registered", department: "Picker", location: "Zone C", currentShift: null, executionStatus: "on-track", registeredDate: "2026-04-09", complianceStatus: "pending", distanceMiles: 5.8, etaMinutes: 25, hourlyRate: 11.50, completedShifts: 0, punctualityScore: 0, rating: 0 },
   // Blocked (2)
-  { id: "AW044", name: "Malcolm Stead", agencyId: "AG003", status: "blocked", department: "Warehouse Operative", location: "Zone D", currentShift: null, executionStatus: "blocked", registeredDate: "2023-10-20", complianceStatus: "expired", distanceMiles: 11.0, etaMinutes: 45, hourlyRate: 12.00, completedShifts: 200, punctualityScore: 74, rating: 3.5 },
-  { id: "AW045", name: "Wanda Obi", agencyId: "AG003", status: "blocked", department: "MHE", location: "Zone B", currentShift: null, executionStatus: "blocked", registeredDate: "2023-05-18", complianceStatus: "expired", distanceMiles: 9.6, etaMinutes: 40, hourlyRate: 13.50, completedShifts: 190, punctualityScore: 72, rating: 3.4 },
+  { id: "AW044", name: "Yuki Tanaka", agencyId: "AG003", status: "blocked", department: "Inbound Warehouse", location: "Zone D", currentShift: null, executionStatus: "blocked", registeredDate: "2023-10-20", complianceStatus: "expired", distanceMiles: 11.0, etaMinutes: 45, hourlyRate: 12.00, completedShifts: 200, punctualityScore: 74, rating: 3.5 },
+  { id: "AW045", name: "Ana Pereira", agencyId: "AG003", status: "blocked", department: "MHE", location: "Zone B", currentShift: null, executionStatus: "blocked", registeredDate: "2023-05-18", complianceStatus: "expired", distanceMiles: 9.6, etaMinutes: 40, hourlyRate: 13.50, completedShifts: 190, punctualityScore: 72, rating: 3.4 },
 ];
 
 // ────────────────────────────────────────
@@ -142,164 +142,164 @@ export const agencyWorkers: AgencyWorker[] = [
 // ────────────────────────────────────────
 
 export const agencyDocuments: AgencyDocument[] = [
-  // ═══ AG001 Staffmark ═══
-  // AW001 – Trevor Pugh (deployed)
+  // ═══ AG001 Workforce Direct ═══
+  // AW001 – Yuki Tanaka (deployed)
   { id: "D001", workerId: "AW001", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2023-08-12", expiryDate: null },
   { id: "D002", workerId: "AW001", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2023-08-12", expiryDate: "2025-08-12" },
   { id: "D003", workerId: "AW001", name: "Health & Safety Cert", type: "client-required", status: "verified", uploadedDate: "2023-08-15", expiryDate: "2025-08-15" },
-  // AW002 – Nina Kowalski (deployed)
+  // AW002 – Rico Fernandez (deployed)
   { id: "D004", workerId: "AW002", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-01-18", expiryDate: null },
   { id: "D005", workerId: "AW002", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-01-18", expiryDate: "2026-01-18" },
   { id: "D006", workerId: "AW002", name: "MHE License", type: "client-required", status: "verified", uploadedDate: "2024-01-20", expiryDate: "2025-07-20" },
-  // AW003 – Andre Williams (deployed)
+  // AW003 – Fatima Al-Hassan (deployed)
   { id: "D007", workerId: "AW003", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-03-05", expiryDate: null },
   { id: "D008", workerId: "AW003", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-03-05", expiryDate: "2026-03-05" },
-  // AW004 – Beth Langley (deployed)
+  // AW004 – Emma Johansson (deployed)
   { id: "D009", workerId: "AW004", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2023-11-22", expiryDate: null },
   { id: "D010", workerId: "AW004", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2023-11-22", expiryDate: "2025-11-22" },
   { id: "D011", workerId: "AW004", name: "Health & Safety Cert", type: "client-required", status: "verified", uploadedDate: "2023-11-25", expiryDate: "2025-11-25" },
-  // AW005 – Karl Nilsson (deployed)
+  // AW005 – Fatima Al-Hassan (deployed)
   { id: "D012", workerId: "AW005", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-02-10", expiryDate: null },
   { id: "D013", workerId: "AW005", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-02-10", expiryDate: "2026-02-10" },
   { id: "D014", workerId: "AW005", name: "Forklift Cert", type: "client-required", status: "verified", uploadedDate: "2024-02-12", expiryDate: "2026-02-12" },
-  // AW006 – Donna Pryce (deployed)
+  // AW006 – Emma Johansson (deployed)
   { id: "D015", workerId: "AW006", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-04-15", expiryDate: null },
   { id: "D016", workerId: "AW006", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-04-15", expiryDate: "2026-04-15" },
-  // AW007 – Ibrahim Yusuf (active)
+  // AW007 – Marcus Webb (active)
   { id: "D017", workerId: "AW007", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-05-20", expiryDate: null },
   { id: "D018", workerId: "AW007", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-05-20", expiryDate: "2026-05-20" },
   { id: "D019", workerId: "AW007", name: "Health & Safety Cert", type: "client-required", status: "verified", uploadedDate: "2024-05-22", expiryDate: "2026-05-22" },
-  // AW008 – Rachael Cope (active)
+  // AW008 – Fatima Al-Hassan (active)
   { id: "D020", workerId: "AW008", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-06-01", expiryDate: null },
   { id: "D021", workerId: "AW008", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-06-01", expiryDate: "2026-06-01" },
   { id: "D022", workerId: "AW008", name: "MHE License", type: "client-required", status: "verified", uploadedDate: "2024-06-03", expiryDate: "2025-12-03" },
-  // AW009 – Leo Barker (active)
+  // AW009 – Tom Brady (active)
   { id: "D023", workerId: "AW009", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-07-15", expiryDate: null },
   { id: "D024", workerId: "AW009", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-07-15", expiryDate: "2026-07-15" },
-  // AW010 – Theresa Quinlan (active)
+  // AW010 – Marcus Webb (active)
   { id: "D025", workerId: "AW010", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-08-10", expiryDate: null },
   { id: "D026", workerId: "AW010", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-08-10", expiryDate: "2026-08-10" },
-  // AW011 – Callum Briggs (new-registered)
+  // AW011 – Tom Brady (new-registered)
   { id: "D027", workerId: "AW011", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2026-03-28", expiryDate: null },
   { id: "D028", workerId: "AW011", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2026-03-28", expiryDate: "2028-03-28" },
-  // AW012 – Martina Vasquez (new-registered)
+  // AW012 – Ana Pereira (new-registered)
   { id: "D029", workerId: "AW012", name: "Employment Contract", type: "contract", status: "pending", uploadedDate: "2026-04-02", expiryDate: null },
   { id: "D030", workerId: "AW012", name: "I9 Verification", type: "compliance", status: "pending", uploadedDate: "2026-04-02", expiryDate: "2028-04-02" },
-  // AW013 – Joel Kaminski (new-registered)
+  // AW013 – Ana Pereira (new-registered)
   { id: "D031", workerId: "AW013", name: "Employment Contract", type: "contract", status: "pending", uploadedDate: "2026-04-08", expiryDate: null },
   { id: "D032", workerId: "AW013", name: "MHE License", type: "client-required", status: "pending", uploadedDate: "2026-04-08", expiryDate: "2028-04-08" },
-  // AW014 – Steve Barlow (blocked)
+  // AW014 – Rico Fernandez (blocked)
   { id: "D033", workerId: "AW014", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2023-09-14", expiryDate: null },
   { id: "D034", workerId: "AW014", name: "I9 Verification", type: "compliance", status: "expired", uploadedDate: "2023-09-14", expiryDate: "2025-01-14" },
   { id: "D035", workerId: "AW014", name: "Health & Safety Cert", type: "client-required", status: "expired", uploadedDate: "2023-09-16", expiryDate: "2024-09-16" },
-  // AW015 – Jenny Kildare (blocked)
+  // AW015 – Aisha Nwosu (blocked)
   { id: "D036", workerId: "AW015", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2023-07-30", expiryDate: null },
   { id: "D037", workerId: "AW015", name: "I9 Verification", type: "compliance", status: "expired", uploadedDate: "2023-07-30", expiryDate: "2024-07-30" },
   { id: "D038", workerId: "AW015", name: "Forklift Cert", type: "client-required", status: "expired", uploadedDate: "2023-08-01", expiryDate: "2024-08-01" },
 
-  // ═══ AG002 Elite Staffing ═══
-  // AW016 – Victor Andrade (deployed)
+  // ═══ AG002 Pinnacle Staffing ═══
+  // AW016 – Aisha Nwosu (deployed)
   { id: "D039", workerId: "AW016", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2023-10-08", expiryDate: null },
   { id: "D040", workerId: "AW016", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2023-10-08", expiryDate: "2025-10-08" },
   { id: "D041", workerId: "AW016", name: "MHE License", type: "client-required", status: "verified", uploadedDate: "2023-10-10", expiryDate: "2025-04-10" },
-  // AW017 – Grace Nkemelu (deployed)
+  // AW017 – Daniel Reeves (deployed)
   { id: "D042", workerId: "AW017", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-01-25", expiryDate: null },
   { id: "D043", workerId: "AW017", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-01-25", expiryDate: "2026-01-25" },
   { id: "D044", workerId: "AW017", name: "Health & Safety Cert", type: "client-required", status: "verified", uploadedDate: "2024-01-28", expiryDate: "2026-01-28" },
-  // AW018 – Sean Doherty (deployed)
+  // AW018 – Leon Kowalski (deployed)
   { id: "D045", workerId: "AW018", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-02-14", expiryDate: null },
   { id: "D046", workerId: "AW018", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-02-14", expiryDate: "2026-02-14" },
-  // AW019 – Tanya Krol (deployed)
+  // AW019 – Sarah Mitchell (deployed)
   { id: "D047", workerId: "AW019", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2023-12-18", expiryDate: null },
   { id: "D048", workerId: "AW019", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2023-12-18", expiryDate: "2025-12-18" },
   { id: "D049", workerId: "AW019", name: "Health & Safety Cert", type: "client-required", status: "verified", uploadedDate: "2023-12-20", expiryDate: "2025-12-20" },
-  // AW020 – Brendan Hales (deployed)
+  // AW020 – Sarah Mitchell (deployed)
   { id: "D050", workerId: "AW020", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-03-22", expiryDate: null },
   { id: "D051", workerId: "AW020", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-03-22", expiryDate: "2026-03-22" },
-  // AW021 – Anita Koroma (deployed)
+  // AW021 – Chris Donnelly (deployed)
   { id: "D052", workerId: "AW021", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-04-10", expiryDate: null },
   { id: "D053", workerId: "AW021", name: "Forklift Cert", type: "client-required", status: "verified", uploadedDate: "2024-04-12", expiryDate: "2026-04-12" },
   { id: "D054", workerId: "AW021", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-04-10", expiryDate: "2026-04-10" },
   // AW022 – Maisie O'Brien (active)
   { id: "D055", workerId: "AW022", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-05-10", expiryDate: null },
   { id: "D056", workerId: "AW022", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-05-10", expiryDate: "2026-05-10" },
-  // AW023 – Kwame Asante (active)
+  // AW023 – Aisha Nwosu (active)
   { id: "D057", workerId: "AW023", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-06-18", expiryDate: null },
   { id: "D058", workerId: "AW023", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-06-18", expiryDate: "2026-06-18" },
-  // AW024 – Laura Fenton (active)
+  // AW024 – James Okafor (active)
   { id: "D059", workerId: "AW024", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-07-02", expiryDate: null },
   { id: "D060", workerId: "AW024", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-07-02", expiryDate: "2026-07-02" },
   { id: "D061", workerId: "AW024", name: "MHE License", type: "client-required", status: "verified", uploadedDate: "2024-07-05", expiryDate: "2026-01-05" },
-  // AW025 – Reggie Dawson (active)
+  // AW025 – Aisha Nwosu (active)
   { id: "D062", workerId: "AW025", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-08-05", expiryDate: null },
   { id: "D063", workerId: "AW025", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-08-05", expiryDate: "2026-08-05" },
-  // AW026 – Olivia Tran (new-registered)
+  // AW026 – Sarah Mitchell (new-registered)
   { id: "D064", workerId: "AW026", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2026-03-25", expiryDate: null },
   { id: "D065", workerId: "AW026", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2026-03-25", expiryDate: "2028-03-25" },
-  // AW027 – Jaden Ifemelu (new-registered)
+  // AW027 – Fatima Al-Hassan (new-registered)
   { id: "D066", workerId: "AW027", name: "Employment Contract", type: "contract", status: "pending", uploadedDate: "2026-04-05", expiryDate: null },
   { id: "D067", workerId: "AW027", name: "Forklift Cert", type: "client-required", status: "pending", uploadedDate: "2026-04-05", expiryDate: "2028-04-05" },
-  // AW028 – Tessa Hillier (new-registered)
+  // AW028 – Diane Foster (new-registered)
   { id: "D068", workerId: "AW028", name: "Employment Contract", type: "contract", status: "pending", uploadedDate: "2026-04-10", expiryDate: null },
   { id: "D069", workerId: "AW028", name: "I9 Verification", type: "compliance", status: "pending", uploadedDate: "2026-04-10", expiryDate: "2028-04-10" },
-  // AW029 – Derek Slade (blocked)
+  // AW029 – Chris Donnelly (blocked)
   { id: "D070", workerId: "AW029", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2023-08-28", expiryDate: null },
   { id: "D071", workerId: "AW029", name: "I9 Verification", type: "compliance", status: "expired", uploadedDate: "2023-08-28", expiryDate: "2024-12-28" },
   { id: "D072", workerId: "AW029", name: "Health & Safety Cert", type: "client-required", status: "expired", uploadedDate: "2023-08-30", expiryDate: "2024-08-30" },
-  // AW030 – Petra Novak (blocked)
+  // AW030 – Priya Sharma (blocked)
   { id: "D073", workerId: "AW030", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2023-06-15", expiryDate: null },
   { id: "D074", workerId: "AW030", name: "I9 Verification", type: "compliance", status: "expired", uploadedDate: "2023-06-15", expiryDate: "2024-06-15" },
   { id: "D075", workerId: "AW030", name: "MHE License", type: "client-required", status: "expired", uploadedDate: "2023-06-18", expiryDate: "2024-12-18" },
 
-  // ═══ AG003 Elwood Staffing ═══
-  // AW031 – Damien Cross (deployed)
+  // ═══ AG003 Meridian Recruitment ═══
+  // AW031 – Sarah Mitchell (deployed)
   { id: "D076", workerId: "AW031", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2023-09-30", expiryDate: null },
   { id: "D077", workerId: "AW031", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2023-09-30", expiryDate: "2025-09-30" },
   { id: "D078", workerId: "AW031", name: "Health & Safety Cert", type: "client-required", status: "verified", uploadedDate: "2023-10-02", expiryDate: "2025-10-02" },
-  // AW032 – Aisha Begum (deployed)
+  // AW032 – Tom Brady (deployed)
   { id: "D079", workerId: "AW032", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-02-08", expiryDate: null },
   { id: "D080", workerId: "AW032", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-02-08", expiryDate: "2026-02-08" },
-  // AW033 – Colin Burrows (deployed)
+  // AW033 – Emma Johansson (deployed)
   { id: "D081", workerId: "AW033", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-01-12", expiryDate: null },
   { id: "D082", workerId: "AW033", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-01-12", expiryDate: "2026-01-12" },
   { id: "D083", workerId: "AW033", name: "MHE License", type: "client-required", status: "verified", uploadedDate: "2024-01-15", expiryDate: "2025-07-15" },
-  // AW034 – Elise Morrow (deployed)
+  // AW034 – James Okafor (deployed)
   { id: "D084", workerId: "AW034", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2023-11-05", expiryDate: null },
   { id: "D085", workerId: "AW034", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2023-11-05", expiryDate: "2025-11-05" },
-  // AW035 – Ray Kapoor (deployed)
+  // AW035 – Emma Johansson (deployed)
   { id: "D086", workerId: "AW035", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-04-01", expiryDate: null },
   { id: "D087", workerId: "AW035", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-04-01", expiryDate: "2026-04-01" },
   { id: "D088", workerId: "AW035", name: "Health & Safety Cert", type: "client-required", status: "verified", uploadedDate: "2024-04-03", expiryDate: "2026-04-03" },
-  // AW036 – Nkechi Eze (deployed)
+  // AW036 – Aisha Nwosu (deployed)
   { id: "D089", workerId: "AW036", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-03-18", expiryDate: null },
   { id: "D090", workerId: "AW036", name: "Forklift Cert", type: "client-required", status: "verified", uploadedDate: "2024-03-20", expiryDate: "2026-03-20" },
   { id: "D091", workerId: "AW036", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-03-18", expiryDate: "2026-03-18" },
-  // AW037 – Heather Todd (active)
+  // AW037 – Sarah Mitchell (active)
   { id: "D092", workerId: "AW037", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-05-28", expiryDate: null },
   { id: "D093", workerId: "AW037", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-05-28", expiryDate: "2026-05-28" },
-  // AW038 – Jerome Baptiste (active)
+  // AW038 – James Okafor (active)
   { id: "D094", workerId: "AW038", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-06-14", expiryDate: null },
   { id: "D095", workerId: "AW038", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-06-14", expiryDate: "2026-06-14" },
-  // AW039 – Sally Kerr (active)
+  // AW039 – Diane Foster (active)
   { id: "D096", workerId: "AW039", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-07-10", expiryDate: null },
   { id: "D097", workerId: "AW039", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-07-10", expiryDate: "2026-07-10" },
   { id: "D098", workerId: "AW039", name: "MHE License", type: "client-required", status: "verified", uploadedDate: "2024-07-12", expiryDate: "2026-01-12" },
-  // AW040 – Gareth Llewellyn (active)
+  // AW040 – Leon Kowalski (active)
   { id: "D099", workerId: "AW040", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2024-08-22", expiryDate: null },
   { id: "D100", workerId: "AW040", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2024-08-22", expiryDate: "2026-08-22" },
-  // AW041 – Bianca Osei (new-registered)
+  // AW041 – Aisha Nwosu (new-registered)
   { id: "D101", workerId: "AW041", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2026-03-22", expiryDate: null },
   { id: "D102", workerId: "AW041", name: "I9 Verification", type: "compliance", status: "verified", uploadedDate: "2026-03-22", expiryDate: "2028-03-22" },
-  // AW042 – Francis Donoghue (new-registered)
+  // AW042 – Marcus Webb (new-registered)
   { id: "D103", workerId: "AW042", name: "Employment Contract", type: "contract", status: "pending", uploadedDate: "2026-04-01", expiryDate: null },
   { id: "D104", workerId: "AW042", name: "MHE License", type: "client-required", status: "pending", uploadedDate: "2026-04-01", expiryDate: "2028-04-01" },
-  // AW043 – Kezia Hamilton (new-registered)
+  // AW043 – Daniel Reeves (new-registered)
   { id: "D105", workerId: "AW043", name: "Employment Contract", type: "contract", status: "pending", uploadedDate: "2026-04-09", expiryDate: null },
   { id: "D106", workerId: "AW043", name: "I9 Verification", type: "compliance", status: "pending", uploadedDate: "2026-04-09", expiryDate: "2028-04-09" },
-  // AW044 – Malcolm Stead (blocked)
+  // AW044 – Yuki Tanaka (blocked)
   { id: "D107", workerId: "AW044", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2023-10-20", expiryDate: null },
   { id: "D108", workerId: "AW044", name: "I9 Verification", type: "compliance", status: "expired", uploadedDate: "2023-10-20", expiryDate: "2025-02-20" },
-  // AW045 – Wanda Obi (blocked)
+  // AW045 – Ana Pereira (blocked)
   { id: "D109", workerId: "AW045", name: "Employment Contract", type: "contract", status: "verified", uploadedDate: "2023-05-18", expiryDate: null },
   { id: "D110", workerId: "AW045", name: "I9 Verification", type: "compliance", status: "expired", uploadedDate: "2023-05-18", expiryDate: "2024-05-18" },
   { id: "D111", workerId: "AW045", name: "MHE License", type: "client-required", status: "expired", uploadedDate: "2023-05-20", expiryDate: "2024-11-20" },
@@ -310,22 +310,22 @@ export const agencyDocuments: AgencyDocument[] = [
 // ────────────────────────────────────────
 
 export const agencyIssues: AgencyIssue[] = [
-  // Staffmark (4)
-  { id: "ISS001", workerId: "AW014", workerName: "Steve Barlow", failedStep: "Compliance", reason: "I9 Verification expired", requiredAction: "Upload valid I9 Verification document", severity: "critical", createdAt: "2025-01-14", agencyId: "AG001" },
-  { id: "ISS002", workerId: "AW015", workerName: "Jenny Kildare", failedStep: "Compliance", reason: "I9 Verification and Forklift Cert expired", requiredAction: "Upload valid I9 and renew Forklift certification", severity: "critical", createdAt: "2024-07-30", agencyId: "AG001" },
-  { id: "ISS003", workerId: "AW003", workerName: "Andre Williams", failedStep: "Attendance", reason: "Late clock-in (18 mins)", requiredAction: "Review and approve exception", severity: "warning", createdAt: "2026-04-10", agencyId: "AG001" },
-  { id: "ISS004", workerId: "AW012", workerName: "Martina Vasquez", failedStep: "Registration", reason: "Pending compliance documents", requiredAction: "Complete I9 verification", severity: "warning", createdAt: "2026-04-03", agencyId: "AG001" },
+  // Workforce Direct (4)
+  { id: "ISS001", workerId: "AW014", workerName: "Rico Fernandez", failedStep: "Compliance", reason: "I9 Verification expired", requiredAction: "Upload valid I9 Verification document", severity: "critical", createdAt: "2025-01-14", agencyId: "AG001" },
+  { id: "ISS002", workerId: "AW015", workerName: "Aisha Nwosu", failedStep: "Compliance", reason: "I9 Verification and Forklift Cert expired", requiredAction: "Upload valid I9 and renew Forklift certification", severity: "critical", createdAt: "2024-07-30", agencyId: "AG001" },
+  { id: "ISS003", workerId: "AW003", workerName: "Fatima Al-Hassan", failedStep: "Attendance", reason: "Late clock-in (18 mins)", requiredAction: "Review and approve exception", severity: "warning", createdAt: "2026-04-10", agencyId: "AG001" },
+  { id: "ISS004", workerId: "AW012", workerName: "Ana Pereira", failedStep: "Registration", reason: "Pending compliance documents", requiredAction: "Complete I9 verification", severity: "warning", createdAt: "2026-04-03", agencyId: "AG001" },
 
-  // Elite Staffing (3)
-  { id: "ISS005", workerId: "AW029", workerName: "Derek Slade", failedStep: "Compliance", reason: "I9 Verification expired", requiredAction: "Upload valid I9 Verification document", severity: "critical", createdAt: "2024-12-28", agencyId: "AG002" },
-  { id: "ISS006", workerId: "AW030", workerName: "Petra Novak", failedStep: "Compliance", reason: "I9 Verification and MHE License expired", requiredAction: "Upload valid I9 and renew MHE License", severity: "critical", createdAt: "2024-06-15", agencyId: "AG002" },
-  { id: "ISS007", workerId: "AW018", workerName: "Sean Doherty", failedStep: "Attendance", reason: "Late clock-in (9 mins)", requiredAction: "Review and approve exception", severity: "warning", createdAt: "2026-04-09", agencyId: "AG002" },
+  // Pinnacle Staffing (3)
+  { id: "ISS005", workerId: "AW029", workerName: "Chris Donnelly", failedStep: "Compliance", reason: "I9 Verification expired", requiredAction: "Upload valid I9 Verification document", severity: "critical", createdAt: "2024-12-28", agencyId: "AG002" },
+  { id: "ISS006", workerId: "AW030", workerName: "Priya Sharma", failedStep: "Compliance", reason: "I9 Verification and MHE License expired", requiredAction: "Upload valid I9 and renew MHE License", severity: "critical", createdAt: "2024-06-15", agencyId: "AG002" },
+  { id: "ISS007", workerId: "AW018", workerName: "Leon Kowalski", failedStep: "Attendance", reason: "Late clock-in (9 mins)", requiredAction: "Review and approve exception", severity: "warning", createdAt: "2026-04-09", agencyId: "AG002" },
 
-  // Elwood Staffing (4)
-  { id: "ISS008", workerId: "AW044", workerName: "Malcolm Stead", failedStep: "Compliance", reason: "I9 Verification expired", requiredAction: "Upload valid I9 Verification document", severity: "critical", createdAt: "2025-02-20", agencyId: "AG003" },
-  { id: "ISS009", workerId: "AW045", workerName: "Wanda Obi", failedStep: "Compliance", reason: "I9 Verification and MHE License expired", requiredAction: "Upload valid I9 and renew MHE License", severity: "critical", createdAt: "2024-05-18", agencyId: "AG003" },
-  { id: "ISS010", workerId: "AW033", workerName: "Colin Burrows", failedStep: "Attendance", reason: "Late clock-in (14 mins)", requiredAction: "Review and approve exception", severity: "warning", createdAt: "2026-04-08", agencyId: "AG003" },
-  { id: "ISS011", workerId: "AW034", workerName: "Elise Morrow", failedStep: "Attendance", reason: "Missed clock-out", requiredAction: "Confirm end time and update record", severity: "warning", createdAt: "2026-04-11", agencyId: "AG003" },
+  // Meridian Recruitment (4)
+  { id: "ISS008", workerId: "AW044", workerName: "Yuki Tanaka", failedStep: "Compliance", reason: "I9 Verification expired", requiredAction: "Upload valid I9 Verification document", severity: "critical", createdAt: "2025-02-20", agencyId: "AG003" },
+  { id: "ISS009", workerId: "AW045", workerName: "Ana Pereira", failedStep: "Compliance", reason: "I9 Verification and MHE License expired", requiredAction: "Upload valid I9 and renew MHE License", severity: "critical", createdAt: "2024-05-18", agencyId: "AG003" },
+  { id: "ISS010", workerId: "AW033", workerName: "Emma Johansson", failedStep: "Attendance", reason: "Late clock-in (14 mins)", requiredAction: "Review and approve exception", severity: "warning", createdAt: "2026-04-08", agencyId: "AG003" },
+  { id: "ISS011", workerId: "AW034", workerName: "James Okafor", failedStep: "Attendance", reason: "Missed clock-out", requiredAction: "Confirm end time and update record", severity: "warning", createdAt: "2026-04-11", agencyId: "AG003" },
 ];
 
 // ────────────────────────────────────────
@@ -333,29 +333,29 @@ export const agencyIssues: AgencyIssue[] = [
 // ────────────────────────────────────────
 
 export const agencyDeployments: AgencyDeployment[] = [
-  // Staffmark (6)
-  { id: "DEP001", workerId: "AW001", workerName: "Trevor Pugh", department: "Warehouse Operative", location: "Zone A", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
-  { id: "DEP002", workerId: "AW002", workerName: "Nina Kowalski", department: "MHE", location: "Zone B", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
-  { id: "DEP003", workerId: "AW003", workerName: "Andre Williams", department: "Picker", location: "Zone C", shiftStart: "14:00", shiftEnd: "22:00", status: "scheduled", attendanceStatus: "pending" },
-  { id: "DEP004", workerId: "AW004", workerName: "Beth Langley", department: "Loader", location: "Zone A", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
-  { id: "DEP005", workerId: "AW005", workerName: "Karl Nilsson", department: "Forklift", location: "Zone D", shiftStart: "14:00", shiftEnd: "22:00", status: "scheduled", attendanceStatus: "pending" },
-  { id: "DEP006", workerId: "AW006", workerName: "Donna Pryce", department: "Warehouse Operative", location: "Zone B", shiftStart: "22:00", shiftEnd: "06:00", status: "completed", attendanceStatus: "clocked-out" },
+  // Workforce Direct (6)
+  { id: "DEP001", workerId: "AW001", workerName: "Yuki Tanaka", department: "Inbound Warehouse", location: "Zone A", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
+  { id: "DEP002", workerId: "AW002", workerName: "Rico Fernandez", department: "MHE", location: "Zone B", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
+  { id: "DEP003", workerId: "AW003", workerName: "Fatima Al-Hassan", department: "Picker", location: "Zone C", shiftStart: "14:00", shiftEnd: "22:00", status: "scheduled", attendanceStatus: "pending" },
+  { id: "DEP004", workerId: "AW004", workerName: "Emma Johansson", department: "Loader", location: "Zone A", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
+  { id: "DEP005", workerId: "AW005", workerName: "Fatima Al-Hassan", department: "Forklift", location: "Zone D", shiftStart: "14:00", shiftEnd: "22:00", status: "scheduled", attendanceStatus: "pending" },
+  { id: "DEP006", workerId: "AW006", workerName: "Emma Johansson", department: "Inbound Warehouse", location: "Zone B", shiftStart: "22:00", shiftEnd: "06:00", status: "completed", attendanceStatus: "clocked-out" },
 
-  // Elite Staffing (6)
-  { id: "DEP007", workerId: "AW016", workerName: "Victor Andrade", department: "MHE", location: "Zone B", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
-  { id: "DEP008", workerId: "AW017", workerName: "Grace Nkemelu", department: "Warehouse Operative", location: "Zone A", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
-  { id: "DEP009", workerId: "AW018", workerName: "Sean Doherty", department: "Picker", location: "Zone C", shiftStart: "14:00", shiftEnd: "22:00", status: "scheduled", attendanceStatus: "pending" },
-  { id: "DEP010", workerId: "AW019", workerName: "Tanya Krol", department: "Loader", location: "Zone D", shiftStart: "22:00", shiftEnd: "06:00", status: "scheduled", attendanceStatus: "pending" },
-  { id: "DEP011", workerId: "AW020", workerName: "Brendan Hales", department: "Warehouse Operative", location: "Zone A", shiftStart: "06:00", shiftEnd: "14:00", status: "completed", attendanceStatus: "clocked-out" },
-  { id: "DEP012", workerId: "AW021", workerName: "Anita Koroma", department: "Forklift", location: "Zone B", shiftStart: "14:00", shiftEnd: "22:00", status: "on-site", attendanceStatus: "clocked-in" },
+  // Pinnacle Staffing (6)
+  { id: "DEP007", workerId: "AW016", workerName: "Aisha Nwosu", department: "MHE", location: "Zone B", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
+  { id: "DEP008", workerId: "AW017", workerName: "Daniel Reeves", department: "Inbound Warehouse", location: "Zone A", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
+  { id: "DEP009", workerId: "AW018", workerName: "Leon Kowalski", department: "Picker", location: "Zone C", shiftStart: "14:00", shiftEnd: "22:00", status: "scheduled", attendanceStatus: "pending" },
+  { id: "DEP010", workerId: "AW019", workerName: "Sarah Mitchell", department: "Loader", location: "Zone D", shiftStart: "22:00", shiftEnd: "06:00", status: "scheduled", attendanceStatus: "pending" },
+  { id: "DEP011", workerId: "AW020", workerName: "Sarah Mitchell", department: "Inbound Warehouse", location: "Zone A", shiftStart: "06:00", shiftEnd: "14:00", status: "completed", attendanceStatus: "clocked-out" },
+  { id: "DEP012", workerId: "AW021", workerName: "Chris Donnelly", department: "Forklift", location: "Zone B", shiftStart: "14:00", shiftEnd: "22:00", status: "on-site", attendanceStatus: "clocked-in" },
 
-  // Elwood Staffing (6)
-  { id: "DEP013", workerId: "AW031", workerName: "Damien Cross", department: "Warehouse Operative", location: "Zone A", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
-  { id: "DEP014", workerId: "AW032", workerName: "Aisha Begum", department: "Picker", location: "Zone C", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
-  { id: "DEP015", workerId: "AW033", workerName: "Colin Burrows", department: "MHE", location: "Zone B", shiftStart: "14:00", shiftEnd: "22:00", status: "scheduled", attendanceStatus: "pending" },
-  { id: "DEP016", workerId: "AW034", workerName: "Elise Morrow", department: "Loader", location: "Zone D", shiftStart: "06:00", shiftEnd: "14:00", status: "completed", attendanceStatus: "clocked-out" },
-  { id: "DEP017", workerId: "AW035", workerName: "Ray Kapoor", department: "Warehouse Operative", location: "Zone A", shiftStart: "22:00", shiftEnd: "06:00", status: "scheduled", attendanceStatus: "pending" },
-  { id: "DEP018", workerId: "AW036", workerName: "Nkechi Eze", department: "Forklift", location: "Zone D", shiftStart: "14:00", shiftEnd: "22:00", status: "on-site", attendanceStatus: "clocked-in" },
+  // Meridian Recruitment (6)
+  { id: "DEP013", workerId: "AW031", workerName: "Sarah Mitchell", department: "Inbound Warehouse", location: "Zone A", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
+  { id: "DEP014", workerId: "AW032", workerName: "Tom Brady", department: "Picker", location: "Zone C", shiftStart: "06:00", shiftEnd: "14:00", status: "on-site", attendanceStatus: "clocked-in" },
+  { id: "DEP015", workerId: "AW033", workerName: "Emma Johansson", department: "MHE", location: "Zone B", shiftStart: "14:00", shiftEnd: "22:00", status: "scheduled", attendanceStatus: "pending" },
+  { id: "DEP016", workerId: "AW034", workerName: "James Okafor", department: "Loader", location: "Zone D", shiftStart: "06:00", shiftEnd: "14:00", status: "completed", attendanceStatus: "clocked-out" },
+  { id: "DEP017", workerId: "AW035", workerName: "Emma Johansson", department: "Inbound Warehouse", location: "Zone A", shiftStart: "22:00", shiftEnd: "06:00", status: "scheduled", attendanceStatus: "pending" },
+  { id: "DEP018", workerId: "AW036", workerName: "Aisha Nwosu", department: "Forklift", location: "Zone D", shiftStart: "14:00", shiftEnd: "22:00", status: "on-site", attendanceStatus: "clocked-in" },
 ];
 
 // ────────────────────────────────────────
@@ -363,7 +363,7 @@ export const agencyDeployments: AgencyDeployment[] = [
 // Derived from the worker data above
 // ────────────────────────────────────────
 
-// AG001 Staffmark: 6 deployed, 4 active, 3 new-reg, 2 blocked
+// AG001 Workforce Direct: 6 deployed, 4 active, 3 new-reg, 2 blocked
 // avgHourlyRate deployed+active: (13.00+14.50+12.50+12.80+14.00+13.20+12.00+14.20+12.50+12.60)/10 = 13.13
 // avgEtaMinutes all 15: (10+15+20+5+15+10+25+10+10+30+15+20+20+10+30)/15 = 17.7 -> 18
 // punctuality deployed+active (excl new/blocked): (96+94+78+97+93+91+88+92+90+85)/10 = 90.4
@@ -452,25 +452,25 @@ export const agencyStats: Record<string, {
 // ────────────────────────────────────────
 
 export const allocations: Allocation[] = [
-  // Monday – Staffmark
-  { id: "ALLOC001", department: "Warehouse Operative", location: "Zone A", role: "Warehouse Operative", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 4, assignedWorkers: [{ workerId: "AW001", workerName: "Trevor Pugh", status: "confirmed" }, { workerId: "AW004", workerName: "Beth Langley", status: "confirmed" }], status: "partial", agencyId: "AG001", agencyName: "Staffmark" },
-  { id: "ALLOC002", department: "Picker", location: "Zone C", role: "Picker", date: "Mon 3 Feb", shift: "14:00–22:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "AW003", workerName: "Andre Williams", status: "confirmed" }, { workerId: "AW007", workerName: "Ibrahim Yusuf", status: "pending" }], status: "partial", agencyId: "AG001", agencyName: "Staffmark" },
-  { id: "ALLOC003", department: "Forklift", location: "Zone D", role: "Forklift Operative", date: "Mon 3 Feb", shift: "14:00–22:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "AW005", workerName: "Karl Nilsson", status: "confirmed" }], status: "partial", agencyId: "AG001", agencyName: "Staffmark" },
-  { id: "ALLOC004", department: "MHE", location: "Zone B", role: "MHE Operative", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "AW002", workerName: "Nina Kowalski", status: "confirmed" }, { workerId: "AW008", workerName: "Rachael Cope", status: "confirmed" }], status: "filled", agencyId: "AG001", agencyName: "Staffmark" },
+  // Monday – Workforce Direct
+  { id: "ALLOC001", department: "Inbound Warehouse", location: "Zone A", role: "Inbound Warehouse", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 4, assignedWorkers: [{ workerId: "AW001", workerName: "Yuki Tanaka", status: "confirmed" }, { workerId: "AW004", workerName: "Emma Johansson", status: "confirmed" }], status: "partial", agencyId: "AG001", agencyName: "Workforce Direct" },
+  { id: "ALLOC002", department: "Picker", location: "Zone C", role: "Picker", date: "Mon 3 Feb", shift: "14:00–22:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "AW003", workerName: "Fatima Al-Hassan", status: "confirmed" }, { workerId: "AW007", workerName: "Marcus Webb", status: "pending" }], status: "partial", agencyId: "AG001", agencyName: "Workforce Direct" },
+  { id: "ALLOC003", department: "Forklift", location: "Zone D", role: "MHE Operations", date: "Mon 3 Feb", shift: "14:00–22:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "AW005", workerName: "Fatima Al-Hassan", status: "confirmed" }], status: "partial", agencyId: "AG001", agencyName: "Workforce Direct" },
+  { id: "ALLOC004", department: "MHE", location: "Zone B", role: "MHE Operations", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "AW002", workerName: "Rico Fernandez", status: "confirmed" }, { workerId: "AW008", workerName: "Fatima Al-Hassan", status: "confirmed" }], status: "filled", agencyId: "AG001", agencyName: "Workforce Direct" },
 
-  // Monday – Elite Staffing
-  { id: "ALLOC005", department: "Warehouse Operative", location: "Zone A", role: "Warehouse Operative", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "AW017", workerName: "Grace Nkemelu", status: "confirmed" }, { workerId: "AW020", workerName: "Brendan Hales", status: "confirmed" }, { workerId: "AW023", workerName: "Kwame Asante", status: "pending" }], status: "filled", agencyId: "AG002", agencyName: "Elite Staffing" },
-  { id: "ALLOC006", department: "MHE", location: "Zone B", role: "MHE Operative", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "AW016", workerName: "Victor Andrade", status: "confirmed" }], status: "partial", agencyId: "AG002", agencyName: "Elite Staffing" },
-  { id: "ALLOC007", department: "Loader", location: "Zone D", role: "Loader", date: "Mon 3 Feb", shift: "22:00–06:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "AW019", workerName: "Tanya Krol", status: "confirmed" }], status: "partial", agencyId: "AG002", agencyName: "Elite Staffing" },
+  // Monday – Pinnacle Staffing
+  { id: "ALLOC005", department: "Inbound Warehouse", location: "Zone A", role: "Inbound Warehouse", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "AW017", workerName: "Daniel Reeves", status: "confirmed" }, { workerId: "AW020", workerName: "Sarah Mitchell", status: "confirmed" }, { workerId: "AW023", workerName: "Aisha Nwosu", status: "pending" }], status: "filled", agencyId: "AG002", agencyName: "Pinnacle Staffing" },
+  { id: "ALLOC006", department: "MHE", location: "Zone B", role: "MHE Operations", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "AW016", workerName: "Aisha Nwosu", status: "confirmed" }], status: "partial", agencyId: "AG002", agencyName: "Pinnacle Staffing" },
+  { id: "ALLOC007", department: "Loader", location: "Zone D", role: "Loader", date: "Mon 3 Feb", shift: "22:00–06:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "AW019", workerName: "Sarah Mitchell", status: "confirmed" }], status: "partial", agencyId: "AG002", agencyName: "Pinnacle Staffing" },
 
-  // Tuesday – Elite Staffing
-  { id: "ALLOC008", department: "Picker", location: "Zone C", role: "Picker", date: "Tue 4 Feb", shift: "14:00–22:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "AW018", workerName: "Sean Doherty", status: "confirmed" }, { workerId: "AW022", workerName: "Maisie O'Brien", status: "confirmed" }], status: "partial", agencyId: "AG002", agencyName: "Elite Staffing" },
+  // Tuesday – Pinnacle Staffing
+  { id: "ALLOC008", department: "Picker", location: "Zone C", role: "Picker", date: "Tue 4 Feb", shift: "14:00–22:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "AW018", workerName: "Leon Kowalski", status: "confirmed" }, { workerId: "AW022", workerName: "Maisie O'Brien", status: "confirmed" }], status: "partial", agencyId: "AG002", agencyName: "Pinnacle Staffing" },
 
-  // Monday – Elwood Staffing
-  { id: "ALLOC009", department: "Warehouse Operative", location: "Zone A", role: "Warehouse Operative", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "AW031", workerName: "Damien Cross", status: "confirmed" }, { workerId: "AW038", workerName: "Jerome Baptiste", status: "pending" }], status: "partial", agencyId: "AG003", agencyName: "Elwood Staffing" },
-  { id: "ALLOC010", department: "Picker", location: "Zone C", role: "Picker", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "AW032", workerName: "Aisha Begum", status: "confirmed" }, { workerId: "AW037", workerName: "Heather Todd", status: "confirmed" }], status: "filled", agencyId: "AG003", agencyName: "Elwood Staffing" },
-  { id: "ALLOC011", department: "MHE", location: "Zone B", role: "MHE Operative", date: "Tue 4 Feb", shift: "14:00–22:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "AW033", workerName: "Colin Burrows", status: "confirmed" }], status: "partial", agencyId: "AG003", agencyName: "Elwood Staffing" },
+  // Monday – Meridian Recruitment
+  { id: "ALLOC009", department: "Inbound Warehouse", location: "Zone A", role: "Inbound Warehouse", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 3, assignedWorkers: [{ workerId: "AW031", workerName: "Sarah Mitchell", status: "confirmed" }, { workerId: "AW038", workerName: "James Okafor", status: "pending" }], status: "partial", agencyId: "AG003", agencyName: "Meridian Recruitment" },
+  { id: "ALLOC010", department: "Picker", location: "Zone C", role: "Picker", date: "Mon 3 Feb", shift: "06:00–14:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "AW032", workerName: "Tom Brady", status: "confirmed" }, { workerId: "AW037", workerName: "Sarah Mitchell", status: "confirmed" }], status: "filled", agencyId: "AG003", agencyName: "Meridian Recruitment" },
+  { id: "ALLOC011", department: "MHE", location: "Zone B", role: "MHE Operations", date: "Tue 4 Feb", shift: "14:00–22:00", requestedHeadcount: 2, assignedWorkers: [{ workerId: "AW033", workerName: "Emma Johansson", status: "confirmed" }], status: "partial", agencyId: "AG003", agencyName: "Meridian Recruitment" },
 
-  // Wednesday – Elwood Staffing
-  { id: "ALLOC012", department: "Warehouse Operative", location: "Zone A", role: "Warehouse Operative", date: "Wed 5 Feb", shift: "06:00–14:00", requestedHeadcount: 4, assignedWorkers: [], status: "unfilled", agencyId: "AG003", agencyName: "Elwood Staffing" },
+  // Wednesday – Meridian Recruitment
+  { id: "ALLOC012", department: "Inbound Warehouse", location: "Zone A", role: "Inbound Warehouse", date: "Wed 5 Feb", shift: "06:00–14:00", requestedHeadcount: 4, assignedWorkers: [], status: "unfilled", agencyId: "AG003", agencyName: "Meridian Recruitment" },
 ];

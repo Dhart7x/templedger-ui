@@ -6,14 +6,14 @@ type Criteria = "Available Workers" | "Agency Performance";
 const recommendationFor = (criteria: Criteria) =>
   criteria === "Available Workers"
     ? {
-        agency: "Elite Staffing",
+        agency: "Pinnacle Staffing",
         reason:
-          "Elite Staffing has 6 workers available for this slot including 3 newly registered workers ready to deploy — the strongest immediate coverage across your agency panel.",
+          "Pinnacle Staffing has 6 workers available for this slot including 3 newly registered workers ready to deploy — the strongest immediate coverage across your agency panel.",
       }
     : {
-        agency: "Elite Staffing",
+        agency: "Pinnacle Staffing",
         reason:
-          "Elite Staffing carries the highest performance score (★ 4.8) across your panel with 6 workers available. Staffmark available as backup with 2 workers on standby.",
+          "Pinnacle Staffing carries the highest performance score (★ 4.8) across your panel with 6 workers available. Workforce Direct available as backup with 2 workers on standby.",
       };
 
 const AllocationRecommendationPreview = () => {

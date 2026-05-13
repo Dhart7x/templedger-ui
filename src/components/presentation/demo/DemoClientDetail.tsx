@@ -32,11 +32,11 @@ interface Event {
 }
 
 const workers: Worker[] = [
-  { id: "1", name: "John Patel", role: "Warehouse Operative", status: "approved" },
-  { id: "2", name: "Maria Santos", role: "Picker", status: "approved" },
-  { id: "3", name: "Ahmed Khan", role: "Forklift Driver", status: "override" },
-  { id: "4", name: "Lucy Brown", role: "Team Lead", status: "approved" },
-  { id: "5", name: "Tomasz Nowak", role: "Warehouse Operative", status: "exception" },
+  { id: "1", name: "Tom Brady", role: "Inbound Warehouse", status: "approved" },
+  { id: "2", name: "Rico Fernandez", role: "Picker", status: "approved" },
+  { id: "3", name: "Sarah Mitchell", role: "MHE Operations", status: "override" },
+  { id: "4", name: "Leon Kowalski", role: "Team Lead", status: "approved" },
+  { id: "5", name: "Fatima Al-Hassan", role: "Inbound Warehouse", status: "exception" },
 ];
 
 const events: Event[] = [
@@ -47,7 +47,7 @@ const events: Event[] = [
   { id: "5", name: "Clock-in / clock-out captured", timestamp: "05 Apr 18:45", source: "System", status: "verified" },
   { id: "6", name: "Hours approved by client", timestamp: "06 Apr 10:15", source: "Human", status: "verified" },
   { id: "7", name: "Pay rate validated", timestamp: "06 Apr 10:18", source: "System", status: "flagged" },
-  { id: "8", name: "Exception resolved", timestamp: "06 Apr 11:45", source: "Human", status: "overridden", resolution: { by: "Usman Iftikhar", reason: "Overtime rate corrected per contract" } },
+  { id: "8", name: "Exception resolved", timestamp: "06 Apr 11:45", source: "Human", status: "overridden", resolution: { by: "Rico Fernandez", reason: "Overtime rate corrected per contract" } },
   { id: "9", name: "Payroll approved", timestamp: "07 Apr 09:00", source: "System", status: "verified" },
   { id: "10", name: "Invoice approved", timestamp: "07 Apr 09:05", source: "System", status: "verified" },
 ];
@@ -298,7 +298,7 @@ const DemoClientDetail = ({ client, onBack, onSendAudit }: DemoClientDetailProps
               <div>
                 <div className="text-xs text-muted-foreground mb-1">Resolution</div>
                 <div className="text-sm text-foreground">Human override</div>
-                <div className="text-xs text-muted-foreground mt-1">Approved by Usman Iftikhar</div>
+                <div className="text-xs text-muted-foreground mt-1">Approved by Rico Fernandez</div>
                 <div className="text-xs text-muted-foreground">06 Apr 2026 11:45</div>
               </div>
               <div>

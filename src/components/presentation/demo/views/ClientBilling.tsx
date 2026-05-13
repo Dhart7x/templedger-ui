@@ -51,13 +51,13 @@ const billingSites: BillingSite[] = [
     agencyCount: 3,
     departments: [
       {
-        name: "Warehouse Operative",
+        name: "Inbound Warehouse",
         totalHours: 74,
         totalAmount: 950,
         workers: [
-          { name: "John Patel", agency: "Staffmark", hours: 24, rate: 12.50, total: 300 },
-          { name: "Maria Santos", agency: "Elite Staffing", hours: 26, rate: 13.00, total: 338 },
-          { name: "Priya Sharma", agency: "Elite Staffing", hours: 24, rate: 13.00, total: 312 },
+          { name: "Tom Brady", agency: "Workforce Direct", hours: 24, rate: 12.50, total: 300 },
+          { name: "Rico Fernandez", agency: "Pinnacle Staffing", hours: 26, rate: 13.00, total: 338 },
+          { name: "Priya Sharma", agency: "Pinnacle Staffing", hours: 24, rate: 13.00, total: 312 },
         ],
       },
       {
@@ -65,8 +65,8 @@ const billingSites: BillingSite[] = [
         totalHours: 40,
         totalAmount: 516,
         workers: [
-          { name: "Marcus Johnson", agency: "Staffmark", hours: 24, rate: 13.50, total: 324 },
-          { name: "Ahmed Khan", agency: "Elwood Staffing", hours: 16, rate: 12.00, total: 192 },
+          { name: "Priya Sharma", agency: "Workforce Direct", hours: 24, rate: 13.50, total: 324 },
+          { name: "Sarah Mitchell", agency: "Meridian Recruitment", hours: 16, rate: 12.00, total: 192 },
         ],
       },
     ],
@@ -79,11 +79,11 @@ const billingSites: BillingSite[] = [
     agencyCount: 1,
     departments: [
       {
-        name: "Warehouse Operative",
+        name: "Inbound Warehouse",
         totalHours: 16,
         totalAmount: 200,
         workers: [
-          { name: "Lucy Brown", agency: "Staffmark", hours: 16, rate: 12.50, total: 200 },
+          { name: "Leon Kowalski", agency: "Workforce Direct", hours: 16, rate: 12.50, total: 200 },
         ],
       },
     ],

@@ -46,12 +46,12 @@ const getWorkerData = (name: string) => {
     compliance: ComplianceDocument[];
     recentShifts: { date: string; site: string; department: string; hours: number; status: string }[];
   }> = {
-    "Marcus Johnson": {
-      name: "Marcus Johnson",
-      agency: "Staffmark",
-      role: "Warehouse Operative",
+    "Priya Sharma": {
+      name: "Priya Sharma",
+      agency: "Workforce Direct",
+      role: "Inbound Warehouse",
       site: "Baltimore, MD",
-      department: "Warehouse Operative",
+      department: "Inbound Warehouse",
       shift: "Early (06:00-14:00)",
       clockIn: "05:58",
       clockOut: "-",
@@ -71,17 +71,17 @@ const getWorkerData = (name: string) => {
         { type: "Tax ID", name: "Social Security Number", status: "verified", icon: "ni", verifiedDate: "Mar 2024" },
       ],
       recentShifts: [
-        { date: "Today", site: "Baltimore, MD", department: "Warehouse Operative", hours: 8, status: "In Progress" },
-        { date: "Yesterday", site: "Baltimore, MD", department: "Warehouse Operative", hours: 8, status: "Completed" },
+        { date: "Today", site: "Baltimore, MD", department: "Inbound Warehouse", hours: 8, status: "In Progress" },
+        { date: "Yesterday", site: "Baltimore, MD", department: "Inbound Warehouse", hours: 8, status: "Completed" },
         { date: "Mon 3 Feb", site: "Baltimore, MD", department: "MHE", hours: 8, status: "Completed" },
       ],
     },
-    "Sarah Williams": {
-      name: "Sarah Williams",
-      agency: "Staffmark",
-      role: "Warehouse Operative",
+    "Leon Kowalski": {
+      name: "Leon Kowalski",
+      agency: "Workforce Direct",
+      role: "Inbound Warehouse",
       site: "Baltimore, MD",
-      department: "Warehouse Operative",
+      department: "Inbound Warehouse",
       shift: "Mid (10:00-18:00)",
       clockIn: "10:15",
       clockOut: "-",
@@ -101,19 +101,19 @@ const getWorkerData = (name: string) => {
         { type: "Tax ID", name: "Social Security Number", status: "verified", icon: "ni", verifiedDate: "Nov 2023" },
       ],
       recentShifts: [
-        { date: "Today", site: "Baltimore, MD", department: "Warehouse Operative", hours: 8, status: "In Progress" },
-        { date: "Yesterday", site: "Baltimore, MD", department: "Warehouse Operative", hours: 8, status: "Completed" },
-        { date: "Mon 3 Feb", site: "Las Vegas, NV", department: "Warehouse Operative", hours: 8, status: "Completed" },
+        { date: "Today", site: "Baltimore, MD", department: "Inbound Warehouse", hours: 8, status: "In Progress" },
+        { date: "Yesterday", site: "Baltimore, MD", department: "Inbound Warehouse", hours: 8, status: "Completed" },
+        { date: "Mon 3 Feb", site: "Las Vegas, NV", department: "Inbound Warehouse", hours: 8, status: "Completed" },
       ],
     },
   };
 
   return workers[name] || {
     name,
-    agency: "Staffmark",
-    role: "Warehouse Operative",
+    agency: "Workforce Direct",
+    role: "Inbound Warehouse",
     site: "Baltimore, MD",
-    department: "Warehouse Operative",
+    department: "Inbound Warehouse",
     shift: "Early (06:00-14:00)",
     clockIn: "06:02",
     clockOut: "-",
@@ -126,8 +126,8 @@ const getWorkerData = (name: string) => {
     etaPublicTransport: "40 min",
     compliance: defaultCompliance,
     recentShifts: [
-      { date: "Today", site: "Baltimore, MD", department: "Warehouse Operative", hours: 8, status: "In Progress" },
-      { date: "Yesterday", site: "Baltimore, MD", department: "Warehouse Operative", hours: 8, status: "Completed" },
+      { date: "Today", site: "Baltimore, MD", department: "Inbound Warehouse", hours: 8, status: "In Progress" },
+      { date: "Yesterday", site: "Baltimore, MD", department: "Inbound Warehouse", hours: 8, status: "Completed" },
     ],
   };
 };

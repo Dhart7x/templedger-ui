@@ -11,8 +11,8 @@ interface Message {
 }
 
 const suggestedQuestions = [
-  "Why is James Wilson blocked?",
-  "What's missing for Ahmed Khan's payroll?",
+  "Why is Daniel Reeves blocked?",
+  "What's missing for Sarah Mitchell's payroll?",
   "How do I resolve a no-show?",
   "What happens if compliance expires?",
 ];
@@ -45,7 +45,7 @@ const DemoChatbot = () => {
     const lowerText = text.toLowerCase();
 
     if (lowerText.includes("james wilson") || lowerText.includes("blocked")) {
-      response = `**James Wilson is currently blocked** due to a no-show on his scheduled shift.
+      response = `**Daniel Reeves is currently blocked** due to a no-show on his scheduled shift.
 
 **Status:** Blocked at step 5 (Clock-in)
 **Impact:** Cannot proceed to payroll or billing
@@ -57,7 +57,7 @@ const DemoChatbot = () => {
 
 The ledger prevents blocked workers from appearing in payroll until the issue is resolved.`;
     } else if (lowerText.includes("ahmed khan") || lowerText.includes("payroll")) {
-      response = `**Ahmed Khan's payroll status:**
+      response = `**Sarah Mitchell's payroll status:**
 
 ✅ Clocked in: 05:58
 ✅ Clocked out: 14:02

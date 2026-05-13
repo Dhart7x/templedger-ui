@@ -13,16 +13,16 @@ interface Worker {
 }
 
 const workers: Worker[] = [
-  { id: "1", name: "John Patel", role: "Warehouse Operative", agency: "Staffmark", department: "Warehouse Operative", site: "Baltimore, MD", status: "on-site", clockIn: "06:02" },
-  { id: "2", name: "Maria Santos", role: "Warehouse Operative", agency: "Elite Staffing", department: "Warehouse Operative", site: "Baltimore, MD", status: "on-site", clockIn: "06:00" },
-  { id: "3", name: "Ahmed Khan", role: "MHE Operative", agency: "Elwood Staffing", department: "MHE", site: "Baltimore, MD", status: "on-site", clockIn: "05:58" },
-  { id: "4", name: "Lucy Brown", role: "Warehouse Operative", agency: "Staffmark", department: "Warehouse Operative", site: "Las Vegas, NV", status: "on-site", clockIn: "06:01" },
-  { id: "5", name: "Tomasz Nowak", role: "MHE Operative", agency: "Staffmark", department: "MHE", site: "Baltimore, MD", status: "late", clockIn: "06:45" },
-  { id: "6", name: "Priya Sharma", role: "Warehouse Operative", agency: "Elite Staffing", department: "Warehouse Operative", site: "Baltimore, MD", status: "on-site", clockIn: "06:00" },
-  { id: "7", name: "James Wilson", role: "MHE Operative", agency: "Elwood Staffing", department: "MHE", site: "Dallas Fort-Worth, TX", status: "no-show" },
-  { id: "8", name: "Fatima Ali", role: "Warehouse Operative", agency: "Staffmark", department: "Warehouse Operative", site: "Baltimore, MD", status: "on-site", clockIn: "06:03" },
-  { id: "9", name: "David Chen", role: "Warehouse Operative", agency: "Staffmark", department: "Warehouse Operative", site: "Dallas Fort-Worth, TX", status: "no-show" },
-  { id: "10", name: "Sophie Taylor", role: "Warehouse Operative", agency: "Elite Staffing", department: "Warehouse Operative", site: "Las Vegas, NV", status: "on-site", clockIn: "05:55" },
+  { id: "1", name: "Tom Brady", role: "Inbound Warehouse", agency: "Workforce Direct", department: "Inbound Warehouse", site: "Baltimore, MD", status: "on-site", clockIn: "06:02" },
+  { id: "2", name: "Rico Fernandez", role: "Inbound Warehouse", agency: "Pinnacle Staffing", department: "Inbound Warehouse", site: "Baltimore, MD", status: "on-site", clockIn: "06:00" },
+  { id: "3", name: "Sarah Mitchell", role: "MHE Operations", agency: "Meridian Recruitment", department: "MHE", site: "Baltimore, MD", status: "on-site", clockIn: "05:58" },
+  { id: "4", name: "Leon Kowalski", role: "Inbound Warehouse", agency: "Workforce Direct", department: "Inbound Warehouse", site: "Las Vegas, NV", status: "on-site", clockIn: "06:01" },
+  { id: "5", name: "Fatima Al-Hassan", role: "MHE Operations", agency: "Workforce Direct", department: "MHE", site: "Baltimore, MD", status: "late", clockIn: "06:45" },
+  { id: "6", name: "Priya Sharma", role: "Inbound Warehouse", agency: "Pinnacle Staffing", department: "Inbound Warehouse", site: "Baltimore, MD", status: "on-site", clockIn: "06:00" },
+  { id: "7", name: "Daniel Reeves", role: "MHE Operations", agency: "Meridian Recruitment", department: "MHE", site: "Dallas Fort-Worth, TX", status: "no-show" },
+  { id: "8", name: "Tom Brady", role: "Inbound Warehouse", agency: "Workforce Direct", department: "Inbound Warehouse", site: "Baltimore, MD", status: "on-site", clockIn: "06:03" },
+  { id: "9", name: "David Chen", role: "Inbound Warehouse", agency: "Workforce Direct", department: "Inbound Warehouse", site: "Dallas Fort-Worth, TX", status: "no-show" },
+  { id: "10", name: "Sophie Taylor", role: "Inbound Warehouse", agency: "Pinnacle Staffing", department: "Inbound Warehouse", site: "Las Vegas, NV", status: "on-site", clockIn: "05:55" },
 ];
 
 const DemoLiveLabour = () => {
