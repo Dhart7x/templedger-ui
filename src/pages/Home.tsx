@@ -899,8 +899,10 @@ const Home = () => {
         </section>
 
 
+        {/* MERGED DARK BLOCK — REVEAL + COST */}
+        <div style={{ background: "#1A3D2E", width: "100%", margin: 0, padding: 0 }}>
         {/* SECTION 3b — THE REVEAL */}
-        <section className="tl-section-reveal" style={{ background: "#1A3D2E", padding: "72px 48px" }}>
+        <section className="tl-section-reveal" style={{ background: "transparent", padding: "72px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <motion.h2
               className="tl-section-h2"
