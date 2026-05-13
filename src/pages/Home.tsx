@@ -722,15 +722,12 @@ const Home = () => {
               className="tl-hidden-costs"
               style={{
                 background: "#1A3D2E",
-                width: "100vw",
-                position: "relative",
-                left: "50%",
-                right: "50%",
-                marginLeft: "-50vw",
-                marginRight: "-50vw",
+                marginLeft: -48,
+                marginRight: -48,
+                marginTop: 0,
                 marginBottom: 0,
-                padding: "72px 48px 72px",
-                borderRadius: "16px 16px 0 0",
+                padding: "72px 48px",
+                borderRadius: 16,
                 boxShadow: "none",
               }}
             >
