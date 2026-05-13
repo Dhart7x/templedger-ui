@@ -151,17 +151,6 @@ const Home = () => {
     outline: "none",
   };
 
-  const problems = [
-    "Shifts fail and you find out on the morning.",
-    "Agency bookings distributed on habit, not performance.",
-    "Payroll is disputed because nobody can prove what happened.",
-    "You have no visibility of who is on your site until they arrive.",
-    "Agency performance is whatever they tell you it is.",
-    "Your agency workforce is a black box.",
-    "Internal spend policies exist. Nothing enforces them.",
-    "Compliance is managed by the agency. The liability is yours.",
-    "Your operations team spends more time chasing agencies than running the operation.",
-  ];
 
   const costs = [
     {
@@ -277,11 +266,6 @@ const Home = () => {
           .tl-cost-closing { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
           .tl-cost-closing-right { text-align: left !important; }
 
-          /* PROBLEM */
-          .tl-section-problem { padding: 56px 20px !important; }
-          .tl-problem-grid { grid-template-columns: 1fr 1fr !important; gap: 1px !important; }
-          .tl-problem-card { padding: 16px !important; }
-          .tl-problem-statement { font-size: 13px !important; }
 
           /* REVEAL */
           .tl-section-reveal { padding: 56px 20px !important; }
@@ -315,9 +299,6 @@ const Home = () => {
           .tl-section-sub { font-size: 13px !important; max-width: 100% !important; }
         }
 
-        @media (min-width: 769px) and (max-width: 1024px) {
-          .tl-problem-grid { grid-template-columns: repeat(3, 1fr) !important; }
-        }
       `}</style>
 
       {/* Hidden access menu */}
@@ -588,7 +569,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 2 — THE INVOICE VISUAL */}
-        <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "80px 48px" }}>
+        <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "80px 48px 0" }}>
           <div style={{ maxWidth: 900, margin: "0 auto" }}>
             <div
               style={{
@@ -746,7 +727,7 @@ const Home = () => {
                 background: "#1A3D2E",
                 margin: "0 -48px",
                 padding: "72px 48px",
-                borderRadius: 16,
+                borderRadius: "16px 16px 0 0",
               }}
             >
               {/* Header block */}
@@ -901,77 +882,6 @@ const Home = () => {
           </div>
         </section>
 
-        {/* SECTION 3 — THE PROBLEM */}
-        <section className="tl-section-problem" style={{ background: C.surface, padding: "80px 48px" }}>
-          <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <SectionTag>The Problem</SectionTag>
-            <h2 className="tl-section-h2"
-              style={{
-                fontWeight: 800,
-                fontSize: 36,
-                color: C.fg,
-                letterSpacing: "-0.022em",
-                lineHeight: 1.2,
-                marginBottom: 10,
-              }}
-            >
-              Every business using agencies at scale lives with the same problems.
-            </h2>
-            <p className="tl-section-sub"
-              style={{
-                fontSize: 15,
-                color: C.muted,
-                lineHeight: 1.65,
-                marginBottom: 48,
-                maxWidth: 520,
-              }}
-            >
-              They surface every week. They compound. The cost is invisible.
-            </p>
-            <div
-              className="tl-problem-grid"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                gap: 1,
-                background: C.border,
-                borderRadius: 12,
-                overflow: "hidden",
-              }}
-            >
-              {problems.map((p, i) => (
-                <motion.div
-                  key={i}
-                  className="tl-card tl-problem-card"
-                  initial={{ opacity: 0, y: 20, scale: 0.97 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.4, delay: i * 0.05, ease: "easeOut" }}
-                  whileHover={{ scale: 1.02, backgroundColor: "#EBF4EF", boxShadow: "0 4px 16px rgba(45,106,79,0.08)" }}
-                  style={{
-                    background: C.bg,
-                    padding: 24,
-                  }}
-                >
-                  <div
-                    style={{
-                      fontWeight: 800,
-                      fontSize: 11,
-                      letterSpacing: "0.1em",
-                      color: C.primary,
-                      marginBottom: 10,
-                    }}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </div>
-                  <div className="tl-problem-statement" style={{ fontWeight: 700, fontSize: 14, color: C.fg, lineHeight: 1.4 }}>
-                    {p}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </section>
 
         {/* SECTION 3b — THE REVEAL */}
         <section className="tl-section-reveal" style={{ background: "#1A3D2E", padding: "72px 48px" }}>
@@ -1396,7 +1306,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 6 — CONTACT */}
-        <section id="contact" className="tl-section-contact" style={{ background: "#1A3D2E", padding: "80px 48px" }}>
+        <section id="contact" className="tl-section-contact" style={{ background: "#2D6A4F", padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
             <h2 className="tl-section-h2 tl-contact-h2"
               style={{
