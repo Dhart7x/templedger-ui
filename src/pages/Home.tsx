@@ -306,6 +306,12 @@ const Home = () => {
           .tl-section-solution { padding: 48px 20px !important; }
           .tl-section-solution h2 { font-size: 26px !important; }
 
+          /* INTRODUCING TEMPLEDGER */
+          .tl-section-introducing { padding: 56px 20px !important; }
+          .tl-section-introducing h2 { font-size: 28px !important; }
+          .tl-pillars { grid-template-columns: 1fr !important; }
+          .tl-pillar-word { font-size: 26px !important; }
+
           /* OUTCOME */
           .tl-section-outcome { padding: 48px 20px !important; }
           .tl-outcome-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
