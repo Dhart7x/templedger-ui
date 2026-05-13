@@ -300,7 +300,7 @@ const Home = () => {
           /* HOW IT WORKS */
           .tl-section-how { padding: 56px 20px !important; }
           .tl-steps-grid { grid-template-columns: 1fr !important; gap: 1px !important; }
-          .tl-step-number { font-size: 36px !important; }
+          .tl-section-how .tl-section-sub { font-size: 13px !important; }
 
           /* CONTACT */
           .tl-section-contact { padding: 56px 20px !important; }
