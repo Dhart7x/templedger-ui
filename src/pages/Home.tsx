@@ -717,78 +717,6 @@ const Home = () => {
                 />
               </div>
             </motion.div>
-
-            {/* ELEMENT 2 — TRANSITION */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 12,
-                padding: "32px 0",
-                maxWidth: 560,
-                margin: "0 auto",
-              }}
-            >
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-                style={{
-                  fontFamily: FONT,
-                  fontWeight: 700,
-                  fontSize: 16,
-                  color: "#6B6460",
-                  textAlign: "center",
-                  margin: 0,
-                }}
-              >
-                The invoice accounts for the spend. Not the cost.
-              </motion.p>
-
-              {/* Arrow chain */}
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-                {[
-                  { color: "#E5E0DA", delay: 0.2 },
-                  { color: "#C0B8B0", delay: 0.3 },
-                  { color: "#2D6A4F", delay: 0.4 },
-                ].map((c, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 0.3, delay: c.delay }}
-                  >
-                    <ChevronDown
-                      size={20}
-                      color={c.color}
-                      className="tl-chevron-pulse"
-                      style={{ animationDelay: `${i * 0.3}s` }}
-                    />
-                  </motion.div>
-                ))}
-              </div>
-
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.4, delay: 0.5 }}
-                style={{
-                  fontFamily: FONT,
-                  fontWeight: 700,
-                  fontSize: 16,
-                  color: "#0D0D0B",
-                  textAlign: "center",
-                  marginTop: 4,
-                }}
-              >
-                None of this is on the invoice. All of it is on your P&L.
-              </motion.p>
-            </div>
-
             {/* ELEMENT 3 — HIDDEN COSTS */}
             <div
               className="tl-hidden-costs"
@@ -829,22 +757,35 @@ const Home = () => {
                   }}
                 >
                   <div style={{ width: 24, height: 2, background: "rgba(255,255,255,0.2)" }} />
-                  THE COST OF INACTION
+                  THE REAL COST
                 </div>
-                <h2
-                  style={{
-                    fontFamily: FONT,
-                    fontWeight: 800,
-                    fontSize: 32,
-                    color: "#FFFFFF",
-                    letterSpacing: "-0.022em",
-                    lineHeight: 1.2,
-                    marginTop: 12,
-                    maxWidth: 560,
-                  }}
-                >
-                  How much is all of this costing your business?
-                </h2>
+                <div style={{ marginTop: 12, maxWidth: 560 }}>
+                  <div
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 400,
+                      fontSize: 20,
+                      color: "rgba(255,255,255,0.6)",
+                      fontStyle: "italic",
+                      lineHeight: 1.4,
+                    }}
+                  >
+                    None of this is on the invoice. All of it is on your P&L.
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 800,
+                      fontSize: 36,
+                      color: "#FFFFFF",
+                      letterSpacing: "-0.022em",
+                      lineHeight: 1.2,
+                      marginTop: 10,
+                    }}
+                  >
+                    How much is all of this costing your business?
+                  </div>
+                </div>
               </motion.div>
 
               {/* Five question blocks */}
