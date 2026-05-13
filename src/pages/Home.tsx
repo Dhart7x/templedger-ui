@@ -484,6 +484,11 @@ const Home = () => {
                 letterSpacing: "-0.03em",
                 lineHeight: 1.08,
                 marginBottom: 20,
+                wordBreak: "normal",
+                overflowWrap: "break-word",
+                whiteSpace: "normal",
+                hyphens: "none",
+                maxWidth: 760,
               }}
             >
               {"The cost of your agency spend isn't the number on the invoice."
