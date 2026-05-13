@@ -671,7 +671,6 @@ const Home = () => {
                   AGENCY INVOICE
                 </span>
                 <span style={{ fontFamily: FONT, fontWeight: 400, fontSize: 11, color: "#C0B8B0" }}>
-                  Week ending 14 Feb
                 </span>
               </div>
               {[
