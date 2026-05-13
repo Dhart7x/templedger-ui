@@ -68,6 +68,7 @@ const TypingDollars = ({
 
 import { X } from "lucide-react";
 import SalesDeck from "./SalesDeck";
+import DemoGate from "@/components/DemoGate";
 
 const FONT = "'Plus Jakarta Sans', system-ui, sans-serif";
 
@@ -123,14 +124,15 @@ const Home = () => {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", company: "", email: "", role: "" });
   const [demoOpen, setDemoOpen] = useState(false);
+  const [demoGateOpen, setDemoGateOpen] = useState(false);
 
   useEffect(() => {
-    if (demoOpen) {
+    if (demoOpen || demoGateOpen) {
       const prev = document.body.style.overflow;
       document.body.style.overflow = "hidden";
       return () => { document.body.style.overflow = prev; };
     }
-  }, [demoOpen]);
+  }, [demoOpen, demoGateOpen]);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -386,7 +388,7 @@ const Home = () => {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button
-            onClick={() => setDemoOpen(true)}
+            onClick={() => setDemoGateOpen(true)}
             style={{
               fontFamily: FONT,
               fontWeight: 700,
