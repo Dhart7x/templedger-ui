@@ -920,190 +920,20 @@ const Home = () => {
         </section>
         </div>
 
-        {/* SECTION 3c — THE ALTERNATIVE */}
-        <section className="tl-section-alternative" style={{ background: "#FAFAF8", padding: "80px 48px", margin: 0, width: "100%" }}>
+
+        {/* SECTION — INTRODUCING TEMPLEDGER */}
+        <section className="tl-section-introducing" style={{ background: "#FFFFFF", padding: "80px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  marginBottom: 16,
-                  fontFamily: FONT,
-                  fontWeight: 700,
-                  fontSize: 10,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "#4C1D95",
-                }}
-              >
-                <span style={{ width: 24, height: 2, background: "#4C1D95" }} />
-                THE ALTERNATIVE
-              </div>
-              <h2
-                className="tl-section-h2"
-                style={{
-                  fontFamily: FONT,
-                  fontWeight: 800,
-                  fontSize: 36,
-                  color: "#0D0D0B",
-                  letterSpacing: "-0.022em",
-                  lineHeight: 1.2,
-                  marginBottom: 48,
-                  maxWidth: 760,
-                }}
-              >
-                If you want to outsource the problem, there are good options. If you want to solve it, TempLedger is the answer.
-              </h2>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="tl-alt-table-wrap"
-              style={{ overflowX: "auto" }}
-            >
-              <div
-                className="tl-alt-table"
-                style={{
-                  display: "grid",
-                  borderRadius: 12,
-                  overflow: "hidden",
-                  border: "0.5px solid #E5E0DA",
-                  minWidth: 520,
-                }}
-              >
-                {/* Header */}
-                <div
-                  className="tl-alt-header"
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr 1fr",
-                    background: "#2E1065",
-                  }}
-                >
-                  <div style={{ padding: "16px 20px" }} />
-                  <div
-                    style={{
-                      padding: "16px 20px",
-                      fontFamily: FONT,
-                      fontWeight: 700,
-                      fontSize: 12,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "rgba(255,255,255,0.5)",
-                    }}
-                  >
-                    MSP / NEUTRAL VENDOR
-                  </div>
-                  <div
-                    style={{
-                      padding: "16px 20px",
-                      fontFamily: FONT,
-                      fontWeight: 700,
-                      fontSize: 12,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "#FFFFFF",
-                      borderLeft: "0.5px solid rgba(255,255,255,0.1)",
-                    }}
-                  >
-                    TEMPLEDGER
-                  </div>
-                </div>
-
-                {/* Data rows */}
-                {[
-                  { label: "Who owns the data", msp: "The intermediary", tl: "You and your agencies equally" },
-                  { label: "Visibility", msp: "What they choose to share", tl: "Live. Both sides. Real time." },
-                  { label: "Agency relationship", msp: "Filtered through a third party", tl: "Direct. No intermediary." },
-                  { label: "Cost", msp: "Expensive", tl: "Pays for itself" },
-                  { label: "Value to agencies", msp: "Net negative", tl: "Net positive" },
-                  { label: "Control", msp: "Outsourced", tl: "Yours" },
-                ].map((row, i, arr) => (
-                  <motion.div
-                    key={i}
-                    className="tl-alt-row"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 0.3, delay: 0.2 + i * 0.06, ease: "easeOut" }}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "1fr 1fr 1fr",
-                      background: i % 2 === 0 ? "#FFFFFF" : "#FAFAF8",
-                      borderBottom: i === arr.length - 1 ? "none" : "0.5px solid #E5E0DA",
-                    }}
-                  >
-                    <div
-                      className="tl-alt-label"
-                      style={{
-                        padding: "18px 20px",
-                        fontFamily: FONT,
-                        fontWeight: 600,
-                        fontSize: 13,
-                        color: "#0D0D0B",
-                      }}
-                    >
-                      {row.label}
-                    </div>
-                    <div
-                      className="tl-alt-msp"
-                      style={{
-                        padding: "18px 20px",
-                        fontFamily: FONT,
-                        fontWeight: 400,
-                        fontSize: 13,
-                        color: "#6B6460",
-                        borderLeft: "0.5px solid #E5E0DA",
-                      }}
-                    >
-                      {row.msp}
-                    </div>
-                    <div
-                      className="tl-alt-tl"
-                      style={{
-                        padding: "18px 20px",
-                        fontFamily: FONT,
-                        fontWeight: 600,
-                        fontSize: 13,
-                        color: "#4C1D95",
-                        borderLeft: "0.5px solid #E5E0DA",
-                      }}
-                    >
-                      {row.tl}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* SECTION 3.5 — THE SOLUTION */}
-        <section className="tl-section-solution" style={{ background: "#FFFFFF", padding: "80px 48px", margin: 0, width: "100%" }}>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}
-          >
-            <div
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
                 gap: 10,
-                marginBottom: 20,
+                marginBottom: 16,
                 fontFamily: FONT,
                 fontWeight: 700,
                 fontSize: 10,
@@ -1113,37 +943,99 @@ const Home = () => {
               }}
             >
               <div style={{ width: 24, height: 2, background: "#4C1D95" }} />
-              THE SOLUTION
-            </div>
-            <h2
+              INTRODUCING TEMPLEDGER
+            </motion.div>
+            <motion.h2
               className="tl-section-h2"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
               style={{
                 fontFamily: FONT,
                 fontWeight: 800,
                 fontSize: 38,
                 color: "#0D0D0B",
                 letterSpacing: "-0.022em",
-                lineHeight: 1.15,
+                lineHeight: 1.2,
                 marginBottom: 16,
               }}
             >
-              TempLedger is the shared system both sides were missing.
-            </h2>
-            <p
+              One platform. Both sides. For the first time.
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
               style={{
                 fontFamily: FONT,
                 fontWeight: 400,
                 fontSize: 16,
                 color: "#6B6460",
-                lineHeight: 1.7,
-                maxWidth: 580,
-                margin: "0 auto",
+                lineHeight: 1.75,
+                maxWidth: 640,
+                marginBottom: 48,
               }}
             >
-              One platform connecting labor users and agencies. Both sides operating on the same data, in real time, with a shared record neither side can dispute.
-            </p>
-          </motion.div>
+              TempLedger is an agency management platform built for the business that carries the spend, the risk and the operational consequence. Not for the agency. Not for an intermediary. For you.
+            </motion.p>
+            <div className="tl-pillars" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 48 }}>
+              {[
+                { word: "Transparency.", title: "A shared system.", body: "Every agency, every worker, every shift — in one place. Both sides operating on the same data simultaneously. No summaries. No lag. No version of events." },
+                { word: "Accountability.", title: "Verified by default.", body: "Attendance captured at source. Compliance checked continuously. Payroll derived from verified data. Accuracy is not a process. It is the architecture." },
+                { word: "Control.", title: "Yours to keep.", body: "Authorization tiers, booking distribution, agency performance and spend visibility — configured to your operation and owned by you. Not outsourced. Not dependent on what your agencies choose to share." },
+              ].map((p, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.45, delay: i * 0.1, ease: "easeOut" }}
+                  style={{
+                    background: "#FAFAF8",
+                    border: "0.5px solid #E5E0DA",
+                    borderRadius: 12,
+                    padding: "32px 28px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 12,
+                  }}
+                >
+                  <div className="tl-pillar-word" style={{ fontFamily: FONT, fontWeight: 800, fontSize: 32, color: "#4C1D95", letterSpacing: "-0.02em", lineHeight: 1 }}>
+                    {p.word}
+                  </div>
+                  <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 16, color: "#0D0D0B", marginTop: 4 }}>
+                    {p.title}
+                  </div>
+                  <div style={{ fontFamily: FONT, fontWeight: 400, fontSize: 14, color: "#6B6460", lineHeight: 1.7 }}>
+                    {p.body}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
+              style={{
+                paddingTop: 32,
+                borderTop: "0.5px solid #E5E0DA",
+                fontFamily: FONT,
+                fontWeight: 700,
+                fontSize: 20,
+                color: "#0D0D0B",
+                textAlign: "center",
+                fontStyle: "italic",
+                lineHeight: 1.5,
+              }}
+            >
+              TempLedger is not an HR tool. It is a financial control tool that happens to live in HR's domain.
+            </motion.div>
+          </div>
         </section>
+
 
         {/* SECTION 4 — THE OUTCOME */}
         <section className="tl-section-outcome" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #5B21B6 40%, #4C1D95 70%, #3B1578 100%)", padding: "80px 48px", margin: 0, width: "100%" }}>
@@ -1433,6 +1325,174 @@ const Home = () => {
               ))}
             </div>
           </motion.div>
+        </section>
+
+        {/* SECTION 3c — THE ALTERNATIVE */}
+        <section className="tl-section-alternative" style={{ background: "#FAFAF8", padding: "80px 48px", margin: 0, width: "100%" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  marginBottom: 16,
+                  fontFamily: FONT,
+                  fontWeight: 700,
+                  fontSize: 10,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  color: "#4C1D95",
+                }}
+              >
+                <span style={{ width: 24, height: 2, background: "#4C1D95" }} />
+                THE ALTERNATIVE
+              </div>
+              <h2
+                className="tl-section-h2"
+                style={{
+                  fontFamily: FONT,
+                  fontWeight: 800,
+                  fontSize: 36,
+                  color: "#0D0D0B",
+                  letterSpacing: "-0.022em",
+                  lineHeight: 1.2,
+                  marginBottom: 48,
+                  maxWidth: 760,
+                }}
+              >
+                If you want to outsource the problem, there are good options. If you want to solve it, TempLedger is the answer.
+              </h2>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              className="tl-alt-table-wrap"
+              style={{ overflowX: "auto" }}
+            >
+              <div
+                className="tl-alt-table"
+                style={{
+                  display: "grid",
+                  borderRadius: 12,
+                  overflow: "hidden",
+                  border: "0.5px solid #E5E0DA",
+                  minWidth: 520,
+                }}
+              >
+                {/* Header */}
+                <div
+                  className="tl-alt-header"
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr 1fr",
+                    background: "#2E1065",
+                  }}
+                >
+                  <div style={{ padding: "16px 20px" }} />
+                  <div
+                    style={{
+                      padding: "16px 20px",
+                      fontFamily: FONT,
+                      fontWeight: 700,
+                      fontSize: 12,
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      color: "rgba(255,255,255,0.5)",
+                    }}
+                  >
+                    MSP / NEUTRAL VENDOR
+                  </div>
+                  <div
+                    style={{
+                      padding: "16px 20px",
+                      fontFamily: FONT,
+                      fontWeight: 700,
+                      fontSize: 12,
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      color: "#FFFFFF",
+                      borderLeft: "0.5px solid rgba(255,255,255,0.1)",
+                    }}
+                  >
+                    TEMPLEDGER
+                  </div>
+                </div>
+
+                {/* Data rows */}
+                {[
+                  { label: "Who owns the data", msp: "The intermediary", tl: "You and your agencies equally" },
+                  { label: "Visibility", msp: "What they choose to share", tl: "Live. Both sides. Real time." },
+                  { label: "Agency relationship", msp: "Filtered through a third party", tl: "Direct. No intermediary." },
+                  { label: "Cost", msp: "Expensive", tl: "Pays for itself" },
+                  { label: "Value to agencies", msp: "Net negative", tl: "Net positive" },
+                  { label: "Control", msp: "Outsourced", tl: "Yours" },
+                ].map((row, i, arr) => (
+                  <motion.div
+                    key={i}
+                    className="tl-alt-row"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: "-80px" }}
+                    transition={{ duration: 0.3, delay: 0.2 + i * 0.06, ease: "easeOut" }}
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr 1fr 1fr",
+                      background: i % 2 === 0 ? "#FFFFFF" : "#FAFAF8",
+                      borderBottom: i === arr.length - 1 ? "none" : "0.5px solid #E5E0DA",
+                    }}
+                  >
+                    <div
+                      className="tl-alt-label"
+                      style={{
+                        padding: "18px 20px",
+                        fontFamily: FONT,
+                        fontWeight: 600,
+                        fontSize: 13,
+                        color: "#0D0D0B",
+                      }}
+                    >
+                      {row.label}
+                    </div>
+                    <div
+                      className="tl-alt-msp"
+                      style={{
+                        padding: "18px 20px",
+                        fontFamily: FONT,
+                        fontWeight: 400,
+                        fontSize: 13,
+                        color: "#6B6460",
+                        borderLeft: "0.5px solid #E5E0DA",
+                      }}
+                    >
+                      {row.msp}
+                    </div>
+                    <div
+                      className="tl-alt-tl"
+                      style={{
+                        padding: "18px 20px",
+                        fontFamily: FONT,
+                        fontWeight: 600,
+                        fontSize: 13,
+                        color: "#4C1D95",
+                        borderLeft: "0.5px solid #E5E0DA",
+                      }}
+                    >
+                      {row.tl}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </section>
 
         {/* SECTION 5 — HOW IT WORKS */}
