@@ -738,7 +738,7 @@ const Home = () => {
                   margin: 0,
                 }}
               >
-                Every week, your operation also experiences this:
+                None of this is on the invoice. All of it is on your P&L.
               </motion.p>
               <div style={{ width: "100%", height: "0.5px", background: "#E5E0DA" }} />
             </div>
