@@ -792,23 +792,23 @@ const Home = () => {
               {/* Five question blocks */}
               {[
                 {
-                  q: "What does it cost your business that every agency booking is distributed on habit rather than performance?",
+                  q: "Agency bookings distributed on habit, not performance.",
                   a: "The optimal agency, with the optimal worker, at the optimal cost — that decision is impossible when the data to make it lives in a system you cannot see.",
                 },
                 {
-                  q: "What does it cost your business that overtime is easier to authorize than it is to avoid?",
+                  q: "Overtime is easier to authorize than it is to avoid.",
                   a: "Giving someone an additional shift takes seconds. Identifying an available nearby worker who costs less takes a system nobody in your operation currently has.",
                 },
                 {
-                  q: "What does it cost your business for your management team to coordinate agencies rather than run your operation?",
+                  q: "Management time spent coordinating agencies instead of running the operation.",
                   a: "Every hour spent chasing timesheets, approving bookings and managing no-shows is an hour not spent on output.",
                 },
                 {
-                  q: "What is the financial and reputational risk of non-compliant workers reaching your site?",
+                  q: "Non-compliant workers on your site because there is no live shared record to prevent it.",
                   a: "The agency manages compliance. The liability sits with you. Without a live shared record, you have no way to verify either.",
                 },
                 {
-                  q: "What does it cost your business when middle management authorizes headcount without financial controls?",
+                  q: "Headcount authorized at site level without financial controls.",
                   a: "Spend decisions made at site level without finance visibility. Every week. Without a system to prevent it, it never stops.",
                 },
               ].map((block, i, arr) => (
