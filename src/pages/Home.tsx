@@ -268,7 +268,13 @@ const Home = () => {
 
           /* INVOICE */
           .tl-section-invoice { padding: 56px 20px !important; }
-          .tl-invoice-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+          .tl-invoice-card { max-width: 100% !important; }
+          .tl-invoice-transition { font-size: 16px !important; }
+          .tl-hidden-costs { margin: 0 -20px !important; padding: 40px 20px !important; }
+          .tl-hidden-costs .tl-hidden-stmt { font-size: 22px !important; }
+
+          .tl-hidden-stmt { transition: color 0.2s ease; }
+          .tl-hidden-stmt:hover { color: #C4391A !important; }
 
           /* PROBLEM */
           .tl-section-problem { padding: 56px 20px !important; }
