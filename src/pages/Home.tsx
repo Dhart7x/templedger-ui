@@ -152,15 +152,15 @@ const Home = () => {
   };
 
   const problems = [
-    "Shifts fail without warning.",
-    "Agency booking distribution is never optimized.",
-    "Payroll accuracy is the objective, not the default.",
-    "Invoice disputes from unverified payroll.",
-    "Performance is self-reported.",
-    "Problems surface too late.",
+    "Shifts fail and you find out on the morning.",
+    "Agency bookings distributed on habit, not performance.",
+    "Payroll is disputed because nobody can prove what happened.",
+    "You have no visibility of who is on your site until they arrive.",
+    "Agency performance is whatever they tell you it is.",
     "Your agency workforce is a black box.",
-    "Internal policies exist. The system to enforce them doesn't.",
-    "Your operations team spends half its time chasing agencies.",
+    "Internal spend policies exist. Nothing enforces them.",
+    "Compliance is managed by the agency. The liability is yours.",
+    "Your operations team spends more time chasing agencies than running the operation.",
   ];
 
   const costs = [
@@ -276,7 +276,11 @@ const Home = () => {
           .tl-problem-card { padding: 16px !important; }
           .tl-problem-statement { font-size: 13px !important; }
 
-          /* COST */
+          /* REVEAL */
+          .tl-section-reveal { padding: 56px 20px !important; }
+          .tl-section-reveal h2 { font-size: 26px !important; }
+          .tl-section-reveal .tl-reveal-block { font-size: 14px !important; }
+          .tl-section-reveal .tl-reveal-close { font-size: 15px !important; }
           .tl-section-cost { padding: 56px 20px !important; }
           .tl-cost-stack { gap: 12px !important; }
 
@@ -870,6 +874,77 @@ const Home = () => {
               ))}
             </div>
           </motion.div>
+        </section>
+
+        {/* SECTION 3b — THE REVEAL */}
+        <section className="tl-section-reveal" style={{ background: "#0D0D0B", padding: "72px 48px" }}>
+          <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
+            <motion.h2
+              className="tl-section-h2"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              style={{
+                fontFamily: FONT,
+                fontWeight: 800,
+                fontSize: 36,
+                color: "#FFFFFF",
+                letterSpacing: "-0.022em",
+                lineHeight: 1.2,
+                marginBottom: 32,
+              }}
+            >
+              There's a reason this keeps happening.
+            </motion.h2>
+            <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 640, margin: "0 auto" }}>
+              {[
+                "Agency worker data lives inside agency CRMs — systems built for the agency, not for you.",
+                "Time and attendance sits in a separate system entirely. No shared record of what was scheduled, who showed up, or whether anything that followed was accurate.",
+                "You are not managing agencies. You are reacting to whatever information they choose to share. And by the time you have it, it is already too late to act on it.",
+              ].map((text, i) => (
+                <motion.div
+                  key={i}
+                  className="tl-reveal-block"
+                  initial={{ opacity: 0, x: -24 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.45, delay: i * 0.1, ease: "easeOut" }}
+                  style={{
+                    borderLeft: "3px solid #2D6A4F",
+                    borderRadius: "0 8px 8px 0",
+                    background: "rgba(255,255,255,0.04)",
+                    padding: "20px 24px",
+                    textAlign: "left",
+                    fontFamily: FONT,
+                    fontWeight: 400,
+                    fontSize: 15,
+                    color: "rgba(255,255,255,0.7)",
+                    lineHeight: 1.75,
+                  }}
+                >
+                  {text}
+                </motion.div>
+              ))}
+            </div>
+            <motion.p
+              className="tl-reveal-close"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
+              style={{
+                fontFamily: FONT,
+                fontWeight: 700,
+                fontSize: 17,
+                color: "#FFFFFF",
+                textAlign: "center",
+                marginTop: 36,
+              }}
+            >
+              Without synchronization, failure is built into the model.
+            </motion.p>
+          </div>
         </section>
 
         {/* SECTION 3 — THE COST */}
