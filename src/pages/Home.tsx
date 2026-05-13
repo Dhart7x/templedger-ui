@@ -1427,7 +1427,7 @@ const Home = () => {
         {/* SECTION 7 — FOOTER */}
         <footer className="tl-footer"
           style={{
-            background: "#0D0D0B",
+            background: "#1A3D2E",
             borderTop: "0.5px solid rgba(255,255,255,0.08)",
             padding: "24px 48px",
             display: "flex",
