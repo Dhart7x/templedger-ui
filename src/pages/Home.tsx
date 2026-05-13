@@ -121,21 +121,18 @@ const scrollToHowItWorks = () => {
 };
 
 const Home = () => {
-  const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", company: "", email: "", role: "" });
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const [deckOpen, setDeckOpen] = useState(false);
+  const [demoOpen, setDemoOpen] = useState(false);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    if (deckOpen || demoOpen) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => { document.body.style.overflow = prev; };
+    }
+  }, [deckOpen, demoOpen]);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
