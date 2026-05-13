@@ -1268,7 +1268,7 @@ const Home = () => {
                 marginBottom: 10,
               }}
             >
-              For TempLedger users, this is what changes.
+              This is what changes.
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 24 }}
