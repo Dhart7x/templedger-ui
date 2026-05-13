@@ -1014,6 +1014,174 @@ const Home = () => {
           </motion.div>
         </section>
 
+        {/* SECTION 3c — THE ALTERNATIVE */}
+        <section className="tl-section-alternative" style={{ background: "#F8F5EF", padding: "80px 48px" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  marginBottom: 16,
+                  fontFamily: FONT,
+                  fontWeight: 700,
+                  fontSize: 10,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  color: "#2D6A4F",
+                }}
+              >
+                <span style={{ width: 24, height: 2, background: "#2D6A4F" }} />
+                THE ALTERNATIVE
+              </div>
+              <h2
+                className="tl-section-h2"
+                style={{
+                  fontFamily: FONT,
+                  fontWeight: 800,
+                  fontSize: 36,
+                  color: "#0D0D0B",
+                  letterSpacing: "-0.022em",
+                  lineHeight: 1.2,
+                  marginBottom: 48,
+                  maxWidth: 760,
+                }}
+              >
+                If you want to outsource the problem, there are good options. If you want to solve it, TempLedger is the answer.
+              </h2>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              className="tl-alt-table-wrap"
+              style={{ overflowX: "auto" }}
+            >
+              <div
+                className="tl-alt-table"
+                style={{
+                  display: "grid",
+                  borderRadius: 12,
+                  overflow: "hidden",
+                  border: "0.5px solid #E5E0DA",
+                  minWidth: 520,
+                }}
+              >
+                {/* Header */}
+                <div
+                  className="tl-alt-header"
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr 1fr",
+                    background: "#1A3D2E",
+                  }}
+                >
+                  <div style={{ padding: "16px 20px" }} />
+                  <div
+                    style={{
+                      padding: "16px 20px",
+                      fontFamily: FONT,
+                      fontWeight: 700,
+                      fontSize: 12,
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      color: "rgba(255,255,255,0.5)",
+                    }}
+                  >
+                    MSP / NEUTRAL VENDOR
+                  </div>
+                  <div
+                    style={{
+                      padding: "16px 20px",
+                      fontFamily: FONT,
+                      fontWeight: 700,
+                      fontSize: 12,
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      color: "#FFFFFF",
+                      borderLeft: "0.5px solid rgba(255,255,255,0.1)",
+                    }}
+                  >
+                    TEMPLEDGER
+                  </div>
+                </div>
+
+                {/* Data rows */}
+                {[
+                  { label: "Who owns the data", msp: "The intermediary", tl: "You and your agencies equally" },
+                  { label: "Visibility", msp: "What they choose to share", tl: "Live. Both sides. Real time." },
+                  { label: "Agency relationship", msp: "Filtered through a third party", tl: "Direct. No intermediary." },
+                  { label: "Cost", msp: "Expensive", tl: "Pays for itself" },
+                  { label: "Value to agencies", msp: "Net negative", tl: "Net positive" },
+                  { label: "Control", msp: "Outsourced", tl: "Yours" },
+                ].map((row, i, arr) => (
+                  <motion.div
+                    key={i}
+                    className="tl-alt-row"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: "-80px" }}
+                    transition={{ duration: 0.3, delay: 0.2 + i * 0.06, ease: "easeOut" }}
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr 1fr 1fr",
+                      background: i % 2 === 0 ? "#FFFFFF" : "#FAFAF6",
+                      borderBottom: i === arr.length - 1 ? "none" : "0.5px solid #E5E0DA",
+                    }}
+                  >
+                    <div
+                      className="tl-alt-label"
+                      style={{
+                        padding: "18px 20px",
+                        fontFamily: FONT,
+                        fontWeight: 600,
+                        fontSize: 13,
+                        color: "#0D0D0B",
+                      }}
+                    >
+                      {row.label}
+                    </div>
+                    <div
+                      className="tl-alt-msp"
+                      style={{
+                        padding: "18px 20px",
+                        fontFamily: FONT,
+                        fontWeight: 400,
+                        fontSize: 13,
+                        color: "#6B6460",
+                        borderLeft: "0.5px solid #E5E0DA",
+                      }}
+                    >
+                      {row.msp}
+                    </div>
+                    <div
+                      className="tl-alt-tl"
+                      style={{
+                        padding: "18px 20px",
+                        fontFamily: FONT,
+                        fontWeight: 600,
+                        fontSize: 13,
+                        color: "#2D6A4F",
+                        borderLeft: "0.5px solid #E5E0DA",
+                      }}
+                    >
+                      {row.tl}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* SECTION 4 — THE OUTCOME */}
         <section className="tl-section-outcome" style={{ background: "#2D6A4F", padding: "80px 48px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
