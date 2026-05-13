@@ -717,8 +717,6 @@ const Home = () => {
                 />
               </div>
             </motion.div>
-
-            {/* ELEMENT 2 — TRANSITION */}
             {/* ELEMENT 3 — HIDDEN COSTS */}
             <div
               className="tl-hidden-costs"
