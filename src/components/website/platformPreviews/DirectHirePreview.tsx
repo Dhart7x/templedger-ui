@@ -5,10 +5,10 @@ const stats = [
 ];
 
 const rows = [
-  { name: "Sarah Mitchell", hours: "847 hrs", depts: "Warehouse, MHE", att: "97%", comp: "Compliant", status: "Recommended" },
-  { name: "James Okafor", hours: "612 hrs", depts: "Picker, Loader", att: "94%", comp: "Compliant", status: "Recommended" },
+  { name: "Sarah Mitchell", hours: "847 hrs", depts: "Inbound Warehouse, MHE Operations", att: "97%", comp: "Compliant", status: "Recommended" },
+  { name: "James Okafor", hours: "612 hrs", depts: "Outbound Dispatch, Pick and Pack", att: "94%", comp: "Compliant", status: "Recommended" },
   { name: "Ana Pereira", hours: "445 hrs", depts: "Inbound Warehouse", att: "89%", comp: "Compliant", status: "Consider" },
-  { name: "Tom Brady", hours: "398 hrs", depts: "MHE Operations", att: "91%", comp: "Compliant", status: "Consider" },
+  { name: "Marcus Webb", hours: "398 hrs", depts: "MHE Operations", att: "91%", comp: "Compliant", status: "Consider" },
   { name: "Diane Foster", hours: "201 hrs", depts: "Pick and Pack", att: "84%", comp: "Compliant", status: "Active Temp" },
 ];
 
