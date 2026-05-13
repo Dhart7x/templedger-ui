@@ -385,37 +385,31 @@ const Home = () => {
           ))}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          {[
-            { label: "Deck", onClick: () => setDeckOpen(true) },
-            { label: "Demo", onClick: () => setDemoOpen(true) },
-          ].map((b) => (
-            <button
-              key={b.label}
-              onClick={b.onClick}
-              style={{
-                fontFamily: FONT,
-                fontWeight: 700,
-                fontSize: 12,
-                background: "transparent",
-                border: "0.5px solid rgba(255,255,255,0.3)",
-                color: "rgba(255,255,255,0.8)",
-                borderRadius: 6,
-                padding: "7px 16px",
-                cursor: "pointer",
-                transition: "border-color 0.15s, color 0.15s",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.6)";
-                e.currentTarget.style.color = "#FFFFFF";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)";
-                e.currentTarget.style.color = "rgba(255,255,255,0.8)";
-              }}
-            >
-              {b.label}
-            </button>
-          ))}
+          <button
+            onClick={() => setDemoOpen(true)}
+            style={{
+              fontFamily: FONT,
+              fontWeight: 700,
+              fontSize: 12,
+              background: "transparent",
+              border: "0.5px solid rgba(255,255,255,0.3)",
+              color: "rgba(255,255,255,0.8)",
+              borderRadius: 6,
+              padding: "7px 16px",
+              cursor: "pointer",
+              transition: "border-color 0.15s, color 0.15s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.6)";
+              e.currentTarget.style.color = "#FFFFFF";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)";
+              e.currentTarget.style.color = "rgba(255,255,255,0.8)";
+            }}
+          >
+            Demo
+          </button>
           <motion.button
             className="tl-nav-cta"
             onClick={scrollToContact}
