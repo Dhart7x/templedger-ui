@@ -880,6 +880,7 @@ const Home = () => {
         <section className="tl-section-reveal" style={{ background: "#0D0D0B", padding: "72px 48px" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <motion.h2
+              className="tl-section-h2"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
