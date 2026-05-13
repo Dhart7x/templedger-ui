@@ -508,7 +508,7 @@ const Home = () => {
 
       <div className="tl-nav-spacer" style={{ paddingTop: 56 }}>
         {/* SECTION 1 — HERO */}
-        <section className="tl-hero" style={{ background: C.bg, padding: "96px 48px 80px" }}>
+        <section className="tl-hero" style={{ background: C.bg, padding: "96px 48px 80px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <motion.span
               initial={{ opacity: 0, y: 20 }}
@@ -600,7 +600,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 2 — THE INVOICE VISUAL */}
-        <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "80px 48px 0" }}>
+        <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "80px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 900, margin: "0 auto" }}>
             <div
               style={{
@@ -722,15 +722,12 @@ const Home = () => {
               className="tl-hidden-costs"
               style={{
                 background: "#1A3D2E",
-                width: "100vw",
-                position: "relative",
-                left: "50%",
-                right: "50%",
-                marginLeft: "-50vw",
-                marginRight: "-50vw",
+                marginLeft: -48,
+                marginRight: -48,
+                marginTop: 0,
                 marginBottom: 0,
-                padding: "72px 48px 72px",
-                borderRadius: "16px 16px 0 0",
+                padding: "72px 48px",
+                borderRadius: 16,
                 boxShadow: "none",
               }}
             >
@@ -902,8 +899,10 @@ const Home = () => {
         </section>
 
 
+        {/* MERGED DARK BLOCK — REVEAL + COST */}
+        <div style={{ background: "#1A3D2E", width: "100%", margin: 0, padding: 0 }}>
         {/* SECTION 3b — THE REVEAL */}
-        <section className="tl-section-reveal" style={{ background: "#1A3D2E", padding: "72px 48px" }}>
+        <section className="tl-section-reveal" style={{ background: "transparent", padding: "72px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <motion.h2
               className="tl-section-h2"
@@ -974,7 +973,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 3 — THE COST */}
-        <section className="tl-section-cost" style={{ background: "#1A3D2E", padding: "80px 48px" }}>
+        <section className="tl-section-cost" style={{ background: "transparent", padding: "80px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag dark>The Cost</SectionTag>
             <h2 className="tl-section-h2"
@@ -1032,9 +1031,10 @@ const Home = () => {
             </div>
           </motion.div>
         </section>
+        </div>
 
         {/* SECTION 3c — THE ALTERNATIVE */}
-        <section className="tl-section-alternative" style={{ background: "#F8F5EF", padding: "80px 48px" }}>
+        <section className="tl-section-alternative" style={{ background: "#F8F5EF", padding: "80px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <motion.div
               initial={{ opacity: 0, y: 24 }}
@@ -1202,7 +1202,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 4 — THE OUTCOME */}
-        <section className="tl-section-outcome" style={{ background: "#2D6A4F", padding: "80px 48px" }}>
+        <section className="tl-section-outcome" style={{ background: "#2D6A4F", padding: "80px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <div
               style={{
@@ -1443,7 +1443,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 5 — HOW IT WORKS */}
-        <section id="how-it-works" className="tl-section-how" style={{ background: C.surface, padding: "80px 48px" }}>
+        <section id="how-it-works" className="tl-section-how" style={{ background: C.surface, padding: "80px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>How It Works</SectionTag>
             <h2 className="tl-section-h2"
@@ -1505,7 +1505,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 6 — CONTACT */}
-        <section id="contact" className="tl-section-contact" style={{ background: "#2D6A4F", padding: "80px 48px" }}>
+        <section id="contact" className="tl-section-contact" style={{ background: "#2D6A4F", padding: "80px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
             <h2 className="tl-section-h2 tl-contact-h2"
               style={{
