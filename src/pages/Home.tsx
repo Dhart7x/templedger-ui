@@ -250,6 +250,14 @@ const Home = () => {
         .tl-input:focus { border-color: ${C.primary} !important; }
         .tl-select option { color: ${C.fg}; }
 
+        @keyframes chevronPulse {
+          0%, 100% { opacity: 0.4; }
+          50% { opacity: 1; }
+        }
+        .tl-chevron-pulse {
+          animation: chevronPulse 1.2s ease-in-out infinite;
+        }
+
         @media (max-width: 768px) {
           /* NAV */
           .tl-nav { padding: 0 16px !important; height: 48px !important; }
@@ -714,33 +722,72 @@ const Home = () => {
             {/* ELEMENT 2 — TRANSITION */}
             <div
               style={{
-                margin: "56px auto",
-                maxWidth: 560,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 gap: 12,
+                padding: "32px 0",
+                maxWidth: 560,
+                margin: "0 auto",
               }}
             >
-              <div style={{ width: "100%", height: "0.5px", background: "#E5E0DA" }} />
               <motion.p
-                className="tl-invoice-transition"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.4, delay: 0.2 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
                 style={{
                   fontFamily: FONT,
                   fontWeight: 700,
-                  fontSize: 18,
-                  color: "#0D0D0B",
+                  fontSize: 16,
+                  color: "#6B6460",
                   textAlign: "center",
                   margin: 0,
                 }}
               >
+                The invoice accounts for the spend. Not the cost.
+              </motion.p>
+
+              {/* Arrow chain */}
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+                {[
+                  { color: "#E5E0DA", delay: 0.2 },
+                  { color: "#C0B8B0", delay: 0.3 },
+                  { color: "#2D6A4F", delay: 0.4 },
+                ].map((c, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: "-80px" }}
+                    transition={{ duration: 0.3, delay: c.delay }}
+                  >
+                    <ChevronDown
+                      size={20}
+                      color={c.color}
+                      className="tl-chevron-pulse"
+                      style={{ animationDelay: `${i * 0.3}s` }}
+                    />
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.4, delay: 0.5 }}
+                style={{
+                  fontFamily: FONT,
+                  fontWeight: 700,
+                  fontSize: 16,
+                  color: "#0D0D0B",
+                  textAlign: "center",
+                  marginTop: 4,
+                }}
+              >
                 None of this is on the invoice. All of it is on your P&L.
               </motion.p>
-              <div style={{ width: "100%", height: "0.5px", background: "#E5E0DA" }} />
             </div>
 
             {/* ELEMENT 3 — HIDDEN COSTS */}
