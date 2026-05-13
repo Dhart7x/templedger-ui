@@ -789,7 +789,7 @@ const Home = () => {
                     maxWidth: 560,
                   }}
                 >
-                  Nobody has ever added up what this costs your business. They should.
+                  How much is all of this costing your business?
                 </h2>
               </motion.div>
 
