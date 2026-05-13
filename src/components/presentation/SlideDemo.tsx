@@ -223,32 +223,56 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
   return (
     <div className="demo-theme w-full h-full flex flex-col" style={{ background: "hsl(var(--background))", color: "hsl(var(--foreground))" }}>
       {/* Demo Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/30">
+      <div
+        className="flex items-center justify-between px-4 py-3"
+        style={{ background: "#4C1D95", borderBottom: "0.5px solid #3B1578" }}
+      >
         <div />
 
-        {/* View Mode Dropdown */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm" className="gap-2 min-w-[160px]">
-              {viewMode === "client" ? "Client View" : "Agency View"}
-              <ChevronDown className="w-4 h-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="center" className="bg-card border border-border">
-            <DropdownMenuItem
-              onClick={() => setViewMode("client")}
-              className={viewMode === "client" ? "bg-primary/10 text-primary" : ""}
-            >
-              Client View (Apex Distribution Ltd)
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => setViewMode("agency")}
-              className={viewMode === "agency" ? "bg-primary/10 text-primary" : ""}
-            >
-              Agency View (Workforce Direct)
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {/* View Mode Pills */}
+        <div
+          role="tablist"
+          aria-label="View mode"
+          style={{
+            display: "inline-flex",
+            gap: 4,
+            padding: 4,
+            borderRadius: 999,
+            background: "rgba(255,255,255,0.08)",
+          }}
+        >
+          {([
+            { key: "client", label: "Client View" },
+            { key: "agency", label: "Agency View" },
+          ] as const).map((opt) => {
+            const active = viewMode === opt.key;
+            return (
+              <button
+                key={opt.key}
+                type="button"
+                role="tab"
+                aria-selected={active}
+                onClick={() => setViewMode(opt.key)}
+                style={{
+                  appearance: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  pointerEvents: "auto",
+                  padding: "6px 16px",
+                  borderRadius: 999,
+                  fontSize: 13,
+                  fontWeight: 600,
+                  letterSpacing: "0.01em",
+                  transition: "background 120ms ease, color 120ms ease",
+                  background: active ? "#FFFFFF" : "rgba(255,255,255,0.2)",
+                  color: active ? "#4C1D95" : "rgba(255,255,255,0.7)",
+                }}
+              >
+                {opt.label}
+              </button>
+            );
+          })}
+        </div>
 
         {/* Right side controls */}
         <div className="flex items-center gap-3">
@@ -263,9 +287,10 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
                 setActiveAgencyView("notifications");
               }
             }}
-            className="relative p-2 rounded-lg hover:bg-muted/50 transition-colors"
+            className="relative p-2 rounded-lg transition-colors"
+            style={{ background: "transparent" }}
           >
-            <Bell className="w-5 h-5 text-muted-foreground" />
+            <Bell className="w-5 h-5" style={{ color: "rgba(255,255,255,0.85)" }} />
             {unreadCount > 0 && (
               <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full flex items-center justify-center">
                 {unreadCount > 9 ? "9+" : unreadCount}
