@@ -901,7 +901,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 3b — THE REVEAL */}
-        <section className="tl-section-reveal" style={{ background: "#0D0D0B", padding: "72px 48px" }}>
+        <section className="tl-section-reveal" style={{ background: "#1A3D2E", padding: "72px 48px" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <motion.h2
               className="tl-section-h2"
