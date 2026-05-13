@@ -905,6 +905,7 @@ const Home = () => {
               ].map((text, i) => (
                 <motion.div
                   key={i}
+                  className="tl-reveal-block"
                   initial={{ opacity: 0, x: -24 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
