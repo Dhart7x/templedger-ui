@@ -891,9 +891,10 @@ const Home = () => {
                     fontSize: 15,
                     color: "rgba(255,255,255,0.9)",
                     textAlign: "right",
+                    whiteSpace: "pre-line",
                   }}
                 >
-                  Every week.<br />On every site.<br />Across every agency.
+                  {`Every week.\nOn every site.\nAcross every agency.`}
                 </span>
               </motion.div>
             </div>
