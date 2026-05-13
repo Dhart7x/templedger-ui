@@ -68,7 +68,6 @@ const TypingDollars = ({
 
 import { X } from "lucide-react";
 import SalesDeck from "./SalesDeck";
-import NewSalesDeck from "./NewSalesDeck";
 
 const FONT = "'Plus Jakarta Sans', system-ui, sans-serif";
 
