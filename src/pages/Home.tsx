@@ -741,7 +741,7 @@ const Home = () => {
             <div
               className="tl-hidden-costs"
               style={{
-                background: "#0D0D0B",
+                background: "#1A3D2E",
                 margin: "0 -48px",
                 padding: "56px 48px",
                 borderRadius: 16,
@@ -901,7 +901,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 3b — THE REVEAL */}
-        <section className="tl-section-reveal" style={{ background: "#0D0D0B", padding: "72px 48px" }}>
+        <section className="tl-section-reveal" style={{ background: "#1A3D2E", padding: "72px 48px" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <motion.h2
               className="tl-section-h2"
@@ -1323,7 +1323,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 6 — CONTACT */}
-        <section id="contact" className="tl-section-contact" style={{ background: "#2D6A4F", padding: "80px 48px" }}>
+        <section id="contact" className="tl-section-contact" style={{ background: "#1A3D2E", padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
             <h2 className="tl-section-h2 tl-contact-h2"
               style={{
@@ -1406,7 +1406,7 @@ const Home = () => {
                     style={{
                       width: "100%",
                       background: "#FFFFFF",
-                      color: "#2D6A4F",
+                      color: "#1A3D2E",
                       fontWeight: 700,
                       fontSize: 14,
                       borderRadius: 8,
@@ -1427,7 +1427,7 @@ const Home = () => {
         {/* SECTION 7 — FOOTER */}
         <footer className="tl-footer"
           style={{
-            background: "#0D0D0B",
+            background: "#1A3D2E",
             borderTop: "0.5px solid rgba(255,255,255,0.08)",
             padding: "24px 48px",
             display: "flex",
