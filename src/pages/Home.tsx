@@ -35,6 +35,37 @@ const StepNumber = ({ value }: { value: number }) => {
     </div>
   );
 };
+
+const TypingDollars = ({
+  delay,
+  style,
+}: {
+  delay: number;
+  style?: React.CSSProperties;
+}) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!inView) return;
+    const timers: number[] = [];
+    timers.push(
+      window.setTimeout(() => {
+        [1, 2, 3].forEach((n, i) => {
+          timers.push(window.setTimeout(() => setCount(n), i * 150));
+        });
+      }, delay * 1000)
+    );
+    return () => timers.forEach((t) => clearTimeout(t));
+  }, [inView, delay]);
+  return (
+    <span ref={ref} style={style}>
+      {"$".repeat(count)}
+      <span style={{ opacity: 0 }}>{"$".repeat(3 - count)}</span>
+    </span>
+  );
+};
+
 import { ChevronDown, Monitor, Presentation, TrendingUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
