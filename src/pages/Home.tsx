@@ -591,7 +591,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 2 — THE INVOICE VISUAL */}
-        <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "80px 48px 80px", margin: 0, width: "100%" }}>
+        <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "80px 48px 96px", position: "relative", zIndex: 1, margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 900, margin: "0 auto" }}>
             <div
               style={{
@@ -829,11 +829,12 @@ const Home = () => {
               </div>
             </div>
           </div>
+          <div style={{ height: '96px', background: '#FFFFFF', width: '100%' }} />
         </section>
 
 
         {/* MERGED DARK BLOCK — REVEAL + COST */}
-        <div style={{ background: "linear-gradient(180deg, #2E1065 0%, #1A0A3D 50%, #0D0520 100%)", width: "100%", margin: 0, padding: 0 }}>
+        <div style={{ background: "linear-gradient(180deg, #2E1065 0%, #1A0A3D 50%, #0D0520 100%)", width: "100%", margin: 0, padding: 0, position: "relative", zIndex: 0, marginTop: 0 }}>
         {/* SECTION 3b — THE REVEAL */}
         <section className="tl-section-reveal" style={{ background: "transparent", padding: "72px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
