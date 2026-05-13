@@ -275,6 +275,14 @@ const Home = () => {
           .tl-section-cost { padding: 56px 20px !important; }
           .tl-cost-stack { gap: 12px !important; }
 
+          /* ALTERNATIVE */
+          .tl-section-alternative { padding: 56px 20px !important; }
+          .tl-alt-table-wrap { overflow-x: auto !important; }
+          .tl-alt-table { min-width: unset !important; }
+          .tl-alt-header > div,
+          .tl-alt-row > div { padding: 12px 10px !important; font-size: 11px !important; }
+          .tl-alt-label { font-size: 11px !important; }
+
           /* OUTCOME */
           .tl-section-outcome { padding: 56px 20px !important; }
           .tl-outcome-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
