@@ -497,7 +497,7 @@ const Home = () => {
         </>
       )}
 
-      <div className="tl-nav-spacer" style={{ paddingTop: 56 }}>
+      <div className="tl-nav-spacer" style={{ paddingTop: 56, background: "#4C1D95", margin: 0 }}>
         {/* SECTION 1 — HERO */}
         <section className="tl-hero" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #5B21B6 35%, rgba(91,33,182,0) 100%)", padding: "96px 48px 80px", margin: 0, width: "100%" }}>
           <div aria-hidden style={{ position: "absolute", left: 0, right: 0, height: 80, marginTop: 0, background: "linear-gradient(180deg, rgba(91,33,182,0.06) 0%, #FFFFFF 100%)", pointerEvents: "none" }} />
