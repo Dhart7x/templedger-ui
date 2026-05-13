@@ -152,15 +152,15 @@ const Home = () => {
   };
 
   const problems = [
-    "Shifts fail without warning.",
-    "Agency booking distribution is never optimized.",
-    "Payroll accuracy is the objective, not the default.",
-    "Invoice disputes from unverified payroll.",
-    "Performance is self-reported.",
-    "Problems surface too late.",
+    "Shifts fail and you find out on the morning.",
+    "Agency bookings distributed on habit, not performance.",
+    "Payroll is disputed because nobody can prove what happened.",
+    "You have no visibility of who is on your site until they arrive.",
+    "Agency performance is whatever they tell you it is.",
     "Your agency workforce is a black box.",
-    "Internal policies exist. The system to enforce them doesn't.",
-    "Your operations team spends half its time chasing agencies.",
+    "Internal spend policies exist. Nothing enforces them.",
+    "Compliance is managed by the agency. The liability is yours.",
+    "Your operations team spends more time chasing agencies than running the operation.",
   ];
 
   const costs = [
