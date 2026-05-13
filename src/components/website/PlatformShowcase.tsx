@@ -306,7 +306,7 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
               color: "#9B9590",
             }}
           >
-            Payroll. Billing. Agency performance. Worker profiles. Direct hire pipeline. Client and agency communication. And more.
+            Payroll. Billing. Worker profiles. Direct hire pipeline. Agency performance. Client and agency communication. And more.
           </div>
           <button
             onClick={onOpenDemo}
