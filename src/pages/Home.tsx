@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, FormEvent } from "react";
 import { motion, useInView } from "framer-motion";
+import PlatformShowcase from "@/components/website/PlatformShowcase";
 
 const StepNumber = ({ value }: { value: number }) => {
   const ref = useRef<HTMLDivElement>(null);
