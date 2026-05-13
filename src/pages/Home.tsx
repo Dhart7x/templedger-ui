@@ -251,6 +251,8 @@ const Home = () => {
         .tl-input::placeholder { color: rgba(255,255,255,0.4); }
         .tl-input:focus { border-color: ${C.primary} !important; }
         .tl-select option { color: ${C.fg}; }
+        .tl-hidden-stmt { transition: color 0.2s ease; }
+        .tl-hidden-stmt:hover { color: #C4391A !important; }
 
         @media (max-width: 768px) {
           /* NAV */
