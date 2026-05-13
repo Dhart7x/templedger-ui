@@ -6,6 +6,7 @@ import ClientPayroll from "@/components/presentation/demo/views/ClientPayroll";
 import AllocationRecommendationPreview from "./platformPreviews/AllocationRecommendationPreview";
 import SchedulePreview from "./platformPreviews/SchedulePreview";
 import PermissionsPreview from "./platformPreviews/PermissionsPreview";
+import DirectHirePreview from "./platformPreviews/DirectHirePreview";
 
 interface Props {
   onOpenDemo: () => void;
@@ -56,6 +57,15 @@ const TABS = [
     body:
       "Define exactly what each level of management can and cannot do — by department. Shift managers operate within the boundaries you set. No more unauthorized headcount. No more off-system bookings.",
     Component: PermissionsPreview,
+  },
+  {
+    id: "directhire",
+    nav: "Direct Hire Pipeline",
+    label: "DIRECT HIRE PIPELINE",
+    headline: "Convert your best agency workers into permanent employees.",
+    body:
+      "Every temp worker builds a verified performance record inside TempLedger. Hours served, departments trained, attendance rate, compliance history — all tracked automatically. The workers worth converting are already ranked. You just have to act on it.",
+    Component: DirectHirePreview,
   },
 ];
 
