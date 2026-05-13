@@ -20,7 +20,7 @@ const TABS = [
     label: "LIVE DASHBOARD",
     headline: "Both sides. Same view. Real time.",
     body:
-      "Exceptions surface the moment they happen — for both the client and the agency simultaneously. No waiting for a report. No summary. The same live record, shared.",
+      "Exceptions surface the moment they happen. For both the client and the agency simultaneously. No waiting for a report. No summary. The same live record, shared.",
     Component: ClientLiveSnapshot,
   },
   {
@@ -29,7 +29,7 @@ const TABS = [
     label: "INTELLIGENT ALLOCATION",
     headline: "The system chose this agency. Here's why.",
     body:
-      "Booking distribution based on real-time availability, proximity and verified performance — not habit. The logic is shown. The decision is yours to confirm.",
+      "Booking distribution based on real-time availability, proximity and verified performance, not habit. The logic is shown. The decision is yours to confirm.",
     Component: AllocationRecommendationPreview,
   },
   {
@@ -45,7 +45,7 @@ const TABS = [
     id: "schedule",
     nav: "Schedule Visibility",
     label: "SCHEDULE VISIBILITY",
-    headline: "See every gap before it becomes a problem — then let the system fill it.",
+    headline: "See every gap before it becomes a problem. Then let the system fill it.",
     body:
       "The schedule shows coverage in real time. Gaps are flagged before the shift. Intelligent allocation reallocates bookings to the agency best placed to fill them.",
     Component: SchedulePreview,
@@ -56,7 +56,7 @@ const TABS = [
     label: "PERMISSIONS",
     headline: "HR sets the rules. The system enforces them.",
     body:
-      "Define exactly what each level of management can and cannot do — by department. Shift managers operate within the boundaries you set. No more unauthorized headcount. No more off-system bookings.",
+      "Define exactly what each level of management can and cannot do, by department. Shift managers operate within the boundaries you set. No more unauthorized headcount. No more off-system bookings.",
     Component: PermissionsPreview,
   },
   {
@@ -65,7 +65,7 @@ const TABS = [
     label: "DIRECT HIRE PIPELINE",
     headline: "Convert your best agency workers into permanent employees.",
     body:
-      "Every temp worker builds a verified performance record inside TempLedger. Hours served, departments trained, attendance rate, compliance history — all tracked automatically. The workers worth converting are already ranked. You just have to act on it.",
+      "Every temp worker builds a verified performance record inside TempLedger. Hours served, departments trained, attendance rate, compliance history. All tracked automatically. The workers worth converting are already ranked. You just have to act on it.",
     Component: DirectHirePreview,
   },
   {
@@ -74,7 +74,7 @@ const TABS = [
     label: "AGENCY PERFORMANCE",
     headline: "Performance derived from the system. Not from what agencies tell you.",
     body:
-      "Every metric — fill rate, attendance, response time, compliance rate — is generated automatically from verified data. No self-reporting. No disputes. The agencies that perform get more work. The ones that don't know exactly why.",
+      "Every metric, fill rate, attendance, response time, compliance rate, is generated automatically from verified data. No self-reporting. No disputes. The agencies that perform get more work. The ones that don't know exactly why.",
     Component: AgencyPerformancePreview,
   },
 ];

@@ -162,7 +162,7 @@ const Home = () => {
     },
     {
       t: "The cost of disconnection.",
-      b: "Agencies operate in their own system. Their data stays theirs. You receive a summary and make commercial decisions from it. The gap between that summary and operational reality is where the cost lives — in attrition, in ramp time, in agency relationships managed on instinct rather than evidence.",
+      b: "Agencies operate in their own system. Their data stays theirs. You receive a summary and make commercial decisions from it. The gap between that summary and operational reality is where the cost lives, in attrition, in ramp time, in agency relationships managed on instinct rather than evidence.",
     },
     {
       t: "The cost of reactivity.",
@@ -225,7 +225,7 @@ const Home = () => {
     {
       n: "02",
       t: "We optimize before we configure",
-      b: "We identify where the inefficiencies live and how to resolve them. The platform is configured around what we find — not the other way around.",
+      b: "We identify where the inefficiencies live and how to resolve them. The platform is configured around what we find, not the other way around.",
     },
     {
       n: "03",
@@ -791,7 +791,7 @@ const Home = () => {
               {[
                 {
                   q: "Agency bookings distributed on habit, not performance.",
-                  a: "The optimal agency, with the optimal worker, at the optimal cost — that decision is impossible when the data to make it lives in a system you cannot see.",
+                  a: "The optimal agency, with the optimal worker, at the optimal cost. That decision is impossible when the data to make it lives in a system you cannot see.",
                 },
                 {
                   q: "Overtime is easier to authorize than it is to avoid.",
@@ -885,7 +885,7 @@ const Home = () => {
             </motion.h2>
             <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 640, margin: "0 auto" }}>
               {[
-                "Agency worker data lives inside agency CRMs — systems built for the agency, not for you.",
+                "Agency worker data lives inside agency CRMs, systems built for the agency, not for you.",
                 "Time and attendance sits in a separate system entirely. No shared record of what was scheduled, who showed up, or whether anything that followed was accurate.",
                 "You are not managing agencies. You are reacting to whatever information they choose to share. And by the time you have it, it is already too late to act on it.",
               ].map((text, i) => (
@@ -996,9 +996,9 @@ const Home = () => {
             </motion.p>
             <div className="tl-pillars" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, alignItems: "stretch", marginBottom: 48 }}>
               {[
-                { word: "Transparency.", title: "A shared system.", body: "Every agency, every worker, every shift — in one place. Both sides operating on the same data simultaneously. No summaries. No lag. No version of events." },
+                { word: "Transparency.", title: "A shared system.", body: "Every agency, every worker, every shift. In one place. Both sides operating on the same data simultaneously. No summaries. No lag. No version of events." },
                 { word: "Accountability.", title: "Verified by default.", body: "Attendance captured at source. Compliance checked continuously. Payroll derived from verified data. Accuracy is not a process. It is the architecture." },
-                { word: "Control.", title: "Yours to keep.", body: "Authorization tiers, booking distribution, agency performance and spend visibility — configured to your operation and owned by you. Not outsourced. Not dependent on what your agencies choose to share." },
+                { word: "Control.", title: "Yours to keep.", body: "Authorization tiers, booking distribution, agency performance and spend visibility, configured to your operation and owned by you. Not outsourced. Not dependent on what your agencies choose to share." },
               ].map((p, i) => (
                 <motion.div
                   key={i}
