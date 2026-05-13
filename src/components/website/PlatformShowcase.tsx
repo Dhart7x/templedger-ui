@@ -28,7 +28,7 @@ const TABS = [
     headline: "The system chose this agency. Here's why.",
     body:
       "Booking distribution based on real-time availability, proximity and verified performance — not habit. The logic is shown. The decision is yours to confirm.",
-    Component: ClientBookings,
+    Component: AllocationRecommendationPreview,
   },
   {
     id: "payroll",
@@ -46,7 +46,7 @@ const TABS = [
     headline: "See every gap before it becomes a problem — then let the system fill it.",
     body:
       "The schedule shows coverage in real time. Gaps are flagged before the shift. Intelligent allocation reallocates bookings to the agency best placed to fill them.",
-    Component: ClientSchedule,
+    Component: SchedulePreview,
   },
   {
     id: "permissions",
@@ -55,7 +55,7 @@ const TABS = [
     headline: "HR sets the rules. The system enforces them.",
     body:
       "Define exactly what each level of management can and cannot do — by department. Shift managers operate within the boundaries you set. No more unauthorized headcount. No more off-system bookings.",
-    Component: ClientPermissions,
+    Component: PermissionsPreview,
   },
 ];
 
