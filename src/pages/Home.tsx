@@ -994,7 +994,7 @@ const Home = () => {
             >
               TempLedger is an agency management platform built for the business that carries the spend, the risk and the operational consequence. Not for the agency. Not for an intermediary. For you.
             </motion.p>
-            <div className="tl-pillars" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 48 }}>
+            <div className="tl-pillars" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, alignItems: "stretch", marginBottom: 48 }}>
               {[
                 { word: "Transparency.", title: "A shared system.", body: "Every agency, every worker, every shift — in one place. Both sides operating on the same data simultaneously. No summaries. No lag. No version of events." },
                 { word: "Accountability.", title: "Verified by default.", body: "Attendance captured at source. Compliance checked continuously. Payroll derived from verified data. Accuracy is not a process. It is the architecture." },
@@ -1011,18 +1011,20 @@ const Home = () => {
                     border: "0.5px solid #E5E0DA",
                     borderRadius: 12,
                     padding: "32px 28px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 12,
+                    display: "grid",
+                    gridTemplateRows: "auto auto auto 1fr",
+                    gap: 0,
+                    height: "100%",
                   }}
                 >
-                  <div className="tl-pillar-word" style={{ fontFamily: FONT, fontWeight: 800, fontSize: 32, color: "#4C1D95", letterSpacing: "-0.02em", lineHeight: 1 }}>
+                  <div className="tl-pillar-word" style={{ fontFamily: FONT, fontWeight: 800, fontSize: 32, color: "#4C1D95", letterSpacing: "-0.02em", lineHeight: 1, height: 48, display: "flex", alignItems: "flex-end", marginBottom: 12, flexShrink: 0 }}>
                     {p.word}
                   </div>
-                  <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 16, color: "#0D0D0B", marginTop: 4 }}>
+                  <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 16, color: "#0D0D0B", height: 28, display: "flex", alignItems: "center", marginBottom: 12, flexShrink: 0 }}>
                     {p.title}
                   </div>
-                  <div style={{ fontFamily: FONT, fontWeight: 400, fontSize: 14, color: "#6B6460", lineHeight: 1.7 }}>
+                  <div style={{ width: "100%", height: 1, background: "#E5E0DA", marginBottom: 16, flexShrink: 0 }} />
+                  <div style={{ fontFamily: FONT, fontWeight: 400, fontSize: 14, color: "#6B6460", lineHeight: 1.7, alignSelf: "start" }}>
                     {p.body}
                   </div>
                 </motion.div>
