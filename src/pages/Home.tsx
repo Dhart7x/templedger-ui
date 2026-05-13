@@ -928,6 +928,7 @@ const Home = () => {
               ))}
             </div>
             <motion.p
+              className="tl-reveal-close"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
