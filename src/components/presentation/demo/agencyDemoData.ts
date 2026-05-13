@@ -375,7 +375,7 @@ export const agencyDeployments: AgencyDeployment[] = [
 // punctuality: (98+96+81+95+97+94+93+91+95+89)/10 = 92.9
 // issues: ISS005-ISS007 = 3
 
-// AG003 Elwood: 6 deployed, 4 active, 3 new-reg, 2 blocked
+// AG003 Meridian Recruitment: 6 deployed, 4 active, 3 new-reg, 2 blocked
 // avgHourlyRate: (12.00+11.80+13.50+12.20+12.00+13.20+11.50+12.00+13.50+12.00)/10 = 12.37
 // avgEtaMinutes: (20+25+20+30+15+35+20+25+15+40+15+30+25+45+40)/15 = 26.7 -> 27
 // punctuality: (90+87+79+88+86+84+83+85+81+80)/10 = 84.3

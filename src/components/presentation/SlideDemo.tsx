@@ -239,13 +239,13 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
               onClick={() => setViewMode("client")}
               className={viewMode === "client" ? "bg-primary/10 text-primary" : ""}
             >
-              Client View (Alo Clothing)
+              Client View (Apex Distribution Ltd)
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => setViewMode("agency")}
               className={viewMode === "agency" ? "bg-primary/10 text-primary" : ""}
             >
-              Agency View (Staffmark)
+              Agency View (Workforce Direct)
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
