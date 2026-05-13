@@ -973,7 +973,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 3 — THE COST */}
-        <section className="tl-section-cost" style={{ background: "#1A3D2E", padding: "80px 48px" }}>
+        <section className="tl-section-cost" style={{ background: "transparent", padding: "80px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag dark>The Cost</SectionTag>
             <h2 className="tl-section-h2"
