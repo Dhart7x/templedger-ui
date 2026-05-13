@@ -386,26 +386,163 @@ const Home = () => {
             </a>
           ))}
         </div>
-        <motion.button
-          className="tl-nav-cta"
-          onClick={scrollToContact}
-          whileHover={{ scale: 1.03, boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}
-          transition={{ duration: 0.15 }}
-          style={{
-            background: "#FFFFFF",
-            color: C.primary,
-            fontWeight: 700,
-            fontSize: 12,
-            borderRadius: 6,
-            padding: "8px 18px",
-            border: "none",
-            cursor: "pointer",
-            fontFamily: FONT,
-          }}
-        >
-          Request Access
-        </motion.button>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          {[
+            { label: "Deck", onClick: () => setDeckOpen(true) },
+            { label: "Demo", onClick: () => setDemoOpen(true) },
+          ].map((b) => (
+            <button
+              key={b.label}
+              onClick={b.onClick}
+              style={{
+                fontFamily: FONT,
+                fontWeight: 700,
+                fontSize: 12,
+                background: "transparent",
+                border: "0.5px solid rgba(255,255,255,0.3)",
+                color: "rgba(255,255,255,0.8)",
+                borderRadius: 6,
+                padding: "7px 16px",
+                cursor: "pointer",
+                transition: "border-color 0.15s, color 0.15s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.6)";
+                e.currentTarget.style.color = "#FFFFFF";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)";
+                e.currentTarget.style.color = "rgba(255,255,255,0.8)";
+              }}
+            >
+              {b.label}
+            </button>
+          ))}
+          <motion.button
+            className="tl-nav-cta"
+            onClick={scrollToContact}
+            whileHover={{ scale: 1.03, boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}
+            transition={{ duration: 0.15 }}
+            style={{
+              background: "#FFFFFF",
+              color: C.primary,
+              fontWeight: 700,
+              fontSize: 12,
+              borderRadius: 6,
+              padding: "8px 18px",
+              border: "none",
+              cursor: "pointer",
+              fontFamily: FONT,
+            }}
+          >
+            Request Access
+          </motion.button>
+        </div>
       </motion.nav>
+
+      {/* Deck Modal */}
+      {deckOpen && (
+        <>
+          <div
+            onClick={() => setDeckOpen(false)}
+            style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(0,0,0,0.85)" }}
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 101,
+              width: "100vw",
+              height: "100vh",
+              overflow: "hidden",
+              background: "#000",
+            }}
+          >
+            <NewSalesDeck />
+            <button
+              onClick={() => setDeckOpen(false)}
+              aria-label="Close"
+              style={{
+                position: "fixed",
+                top: 16,
+                right: 16,
+                zIndex: 102,
+                width: 36,
+                height: 36,
+                background: "rgba(255,255,255,0.1)",
+                borderRadius: "50%",
+                border: "none",
+                color: "#FFFFFF",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "background 0.15s",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.2)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.1)"; }}
+            >
+              <X size={16} />
+            </button>
+          </motion.div>
+        </>
+      )}
+
+      {/* Demo Modal */}
+      {demoOpen && (
+        <>
+          <div
+            onClick={() => setDemoOpen(false)}
+            style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(0,0,0,0.85)" }}
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 101,
+              width: "100vw",
+              height: "100vh",
+              overflow: "hidden",
+              background: "#000",
+            }}
+          >
+            <SalesDeck />
+            <button
+              onClick={() => setDemoOpen(false)}
+              aria-label="Close"
+              style={{
+                position: "fixed",
+                top: 16,
+                right: 16,
+                zIndex: 102,
+                width: 36,
+                height: 36,
+                background: "rgba(255,255,255,0.1)",
+                borderRadius: "50%",
+                border: "none",
+                color: "#FFFFFF",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "background 0.15s",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.2)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.1)"; }}
+            >
+              <X size={16} />
+            </button>
+          </motion.div>
+        </>
+      )}
 
       <div className="tl-nav-spacer" style={{ paddingTop: 56 }}>
         {/* SECTION 1 — HERO */}
