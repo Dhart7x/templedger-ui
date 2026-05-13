@@ -122,16 +122,15 @@ const scrollToHowItWorks = () => {
 const Home = () => {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", company: "", email: "", role: "" });
-  const [deckOpen, setDeckOpen] = useState(false);
   const [demoOpen, setDemoOpen] = useState(false);
 
   useEffect(() => {
-    if (deckOpen || demoOpen) {
+    if (demoOpen) {
       const prev = document.body.style.overflow;
       document.body.style.overflow = "hidden";
       return () => { document.body.style.overflow = prev; };
     }
-  }, [deckOpen, demoOpen]);
+  }, [demoOpen]);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
