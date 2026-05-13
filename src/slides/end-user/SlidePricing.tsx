@@ -59,7 +59,7 @@ export default function SlidePricing() {
           </span>
           <h2
             className="font-bold text-[32px] text-foreground leading-[1.2] mb-[6px]"
-            style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+            style={{ fontFamily: "'Inter', monospace" }}
           >
             Simple. Aligned to your spend.
           </h2>
@@ -75,14 +75,14 @@ export default function SlidePricing() {
           <div
             className="rounded-xl p-7 mt-6 mb-6"
             style={{
-              background: "#1a1b18",
+              background: "#2E1065",
               border: "0.5px solid #2a2b27",
               padding: "28px 32px",
             }}
           >
             <span
               className="text-[13px] font-semibold text-foreground block mb-5"
-              style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+              style={{ fontFamily: "'Inter', monospace" }}
             >
               Calculate your investment
             </span>
@@ -161,7 +161,7 @@ export default function SlidePricing() {
                         </span>
                         <span
                           className="text-[20px] font-bold text-foreground"
-                          style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+                          style={{ fontFamily: "'Inter', monospace" }}
                         >
                           ${result.annualSpend.toLocaleString()}
                         </span>
@@ -175,7 +175,7 @@ export default function SlidePricing() {
                         </span>
                         <span
                           className="text-[20px] font-bold text-primary"
-                          style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+                          style={{ fontFamily: "'Inter', monospace" }}
                         >
                           {(result.rate * 100).toFixed(2)}%
                         </span>
@@ -189,7 +189,7 @@ export default function SlidePricing() {
                         </span>
                         <span
                           className="text-[20px] font-bold text-foreground"
-                          style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+                          style={{ fontFamily: "'Inter', monospace" }}
                         >
                           ${result.monthlyFee.toLocaleString()}
                         </span>
@@ -218,7 +218,7 @@ export default function SlidePricing() {
               <div
                 key={i}
                 className="flex items-center rounded-[20px] px-[14px] py-[6px]"
-                style={{ background: "#1a1b18", border: "0.5px solid #2a2b27" }}
+                style={{ background: "#2E1065", border: "0.5px solid #2a2b27" }}
               >
                 <div className="w-1 h-1 bg-primary rounded-[1px] flex-shrink-0 mr-2" />
                 <span

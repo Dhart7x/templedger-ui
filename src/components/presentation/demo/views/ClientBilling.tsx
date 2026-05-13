@@ -261,7 +261,7 @@ const ClientBilling = ({ onViewChange }: ClientBillingProps) => {
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className="font-mono text-sm font-semibold" style={{ color: "#2D6A4F" }}>
+                      <span className="font-mono text-sm font-semibold" style={{ color: "#4C1D95" }}>
                         £{site.totalAmount.toLocaleString()}
                       </span>
                       <ChevronRight className={`w-4 h-4 text-muted-foreground transition-transform ${isSiteExpanded ? "rotate-90" : ""}`} />
@@ -299,7 +299,7 @@ const ClientBilling = ({ onViewChange }: ClientBillingProps) => {
                               </span>
                               <div className="flex items-center gap-3">
                                 <span className="text-[11px]" style={{ color: "#6B6460" }}>{dept.totalHours}h</span>
-                                <span className="font-mono text-xs" style={{ color: "#2D6A4F" }}>
+                                <span className="font-mono text-xs" style={{ color: "#4C1D95" }}>
                                   £{dept.totalAmount.toLocaleString()}
                                 </span>
                                 <ChevronDown className={`w-3.5 h-3.5 text-muted-foreground transition-transform ${isDeptExpanded ? "rotate-180" : ""}`} />
@@ -318,7 +318,7 @@ const ClientBilling = ({ onViewChange }: ClientBillingProps) => {
                                     <div className="flex items-center gap-4">
                                       <span className="font-mono text-xs" style={{ color: "#0D0D0B" }}>{worker.hours}h</span>
                                       <span className="text-[11px]" style={{ color: "#6B6460" }}>£{worker.rate.toFixed(2)}/h</span>
-                                      <span className="font-mono text-xs" style={{ color: "#2D6A4F" }}>£{worker.total}</span>
+                                      <span className="font-mono text-xs" style={{ color: "#4C1D95" }}>£{worker.total}</span>
                                     </div>
                                   </div>
                                 ))}
@@ -337,7 +337,7 @@ const ClientBilling = ({ onViewChange }: ClientBillingProps) => {
           {/* Grand Total */}
           <div className="bg-card border-t border-border p-4 rounded-xl">
             <p className="text-[13px]" style={{ color: "#6B6460" }}>Total verified billing this week</p>
-            <p className="font-mono text-2xl font-bold mt-1" style={{ color: "#2D6A4F" }}>
+            <p className="font-mono text-2xl font-bold mt-1" style={{ color: "#4C1D95" }}>
               £{grandTotalAmount.toLocaleString()}
             </p>
             <p className="text-[11px] mt-0.5" style={{ color: "#6B6460" }}>
@@ -355,7 +355,7 @@ const ClientBilling = ({ onViewChange }: ClientBillingProps) => {
               <button
                 onClick={() => onViewChange?.("payroll")}
                 className="text-xs mt-1 cursor-pointer hover:underline"
-                style={{ color: "#2D6A4F" }}
+                style={{ color: "#4C1D95" }}
               >
                 View exceptions →
               </button>
@@ -390,7 +390,7 @@ const ClientBilling = ({ onViewChange }: ClientBillingProps) => {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-sm font-semibold" style={{ color: "#2D6A4F" }}>
+                    <span className="font-mono text-sm font-semibold" style={{ color: "#4C1D95" }}>
                       £{inv.totalAmount.toLocaleString()}
                     </span>
                     <span className="inline-flex items-center gap-1 text-[10px] font-medium text-green-600 bg-green-500/10 px-1.5 py-0.5 rounded">

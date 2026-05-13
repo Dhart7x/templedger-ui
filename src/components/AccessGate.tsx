@@ -3,7 +3,7 @@ import { useState, useEffect, ReactNode, useRef } from "react";
 const STORAGE_KEY = "tl_access";
 const STORAGE_VALUE = "granted";
 const ACCESS_CODE = "templedger101";
-const FONT = "'Plus Jakarta Sans', system-ui, sans-serif";
+const FONT = "'Inter', system-ui, sans-serif";
 
 interface AccessGateProps {
   children: ReactNode;
@@ -100,7 +100,7 @@ const AccessGate = ({ children }: AccessGateProps) => {
               fontSize: 14,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "#2D6A4F",
+              color: "#4C1D95",
               marginBottom: 4,
             }}
           >
@@ -153,7 +153,7 @@ const AccessGate = ({ children }: AccessGateProps) => {
             }}
             style={{
               width: "100%",
-              background: "#F8F5EF",
+              background: "#FAFAF8",
               border: `1px solid ${error ? "#C4391A" : "#E5E0DA"}`,
               borderRadius: 10,
               padding: "14px 18px",
@@ -169,7 +169,7 @@ const AccessGate = ({ children }: AccessGateProps) => {
               boxSizing: "border-box",
             }}
             onFocus={(e) => {
-              if (!error) e.currentTarget.style.borderColor = "#2D6A4F";
+              if (!error) e.currentTarget.style.borderColor = "#4C1D95";
             }}
             onBlur={(e) => {
               if (!error) e.currentTarget.style.borderColor = "#E5E0DA";
@@ -196,7 +196,7 @@ const AccessGate = ({ children }: AccessGateProps) => {
             style={{
               marginTop: 14,
               width: "100%",
-              background: "#2D6A4F",
+              background: "#4C1D95",
               color: "#FFFFFF",
               fontFamily: FONT,
               fontWeight: 700,
@@ -207,8 +207,8 @@ const AccessGate = ({ children }: AccessGateProps) => {
               cursor: "pointer",
               transition: "background 0.15s",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#1A3D2E")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "#2D6A4F")}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#2E1065")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "#4C1D95")}
           >
             Enter
           </button>

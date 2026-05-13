@@ -8,7 +8,7 @@ export default function SlideClosing() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
         className="font-bold text-[38px] md:text-[52px] text-foreground leading-[1.2] max-w-[700px]"
-        style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+        style={{ fontFamily: "'Inter', monospace" }}
       >
         Take control of your{"\n"}contingent workforce.
       </motion.h2>

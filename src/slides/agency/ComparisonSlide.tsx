@@ -30,7 +30,7 @@ const ComparisonSlide = () => (
       />
 
       <div className="grid grid-cols-2 gap-6 mb-8">
-        <div className="rounded-xl p-6" style={{ backgroundColor: "#1a1b18", border: "0.5px solid #2a2b27" }}>
+        <div className="rounded-xl p-6" style={{ backgroundColor: "#2E1065", border: "0.5px solid #2a2b27" }}>
           <p className="font-mono text-[13px] font-semibold mb-4" style={{ color: "rgba(237,231,217,0.4)" }}>
             MSP / Neutral Vendor
           </p>
@@ -45,13 +45,13 @@ const ComparisonSlide = () => (
         </div>
 
         <div className="rounded-xl p-6" style={{ backgroundColor: "rgba(125,143,70,0.08)", border: "0.5px solid rgba(125,143,70,0.3)" }}>
-          <p className="font-mono text-[13px] font-semibold mb-4" style={{ color: "#7d8f46" }}>
+          <p className="font-mono text-[13px] font-semibold mb-4" style={{ color: "#4C1D95" }}>
             Temp Ledger
           </p>
           <div className="space-y-3">
             {tlPoints.map((p, i) => (
               <div key={i} className="flex items-start gap-2.5">
-                <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style={{ color: "#7d8f46" }} />
+                <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style={{ color: "#4C1D95" }} />
                 <span className="font-sans text-[13px] font-normal text-foreground">{p}</span>
               </div>
             ))}

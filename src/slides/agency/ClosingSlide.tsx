@@ -27,7 +27,7 @@ const ClosingSlide = () => (
       animate={{ opacity: 0.5 }}
       transition={{ duration: 0.5, delay: 0.35 }}
       className="mx-auto my-9"
-      style={{ width: 48, height: 1, backgroundColor: "#7d8f46" }}
+      style={{ width: 48, height: 1, backgroundColor: "#4C1D95" }}
     />
 
     <div className="space-y-3" style={{ maxWidth: 480 }}>
@@ -50,7 +50,7 @@ const ClosingSlide = () => (
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6, delay: 0.9 }}
       className="font-mono font-medium mt-12"
-      style={{ fontSize: "clamp(16px, 1.5vw, 20px)", color: "#7d8f46" }}
+      style={{ fontSize: "clamp(16px, 1.5vw, 20px)", color: "#4C1D95" }}
     >
       Temp Ledger makes that the default.
     </motion.p>

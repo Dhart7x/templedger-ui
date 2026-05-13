@@ -8,7 +8,7 @@ export default function SlideHero() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0 }}
         className="font-mono text-[16px] tracking-[0.35em] text-primary uppercase font-medium"
-        style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+        style={{ fontFamily: "'Inter', monospace" }}
       >
         TEMP LEDGER
       </motion.span>
@@ -18,7 +18,7 @@ export default function SlideHero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.65, delay: 0.2 }}
         className="font-bold text-[40px] md:text-[50px] lg:text-[56px] text-foreground leading-[1.1] max-w-[800px] mt-5"
-        style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+        style={{ fontFamily: "'Inter', monospace" }}
       >
         Temp Labor Orchestration.
       </motion.h1>

@@ -78,7 +78,7 @@ const EndUserDeck = () => {
         <button
           onClick={() => go(-1)}
           className="fixed left-6 top-1/2 -translate-y-1/2 z-50 cursor-pointer hover:scale-110 transition-transform duration-200"
-          style={{ color: "#7d8f46" }}
+          style={{ color: "#4C1D95" }}
         >
           <ChevronLeft className="w-8 h-8" />
         </button>
@@ -87,7 +87,7 @@ const EndUserDeck = () => {
         <button
           onClick={() => go(1)}
           className="fixed right-6 top-1/2 -translate-y-1/2 z-50 cursor-pointer hover:scale-110 transition-transform duration-200"
-          style={{ color: "#7d8f46" }}
+          style={{ color: "#4C1D95" }}
         >
           <ChevronRight className="w-8 h-8" />
         </button>

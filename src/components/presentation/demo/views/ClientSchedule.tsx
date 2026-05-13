@@ -288,7 +288,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
         ? "#ef4444"
         : displayFilled < required
           ? "#f59e0b"
-          : "#2D6A4F";
+          : "#4C1D95";
 
   // Past/current breakdown derived from seeded current-week agency mix
   const totalWorkers = currentWeekAgencies.reduce((a, x) => a + x.workers, 0);
@@ -366,7 +366,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
               <span
                 style={{
                   fontSize: 10,
-                  color: "#2D6A4F",
+                  color: "#4C1D95",
                   background: "rgba(125,143,70,0.12)",
                   padding: "3px 8px",
                   borderRadius: 6,
@@ -450,7 +450,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                   <div className="bg-muted h-1.5 rounded-full overflow-hidden" style={{ marginTop: 8 }}>
                     <div
                       className="h-1.5 rounded-full"
-                      style={{ width: `${pct}%`, background: "#2D6A4F" }}
+                      style={{ width: `${pct}%`, background: "#4C1D95" }}
                     />
                   </div>
                   <p
@@ -688,12 +688,12 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                 {([
                   {
                     key: "Available Workers" as const,
-                    icon: <Users className="w-4 h-4" style={{ color: "#2D6A4F" }} />,
+                    icon: <Users className="w-4 h-4" style={{ color: "#4C1D95" }} />,
                     desc: "Prioritise the agency with the most workers ready to fill this slot.",
                   },
                   {
                     key: "Agency Performance" as const,
-                    icon: <BarChart2 className="w-4 h-4" style={{ color: "#2D6A4F" }} />,
+                    icon: <BarChart2 className="w-4 h-4" style={{ color: "#4C1D95" }} />,
                     desc: "Prioritise the agency with the strongest performance record for this shift type.",
                   },
                 ]).map((c) => {
@@ -704,7 +704,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                       onClick={() => setCriteria(c.key)}
                       className="flex-1 text-left transition-colors"
                       style={{
-                        border: `0.5px solid ${selected ? "#2D6A4F" : "#E5E0DA"}`,
+                        border: `0.5px solid ${selected ? "#4C1D95" : "#E5E0DA"}`,
                         background: selected ? "rgba(125,143,70,0.08)" : "rgba(255,255,255,0.02)",
                         borderRadius: 10,
                         padding: 16,
@@ -815,7 +815,7 @@ const ShiftSnapshotModal = ({ cell, shift, day, weekLabel, isFutureWeek, onClose
                 disabled={submitting}
                 className="w-full flex items-center justify-center transition-opacity disabled:opacity-70"
                 style={{
-                  background: "#2D6A4F",
+                  background: "#4C1D95",
                   borderRadius: 10,
                   padding: 14,
                   gap: 8,

@@ -2,7 +2,7 @@ import { useState, useEffect, FormEvent, KeyboardEvent } from "react";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
 
-const FONT = "'Plus Jakarta Sans', system-ui, sans-serif";
+const FONT = "'Inter', system-ui, sans-serif";
 const ACCESS_CODE = "demoaccess1";
 
 interface DemoGateProps {
@@ -53,7 +53,7 @@ const DemoGate = ({ onClose, onSuccess }: DemoGateProps) => {
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
-    background: "#F8F5EF",
+    background: "#FAFAF8",
     border: "1px solid #E5E0DA",
     borderRadius: 8,
     padding: "11px 16px",
@@ -67,7 +67,7 @@ const DemoGate = ({ onClose, onSuccess }: DemoGateProps) => {
   };
 
   const focusOn = (e: React.FocusEvent<HTMLInputElement>) => {
-    e.currentTarget.style.borderColor = "#2D6A4F";
+    e.currentTarget.style.borderColor = "#4C1D95";
   };
   const focusOff = (e: React.FocusEvent<HTMLInputElement>) => {
     e.currentTarget.style.borderColor = "#E5E0DA";
@@ -131,7 +131,7 @@ const DemoGate = ({ onClose, onSuccess }: DemoGateProps) => {
               right: 16,
               width: 28,
               height: 28,
-              background: "#F8F5EF",
+              background: "#FAFAF8",
               borderRadius: "50%",
               border: "none",
               color: "#9B9590",
@@ -142,7 +142,7 @@ const DemoGate = ({ onClose, onSuccess }: DemoGateProps) => {
               transition: "background 0.15s",
             }}
             onMouseEnter={(e) => { e.currentTarget.style.background = "#E5E0DA"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = "#F8F5EF"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "#FAFAF8"; }}
           >
             <X size={14} />
           </button>
@@ -155,7 +155,7 @@ const DemoGate = ({ onClose, onSuccess }: DemoGateProps) => {
               fontSize: 13,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "#2D6A4F",
+              color: "#4C1D95",
               marginBottom: 4,
             }}
           >
@@ -169,7 +169,7 @@ const DemoGate = ({ onClose, onSuccess }: DemoGateProps) => {
           {/* Tabs */}
           <div
             style={{
-              background: "#F8F5EF",
+              background: "#FAFAF8",
               borderRadius: 8,
               padding: 4,
               display: "flex",
@@ -224,7 +224,7 @@ const DemoGate = ({ onClose, onSuccess }: DemoGateProps) => {
                 className={shake ? "tl-gate-shake" : undefined}
                 style={{
                   width: "100%",
-                  background: "#F8F5EF",
+                  background: "#FAFAF8",
                   border: `1px solid ${error ? "#C4391A" : "#E5E0DA"}`,
                   borderRadius: 10,
                   padding: "14px 18px",
@@ -237,7 +237,7 @@ const DemoGate = ({ onClose, onSuccess }: DemoGateProps) => {
                   outline: "none",
                   transition: "border-color 0.2s",
                 }}
-                onFocus={(e) => { if (!error) e.currentTarget.style.borderColor = "#2D6A4F"; }}
+                onFocus={(e) => { if (!error) e.currentTarget.style.borderColor = "#4C1D95"; }}
                 onBlur={(e) => { if (!error) e.currentTarget.style.borderColor = "#E5E0DA"; }}
               />
               {error && (
@@ -259,7 +259,7 @@ const DemoGate = ({ onClose, onSuccess }: DemoGateProps) => {
                 style={{
                   marginTop: 14,
                   width: "100%",
-                  background: "#2D6A4F",
+                  background: "#4C1D95",
                   color: "#FFFFFF",
                   fontFamily: FONT,
                   fontWeight: 700,
@@ -349,7 +349,7 @@ const DemoGate = ({ onClose, onSuccess }: DemoGateProps) => {
                 type="submit"
                 style={{
                   width: "100%",
-                  background: "#2D6A4F",
+                  background: "#4C1D95",
                   color: "#FFFFFF",
                   fontFamily: FONT,
                   fontWeight: 700,

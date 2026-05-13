@@ -9,7 +9,7 @@ const SlideHeader = ({ eyebrow, heading, subline, headingSize = "34px" }: SlideH
   <>
     <p
       className="font-sans uppercase mb-3"
-      style={{ fontSize: 10, letterSpacing: "0.24em", color: "#7d8f46" }}
+      style={{ fontSize: 10, letterSpacing: "0.24em", color: "#4C1D95" }}
     >
       {eyebrow}
     </p>
