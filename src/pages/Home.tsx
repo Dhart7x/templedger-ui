@@ -251,8 +251,6 @@ const Home = () => {
         .tl-input::placeholder { color: rgba(255,255,255,0.4); }
         .tl-input:focus { border-color: ${C.primary} !important; }
         .tl-select option { color: ${C.fg}; }
-        .tl-hidden-stmt { transition: color 0.2s ease; }
-        .tl-hidden-stmt:hover { color: #C4391A !important; }
 
         @media (max-width: 768px) {
           /* NAV */
@@ -272,8 +270,12 @@ const Home = () => {
           .tl-section-invoice { padding: 56px 20px !important; }
           .tl-invoice-card { max-width: 100% !important; }
           .tl-invoice-transition { font-size: 16px !important; }
-          .tl-hidden-costs { margin: 0 -20px !important; padding: 40px 20px !important; }
-          .tl-hidden-costs .tl-hidden-stmt { font-size: 22px !important; }
+          .tl-hidden-costs { margin: 0 -20px !important; padding: 48px 20px !important; border-radius: 12px !important; }
+          .tl-hidden-costs h2 { font-size: 24px !important; }
+          .tl-hidden-costs .tl-cost-question { font-size: 16px !important; }
+          .tl-hidden-costs .tl-cost-answer { font-size: 13px !important; }
+          .tl-cost-closing { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
+          .tl-cost-closing-right { text-align: left !important; }
 
           /* PROBLEM */
           .tl-section-problem { padding: 56px 20px !important; }
@@ -743,87 +745,157 @@ const Home = () => {
               style={{
                 background: "#1A3D2E",
                 margin: "0 -48px",
-                padding: "56px 48px",
+                padding: "72px 48px",
                 borderRadius: 16,
               }}
             >
-              {[
-                "Overtime from gaps nobody saw coming.",
-                "Management time spent fixing avoidable problems.",
-                "Workers who left over a pay error.",
-                "Last-minute replacement ramp time.",
-                "Unscheduled workers on your site.",
-              ].map((stmt, i, arr) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 32 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
+              {/* Header block */}
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                style={{ marginBottom: 48 }}
+              >
+                <div
                   style={{
+                    fontFamily: FONT,
+                    fontWeight: 700,
+                    fontSize: 10,
+                    letterSpacing: "0.18em",
+                    textTransform: "uppercase",
+                    color: "rgba(255,255,255,0.4)",
                     display: "flex",
-                    alignItems: "flex-start",
-                    gap: 20,
-                    padding: "24px 0",
-                    borderBottom: i === arr.length - 1 ? "none" : "0.5px solid rgba(255,255,255,0.06)",
+                    alignItems: "center",
+                    gap: 10,
                   }}
                 >
-                  <div
-                    style={{
-                      width: 3,
-                      alignSelf: "stretch",
-                      background: "#C4391A",
-                      borderRadius: 2,
-                      flexShrink: 0,
-                      marginTop: 4,
-                    }}
-                  />
-                  <div
-                    className="tl-hidden-stmt"
-                    style={{
-                      fontFamily: FONT,
-                      fontWeight: 800,
-                      fontSize: 28,
-                      color: "#FFFFFF",
-                      letterSpacing: "-0.02em",
-                      lineHeight: 1.2,
-                      transition: "color 0.2s ease",
-                    }}
-                  >
-                    {stmt}
-                  </div>
-                </motion.div>
-              ))}
-              <div
-                style={{
-                  paddingTop: 32,
-                  marginTop: 8,
-                  borderTop: "0.5px solid rgba(255,255,255,0.08)",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  gap: 16,
-                }}
-              >
-                <span style={{ fontFamily: FONT, fontWeight: 400, fontSize: 13, color: "rgba(255,255,255,0.35)" }}>
-                  None of these appear on any invoice.
-                </span>
-                <motion.span
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.4, delay: 0.6 }}
+                  <div style={{ width: 24, height: 2, background: "rgba(255,255,255,0.2)" }} />
+                  THE COST OF INACTION
+                </div>
+                <h2
                   style={{
                     fontFamily: FONT,
                     fontWeight: 800,
-                    fontSize: 18,
-                    color: "#C4391A",
-                    display: "inline-block",
+                    fontSize: 32,
+                    color: "#FFFFFF",
+                    letterSpacing: "-0.022em",
+                    lineHeight: 1.2,
+                    marginTop: 12,
+                    maxWidth: 560,
                   }}
                 >
-                  Every week.
-                </motion.span>
-              </div>
+                  Nobody has ever added up what this costs your business. They should.
+                </h2>
+              </motion.div>
+
+              {/* Five question blocks */}
+              {[
+                {
+                  q: "What does it cost your business that every agency booking is distributed on habit rather than performance?",
+                  a: "The optimal agency, with the optimal worker, at the optimal cost — that decision is impossible when the data to make it lives in a system you cannot see.",
+                },
+                {
+                  q: "What does it cost your business that overtime is easier to authorize than it is to avoid?",
+                  a: "Giving someone an additional shift takes seconds. Identifying an available nearby worker who costs less takes a system nobody in your operation currently has.",
+                },
+                {
+                  q: "What does it cost your business for your management team to coordinate agencies rather than run your operation?",
+                  a: "Every hour spent chasing timesheets, approving bookings and managing no-shows is an hour not spent on output.",
+                },
+                {
+                  q: "What is the financial and reputational risk of non-compliant workers reaching your site?",
+                  a: "The agency manages compliance. The liability sits with you. Without a live shared record, you have no way to verify either.",
+                },
+                {
+                  q: "What does it cost your business when middle management authorizes headcount without financial controls?",
+                  a: "Spend decisions made at site level without finance visibility. Every week. Without a system to prevent it, it never stops.",
+                },
+              ].map((block, i, arr) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.45, delay: i * 0.1, ease: "easeOut" }}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 10,
+                    padding: "32px 0",
+                    borderBottom: i === arr.length - 1 ? "none" : "0.5px solid rgba(255,255,255,0.08)",
+                  }}
+                >
+                  <div
+                    className="tl-cost-question"
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 700,
+                      fontSize: 18,
+                      color: "#FFFFFF",
+                      lineHeight: 1.45,
+                      maxWidth: 640,
+                    }}
+                  >
+                    {block.q}
+                  </div>
+                  <div
+                    className="tl-cost-answer"
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 400,
+                      fontSize: 14,
+                      color: "rgba(255,255,255,0.5)",
+                      lineHeight: 1.7,
+                      maxWidth: 580,
+                    }}
+                  >
+                    {block.a}
+                  </div>
+                </motion.div>
+              ))}
+
+              {/* Closing line */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.4, delay: 0.6 }}
+                style={{
+                  marginTop: 48,
+                  paddingTop: 32,
+                  borderTop: "0.5px solid rgba(255,255,255,0.1)",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+                className="tl-cost-closing"
+              >
+                <span
+                  style={{
+                    fontFamily: FONT,
+                    fontWeight: 400,
+                    fontSize: 13,
+                    color: "rgba(255,255,255,0.35)",
+                    maxWidth: 400,
+                    lineHeight: 1.6,
+                  }}
+                >
+                  None of this is the result of poor management. It is the direct consequence of two sides operating without a shared system.
+                </span>
+                <span
+                  className="tl-cost-closing-right"
+                  style={{
+                    fontFamily: FONT,
+                    fontWeight: 800,
+                    fontSize: 15,
+                    color: "rgba(255,255,255,0.9)",
+                    textAlign: "right",
+                  }}
+                >
+                  Every week.<br />On every site.<br />Across every agency.
+                </span>
+              </motion.div>
             </div>
           </div>
         </section>
