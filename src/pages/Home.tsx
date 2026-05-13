@@ -793,7 +793,7 @@ const Home = () => {
                     display: "flex",
                     flexDirection: "column",
                     gap: 10,
-                    padding: "32px 0",
+                    padding: "10px 0",
                     borderBottom: i === arr.length - 1 ? "none" : "0.5px solid rgba(255,255,255,0.08)",
                   }}
                 >
