@@ -1176,6 +1176,63 @@ const Home = () => {
           </div>
         </section>
 
+        {/* SECTION 3.5 — THE SOLUTION */}
+        <section className="tl-section-solution" style={{ background: "#FFFFFF", padding: "80px 48px", margin: 0, width: "100%" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 10,
+                marginBottom: 20,
+                fontFamily: FONT,
+                fontWeight: 700,
+                fontSize: 10,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#2D6A4F",
+              }}
+            >
+              <div style={{ width: 24, height: 2, background: "#2D6A4F" }} />
+              THE SOLUTION
+            </div>
+            <h2
+              className="tl-section-h2"
+              style={{
+                fontFamily: FONT,
+                fontWeight: 800,
+                fontSize: 38,
+                color: "#0D0D0B",
+                letterSpacing: "-0.022em",
+                lineHeight: 1.15,
+                marginBottom: 16,
+              }}
+            >
+              TempLedger is the shared system both sides were missing.
+            </h2>
+            <p
+              style={{
+                fontFamily: FONT,
+                fontWeight: 400,
+                fontSize: 16,
+                color: "#6B6460",
+                lineHeight: 1.7,
+                maxWidth: 580,
+                margin: "0 auto",
+              }}
+            >
+              One platform connecting labor users and agencies. Both sides operating on the same data, in real time, with a shared record neither side can dispute.
+            </p>
+          </motion.div>
+        </section>
+
         {/* SECTION 4 — THE OUTCOME */}
         <section className="tl-section-outcome" style={{ background: "#2D6A4F", padding: "80px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
