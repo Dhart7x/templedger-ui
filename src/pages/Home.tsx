@@ -115,6 +115,10 @@ const scrollToContact = () => {
   document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
 };
 
+const scrollToHowItWorks = () => {
+  document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
+};
+
 const Home = () => {
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
@@ -216,18 +220,23 @@ const Home = () => {
   const steps = [
     {
       n: "01",
-      t: "Implemented on site",
-      b: "We install alongside what you already have. No integration required. No disruption to your operation.",
+      t: "We embed in your operation",
+      b: "Before anything is built or configured, we come on site. We understand your workforce structure, your agencies, your current process and where it breaks down. Discovery first. Always.",
     },
     {
       n: "02",
-      t: "Onboard your agencies",
-      b: "Your agencies join the platform. Both sides in one shared system from the very first shift. We coordinate everything.",
+      t: "We optimize before we configure",
+      b: "We identify where the inefficiencies live and how they should be resolved. The platform is then configured around what we find — not the other way around.",
     },
     {
       n: "03",
-      t: "Configured in 90 days.",
-      b: "We handle setup, agency onboarding and hardware installation. You provide one point of contact. Proven on one shift before anything scales.",
+      t: "We deploy and onboard",
+      b: "Hardware on site. Agencies onboarded. Both sides in one shared system from the first shift. We coordinate everything.",
+    },
+    {
+      n: "04",
+      t: "We stay",
+      b: "Live on one shift or department first. We maintain, refine and expand at a pace that works for your operation. We stay until you're confident. Not until we are.",
     },
   ];
 
@@ -291,7 +300,7 @@ const Home = () => {
           /* HOW IT WORKS */
           .tl-section-how { padding: 56px 20px !important; }
           .tl-steps-grid { grid-template-columns: 1fr !important; gap: 1px !important; }
-          .tl-step-number { font-size: 36px !important; }
+          .tl-section-how .tl-section-sub { font-size: 13px !important; }
 
           /* CONTACT */
           .tl-section-contact { padding: 56px 20px !important; }
@@ -441,24 +450,30 @@ const Home = () => {
           TEMP LEDGER
         </div>
         <div className="tl-nav-links" style={{ display: "flex", gap: 32 }}>
-          {["Resources", "Contact"].map((l) => (
+          {[
+            { label: "How It Works", action: scrollToHowItWorks },
+            { label: "Resources", action: () => {} },
+            { label: "Contact", action: scrollToContact },
+          ].map((l) => (
             <a
-              key={l}
-              href={l === "Contact" ? "#contact" : "#"}
+              key={l.label}
+              href="#"
               onClick={(e) => {
-                if (l === "Contact") {
-                  e.preventDefault();
-                  scrollToContact();
-                }
+                e.preventDefault();
+                l.action();
               }}
               style={{
+                fontFamily: FONT,
                 fontWeight: 500,
                 fontSize: 13,
                 color: "rgba(255,255,255,0.65)",
                 textDecoration: "none",
+                transition: "color 0.15s",
               }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = "#FFFFFF"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.65)"; }}
             >
-              {l}
+              {l.label}
             </a>
           ))}
         </div>
@@ -1432,7 +1447,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 5 — HOW IT WORKS */}
-        <section className="tl-section-how" style={{ background: C.surface, padding: "80px 48px" }}>
+        <section id="how-it-works" className="tl-section-how" style={{ background: C.surface, padding: "80px 48px" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>How It Works</SectionTag>
             <h2 className="tl-section-h2"
@@ -1445,16 +1460,16 @@ const Home = () => {
                 marginBottom: 10,
               }}
             >
-              Controlled from day one. One shift at a time.
+              This isn't a software subscription you configure yourself.
             </h2>
             <p className="tl-section-sub" style={{ fontSize: 15, color: C.muted, lineHeight: 1.65, marginBottom: 48 }}>
-              No disruption. No rip and replace. Proven before it scales.
+              TempLedger is implemented by a team of forward deployed experts embedded in your operation from day one. You provide one point of contact. We handle everything else.
             </p>
             <div
               className="tl-steps-grid"
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
+                gridTemplateColumns: "repeat(4, 1fr)",
                 gap: 1,
                 background: C.border,
                 borderRadius: 12,
@@ -1468,13 +1483,25 @@ const Home = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.5, delay: idx * 0.12, ease: "easeOut" }}
-                  style={{ background: C.bg, padding: 32 }}
+                  style={{ background: C.bg, padding: 28, display: "flex", flexDirection: "column" }}
                 >
-                  <StepNumber value={idx + 1} />
-                  <div style={{ fontWeight: 700, fontSize: 16, color: C.fg, marginBottom: 8 }}>
+                  <div
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 800,
+                      fontSize: 44,
+                      color: "#2D6A4F",
+                      opacity: 0.15,
+                      lineHeight: 1,
+                      marginBottom: 14,
+                    }}
+                  >
+                    {s.n}
+                  </div>
+                  <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 15, color: C.fg, marginBottom: 8 }}>
                     {s.t}
                   </div>
-                  <div style={{ fontSize: 13, color: C.muted, lineHeight: 1.65 }}>{s.b}</div>
+                  <div style={{ fontFamily: FONT, fontSize: 13, color: C.muted, lineHeight: 1.65 }}>{s.b}</div>
                 </motion.div>
               ))}
             </div>
