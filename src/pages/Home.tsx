@@ -741,7 +741,7 @@ const Home = () => {
             <div
               className="tl-hidden-costs"
               style={{
-                background: "#0D0D0B",
+                background: "#1A3D2E",
                 margin: "0 -48px",
                 padding: "56px 48px",
                 borderRadius: 16,
