@@ -582,13 +582,13 @@ const Home = () => {
 
         {/* SECTION 2 — THE INVOICE VISUAL */}
         <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "80px 48px" }}>
-          <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+          <div style={{ maxWidth: 900, margin: "0 auto" }}>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 gap: 10,
-                marginBottom: 24,
+                marginBottom: 48,
                 fontFamily: FONT,
                 fontWeight: 700,
                 fontSize: 10,
@@ -601,205 +601,224 @@ const Home = () => {
               THE REAL COST
             </div>
 
-            <div className="tl-invoice-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, alignItems: "stretch" }}>
-              {/* LEFT PANEL */}
-              <motion.div
-                initial={{ opacity: 0, x: -40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
+            {/* ELEMENT 1 — INVOICE */}
+            <p
+              style={{
+                fontFamily: FONT,
+                fontWeight: 500,
+                fontSize: 14,
+                color: "#6B6460",
+                marginBottom: 16,
+                textAlign: "center",
+              }}
+            >
+              This is the information captured on a typical invoice from your agency.
+            </p>
+            <motion.div
+              className="tl-invoice-card"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              style={{
+                background: "#FFFFFF",
+                border: "0.5px solid #E5E0DA",
+                borderRadius: 12,
+                overflow: "hidden",
+                maxWidth: 560,
+                margin: "0 auto",
+              }}
+            >
+              <div
                 style={{
-                  background: "#FFFFFF",
-                  border: "0.5px solid #E5E0DA",
-                  borderRadius: 12,
-                  overflow: "hidden",
-                  padding: 0,
+                  background: "#F8F5EF",
+                  borderBottom: "0.5px solid #E5E0DA",
+                  padding: "14px 20px",
                   display: "flex",
-                  flexDirection: "column",
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
-                <div
+                <span
                   style={{
-                    height: 48,
-                    background: "#F8F5EF",
-                    borderBottom: "0.5px solid #E5E0DA",
-                    display: "flex",
-                    alignItems: "center",
-                    padding: "0 20px",
                     fontFamily: FONT,
                     fontWeight: 700,
-                    fontSize: 10,
-                    letterSpacing: "0.14em",
+                    fontSize: 11,
+                    letterSpacing: "0.1em",
                     textTransform: "uppercase",
                     color: "#9B9590",
                   }}
                 >
-                  WHAT THE INVOICE SHOWS
-                </div>
-                <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-                  {[
-                    { d: "Agency hours" },
-                    { d: "Employer costs" },
-                    { d: "Agency margin" },
-                  ].map((row, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        minHeight: 52,
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        padding: "0 20px",
-                        borderBottom: "0.5px solid #F8F5EF",
-                      }}
-                    >
-                      <span style={{ fontFamily: FONT, fontWeight: 500, fontSize: 13, color: "#6B6460" }}>
-                        {row.d}
-                      </span>
-                      <TypingDollars
-                        delay={0.7 + i * 0.3}
-                        style={{ fontFamily: FONT, fontWeight: 700, fontSize: 13, color: "#0D0D0B" }}
-                      />
-                    </div>
-                  ))}
-                </div>
+                  AGENCY INVOICE
+                </span>
+                <span style={{ fontFamily: FONT, fontWeight: 400, fontSize: 11, color: "#C0B8B0" }}>
+                  Week ending 14 Feb
+                </span>
+              </div>
+              {[
+                { d: "Agency hours" },
+                { d: "Employer costs" },
+                { d: "Agency margin" },
+              ].map((row, i) => (
                 <div
+                  key={i}
                   style={{
-                    height: 56,
-                    padding: "0 20px",
-                    borderTop: "1px solid #E5E0DA",
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    background: "#FAFAF6",
-                    marginTop: "auto",
+                    minHeight: 48,
+                    padding: "0 20px",
+                    borderBottom: "0.5px solid #F8F5EF",
                   }}
                 >
-                  <span style={{ fontFamily: FONT, fontWeight: 700, fontSize: 13, color: "#0D0D0B" }}>
-                    Invoice total
+                  <span style={{ fontFamily: FONT, fontWeight: 500, fontSize: 13, color: "#6B6460" }}>
+                    {row.d}
                   </span>
                   <TypingDollars
-                    delay={0.7 + 3 * 0.3}
-                    style={{ fontFamily: FONT, fontWeight: 800, fontSize: 18, color: "#0D0D0B" }}
+                    delay={0.6 + i * 0.2}
+                    style={{ fontFamily: FONT, fontWeight: 700, fontSize: 13, color: "#0D0D0B" }}
                   />
                 </div>
-              </motion.div>
-
-              {/* RIGHT PANEL */}
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              ))}
+              <div
                 style={{
-                  background: "#0D0D0B",
-                  border: "1.5px solid #C4391A",
-                  borderRadius: 12,
-                  overflow: "hidden",
-                  padding: 0,
+                  padding: "14px 20px",
+                  borderTop: "1px solid #E5E0DA",
+                  background: "#FAFAF6",
                   display: "flex",
-                  flexDirection: "column",
-                  boxShadow: "0 4px 32px rgba(196,57,26,0.15)",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
-                <div
+                <span style={{ fontFamily: FONT, fontWeight: 700, fontSize: 13, color: "#0D0D0B" }}>
+                  Invoice total
+                </span>
+                <TypingDollars
+                  delay={0.6 + 3 * 0.2}
+                  style={{ fontFamily: FONT, fontWeight: 800, fontSize: 20, color: "#0D0D0B" }}
+                />
+              </div>
+            </motion.div>
+
+            {/* ELEMENT 2 — TRANSITION */}
+            <div
+              style={{
+                margin: "56px auto",
+                maxWidth: 560,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 12,
+              }}
+            >
+              <div style={{ width: "100%", height: "0.5px", background: "#E5E0DA" }} />
+              <motion.p
+                className="tl-invoice-transition"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+                style={{
+                  fontFamily: FONT,
+                  fontWeight: 700,
+                  fontSize: 18,
+                  color: "#0D0D0B",
+                  textAlign: "center",
+                  margin: 0,
+                }}
+              >
+                Every week, your operation also experiences this:
+              </motion.p>
+              <div style={{ width: "100%", height: "0.5px", background: "#E5E0DA" }} />
+            </div>
+
+            {/* ELEMENT 3 — HIDDEN COSTS */}
+            <div
+              className="tl-hidden-costs"
+              style={{
+                background: "#0D0D0B",
+                margin: "0 -48px",
+                padding: "56px 48px",
+                borderRadius: 16,
+              }}
+            >
+              {[
+                "Overtime from gaps nobody saw coming.",
+                "Management time spent fixing avoidable problems.",
+                "Workers who left over a pay error.",
+                "Last-minute replacement ramp time.",
+                "Unscheduled workers on your site.",
+              ].map((stmt, i, arr) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 32 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
                   style={{
-                    height: 48,
-                    background: "#C4391A",
                     display: "flex",
-                    alignItems: "center",
-                    padding: "0 20px",
-                    fontFamily: FONT,
-                    fontWeight: 700,
-                    fontSize: 10,
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                    color: "#FFFFFF",
+                    alignItems: "flex-start",
+                    gap: 20,
+                    padding: "24px 0",
+                    borderBottom: i === arr.length - 1 ? "none" : "0.5px solid rgba(255,255,255,0.06)",
                   }}
                 >
-                  WHAT IT ACTUALLY COST YOU
-                </div>
-                <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-                  {["Agency hours", "Employer costs", "Agency margin"].map((d, i) => (
-                    <div
-                      key={`base-${i}`}
-                      style={{
-                        minHeight: 52,
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        padding: "0 20px",
-                        background: "transparent",
-                        borderBottom: "0.5px solid rgba(255,255,255,0.06)",
-                      }}
-                    >
-                      <span style={{ fontFamily: FONT, fontWeight: 500, fontSize: 13, color: "rgba(255,255,255,0.4)" }}>
-                        {d}
-                      </span>
-                      <span style={{ fontFamily: FONT, fontWeight: 600, fontSize: 13, color: "rgba(255,255,255,0.4)" }}>
-                        $$$
-                      </span>
-                    </div>
-                  ))}
-                  {[
-                    "Overtime from gaps nobody saw",
-                    "Management time fixing avoidable problems",
-                    "Workers who left over a pay error",
-                    "Last-minute replacement ramp time",
-                    "Unscheduled workers on your site",
-                  ].map((d, i) => (
-                    <motion.div
-                      key={`hidden-${i}`}
-                      initial={{ opacity: 0, x: 16 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true, margin: "-80px" }}
-                      transition={{ duration: 0.35, delay: 0.5 + 0.2 + i * 0.08, ease: "easeOut" }}
-                      style={{
-                        minHeight: 52,
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        padding: "0 20px",
-                        background: "transparent",
-                        borderBottom: "0.5px solid rgba(196,57,26,0.15)",
-                      }}
-                    >
-                      <span style={{ fontFamily: FONT, fontWeight: 500, fontSize: 13, color: "rgba(255,255,255,0.75)" }}>
-                        {d}
-                      </span>
-                      <span style={{ fontFamily: FONT, fontWeight: 600, fontSize: 13, color: "#C4391A" }}>
-                        Unknown
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-                <div
-                  style={{
-                    height: 56,
-                    padding: "0 20px",
-                    borderTop: "1px solid rgba(196,57,26,0.3)",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    background: "rgba(196,57,26,0.1)",
-                    marginTop: "auto",
-                  }}
-                >
-                  <span style={{ fontFamily: FONT, fontWeight: 700, fontSize: 13, color: "#FFFFFF" }}>
-                    Actual cost to your business
-                  </span>
-                  <motion.span
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 0.4, delay: 1.2 + 0.2, ease: "easeOut" }}
-                    style={{ fontFamily: FONT, fontWeight: 800, fontSize: 18, color: "#C4391A", display: "inline-block" }}
+                  <div
+                    style={{
+                      width: 3,
+                      alignSelf: "stretch",
+                      background: "#C4391A",
+                      borderRadius: 2,
+                      flexShrink: 0,
+                      marginTop: 4,
+                    }}
+                  />
+                  <div
+                    className="tl-hidden-stmt"
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 800,
+                      fontSize: 28,
+                      color: "#FFFFFF",
+                      letterSpacing: "-0.02em",
+                      lineHeight: 1.2,
+                      transition: "color 0.2s ease",
+                    }}
                   >
-                    You guessed it.
-                  </motion.span>
-                </div>
-              </motion.div>
+                    {stmt}
+                  </div>
+                </motion.div>
+              ))}
+              <div
+                style={{
+                  paddingTop: 32,
+                  marginTop: 8,
+                  borderTop: "0.5px solid rgba(255,255,255,0.08)",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  gap: 16,
+                }}
+              >
+                <span style={{ fontFamily: FONT, fontWeight: 400, fontSize: 13, color: "rgba(255,255,255,0.35)" }}>
+                  None of these appear on any invoice.
+                </span>
+                <motion.span
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.4, delay: 0.6 }}
+                  style={{
+                    fontFamily: FONT,
+                    fontWeight: 800,
+                    fontSize: 18,
+                    color: "#C4391A",
+                    display: "inline-block",
+                  }}
+                >
+                  Every week.
+                </motion.span>
+              </div>
             </div>
           </div>
         </section>
