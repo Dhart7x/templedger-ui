@@ -44,6 +44,24 @@ const TABS = [
     Component: ClientPayroll,
   },
   {
+    id: "invoiceclarity",
+    nav: "Invoice Clarity",
+    label: "INVOICE CLARITY",
+    headline: "Every invoice line traces back to a verified clock event.",
+    body:
+      "TempLedger derives your invoice total directly from verified payroll hours, broken down by cost centre. No estimates. No reconciliation calls. No disputes. The number on the invoice is the number the system verified.",
+    Component: ClientBilling,
+  },
+  {
+    id: "compliance",
+    nav: "Compliance",
+    label: "COMPLIANCE",
+    headline: "Every worker's documents verified before they reach your site.",
+    body:
+      "Compliance status is checked continuously — not assumed. Right to work, certifications and contracts are verified for every worker on every shift. Non-compliant workers are blocked automatically before they arrive. The risk stays with the agency.",
+    Component: ComplianceDocsPreview,
+  },
+  {
     id: "schedule",
     nav: "Schedule Visibility",
     label: "SCHEDULE VISIBILITY",
