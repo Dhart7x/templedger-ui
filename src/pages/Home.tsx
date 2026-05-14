@@ -328,7 +328,6 @@ const Home = () => {
           .tl-section-platform h2 { font-size: 26px !important; }
           .tl-platform-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
           .tl-platform-preview { height: 360px !important; }
-          .tl-platform-bottom { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
 
           /* COMPOUNDING INTELLIGENCE */
           .tl-section-compound { padding: 56px 20px !important; }
