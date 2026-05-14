@@ -793,8 +793,8 @@ const Home = () => {
                   a: "If you are filling a no-show you need speed. If you are planning ahead, quality and cost matter more. That distinction requires data nobody in your operation currently has.",
                 },
                 {
-                  q: "Overtime is easier to authorize than it is to avoid.",
-                  a: "Giving someone an additional shift takes seconds. Identifying an available nearby worker who costs less takes a system nobody in your operation currently has.",
+                  q: "Unplanned overtime and poor shift distribution both have a cost.",
+                  a: "Overtime events and uneven shift distribution are symptoms of the same problem. Workers who don't get enough hours leave. Every departure means recruitment, retraining and ramp time. The cost compounds whether you're paying overtime premiums or replacing the people who walked.",
                 },
                 {
                   q: "Management time spent coordinating agencies instead of running the operation.",
