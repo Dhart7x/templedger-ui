@@ -1527,15 +1527,18 @@ const Home = () => {
           </div>
         </section>
 
+        {/* Outcome → white fade */}
+        <div aria-hidden style={{ height: 80, background: "linear-gradient(180deg, rgba(59,21,120,0.4) 0%, rgba(255,255,255,0) 100%)", margin: 0, width: "100%" }} />
+
         {/* SECTION 3 — THE COST */}
-        <section className="tl-section-cost" style={{ background: "transparent", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-cost" style={{ background: "#FFFFFF", padding: "80px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <SectionTag dark>The Cost</SectionTag>
+            <SectionTag>The Cost</SectionTag>
             <h2 className="tl-section-h2"
               style={{
                 fontWeight: 800,
                 fontSize: 36,
-                color: "#FFFFFF",
+                color: C.fg,
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
                 marginBottom: 24,
