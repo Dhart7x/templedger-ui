@@ -169,6 +169,7 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
         >
           {TABS.map((t, i) => {
             const isActive = i === active;
+            const isLast = i === TABS.length - 1;
             return (
               <button
                 key={t.id}
@@ -178,11 +179,12 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
                   fontWeight: 600,
                   fontSize: 12,
                   borderRadius: 7,
-                  padding: "9px 16px",
+                  padding: "9px 20px",
                   cursor: "pointer",
                   transition: "all 0.15s",
                   whiteSpace: "nowrap",
                   border: "none",
+                  borderRight: isLast ? "none" : "1px solid rgba(76,29,149,0.15)",
                   background: isActive ? "#FFFFFF" : "transparent",
                   color: isActive ? "#4C1D95" : "#9B9590",
                   boxShadow: isActive ? "0 1px 4px rgba(0,0,0,0.08)" : "none",
