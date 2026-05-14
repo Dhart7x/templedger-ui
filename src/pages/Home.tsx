@@ -342,8 +342,7 @@ const Home = () => {
 
           /* OUTCOME */
           .tl-section-outcome { padding: 48px 20px !important; }
-          .tl-outcome-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
-          .tl-outcome-col-inner { grid-template-rows: unset !important; display: flex !important; flex-direction: column !important; gap: 10px !important; }
+          .tl-outcome-cards { grid-template-columns: 1fr !important; }
 
           /* HOW IT WORKS */
           .tl-section-how { padding: 48px 20px !important; }
