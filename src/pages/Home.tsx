@@ -433,6 +433,7 @@ const Home = () => {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button
+            className="tl-nav-demo"
             onClick={() => setDemoGateOpen(true)}
             style={{
               fontFamily: FONT,
