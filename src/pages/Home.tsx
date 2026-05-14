@@ -174,22 +174,27 @@ const Home = () => {
     {
       t: "Operational visibility",
       b: "Exceptions and shift gaps surface before they reach payroll or the shop floor.",
+      intel: "Over time the system predicts exceptions before they appear.",
     },
     {
       t: "Retention",
       b: "Accurate pay removes the friction that drives temps to leave. Less churn. Lower replacement cost.",
+      intel: "The system identifies which workers are at risk of leaving before they do.",
     },
     {
       t: "Productivity",
       b: "Right people, right agency, right shift. Output stays consistent and your operation keeps moving.",
+      intel: "Booking decisions get sharper with every shift the system sees.",
     },
     {
       t: "Workforce stability",
       b: "Proven workers identified and converted earlier. Fewer replacements. Less ramp time.",
+      intel: "The platform surfaces conversion candidates automatically as their record builds.",
     },
     {
       t: "Agency accountability",
       b: "Performance derived from the system. Not self-reported. Every decision backed by data.",
+      intel: "Performance patterns emerge across hundreds of shifts, not just the last one.",
     },
   ];
 
@@ -197,22 +202,27 @@ const Home = () => {
     {
       t: "Compliance exposure",
       b: "Non-compliant workers blocked before they reach a shift. The risk stays with the agency.",
+      intel: "The system learns which worker profiles carry higher compliance risk before they reach your site.",
     },
     {
       t: "Overtime",
       b: "Gaps caught early enough to fill properly. Every avoided event is direct margin recovery.",
+      intel: "Over time the system flags high-risk shifts before the gap is ever created.",
     },
     {
       t: "Reconciliation overhead",
       b: "Payroll, invoices and admin chasing drops to near zero. Every week.",
+      intel: "Patterns in billing exceptions are identified and eliminated automatically over time.",
     },
     {
       t: "Fraud risk",
       b: "Unscheduled clock-ins and unexplained overtime flagged live. Nowhere to hide.",
+      intel: "Anomaly detection sharpens with every shift. Patterns invisible to any auditor become visible to the system.",
     },
     {
       t: "Management burden",
       b: "Fewer firefighting hours. Fewer escalations. Fewer decisions made without the right information.",
+      intel: "The system absorbs the coordination load that currently sits with your team.",
     },
   ];
 
