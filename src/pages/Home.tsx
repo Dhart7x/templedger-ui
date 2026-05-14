@@ -1374,8 +1374,9 @@ const Home = () => {
                   WHAT GOES UP
                 </span>
               </div>
-              <div
-                style={{
+            <div
+              className="tl-outcome-cards"
+              style={{
                   display: "flex",
                   alignItems: "center",
                   gap: 8,
