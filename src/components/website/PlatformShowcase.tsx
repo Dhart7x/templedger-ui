@@ -166,12 +166,14 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
         >
           {/* Left column — tab list */}
           <div
+            className="tl-platform-tablist"
             style={{
               borderRight: "0.5px solid #E7E5E4",
               paddingRight: 16,
             }}
           >
             <div
+              className="tl-platform-tablabel"
               style={{
                 fontFamily: "Inter, sans-serif",
                 fontWeight: 700,
@@ -190,6 +192,7 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
               return (
                 <button
                   key={t.id}
+                  className={`tl-platform-tab${isActive ? " is-active" : ""}`}
                   onClick={() => setActive(i)}
                   onMouseEnter={(e) => {
                     if (!isActive) {

@@ -269,102 +269,128 @@ const Home = () => {
 
         @media (max-width: 768px) {
           /* GLOBAL */
-          body { overflow-x: hidden !important; }
+          html, body { overflow-x: hidden !important; }
 
           /* NAV */
           .tl-nav { padding: 0 16px !important; height: 48px !important; }
           .tl-nav-links { display: none !important; }
-          .tl-nav-cta { padding: 6px 12px !important; font-size: 11px !important; }
+          .tl-nav-demo { padding: 6px 10px !important; font-size: 11px !important; }
+          .tl-nav-cta { padding: 6px 10px !important; font-size: 11px !important; }
           .tl-nav-spacer { padding-top: 48px !important; }
 
           /* HERO */
-          .tl-hero { padding: 52px 20px 48px !important; }
-          .tl-hero-h1 { font-size: 32px !important; }
+          .tl-hero { padding: 64px 20px 48px !important; }
+          .tl-hero-h1 { font-size: 28px !important; letter-spacing: -0.02em !important; }
           .tl-hero-sub { font-size: 15px !important; }
           .tl-hero-cta { width: 100% !important; }
           .tl-hero-muted { font-size: 11px !important; }
 
           /* INVOICE / REAL COST */
-          .tl-section-invoice { padding: 48px 20px 96px !important; }
+          .tl-section-invoice { padding: 48px 20px !important; }
           .tl-invoice-card { max-width: 100% !important; width: 100% !important; }
           .tl-invoice-transition { font-size: 16px !important; }
 
-          /* COST OF INACTION */
-          .tl-hidden-costs { margin: 0 -20px !important; padding: 48px 20px !important; border-radius: 12px !important; }
-          .tl-hidden-costs h2 { font-size: 26px !important; }
-          .tl-hidden-costs .tl-cost-question { font-size: 15px !important; }
-          .tl-hidden-costs .tl-cost-answer { font-size: 13px !important; }
+          /* COST OF INACTION (hidden costs) */
+          .tl-hidden-costs { margin: 0 -20px !important; padding: 56px 20px !important; border-radius: 0 !important; }
+          .tl-hidden-costs h2 { font-size: 26px !important; letter-spacing: -0.02em !important; }
+          .tl-cost-block { padding: 20px 0 !important; }
+          .tl-cost-question { font-size: 15px !important; font-weight: 700 !important; }
+          .tl-cost-answer { font-size: 13px !important; line-height: 1.65 !important; }
           .tl-cost-closing { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
           .tl-cost-closing-right { text-align: left !important; }
 
           /* REVEAL */
           .tl-section-reveal { padding: 48px 20px !important; }
-          .tl-section-reveal h2 { font-size: 26px !important; }
-          .tl-section-reveal .tl-reveal-block { font-size: 14px !important; }
+          .tl-section-reveal h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
+          .tl-section-reveal .tl-reveal-block { font-size: 13px !important; width: 100% !important; max-width: 100% !important; }
           .tl-section-reveal .tl-reveal-close { font-size: 15px !important; }
+
+          /* THE COST */
           .tl-section-cost { padding: 48px 20px !important; }
+          .tl-section-cost h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
           .tl-cost-stack { gap: 12px !important; }
+          .tl-cost-stack > * { width: 100% !important; max-width: 100% !important; }
 
           /* ALTERNATIVE */
           .tl-section-alternative { padding: 48px 20px !important; }
-          .tl-alt-table-wrap { overflow-x: auto !important; }
+          .tl-section-alternative h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
+          .tl-alt-table-wrap { overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; }
           .tl-alt-table { min-width: unset !important; }
           .tl-alt-header > div,
-          .tl-alt-row > div { padding: 10px 8px !important; font-size: 11px !important; }
-          .tl-alt-label { font-size: 11px !important; }
+          .tl-alt-row > div { padding: 8px 6px !important; font-size: 10px !important; }
+          .tl-alt-label { width: 100px !important; min-width: 100px !important; max-width: 100px !important; font-size: 10px !important; }
 
           /* SOLUTION TRANSITION */
           .tl-section-solution { padding: 48px 20px !important; }
-          .tl-section-solution h2 { font-size: 26px !important; }
+          .tl-section-solution h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
 
           /* INTRODUCING TEMPLEDGER */
-          .tl-section-introducing { padding: 56px 20px !important; }
-          .tl-section-introducing h2 { font-size: 28px !important; }
-          .tl-pillars { grid-template-columns: 1fr !important; }
-          .tl-pillar-word { font-size: 26px !important; }
+          .tl-section-introducing { padding: 48px 20px !important; }
+          .tl-section-introducing h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
+          .tl-pillars { grid-template-columns: 1fr !important; gap: 12px !important; }
+          .tl-pillar-word { font-size: 22px !important; }
+          .tl-section-introducing .tl-section-sub { font-size: 14px !important; }
 
           /* PLATFORM SHOWCASE */
-          .tl-section-platform { padding: 56px 20px !important; }
-          .tl-section-platform h2 { font-size: 26px !important; }
-          .tl-platform-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+          .tl-section-platform { padding: 48px 20px !important; }
+          .tl-section-platform h2 { font-size: 22px !important; letter-spacing: -0.02em !important; }
+          .tl-platform-grid { display: flex !important; flex-direction: column !important; gap: 16px !important; }
+          .tl-platform-tablist { border-right: none !important; padding-right: 0 !important; display: flex !important; overflow-x: auto !important; gap: 8px !important; padding-bottom: 12px !important; -webkit-overflow-scrolling: touch !important; scrollbar-width: none !important; }
+          .tl-platform-tablist::-webkit-scrollbar { display: none !important; }
+          .tl-platform-tablabel { display: none !important; }
+          .tl-platform-tab { width: auto !important; white-space: nowrap !important; font-size: 11px !important; padding: 7px 14px !important; border-radius: 20px !important; background: #FAFAF8 !important; border: 0.5px solid #E7E5E4 !important; border-left: 0.5px solid #E7E5E4 !important; color: #78716C !important; font-weight: 500 !important; }
+          .tl-platform-tab.is-active { background: #F5F3FF !important; border: 0.5px solid #4C1D95 !important; border-left: 0.5px solid #4C1D95 !important; color: #4C1D95 !important; font-weight: 700 !important; padding: 7px 14px !important; }
+          .tl-platform-grid h3 { font-size: 15px !important; }
+          .tl-platform-grid p { font-size: 12px !important; }
           .tl-platform-preview { height: 360px !important; }
+          .tl-platform-preview > div { transform: scale(0.55) !important; transform-origin: top left !important; width: 182% !important; }
 
           /* COMPOUNDING INTELLIGENCE */
-          .tl-section-compound { padding: 56px 20px !important; }
-          .tl-compound-h2 { font-size: 28px !important; }
-          .tl-compound-stages { grid-template-columns: 1fr !important; gap: 32px !important; padding-left: 32px !important; }
+          .tl-section-compound { padding: 48px 20px !important; }
+          .tl-compound-h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
+          .tl-compound-stages { grid-template-columns: 1fr !important; gap: 24px !important; padding-left: 32px !important; }
           .tl-compound-line { top: 0 !important; left: 27px !important; width: 2px !important; height: 100% !important; background: linear-gradient(to bottom, #4C1D95, #7C3AED, #4C1D95) !important; }
-          .tl-compound-stage { align-items: flex-start !important; text-align: left !important; padding: 0 !important; }
-          .tl-compound-stage-body { text-align: left !important; }
-          .tl-compound-bottom { grid-template-columns: 1fr !important; gap: 16px !important; padding: 24px !important; }
+          .tl-compound-stage { flex-direction: row !important; align-items: flex-start !important; text-align: left !important; padding: 0 !important; gap: 16px !important; }
+          .tl-compound-stage > div:first-child { margin-bottom: 0 !important; }
+          .tl-compound-stage-body { text-align: left !important; max-width: 100% !important; }
+          .tl-compound-bottom { grid-template-columns: 1fr !important; gap: 12px !important; padding: 24px !important; }
           .tl-compound-bottom-right { text-align: left !important; }
 
           /* OUTCOME */
           .tl-section-outcome { padding: 48px 20px !important; }
-          .tl-outcome-cards { grid-template-columns: 1fr !important; }
+          .tl-section-outcome h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
+          .tl-outcome-stack { display: flex !important; flex-direction: column !important; }
+          .tl-outcome-headers { display: contents !important; }
+          .tl-outcome-grid { display: contents !important; }
+          .tl-outcome-header-up { order: 0 !important; margin-bottom: 8px !important; }
+          .tl-outcome-card[data-dir="up"] { order: 1 !important; margin-bottom: 10px !important; }
+          .tl-outcome-header-down { order: 2 !important; margin-top: 16px !important; margin-bottom: 8px !important; }
+          .tl-outcome-card[data-dir="down"] { order: 3 !important; margin-bottom: 10px !important; }
 
           /* HOW IT WORKS */
           .tl-section-how { padding: 48px 20px !important; }
-          .tl-section-how h2 { font-size: 24px !important; }
-          .tl-steps-grid { grid-template-columns: 1fr !important; gap: 1px !important; }
-          .tl-step-card { grid-template-rows: auto auto auto !important; height: auto !important; }
-          .tl-step-title { min-height: unset !important; }
+          .tl-section-how h2 { font-size: 22px !important; letter-spacing: -0.02em !important; }
           .tl-section-how .tl-section-sub { font-size: 13px !important; }
+          .tl-steps-grid { grid-template-columns: 1fr !important; gap: 1px !important; }
+          .tl-step-card { grid-template-rows: auto auto auto !important; height: auto !important; width: 100% !important; }
+          .tl-step-number { font-size: 36px !important; }
+          .tl-step-title { min-height: auto !important; }
 
           /* CONTACT */
-          .tl-section-contact { padding: 48px 20px !important; }
-          .tl-contact-h2 { font-size: 28px !important; }
+          .tl-section-contact { padding: 56px 20px !important; }
+          .tl-contact-h2 { font-size: 26px !important; letter-spacing: -0.02em !important; }
+          .tl-section-contact form { max-width: 100% !important; width: 100% !important; }
           .tl-section-contact input,
           .tl-section-contact select,
           .tl-section-contact textarea,
           .tl-section-contact button { width: 100% !important; }
 
           /* FOOTER */
-          .tl-footer { flex-direction: column !important; gap: 8px !important; padding: 20px 16px !important; text-align: center !important; }
+          .tl-footer { flex-direction: column !important; align-items: center !important; gap: 8px !important; padding: 20px 16px !important; text-align: center !important; }
           .tl-footer > * { font-size: 10px !important; text-align: center !important; }
 
           /* GLOBAL TYPOGRAPHY */
-          .tl-section-h2 { font-size: 26px !important; letter-spacing: -0.02em !important; }
+          .tl-section-h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
           .tl-section-tag { font-size: 9px !important; }
           .tl-section-sub { font-size: 13px !important; max-width: 100% !important; }
         }
@@ -433,6 +459,7 @@ const Home = () => {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button
+            className="tl-nav-demo"
             onClick={() => setDemoGateOpen(true)}
             style={{
               fontFamily: FONT,
@@ -820,6 +847,7 @@ const Home = () => {
               ].map((block, i, arr) => (
                 <motion.div
                   key={i}
+                  className="tl-cost-block"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
@@ -1349,9 +1377,11 @@ const Home = () => {
               The impact compounds with every shift, every week.
             </motion.p>
 
+            <div className="tl-outcome-stack">
             {/* Column headers above the grid */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+            <div className="tl-outcome-headers" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
               <div
+                className="tl-outcome-header tl-outcome-header-up"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -1383,7 +1413,7 @@ const Home = () => {
                 </span>
               </div>
             <div
-              className="tl-outcome-cards"
+              className="tl-outcome-header tl-outcome-header-down"
               style={{
                   display: "flex",
                   alignItems: "center",
@@ -1419,6 +1449,7 @@ const Home = () => {
 
             {/* 10-CARD GRID */}
             <div
+              className="tl-outcome-grid"
               style={{
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
@@ -1441,6 +1472,8 @@ const Home = () => {
               ].map((item, i) => (
                 <motion.div
                   key={i}
+                  className="tl-outcome-card"
+                  data-dir={item.dir}
                   initial={{ opacity: 0, x: item.dir === "up" ? -24 : 24 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
@@ -1497,6 +1530,7 @@ const Home = () => {
                   )}
                 </motion.div>
               ))}
+            </div>
             </div>
 
             <div
