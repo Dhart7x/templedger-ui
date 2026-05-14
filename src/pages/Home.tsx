@@ -1280,7 +1280,7 @@ const Home = () => {
                   lineHeight: 1.6,
                 }}
               >
-                Human in the loop. Always. Every recommendation confirmed by you.
+                Across thousands of shifts. From month six onwards.
               </div>
             </motion.div>
           </div>
