@@ -185,40 +185,26 @@ const ClientPayroll = () => {
           </div>
           <div className="space-y-2">
             {verified.map((entry, idx) => (
-              <div key={idx} className="flex items-center justify-between py-2">
-                <div className="flex items-center gap-1.5 min-w-0">
-                  <span className="text-[13px] font-medium truncate" style={{ color: "#0D0D0B" }}>
+              <div key={idx} className="flex items-center gap-3 py-2">
+                {/* WORKER INFO (left) */}
+                <div className="min-w-0 flex-1">
+                  <div className="text-[13px] font-medium truncate" style={{ color: "#0D0D0B" }}>
                     {entry.worker}
-                  </span>
-                  <span className="text-[11px]" style={{ color: "#6B6460" }}>·</span>
-                  <span className="text-[11px] truncate" style={{ color: "#6B6460" }}>{entry.agency}</span>
-                  <span className="text-[11px]" style={{ color: "#6B6460" }}>·</span>
-                  <span className="text-[11px] truncate" style={{ color: "#6B6460" }}>{entry.department}</span>
-                </div>
-                <div className="flex items-center gap-3 shrink-0">
-                  <div className="text-right">
-                    <span className="text-[13px] font-bold text-green-500">{entry.totalHours}h</span>
-                    <div className="text-[9px]" style={{ color: "#6B6460" }}>
-                      {entry.days.map(d => `${d.day} ${d.hours}h`).join(" ")}
-                      {entry.totalHours > entry.days.reduce((s, d) => s + (d.day === "Wed" && d.hours > 8 ? 8 : d.hours), 0) && entry.days.some(d => d.hours > 8) && (
-                        <span className="text-primary ml-1">({entry.days.find(d => d.hours > 8)!.hours - 8}h OT)</span>
-                      )}
-                    </div>
                   </div>
-                  <TooltipProvider>
-                    <div className="flex items-center gap-0.5">
-                      {verificationSteps.map((step, si) => (
-                        <Tooltip key={si}>
-                          <TooltipTrigger asChild>
-                            <div className={`w-1.5 h-1.5 rounded-full ${
-                              si < entry.stepsCompleted ? "bg-green-500" : "bg-muted-foreground/30"
-                            }`} />
-                          </TooltipTrigger>
-                          <TooltipContent side="top" className="text-[10px]">{step}</TooltipContent>
-                        </Tooltip>
-                      ))}
-                    </div>
-                  </TooltipProvider>
+                  <div className="text-[10px] truncate" style={{ color: "#6B6460" }}>
+                    {entry.agency} · {entry.department}
+                  </div>
+                </div>
+                {/* VERIFICATION SEQUENCE (center) */}
+                <div className="shrink-0">
+                  <VerificationChain completed={entry.stepsCompleted} />
+                </div>
+                {/* PAYROLL AMOUNT (right) */}
+                <div className="text-right shrink-0 w-24">
+                  <div className="text-[13px] font-bold text-green-500">{entry.totalHours}h</div>
+                  <div className="font-mono text-[11px]" style={{ color: "#0D0D0B" }}>
+                    £{(entry.totalHours * entry.hourlyRate).toLocaleString("en-GB", { minimumFractionDigits: 0 })}
+                  </div>
                 </div>
               </div>
             ))}
