@@ -225,60 +225,60 @@ const ClientPayroll = () => {
             <span className="text-[9px]" style={{ color: "#6B6460" }}>Unresolved live issues</span>
           </div>
           <div className="space-y-2">
-            {exceptions.map((entry) => (
-              <div key={entry.id} className="flex items-center justify-between py-2 relative">
-                <div className="flex items-center gap-2 min-w-0">
-                  <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-                    entry.exceptionType.includes("No Clock") ? "bg-destructive" : "bg-amber-500"
-                  }`} />
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-[13px] font-medium truncate" style={{ color: "#0D0D0B" }}>
-                        {entry.worker}
-                      </span>
-                      <span className="text-[11px]" style={{ color: "#6B6460" }}>·</span>
-                      <span className="text-[11px] truncate" style={{ color: "#6B6460" }}>{entry.agency}</span>
-                      <span className="text-[11px]" style={{ color: "#6B6460" }}>·</span>
-                      <span className="text-[11px] truncate" style={{ color: "#6B6460" }}>{entry.department}</span>
+            {exceptions.map((entry) => {
+              const completed = entry.stepsCompleted.filter(Boolean).length;
+              return (
+                <div key={entry.id} className="flex items-center gap-3 py-2 relative">
+                  {/* WORKER INFO (left) */}
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[13px] font-medium truncate" style={{ color: "#0D0D0B" }}>
+                      {entry.worker}
                     </div>
-                    <div className="flex items-center gap-2 mt-0.5">
+                    <div className="text-[10px] truncate" style={{ color: "#6B6460" }}>
+                      {entry.agency} · {entry.department}
+                    </div>
+                    <div className="mt-0.5">
                       <span className={`text-[10px] px-1.5 py-0.5 rounded ${entry.exceptionColor}`}>
                         {entry.exceptionType}
                       </span>
-                      <span className="text-[10px] text-destructive">{entry.failingStep}</span>
                     </div>
                   </div>
+                  {/* VERIFICATION SEQUENCE (center) */}
+                  <div className="shrink-0">
+                    <VerificationChain completed={completed} />
+                  </div>
+                  {/* RIGHT */}
+                  <div className="flex flex-col items-end gap-1 shrink-0 w-24">
+                    <span className="text-[10px] text-destructive">Blocked · {entry.id}</span>
+                    {entry.status === "in-review" ? (
+                      <span className="text-[10px] text-amber-500 bg-amber-500/10 px-1.5 py-0.5 rounded">In Review</span>
+                    ) : (
+                      <div className="relative">
+                        <button
+                          onClick={() => setResolveDropdown(resolveDropdown === entry.id ? null : entry.id)}
+                          className="text-[11px] border border-border rounded px-2 py-0.5 text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors"
+                        >
+                          Resolve
+                        </button>
+                        {resolveDropdown === entry.id && (
+                          <div className="absolute right-0 top-full mt-1 z-50 bg-card border border-border rounded-lg shadow-lg w-52 overflow-hidden">
+                            {resolveOptions.map((opt) => (
+                              <button
+                                key={opt}
+                                onClick={() => handleResolve(entry.id, opt)}
+                                className="w-full text-left px-3 py-2 text-xs hover:bg-muted/50 text-foreground transition-colors"
+                              >
+                                {opt}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 shrink-0">
-                  <span className="text-[11px] text-destructive">Blocked — {entry.id}</span>
-                  {entry.status === "in-review" ? (
-                    <span className="text-[10px] text-amber-500 bg-amber-500/10 px-1.5 py-0.5 rounded">In Review</span>
-                  ) : (
-                    <div className="relative">
-                      <button
-                        onClick={() => setResolveDropdown(resolveDropdown === entry.id ? null : entry.id)}
-                        className="text-xs border border-border rounded px-2 py-1 text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors"
-                      >
-                        Resolve
-                      </button>
-                      {resolveDropdown === entry.id && (
-                        <div className="absolute right-0 top-full mt-1 z-50 bg-card border border-border rounded-lg shadow-lg w-52 overflow-hidden">
-                          {resolveOptions.map((opt) => (
-                            <button
-                              key={opt}
-                              onClick={() => handleResolve(entry.id, opt)}
-                              className="w-full text-left px-3 py-2 text-xs hover:bg-muted/50 text-foreground transition-colors"
-                            >
-                              {opt}
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
