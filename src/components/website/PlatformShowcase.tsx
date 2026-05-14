@@ -140,7 +140,7 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
             marginBottom: 8,
           }}
         >
-          Built around every problem on this page.
+          Agency spend at scale erodes margin. TempLedger addresses every source.
         </h2>
         <p
           style={{
