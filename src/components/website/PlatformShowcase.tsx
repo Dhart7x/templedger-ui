@@ -53,15 +53,6 @@ const TABS = [
     Component: ClientBilling,
   },
   {
-    id: "compliance",
-    nav: "Compliance",
-    label: "COMPLIANCE",
-    headline: "Every worker's documents verified before they reach your site.",
-    body:
-      "Compliance status is checked continuously — not assumed. Right to work, certifications and contracts are verified for every worker on every shift. Non-compliant workers are blocked automatically before they arrive. The risk stays with the agency.",
-    Component: ComplianceDocsPreview,
-  },
-  {
     id: "schedule",
     nav: "Schedule Visibility",
     label: "SCHEDULE VISIBILITY",
@@ -78,6 +69,15 @@ const TABS = [
     body:
       "Define exactly what each level of management can and cannot do, by department. Shift managers operate within the boundaries you set. No more unauthorized headcount. No more off-system bookings.",
     Component: PermissionsPreview,
+  },
+  {
+    id: "compliance",
+    nav: "Compliance",
+    label: "COMPLIANCE",
+    headline: "Every worker's documents verified before they reach your site.",
+    body:
+      "Compliance status is checked continuously — not assumed. Right to work, certifications and contracts are verified for every worker on every shift. Non-compliant workers are blocked automatically before they arrive. The risk stays with the agency.",
+    Component: ComplianceDocsPreview,
   },
   {
     id: "directhire",
@@ -154,157 +154,181 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
           This is a fraction of what's inside.
         </p>
 
-        {/* Tabs */}
-        <div
-          className="tl-platform-tabs"
-          style={{
-            display: "flex",
-            gap: 4,
-            background: "#F8F5EF",
-            borderRadius: 10,
-            padding: 4,
-            marginBottom: 32,
-            overflowX: "auto",
-          }}
-        >
-          {TABS.map((t, i) => {
-            const isActive = i === active;
-            const isLast = i === TABS.length - 1;
-            return (
-              <button
-                key={t.id}
-                onClick={() => setActive(i)}
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontWeight: 600,
-                  fontSize: 12,
-                  borderRadius: 7,
-                  padding: "9px 20px",
-                  cursor: "pointer",
-                  transition: "all 0.15s",
-                  whiteSpace: "nowrap",
-                  border: "none",
-                  borderRight: isLast ? "none" : "1px solid rgba(76,29,149,0.15)",
-                  background: isActive ? "#FFFFFF" : "transparent",
-                  color: isActive ? "#4C1D95" : "#9B9590",
-                  boxShadow: isActive ? "0 1px 4px rgba(0,0,0,0.08)" : "none",
-                }}
-              >
-                {t.nav}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Two column content */}
+        {/* Two column: tab list + content */}
         <div
           className="tl-platform-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "35% 65%",
-            gap: 40,
-            alignItems: "flex-start",
+            gridTemplateColumns: "200px 1fr",
+            gap: 24,
+            alignItems: "start",
           }}
         >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={tab.id + "-ctx"}
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-            >
-              <div
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontWeight: 700,
-                  fontSize: 10,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.14em",
-                  color: "#4C1D95",
-                  marginBottom: 8,
-                }}
-              >
-                {tab.label}
-              </div>
-              <h3
-                style={{
-                  fontFamily: "'Bricolage Grotesque', sans-serif",
-                  fontWeight: 800,
-                  fontSize: 24,
-                  color: "#0D0D0B",
-                  lineHeight: 1.3,
-                  marginBottom: 10,
-                }}
-              >
-                {tab.headline}
-              </h3>
-              <p
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontWeight: 400,
-                  fontSize: 14,
-                  color: "#6B6460",
-                  lineHeight: 1.7,
-                  marginBottom: 20,
-                }}
-              >
-                {tab.body}
-              </p>
-              <button
-                onClick={onOpenDemo}
-                style={{
-                  background: "transparent",
-                  border: "none",
-                  padding: 0,
-                  fontFamily: "Inter, sans-serif",
-                  fontWeight: 600,
-                  fontSize: 13,
-                  color: "#4C1D95",
-                  textDecoration: "underline",
-                  textUnderlineOffset: 3,
-                  cursor: "pointer",
-                }}
-              >
-                Explore in the live demo →
-              </button>
-            </motion.div>
-          </AnimatePresence>
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={tab.id + "-preview"}
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-              className="tl-platform-preview"
+          {/* Left column — tab list */}
+          <div
+            style={{
+              borderRight: "0.5px solid #E7E5E4",
+              paddingRight: 16,
+            }}
+          >
+            <div
               style={{
-                background: "#FAFAF8",
-                border: "0.5px solid #E5E0DA",
-                borderRadius: 12,
-                overflow: "hidden",
-                pointerEvents: "none",
-                userSelect: "none",
-                position: "relative",
-                height: 460,
+                fontFamily: "Inter, sans-serif",
+                fontWeight: 700,
+                fontSize: 9,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "#9B9590",
+                marginBottom: 8,
+                paddingLeft: 12,
               }}
             >
-              <div
+              PLATFORM VIEWS
+            </div>
+            {TABS.map((t, i) => {
+              const isActive = i === active;
+              return (
+                <button
+                  key={t.id}
+                  onClick={() => setActive(i)}
+                  onMouseEnter={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.background = "#FAFAF8";
+                      e.currentTarget.style.color = "#44403C";
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.background = "transparent";
+                      e.currentTarget.style.color = "#78716C";
+                    }
+                  }}
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    textAlign: "left",
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: 12,
+                    fontWeight: isActive ? 700 : 500,
+                    padding: isActive ? "9px 12px 9px 11px" : "9px 12px",
+                    borderRadius: "0 6px 6px 0",
+                    border: "none",
+                    borderLeft: isActive ? "3px solid #4C1D95" : "none",
+                    background: isActive ? "#F5F3FF" : "transparent",
+                    color: isActive ? "#4C1D95" : "#78716C",
+                    cursor: "pointer",
+                    transition: "all 0.15s",
+                  }}
+                >
+                  {t.nav}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Right column — context + preview */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={tab.id + "-ctx"}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                <div
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontWeight: 700,
+                    fontSize: 9,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.14em",
+                    color: "#4C1D95",
+                    marginBottom: 4,
+                  }}
+                >
+                  {tab.label}
+                </div>
+                <h3
+                  style={{
+                    fontFamily: "'Bricolage Grotesque', sans-serif",
+                    fontWeight: 800,
+                    fontSize: 18,
+                    color: "#0D0D0B",
+                    lineHeight: 1.3,
+                    marginBottom: 8,
+                  }}
+                >
+                  {tab.headline}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontWeight: 400,
+                    fontSize: 13,
+                    color: "#6B6460",
+                    lineHeight: 1.65,
+                    maxWidth: 520,
+                    marginBottom: 10,
+                  }}
+                >
+                  {tab.body}
+                </p>
+                <button
+                  onClick={onOpenDemo}
+                  style={{
+                    background: "transparent",
+                    border: "none",
+                    padding: 0,
+                    fontFamily: "Inter, sans-serif",
+                    fontWeight: 600,
+                    fontSize: 12,
+                    color: "#4C1D95",
+                    textDecoration: "underline",
+                    textUnderlineOffset: 3,
+                    cursor: "pointer",
+                  }}
+                >
+                  Explore in the live demo →
+                </button>
+              </motion.div>
+            </AnimatePresence>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={tab.id + "-preview"}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="tl-platform-preview"
                 style={{
-                  transform: "scale(0.65)",
-                  transformOrigin: "top left",
-                  width: "154%",
-                  height: "auto",
+                  background: "#FAFAF8",
+                  border: "0.5px solid #E5E0DA",
+                  borderRadius: 12,
                   overflow: "hidden",
+                  pointerEvents: "none",
+                  userSelect: "none",
+                  position: "relative",
+                  height: 460,
                 }}
               >
-                <DemoProvider>
-                  <Active />
-                </DemoProvider>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+                <div
+                  style={{
+                    transform: "scale(0.65)",
+                    transformOrigin: "top left",
+                    width: "154%",
+                    height: "auto",
+                    overflow: "hidden",
+                  }}
+                >
+                  <DemoProvider>
+                    <Active />
+                  </DemoProvider>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
 
       </div>
