@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { CheckCircle, AlertTriangle, ChevronDown } from "lucide-react";
+import { CheckCircle, AlertTriangle, ChevronDown, Check } from "lucide-react";
 import { toast } from "sonner";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 /* ─── Verification steps ─── */
 const verificationSteps = [
@@ -9,8 +8,64 @@ const verificationSteps = [
   "Clocked In",
   "Clocked Out",
   "Manager Approved",
-  "Verified",
+  "Compliant",
 ];
+
+const PURPLE = "#4C1D95";
+const MUTED_BORDER = "#D6D2CE";
+const MUTED_TEXT = "#9B948F";
+
+/* ─── Verification Chain ─── */
+const VerificationChain = ({ completed }: { completed: number }) => (
+  <div className="flex items-start gap-0 select-none">
+    {verificationSteps.map((step, i) => {
+      const isDone = i < completed;
+      const nextDone = i + 1 < completed;
+      return (
+        <div key={i} className="flex items-start">
+          <div className="flex flex-col items-center" style={{ width: 56 }}>
+            <div
+              className="flex items-center justify-center rounded-full"
+              style={{
+                width: 18,
+                height: 18,
+                background: isDone ? PURPLE : "transparent",
+                border: isDone ? `1px solid ${PURPLE}` : `1px solid ${MUTED_BORDER}`,
+              }}
+            >
+              {isDone ? (
+                <Check className="w-2.5 h-2.5" style={{ color: "#fff" }} strokeWidth={3} />
+              ) : (
+                <div className="rounded-full" style={{ width: 4, height: 4, background: MUTED_TEXT }} />
+              )}
+            </div>
+            <span
+              className="mt-1 text-center leading-tight"
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: 9,
+                color: isDone ? PURPLE : MUTED_TEXT,
+                fontWeight: isDone ? 500 : 400,
+              }}
+            >
+              {step}
+            </span>
+          </div>
+          {i < verificationSteps.length - 1 && (
+            <div
+              style={{
+                width: 18,
+                height: 1,
+                marginTop: 9,
+                background: isDone && nextDone ? PURPLE : MUTED_BORDER,
+              }}
+            />
+          )}
+        </div>
+      );
+    })}
+  </div>
+);
 
 /* ─── Types ─── */
 interface VerifiedEntry {
