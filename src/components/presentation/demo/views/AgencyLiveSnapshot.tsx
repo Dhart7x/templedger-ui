@@ -336,7 +336,7 @@ const AgencyLiveSnapshot = ({ onViewWorker }: AgencyLiveSnapshotProps) => {
                       </div>
 
                       {/* Overtime contextual note */}
-                      {exception.type === "overtime" && (
+                      {exception.type === "overtime" && exception.workerName !== "Marcus Webb" && (
                         <div
                           style={{
                             display: "flex",
@@ -361,6 +361,41 @@ const AgencyLiveSnapshot = ({ onViewWorker }: AgencyLiveSnapshotProps) => {
                           >
                             29 available workers to cover this shift within 3 miles of site.
                           </span>
+                        </div>
+                      )}
+
+                      {/* Marcus Webb — agency-side overtime */}
+                      {exception.type === "overtime" && exception.workerName === "Marcus Webb" && (
+                        <div style={{ marginTop: 8 }}>
+                          <div style={{ marginBottom: 6 }}>
+                            <span
+                              style={{
+                                background: "#FEF3C7",
+                                color: "#92400E",
+                                fontFamily: "Inter, sans-serif",
+                                fontWeight: 600,
+                                fontSize: 10,
+                                textTransform: "uppercase",
+                                letterSpacing: "0.06em",
+                                padding: "3px 8px",
+                                borderRadius: 4,
+                              }}
+                            >
+                              Awaiting client response
+                            </span>
+                          </div>
+                          <p
+                            style={{
+                              fontFamily: "Inter, sans-serif",
+                              fontWeight: 400,
+                              fontSize: 12,
+                              color: "#6B6460",
+                              lineHeight: 1.5,
+                              margin: 0,
+                            }}
+                          >
+                            Overtime alert — Marcus Webb (Outbound Dispatch) has exceeded threshold. Client has been notified. Await instruction.
+                          </p>
                         </div>
                       )}
 

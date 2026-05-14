@@ -429,7 +429,7 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
                       )}
 
                       {/* Overtime contextual note */}
-                      {exception.type === "overtime" && (
+                      {exception.type === "overtime" && exception.workerName !== "Marcus Webb" && (
                         <div
                           style={{
                             display: "flex",
@@ -454,6 +454,125 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
                           >
                             29 available workers to cover this shift within 3 miles of site.
                           </span>
+                        </div>
+                      )}
+
+                      {/* Marcus Webb — expanded overtime intervention card */}
+                      {exception.type === "overtime" && exception.workerName === "Marcus Webb" && (
+                        <div style={{ marginTop: 8 }}>
+                          <p
+                            style={{
+                              fontFamily: "Inter, sans-serif",
+                              fontWeight: 400,
+                              fontSize: 12,
+                              color: "#6B6460",
+                              lineHeight: 1.5,
+                              margin: 0,
+                            }}
+                          >
+                            Marcus Webb has been on shift for 6h 42m. Overtime threshold reached.
+                          </p>
+
+                          <div
+                            style={{
+                              background: "#EDE9FE",
+                              borderRadius: 8,
+                              borderLeft: "3px solid #4C1D95",
+                              padding: "10px 14px",
+                              marginTop: 8,
+                            }}
+                          >
+                            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                              <Users className="w-4 h-4" style={{ color: "#4C1D95", flexShrink: 0 }} />
+                              <span
+                                style={{
+                                  fontFamily: "Inter, sans-serif",
+                                  fontWeight: 600,
+                                  fontSize: 13,
+                                  color: "#4C1D95",
+                                }}
+                              >
+                                37 available workers
+                              </span>
+                            </div>
+                            <p
+                              style={{
+                                fontFamily: "Inter, sans-serif",
+                                fontWeight: 400,
+                                fontSize: 12,
+                                color: "#5B4E8A",
+                                lineHeight: 1.5,
+                                margin: "4px 0 0 0",
+                              }}
+                            >
+                              across 3 agencies within 3 miles of site who can cover this shift
+                            </p>
+                            <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8 }}>
+                              {[
+                                "Workforce Direct · 14 workers",
+                                "Pinnacle Staffing · 12 workers",
+                                "Meridian Recruitment · 11 workers",
+                              ].map((p) => (
+                                <span
+                                  key={p}
+                                  style={{
+                                    background: "#FFFFFF",
+                                    border: "0.5px solid #C4B5FD",
+                                    color: "#4C1D95",
+                                    fontFamily: "Inter, sans-serif",
+                                    fontSize: 10,
+                                    borderRadius: 20,
+                                    padding: "3px 10px",
+                                  }}
+                                >
+                                  {p}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toast.success("Intelligent Allocation initiated", {
+                                  description: "Pre-populated with Outbound Dispatch · 14:00 shift requirements",
+                                });
+                              }}
+                              style={{
+                                background: "#4C1D95",
+                                color: "#FFFFFF",
+                                fontFamily: "Inter, sans-serif",
+                                fontWeight: 700,
+                                fontSize: 12,
+                                borderRadius: 7,
+                                padding: "8px 16px",
+                                border: "none",
+                                cursor: "pointer",
+                              }}
+                            >
+                              Run Intelligent Allocation
+                            </button>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toast("Shift manager notified");
+                              }}
+                              style={{
+                                background: "transparent",
+                                border: "0.5px solid #4C1D95",
+                                color: "#4C1D95",
+                                fontFamily: "Inter, sans-serif",
+                                fontWeight: 600,
+                                fontSize: 12,
+                                borderRadius: 7,
+                                padding: "8px 16px",
+                                cursor: "pointer",
+                              }}
+                            >
+                              Alert Shift Manager
+                            </button>
+                          </div>
                         </div>
                       )}
 
