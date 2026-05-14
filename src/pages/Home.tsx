@@ -759,8 +759,6 @@ const Home = () => {
                 marginTop: 0,
                 marginBottom: 0,
                 padding: "72px 48px 48px",
-                borderRadius: 16,
-                boxShadow: "none",
               }}
             >
               <div style={{ maxWidth: 900, margin: "0 auto" }}>
