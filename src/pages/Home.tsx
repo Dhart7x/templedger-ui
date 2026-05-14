@@ -320,6 +320,16 @@ const Home = () => {
           .tl-platform-preview { height: 360px !important; }
           .tl-platform-bottom { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
 
+          /* COMPOUNDING INTELLIGENCE */
+          .tl-section-compound { padding: 56px 20px !important; }
+          .tl-compound-h2 { font-size: 28px !important; }
+          .tl-compound-stages { grid-template-columns: 1fr !important; gap: 32px !important; padding-left: 32px !important; }
+          .tl-compound-line { top: 0 !important; left: 27px !important; width: 2px !important; height: 100% !important; background: linear-gradient(to bottom, #4C1D95, #7C3AED, #4C1D95) !important; }
+          .tl-compound-stage { align-items: flex-start !important; text-align: left !important; padding: 0 !important; }
+          .tl-compound-stage-body { text-align: left !important; }
+          .tl-compound-bottom { grid-template-columns: 1fr !important; gap: 16px !important; padding: 24px !important; }
+          .tl-compound-bottom-right { text-align: left !important; }
+
           /* OUTCOME */
           .tl-section-outcome { padding: 48px 20px !important; }
           .tl-outcome-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
