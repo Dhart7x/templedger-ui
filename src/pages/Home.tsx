@@ -1355,6 +1355,7 @@ const Home = () => {
             {/* Column headers above the grid */}
             <div className="tl-outcome-headers" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
               <div
+                className="tl-outcome-header tl-outcome-header-up"
                 style={{
                   display: "flex",
                   alignItems: "center",
