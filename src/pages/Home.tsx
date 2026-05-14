@@ -791,8 +791,8 @@ const Home = () => {
               {/* Five question blocks */}
               {[
                 {
-                  q: "Agency bookings distributed on habit, not performance.",
-                  a: "The optimal agency, with the optimal worker, at the optimal cost. That decision is impossible when the data to make it lives in a system you cannot see.",
+                  q: "Shifts are never assigned to the optimal worker or the optimal agency. Because everyone is operating blind.",
+                  a: "If you are filling a no-show you need speed. If you are planning ahead, quality and cost matter more. That distinction requires data nobody in your operation currently has.",
                 },
                 {
                   q: "Overtime is easier to authorize than it is to avoid.",
