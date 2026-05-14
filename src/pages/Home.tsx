@@ -1630,7 +1630,7 @@ const Home = () => {
                   maxWidth: 760,
                 }}
               >
-                Outsourcing moves the problem.{"\n"}It doesn't solve it.
+                Outsourcing moves the problem. It doesn't solve it.
               </h2>
             </motion.div>
 
