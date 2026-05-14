@@ -38,9 +38,9 @@ const TABS = [
     id: "payroll",
     nav: "Payroll Sequence",
     label: "PAYROLL SEQUENCE",
-    headline: "Scheduled → Clocked in → Clocked out → Approved → Compliant → Paid.",
+    headline: "Scheduled. Clocked in. Clocked out. Approved. Compliant. Paid.",
     body:
-      "Every worker follows the same verified sequence before appearing on the payroll report. No step can be skipped. No hour goes unverified.",
+      "Every worker follows the same verified sequence before appearing on the payroll report. No step can be skipped. No hour goes unverified. The sequence is the guarantee.",
     Component: ClientPayroll,
   },
   {
