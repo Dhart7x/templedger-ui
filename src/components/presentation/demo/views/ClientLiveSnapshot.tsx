@@ -76,11 +76,17 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
   // Filter exceptions
   const openExceptions = exceptions.filter(e => e.status !== "resolved" && e.status !== "actioned");
   const actionedExceptions = exceptions.filter(e => e.status === "actioned");
-  const filteredExceptions = openExceptions.filter(e => {
-    if (typeFilter !== "all" && e.type !== typeFilter) return false;
-    if (siteFilter !== "all" && e.site !== siteFilter) return false;
-    return true;
-  });
+  const filteredExceptions = openExceptions
+    .filter(e => {
+      if (typeFilter !== "all" && e.type !== typeFilter) return false;
+      if (siteFilter !== "all" && e.site !== siteFilter) return false;
+      return true;
+    })
+    .sort((a, b) => {
+      const aPriority = a.workerName === "Marcus Webb" ? 0 : 1;
+      const bPriority = b.workerName === "Marcus Webb" ? 0 : 1;
+      return aPriority - bPriority;
+    });
 
   // Exceptions awaiting response
   const exceptionsWithUpdates = openExceptions.filter(e => e.resolution && !e.resolution.acknowledged);
