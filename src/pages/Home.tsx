@@ -800,7 +800,7 @@ const Home = () => {
                 },
                 {
                   q: "Management time spent coordinating agencies instead of running the operation.",
-                  a: "Every hour spent chasing timesheets, approving bookings and managing no-shows is an hour not spent on output.",
+                  a: "Every hour spent verifying attendance, reconciling hours, managing no-shows, dealing with understaffing or overstaffing is an hour not spent on output.",
                 },
                 {
                   q: "Non-compliant workers on your site because there is no live shared record to prevent it.",
@@ -808,7 +808,7 @@ const Home = () => {
                 },
                 {
                   q: "Headcount authorized at site level without financial controls.",
-                  a: "Spend decisions made at site level without finance visibility. Every week. Without a system to prevent it, it never stops.",
+                  a: "Spend decisions made at site level without finance visibility. Without a system to prevent it, it never stops.",
                 },
               ].map((block, i, arr) => (
                 <motion.div
