@@ -544,7 +544,7 @@ const Home = () => {
 
       <div className="tl-nav-spacer" style={{ paddingTop: 56, background: "#4C1D95", margin: 0 }}>
         {/* SECTION 1 — HERO */}
-        <section className="tl-hero" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #4C1D95 20%, #5B21B6 45%, rgba(91,33,182,0.6) 65%, rgba(91,33,182,0.15) 82%, rgba(255,255,255,0) 100%)", padding: "76px 48px 80px", margin: 0, width: "100%", minHeight: 520 }}>
+        <section className="tl-hero" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #4C1D95 20%, #5B21B6 45%, rgba(91,33,182,0.6) 65%, rgba(91,33,182,0.15) 82%, rgba(255,255,255,0) 100%)", padding: "80px 48px 60px", margin: 0, width: "100%", minHeight: 520 }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <h1
               className="tl-hero-h1"
@@ -617,7 +617,7 @@ const Home = () => {
         </section>
 
         {/* Hero → white fade */}
-        <div aria-hidden style={{ height: 160, background: "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 30%, rgba(255,255,255,0.85) 65%, #FFFFFF 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 80, background: "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 40%, #FFFFFF 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 2 — THE INVOICE VISUAL */}
         <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "80px 48px 96px", position: "relative", zIndex: 1, margin: 0, width: "100%" }}>
