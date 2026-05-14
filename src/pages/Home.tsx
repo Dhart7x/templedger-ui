@@ -816,6 +816,10 @@ const Home = () => {
                   a: "Without a verified record at the point of clock-in, unverified hours reach your payroll unchallenged. Workers clocking in early, clocking out late, shifts recorded that were never worked — none of it is visible until it is already on the invoice. And by then it has already been paid.",
                 },
                 {
+                  q: "A compliance breach on your site is your liability, not the agency's.",
+                  a: "The agency manages compliance. You carry the consequence. Right to work violations, expired certifications, unsigned contracts — if a non-compliant worker reaches your site, the fine, the reputational damage and the legal exposure sit with you. Not them.",
+                },
+                {
                   q: "You're paying agency margin on workers who should already be yours.",
                   a: "Agency contracts define a conversion window. After a set number of hours on site, you have the right to move a worker onto your payroll — often at a reduced or zero fee. Most businesses never act on it. Not because they don't want to. Because nobody has the visibility to know when the window is open, which workers have earned it, or which departments are most exposed. The margin keeps running. The window closes. Your best people become someone else's permanent employees.",
                 },
