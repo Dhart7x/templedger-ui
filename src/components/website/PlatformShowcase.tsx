@@ -3,11 +3,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { DemoProvider } from "@/components/presentation/demo/DemoContext";
 import ClientLiveSnapshot from "@/components/presentation/demo/views/ClientLiveSnapshot";
 import ClientPayroll from "@/components/presentation/demo/views/ClientPayroll";
+import ClientBilling from "@/components/presentation/demo/views/ClientBilling";
 import AllocationRecommendationPreview from "./platformPreviews/AllocationRecommendationPreview";
 import SchedulePreview from "./platformPreviews/SchedulePreview";
 import PermissionsPreview from "./platformPreviews/PermissionsPreview";
 import DirectHirePreview from "./platformPreviews/DirectHirePreview";
 import AgencyPerformancePreview from "./platformPreviews/AgencyPerformancePreview";
+import ComplianceDocsPreview from "./platformPreviews/ComplianceDocsPreview";
 
 interface Props {
   onOpenDemo: () => void;
@@ -40,6 +42,24 @@ const TABS = [
     body:
       "Every worker follows the same verified sequence before appearing on the payroll report. No step can be skipped. No hour goes unverified.",
     Component: ClientPayroll,
+  },
+  {
+    id: "invoiceclarity",
+    nav: "Invoice Clarity",
+    label: "INVOICE CLARITY",
+    headline: "Every invoice line traces back to a verified clock event.",
+    body:
+      "TempLedger derives your invoice total directly from verified payroll hours, broken down by cost centre. No estimates. No reconciliation calls. No disputes. The number on the invoice is the number the system verified.",
+    Component: ClientBilling,
+  },
+  {
+    id: "compliance",
+    nav: "Compliance",
+    label: "COMPLIANCE",
+    headline: "Every worker's documents verified before they reach your site.",
+    body:
+      "Compliance status is checked continuously — not assumed. Right to work, certifications and contracts are verified for every worker on every shift. Non-compliant workers are blocked automatically before they arrive. The risk stays with the agency.",
+    Component: ComplianceDocsPreview,
   },
   {
     id: "schedule",
@@ -149,6 +169,7 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
         >
           {TABS.map((t, i) => {
             const isActive = i === active;
+            const isLast = i === TABS.length - 1;
             return (
               <button
                 key={t.id}
@@ -158,11 +179,12 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
                   fontWeight: 600,
                   fontSize: 12,
                   borderRadius: 7,
-                  padding: "9px 16px",
+                  padding: "9px 20px",
                   cursor: "pointer",
                   transition: "all 0.15s",
                   whiteSpace: "nowrap",
                   border: "none",
+                  borderRight: isLast ? "none" : "1px solid rgba(76,29,149,0.15)",
                   background: isActive ? "#FFFFFF" : "transparent",
                   color: isActive ? "#4C1D95" : "#9B9590",
                   boxShadow: isActive ? "0 1px 4px rgba(0,0,0,0.08)" : "none",
