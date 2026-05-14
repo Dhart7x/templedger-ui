@@ -53,15 +53,6 @@ const TABS = [
     Component: ClientBilling,
   },
   {
-    id: "compliance",
-    nav: "Compliance",
-    label: "COMPLIANCE",
-    headline: "Every worker's documents verified before they reach your site.",
-    body:
-      "Compliance status is checked continuously — not assumed. Right to work, certifications and contracts are verified for every worker on every shift. Non-compliant workers are blocked automatically before they arrive. The risk stays with the agency.",
-    Component: ComplianceDocsPreview,
-  },
-  {
     id: "schedule",
     nav: "Schedule Visibility",
     label: "SCHEDULE VISIBILITY",
@@ -78,6 +69,15 @@ const TABS = [
     body:
       "Define exactly what each level of management can and cannot do, by department. Shift managers operate within the boundaries you set. No more unauthorized headcount. No more off-system bookings.",
     Component: PermissionsPreview,
+  },
+  {
+    id: "compliance",
+    nav: "Compliance",
+    label: "COMPLIANCE",
+    headline: "Every worker's documents verified before they reach your site.",
+    body:
+      "Compliance status is checked continuously — not assumed. Right to work, certifications and contracts are verified for every worker on every shift. Non-compliant workers are blocked automatically before they arrive. The risk stays with the agency.",
+    Component: ComplianceDocsPreview,
   },
   {
     id: "directhire",
