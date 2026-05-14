@@ -1423,6 +1423,7 @@ const Home = () => {
 
             {/* 10-CARD GRID */}
             <div
+              className="tl-outcome-grid"
               style={{
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
@@ -1445,6 +1446,8 @@ const Home = () => {
               ].map((item, i) => (
                 <motion.div
                   key={i}
+                  className="tl-outcome-card"
+                  data-dir={item.dir}
                   initial={{ opacity: 0, x: item.dir === "up" ? -24 : 24 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
