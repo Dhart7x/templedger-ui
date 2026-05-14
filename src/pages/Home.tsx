@@ -811,6 +811,10 @@ const Home = () => {
                   q: "Headcount authorized at site level without financial controls.",
                   a: "Spend decisions made at site level without finance visibility. Without a system to prevent it, it never stops.",
                 },
+                {
+                  q: "You're paying agency margin on workers who should already be yours.",
+                  a: "Agency contracts define a conversion window. After a set number of hours on site, you have the right to move a worker onto your payroll — often at a reduced or zero fee. Most businesses never act on it. Not because they don't want to. Because nobody has the visibility to know when the window is open, which workers have earned it, or which departments are most exposed. The margin keeps running. The window closes. Your best people become someone else's permanent employees.",
+                },
               ].map((block, i, arr) => (
                 <motion.div
                   key={i}
