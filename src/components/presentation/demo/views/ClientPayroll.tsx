@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { CheckCircle, AlertTriangle, ChevronDown } from "lucide-react";
+import { Check } from "lucide-react";
 import { toast } from "sonner";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 /* ─── Verification steps ─── */
 const verificationSteps = [
@@ -9,8 +8,64 @@ const verificationSteps = [
   "Clocked In",
   "Clocked Out",
   "Manager Approved",
-  "Verified",
+  "Compliant",
 ];
+
+const PURPLE = "#4C1D95";
+const MUTED_BORDER = "#D6D2CE";
+const MUTED_TEXT = "#9B948F";
+
+/* ─── Verification Chain ─── */
+const VerificationChain = ({ completed }: { completed: number }) => (
+  <div className="flex items-start gap-0 select-none">
+    {verificationSteps.map((step, i) => {
+      const isDone = i < completed;
+      const nextDone = i + 1 < completed;
+      return (
+        <div key={i} className="flex items-start">
+          <div className="flex flex-col items-center" style={{ width: 56 }}>
+            <div
+              className="flex items-center justify-center rounded-full"
+              style={{
+                width: 18,
+                height: 18,
+                background: isDone ? PURPLE : "transparent",
+                border: isDone ? `1px solid ${PURPLE}` : `1px solid ${MUTED_BORDER}`,
+              }}
+            >
+              {isDone ? (
+                <Check className="w-2.5 h-2.5" style={{ color: "#fff" }} strokeWidth={3} />
+              ) : (
+                <div className="rounded-full" style={{ width: 4, height: 4, background: MUTED_TEXT }} />
+              )}
+            </div>
+            <span
+              className="mt-1 text-center leading-tight"
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: 9,
+                color: isDone ? PURPLE : MUTED_TEXT,
+                fontWeight: isDone ? 500 : 400,
+              }}
+            >
+              {step}
+            </span>
+          </div>
+          {i < verificationSteps.length - 1 && (
+            <div
+              style={{
+                width: 18,
+                height: 1,
+                marginTop: 9,
+                background: isDone && nextDone ? PURPLE : MUTED_BORDER,
+              }}
+            />
+          )}
+        </div>
+      );
+    })}
+  </div>
+);
 
 /* ─── Types ─── */
 interface VerifiedEntry {
@@ -130,40 +185,26 @@ const ClientPayroll = () => {
           </div>
           <div className="space-y-2">
             {verified.map((entry, idx) => (
-              <div key={idx} className="flex items-center justify-between py-2">
-                <div className="flex items-center gap-1.5 min-w-0">
-                  <span className="text-[13px] font-medium truncate" style={{ color: "#0D0D0B" }}>
+              <div key={idx} className="flex items-center gap-3 py-2">
+                {/* WORKER INFO (left) */}
+                <div className="min-w-0 flex-1">
+                  <div className="text-[13px] font-medium truncate" style={{ color: "#0D0D0B" }}>
                     {entry.worker}
-                  </span>
-                  <span className="text-[11px]" style={{ color: "#6B6460" }}>·</span>
-                  <span className="text-[11px] truncate" style={{ color: "#6B6460" }}>{entry.agency}</span>
-                  <span className="text-[11px]" style={{ color: "#6B6460" }}>·</span>
-                  <span className="text-[11px] truncate" style={{ color: "#6B6460" }}>{entry.department}</span>
-                </div>
-                <div className="flex items-center gap-3 shrink-0">
-                  <div className="text-right">
-                    <span className="text-[13px] font-bold text-green-500">{entry.totalHours}h</span>
-                    <div className="text-[9px]" style={{ color: "#6B6460" }}>
-                      {entry.days.map(d => `${d.day} ${d.hours}h`).join(" ")}
-                      {entry.totalHours > entry.days.reduce((s, d) => s + (d.day === "Wed" && d.hours > 8 ? 8 : d.hours), 0) && entry.days.some(d => d.hours > 8) && (
-                        <span className="text-primary ml-1">({entry.days.find(d => d.hours > 8)!.hours - 8}h OT)</span>
-                      )}
-                    </div>
                   </div>
-                  <TooltipProvider>
-                    <div className="flex items-center gap-0.5">
-                      {verificationSteps.map((step, si) => (
-                        <Tooltip key={si}>
-                          <TooltipTrigger asChild>
-                            <div className={`w-1.5 h-1.5 rounded-full ${
-                              si < entry.stepsCompleted ? "bg-green-500" : "bg-muted-foreground/30"
-                            }`} />
-                          </TooltipTrigger>
-                          <TooltipContent side="top" className="text-[10px]">{step}</TooltipContent>
-                        </Tooltip>
-                      ))}
-                    </div>
-                  </TooltipProvider>
+                  <div className="text-[10px] truncate" style={{ color: "#6B6460" }}>
+                    {entry.agency} · {entry.department}
+                  </div>
+                </div>
+                {/* VERIFICATION SEQUENCE (center) */}
+                <div className="shrink-0">
+                  <VerificationChain completed={entry.stepsCompleted} />
+                </div>
+                {/* PAYROLL AMOUNT (right) */}
+                <div className="text-right shrink-0 w-24">
+                  <div className="text-[13px] font-bold text-green-500">{entry.totalHours}h</div>
+                  <div className="font-mono text-[11px]" style={{ color: "#0D0D0B" }}>
+                    £{(entry.totalHours * entry.hourlyRate).toLocaleString("en-GB", { minimumFractionDigits: 0 })}
+                  </div>
                 </div>
               </div>
             ))}
@@ -184,60 +225,60 @@ const ClientPayroll = () => {
             <span className="text-[9px]" style={{ color: "#6B6460" }}>Unresolved live issues</span>
           </div>
           <div className="space-y-2">
-            {exceptions.map((entry) => (
-              <div key={entry.id} className="flex items-center justify-between py-2 relative">
-                <div className="flex items-center gap-2 min-w-0">
-                  <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-                    entry.exceptionType.includes("No Clock") ? "bg-destructive" : "bg-amber-500"
-                  }`} />
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-[13px] font-medium truncate" style={{ color: "#0D0D0B" }}>
-                        {entry.worker}
-                      </span>
-                      <span className="text-[11px]" style={{ color: "#6B6460" }}>·</span>
-                      <span className="text-[11px] truncate" style={{ color: "#6B6460" }}>{entry.agency}</span>
-                      <span className="text-[11px]" style={{ color: "#6B6460" }}>·</span>
-                      <span className="text-[11px] truncate" style={{ color: "#6B6460" }}>{entry.department}</span>
+            {exceptions.map((entry) => {
+              const completed = entry.stepsCompleted.filter(Boolean).length;
+              return (
+                <div key={entry.id} className="flex items-center gap-3 py-2 relative">
+                  {/* WORKER INFO (left) */}
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[13px] font-medium truncate" style={{ color: "#0D0D0B" }}>
+                      {entry.worker}
                     </div>
-                    <div className="flex items-center gap-2 mt-0.5">
+                    <div className="text-[10px] truncate" style={{ color: "#6B6460" }}>
+                      {entry.agency} · {entry.department}
+                    </div>
+                    <div className="mt-0.5">
                       <span className={`text-[10px] px-1.5 py-0.5 rounded ${entry.exceptionColor}`}>
                         {entry.exceptionType}
                       </span>
-                      <span className="text-[10px] text-destructive">{entry.failingStep}</span>
                     </div>
                   </div>
+                  {/* VERIFICATION SEQUENCE (center) */}
+                  <div className="shrink-0">
+                    <VerificationChain completed={completed} />
+                  </div>
+                  {/* RIGHT */}
+                  <div className="flex flex-col items-end gap-1 shrink-0 w-24">
+                    <span className="text-[10px] text-destructive">Blocked · {entry.id}</span>
+                    {entry.status === "in-review" ? (
+                      <span className="text-[10px] text-amber-500 bg-amber-500/10 px-1.5 py-0.5 rounded">In Review</span>
+                    ) : (
+                      <div className="relative">
+                        <button
+                          onClick={() => setResolveDropdown(resolveDropdown === entry.id ? null : entry.id)}
+                          className="text-[11px] border border-border rounded px-2 py-0.5 text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors"
+                        >
+                          Resolve
+                        </button>
+                        {resolveDropdown === entry.id && (
+                          <div className="absolute right-0 top-full mt-1 z-50 bg-card border border-border rounded-lg shadow-lg w-52 overflow-hidden">
+                            {resolveOptions.map((opt) => (
+                              <button
+                                key={opt}
+                                onClick={() => handleResolve(entry.id, opt)}
+                                className="w-full text-left px-3 py-2 text-xs hover:bg-muted/50 text-foreground transition-colors"
+                              >
+                                {opt}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 shrink-0">
-                  <span className="text-[11px] text-destructive">Blocked — {entry.id}</span>
-                  {entry.status === "in-review" ? (
-                    <span className="text-[10px] text-amber-500 bg-amber-500/10 px-1.5 py-0.5 rounded">In Review</span>
-                  ) : (
-                    <div className="relative">
-                      <button
-                        onClick={() => setResolveDropdown(resolveDropdown === entry.id ? null : entry.id)}
-                        className="text-xs border border-border rounded px-2 py-1 text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors"
-                      >
-                        Resolve
-                      </button>
-                      {resolveDropdown === entry.id && (
-                        <div className="absolute right-0 top-full mt-1 z-50 bg-card border border-border rounded-lg shadow-lg w-52 overflow-hidden">
-                          {resolveOptions.map((opt) => (
-                            <button
-                              key={opt}
-                              onClick={() => handleResolve(entry.id, opt)}
-                              className="w-full text-left px-3 py-2 text-xs hover:bg-muted/50 text-foreground transition-colors"
-                            >
-                              {opt}
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
