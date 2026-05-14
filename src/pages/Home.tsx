@@ -1612,7 +1612,7 @@ const Home = () => {
                   maxWidth: 760,
                 }}
               >
-                If you want to outsource the problem, there are good options. If you want to solve it, TempLedger is the answer.
+                Outsourcing moves the problem.{"\n"}It doesn't solve it.
               </h2>
             </motion.div>
 
