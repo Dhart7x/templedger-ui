@@ -783,7 +783,7 @@ const Home = () => {
                       marginTop: 10,
                     }}
                   >
-                    How much is all of this costing your business?
+                    But how much is all of this costing your business?
                   </div>
                 </div>
               </motion.div>
