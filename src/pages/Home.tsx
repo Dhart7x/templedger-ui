@@ -1351,8 +1351,9 @@ const Home = () => {
               The impact compounds with every shift, every week.
             </motion.p>
 
+            <div className="tl-outcome-stack">
             {/* Column headers above the grid */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+            <div className="tl-outcome-headers" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
               <div
                 style={{
                   display: "flex",
