@@ -1267,7 +1267,7 @@ const Home = () => {
                   lineHeight: 1.5,
                 }}
               >
-                The longer TempLedger runs in your operation, the more precisely it works for it.
+                Your site data compounds into intelligent workforce orchestration.
               </div>
               <div
                 className="tl-compound-bottom-right"
