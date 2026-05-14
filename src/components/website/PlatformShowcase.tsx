@@ -285,46 +285,6 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
           </AnimatePresence>
         </div>
 
-        {/* Bottom line */}
-        <div
-          className="tl-platform-bottom"
-          style={{
-            paddingTop: 32,
-            borderTop: "0.5px solid #E5E0DA",
-            marginTop: 32,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: 16,
-          }}
-        >
-          <div
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontWeight: 400,
-              fontSize: 13,
-              color: "#9B9590",
-            }}
-          >
-            Payroll. Billing. Worker profiles. Direct hire pipeline. Agency performance. Client and agency communication. And more.
-          </div>
-          <button
-            onClick={onOpenDemo}
-            style={{
-              background: "transparent",
-              border: "none",
-              padding: 0,
-              fontFamily: "Inter, sans-serif",
-              fontWeight: 600,
-              fontSize: 13,
-              color: "#4C1D95",
-              cursor: "pointer",
-              whiteSpace: "nowrap",
-            }}
-          >
-            View the full platform →
-          </button>
-        </div>
       </div>
     </section>
   );
