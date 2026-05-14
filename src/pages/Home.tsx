@@ -1429,8 +1429,25 @@ const Home = () => {
                           lineHeight: 1.55,
                         }}
                       >
-                        {item.b}
+                      {item.b}
                       </div>
+                      {item.intel && (
+                        <div
+                          style={{
+                            fontFamily: FONT,
+                            fontWeight: 500,
+                            fontSize: 12,
+                            color: "rgba(255,255,255,0.45)",
+                            fontStyle: "italic",
+                            marginTop: 8,
+                            paddingTop: 8,
+                            borderTop: "0.5px solid rgba(255,255,255,0.1)",
+                            lineHeight: 1.5,
+                          }}
+                        >
+                          {item.intel}
+                        </div>
+                      )}
                     </motion.div>
                   ))}
                 </div>
