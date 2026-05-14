@@ -789,7 +789,7 @@ const Home = () => {
                 </div>
               </motion.div>
 
-              {/* Five question blocks */}
+              {/* Seven question blocks */}
               {[
                 {
                   q: "Shifts are never assigned to the optimal worker or the optimal agency. Because everyone is operating blind.",
@@ -797,15 +797,11 @@ const Home = () => {
                 },
                 {
                   q: "Unplanned overtime and poor shift distribution both have a cost.",
-                  a: "Overtime and poor shift distribution are symptoms of the same problem. Workers who don't get enough hours leave. Every departure means recruitment, retraining and ramp time. The cost lands either way.",
+                  a: "Overtime and poor shift distribution are symptoms of the same problem. Workers who don't get enough hours leave. Every departure means recruitment, retraining and ramp time.",
                 },
                 {
                   q: "Management time spent coordinating agencies instead of running the operation.",
-                  a: "Every hour spent verifying attendance, reconciling hours, managing no-shows, dealing with understaffing or overstaffing is an hour not spent on output.",
-                },
-                {
-                  q: "Non-compliant workers on your site because there is no live shared record to prevent it.",
-                  a: "The agency manages compliance. The liability sits with you. Without a live shared record, you have no way to verify either.",
+                  a: "Every hour spent verifying attendance, reconciling hours and managing no-shows is an hour not spent on output.",
                 },
                 {
                   q: "Headcount authorized at site level without financial controls.",
@@ -813,15 +809,15 @@ const Home = () => {
                 },
                 {
                   q: "Inflated hours, ghost shifts, late clock-outs, questionable overtime. You'd never know.",
-                  a: "Without a verified record at the point of clock-in, unverified hours reach your payroll unchallenged. Workers clocking in early, clocking out late, shifts recorded that were never worked — none of it is visible until it is already on the invoice. And by then it has already been paid.",
+                  a: "Without verified clock events, unverified hours reach payroll unchallenged. By the time it surfaces it has already been paid.",
                 },
                 {
                   q: "A compliance breach on your site is your liability, not the agency's.",
-                  a: "The agency manages compliance. You carry the consequence. Right to work violations, expired certifications, unsigned contracts — if a non-compliant worker reaches your site, the fine, the reputational damage and the legal exposure sit with you. Not them.",
+                  a: "Right to work violations, expired certifications, unsigned contracts — the fine, the reputational damage and the legal exposure sit with you. Not them.",
                 },
                 {
                   q: "You're paying agency margin on workers who should already be yours.",
-                  a: "Agency contracts define a conversion window. After a set number of hours on site, you have the right to move a worker onto your payroll — often at a reduced or zero fee. Most businesses never act on it. Not because they don't want to. Because nobody has the visibility to know when the window is open, which workers have earned it, or which departments are most exposed. The margin keeps running. The window closes. Your best people become someone else's permanent employees.",
+                  a: "Agency contracts define a conversion window. Most businesses never act on it because nobody has the visibility. The margin keeps running. Your best people become someone else's permanent employees.",
                 },
               ].map((block, i, arr) => (
                 <motion.div
