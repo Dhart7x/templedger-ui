@@ -1564,14 +1564,25 @@ const Home = () => {
               <span
                 style={{
                   fontFamily: FONT,
-                  fontWeight: 500,
+                  fontWeight: 400,
                   fontSize: 15,
-                  color: "rgba(255,255,255,0.45)",
+                  color: "rgba(255,255,255,0.55)",
                   fontStyle: "italic",
                 }}
               >
                 Compounded across a financial year, the invisible cost is significant.
               </span>
+              <div
+                style={{
+                  fontFamily: "'Bricolage Grotesque', sans-serif",
+                  fontWeight: 700,
+                  fontSize: 18,
+                  color: "#FFFFFF",
+                  marginTop: 8,
+                }}
+              >
+                And the system gets smarter with every shift that runs through it.
+              </div>
             </div>
           </div>
         </section>
