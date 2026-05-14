@@ -616,6 +616,9 @@ const Home = () => {
           </div>
         </section>
 
+        {/* Hero → white fade */}
+        <div aria-hidden style={{ height: 160, background: "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 30%, rgba(255,255,255,0.85) 65%, #FFFFFF 100%)", margin: 0, width: "100%" }} />
+
         {/* SECTION 2 — THE INVOICE VISUAL */}
         <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "80px 48px 96px", position: "relative", zIndex: 1, margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 900, margin: "0 auto" }}>
