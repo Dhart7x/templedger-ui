@@ -1387,7 +1387,7 @@ const Home = () => {
                 </span>
               </div>
             <div
-              className="tl-outcome-cards"
+              className="tl-outcome-header tl-outcome-header-down"
               style={{
                   display: "flex",
                   alignItems: "center",
