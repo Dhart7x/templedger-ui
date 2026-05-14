@@ -320,6 +320,16 @@ const Home = () => {
           .tl-platform-preview { height: 360px !important; }
           .tl-platform-bottom { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
 
+          /* COMPOUNDING INTELLIGENCE */
+          .tl-section-compound { padding: 56px 20px !important; }
+          .tl-compound-h2 { font-size: 28px !important; }
+          .tl-compound-stages { grid-template-columns: 1fr !important; gap: 32px !important; padding-left: 32px !important; }
+          .tl-compound-line { top: 0 !important; left: 27px !important; width: 2px !important; height: 100% !important; background: linear-gradient(to bottom, #4C1D95, #7C3AED, #4C1D95) !important; }
+          .tl-compound-stage { align-items: flex-start !important; text-align: left !important; padding: 0 !important; }
+          .tl-compound-stage-body { text-align: left !important; }
+          .tl-compound-bottom { grid-template-columns: 1fr !important; gap: 16px !important; padding: 24px !important; }
+          .tl-compound-bottom-right { text-align: left !important; }
+
           /* OUTCOME */
           .tl-section-outcome { padding: 48px 20px !important; }
           .tl-outcome-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
@@ -1048,6 +1058,238 @@ const Home = () => {
 
         {/* SECTION — PLATFORM SHOWCASE */}
         <PlatformShowcase onOpenDemo={() => setDemoGateOpen(true)} />
+
+        {/* SECTION — COMPOUNDING INTELLIGENCE */}
+        <section
+          className="tl-section-compound"
+          style={{
+            background: "linear-gradient(180deg, #FFFFFF 0%, #F8F5FF 50%, #FFFFFF 100%)",
+            padding: "80px 48px",
+            margin: 0,
+            width: "100%",
+          }}
+        >
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                marginBottom: 16,
+                fontFamily: FONT,
+                fontWeight: 700,
+                fontSize: 10,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#4C1D95",
+              }}
+            >
+              <div style={{ width: 24, height: 2, background: "#4C1D95" }} />
+              COMPOUNDING INTELLIGENCE
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="tl-compound-h2"
+              style={{
+                fontFamily: "'Bricolage Grotesque', sans-serif",
+                fontWeight: 800,
+                fontSize: 38,
+                color: "#0D0D0B",
+                letterSpacing: "-0.022em",
+                lineHeight: 1.2,
+                marginBottom: 12,
+              }}
+            >
+              The platform learns your operation.
+            </motion.h2>
+            <p
+              style={{
+                fontFamily: FONT,
+                fontWeight: 400,
+                fontSize: 16,
+                color: "#6B6460",
+                lineHeight: 1.7,
+                maxWidth: 600,
+                marginBottom: 56,
+              }}
+            >
+              Every shift, every booking, every exception builds a verified data record specific to your sites, your agencies and your workforce. The system gets smarter with every shift that runs through it.
+            </p>
+
+            <div style={{ position: "relative" }}>
+              <motion.div
+                className="tl-compound-line"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+                style={{
+                  position: "absolute",
+                  top: 28,
+                  left: "16.5%",
+                  width: "67%",
+                  height: 2,
+                  background: "linear-gradient(to right, #4C1D95, #7C3AED, #4C1D95)",
+                  zIndex: 0,
+                  transformOrigin: "left",
+                }}
+              />
+              <div
+                className="tl-compound-stages"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, 1fr)",
+                  gap: 0,
+                  position: "relative",
+                }}
+              >
+                {[
+                  {
+                    time: "DAY ONE",
+                    title: "Structured and verified.",
+                    body:
+                      "The system works because the data is shared. Both sides. Real time. Verified at source. Every decision backed by a live operational record.",
+                  },
+                  {
+                    time: "MONTH SIX",
+                    title: "Learning your operation.",
+                    body:
+                      "Patterns emerge. The system identifies which shifts run short, which agencies respond fastest, which workers are worth converting. Recommendations sharpen with every shift.",
+                  },
+                  {
+                    time: "YEAR TWO",
+                    title: "A model of your workforce.",
+                    body:
+                      "The platform has seen your operation across hundreds of shifts. It anticipates problems before they happen. Forecasts before you ask. No competitor can replicate what it knows about your sites.",
+                  },
+                ].map((s, i) => (
+                  <motion.div
+                    key={s.time}
+                    className="tl-compound-stage"
+                    initial={{ opacity: 0, y: 32 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.15, ease: "easeOut" }}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      textAlign: "center",
+                      position: "relative",
+                      zIndex: 1,
+                      padding: "0 24px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: 56,
+                        height: 56,
+                        borderRadius: "50%",
+                        background: "#4C1D95",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginBottom: 16,
+                        flexShrink: 0,
+                      }}
+                    >
+                      <div style={{ width: 16, height: 16, borderRadius: "50%", background: "#FFFFFF" }} />
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: FONT,
+                        fontWeight: 700,
+                        fontSize: 10,
+                        letterSpacing: "0.14em",
+                        textTransform: "uppercase",
+                        color: "#4C1D95",
+                        marginBottom: 8,
+                      }}
+                    >
+                      {s.time}
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: "'Bricolage Grotesque', sans-serif",
+                        fontWeight: 700,
+                        fontSize: 16,
+                        color: "#0D0D0B",
+                        marginBottom: 8,
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      {s.title}
+                    </div>
+                    <div
+                      className="tl-compound-stage-body"
+                      style={{
+                        fontFamily: FONT,
+                        fontWeight: 400,
+                        fontSize: 13,
+                        color: "#6B6460",
+                        lineHeight: 1.65,
+                        maxWidth: 260,
+                      }}
+                    >
+                      {s.body}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            <motion.div
+              className="tl-compound-bottom"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
+              style={{
+                marginTop: 56,
+                padding: "32px 40px",
+                background: "#4C1D95",
+                borderRadius: 12,
+                display: "grid",
+                gridTemplateColumns: "1fr auto",
+                gap: 32,
+                alignItems: "center",
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "'Bricolage Grotesque', sans-serif",
+                  fontWeight: 700,
+                  fontSize: 20,
+                  color: "#FFFFFF",
+                  lineHeight: 1.5,
+                }}
+              >
+                The longer TempLedger runs in your operation, the more precisely it works for it.
+              </div>
+              <div
+                className="tl-compound-bottom-right"
+                style={{
+                  fontFamily: FONT,
+                  fontWeight: 400,
+                  fontSize: 14,
+                  color: "rgba(255,255,255,0.55)",
+                  textAlign: "right",
+                  lineHeight: 1.6,
+                }}
+              >
+                Human in the loop. Always. Every recommendation confirmed by you.
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
 
         {/* SECTION 4 — THE OUTCOME */}
         <section className="tl-section-outcome" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #5B21B6 40%, #4C1D95 70%, #3B1578 100%)", padding: "80px 48px", margin: 0, width: "100%" }}>

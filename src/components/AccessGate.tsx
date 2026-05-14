@@ -115,7 +115,7 @@ const AccessGate = ({ children }: AccessGateProps) => {
               marginBottom: 32,
             }}
           >
-            Agency Management Platform
+            Intelligent Workforce Orchestration
           </div>
           <div
             style={{
