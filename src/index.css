@@ -177,3 +177,6 @@
 .demo-theme .font-mono-data {
   font-family: 'Inter', system-ui, sans-serif !important;
 }
+
+html, body { overflow-x: hidden; }
+
