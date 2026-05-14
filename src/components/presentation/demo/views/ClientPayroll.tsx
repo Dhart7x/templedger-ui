@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle, AlertTriangle, ChevronDown, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { toast } from "sonner";
 
 /* ─── Verification steps ─── */
