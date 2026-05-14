@@ -775,18 +775,6 @@ const Home = () => {
                   <div
                     style={{
                       fontFamily: FONT,
-                      fontWeight: 400,
-                      fontSize: 20,
-                      color: "rgba(255,255,255,0.6)",
-                      fontStyle: "italic",
-                      lineHeight: 1.4,
-                    }}
-                  >
-                    None of this is on the invoice. All of it is on your P&L.
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: FONT,
                       fontWeight: 800,
                       fontSize: 36,
                       color: "#FFFFFF",
