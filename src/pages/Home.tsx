@@ -342,8 +342,7 @@ const Home = () => {
 
           /* OUTCOME */
           .tl-section-outcome { padding: 48px 20px !important; }
-          .tl-outcome-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
-          .tl-outcome-col-inner { grid-template-rows: unset !important; display: flex !important; flex-direction: column !important; gap: 10px !important; }
+          .tl-outcome-cards { grid-template-columns: 1fr !important; }
 
           /* HOW IT WORKS */
           .tl-section-how { padding: 48px 20px !important; }
@@ -1342,203 +1341,154 @@ const Home = () => {
               The impact compounds with every shift, every week.
             </motion.p>
 
-            <div className="tl-outcome-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, alignItems: "stretch" }}>
-              {/* LEFT COLUMN */}
-              <div>
+            {/* Column headers above the grid */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  paddingBottom: 12,
+                  borderBottom: "0.5px solid rgba(255,255,255,0.12)",
+                }}
+              >
                 <div
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                    marginBottom: 16,
-                    paddingBottom: 12,
-                    borderBottom: "0.5px solid rgba(255,255,255,0.12)",
+                    width: 0,
+                    height: 0,
+                    borderLeft: "6px solid transparent",
+                    borderRight: "6px solid transparent",
+                    borderBottom: "10px solid #FFFFFF",
+                  }}
+                />
+                <span
+                  style={{
+                    fontFamily: FONT,
+                    fontWeight: 700,
+                    fontSize: 11,
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    color: "#FFFFFF",
                   }}
                 >
-                  <div
-                    style={{
-                      width: 0,
-                      height: 0,
-                      borderLeft: "6px solid transparent",
-                      borderRight: "6px solid transparent",
-                      borderBottom: "10px solid #FFFFFF",
-                    }}
-                  />
-                  <span
-                    style={{
-                      fontFamily: FONT,
-                      fontWeight: 700,
-                      fontSize: 11,
-                      letterSpacing: "0.14em",
-                      textTransform: "uppercase",
-                      color: "#FFFFFF",
-                    }}
-                  >
-                    WHAT GOES UP
-                  </span>
-                </div>
-                <div className="tl-outcome-col-inner" style={{ display: "grid", gridTemplateRows: "repeat(5, 1fr)", gap: 10 }}>
-                  {upItems.map((item, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: -24 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true, margin: "-80px" }}
-                      transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" }}
-                      style={{
-                        height: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "flex-start",
-                        background: "rgba(255,255,255,0.07)",
-                        border: "0.5px solid rgba(255,255,255,0.1)",
-                        borderLeft: "3px solid #FFFFFF",
-                        borderRadius: "0 8px 8px 0",
-                        padding: "16px 18px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontFamily: FONT,
-                          fontWeight: 700,
-                          fontSize: 14,
-                          color: "#FFFFFF",
-                          marginBottom: 4,
-                        }}
-                      >
-                        {item.t}
-                      </div>
-                      <div
-                        style={{
-                          fontFamily: FONT,
-                          fontWeight: 400,
-                          fontSize: 12,
-                          color: "rgba(255,255,255,0.85)",
-                          lineHeight: 1.55,
-                        }}
-                      >
-                      {item.b}
-                      </div>
-                      {item.intel && (
-                        <div
-                          style={{
-                            fontFamily: FONT,
-                            fontWeight: 500,
-                            fontSize: 12,
-                            color: "rgba(255,255,255,0.45)",
-                            fontStyle: "italic",
-                            marginTop: 8,
-                            paddingTop: 8,
-                            borderTop: "0.5px solid rgba(255,255,255,0.1)",
-                            lineHeight: 1.5,
-                          }}
-                        >
-                          {item.intel}
-                        </div>
-                      )}
-                    </motion.div>
-                  ))}
-                </div>
+                  WHAT GOES UP
+                </span>
               </div>
+            <div
+              className="tl-outcome-cards"
+              style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  paddingBottom: 12,
+                  borderBottom: "0.5px solid rgba(255,255,255,0.12)",
+                }}
+              >
+                <div
+                  style={{
+                    width: 0,
+                    height: 0,
+                    borderTop: "10px solid #C4391A",
+                    borderLeft: "6px solid transparent",
+                    borderRight: "6px solid transparent",
+                    borderBottom: "none",
+                  }}
+                />
+                <span
+                  style={{
+                    fontFamily: FONT,
+                    fontWeight: 700,
+                    fontSize: 11,
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    color: "#C4391A",
+                  }}
+                >
+                  WHAT COMES DOWN
+                </span>
+              </div>
+            </div>
 
-              {/* RIGHT COLUMN */}
-              <div>
-                <div
+            {/* 10-CARD GRID */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gridTemplateRows: "repeat(5, auto)",
+                gap: 10,
+                alignItems: "stretch",
+              }}
+            >
+              {[
+                { ...upItems[0], dir: "up" as const, row: 0 },
+                { ...downItems[0], dir: "down" as const, row: 0 },
+                { ...upItems[1], dir: "up" as const, row: 1 },
+                { ...downItems[1], dir: "down" as const, row: 1 },
+                { ...upItems[2], dir: "up" as const, row: 2 },
+                { ...downItems[2], dir: "down" as const, row: 2 },
+                { ...upItems[3], dir: "up" as const, row: 3 },
+                { ...downItems[3], dir: "down" as const, row: 3 },
+                { ...upItems[4], dir: "up" as const, row: 4 },
+                { ...downItems[4], dir: "down" as const, row: 4 },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: item.dir === "up" ? -24 : 24 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.4, delay: (item.dir === "up" ? 0 : 0.2) + item.row * 0.08, ease: "easeOut" }}
                   style={{
+                    height: "100%",
                     display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                    marginBottom: 16,
-                    paddingBottom: 12,
-                    borderBottom: "0.5px solid rgba(255,255,255,0.12)",
+                    flexDirection: "column",
+                    background: "rgba(255,255,255,0.07)",
+                    border: "0.5px solid rgba(255,255,255,0.1)",
+                    borderLeft: item.dir === "up" ? "3px solid #FFFFFF" : "3px solid #C4391A",
+                    borderRadius: "0 8px 8px 0",
+                    padding: "16px 18px",
                   }}
                 >
                   <div
                     style={{
-                      width: 0,
-                      height: 0,
-                      borderTop: "10px solid #C4391A",
-                      borderLeft: "6px solid transparent",
-                      borderRight: "6px solid transparent",
-                      borderBottom: "none",
-                    }}
-                  />
-                  <span
-                    style={{
                       fontFamily: FONT,
                       fontWeight: 700,
-                      fontSize: 11,
-                      letterSpacing: "0.14em",
-                      textTransform: "uppercase",
-                      color: "#C4391A",
+                      fontSize: 14,
+                      color: "#FFFFFF",
+                      marginBottom: 4,
                     }}
                   >
-                    WHAT COMES DOWN
-                  </span>
-                </div>
-                <div className="tl-outcome-col-inner" style={{ display: "grid", gridTemplateRows: "repeat(5, 1fr)", gap: 10 }}>
-                  {downItems.map((item, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: 24 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true, margin: "-80px" }}
-                      transition={{ duration: 0.4, delay: 0.2 + i * 0.08, ease: "easeOut" }}
+                    {item.t}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 400,
+                      fontSize: 12,
+                      color: "rgba(255,255,255,0.85)",
+                      lineHeight: 1.55,
+                    }}
+                  >
+                    {item.b}
+                  </div>
+                  {item.intel && (
+                    <div
                       style={{
-                        height: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "flex-start",
-                        background: "rgba(255,255,255,0.07)",
-                        border: "0.5px solid rgba(255,255,255,0.1)",
-                        borderLeft: "3px solid #C4391A",
-                        borderRadius: "0 8px 8px 0",
-                        padding: "16px 18px",
+                        fontFamily: FONT,
+                        fontWeight: 500,
+                        fontSize: 12,
+                        color: "rgba(255,255,255,0.45)",
+                        fontStyle: "italic",
+                        marginTop: "auto",
+                        paddingTop: 8,
+                        borderTop: "0.5px solid rgba(255,255,255,0.1)",
+                        lineHeight: 1.5,
                       }}
                     >
-                      <div
-                        style={{
-                          fontFamily: FONT,
-                          fontWeight: 700,
-                          fontSize: 14,
-                          color: "#FFFFFF",
-                          marginBottom: 4,
-                        }}
-                      >
-                        {item.t}
-                      </div>
-                      <div
-                        style={{
-                          fontFamily: FONT,
-                          fontWeight: 400,
-                          fontSize: 12,
-                          color: "rgba(255,255,255,0.85)",
-                          lineHeight: 1.55,
-                        }}
-                      >
-                        {item.b}
-                      </div>
-                      {item.intel && (
-                        <div
-                          style={{
-                            fontFamily: FONT,
-                            fontWeight: 500,
-                            fontSize: 12,
-                            color: "rgba(255,255,255,0.45)",
-                            fontStyle: "italic",
-                            marginTop: 8,
-                            paddingTop: 8,
-                            borderTop: "0.5px solid rgba(255,255,255,0.1)",
-                            lineHeight: 1.5,
-                          }}
-                        >
-                          {item.intel}
-                        </div>
-                      )}
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+                      {item.intel}
+                    </div>
+                  )}
+                </motion.div>
+              ))}
             </div>
 
             <div
