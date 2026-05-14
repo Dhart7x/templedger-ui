@@ -797,7 +797,7 @@ const Home = () => {
                 },
                 {
                   q: "Unplanned overtime and poor shift distribution both have a cost.",
-                  a: "Overtime events and uneven shift distribution are symptoms of the same problem. Workers who don't get enough hours leave. Every departure means recruitment, retraining and ramp time. The cost compounds whether you're paying overtime premiums or replacing the people who walked.",
+                  a: "Overtime and poor shift distribution are symptoms of the same problem. Workers who don't get enough hours leave. Every departure means recruitment, retraining and ramp time. The cost lands either way.",
                 },
                 {
                   q: "Management time spent coordinating agencies instead of running the operation.",
