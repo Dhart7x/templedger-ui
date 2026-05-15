@@ -267,6 +267,12 @@ const Home = () => {
           animation: chevronPulse 1.2s ease-in-out infinite;
         }
 
+        /* COST OF INACTION — enforce light card spec on all viewports */
+        .tl-cost-block { padding: 20px 24px !important; background-color: rgba(76, 29, 149, 0.02) !important; border: 1px solid rgba(76, 29, 149, 0.07) !important; border-radius: 6px !important; box-shadow: none !important; }
+        .tl-cost-question { font-size: 16px !important; font-weight: 600 !important; color: #2E1065 !important; line-height: 1.35 !important; margin-bottom: 8px !important; font-family: 'Inter', system-ui, sans-serif !important; }
+        .tl-cost-answer { font-size: 13px !important; font-weight: 400 !important; color: rgba(0, 0, 0, 0.55) !important; line-height: 1.55 !important; font-family: 'Inter', system-ui, sans-serif !important; }
+        .tl-cost-grid { gap: 12px !important; }
+
         @media (max-width: 768px) {
           /* GLOBAL */
           html, body { overflow-x: hidden !important; }
