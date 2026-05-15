@@ -408,6 +408,14 @@ const Home = () => {
           .tl-compound-phase-title { font-size: 16px !important; }
           .tl-compound-phase-body { font-size: 12px !important; }
 
+          /* CREDIBILITY STRIP */
+          .tl-credibility-strip { padding: 28px 24px !important; }
+          .tl-credibility-inner { grid-template-columns: 1fr !important; gap: 24px !important; text-align: center !important; }
+          .tl-credibility-divider { display: none !important; }
+          .tl-credibility-left p { max-width: none !important; font-size: 13px !important; }
+          .tl-credibility-right { flex-direction: column !important; gap: 16px !important; justify-content: center !important; }
+          .tl-credibility-right > div > div:first-child { font-size: 20px !important; }
+
           /* OUTCOME */
           .tl-section-outcome { padding: 64px 20px !important; }
           .tl-section-outcome h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
@@ -2360,9 +2368,117 @@ const Home = () => {
               ))}
             </div>
           </motion.div>
-        </section>
+	</section>
 
-        {/* SECTION 6 — CONTACT */}
+		{/* CREDIBILITY STRIP */}
+		<section
+			className="tl-credibility-strip"
+			style={{
+				background: "#FAFAF8",
+				padding: "36px 48px",
+				borderTop: "1px solid rgba(76, 29, 149, 0.1)",
+				borderBottom: "1px solid rgba(76, 29, 149, 0.1)",
+				width: "100%",
+				margin: 0,
+			}}
+		>
+			<div
+				className="tl-credibility-inner"
+				style={{
+					maxWidth: 1100,
+					margin: "0 auto",
+					display: "grid",
+					gridTemplateColumns: "auto 1fr auto",
+					gap: 32,
+					alignItems: "center",
+				}}
+			>
+				{/* Left Block */}
+				<div className="tl-credibility-left">
+					<div
+						style={{
+						fontFamily: FONT,
+						fontWeight: 600,
+						fontSize: 9,
+						letterSpacing: "0.1em",
+						textTransform: "uppercase",
+						color: "rgba(76, 29, 149, 0.5)",
+						marginBottom: 4,
+					}}
+					>
+						— BUILT BY
+					</div>
+					<p
+						style={{
+						fontFamily: FONT,
+						fontWeight: 600,
+						fontSize: 14,
+						color: "#2E1065",
+						lineHeight: 1.4,
+						margin: 0,
+						maxWidth: 360,
+					}}
+					>
+						Operators who've run agency workforces, not engineers who've imagined them.
+					</p>
+				</div>
+
+				{/* Divider */}
+				<div
+					className="tl-credibility-divider"
+					style={{
+						width: 1,
+						height: 32,
+						background: "rgba(76, 29, 149, 0.15)",
+					}}
+				/>
+
+				{/* Right Block — Stats */}
+				<div
+					className="tl-credibility-right"
+					style={{
+						display: "flex",
+						gap: 32,
+						alignItems: "center",
+					}}
+				>
+					{[
+						{ num: "15+", label: "YEARS IN AGENCY OPS" },
+						{ num: "$2B+", label: "AGENCY SPEND MANAGED" },
+						{ num: "UK + US", label: "MARKETS RUN" },
+					].map((stat) => (
+						<div key={stat.label} style={{ textAlign: "center" }}>
+							<div
+								style={{
+									fontFamily: FONT,
+									fontWeight: 700,
+									fontSize: 24,
+									color: "#2E1065",
+									lineHeight: 1,
+								}}
+							>
+								{stat.num}
+							</div>
+							<div
+								style={{
+									fontFamily: FONT,
+									fontWeight: 500,
+									fontSize: 10,
+									letterSpacing: "0.05em",
+									color: "rgba(0, 0, 0, 0.6)",
+									marginTop: 2,
+									textTransform: "uppercase",
+								}}
+							>
+								{stat.label}
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		{/* SECTION 6 — CONTACT */}
         <section id="contact" className="tl-section-contact" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #3B1578 40%, #2E1065 70%, #1A0A3D 100%)", padding: "96px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
             <div
