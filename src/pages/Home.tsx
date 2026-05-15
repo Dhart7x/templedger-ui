@@ -296,6 +296,7 @@ const Home = () => {
           .tl-cost-grid { grid-template-columns: 1fr !important; }
           .tl-cost-question { font-size: 15px !important; }
           .tl-cost-answer { font-size: 12px !important; }
+          .tl-cost-block { padding: 16px 18px !important; }
 
           /* INTELLIGENT WORKFORCE ORCHESTRATION */
           .tl-section-intel { padding: 56px 20px !important; }
