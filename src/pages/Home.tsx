@@ -950,6 +950,43 @@ const Home = () => {
         </section>
 
 
+        {/* SECTION 3 — THE COST (moved: now sits between Cost of Inaction and The Structure) */}
+        <section className="tl-section-cost" style={{ background: "#FAFAF8", padding: "80px 48px", margin: 0, width: "100%" }}>
+          <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <SectionTag>The Cost</SectionTag>
+            <h2 className="tl-section-h2"
+              style={{
+                fontWeight: 800,
+                fontSize: 32,
+                color: C.fg,
+                letterSpacing: "-0.022em",
+                lineHeight: 1.2,
+                marginBottom: 24,
+              }}
+            >
+              Three structural costs. Compounding every week.
+            </h2>
+            <div className="tl-cost-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32 }}>
+              {costs.map((c, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.5, delay: i * 0.12, ease: "easeOut" }}
+                  style={{ padding: 0 }}
+                >
+                  <div style={{ fontWeight: 800, fontSize: 18, color: C.fg, marginBottom: 10 }}>
+                    {c.t}
+                  </div>
+                  <div style={{ fontSize: 14, color: C.muted, lineHeight: 1.7 }}>{c.b}</div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </section>
+
+
         {/* TRANSITION — cream cost-of-inaction → reveal dark purple */}
         <div aria-hidden style={{ height: 60, background: "linear-gradient(180deg, #FAFAF8 0%, #1A0A3D 100%)", margin: 0, width: "100%" }} />
 
@@ -1086,52 +1123,7 @@ const Home = () => {
             </motion.div>
           </div>
         </section>
-        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #1A0A3D 0%, #1A0A3D 35%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
-
-        {/* SECTION 3 — THE COST */}
-        <section className="tl-section-cost" style={{ background: "#FAFAF8", padding: "80px 48px", margin: 0, width: "100%" }}>
-          <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <SectionTag>The Cost</SectionTag>
-            <h2 className="tl-section-h2"
-              style={{
-                fontWeight: 800,
-                fontSize: 32,
-                color: C.fg,
-                letterSpacing: "-0.022em",
-                lineHeight: 1.2,
-                marginBottom: 24,
-              }}
-            >
-              Three structural costs. Compounding every week.
-            </h2>
-            <div className="tl-cost-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32 }}>
-              {costs.map((c, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.5, delay: i * 0.12, ease: "easeOut" }}
-                  style={{
-                    padding: 0,
-                  }}
-                >
-                  <div
-                    style={{
-                      fontWeight: 800,
-                      fontSize: 18,
-                      color: C.fg,
-                      marginBottom: 10,
-                    }}
-                  >
-                    {c.t}
-                  </div>
-                  <div style={{ fontSize: 14, color: C.muted, lineHeight: 1.7 }}>{c.b}</div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </section>
+        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #1A0A3D 0%, #1A0A3D 35%, #FFFFFF 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 3c — THE ALTERNATIVE */}
         <section className="tl-section-alternative" style={{ background: "#FFFFFF", padding: "80px 48px", margin: 0, width: "100%" }}>
