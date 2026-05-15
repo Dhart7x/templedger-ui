@@ -294,6 +294,9 @@ const Home = () => {
           .tl-hero-cta { width: 100% !important; }
           .tl-hero-muted { font-size: 11px !important; }
 
+          /* H2 margin-bottom mobile */
+          h2, .tl-section-h2, .tl-intel-h2, .tl-outcome-h2, .tl-solution-h2, .tl-contact-h2 { margin-bottom: 16px !important; }
+
           /* INVOICE / REAL COST */
           .tl-section-invoice { padding: 48px 20px !important; }
           .tl-invoice-card { max-width: 100% !important; width: 100% !important; }
