@@ -285,7 +285,7 @@ const Home = () => {
           .tl-nav-spacer { padding-top: 48px !important; }
 
           /* HERO */
-          .tl-hero { padding: 64px 20px 48px !important; }
+          .tl-hero { padding: 64px 20px 0 !important; }
           .tl-hero-h1 { font-size: 28px !important; letter-spacing: -0.02em !important; }
           .tl-hero-sub { font-size: 15px !important; }
           .tl-hero-cta { width: 100% !important; }
@@ -334,19 +334,19 @@ const Home = () => {
 
         @media (max-width: 767px) {
           /* REVEAL */
-          .tl-section-reveal { padding: 48px 20px !important; }
+          .tl-section-reveal { padding: 64px 20px !important; }
           .tl-section-reveal h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
           .tl-reveal-body { font-size: 12px !important; }
           .tl-reveal-close { font-size: 16px !important; margin-top: 32px !important; padding-top: 20px !important; }
 
           /* THE COST */
-          .tl-section-cost { padding: 48px 20px !important; }
+          .tl-section-cost { padding: 64px 20px !important; }
           .tl-section-cost h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
           .tl-cost-stack { grid-template-columns: 1fr !important; gap: 24px !important; }
           .tl-cost-stack > * { width: 100% !important; max-width: 100% !important; }
 
           /* ALTERNATIVE */
-          .tl-section-alternative { padding: 48px 20px !important; }
+          .tl-section-alternative { padding: 64px 20px !important; }
           .tl-section-alternative h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
           .tl-alt-table-wrap { overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; }
           .tl-alt-table { min-width: unset !important; }
@@ -355,18 +355,18 @@ const Home = () => {
           .tl-alt-label { width: 100px !important; min-width: 100px !important; max-width: 100px !important; font-size: 10px !important; }
 
           /* SOLUTION TRANSITION */
-          .tl-section-solution { padding: 48px 20px !important; }
+          .tl-section-solution { padding: 64px 20px !important; }
           .tl-section-solution h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
 
           /* INTRODUCING TEMPLEDGER */
-          .tl-section-introducing { padding: 48px 20px !important; }
+          .tl-section-introducing { padding: 64px 20px !important; }
           .tl-section-introducing h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
           .tl-pillars { grid-template-columns: 1fr !important; gap: 12px !important; }
           .tl-pillar-word { font-size: 22px !important; }
           .tl-section-introducing .tl-section-sub { font-size: 14px !important; }
 
           /* PLATFORM SHOWCASE */
-          .tl-section-platform { padding: 48px 20px !important; }
+          .tl-section-platform { padding: 64px 20px !important; }
           .tl-section-platform h2 { font-size: 22px !important; letter-spacing: -0.02em !important; }
           .tl-platform-grid { display: flex !important; flex-direction: column !important; gap: 16px !important; }
           .tl-platform-tablist { border-right: none !important; padding-right: 0 !important; display: flex !important; overflow-x: auto !important; gap: 8px !important; padding-bottom: 12px !important; -webkit-overflow-scrolling: touch !important; scrollbar-width: none !important; }
@@ -380,7 +380,7 @@ const Home = () => {
           .tl-platform-preview > div { transform: scale(0.55) !important; transform-origin: top left !important; width: 182% !important; }
 
           /* COMPOUNDING INTELLIGENCE */
-          .tl-section-compound { padding: 48px 20px !important; }
+          .tl-section-compound { padding: 64px 20px !important; }
           .tl-compound-h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
           .tl-compound-intro { font-size: 13px !important; }
           .tl-compound-phases { grid-template-columns: 1fr !important; gap: 24px !important; }
@@ -388,7 +388,7 @@ const Home = () => {
           .tl-compound-phase-body { font-size: 12px !important; }
 
           /* OUTCOME */
-          .tl-section-outcome { padding: 48px 20px !important; }
+          .tl-section-outcome { padding: 64px 20px !important; }
           .tl-section-outcome h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
           .tl-outcome-stack { display: flex !important; flex-direction: column !important; }
           .tl-outcome-headers { display: contents !important; }
@@ -399,7 +399,7 @@ const Home = () => {
           .tl-outcome-card[data-dir="down"] { order: 3 !important; margin-bottom: 10px !important; }
 
           /* HOW IT WORKS */
-          .tl-section-how { padding: 48px 20px !important; }
+          .tl-section-how { padding: 64px 20px !important; }
           .tl-section-how h2 { font-size: 22px !important; letter-spacing: -0.02em !important; }
           .tl-section-how .tl-section-sub { font-size: 13px !important; }
           .tl-steps-grid { grid-template-columns: 1fr !important; gap: 1px !important; }
@@ -608,7 +608,7 @@ const Home = () => {
 
       <div className="tl-nav-spacer" style={{ paddingTop: 56, background: "#4C1D95", margin: 0 }}>
         {/* SECTION 1 — HERO */}
-        <section className="tl-hero" style={{ background: "#4C1D95", padding: "80px 48px 0", margin: 0, width: "100%", minHeight: 520 }}>
+        <section className="tl-hero" style={{ background: "#4C1D95", padding: "96px 48px 0", margin: 0, width: "100%", minHeight: 520 }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <h1
               className="tl-hero-h1"
@@ -958,7 +958,7 @@ const Home = () => {
 
 
         {/* SECTION 3 — THE COST (moved: now sits between Cost of Inaction and The Structure) */}
-        <section className="tl-section-cost" style={{ background: "#FAFAF8", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-cost" style={{ background: "#FAFAF8", padding: "96px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <SectionTag>The Cost</SectionTag>
             <h2 className="tl-section-h2"
@@ -999,7 +999,7 @@ const Home = () => {
 
 
         {/* SECTION 3b — THE REVEAL */}
-        <section className="tl-section-reveal" style={{ background: "#1A0A3D", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-reveal" style={{ background: "#1A0A3D", padding: "96px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "left" }}>
             <div
               style={{
@@ -1133,7 +1133,7 @@ const Home = () => {
         <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #1A0A3D 0%, #1A0A3D 75%, #FFFFFF 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 3c — THE ALTERNATIVE */}
-        <section className="tl-section-alternative" style={{ background: "#FFFFFF", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-alternative" style={{ background: "#FFFFFF", padding: "96px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <motion.div
               initial={{ opacity: 0, y: 24 }}
@@ -1299,7 +1299,7 @@ const Home = () => {
           </div>
         </section>
         {/* SECTION — INTRODUCING TEMPLEDGER */}
-        <section className="tl-section-introducing" style={{ background: "#FAFAF8", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-introducing" style={{ background: "#FAFAF8", padding: "96px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <motion.div
               initial={{ opacity: 0, y: 24 }}
@@ -1406,7 +1406,7 @@ const Home = () => {
           className="tl-section-compound"
           style={{
             background: "linear-gradient(180deg, #F5F3FF 0%, #FFFFFF 35%, #FFFFFF 100%)",
-            padding: "80px 48px",
+            padding: "96px 48px",
             margin: 0,
             width: "100%",
           }}
@@ -1645,7 +1645,7 @@ const Home = () => {
           className="tl-section-intel"
           style={{
             background: "#FAFAF8",
-            padding: "80px 48px",
+            padding: "96px 48px",
             margin: 0,
             width: "100%",
           }}
@@ -1921,7 +1921,7 @@ const Home = () => {
         <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #FAFAF8 0%, #FAFAF8 75%, #1A0A3D 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 4 — THE OUTCOME */}
-        <section className="tl-section-outcome" style={{ background: "#1A0A3D", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-outcome" style={{ background: "#1A0A3D", padding: "96px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <div
               style={{
@@ -2100,7 +2100,7 @@ const Home = () => {
         <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #1A0A3D 0%, #1A0A3D 75%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 5 — HOW IT WORKS */}
-        <section id="how-it-works" className="tl-section-how" style={{ background: C.surface, padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section id="how-it-works" className="tl-section-how" style={{ background: C.surface, padding: "96px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
             <div
               style={{
@@ -2221,7 +2221,7 @@ const Home = () => {
         <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #FAFAF8 0%, #FAFAF8 75%, #4C1D95 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 6 — CONTACT */}
-        <section id="contact" className="tl-section-contact" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #3B1578 40%, #2E1065 70%, #1A0A3D 100%)", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section id="contact" className="tl-section-contact" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #3B1578 40%, #2E1065 70%, #1A0A3D 100%)", padding: "96px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
             <div
               style={{
