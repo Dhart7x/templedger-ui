@@ -294,10 +294,19 @@ const Home = () => {
           .tl-hidden-costs { margin: 0 -20px !important; padding: 56px 20px !important; border-radius: 0 !important; }
           .tl-hidden-costs h2 { font-size: 26px !important; letter-spacing: -0.02em !important; }
           .tl-cost-grid { grid-template-columns: 1fr !important; }
-          .tl-cost-question { font-size: 16px !important; }
-          .tl-cost-answer { font-size: 13px !important; }
-          .tl-cost-closing { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
-          .tl-cost-closing-right { text-align: left !important; }
+          .tl-cost-question { font-size: 15px !important; }
+          .tl-cost-answer { font-size: 12px !important; }
+
+          /* INTELLIGENT WORKFORCE ORCHESTRATION */
+          .tl-section-intel { padding: 56px 20px !important; }
+          .tl-intel-h2 { font-size: 26px !important; letter-spacing: -0.02em !important; }
+          .tl-intel-grid { grid-template-columns: 1fr !important; }
+          .tl-intel-body { font-size: 12px !important; }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .tl-cost-grid { grid-template-columns: 1fr 1fr !important; }
+        }
 
           /* REVEAL */
           .tl-section-reveal { padding: 48px 20px !important; }
@@ -838,14 +847,15 @@ const Home = () => {
                 </div>
               </motion.div>
 
-              {/* Seven cost cards in two-column grid */}
+              {/* Seven cost cards in three-column grid */}
               <div
                 className="tl-cost-grid"
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  columnGap: 14,
-                  rowGap: 14,
+                  gridTemplateColumns: "1fr 1fr 1fr",
+                  columnGap: 12,
+                  rowGap: 12,
+                  alignItems: "stretch",
                 }}
               >
               {[
@@ -884,12 +894,12 @@ const Home = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.45, delay: (i % 2) * 0.05 + Math.floor(i / 2) * 0.08, ease: "easeOut" }}
+                  transition={{ duration: 0.45, delay: (i % 3) * 0.05 + Math.floor(i / 3) * 0.08, ease: "easeOut" }}
                   style={{
-                    background: "rgba(76, 29, 149, 0.04)",
-                    border: "1px solid rgba(76, 29, 149, 0.12)",
-                    borderRadius: 8,
-                    padding: "24px 28px",
+                    background: "rgba(76, 29, 149, 0.02)",
+                    border: "1px solid rgba(76, 29, 149, 0.07)",
+                    borderRadius: 6,
+                    padding: "20px 24px",
                   }}
                 >
                   <div
@@ -897,7 +907,7 @@ const Home = () => {
                     style={{
                       fontFamily: FONT,
                       fontWeight: 600,
-                      fontSize: 18,
+                      fontSize: 16,
                       color: "#2E1065",
                       lineHeight: 1.35,
                       marginBottom: 8,
@@ -910,8 +920,8 @@ const Home = () => {
                     style={{
                       fontFamily: FONT,
                       fontWeight: 400,
-                      fontSize: 14,
-                      color: "rgba(0, 0, 0, 0.6)",
+                      fontSize: 13,
+                      color: "rgba(0, 0, 0, 0.55)",
                       lineHeight: 1.55,
                     }}
                   >
