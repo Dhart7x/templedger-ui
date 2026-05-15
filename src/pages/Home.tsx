@@ -1647,7 +1647,7 @@ const Home = () => {
                 marginBottom: 48,
               }}
             >
-              Stops the bleed today. Sees the patterns tomorrow.
+              Stops what's leaking. Predicts what's next.
             </motion.h2>
 
             {/* Horizontal timeline */}
