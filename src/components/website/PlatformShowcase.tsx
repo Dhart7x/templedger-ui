@@ -538,28 +538,56 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
 
         {/* Rotating panel container */}
         <div
-          className="tl-platform-rotator"
+          ref={outerRef}
+          className="tl-platform-carousel"
           style={{
-            background: "#FAFAF8",
-            border: "1px solid rgba(76,29,149,0.08)",
-            borderRadius: 12,
-            padding: 28,
-            minHeight: 480,
             position: "relative",
+            width: "100%",
             overflow: "hidden",
           }}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
         >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={PANELS[active].id}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-            >
-              <Active />
-            </motion.div>
-          </AnimatePresence>
+          <div
+            className="tl-platform-track"
+            onTransitionEnd={onTransitionEnd}
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              gap: PANEL_GAP,
+              transform: `translateX(${translatePx}px)`,
+              transition: animate ? `transform ${TRANSITION_MS}ms ${TRANSITION_EASE}` : "none",
+              willChange: "transform",
+            }}
+          >
+            {trackItems.map((p, i) => {
+              const Cmp = PANEL_COMPONENTS[i % PANELS.length];
+              const isActive = i === index;
+              return (
+                <div
+                  key={`${p.id}-${i}`}
+                  style={{
+                    flexShrink: 0,
+                    width: panelWidth || `${panelPct * 100}%`,
+                    background: "#FAFAF8",
+                    border: "1px solid rgba(76,29,149,0.08)",
+                    borderRadius: 12,
+                    padding: 28,
+                    minHeight: 480,
+                    boxSizing: "border-box",
+                    opacity: isActive ? 1 : 0.4,
+                    filter: isActive ? "none" : "saturate(0.7)",
+                    transition: animate
+                      ? `opacity ${TRANSITION_MS}ms ${TRANSITION_EASE}, filter ${TRANSITION_MS}ms ${TRANSITION_EASE}`
+                      : "none",
+                  }}
+                >
+                  <Cmp />
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         {/* Rotation controls */}
