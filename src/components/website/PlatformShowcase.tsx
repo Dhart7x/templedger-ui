@@ -280,8 +280,8 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
                 transition={{ duration: 0.2, ease: "easeOut" }}
                 className="tl-platform-preview"
                 style={{
-                  background: "#FAFAF8",
-                  border: "1px solid hsl(0 0% 90%)",
+                  background: "#FFFFFF",
+                  border: "1px solid rgba(0, 0, 0, 0.06)",
                   borderRadius: 16,
                   overflow: "hidden",
                   pointerEvents: "none",

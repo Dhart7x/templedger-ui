@@ -1441,9 +1441,9 @@ const Home = () => {
               className="tl-compound-h2"
               style={{
                 fontFamily: "'Bricolage Grotesque', sans-serif",
-                fontWeight: 800,
+                fontWeight: 600,
                 fontSize: 32,
-                color: "#0D0D0B",
+                color: "#2E1065",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
                 marginBottom: 0,
