@@ -307,27 +307,6 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
               </motion.div>
             </AnimatePresence>
 
-            <div style={{ marginTop: 8 }}>
-              <button
-                onClick={onOpenDemo}
-                style={{
-                  background: "#4C1D95",
-                  border: "none",
-                  padding: "12px 24px",
-                  fontFamily: "Inter, sans-serif",
-                  fontWeight: 700,
-                  fontSize: 13,
-                  color: "#FFFFFF",
-                  borderRadius: 8,
-                  cursor: "pointer",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                }}
-              >
-                Explore in the live demo →
-              </button>
-            </div>
           </div>
         </div>
 
