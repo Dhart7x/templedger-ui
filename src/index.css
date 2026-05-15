@@ -252,7 +252,33 @@ html, body { overflow-x: hidden; }
     .tl-hover-a:hover { transform: translateY(-4px); }
     .tl-hover-b:hover { transform: scale(1.015); }
     .tl-hover-c:hover .tl-hover-c-arrow { transform: translateX(4px); }
-    .tl-hover-d:hover { transform: translateY(-2px); }
+  .tl-hover-d:hover { transform: translateY(-2px); }
+}
+
+/* ============================================================
+   DARK BACKGROUND PILLAR CARD HOVER (Introducing TempLedger)
+   ============================================================ */
+.tl-hover-pillar-dark {
+  cursor: pointer;
+  transition:
+    border-color 320ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    background-color 320ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 320ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@media (hover: hover) {
+  .tl-hover-pillar-dark:hover {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25) !important;
   }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tl-hover-pillar-dark:hover {
+      transform: translateY(-4px);
+    }
+  }
+}
 }
 
