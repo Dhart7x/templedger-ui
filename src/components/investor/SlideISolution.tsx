@@ -30,7 +30,7 @@ const SlideISolution = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-3xl md:text-5xl font-bold text-foreground mb-6"
         >
-          Temp Ledger
+          TEMPLEDGER
         </motion.h2>
 
         <motion.p

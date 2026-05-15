@@ -94,7 +94,7 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
             className="w-full max-w-md"
           >
             <div className="flex flex-col items-center mb-8">
-              <h1 className="text-2xl font-bold text-foreground">Temp Ledger</h1>
+              <h1 className="text-2xl font-bold text-foreground">TEMPLEDGER</h1>
               <p className="text-sm text-muted-foreground mt-1">Demo Environment</p>
             </div>
 

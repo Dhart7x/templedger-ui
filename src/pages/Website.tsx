@@ -65,7 +65,7 @@
                <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
                  <Shield className="w-5 h-5 text-foreground" />
                </div>
-               <span className="text-xl font-semibold text-foreground">Temp Ledger</span>
+               <span className="text-xl font-semibold text-foreground">TEMPLEDGER</span>
              </div>
              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
                The Operating System for Labour Users
@@ -139,18 +139,18 @@
          </div>
        </section>
  
-       {/* SECTION 3 — WHAT TEMP LEDGER IS */}
+       {/* SECTION 3 — WHAT TEMPLEDGER IS */}
        <section className="min-h-screen flex flex-col justify-center px-6 py-24 bg-card/30 border-t border-border/30">
          <div className="max-w-3xl mx-auto">
            <motion.h2
              {...fadeInUp}
              className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center"
            >
-             What Temp Ledger Is
+             What TEMPLEDGER Is
            </motion.h2>
  
            <motion.p {...fadeInUp} className="text-muted-foreground text-center mb-12 max-w-xl mx-auto">
-             Temp Ledger provides a single shared system where labour users and agencies operate
+             TEMPLEDGER provides a single shared system where labour users and agencies operate
              against the same verified steps.
            </motion.p>
  
@@ -319,7 +319,7 @@
            </motion.h2>
  
            <motion.p {...fadeInUp} className="text-muted-foreground mb-12 max-w-xl mx-auto">
-             Temp Ledger replaces fragmented systems with shared visibility and control.
+             TEMPLEDGER replaces fragmented systems with shared visibility and control.
            </motion.p>
  
            <motion.div

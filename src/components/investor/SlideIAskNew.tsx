@@ -56,7 +56,7 @@
            className="p-6 rounded-xl bg-primary/5 border border-primary/20 max-w-xl mx-auto"
          >
            <p className="text-muted-foreground mb-2">
-             Temp Ledger is building the control layer contingent labour has always lacked.
+             TEMPLEDGER is building the control layer contingent labour has always lacked.
            </p>
            <p className="text-foreground font-medium mb-1">This is a systems problem.</p>
            <p className="text-lg font-semibold text-foreground">The solution is inevitable.</p>

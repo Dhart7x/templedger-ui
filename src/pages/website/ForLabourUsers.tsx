@@ -56,7 +56,7 @@ const ForLabourUsers = () => {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-              What changes with Temp Ledger
+              What changes with TEMPLEDGER
             </h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -90,7 +90,7 @@ const ForLabourUsers = () => {
           </motion.div>
           <div className="space-y-4 max-w-xl mx-auto">
             {[
-              "You adopt Temp Ledger",
+              "You adopt TEMPLEDGER",
               "All staffing agencies operate through it",
               "Agencies pay to participate",
               "You gain assurance and control"

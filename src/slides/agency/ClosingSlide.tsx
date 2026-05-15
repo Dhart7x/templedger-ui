@@ -52,7 +52,7 @@ const ClosingSlide = () => (
       className="font-mono font-medium mt-12"
       style={{ fontSize: "clamp(16px, 1.5vw, 20px)", color: "#4C1D95" }}
     >
-      Temp Ledger makes that the default.
+      TEMPLEDGER makes that the default.
     </motion.p>
   </div>
 );

@@ -10,7 +10,7 @@ export default function SlideHero() {
         className="font-mono text-[16px] tracking-[0.35em] text-primary uppercase font-medium"
         style={{ fontFamily: "'Inter', monospace" }}
       >
-        TEMP LEDGER
+        TEMPLEDGER
       </motion.span>
 
       <motion.h1

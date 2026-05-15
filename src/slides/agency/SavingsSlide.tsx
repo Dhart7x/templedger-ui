@@ -16,7 +16,7 @@ const SavingsSlide = () => (
       <SlideHeader
         eyebrow="THE BUSINESS CASE"
         heading={"We don't cost you money.\nWe save it."}
-        subline="Every problem Temp Ledger solves has a saving attached to it."
+        subline="Every problem TEMPLEDGER solves has a saving attached to it."
       />
       <BulletList items={items} />
     </div>

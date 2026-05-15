@@ -22,7 +22,7 @@ const DemoChatbot = () => {
     {
       id: "1",
       type: "assistant",
-      content: "Hi! I'm your Temp Ledger assistant. I can help you understand what's blocked, what's missing, and what to do next. Try asking me about specific workers or issues.",
+      content: "Hi! I'm your TEMPLEDGER assistant. I can help you understand what's blocked, what's missing, and what to do next. Try asking me about specific workers or issues.",
       timestamp: "Just now",
     },
   ]);
@@ -128,7 +128,7 @@ Try being specific with a worker name or issue type.`;
             <Sparkles className="w-4 h-4 text-primary" />
           </div>
           <div>
-            <h1 className="text-sm font-semibold text-foreground">Temp Ledger Assistant</h1>
+            <h1 className="text-sm font-semibold text-foreground">TEMPLEDGER Assistant</h1>
             <p className="text-xs text-muted-foreground">Ask about blocks, issues, or next steps</p>
           </div>
         </div>

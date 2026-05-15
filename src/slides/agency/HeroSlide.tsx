@@ -9,7 +9,7 @@ const HeroSlide = () => (
       className="font-mono uppercase font-medium"
       style={{ fontSize: 16, letterSpacing: "0.35em", color: "#4C1D95" }}
     >
-      TEMP LEDGER
+      TEMPLEDGER
     </motion.p>
 
     <motion.h1

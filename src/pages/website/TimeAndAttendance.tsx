@@ -32,7 +32,7 @@ const TimeAndAttendance = () => {
               The Capture Point Matters
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Ground truth starts at attendance. Temp Ledger controls the capture point to enable everything downstream.
+              Ground truth starts at attendance. TEMPLEDGER controls the capture point to enable everything downstream.
             </p>
           </motion.div>
         </div>

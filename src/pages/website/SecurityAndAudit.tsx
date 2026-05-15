@@ -44,7 +44,7 @@ const SecurityAndAudit = () => {
               Audits shouldn't require archaeology.
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              Traditional systems store data. When audits happen, teams scramble to reconstruct what happened. Temp Ledger logs execution as it happens — immutably.
+              Traditional systems store data. When audits happen, teams scramble to reconstruct what happened. TEMPLEDGER logs execution as it happens — immutably.
             </p>
           </motion.div>
         </div>

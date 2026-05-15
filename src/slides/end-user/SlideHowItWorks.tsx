@@ -57,7 +57,7 @@ export default function SlideHowItWorks() {
             className="text-[15px] text-foreground font-medium leading-[1.65] max-w-[560px] mx-auto mb-[36px] text-center"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            No integration with existing systems required. Temp Ledger installs alongside what you
+            No integration with existing systems required. TEMPLEDGER installs alongside what you
             already have. The only dependency is our time and attendance hardware on site.
           </motion.p>
 

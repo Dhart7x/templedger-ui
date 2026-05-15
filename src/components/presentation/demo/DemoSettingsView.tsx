@@ -337,7 +337,7 @@ const DemoSettingsView = () => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent className="bg-card border-border">
-                    <SelectItem value="native">Temp Ledger Native</SelectItem>
+                    <SelectItem value="native">TEMPLEDGER Native</SelectItem>
                     <SelectItem value="external">External</SelectItem>
                   </SelectContent>
                 </Select>

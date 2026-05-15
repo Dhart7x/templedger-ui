@@ -31,7 +31,7 @@ const ForAgencies = () => {
               A Better Way to Run the Back Office
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Temp Ledger doesn't punish agencies. It removes chaos from the back office.
+              TEMPLEDGER doesn't punish agencies. It removes chaos from the back office.
             </p>
           </motion.div>
         </div>
@@ -45,7 +45,7 @@ const ForAgencies = () => {
               You're not the problem.
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              Pay queries, invoice disputes, and compliance challenges aren't caused by bad intentions. They're caused by systems that don't talk to each other. Temp Ledger fixes the process, not the people.
+              Pay queries, invoice disputes, and compliance challenges aren't caused by bad intentions. They're caused by systems that don't talk to each other. TEMPLEDGER fixes the process, not the people.
             </p>
           </motion.div>
         </div>
@@ -85,12 +85,12 @@ const ForAgencies = () => {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-              What operating through Temp Ledger means
+              What operating through TEMPLEDGER means
             </h2>
           </motion.div>
           <div className="space-y-4 max-w-xl mx-auto">
             {[
-              "Your workers clock in through Temp Ledger T&A",
+              "Your workers clock in through TEMPLEDGER T&A",
               "Hours flow automatically to your systems",
               "Pay validation happens before payroll runs",
               "Invoices are generated from verified execution"

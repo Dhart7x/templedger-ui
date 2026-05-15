@@ -32,7 +32,7 @@ const SlideIPerformance = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-center text-muted-foreground mb-8"
         >
-          Because execution is enforced, Temp Ledger produces:
+          Because execution is enforced, TEMPLEDGER produces:
         </motion.p>
 
         <div className="max-w-md mx-auto mb-10">
