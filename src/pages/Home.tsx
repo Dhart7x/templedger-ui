@@ -1603,7 +1603,7 @@ const Home = () => {
         <section
           className="tl-section-compound"
           style={{
-            background: "#FAFAF8",
+            background: "#2E1065",
             padding: "96px 48px",
             margin: 0,
             width: "100%",
