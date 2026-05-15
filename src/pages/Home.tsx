@@ -772,12 +772,14 @@ const Home = () => {
           </div>
         </section>
 
-        {/* HARD WHITE SPACER — guarantees 80px white gap before purple block */}
+        {/* TRANSITION — white → cost-of-inaction purple (hold white, late fade to avoid lavender midpoint) */}
         <div
+          aria-hidden
           style={{
-            height: '80px',
+            height: 120,
             width: '100%',
-            background: '#FFFFFF',
+            background: 'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 35%, #2E1065 100%)',
+            margin: 0,
           }}
         />
 
@@ -1003,7 +1005,7 @@ const Home = () => {
             </motion.p>
           </div>
         </section>
-        <div aria-hidden style={{ height: 80, background: "linear-gradient(180deg, #1A0A3D 0%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #1A0A3D 0%, #1A0A3D 35%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 3 — THE COST */}
         <section className="tl-section-cost" style={{ background: "#FAFAF8", padding: "80px 48px", margin: 0, width: "100%" }}>
@@ -1340,7 +1342,7 @@ const Home = () => {
         <section
           className="tl-section-compound"
           style={{
-            background: "linear-gradient(180deg, #FFFFFF 0%, #F8F5FF 35%, #EDE9FE 65%, #4C1D95 100%)",
+            background: "linear-gradient(180deg, #FFFFFF 0%, #F8F5FF 30%, #EDE9FE 55%, #5B21B6 85%, #2E1065 100%)",
             padding: "80px 48px",
             margin: 0,
             width: "100%",
@@ -2040,7 +2042,7 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <div aria-hidden style={{ height: 80, background: "linear-gradient(180deg, #2E1065 0%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #2E1065 0%, #2E1065 35%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 5 — HOW IT WORKS */}
         <section id="how-it-works" className="tl-section-how" style={{ background: C.surface, padding: "80px 48px", margin: 0, width: "100%" }}>
@@ -2145,7 +2147,7 @@ const Home = () => {
             </div>
           </motion.div>
         </section>
-        <div aria-hidden style={{ height: 80, background: "linear-gradient(180deg, #FAFAF8 0%, #4C1D95 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #FAFAF8 0%, #FAFAF8 35%, #4C1D95 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 6 — CONTACT */}
         <section id="contact" className="tl-section-contact" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #3B1578 40%, #2E1065 70%, #1A0A3D 100%)", padding: "80px 48px", margin: 0, width: "100%" }}>
