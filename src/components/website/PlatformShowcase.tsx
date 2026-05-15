@@ -111,7 +111,7 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
             marginBottom: 8,
           }}
         >
-          Agency spend at scale erodes margin. TempLedger addresses every source.
+          Margin recovery, at scale.
         </h2>
         <p
           className="tl-platform-fraction"
