@@ -889,28 +889,28 @@ const Home = () => {
               >
               {[
                 {
-                  q: "Inflated hours, ghost shifts, late clock-outs, questionable overtime. You'd never know.",
+                  q: "Inflated hours, ghost shifts, late clock-outs, questionable overtime.",
                   a: "Without verified clock events, unverified hours reach payroll unchallenged. By the time it surfaces it has already been paid.",
                 },
                 {
-                  q: "A compliance breach on your site is your liability, not the agency's.",
-                  a: "Right to work violations, expired certifications, unsigned contracts. The fine, the reputational damage and the legal exposure sit with you. Not them.",
+                  q: "Compliance breaches on your site are your liability, not the agency's.",
+                  a: "Right to work violations, expired certifications, unsigned contracts. The fine, the reputational damage and the legal exposure sit with you.",
                 },
                 {
                   q: "You're paying agency margin on workers who should already be yours.",
-                  a: "Agency contracts define a conversion window. Most businesses never act on it because nobody has the visibility. The margin keeps running. Your best people become someone else's permanent employees.",
+                  a: "Agency contracts define a conversion window. Most businesses never act on it because nobody has the visibility. The margin keeps running.",
                 },
                 {
                   q: "Headcount authorized at site level without financial controls.",
-                  a: "Spend decisions made at site level without finance visibility. Without a system to prevent it, it never stops.",
+                  a: "Spend decisions made without finance visibility, on commitments that compound week over week. Without a system to prevent it, it never stops.",
                 },
                 {
                   q: "Unplanned overtime and poor shift distribution both have a cost.",
-                  a: "Overtime and poor shift distribution are symptoms of the same problem. Workers who don't get enough hours leave. Every departure means recruitment, retraining and ramp time.",
+                  a: "Overtime and poor distribution are symptoms of the same root problem. Workers who don't get enough hours leave. Every departure costs.",
                 },
                 {
-                  q: "Shifts are never assigned to the optimal worker or the optimal agency. Because everyone is operating blind.",
-                  a: "If you are filling a no-show you need speed. If you are planning ahead, quality and cost matter more. That distinction requires data nobody in your operation currently has.",
+                  q: "Shifts are never assigned to the optimal worker or optimal agency.",
+                  a: "Filling a no-show needs speed. Planning ahead needs quality and cost. That distinction requires data nobody currently has. Everyone is operating blind.",
                 },
               ].map((block, i) => (
                 <motion.div
@@ -925,6 +925,9 @@ const Home = () => {
                     border: "1px solid rgba(76, 29, 149, 0.07)",
                     borderRadius: 6,
                     padding: "20px 24px",
+                    display: "grid",
+                    gridTemplateRows: "auto 1fr",
+                    gap: 8,
                   }}
                 >
                   <div
@@ -935,7 +938,7 @@ const Home = () => {
                       fontSize: 16,
                       color: "#2E1065",
                       lineHeight: 1.35,
-                      marginBottom: 8,
+                      minHeight: 56,
                     }}
                   >
                     {block.q}
