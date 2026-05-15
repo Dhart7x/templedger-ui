@@ -1471,9 +1471,10 @@ const Home = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.45, delay: i * 0.1, ease: "easeOut" }}
+                  className="tl-hover-a"
                   style={{
                     background: "#FFFFFF",
-                    border: "1px solid rgba(0,0,0,0.06)",
+                    border: "1px solid rgba(76, 29, 149, 0.1)",
                     boxShadow: "0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04)",
                     borderRadius: 12,
                     padding: "32px 28px",
