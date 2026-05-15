@@ -1102,7 +1102,7 @@ const Home = () => {
                 marginBottom: 24,
               }}
             >
-              The invisible cost is significant. And it compounds every week.
+              Three structural costs. Compounding every week.
             </h2>
             <div className="tl-cost-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32 }}>
               {costs.map((c, i) => (
@@ -1394,24 +1394,6 @@ const Home = () => {
                 </motion.div>
               ))}
             </div>
-            <motion.div
-              className="tl-locked-line"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
-              style={{
-                paddingTop: 32,
-                fontFamily: FONT,
-                fontWeight: 700,
-                fontSize: 24,
-                color: "#0D0D0B",
-                textAlign: "center",
-                lineHeight: 1.5,
-              }}
-            >
-              TempLedger is not an HR tool. It is a financial control tool that happens to live in HR's domain.
-            </motion.div>
           </div>
         </section>
 
@@ -1690,7 +1672,7 @@ const Home = () => {
                 }}
               >
                 <span style={{ width: 24, height: 2, background: "#4C1D95", opacity: 0.5 }} />
-                INTELLIGENT WORKFORCE ORCHESTRATION
+                — INTELLIGENT WORKFORCE ORCHESTRATION
               </div>
               <h2
                 className="tl-intel-h2"
@@ -1704,7 +1686,7 @@ const Home = () => {
                   marginBottom: 10,
                 }}
               >
-                After six months, something shifts. The platform starts working for you.
+                This is what that intelligence looks like.
               </h2>
               <p
                 style={{
@@ -1713,23 +1695,11 @@ const Home = () => {
                   fontSize: 15,
                   color: "rgba(0,0,0,0.6)",
                   lineHeight: 1.65,
-                  marginBottom: 8,
+                  marginBottom: 32,
                   maxWidth: 560,
                 }}
               >
-                Across thousands of verified shifts, patterns emerge that no coordinator, scheduler or manager could see manually. The system surfaces them before they become problems.
-              </p>
-              <p
-                style={{
-                  fontFamily: FONT,
-                  fontWeight: 400,
-                  fontSize: 13,
-                  color: "rgba(0,0,0,0.45)",
-                  fontStyle: "italic",
-                  marginBottom: 32,
-                }}
-              >
-                A few examples of what that looks like in practice.
+                Six examples of insights the system surfaces, in your operation, in your language.
               </p>
             </motion.div>
 
