@@ -719,7 +719,7 @@ const Home = () => {
               }}
             >
               <div style={{ width: 24, height: 2, background: "#4C1D95" }} />
-              THE REAL COST
+              THE ASSUMED COST
             </div>
 
             {/* ELEMENT 1 — INVOICE */}
@@ -858,7 +858,7 @@ const Home = () => {
                     }}
                   >
                     <span style={{ width: 24, height: 2, background: "rgba(76,29,149,0.4)" }} />
-                    COST OF INACTION
+                    THE VARIABLES
                   </div>
                   <div
                     className="tl-section-h2"
