@@ -1995,7 +1995,7 @@ const Home = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" }}
-                    className="tl-intel-card"
+                    className="tl-intel-card tl-hover-b"
                     style={{
                       background: "#FFFFFF",
                       border: "1px solid rgba(0,0,0,0.06)",
