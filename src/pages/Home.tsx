@@ -357,13 +357,10 @@ const Home = () => {
           /* COMPOUNDING INTELLIGENCE */
           .tl-section-compound { padding: 48px 20px !important; }
           .tl-compound-h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
-          .tl-compound-stages { grid-template-columns: 1fr !important; gap: 24px !important; padding-left: 32px !important; }
-          .tl-compound-line { top: 0 !important; left: 27px !important; width: 2px !important; height: 100% !important; background: linear-gradient(to bottom, #4C1D95, #7C3AED, #4C1D95) !important; }
-          .tl-compound-stage { flex-direction: row !important; align-items: flex-start !important; text-align: left !important; padding: 0 !important; gap: 16px !important; }
-          .tl-compound-stage > div:first-child { margin-bottom: 0 !important; }
-          .tl-compound-stage-body { text-align: left !important; max-width: 100% !important; }
-          .tl-compound-bottom { grid-template-columns: 1fr !important; gap: 12px !important; padding: 24px !important; }
-          .tl-compound-bottom-right { text-align: left !important; }
+          .tl-compound-intro { font-size: 13px !important; }
+          .tl-compound-phases { grid-template-columns: 1fr !important; gap: 24px !important; }
+          .tl-compound-phase-title { font-size: 16px !important; }
+          .tl-compound-phase-body { font-size: 12px !important; }
 
           /* OUTCOME */
           .tl-section-outcome { padding: 48px 20px !important; }
