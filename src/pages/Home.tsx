@@ -1992,7 +1992,7 @@ const Home = () => {
                 color: "#FFFFFF",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
-                marginBottom: 10,
+                marginBottom: 8,
               }}
             >
               This is what changes.
@@ -2008,7 +2008,7 @@ const Home = () => {
                 fontWeight: 400,
                 fontSize: 15,
                 color: "rgba(255,255,255,0.55)",
-                marginBottom: 48,
+                marginBottom: 40,
               }}
             >
               The impact compounds with every shift, every week.
@@ -2019,21 +2019,21 @@ const Home = () => {
               style={{
                 display: "grid",
                 gridTemplateColumns: window.innerWidth >= 768 ? "1fr 1fr" : "1fr",
-                gap: 32,
-                marginBottom: 16,
+                columnGap: 48,
+                marginBottom: 0,
               }}
             >
               <div
                 style={{
                   fontFamily: FONT,
-                  fontSize: 11,
+                  fontSize: 10,
                   fontWeight: 600,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
                   color: "rgba(255, 255, 255, 0.6)",
                   paddingBottom: 12,
                   borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
-                  marginBottom: 16,
+                  marginBottom: 18,
                 }}
               >
                 ▲ WHAT GOES UP
@@ -2041,14 +2041,14 @@ const Home = () => {
               <div
                 style={{
                   fontFamily: FONT,
-                  fontSize: 11,
+                  fontSize: 10,
                   fontWeight: 600,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
                   color: "rgba(255, 255, 255, 0.6)",
                   paddingBottom: 12,
                   borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
-                  marginBottom: 16,
+                  marginBottom: 18,
                 }}
               >
                 ▼ WHAT COMES DOWN
@@ -2060,48 +2060,51 @@ const Home = () => {
               style={{
                 display: "grid",
                 gridTemplateColumns: window.innerWidth >= 768 ? "1fr 1fr" : "1fr",
-                gap: 32,
+                columnGap: 48,
+                alignItems: "start",
               }}
             >
               {/* Left column */}
               <div>
                 {[
-                  { arrow: "▲", text: "Operational visibility" },
-                  { arrow: "▲", text: "Retention" },
-                  { arrow: "▲", text: "Productivity" },
-                  { arrow: "▲", text: "Workforce stability" },
-                  { arrow: "▲", text: "Agency accountability" },
-                ].map((item, i, arr) => (
+                  "Operational visibility",
+                  "Retention",
+                  "Productivity",
+                  "Workforce stability",
+                  "Agency accountability",
+                ].map((text, i) => (
                   <div
-                    key={item.text}
+                    key={text}
                     style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 12,
-                      padding: "16px 0",
-                      borderBottom: i < arr.length - 1 ? "1px solid rgba(255, 255, 255, 0.08)" : "none",
+                      display: "grid",
+                      gridTemplateColumns: "32px 1fr",
+                      gap: 16,
+                      padding: "14px 0",
+                      borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+                      alignItems: "baseline",
                     }}
                   >
                     <span
                       style={{
-                        fontSize: 10,
-                        color: "rgba(255, 255, 255, 0.5)",
-                        display: "inline-block",
-                        lineHeight: 1,
+                        fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                        fontSize: 12,
+                        fontWeight: 600,
+                        color: "rgba(255, 255, 255, 0.3)",
+                        margin: 0,
                       }}
                     >
-                      {item.arrow}
+                      {String(i + 1).padStart(2, "0")}
                     </span>
                     <span
                       style={{
                         fontFamily: FONT,
-                        fontSize: window.innerWidth >= 768 ? 18 : 16,
+                        fontSize: window.innerWidth >= 768 ? 15 : 14,
                         fontWeight: 500,
                         color: "#FFFFFF",
-                        lineHeight: 1.5,
+                        margin: 0,
                       }}
                     >
-                      {item.text}
+                      {text}
                     </span>
                   </div>
                 ))}
@@ -2110,42 +2113,44 @@ const Home = () => {
               {/* Right column */}
               <div>
                 {[
-                  { arrow: "▼", text: "Compliance exposure" },
-                  { arrow: "▼", text: "Overtime" },
-                  { arrow: "▼", text: "Reconciliation overhead" },
-                  { arrow: "▼", text: "Fraud risk" },
-                  { arrow: "▼", text: "Management burden" },
-                ].map((item, i, arr) => (
+                  "Compliance exposure",
+                  "Overtime",
+                  "Reconciliation overhead",
+                  "Fraud risk",
+                  "Management burden",
+                ].map((text, i) => (
                   <div
-                    key={item.text}
+                    key={text}
                     style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 12,
-                      padding: "16px 0",
-                      borderBottom: i < arr.length - 1 ? "1px solid rgba(255, 255, 255, 0.08)" : "none",
+                      display: "grid",
+                      gridTemplateColumns: "32px 1fr",
+                      gap: 16,
+                      padding: "14px 0",
+                      borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+                      alignItems: "baseline",
                     }}
                   >
                     <span
                       style={{
-                        fontSize: 10,
-                        color: "rgba(255, 255, 255, 0.5)",
-                        display: "inline-block",
-                        lineHeight: 1,
+                        fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                        fontSize: 12,
+                        fontWeight: 600,
+                        color: "rgba(255, 255, 255, 0.3)",
+                        margin: 0,
                       }}
                     >
-                      {item.arrow}
+                      {String(i + 1).padStart(2, "0")}
                     </span>
                     <span
                       style={{
                         fontFamily: FONT,
-                        fontSize: window.innerWidth >= 768 ? 18 : 16,
+                        fontSize: window.innerWidth >= 768 ? 15 : 14,
                         fontWeight: 500,
                         color: "#FFFFFF",
-                        lineHeight: 1.5,
+                        margin: 0,
                       }}
                     >
-                      {item.text}
+                      {text}
                     </span>
                   </div>
                 ))}
@@ -2155,17 +2160,17 @@ const Home = () => {
             {/* Closing line */}
             <div
               style={{
-                marginTop: 32,
-                paddingTop: 32,
-                borderTop: "1px solid rgba(255, 255, 255, 0.12)",
+                marginTop: 40,
+                paddingTop: 24,
+                borderTop: "1px solid rgba(255, 255, 255, 0.15)",
                 textAlign: "left",
               }}
             >
               <div
                 style={{
-                  fontFamily: "'Bricolage Grotesque', sans-serif",
-                  fontWeight: 700,
-                  fontSize: 18,
+                  fontFamily: FONT,
+                  fontWeight: 600,
+                  fontSize: window.innerWidth >= 768 ? 18 : 16,
                   color: "#FFFFFF",
                 }}
               >
