@@ -1577,13 +1577,13 @@ const Home = () => {
             </motion.div>
           </div>
         </section>
-        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 35%, #2E1065 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 80, background: "linear-gradient(to bottom, #FFFFFF 0%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION — INTELLIGENT WORKFORCE ORCHESTRATION */}
         <section
           className="tl-section-intel"
           style={{
-            background: "#2E1065",
+            background: "#FAFAF8",
             padding: "80px 48px",
             margin: 0,
             width: "100%",
@@ -1607,10 +1607,10 @@ const Home = () => {
                   fontSize: 10,
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.4)",
+                  color: "#4C1D95",
                 }}
               >
-                <span style={{ width: 24, height: 2, background: "rgba(255,255,255,0.2)" }} />
+                <span style={{ width: 24, height: 2, background: "#4C1D95", opacity: 0.5 }} />
                 INTELLIGENT WORKFORCE ORCHESTRATION
               </div>
               <h2
@@ -1619,7 +1619,7 @@ const Home = () => {
                   fontFamily: "'Bricolage Grotesque', sans-serif",
                   fontWeight: 800,
                   fontSize: 32,
-                  color: "#FFFFFF",
+                  color: "#2E1065",
                   letterSpacing: "-0.022em",
                   lineHeight: 1.2,
                   marginBottom: 10,
@@ -1632,7 +1632,7 @@ const Home = () => {
                   fontFamily: FONT,
                   fontWeight: 400,
                   fontSize: 15,
-                  color: "rgba(255,255,255,0.5)",
+                  color: "rgba(0,0,0,0.6)",
                   lineHeight: 1.65,
                   marginBottom: 8,
                   maxWidth: 560,
@@ -1645,7 +1645,7 @@ const Home = () => {
                   fontFamily: FONT,
                   fontWeight: 400,
                   fontSize: 13,
-                  color: "rgba(255,255,255,0.3)",
+                  color: "rgba(0,0,0,0.45)",
                   fontStyle: "italic",
                   marginBottom: 32,
                 }}
@@ -1660,184 +1660,215 @@ const Home = () => {
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
                 gap: 12,
+                alignItems: "stretch",
               }}
             >
               {[
                 {
                   badge: "WORKFORCE INSIGHT",
-                  badgeBg: "rgba(76,29,149,0.5)",
-                  badgeColor: "#C4B5FD",
+                  Icon: BarChart3,
+                  iconColor: "#4C1D95",
+                  iconBg: "rgba(76,29,149,0.10)",
+                  tagColor: "#4C1D95",
                   time: "Now",
                   body: (
                     <>
-                      <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Workforce Direct</span> has a <span style={{ color: "#FFFFFF", fontWeight: 600 }}>94%</span> fill rate on morning shifts but drops to <span style={{ color: "#FFFFFF", fontWeight: 600 }}>61%</span> on late shifts. You have been distributing bookings <span style={{ color: "#FFFFFF", fontWeight: 600 }}>evenly</span>. The data suggests you shouldn't be.
+                      <span style={{ fontWeight: 600 }}>Workforce Direct</span> has a <span style={{ fontWeight: 600 }}>94%</span> fill rate on morning shifts but drops to <span style={{ fontWeight: 600 }}>61%</span> on late shifts. You have been distributing bookings <span style={{ fontWeight: 600 }}>evenly</span>. The data suggests you shouldn't be.
                     </>
                   ),
+                  suggested: "Suggested. Weight morning shifts toward Workforce Direct and rebalance late shifts toward your higher-performing agencies. The system can apply this rule on your next booking.",
                   action: "Adjust allocation preference →",
                 },
                 {
                   badge: "CONVERSION WINDOW",
-                  badgeBg: "rgba(13,148,136,0.2)",
-                  badgeColor: "#5EEAD4",
+                  Icon: UserCheck,
+                  iconColor: "#0F6E56",
+                  iconBg: "rgba(15,110,86,0.10)",
+                  tagColor: "#0F6E56",
                   time: "Today",
                   body: (
                     <>
-                      <span style={{ color: "#FFFFFF", fontWeight: 600 }}>James Okafor</span> has reached <span style={{ color: "#FFFFFF", fontWeight: 600 }}>520</span> verified hours across <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Inbound Warehouse</span> and <span style={{ color: "#FFFFFF", fontWeight: 600 }}>MHE Operations</span>. <span style={{ color: "#FFFFFF", fontWeight: 600 }}>97%</span> attendance. <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Zero</span> compliance flags. Conversion fee waivable from this week.
+                      <span style={{ fontWeight: 600 }}>James Okafor</span> has reached <span style={{ fontWeight: 600 }}>520</span> verified hours across <span style={{ fontWeight: 600 }}>Inbound Warehouse</span> and <span style={{ fontWeight: 600 }}>MHE Operations</span>. <span style={{ fontWeight: 600 }}>97%</span> attendance. <span style={{ fontWeight: 600 }}>Zero</span> compliance flags. Conversion fee waivable from this week.
                     </>
                   ),
+                  suggested: "Suggested. Initiate conversion this week to avoid the agency fee resetting on his next assignment. He is one of three workers eligible across your sites.",
                   action: "View conversion eligibility →",
                 },
                 {
                   badge: "SHIFT RISK",
-                  badgeBg: "rgba(217,119,6,0.2)",
-                  badgeColor: "#FCD34D",
+                  Icon: AlertTriangle,
+                  iconColor: "#BA7517",
+                  iconBg: "rgba(186,117,23,0.12)",
+                  tagColor: "#BA7517",
                   time: "Tomorrow",
                   body: (
                     <>
-                      <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Friday 06:00 Cold Storage</span> has a <span style={{ color: "#FFFFFF", fontWeight: 600 }}>73%</span> historical no-show rate over the last 8 weeks. You have <span style={{ color: "#FFFFFF", fontWeight: 600 }}>18</span> workers booked. Based on the pattern, expect <span style={{ color: "#FFFFFF", fontWeight: 600 }}>5</span> gaps.
+                      <span style={{ fontWeight: 600 }}>Friday 06:00 Cold Storage</span> has a <span style={{ fontWeight: 600 }}>73%</span> historical no-show rate over the last 8 weeks. You have <span style={{ fontWeight: 600 }}>18</span> workers booked. Based on the pattern, expect <span style={{ fontWeight: 600 }}>5</span> gaps.
                     </>
                   ),
-                  subNote: "Suggested: pre-book 5 additional workers tonight via Pinnacle Staffing. Highest Friday fill rate of your three agencies.",
+                  suggested: "Suggested. Pre-book 5 additional workers tonight via Pinnacle Staffing. Highest Friday fill rate of your three agencies.",
                   action: "Pre-book now →",
                 },
                 {
                   badge: "SPEND ANOMALY",
-                  badgeBg: "rgba(220,38,38,0.2)",
-                  badgeColor: "#FCA5A5",
+                  Icon: TrendingUp,
+                  iconColor: "#E24B4A",
+                  iconBg: "rgba(226,75,74,0.10)",
+                  tagColor: "#A32D2D",
                   time: "This week",
                   body: (
                     <>
-                      <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Outbound Dispatch</span> has logged <span style={{ color: "#FFFFFF", fontWeight: 600 }}>34</span> overtime events this month. <span style={{ color: "#FFFFFF", fontWeight: 600 }}>3x</span> your site average. The pattern started when a new shift manager joined. Authorization controls may need reviewing.
+                      <span style={{ fontWeight: 600 }}>Outbound Dispatch</span> has logged <span style={{ fontWeight: 600 }}>34</span> overtime events this month. <span style={{ fontWeight: 600 }}>3x</span> your site average. The pattern started when a new shift manager joined. Authorization controls may need reviewing.
                     </>
                   ),
+                  suggested: "Suggested. Tighten the authorization tier for overtime at Outbound Dispatch and require finance approval beyond your standard threshold.",
                   action: "Review permissions →",
                 },
                 {
                   badge: "COST CREEP",
-                  badgeBg: "rgba(217,119,6,0.2)",
-                  badgeColor: "#FCD34D",
+                  Icon: DollarSign,
+                  iconColor: "#BA7517",
+                  iconBg: "rgba(186,117,23,0.12)",
+                  tagColor: "#BA7517",
                   time: "Past 2 weeks",
                   body: (
                     <>
-                      <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Pinnacle Staffing</span> are your most expensive agency on night shifts and their volume has increased <span style={{ color: "#FFFFFF", fontWeight: 600 }}>29%</span> over the past two weeks. If this continues, your blended rate will rise materially.
+                      <span style={{ fontWeight: 600 }}>Pinnacle Staffing</span> are your most expensive agency on night shifts and their volume has increased <span style={{ fontWeight: 600 }}>29%</span> over the past two weeks. If this continues, your blended rate will rise materially.
                     </>
                   ),
-                  subNote: "Consider redistributing night shift volume to Workforce Direct. Comparable fill rate, lower charge rate. The system can do this automatically on your next booking.",
+                  suggested: "Suggested. Redistribute night shift volume to Workforce Direct. Comparable fill rate, lower charge rate. The system can do this automatically on your next booking.",
                   action: "Redistribute volume →",
                 },
                 {
                   badge: "ATTRITION PATTERN",
-                  badgeBg: "rgba(124,58,237,0.3)",
-                  badgeColor: "#DDD6FE",
+                  Icon: Users,
+                  iconColor: "#4C1D95",
+                  iconBg: "rgba(76,29,149,0.10)",
+                  tagColor: "#4C1D95",
                   time: "Past 6 weeks",
                   body: (
                     <>
-                      Mid-shift weekend attrition in <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Returns Processing</span> is running at <span style={{ color: "#FFFFFF", fontWeight: 600 }}>31%</span>, significantly above your site average. This points to either an agency supply issue or a site-level management factor.
+                      Mid-shift weekend attrition in <span style={{ fontWeight: 600 }}>Returns Processing</span> is running at <span style={{ fontWeight: 600 }}>31%</span>, significantly above your site average. This points to either an agency supply issue or a site-level management factor.
                     </>
                   ),
-                  subNote: "Meridian Recruitment historically perform well in this department. The pattern began when this shift's manager transferred from your other site. The data leans toward a management factor.",
+                  suggested: "Suggested. Investigate the management factor first. Meridian Recruitment historically perform well here and the pattern began when this shift's manager transferred from your other site.",
                   action: "View full breakdown →",
                 },
-              ].map((card, i) => (
-                <motion.div
-                  key={card.badge}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" }}
-                  style={{
-                    background: "rgba(255,255,255,0.06)",
-                    border: "0.5px solid rgba(255,255,255,0.1)",
-                    borderRadius: 10,
-                    padding: 18,
-                  }}
-                >
-                  <div
+              ].map((card, i) => {
+                const Icon = card.Icon;
+                return (
+                  <motion.div
+                    key={card.badge}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" }}
+                    className="tl-intel-card"
                     style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      marginBottom: 10,
+                      background: "#FFFFFF",
+                      border: "1px solid rgba(0,0,0,0.06)",
+                      borderRadius: 10,
+                      padding: "20px 24px",
+                      boxShadow: "0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(76,29,149,0.06)",
+                      display: "grid",
+                      gridTemplateRows: "auto 1fr auto auto",
                     }}
                   >
-                    <span
+                    {/* Row 1 — Header */}
+                    <div
                       style={{
-                        fontSize: 9,
-                        fontWeight: 700,
-                        letterSpacing: "0.14em",
-                        textTransform: "uppercase",
-                        padding: "3px 8px",
-                        borderRadius: 20,
-                        background: card.badgeBg,
-                        color: card.badgeColor,
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        marginBottom: 12,
                       }}
                     >
-                      {card.badge}
-                    </span>
-                    <span
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <span
+                          style={{
+                            width: 18,
+                            height: 18,
+                            borderRadius: 4,
+                            background: card.iconBg,
+                            display: "inline-flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Icon size={11} color={card.iconColor} strokeWidth={2.25} />
+                        </span>
+                        <span
+                          style={{
+                            fontFamily: FONT,
+                            fontSize: 10,
+                            fontWeight: 600,
+                            letterSpacing: "0.08em",
+                            textTransform: "uppercase",
+                            color: card.tagColor,
+                          }}
+                        >
+                          {card.badge}
+                        </span>
+                      </div>
+                      <span style={{ fontFamily: FONT, fontSize: 11, color: "rgba(0,0,0,0.4)" }}>
+                        {card.time}
+                      </span>
+                    </div>
+
+                    {/* Row 2 — Body */}
+                    <div
+                      className="tl-intel-body"
                       style={{
-                        fontSize: 10,
-                        color: "rgba(255,255,255,0.3)",
+                        fontFamily: FONT,
+                        fontWeight: 400,
+                        fontSize: 13,
+                        color: "#1a1a1a",
+                        lineHeight: 1.55,
+                        marginBottom: 10,
                       }}
                     >
-                      {card.time}
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: FONT,
-                      fontWeight: 400,
-                      fontSize: 12,
-                      color: "rgba(255,255,255,0.75)",
-                      lineHeight: 1.6,
-                      marginBottom: 10,
-                    }}
-                  >
-                    {card.body}
-                  </div>
-                  {card.subNote && (
-                    <>
-                      <div
-                        style={{
-                          height: 0.5,
-                          background: "rgba(255,255,255,0.08)",
-                          margin: "8px 0",
-                        }}
-                      />
-                      <p
-                        style={{
-                          fontFamily: FONT,
-                          fontWeight: 400,
-                          fontSize: 10,
-                          color: "rgba(255,255,255,0.35)",
-                          fontStyle: "italic",
-                          lineHeight: 1.55,
-                          marginTop: 6,
-                        }}
-                      >
-                        {card.subNote}
-                      </p>
-                    </>
-                  )}
-                  <div
-                    onClick={() => setDemoGateOpen(true)}
-                    style={{
-                      fontFamily: FONT,
-                      fontWeight: 600,
-                      fontSize: 11,
-                      color: "#A78BFA",
-                      marginTop: 8,
-                      cursor: "pointer",
-                    }}
-                  >
-                    {card.action}
-                  </div>
-                </motion.div>
-              ))}
+                      {card.body}
+                    </div>
+
+                    {/* Row 3 — Suggested */}
+                    <p
+                      style={{
+                        fontFamily: FONT,
+                        fontWeight: 400,
+                        fontSize: 11,
+                        color: "rgba(0,0,0,0.55)",
+                        fontStyle: "italic",
+                        lineHeight: 1.55,
+                        paddingTop: 10,
+                        borderTop: "1px solid rgba(0,0,0,0.05)",
+                        marginBottom: 10,
+                        marginTop: 0,
+                      }}
+                    >
+                      {card.suggested}
+                    </p>
+
+                    {/* Row 4 — CTA */}
+                    <div
+                      onClick={() => setDemoGateOpen(true)}
+                      style={{
+                        fontFamily: FONT,
+                        fontWeight: 500,
+                        fontSize: 11,
+                        color: "#4C1D95",
+                        cursor: "pointer",
+                        margin: 0,
+                      }}
+                    >
+                      {card.action}
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>
-        <div aria-hidden style={{ height: 60, background: "linear-gradient(180deg, #2E1065 0%, #1A0A3D 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 80, background: "linear-gradient(180deg, #FAFAF8 0%, #1A0A3D 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 4 — THE OUTCOME */}
         <section className="tl-section-outcome" style={{ background: "#1A0A3D", padding: "80px 48px", margin: 0, width: "100%" }}>
