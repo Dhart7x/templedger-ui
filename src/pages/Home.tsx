@@ -398,6 +398,7 @@ const Home = () => {
           .tl-section-intel { padding: 56px 20px !important; }
           .tl-intel-h2 { font-size: 26px !important; letter-spacing: -0.02em !important; }
           .tl-intel-grid { grid-template-columns: 1fr !important; }
+          .tl-intel-body { font-size: 12px !important; }
         }
 
       `}</style>
