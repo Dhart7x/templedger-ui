@@ -1102,7 +1102,7 @@ const Home = () => {
                 marginBottom: 24,
               }}
             >
-              The invisible cost is significant. And it compounds every week.
+              Three structural costs. Compounding every week.
             </h2>
             <div className="tl-cost-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32 }}>
               {costs.map((c, i) => (
