@@ -1109,122 +1109,6 @@ const Home = () => {
         </section>
 
 
-        {/* SECTION — COMPLIANCE & AUDIT CALLOUT */}
-        <section
-          className="tl-section-compliance"
-          style={{
-            background: "#2E1065",
-            padding: "64px 48px",
-            margin: 0,
-            width: "100%",
-          }}
-        >
-          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <div
-              className="tl-compliance-grid"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: 48,
-                alignItems: "center",
-              }}
-            >
-              {/* Left Column */}
-              <div className="tl-compliance-left">
-                <div
-                  style={{
-                    fontFamily: FONT,
-                    fontWeight: 600,
-                    fontSize: 9,
-                    letterSpacing: "0.12em",
-                    textTransform: "uppercase",
-                    color: "rgba(255, 255, 255, 0.5)",
-                    marginBottom: 12,
-                  }}
-                >
-                  — AUDIT-READY BY DESIGN
-                </div>
-                <h2
-                  style={{
-                    fontFamily: FONT,
-                    fontWeight: 600,
-                    fontSize: 22,
-                    color: "#FFFFFF",
-                    lineHeight: 1.25,
-                    marginBottom: 16,
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  Every shift, every compliance check, every authorization, on an immutable record your auditors can read directly.
-                </h2>
-                <p
-                  style={{
-                    fontFamily: FONT,
-                    fontWeight: 400,
-                    fontSize: 13,
-                    color: "rgba(255, 255, 255, 0.7)",
-                    lineHeight: 1.55,
-                    margin: 0,
-                  }}
-                >
-                  Built for SOX, GDPR, IR35, and US/UK contingent-worker audit standards. When the auditor asks who worked on which site under what compliance status, the answer is one query away.
-                </p>
-              </div>
-
-              {/* Right Column — Framework Tiles */}
-              <div
-                className="tl-compliance-right"
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: 10,
-                }}
-              >
-                {[
-                  { name: "SOX", desc: "Internal control audit trail" },
-                  { name: "GDPR", desc: "EU data residency" },
-                  { name: "IR35", desc: "UK contractor compliance" },
-                  { name: "SOC 2", desc: "Security & data integrity" },
-                ].map((tile) => (
-                  <div
-                    key={tile.name}
-                    style={{
-                      background: "rgba(255, 255, 255, 0.05)",
-                      border: "1px solid rgba(255, 255, 255, 0.1)",
-                      borderRadius: 6,
-                      padding: 14,
-                    }}
-                  >
-                    <div
-                      style={{
-                        fontFamily: FONT,
-                        fontWeight: 700,
-                        fontSize: 18,
-                        color: "#FFFFFF",
-                        lineHeight: 1,
-                        marginBottom: 4,
-                      }}
-                    >
-                      {tile.name}
-                    </div>
-                    <div
-                      style={{
-                        fontFamily: FONT,
-                        fontWeight: 400,
-                        fontSize: 10,
-                        color: "rgba(255, 255, 255, 0.6)",
-                        margin: 0,
-                      }}
-                    >
-                      {tile.desc}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* TRANSITION — cream cost-of-inaction → reveal dark purple */}
 
 
@@ -2469,6 +2353,122 @@ const Home = () => {
                 }}
               >
                 The system gets smarter with every shift that runs through it.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION — COMPLIANCE & AUDIT CALLOUT */}
+        <section
+          className="tl-section-compliance"
+          style={{
+            background: "#2E1065",
+            padding: "64px 48px",
+            margin: 0,
+            width: "100%",
+          }}
+        >
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <div
+              className="tl-compliance-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: 48,
+                alignItems: "center",
+              }}
+            >
+              {/* Left Column */}
+              <div className="tl-compliance-left">
+                <div
+                  style={{
+                    fontFamily: FONT,
+                    fontWeight: 600,
+                    fontSize: 9,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: "rgba(255, 255, 255, 0.5)",
+                    marginBottom: 12,
+                  }}
+                >
+                  — AUDIT-READY BY DESIGN
+                </div>
+                <h2
+                  style={{
+                    fontFamily: FONT,
+                    fontWeight: 600,
+                    fontSize: 22,
+                    color: "#FFFFFF",
+                    lineHeight: 1.25,
+                    marginBottom: 16,
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  Every shift, every compliance check, every authorization, on an immutable record your auditors can read directly.
+                </h2>
+                <p
+                  style={{
+                    fontFamily: FONT,
+                    fontWeight: 400,
+                    fontSize: 13,
+                    color: "rgba(255, 255, 255, 0.7)",
+                    lineHeight: 1.55,
+                    margin: 0,
+                  }}
+                >
+                  Built for SOX, GDPR, IR35, and US/UK contingent-worker audit standards. When the auditor asks who worked on which site under what compliance status, the answer is one query away.
+                </p>
+              </div>
+
+              {/* Right Column — Framework Tiles */}
+              <div
+                className="tl-compliance-right"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: 10,
+                }}
+              >
+                {[
+                  { name: "SOX", desc: "Internal control audit trail" },
+                  { name: "GDPR", desc: "EU data residency" },
+                  { name: "IR35", desc: "UK contractor compliance" },
+                  { name: "SOC 2", desc: "Security & data integrity" },
+                ].map((tile) => (
+                  <div
+                    key={tile.name}
+                    style={{
+                      background: "rgba(255, 255, 255, 0.05)",
+                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      borderRadius: 6,
+                      padding: 14,
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontFamily: FONT,
+                        fontWeight: 700,
+                        fontSize: 18,
+                        color: "#FFFFFF",
+                        lineHeight: 1,
+                        marginBottom: 4,
+                      }}
+                    >
+                      {tile.name}
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: FONT,
+                        fontWeight: 400,
+                        fontSize: 10,
+                        color: "rgba(255, 255, 255, 0.6)",
+                        margin: 0,
+                      }}
+                    >
+                      {tile.desc}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
