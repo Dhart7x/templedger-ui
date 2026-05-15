@@ -1775,13 +1775,11 @@ const Home = () => {
               {[
                 {
                   title: "Margin recovery.",
-                  boldPrefix: "From day one.",
-                  body: "Verified clocking. Real-time compliance. Authorization controls. Automated reconciliation. Agency performance derived from system data rather than self-reports. The bleed stops the day hardware goes live. And much more.",
+                  body: "Verified clocking, real-time compliance, authorization controls. The bleed stops the day hardware goes live.",
                 },
                 {
                   title: "Intelligent workforce orchestration.",
-                  boldPrefix: "Sharpens with every shift.",
-                  body: "Shift gaps predicted. Conversion candidates identified. Spend anomalies flagged. Cost creep surfaced. Agency redistribution recommended. The platform stops describing your operation and starts orchestrating it. And much more.",
+                  body: "Shift gaps predicted, conversion candidates surfaced, anomalies flagged. The platform starts orchestrating, not describing.",
                 },
               ].map((phase, i) => (
                 <motion.div
@@ -1792,7 +1790,7 @@ const Home = () => {
                   transition={{ duration: 0.5, delay: 0.3 + i * 0.15, ease: "easeOut" }}
                 >
                   <div
-                    className="tl-compound-phase-title"
+                    className="tl-compound-phase-title flex items-start min-h-[2.4em]"
                     style={{
                       fontFamily: FONT,
                       fontWeight: 600,
@@ -1805,7 +1803,7 @@ const Home = () => {
                     {phase.title}
                   </div>
                   <div
-                    className="tl-compound-phase-body"
+                    className="tl-compound-phase-body min-h-[56px] md:min-h-[60px]"
                     style={{
                       fontFamily: FONT,
                       fontWeight: 400,
@@ -1814,7 +1812,6 @@ const Home = () => {
                       lineHeight: 1.55,
                     }}
                   >
-                    <span style={{ fontWeight: 600 }}>{phase.boldPrefix} </span>
                     {phase.body}
                   </div>
                 </motion.div>
