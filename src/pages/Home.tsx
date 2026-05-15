@@ -279,6 +279,9 @@ const Home = () => {
         /* Section intro paragraph margin-bottom */
         .tl-section-intro { margin-bottom: 48px !important; }
 
+        /* The Cost — numbered argument rows */
+        .tl-cost-row + .tl-cost-row { border-top: 1px solid rgba(76, 29, 149, 0.15) !important; }
+
         @media (max-width: 768px) {
           /* GLOBAL */
           html, body { overflow-x: hidden !important; }
