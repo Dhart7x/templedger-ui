@@ -1400,7 +1400,7 @@ const Home = () => {
           </div>
         </section>
         {/* SECTION — INTRODUCING TEMPLEDGER */}
-        <section className="tl-section-introducing" style={{ background: "#FAFAF8", padding: "96px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-introducing" style={{ background: "#2E1065", padding: "96px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <motion.div
               initial={{ opacity: 0, y: 24 }}
@@ -1417,10 +1417,10 @@ const Home = () => {
                 fontSize: 10,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#4C1D95",
+                color: "rgba(255, 255, 255, 0.5)",
               }}
             >
-              <div style={{ width: 24, height: 2, background: "#4C1D95" }} />
+              <div style={{ width: 24, height: 2, background: "rgba(255, 255, 255, 0.5)" }} />
               INTRODUCING TEMPLEDGER
             </motion.div>
             <motion.h2
@@ -1433,7 +1433,7 @@ const Home = () => {
                 fontFamily: FONT,
                 fontWeight: 800,
                 fontSize: 32,
-                color: "#0D0D0B",
+                color: "#FFFFFF",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
                 marginBottom: 16,
@@ -1451,7 +1451,7 @@ const Home = () => {
                 fontFamily: FONT,
                 fontWeight: 400,
                 fontSize: 16,
-                color: "#6B6460",
+                color: "rgba(255, 255, 255, 0.7)",
                 lineHeight: 1.75,
                 maxWidth: 640,
                 marginBottom: 48,
@@ -1473,9 +1473,8 @@ const Home = () => {
                   transition={{ duration: 0.45, delay: i * 0.1, ease: "easeOut" }}
                   className="tl-hover-a"
                   style={{
-                    background: "#FFFFFF",
-                    border: "1px solid rgba(76, 29, 149, 0.1)",
-                    boxShadow: "0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04)",
+                    background: "rgba(255, 255, 255, 0.04)",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
                     borderRadius: 12,
                     padding: "32px 28px",
                     display: "grid",
@@ -1484,14 +1483,14 @@ const Home = () => {
                     height: "100%",
                   }}
                 >
-                  <div className="tl-pillar-word" style={{ fontFamily: FONT, fontWeight: 800, fontSize: 38, color: "#4C1D95", letterSpacing: "-0.02em", lineHeight: 1, height: 48, display: "flex", alignItems: "flex-end", marginBottom: 12, flexShrink: 0 }}>
+                  <div className="tl-pillar-word" style={{ fontFamily: FONT, fontWeight: 800, fontSize: 38, color: "#FFFFFF", letterSpacing: "-0.02em", lineHeight: 1, height: 48, display: "flex", alignItems: "flex-end", marginBottom: 12, flexShrink: 0 }}>
                     {p.word}
                   </div>
-                  <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 16, color: "#0D0D0B", height: 28, display: "flex", alignItems: "center", marginBottom: 12, flexShrink: 0 }}>
+                  <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 16, color: "#FFFFFF", height: 28, display: "flex", alignItems: "center", marginBottom: 12, flexShrink: 0 }}>
                     {p.title}
                   </div>
-                  <div style={{ width: "100%", height: 1, background: "#E5E0DA", marginBottom: 16, flexShrink: 0 }} />
-                  <div style={{ fontFamily: FONT, fontWeight: 400, fontSize: 14, color: "#6B6460", lineHeight: 1.7, alignSelf: "start" }}>
+                  <div style={{ width: "100%", height: 1, background: "rgba(255, 255, 255, 0.1)", marginBottom: 16, flexShrink: 0 }} />
+                  <div style={{ fontFamily: FONT, fontWeight: 400, fontSize: 14, color: "rgba(255, 255, 255, 0.7)", lineHeight: 1.7, alignSelf: "start" }}>
                     {p.body}
                   </div>
                 </motion.div>
@@ -1604,7 +1603,7 @@ const Home = () => {
         <section
           className="tl-section-compound"
           style={{
-            background: "#FAFAF8",
+            background: "#2E1065",
             padding: "96px 48px",
             margin: 0,
             width: "100%",
@@ -1626,10 +1625,10 @@ const Home = () => {
                 fontSize: 10,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#4C1D95",
+                color: "rgba(255, 255, 255, 0.5)",
               }}
             >
-              <div style={{ width: 24, height: 2, background: "#4C1D95" }} />
+              <div style={{ width: 24, height: 2, background: "rgba(255, 255, 255, 0.5)" }} />
               COMPOUNDING INTELLIGENCE
             </motion.div>
             <motion.h2
@@ -1642,7 +1641,7 @@ const Home = () => {
                 fontFamily: "'Bricolage Grotesque', sans-serif",
                 fontWeight: 600,
                 fontSize: 32,
-                color: "#2E1065",
+                color: "#FFFFFF",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
                 marginBottom: 48,
@@ -1665,7 +1664,7 @@ const Home = () => {
                   left: 0,
                   right: 0,
                   height: 2,
-                  background: "#4C1D95",
+                  background: "#FFFFFF",
                   borderRadius: 1,
                   transformOrigin: "left",
                 }}
@@ -1688,7 +1687,7 @@ const Home = () => {
                       width: 12,
                       height: 12,
                       borderRadius: "50%",
-                      background: "#4C1D95",
+                      background: "#FFFFFF",
                       marginTop: 2,
                     }}
                   />
@@ -1711,8 +1710,8 @@ const Home = () => {
                       width: 16,
                       height: 16,
                       borderRadius: "50%",
-                      background: "#4C1D95",
-                      border: "3px solid #FFFFFF",
+                      background: "#FFFFFF",
+                      border: "3px solid #2E1065",
                       boxSizing: "content-box",
                       marginTop: -3,
                     }}
@@ -1727,7 +1726,7 @@ const Home = () => {
                       height: 0,
                       borderTop: "5px solid transparent",
                       borderBottom: "5px solid transparent",
-                      borderLeft: "8px solid #4C1D95",
+                      borderLeft: "8px solid #FFFFFF",
                       marginTop: 3,
                     }}
                   />
@@ -1749,18 +1748,18 @@ const Home = () => {
                   textTransform: "uppercase",
                 }}
               >
-                <span style={{ color: "#4C1D95" }}>DAY ONE</span>
+                <span style={{ color: "#FFFFFF" }}>DAY ONE</span>
                 <span
                   style={{
                     position: "absolute",
                     left: "50%",
                     transform: "translateX(-50%)",
-                    color: "#4C1D95",
+                    color: "#FFFFFF",
                   }}
                 >
                   COMPOUNDING
                 </span>
-                <span style={{ color: "rgba(76, 29, 149, 0.5)" }}>ONGOING</span>
+                <span style={{ color: "rgba(255, 255, 255, 0.5)" }}>ONGOING</span>
               </div>
             </div>
 
@@ -1798,7 +1797,7 @@ const Home = () => {
                       fontFamily: FONT,
                       fontWeight: 600,
                       fontSize: 18,
-                      color: "#2E1065",
+                      color: "#FFFFFF",
                       marginBottom: 10,
                       lineHeight: 1.3,
                     }}
@@ -1811,7 +1810,7 @@ const Home = () => {
                       fontFamily: FONT,
                       fontWeight: 400,
                       fontSize: 13,
-                      color: "rgba(0, 0, 0, 0.65)",
+                      color: "rgba(255, 255, 255, 0.7)",
                       lineHeight: 1.55,
                     }}
                   >
