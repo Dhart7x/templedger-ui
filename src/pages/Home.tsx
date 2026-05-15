@@ -902,7 +902,7 @@ const Home = () => {
 
 
         {/* MERGED DARK BLOCK — REVEAL + COST */}
-        <div style={{ background: "linear-gradient(180deg, #2E1065 0%, #1A0A3D 50%, #0D0520 100%)", width: "100%", margin: 0, padding: 0, position: "relative", zIndex: 0, marginTop: 0 }}>
+        <div style={{ background: "#2E1065", width: "100%", margin: 0, padding: 0, position: "relative", zIndex: 0, marginTop: 0 }}>
         {/* SECTION 3b — THE REVEAL */}
         <section className="tl-section-reveal" style={{ background: "transparent", padding: "72px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
