@@ -408,6 +408,14 @@ const Home = () => {
           .tl-compound-phase-title { font-size: 16px !important; }
           .tl-compound-phase-body { font-size: 12px !important; }
 
+          /* CREDIBILITY STRIP */
+          .tl-credibility-strip { padding: 28px 24px !important; }
+          .tl-credibility-inner { grid-template-columns: 1fr !important; gap: 24px !important; text-align: center !important; }
+          .tl-credibility-divider { display: none !important; }
+          .tl-credibility-left p { max-width: none !important; font-size: 13px !important; }
+          .tl-credibility-right { flex-direction: column !important; gap: 16px !important; justify-content: center !important; }
+          .tl-credibility-right > div > div:first-child { font-size: 20px !important; }
+
           /* OUTCOME */
           .tl-section-outcome { padding: 64px 20px !important; }
           .tl-section-outcome h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
