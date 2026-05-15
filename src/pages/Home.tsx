@@ -276,6 +276,9 @@ const Home = () => {
         /* H2 margin-bottom global */
         h2, .tl-section-h2, .tl-intel-h2, .tl-outcome-h2, .tl-solution-h2, .tl-contact-h2 { margin-bottom: 24px !important; }
 
+        /* Section intro paragraph margin-bottom */
+        .tl-section-intro { margin-bottom: 48px !important; }
+
         @media (max-width: 768px) {
           /* GLOBAL */
           html, body { overflow-x: hidden !important; }
