@@ -1258,11 +1258,22 @@ const Home = () => {
                   color: "#0D0D0B",
                   letterSpacing: "-0.022em",
                   lineHeight: 1.2,
-                  marginBottom: 48,
+                  marginBottom: 8,
                 }}
               >
-                Outsourcing moves the problem. It doesn't solve it.
+                MSPs move the problem. They don't solve it.
               </h2>
+              <p
+                style={{
+                  fontFamily: FONT,
+                  fontSize: 14,
+                  color: "rgba(0,0,0,0.6)",
+                  lineHeight: 1.55,
+                  marginBottom: 40,
+                }}
+              >
+                Three reasons the intermediary model degrades the outcome.
+              </p>
             </motion.div>
 
             <motion.div
@@ -1270,122 +1281,110 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="tl-alt-table-wrap"
-              style={{ overflowX: "auto" }}
+              className="tl-alt-cards"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr 1fr",
+                gap: 12,
+                alignItems: "stretch",
+              }}
             >
-              <div
-                className="tl-alt-table"
-                style={{
-                  display: "grid",
-                  borderRadius: 12,
-                  overflow: "hidden",
-                  border: "0.5px solid #E5E0DA",
-                  minWidth: 520,
-                }}
-              >
-                {/* Header */}
-                <div
-                  className="tl-alt-header"
+              {[
+                {
+                  tag: "AGENCIES",
+                  header: "They squeeze the agency, not the problem.",
+                  body: "MSP margin comes from your agencies' margin. Agencies absorb the squeeze on every booking they win, with no improvement to the relationship that produced it.",
+                },
+                {
+                  tag: "DISTANCE",
+                  header: "They add a layer. They don't fix the one underneath.",
+                  body: "The variables continue to happen. Every shift, every week. The MSP becomes one more reporting layer on a system that already had too many.",
+                },
+                {
+                  tag: "PRIORITY",
+                  header: "The best workers go where the relationship is direct.",
+                  body: "Agencies route their top talent to accounts where the margin holds and the relationship is unmediated. You receive lower fill rates, slower response, and second-tier service.",
+                },
+              ].map((card, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.4, delay: 0.3 + i * 0.1, ease: "easeOut" }}
                   style={{
+                    background: "#FFFFFF",
+                    border: "1px solid rgba(76, 29, 149, 0.1)",
+                    borderRadius: 8,
+                    padding: 22,
                     display: "grid",
-                    gridTemplateColumns: "1fr 1fr 1fr",
-                    background: "#2E1065",
+                    gridTemplateRows: "auto auto 1fr",
+                    gap: 0,
                   }}
                 >
-                  <div style={{ padding: "16px 20px" }} />
-                  <div
-                    style={{
-                      padding: "16px 20px",
-                      fontFamily: FONT,
-                      fontWeight: 700,
-                      fontSize: 12,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "rgba(255,255,255,0.5)",
-                    }}
-                  >
-                    MSP / NEUTRAL VENDOR
+                  <div style={{ paddingBottom: 14 }}>
+                    <span
+                      style={{
+                        display: "inline-block",
+                        padding: "2px 8px",
+                        background: "rgba(226, 75, 74, 0.1)",
+                        border: "1px solid rgba(226, 75, 74, 0.25)",
+                        borderRadius: 4,
+                        color: "#B82F2E",
+                        fontSize: 9,
+                        fontWeight: 600,
+                        letterSpacing: "0.06em",
+                        fontFamily: FONT,
+                      }}
+                    >
+                      {`\u25BC ${card.tag}`}
+                    </span>
                   </div>
                   <div
                     style={{
-                      padding: "16px 20px",
+                      color: "#2E1065",
+                      fontSize: 15,
+                      fontWeight: 600,
+                      lineHeight: 1.3,
+                      marginBottom: 10,
+                      minHeight: 44,
                       fontFamily: FONT,
-                      fontWeight: 700,
-                      fontSize: 12,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "#FFFFFF",
-                      borderLeft: "0.5px solid rgba(255,255,255,0.1)",
                     }}
                   >
-                    TEMPLEDGER
+                    {card.header}
                   </div>
-                </div>
+                  <p
+                    style={{
+                      color: "rgba(0,0,0,0.65)",
+                      fontSize: 11,
+                      fontWeight: 400,
+                      lineHeight: 1.55,
+                      margin: 0,
+                      fontFamily: FONT,
+                    }}
+                  >
+                    {card.body}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
 
-                {/* Data rows */}
-                {[
-                  { label: "Who owns the data", msp: "The intermediary", tl: "You and your agencies equally" },
-                  { label: "Visibility", msp: "What they choose to share", tl: "Live. Both sides. Real time." },
-                  { label: "Agency relationship", msp: "Filtered through a third party", tl: "Direct. No intermediary." },
-                  { label: "Cost", msp: "Expensive", tl: "Pays for itself" },
-                  { label: "Value to agencies", msp: "Net negative", tl: "Net positive" },
-                  { label: "Control", msp: "Outsourced", tl: "Yours" },
-                ].map((row, i, arr) => (
-                  <motion.div
-                    key={i}
-                    className="tl-alt-row"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 0.3, delay: 0.2 + i * 0.06, ease: "easeOut" }}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "1fr 1fr 1fr",
-                      background: i % 2 === 0 ? "#FFFFFF" : "#FAFAF8",
-                      borderBottom: i === arr.length - 1 ? "none" : "0.5px solid #E5E0DA",
-                    }}
-                  >
-                    <div
-                      className="tl-alt-label"
-                      style={{
-                        padding: "18px 20px",
-                        fontFamily: FONT,
-                        fontWeight: 600,
-                        fontSize: 13,
-                        color: "#0D0D0B",
-                      }}
-                    >
-                      {row.label}
-                    </div>
-                    <div
-                      className="tl-alt-msp"
-                      style={{
-                        padding: "18px 20px",
-                        fontFamily: FONT,
-                        fontWeight: 400,
-                        fontSize: 13,
-                        color: "#6B6460",
-                        borderLeft: "0.5px solid #E5E0DA",
-                      }}
-                    >
-                      {row.msp}
-                    </div>
-                    <div
-                      className="tl-alt-tl"
-                      style={{
-                        padding: "18px 20px",
-                        fontFamily: FONT,
-                        fontWeight: 600,
-                        fontSize: 13,
-                        color: "#4C1D95",
-                        borderLeft: "0.5px solid #E5E0DA",
-                      }}
-                    >
-                      {row.tl}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              style={{
+                marginTop: 32,
+                paddingTop: 22,
+                borderTop: "1px solid rgba(76, 29, 149, 0.15)",
+                color: "#1a1a1a",
+                fontSize: 20,
+                fontWeight: 600,
+                fontFamily: FONT,
+              }}
+            >
+              You pay more, for less.
             </motion.div>
           </div>
         </section>
