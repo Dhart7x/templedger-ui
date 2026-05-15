@@ -414,6 +414,12 @@ const Home = () => {
           .tl-compound-phase-title { font-size: 16px !important; }
           .tl-compound-phase-body { font-size: 12px !important; }
 
+          /* COMPLIANCE & AUDIT CALLOUT */
+          .tl-section-compliance { padding: 48px 24px !important; }
+          .tl-compliance-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+          .tl-compliance-left h2 { font-size: 18px !important; }
+          .tl-compliance-left p { font-size: 12px !important; }
+
           /* CREDIBILITY STRIP */
           .tl-credibility-strip { padding: 28px 24px !important; }
           .tl-credibility-inner { grid-template-columns: 1fr !important; gap: 24px !important; text-align: center !important; }
