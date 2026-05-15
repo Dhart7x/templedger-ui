@@ -657,7 +657,7 @@ const Home = () => {
             </motion.p>
             <motion.button
               className="tl-hero-cta"
-              onClick={scrollToContact}
+              onClick={() => document.querySelector('.tl-section-platform')?.scrollIntoView({ behavior: 'smooth' })}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.9 }}
@@ -674,7 +674,7 @@ const Home = () => {
                 fontFamily: FONT,
               }}
             >
-              Request Access
+              See the platform →
             </motion.button>
           </div>
         </section>
