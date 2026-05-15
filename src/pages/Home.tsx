@@ -393,6 +393,11 @@ const Home = () => {
           .tl-section-h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
           .tl-section-tag { font-size: 9px !important; }
           .tl-section-sub { font-size: 13px !important; max-width: 100% !important; }
+
+          /* INTELLIGENT WORKFORCE ORCHESTRATION */
+          .tl-section-intel { padding: 56px 20px !important; }
+          .tl-intel-h2 { font-size: 26px !important; letter-spacing: -0.02em !important; }
+          .tl-intel-grid { grid-template-columns: 1fr !important; }
         }
 
       `}</style>
@@ -1323,6 +1328,264 @@ const Home = () => {
           </div>
         </section>
 
+        {/* SECTION — INTELLIGENT WORKFORCE ORCHESTRATION */}
+        <section
+          className="tl-section-intel"
+          style={{
+            background: "#2E1065",
+            padding: "80px 48px",
+            margin: 0,
+            width: "100%",
+          }}
+        >
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  marginBottom: 16,
+                  fontFamily: FONT,
+                  fontWeight: 700,
+                  fontSize: 10,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  color: "rgba(255,255,255,0.4)",
+                }}
+              >
+                <span style={{ width: 24, height: 2, background: "rgba(255,255,255,0.2)" }} />
+                INTELLIGENT WORKFORCE ORCHESTRATION
+              </div>
+              <h2
+                className="tl-intel-h2"
+                style={{
+                  fontFamily: "'Bricolage Grotesque', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 36,
+                  color: "#FFFFFF",
+                  letterSpacing: "-0.022em",
+                  lineHeight: 1.2,
+                  marginBottom: 10,
+                }}
+              >
+                After six months, something shifts. The platform starts working for you.
+              </h2>
+              <p
+                style={{
+                  fontFamily: FONT,
+                  fontWeight: 400,
+                  fontSize: 15,
+                  color: "rgba(255,255,255,0.5)",
+                  lineHeight: 1.65,
+                  marginBottom: 8,
+                  maxWidth: 560,
+                }}
+              >
+                Across thousands of verified shifts, patterns emerge that no coordinator, scheduler or manager could see manually. The system surfaces them before they become problems.
+              </p>
+              <p
+                style={{
+                  fontFamily: FONT,
+                  fontWeight: 400,
+                  fontSize: 13,
+                  color: "rgba(255,255,255,0.3)",
+                  fontStyle: "italic",
+                  marginBottom: 32,
+                }}
+              >
+                A few examples of what that looks like in practice.
+              </p>
+            </motion.div>
+
+            <div
+              className="tl-intel-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: 12,
+              }}
+            >
+              {[
+                {
+                  badge: "WORKFORCE INSIGHT",
+                  badgeBg: "rgba(76,29,149,0.5)",
+                  badgeColor: "#C4B5FD",
+                  time: "Now",
+                  body: (
+                    <>
+                      <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Workforce Direct</span> has a <span style={{ color: "#FFFFFF", fontWeight: 600 }}>94%</span> fill rate on morning shifts but drops to <span style={{ color: "#FFFFFF", fontWeight: 600 }}>61%</span> on late shifts. You have been distributing bookings <span style={{ color: "#FFFFFF", fontWeight: 600 }}>evenly</span>. The data suggests you shouldn't be.
+                    </>
+                  ),
+                  action: "Adjust allocation preference →",
+                },
+                {
+                  badge: "CONVERSION WINDOW",
+                  badgeBg: "rgba(13,148,136,0.2)",
+                  badgeColor: "#5EEAD4",
+                  time: "Today",
+                  body: (
+                    <>
+                      <span style={{ color: "#FFFFFF", fontWeight: 600 }}>James Okafor</span> has reached <span style={{ color: "#FFFFFF", fontWeight: 600 }}>520</span> verified hours across <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Inbound Warehouse</span> and <span style={{ color: "#FFFFFF", fontWeight: 600 }}>MHE Operations</span>. <span style={{ color: "#FFFFFF", fontWeight: 600 }}>97%</span> attendance. <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Zero</span> compliance flags. Conversion fee waivable from this week.
+                    </>
+                  ),
+                  action: "View conversion eligibility →",
+                },
+                {
+                  badge: "SHIFT RISK",
+                  badgeBg: "rgba(217,119,6,0.2)",
+                  badgeColor: "#FCD34D",
+                  time: "Tomorrow",
+                  body: (
+                    <>
+                      <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Friday 06:00 Cold Storage</span> has a <span style={{ color: "#FFFFFF", fontWeight: 600 }}>73%</span> historical no-show rate over the last 8 weeks. You have <span style={{ color: "#FFFFFF", fontWeight: 600 }}>18</span> workers booked. Based on the pattern, expect <span style={{ color: "#FFFFFF", fontWeight: 600 }}>5</span> gaps.
+                    </>
+                  ),
+                  subNote: "Suggested: pre-book 5 additional workers tonight via Pinnacle Staffing — highest Friday fill rate of your three agencies.",
+                  action: "Pre-book now →",
+                },
+                {
+                  badge: "SPEND ANOMALY",
+                  badgeBg: "rgba(220,38,38,0.2)",
+                  badgeColor: "#FCA5A5",
+                  time: "This week",
+                  body: (
+                    <>
+                      <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Outbound Dispatch</span> has logged <span style={{ color: "#FFFFFF", fontWeight: 600 }}>34</span> overtime events this month — <span style={{ color: "#FFFFFF", fontWeight: 600 }}>3x</span> your site average. The pattern started when a new shift manager joined. Authorization controls may need reviewing.
+                    </>
+                  ),
+                  action: "Review permissions →",
+                },
+                {
+                  badge: "COST CREEP",
+                  badgeBg: "rgba(220,38,38,0.15)",
+                  badgeColor: "#FCA5A5",
+                  time: "Past 2 weeks",
+                  body: (
+                    <>
+                      <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Pinnacle Staffing</span> are your most expensive agency on night shifts and their volume has increased <span style={{ color: "#FFFFFF", fontWeight: 600 }}>29%</span> over the past two weeks. If this continues, your blended rate will rise materially.
+                    </>
+                  ),
+                  subNote: "Consider redistributing night shift volume to Workforce Direct — comparable fill rate, lower charge rate. The system can do this automatically on your next booking.",
+                  action: "Redistribute volume →",
+                },
+                {
+                  badge: "ATTRITION PATTERN",
+                  badgeBg: "rgba(124,58,237,0.3)",
+                  badgeColor: "#DDD6FE",
+                  time: "Past 6 weeks",
+                  body: (
+                    <>
+                      Mid-shift weekend attrition in <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Returns Processing</span> is running at <span style={{ color: "#FFFFFF", fontWeight: 600 }}>31%</span> — significantly above your site average. This points to either an agency supply issue or a site-level management factor.
+                    </>
+                  ),
+                  subNote: "Meridian Recruitment historically perform well in this department. The pattern began when this shift's manager transferred from your other site. The data leans toward a management factor.",
+                  action: "View full breakdown →",
+                },
+              ].map((card, i) => (
+                <motion.div
+                  key={card.badge}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" }}
+                  style={{
+                    background: "rgba(255,255,255,0.06)",
+                    border: "0.5px solid rgba(255,255,255,0.1)",
+                    borderRadius: 10,
+                    padding: 18,
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      marginBottom: 10,
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: 9,
+                        fontWeight: 700,
+                        letterSpacing: "0.14em",
+                        textTransform: "uppercase",
+                        padding: "3px 8px",
+                        borderRadius: 20,
+                        background: card.badgeBg,
+                        color: card.badgeColor,
+                      }}
+                    >
+                      {card.badge}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: 10,
+                        color: "rgba(255,255,255,0.3)",
+                      }}
+                    >
+                      {card.time}
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 400,
+                      fontSize: 12,
+                      color: "rgba(255,255,255,0.75)",
+                      lineHeight: 1.6,
+                      marginBottom: 10,
+                    }}
+                  >
+                    {card.body}
+                  </div>
+                  {card.subNote && (
+                    <>
+                      <div
+                        style={{
+                          height: 0.5,
+                          background: "rgba(255,255,255,0.08)",
+                          margin: "8px 0",
+                        }}
+                      />
+                      <p
+                        style={{
+                          fontFamily: FONT,
+                          fontWeight: 400,
+                          fontSize: 10,
+                          color: "rgba(255,255,255,0.35)",
+                          fontStyle: "italic",
+                          lineHeight: 1.55,
+                          marginTop: 6,
+                        }}
+                      >
+                        {card.subNote}
+                      </p>
+                    </>
+                  )}
+                  <div
+                    onClick={() => setDemoGateOpen(true)}
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 600,
+                      fontSize: 11,
+                      color: "#A78BFA",
+                      marginTop: 8,
+                      cursor: "pointer",
+                    }}
+                  >
+                    {card.action}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* SECTION 4 — THE OUTCOME */}
         <section className="tl-section-outcome" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #5B21B6 40%, #4C1D95 75%, #3B1578 100%)", padding: "80px 48px", margin: 0, width: "100%" }}>
