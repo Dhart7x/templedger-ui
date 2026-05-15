@@ -1726,7 +1726,7 @@ const Home = () => {
                       height: 0,
                       borderTop: "5px solid transparent",
                       borderBottom: "5px solid transparent",
-                      borderLeft: "8px solid #4C1D95",
+                      borderLeft: "8px solid #FFFFFF",
                       marginTop: 3,
                     }}
                   />
