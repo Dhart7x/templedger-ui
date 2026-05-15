@@ -890,28 +890,28 @@ const Home = () => {
               >
               {[
                 {
-                  q: "Shifts are never assigned to the optimal worker or the optimal agency. Because everyone is operating blind.",
-                  a: "If you are filling a no-show you need speed. If you are planning ahead, quality and cost matter more. That distinction requires data nobody in your operation currently has.",
+                  q: "Inflated hours, ghost shifts, late clock-outs, questionable overtime. You'd never know.",
+                  a: "Without verified clock events, unverified hours reach payroll unchallenged. By the time it surfaces it has already been paid.",
                 },
                 {
-                  q: "Unplanned overtime and poor shift distribution both have a cost.",
-                  a: "Overtime and poor shift distribution are symptoms of the same problem. Workers who don't get enough hours leave. Every departure means recruitment, retraining and ramp time.",
+                  q: "A compliance breach on your site is your liability, not the agency's.",
+                  a: "Right to work violations, expired certifications, unsigned contracts. The fine, the reputational damage and the legal exposure sit with you. Not them.",
                 },
                 {
-                  q: "Management time spent coordinating agencies instead of running the operation.",
-                  a: "Every hour spent verifying attendance, reconciling hours and managing no-shows is an hour not spent on output.",
+                  q: "You're paying agency margin on workers who should already be yours.",
+                  a: "Agency contracts define a conversion window. Most businesses never act on it because nobody has the visibility. The margin keeps running. Your best people become someone else's permanent employees.",
                 },
                 {
                   q: "Headcount authorized at site level without financial controls.",
                   a: "Spend decisions made at site level without finance visibility. Without a system to prevent it, it never stops.",
                 },
                 {
-                  q: "Inflated hours, ghost shifts, late clock-outs, questionable overtime. You'd never know.",
-                  a: "Without verified clock events, unverified hours reach payroll unchallenged. By the time it surfaces it has already been paid.",
+                  q: "Unplanned overtime and poor shift distribution both have a cost.",
+                  a: "Overtime and poor shift distribution are symptoms of the same problem. Workers who don't get enough hours leave. Every departure means recruitment, retraining and ramp time.",
                 },
                 {
-                  q: "Your liability. Their margin.",
-                  a: "Compliance breaches and conversion windows both sit with you. Right to work violations, expired certifications, agency margin running on workers who should already be yours. The agency carries none of it.",
+                  q: "Shifts are never assigned to the optimal worker or the optimal agency. Because everyone is operating blind.",
+                  a: "If you are filling a no-show you need speed. If you are planning ahead, quality and cost matter more. That distinction requires data nobody in your operation currently has.",
                 },
               ].map((block, i) => (
                 <motion.div
