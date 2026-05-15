@@ -1924,150 +1924,114 @@ const Home = () => {
               The impact compounds with every shift, every week.
             </motion.p>
 
-            <div className="tl-outcome-stack">
-            {/* Column headers above the grid */}
-            <div className="tl-outcome-headers" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
-              <div
-                className="tl-outcome-header tl-outcome-header-up"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 8,
-                  paddingBottom: 12,
-                  borderBottom: "0.5px solid rgba(255,255,255,0.12)",
-                }}
-              >
-                <div
-                  style={{
-                    width: 0,
-                    height: 0,
-                    borderLeft: "6px solid transparent",
-                    borderRight: "6px solid transparent",
-                    borderBottom: "10px solid #FFFFFF",
-                  }}
-                />
-                <span
-                  style={{
-                    fontFamily: FONT,
-                    fontWeight: 700,
-                    fontSize: 11,
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  WHAT GOES UP
-                </span>
-              </div>
+            {/* Column headers */}
             <div
-              className="tl-outcome-header tl-outcome-header-down"
-              style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 8,
-                  paddingBottom: 12,
-                  borderBottom: "0.5px solid rgba(255,255,255,0.12)",
-                }}
-              >
-                <div
-                  style={{
-                    width: 0,
-                    height: 0,
-                    borderTop: "10px solid #FFFFFF",
-                    borderLeft: "6px solid transparent",
-                    borderRight: "6px solid transparent",
-                    borderBottom: "none",
-                  }}
-                />
-                <span
-                  style={{
-                    fontFamily: FONT,
-                    fontWeight: 700,
-                    fontSize: 11,
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  WHAT COMES DOWN
-                </span>
-              </div>
-            </div>
-
-            {/* 10-CARD GRID */}
-            <div
-              className="tl-outcome-grid"
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gridTemplateRows: "repeat(5, auto)",
-                gap: 10,
-                alignItems: "stretch",
+                gridTemplateColumns: window.innerWidth >= 768 ? "1fr 1fr" : "1fr",
+                gap: 32,
+                marginBottom: 16,
               }}
             >
-              {[
-                { ...upItems[0], dir: "up" as const, row: 0 },
-                { ...downItems[0], dir: "down" as const, row: 0 },
-                { ...upItems[1], dir: "up" as const, row: 1 },
-                { ...downItems[1], dir: "down" as const, row: 1 },
-                { ...upItems[2], dir: "up" as const, row: 2 },
-                { ...downItems[2], dir: "down" as const, row: 2 },
-                { ...upItems[3], dir: "up" as const, row: 3 },
-                { ...downItems[3], dir: "down" as const, row: 3 },
-                { ...upItems[4], dir: "up" as const, row: 4 },
-                { ...downItems[4], dir: "down" as const, row: 4 },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="tl-outcome-card"
-                  data-dir={item.dir}
-                  initial={{ opacity: 0, x: item.dir === "up" ? -24 : 24 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.4, delay: (item.dir === "up" ? 0 : 0.2) + item.row * 0.08, ease: "easeOut" }}
-                  style={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    background: "rgba(255,255,255,0.07)",
-                    border: "0.5px solid rgba(255,255,255,0.1)",
-                    borderRadius: 8,
-                    padding: "16px 18px",
-                  }}
-                >
+              <div
+                style={{
+                  fontFamily: FONT,
+                  fontSize: 12,
+                  fontWeight: 600,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#FFFFFF",
+                  paddingBottom: 12,
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.15)",
+                  marginBottom: 16,
+                }}
+              >
+                ▲ WHAT GOES UP
+              </div>
+              <div
+                style={{
+                  fontFamily: FONT,
+                  fontSize: 12,
+                  fontWeight: 600,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#FFFFFF",
+                  paddingBottom: 12,
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.15)",
+                  marginBottom: 16,
+                }}
+              >
+                ▼ WHAT COMES DOWN
+              </div>
+            </div>
+
+            {/* Two-column list */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: window.innerWidth >= 768 ? "1fr 1fr" : "1fr",
+                gap: 32,
+              }}
+            >
+              {/* Left column */}
+              <div>
+                {[
+                  "Operational visibility",
+                  "Retention",
+                  "Productivity",
+                  "Workforce stability",
+                  "Agency accountability",
+                ].map((item, i, arr) => (
                   <div
+                    key={item}
                     style={{
                       fontFamily: FONT,
-                      fontWeight: 700,
-                      fontSize: 14,
+                      fontSize: window.innerWidth >= 768 ? 16 : 15,
+                      fontWeight: 500,
                       color: "#FFFFFF",
-                      marginBottom: 4,
+                      lineHeight: 1.5,
+                      padding: "14px 0",
+                      borderBottom: i < arr.length - 1 ? "1px solid rgba(255, 255, 255, 0.06)" : "none",
                     }}
                   >
-                    {item.t}
+                    {item}
                   </div>
+                ))}
+              </div>
+
+              {/* Right column */}
+              <div>
+                {[
+                  "Compliance exposure",
+                  "Overtime",
+                  "Reconciliation overhead",
+                  "Fraud risk",
+                  "Management burden",
+                ].map((item, i, arr) => (
                   <div
+                    key={item}
                     style={{
                       fontFamily: FONT,
-                      fontWeight: 400,
-                      fontSize: 12,
-                      color: "rgba(255,255,255,0.85)",
-                      lineHeight: 1.55,
+                      fontSize: window.innerWidth >= 768 ? 16 : 15,
+                      fontWeight: 500,
+                      color: "#FFFFFF",
+                      lineHeight: 1.5,
+                      padding: "14px 0",
+                      borderBottom: i < arr.length - 1 ? "1px solid rgba(255, 255, 255, 0.06)" : "none",
                     }}
                   >
-                    {item.b}
+                    {item}
                   </div>
-
-                </motion.div>
-              ))}
-            </div>
+                ))}
+              </div>
             </div>
 
+            {/* Closing line */}
             <div
               style={{
                 marginTop: 32,
-                paddingTop: 24,
-                borderTop: "0.5px solid rgba(255,255,255,0.12)",
+                paddingTop: 32,
+                borderTop: "1px solid rgba(255, 255, 255, 0.12)",
                 textAlign: "center",
               }}
             >
@@ -2077,7 +2041,6 @@ const Home = () => {
                   fontWeight: 700,
                   fontSize: 18,
                   color: "#FFFFFF",
-                  marginTop: 8,
                 }}
               >
                 The system gets smarter with every shift that runs through it.
