@@ -914,11 +914,29 @@ const Home = () => {
         </section>
 
 
-        {/* MERGED DARK BLOCK — REVEAL + COST */}
-        <div style={{ background: "#2E1065", width: "100%", margin: 0, padding: 0, position: "relative", zIndex: 0, marginTop: 0 }}>
+        {/* TRANSITION — cost-of-inaction purple to reveal darker purple */}
+        <div aria-hidden style={{ height: 60, background: "linear-gradient(180deg, #2E1065 0%, #1A0A3D 100%)", margin: 0, width: "100%" }} />
+
         {/* SECTION 3b — THE REVEAL */}
-        <section className="tl-section-reveal" style={{ background: "transparent", padding: "80px 48px", margin: 0, width: "100%" }}>
-          <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "left" }}>
+        <section className="tl-section-reveal" style={{ background: "#1A0A3D", padding: "80px 48px", margin: 0, width: "100%" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "left" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                marginBottom: 16,
+                fontFamily: FONT,
+                fontWeight: 700,
+                fontSize: 10,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.5)",
+              }}
+            >
+              <span style={{ width: 24, height: 2, background: "rgba(255,255,255,0.3)" }} />
+              THE STRUCTURE
+            </div>
             <motion.h2
               className="tl-section-h2"
               initial={{ opacity: 0, y: 24 }}
@@ -933,11 +951,12 @@ const Home = () => {
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
                 marginBottom: 32,
+                textAlign: "left",
               }}
             >
               There's a reason this keeps happening.
             </motion.h2>
-            <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 640, margin: "0 auto" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: "100%", margin: 0 }}>
               {[
                 "Agency worker data lives inside agency CRMs, systems built for the agency, not for you.",
                 "Time and attendance sits in a separate system entirely. No shared record of what was scheduled, who showed up, or whether anything that followed was accurate.",
@@ -984,8 +1003,7 @@ const Home = () => {
             </motion.p>
           </div>
         </section>
-        </div>
-        <div aria-hidden style={{ height: 80, background: "linear-gradient(180deg, #2E1065 0%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 80, background: "linear-gradient(180deg, #1A0A3D 0%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 3 — THE COST */}
         <section className="tl-section-cost" style={{ background: "#FAFAF8", padding: "80px 48px", margin: 0, width: "100%" }}>
