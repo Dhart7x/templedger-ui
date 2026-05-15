@@ -1312,7 +1312,7 @@ const Home = () => {
                 {
                   tag: "PRIORITY",
                   header: "The best workers go where the relationship is direct.",
-                  body: "Agencies route their top talent to accounts where the margin holds and the relationship is unmediated. You receive lower fill rates, slower response, and second-tier service.",
+                  body: "Agencies route their top talent to direct accounts. You get lower fill rates, slower response, and second-tier service.",
                 },
               ].map((card, i) => (
                 <motion.div
@@ -1370,6 +1370,7 @@ const Home = () => {
                       lineHeight: 1.55,
                       margin: 0,
                       fontFamily: FONT,
+                      minHeight: 80,
                     }}
                   >
                     {card.body}
