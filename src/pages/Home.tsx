@@ -370,11 +370,9 @@ const Home = () => {
           /* ALTERNATIVE */
           .tl-section-alternative { padding: 64px 20px !important; }
           .tl-section-alternative h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
-          .tl-alt-table-wrap { overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; }
-          .tl-alt-table { min-width: unset !important; }
-          .tl-alt-header > div,
-          .tl-alt-row > div { padding: 8px 6px !important; font-size: 10px !important; }
-          .tl-alt-label { width: 100px !important; min-width: 100px !important; max-width: 100px !important; font-size: 10px !important; }
+          .tl-alt-cards { grid-template-columns: 1fr !important; }
+          .tl-alt-cards > div { padding: 18px !important; }
+          .tl-alt-cards > div > div:nth-child(2) { font-size: 14px !important; }
 
           /* SOLUTION TRANSITION */
           .tl-section-solution { padding: 64px 20px !important; }
