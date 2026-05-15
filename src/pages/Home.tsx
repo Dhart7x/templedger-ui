@@ -336,6 +336,7 @@ const Home = () => {
         @media (min-width: 768px) and (max-width: 1023px) {
           .tl-cost-grid { grid-template-columns: 1fr 1fr !important; }
           .tl-alt-cards { grid-template-columns: 1fr !important; }
+          .tl-integrations-grid { grid-template-columns: repeat(3, 1fr) !important; }
         }
 
         @media (min-width: 768px) {
