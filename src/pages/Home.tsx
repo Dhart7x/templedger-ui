@@ -294,10 +294,19 @@ const Home = () => {
           .tl-hidden-costs { margin: 0 -20px !important; padding: 56px 20px !important; border-radius: 0 !important; }
           .tl-hidden-costs h2 { font-size: 26px !important; letter-spacing: -0.02em !important; }
           .tl-cost-grid { grid-template-columns: 1fr !important; }
-          .tl-cost-question { font-size: 16px !important; }
-          .tl-cost-answer { font-size: 13px !important; }
-          .tl-cost-closing { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
-          .tl-cost-closing-right { text-align: left !important; }
+          .tl-cost-question { font-size: 15px !important; }
+          .tl-cost-answer { font-size: 12px !important; }
+
+          /* INTELLIGENT WORKFORCE ORCHESTRATION */
+          .tl-section-intel { padding: 56px 20px !important; }
+          .tl-intel-h2 { font-size: 26px !important; letter-spacing: -0.02em !important; }
+          .tl-intel-grid { grid-template-columns: 1fr !important; }
+          .tl-intel-body { font-size: 12px !important; }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .tl-cost-grid { grid-template-columns: 1fr 1fr !important; }
+        }
 
           /* REVEAL */
           .tl-section-reveal { padding: 48px 20px !important; }
