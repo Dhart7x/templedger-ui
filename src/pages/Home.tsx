@@ -2362,7 +2362,7 @@ const Home = () => {
         <section
           className="tl-section-compliance"
           style={{
-            background: "#2E1065",
+            background: C.surface,
             padding: "64px 48px",
             margin: 0,
             width: "100%",
@@ -2387,7 +2387,7 @@ const Home = () => {
                     fontSize: 9,
                     letterSpacing: "0.12em",
                     textTransform: "uppercase",
-                    color: "rgba(255, 255, 255, 0.5)",
+                    color: C.primary,
                     marginBottom: 12,
                   }}
                 >
@@ -2398,7 +2398,7 @@ const Home = () => {
                     fontFamily: FONT,
                     fontWeight: 600,
                     fontSize: 22,
-                    color: "#FFFFFF",
+                    color: "#1a1a1a",
                     lineHeight: 1.25,
                     marginBottom: 16,
                     letterSpacing: "-0.02em",
@@ -2411,7 +2411,7 @@ const Home = () => {
                     fontFamily: FONT,
                     fontWeight: 400,
                     fontSize: 13,
-                    color: "rgba(255, 255, 255, 0.7)",
+                    color: "rgba(0, 0, 0, 0.65)",
                     lineHeight: 1.55,
                     margin: 0,
                   }}
@@ -2438,8 +2438,8 @@ const Home = () => {
                   <div
                     key={tile.name}
                     style={{
-                      background: "rgba(255, 255, 255, 0.05)",
-                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      background: "#FFFFFF",
+                      border: "1px solid rgba(76, 29, 149, 0.1)",
                       borderRadius: 6,
                       padding: 14,
                     }}
@@ -2449,7 +2449,7 @@ const Home = () => {
                         fontFamily: FONT,
                         fontWeight: 700,
                         fontSize: 18,
-                        color: "#FFFFFF",
+                        color: C.primaryDark,
                         lineHeight: 1,
                         marginBottom: 4,
                       }}
@@ -2461,7 +2461,7 @@ const Home = () => {
                         fontFamily: FONT,
                         fontWeight: 400,
                         fontSize: 10,
-                        color: "rgba(255, 255, 255, 0.6)",
+                        color: "rgba(0, 0, 0, 0.55)",
                         margin: 0,
                       }}
                     >
