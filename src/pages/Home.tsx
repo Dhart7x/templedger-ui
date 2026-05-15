@@ -1748,18 +1748,18 @@ const Home = () => {
                   textTransform: "uppercase",
                 }}
               >
-                <span style={{ color: "#4C1D95" }}>DAY ONE</span>
+                <span style={{ color: "#FFFFFF" }}>DAY ONE</span>
                 <span
                   style={{
                     position: "absolute",
                     left: "50%",
                     transform: "translateX(-50%)",
-                    color: "#4C1D95",
+                    color: "#FFFFFF",
                   }}
                 >
                   COMPOUNDING
                 </span>
-                <span style={{ color: "rgba(76, 29, 149, 0.5)" }}>ONGOING</span>
+                <span style={{ color: "rgba(255, 255, 255, 0.5)" }}>ONGOING</span>
               </div>
             </div>
 
