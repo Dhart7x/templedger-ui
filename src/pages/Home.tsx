@@ -1625,10 +1625,10 @@ const Home = () => {
                 fontSize: 10,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#4C1D95",
+                color: "rgba(255, 255, 255, 0.5)",
               }}
             >
-              <div style={{ width: 24, height: 2, background: "#4C1D95" }} />
+              <div style={{ width: 24, height: 2, background: "rgba(255, 255, 255, 0.5)" }} />
               COMPOUNDING INTELLIGENCE
             </motion.div>
             <motion.h2
