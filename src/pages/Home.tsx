@@ -67,7 +67,7 @@ const TypingDollars = ({
   );
 };
 
-import { X } from "lucide-react";
+import { X, BarChart3, UserCheck, AlertTriangle, TrendingUp, DollarSign, Users } from "lucide-react";
 import SalesDeck from "./SalesDeck";
 import DemoGate from "@/components/DemoGate";
 
