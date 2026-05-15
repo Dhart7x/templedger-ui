@@ -2147,7 +2147,7 @@ const Home = () => {
             </div>
           </motion.div>
         </section>
-        <div aria-hidden style={{ height: 80, background: "linear-gradient(180deg, #FAFAF8 0%, #4C1D95 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #FAFAF8 0%, #FAFAF8 35%, #4C1D95 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 6 — CONTACT */}
         <section id="contact" className="tl-section-contact" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #3B1578 40%, #2E1065 70%, #1A0A3D 100%)", padding: "80px 48px", margin: 0, width: "100%" }}>
