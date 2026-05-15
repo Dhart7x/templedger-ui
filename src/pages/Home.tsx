@@ -772,12 +772,14 @@ const Home = () => {
           </div>
         </section>
 
-        {/* HARD WHITE SPACER — guarantees 80px white gap before purple block */}
+        {/* TRANSITION — white → cost-of-inaction purple (hold white, late fade to avoid lavender midpoint) */}
         <div
+          aria-hidden
           style={{
-            height: '80px',
+            height: 120,
             width: '100%',
-            background: '#FFFFFF',
+            background: 'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 35%, #2E1065 100%)',
+            margin: 0,
           }}
         />
 
