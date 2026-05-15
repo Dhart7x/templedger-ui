@@ -21,7 +21,7 @@ const SlideILedger = () => {
           className="text-center mb-8"
         >
           <h2 className="text-2xl md:text-4xl font-bold text-foreground">
-            What Temp Ledger Enforces
+            What TEMPLEDGER Enforces
           </h2>
         </motion.div>
 

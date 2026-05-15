@@ -21,7 +21,7 @@ const SlideIClosing = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-4xl md:text-5xl font-bold text-foreground mb-8"
         >
-          Temp Ledger
+          TEMPLEDGER
         </motion.h2>
 
         <motion.p

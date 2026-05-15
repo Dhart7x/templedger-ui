@@ -464,7 +464,7 @@ const Home = () => {
             color: "#FFFFFF",
           }}
         >
-          TEMP LEDGER
+          TEMPLEDGER
         </div>
         <div className="tl-nav-links" style={{ display: "flex", gap: 32 }}>
           {[
@@ -2371,7 +2371,7 @@ const Home = () => {
               color: "rgba(255,255,255,0.2)",
             }}
           >
-            TEMP LEDGER
+            TEMPLEDGER
           </div>
           <div style={{ fontSize: 11, color: "rgba(255,255,255,0.2)" }}>
             © 2026 TempLedger. All rights reserved.

@@ -159,7 +159,7 @@ const DemoGate = ({ onClose, onSuccess }: DemoGateProps) => {
               marginBottom: 4,
             }}
           >
-            TEMP LEDGER
+            TEMPLEDGER
           </div>
           <div style={{ fontFamily: FONT, fontWeight: 400, fontSize: 12, color: "#9B9590", marginBottom: 24 }}>
             Demo Access

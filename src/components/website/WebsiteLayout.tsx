@@ -42,7 +42,7 @@ const WebsiteLayout = ({ children }: WebsiteLayoutProps) => {
             onClick={() => navigate("/website")}
             className="flex items-center gap-2 group"
           >
-            <span className="font-semibold text-foreground text-sm">Temp Ledger</span>
+            <span className="font-semibold text-foreground text-sm">TEMPLEDGER</span>
           </button>
 
           {/* Desktop Dropdown */}

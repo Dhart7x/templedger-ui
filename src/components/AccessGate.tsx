@@ -117,7 +117,7 @@ const AccessGate = ({ children }: AccessGateProps) => {
               color: "#4C1D95",
             }}
           >
-            TEMP LEDGER
+            TEMPLEDGER
           </div>
           <div
             style={{

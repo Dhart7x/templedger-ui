@@ -3,7 +3,7 @@ import { Building2, Users, CreditCard, ArrowRight } from "lucide-react";
 import Slide from "../presentation/Slide";
 
 const steps = [
-  { icon: Building2, text: "Labour users deploy Temp Ledger" },
+  { icon: Building2, text: "Labour users deploy TEMPLEDGER" },
   { icon: Users, text: "Staffing agencies are required to operate through it" },
   { icon: CreditCard, text: "Agencies pay to participate" },
 ];

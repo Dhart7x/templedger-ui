@@ -44,7 +44,7 @@ const SlideICompetition = () => {
           >
             <div className="flex items-center gap-2 mb-4">
               <CheckCircle className="w-5 h-5 text-primary" />
-              <h3 className="font-semibold text-foreground">Temp Ledger</h3>
+              <h3 className="font-semibold text-foreground">TEMPLEDGER</h3>
             </div>
             <p className="text-sm text-muted-foreground">
               Enforces execution. Creates a single source of truth across organisational boundaries.

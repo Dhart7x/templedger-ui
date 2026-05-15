@@ -46,7 +46,7 @@ const ComparisonSlide = () => (
 
         <div className="rounded-xl p-6" style={{ backgroundColor: "rgba(125,143,70,0.08)", border: "0.5px solid rgba(125,143,70,0.3)" }}>
           <p className="font-mono text-[13px] font-semibold mb-4" style={{ color: "#4C1D95" }}>
-            Temp Ledger
+            TEMPLEDGER
           </p>
           <div className="space-y-3">
             {tlPoints.map((p, i) => (

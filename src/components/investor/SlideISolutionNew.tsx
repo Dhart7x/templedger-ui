@@ -27,7 +27,7 @@
            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
              <Shield className="w-5 h-5 text-foreground" />
            </div>
-           <h2 className="text-2xl md:text-4xl font-bold text-foreground">Temp Ledger</h2>
+           <h2 className="text-2xl md:text-4xl font-bold text-foreground">TEMPLEDGER</h2>
          </div>
          <p className="text-primary font-medium text-center mb-10">
            The Operating System for Labour Users
@@ -39,7 +39,7 @@
            transition={{ delay: 0.2 }}
            className="text-muted-foreground text-center mb-8 max-w-xl mx-auto"
          >
-           Temp Ledger introduces a single shared system between labour users and agencies.
+           TEMPLEDGER introduces a single shared system between labour users and agencies.
          </motion.p>
  
          <div className="grid md:grid-cols-2 gap-6 mb-10 max-w-3xl mx-auto">
