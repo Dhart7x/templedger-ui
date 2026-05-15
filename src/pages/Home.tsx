@@ -311,8 +311,8 @@ const Home = () => {
           /* REVEAL */
           .tl-section-reveal { padding: 48px 20px !important; }
           .tl-section-reveal h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
-          .tl-section-reveal .tl-reveal-block { font-size: 13px !important; width: 100% !important; max-width: 100% !important; }
-          .tl-section-reveal .tl-reveal-close { font-size: 15px !important; }
+          .tl-reveal-body { font-size: 12px !important; }
+          .tl-reveal-close { font-size: 16px !important; margin-top: 32px !important; padding-top: 20px !important; }
 
           /* THE COST */
           .tl-section-cost { padding: 48px 20px !important; }
@@ -972,57 +972,103 @@ const Home = () => {
                 color: "#FFFFFF",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
-                marginBottom: 32,
+                marginBottom: 48,
                 textAlign: "left",
               }}
             >
               There's a reason this keeps happening.
             </motion.h2>
-            <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: "100%", margin: 0 }}>
+
+            {/* Three-column grid */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: window.innerWidth >= 1024 ? "1fr 1fr 1fr" : "1fr",
+                gap: 24,
+                alignItems: "start",
+              }}
+            >
               {[
-                "Agency worker data lives inside agency CRMs, systems built for the agency, not for you.",
-                "Time and attendance sits in a separate system entirely. No shared record of what was scheduled, who showed up, or whether anything that followed was accurate.",
-                "You are not managing agencies. You are reacting to whatever information they choose to share. And by the time you have it, it is already too late to act on it.",
-              ].map((text, i) => (
+                {
+                  label: "DATA OWNERSHIP",
+                  body: "Agency worker data lives inside agency CRMs, systems built for the agency, not for you.",
+                },
+                {
+                  label: "SYSTEM SEPARATION",
+                  body: "Time and attendance sits in a separate system. No shared record of what was scheduled or who showed up.",
+                },
+                {
+                  label: "REACTIVITY",
+                  body: "You are not managing agencies. You are reacting to whatever information they choose to share.",
+                },
+              ].map((col, i) => (
                 <motion.div
                   key={i}
-                  className="tl-reveal-block"
-                  initial={{ opacity: 0, x: -24 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.45, delay: i * 0.1, ease: "easeOut" }}
-                  style={{
-                    padding: "8px 0",
-                    textAlign: "left",
-                    fontFamily: FONT,
-                    fontWeight: 400,
-                    fontSize: 15,
-                    color: "rgba(255,255,255,0.75)",
-                    lineHeight: 1.75,
-                  }}
                 >
-                  {text}
+                  {/* Top divider */}
+                  <div
+                    style={{
+                      width: "100%",
+                      height: 1,
+                      background: "rgba(255, 255, 255, 0.2)",
+                    }}
+                  />
+                  {/* Category label */}
+                  <div
+                    style={{
+                      fontFamily: FONT,
+                      fontSize: 11,
+                      fontWeight: 600,
+                      color: "#FFFFFF",
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      paddingTop: 16,
+                      marginBottom: 10,
+                    }}
+                  >
+                    {col.label}
+                  </div>
+                  {/* Body copy */}
+                  <div
+                    className="tl-reveal-body"
+                    style={{
+                      fontFamily: FONT,
+                      fontSize: 13,
+                      fontWeight: 400,
+                      color: "rgba(255, 255, 255, 0.7)",
+                      lineHeight: 1.55,
+                    }}
+                  >
+                    {col.body}
+                  </div>
                 </motion.div>
               ))}
             </div>
-            <motion.p
+
+            {/* Closing line */}
+            <motion.div
               className="tl-reveal-close"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
               style={{
+                marginTop: 40,
+                paddingTop: 24,
+                borderTop: "1px solid rgba(255, 255, 255, 0.15)",
                 fontFamily: FONT,
-                fontWeight: 700,
-                fontSize: 24,
+                fontWeight: 600,
+                fontSize: 18,
                 color: "#FFFFFF",
                 textAlign: "left",
-                marginTop: 40,
-                lineHeight: 1.4,
               }}
             >
               Without synchronization, failure is built into the model.
-            </motion.p>
+            </motion.div>
           </div>
         </section>
         <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #1A0A3D 0%, #1A0A3D 35%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
