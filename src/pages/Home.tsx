@@ -1634,7 +1634,7 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="tl-compound-h2"
+              className="tl-compound-h2 !mb-8 md:!mb-12"
               style={{
                 fontFamily: "'Bricolage Grotesque', sans-serif",
                 fontWeight: 600,
@@ -1642,26 +1642,11 @@ const Home = () => {
                 color: "#2E1065",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
-                marginBottom: 0,
+                marginBottom: 48,
               }}
             >
               Stops the bleed today. Sees the patterns tomorrow.
             </motion.h2>
-            <p
-              className="tl-compound-intro tl-section-intro"
-              style={{
-                fontFamily: FONT,
-                fontWeight: 400,
-                fontSize: 14,
-                color: "rgba(0, 0, 0, 0.6)",
-                lineHeight: 1.55,
-                maxWidth: 720,
-                marginTop: 8,
-                marginBottom: 56,
-              }}
-            >
-              Margin recovery starts from day one. The platform's intelligence compounds with every shift, becoming a true workforce orchestration system as your operational data deepens.
-            </p>
 
             {/* Horizontal timeline */}
             <div style={{ position: "relative", padding: "0 4px" }}>
