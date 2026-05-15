@@ -255,7 +255,7 @@ const Home = () => {
         body { font-family: ${FONT}; overflow-x: hidden; }
         html { overflow-x: hidden; }
         .tl-card:hover { background: ${C.primaryLight} !important; }
-        .tl-input::placeholder { color: rgba(255,255,255,0.4); }
+        .tl-input::placeholder { color: rgba(255,255,255,0.75); }
         .tl-input:focus { border-color: ${C.primary} !important; }
         .tl-select option { color: ${C.fg}; }
 
@@ -308,7 +308,7 @@ const Home = () => {
           /* THE COST */
           .tl-section-cost { padding: 48px 20px !important; }
           .tl-section-cost h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
-          .tl-cost-stack { gap: 12px !important; }
+          .tl-cost-stack { grid-template-columns: 1fr !important; gap: 24px !important; }
           .tl-cost-stack > * { width: 100% !important; max-width: 100% !important; }
 
           /* ALTERNATIVE */
@@ -576,7 +576,7 @@ const Home = () => {
 
       <div className="tl-nav-spacer" style={{ paddingTop: 56, background: "#4C1D95", margin: 0 }}>
         {/* SECTION 1 — HERO */}
-        <section className="tl-hero" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #4C1D95 20%, #5B21B6 45%, rgba(91,33,182,0.6) 65%, rgba(91,33,182,0.15) 82%, rgba(255,255,255,0) 100%)", padding: "80px 48px 0", margin: 0, width: "100%", minHeight: 520 }}>
+        <section className="tl-hero" style={{ background: "#4C1D95", padding: "80px 48px 0", margin: 0, width: "100%", minHeight: 520 }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <h1
               className="tl-hero-h1"
@@ -617,7 +617,6 @@ const Home = () => {
                 fontWeight: 400,
                 fontSize: 20,
                 color: "rgba(255,255,255,0.7)",
-                fontStyle: "italic",
                 lineHeight: 1.5,
                 marginBottom: 36,
               }}
@@ -632,8 +631,8 @@ const Home = () => {
               transition={{ duration: 0.4, delay: 0.9 }}
               whileHover={{ scale: 1.03 }}
               style={{
-                background: C.primary,
-                color: "#FFFFFF",
+                background: "#FFFFFF",
+                color: C.primary,
                 fontWeight: 700,
                 fontSize: 14,
                 borderRadius: 8,
@@ -649,7 +648,7 @@ const Home = () => {
         </section>
 
         {/* Hero → white fade */}
-        <div aria-hidden style={{ height: 60, background: "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 40%, #FFFFFF 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 80, background: "linear-gradient(180deg, #4C1D95 0%, #FFFFFF 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 2 — THE INVOICE VISUAL */}
         <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "32px 48px 0", position: "relative", zIndex: 1, margin: 0, width: "100%" }}>
@@ -698,6 +697,7 @@ const Home = () => {
                 overflow: "hidden",
                 maxWidth: 560,
                 margin: "0 auto",
+                boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
               }}
             >
               <div
@@ -790,7 +790,7 @@ const Home = () => {
                 marginRight: -48,
                 marginTop: 0,
                 marginBottom: 0,
-                padding: "72px 48px 48px",
+                padding: "56px 48px 48px",
               }}
             >
               <div style={{ maxWidth: 900, margin: "0 auto" }}>
@@ -802,16 +802,34 @@ const Home = () => {
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 style={{ marginBottom: 48 }}
               >
-                <div style={{ marginTop: 0, maxWidth: 560 }}>
+                <div style={{ marginTop: 0, maxWidth: 760 }}>
                   <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 10,
+                      marginBottom: 16,
+                      fontFamily: FONT,
+                      fontWeight: 700,
+                      fontSize: 10,
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase",
+                      color: "rgba(255,255,255,0.5)",
+                    }}
+                  >
+                    <span style={{ width: 24, height: 2, background: "rgba(255,255,255,0.3)" }} />
+                    COST OF INACTION
+                  </div>
+                  <div
+                    className="tl-section-h2"
                     style={{
                       fontFamily: FONT,
                       fontWeight: 800,
-                      fontSize: 36,
+                      fontSize: 32,
                       color: "#FFFFFF",
                       letterSpacing: "-0.022em",
                       lineHeight: 1.2,
-                      marginTop: 10,
+                      marginTop: 0,
                     }}
                   >
                     But how much is all of this costing your business?
@@ -843,7 +861,7 @@ const Home = () => {
                 },
                 {
                   q: "A compliance breach on your site is your liability, not the agency's.",
-                  a: "Right to work violations, expired certifications, unsigned contracts — the fine, the reputational damage and the legal exposure sit with you. Not them.",
+                  a: "Right to work violations, expired certifications, unsigned contracts. The fine, the reputational damage and the legal exposure sit with you. Not them.",
                 },
                 {
                   q: "You're paying agency margin on workers who should already be yours.",
@@ -904,8 +922,8 @@ const Home = () => {
         {/* MERGED DARK BLOCK — REVEAL + COST */}
         <div style={{ background: "#2E1065", width: "100%", margin: 0, padding: 0, position: "relative", zIndex: 0, marginTop: 0 }}>
         {/* SECTION 3b — THE REVEAL */}
-        <section className="tl-section-reveal" style={{ background: "transparent", padding: "72px 48px", margin: 0, width: "100%" }}>
-          <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
+        <section className="tl-section-reveal" style={{ background: "transparent", padding: "80px 48px", margin: 0, width: "100%" }}>
+          <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "left" }}>
             <motion.h2
               className="tl-section-h2"
               initial={{ opacity: 0, y: 24 }}
@@ -915,7 +933,7 @@ const Home = () => {
               style={{
                 fontFamily: FONT,
                 fontWeight: 800,
-                fontSize: 36,
+                fontSize: 32,
                 color: "#FFFFFF",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
@@ -938,15 +956,12 @@ const Home = () => {
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.45, delay: i * 0.1, ease: "easeOut" }}
                   style={{
-                    borderLeft: "3px solid #4C1D95",
-                    borderRadius: "0 8px 8px 0",
-                    background: "rgba(255,255,255,0.04)",
-                    padding: "20px 24px",
+                    padding: "8px 0",
                     textAlign: "left",
                     fontFamily: FONT,
                     fontWeight: 400,
                     fontSize: 15,
-                    color: "rgba(255,255,255,0.7)",
+                    color: "rgba(255,255,255,0.75)",
                     lineHeight: 1.75,
                   }}
                 >
@@ -963,10 +978,11 @@ const Home = () => {
               style={{
                 fontFamily: FONT,
                 fontWeight: 700,
-                fontSize: 17,
+                fontSize: 24,
                 color: "#FFFFFF",
-                textAlign: "center",
-                marginTop: 36,
+                textAlign: "left",
+                marginTop: 40,
+                lineHeight: 1.4,
               }}
             >
               Without synchronization, failure is built into the model.
@@ -974,7 +990,7 @@ const Home = () => {
           </div>
         </section>
         </div>
-
+        <div aria-hidden style={{ height: 80, background: "linear-gradient(180deg, #2E1065 0%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 3 — THE COST */}
         <section className="tl-section-cost" style={{ background: "#FAFAF8", padding: "80px 48px", margin: 0, width: "100%" }}>
@@ -983,7 +999,7 @@ const Home = () => {
             <h2 className="tl-section-h2"
               style={{
                 fontWeight: 800,
-                fontSize: 36,
+                fontSize: 32,
                 color: C.fg,
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
@@ -992,20 +1008,16 @@ const Home = () => {
             >
               The invisible cost is significant. And it compounds every week.
             </h2>
-            <div className="tl-cost-stack" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <div className="tl-cost-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32 }}>
               {costs.map((c, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, x: -32 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.5, delay: i * 0.12, ease: "easeOut" }}
                   style={{
-                    background: C.surface,
-                    border: `0.5px solid ${C.border}`,
-                    borderLeft: `4px solid ${C.primary}`,
-                    borderRadius: "0 10px 10px 0",
-                    padding: "28px 32px",
+                    padding: 0,
                   }}
                 >
                   <div
@@ -1056,12 +1068,11 @@ const Home = () => {
                 style={{
                   fontFamily: FONT,
                   fontWeight: 800,
-                  fontSize: 36,
+                  fontSize: 32,
                   color: "#0D0D0B",
                   letterSpacing: "-0.022em",
                   lineHeight: 1.2,
                   marginBottom: 48,
-                  maxWidth: 760,
                 }}
               >
                 Outsourcing moves the problem. It doesn't solve it.
@@ -1225,7 +1236,7 @@ const Home = () => {
               style={{
                 fontFamily: FONT,
                 fontWeight: 800,
-                fontSize: 38,
+                fontSize: 32,
                 color: "#0D0D0B",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
@@ -1274,7 +1285,7 @@ const Home = () => {
                     height: "100%",
                   }}
                 >
-                  <div className="tl-pillar-word" style={{ fontFamily: FONT, fontWeight: 800, fontSize: 32, color: "#4C1D95", letterSpacing: "-0.02em", lineHeight: 1, height: 48, display: "flex", alignItems: "flex-end", marginBottom: 12, flexShrink: 0 }}>
+                  <div className="tl-pillar-word" style={{ fontFamily: FONT, fontWeight: 800, fontSize: 38, color: "#4C1D95", letterSpacing: "-0.02em", lineHeight: 1, height: 48, display: "flex", alignItems: "flex-end", marginBottom: 12, flexShrink: 0 }}>
                     {p.word}
                   </div>
                   <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 16, color: "#0D0D0B", height: 28, display: "flex", alignItems: "center", marginBottom: 12, flexShrink: 0 }}>
@@ -1288,19 +1299,18 @@ const Home = () => {
               ))}
             </div>
             <motion.div
+              className="tl-locked-line"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
               style={{
                 paddingTop: 32,
-                borderTop: "0.5px solid #E5E0DA",
                 fontFamily: FONT,
                 fontWeight: 700,
-                fontSize: 20,
+                fontSize: 24,
                 color: "#0D0D0B",
                 textAlign: "center",
-                fontStyle: "italic",
                 lineHeight: 1.5,
               }}
             >
@@ -1354,7 +1364,7 @@ const Home = () => {
               style={{
                 fontFamily: "'Bricolage Grotesque', sans-serif",
                 fontWeight: 800,
-                fontSize: 38,
+                fontSize: 32,
                 color: "#0D0D0B",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
@@ -1583,7 +1593,7 @@ const Home = () => {
                 style={{
                   fontFamily: "'Bricolage Grotesque', sans-serif",
                   fontWeight: 800,
-                  fontSize: 36,
+                  fontSize: 32,
                   color: "#FFFFFF",
                   letterSpacing: "-0.022em",
                   lineHeight: 1.2,
@@ -1662,7 +1672,7 @@ const Home = () => {
                       <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Friday 06:00 Cold Storage</span> has a <span style={{ color: "#FFFFFF", fontWeight: 600 }}>73%</span> historical no-show rate over the last 8 weeks. You have <span style={{ color: "#FFFFFF", fontWeight: 600 }}>18</span> workers booked. Based on the pattern, expect <span style={{ color: "#FFFFFF", fontWeight: 600 }}>5</span> gaps.
                     </>
                   ),
-                  subNote: "Suggested: pre-book 5 additional workers tonight via Pinnacle Staffing — highest Friday fill rate of your three agencies.",
+                  subNote: "Suggested: pre-book 5 additional workers tonight via Pinnacle Staffing. Highest Friday fill rate of your three agencies.",
                   action: "Pre-book now →",
                 },
                 {
@@ -1672,22 +1682,22 @@ const Home = () => {
                   time: "This week",
                   body: (
                     <>
-                      <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Outbound Dispatch</span> has logged <span style={{ color: "#FFFFFF", fontWeight: 600 }}>34</span> overtime events this month — <span style={{ color: "#FFFFFF", fontWeight: 600 }}>3x</span> your site average. The pattern started when a new shift manager joined. Authorization controls may need reviewing.
+                      <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Outbound Dispatch</span> has logged <span style={{ color: "#FFFFFF", fontWeight: 600 }}>34</span> overtime events this month. <span style={{ color: "#FFFFFF", fontWeight: 600 }}>3x</span> your site average. The pattern started when a new shift manager joined. Authorization controls may need reviewing.
                     </>
                   ),
                   action: "Review permissions →",
                 },
                 {
                   badge: "COST CREEP",
-                  badgeBg: "rgba(220,38,38,0.15)",
-                  badgeColor: "#FCA5A5",
+                  badgeBg: "rgba(217,119,6,0.2)",
+                  badgeColor: "#FCD34D",
                   time: "Past 2 weeks",
                   body: (
                     <>
                       <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Pinnacle Staffing</span> are your most expensive agency on night shifts and their volume has increased <span style={{ color: "#FFFFFF", fontWeight: 600 }}>29%</span> over the past two weeks. If this continues, your blended rate will rise materially.
                     </>
                   ),
-                  subNote: "Consider redistributing night shift volume to Workforce Direct — comparable fill rate, lower charge rate. The system can do this automatically on your next booking.",
+                  subNote: "Consider redistributing night shift volume to Workforce Direct. Comparable fill rate, lower charge rate. The system can do this automatically on your next booking.",
                   action: "Redistribute volume →",
                 },
                 {
@@ -1697,7 +1707,7 @@ const Home = () => {
                   time: "Past 6 weeks",
                   body: (
                     <>
-                      Mid-shift weekend attrition in <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Returns Processing</span> is running at <span style={{ color: "#FFFFFF", fontWeight: 600 }}>31%</span> — significantly above your site average. This points to either an agency supply issue or a site-level management factor.
+                      Mid-shift weekend attrition in <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Returns Processing</span> is running at <span style={{ color: "#FFFFFF", fontWeight: 600 }}>31%</span>, significantly above your site average. This points to either an agency supply issue or a site-level management factor.
                     </>
                   ),
                   subNote: "Meridian Recruitment historically perform well in this department. The pattern began when this shift's manager transferred from your other site. The data leans toward a management factor.",
@@ -1831,7 +1841,7 @@ const Home = () => {
               style={{
                 fontFamily: FONT,
                 fontWeight: 800,
-                fontSize: 36,
+                fontSize: 32,
                 color: "#FFFFFF",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
@@ -1905,7 +1915,7 @@ const Home = () => {
                   style={{
                     width: 0,
                     height: 0,
-                    borderTop: "10px solid #C4391A",
+                    borderTop: "10px solid #FFFFFF",
                     borderLeft: "6px solid transparent",
                     borderRight: "6px solid transparent",
                     borderBottom: "none",
@@ -1918,7 +1928,7 @@ const Home = () => {
                     fontSize: 11,
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
-                    color: "#C4391A",
+                    color: "#FFFFFF",
                   }}
                 >
                   WHAT COMES DOWN
@@ -1963,8 +1973,7 @@ const Home = () => {
                     flexDirection: "column",
                     background: "rgba(255,255,255,0.07)",
                     border: "0.5px solid rgba(255,255,255,0.1)",
-                    borderLeft: item.dir === "up" ? "3px solid #FFFFFF" : "3px solid #C4391A",
-                    borderRadius: "0 8px 8px 0",
+                    borderRadius: 8,
                     padding: "16px 18px",
                   }}
                 >
@@ -1990,23 +1999,7 @@ const Home = () => {
                   >
                     {item.b}
                   </div>
-                  {item.intel && (
-                    <div
-                      style={{
-                        fontFamily: FONT,
-                        fontWeight: 500,
-                        fontSize: 12,
-                        color: "rgba(255,255,255,0.45)",
-                        fontStyle: "italic",
-                        marginTop: "auto",
-                        paddingTop: 8,
-                        borderTop: "0.5px solid rgba(255,255,255,0.1)",
-                        lineHeight: 1.5,
-                      }}
-                    >
-                      {item.intel}
-                    </div>
-                  )}
+
                 </motion.div>
               ))}
             </div>
@@ -2020,17 +2013,6 @@ const Home = () => {
                 textAlign: "center",
               }}
             >
-              <span
-                style={{
-                  fontFamily: FONT,
-                  fontWeight: 400,
-                  fontSize: 15,
-                  color: "rgba(255,255,255,0.55)",
-                  fontStyle: "italic",
-                }}
-              >
-                Compounded across a financial year, the invisible cost is significant.
-              </span>
               <div
                 style={{
                   fontFamily: "'Bricolage Grotesque', sans-serif",
@@ -2040,11 +2022,12 @@ const Home = () => {
                   marginTop: 8,
                 }}
               >
-                And the system gets smarter with every shift that runs through it.
+                The system gets smarter with every shift that runs through it.
               </div>
             </div>
           </div>
         </section>
+        <div aria-hidden style={{ height: 80, background: "linear-gradient(180deg, #2E1065 0%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 5 — HOW IT WORKS */}
         <section id="how-it-works" className="tl-section-how" style={{ background: C.surface, padding: "80px 48px", margin: 0, width: "100%" }}>
@@ -2053,7 +2036,7 @@ const Home = () => {
             <h2 className="tl-section-h2"
               style={{
                 fontWeight: 800,
-                fontSize: 36,
+                fontSize: 32,
                 color: C.fg,
                 letterSpacing: "-0.022em",
                 lineHeight: 1.25,
@@ -2109,7 +2092,7 @@ const Home = () => {
                       fontWeight: 800,
                       fontSize: 44,
                       color: "#4C1D95",
-                      opacity: 0.15,
+                      opacity: 1,
                       lineHeight: 1,
                       marginBottom: 14,
                       display: "block",
@@ -2149,22 +2132,54 @@ const Home = () => {
             </div>
           </motion.div>
         </section>
+        <div aria-hidden style={{ height: 80, background: "linear-gradient(180deg, #FAFAF8 0%, #4C1D95 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 6 — CONTACT */}
         <section id="contact" className="tl-section-contact" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #3B1578 40%, #2E1065 70%, #1A0A3D 100%)", padding: "80px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 10,
+                marginBottom: 16,
+                fontFamily: FONT,
+                fontWeight: 700,
+                fontSize: 10,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.6)",
+              }}
+            >
+              <span style={{ width: 24, height: 2, background: "rgba(255,255,255,0.4)" }} />
+              CONTACT
+            </div>
             <h2 className="tl-section-h2 tl-contact-h2"
               style={{
                 fontWeight: 800,
-                fontSize: 36,
+                fontSize: 32,
                 color: "#FFFFFF",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
-                marginBottom: 12,
+                marginBottom: 16,
               }}
             >
               Ready to take control of your contingent workforce?
             </h2>
+            <p className="tl-contact-sub"
+              style={{
+                fontFamily: FONT,
+                fontWeight: 500,
+                fontSize: 18,
+                color: "#FFFFFF",
+                lineHeight: 1.5,
+                marginTop: 16,
+                marginBottom: 48,
+                textAlign: "center",
+              }}
+            >
+              TempLedger is not an HR tool. It is a financial control tool that happens to live in HR's domain.
+            </p>
             <div style={{ maxWidth: 480, margin: "0 auto" }}>
               {submitted ? (
                 <div style={{ fontWeight: 500, fontSize: 16, color: "#FFFFFF", textAlign: "center" }}>
@@ -2277,7 +2292,7 @@ const Home = () => {
             TEMP LEDGER
           </div>
           <div style={{ fontSize: 11, color: "rgba(255,255,255,0.2)" }}>
-            © 2025 TempLedger. All rights reserved.
+            © 2026 TempLedger. All rights reserved.
           </div>
           <div style={{ fontSize: 11, color: "rgba(255,255,255,0.25)", display: "flex", gap: 12 }}>
             <a href="#" style={{ color: "inherit", textDecoration: "none" }}>Privacy Policy</a>
