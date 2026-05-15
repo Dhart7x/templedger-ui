@@ -652,7 +652,7 @@ const Home = () => {
         <div aria-hidden style={{ height: 60, background: "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 40%, #FFFFFF 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 2 — THE INVOICE VISUAL */}
-        <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "32px 48px 96px", position: "relative", zIndex: 1, margin: 0, width: "100%" }}>
+        <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "32px 48px 0", position: "relative", zIndex: 1, margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 900, margin: "0 auto" }}>
             <div
               style={{
