@@ -1488,7 +1488,7 @@ const Home = () => {
                 marginBottom: 0,
               }}
             >
-              The platform earns its category.
+              Two outcomes. One platform.
             </motion.h2>
             <p
               className="tl-compound-intro tl-section-intro"
