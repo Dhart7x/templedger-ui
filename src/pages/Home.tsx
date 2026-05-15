@@ -1613,7 +1613,7 @@ const Home = () => {
                     color: "#4C1D95",
                   }}
                 >
-                  MONTH SIX
+                  COMPOUNDING
                 </span>
                 <span style={{ color: "rgba(76, 29, 149, 0.5)" }}>ONGOING</span>
               </div>
