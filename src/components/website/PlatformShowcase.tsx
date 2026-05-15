@@ -76,7 +76,7 @@ const TABS = [
     label: "COMPLIANCE",
     headline: "Every worker's documents verified before they reach your site.",
     body:
-      "Compliance status is checked continuously — not assumed. Right to work, certifications and contracts are verified for every worker on every shift. Non-compliant workers are blocked automatically before they arrive. The risk stays with the agency.",
+      "Compliance status is checked continuously, not assumed. Right to work, certifications and contracts are verified for every worker on every shift. Non-compliant workers are blocked automatically before they arrive. The risk stays with the agency.",
     Component: ComplianceDocsPreview,
   },
   {
@@ -133,7 +133,7 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
           style={{
             fontFamily: "'Bricolage Grotesque', sans-serif",
             fontWeight: 800,
-            fontSize: 36,
+            fontSize: 32,
             color: "#0D0D0B",
             letterSpacing: "-0.022em",
             lineHeight: 1.2,
@@ -143,11 +143,12 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
           Agency spend at scale erodes margin. TempLedger addresses every source.
         </h2>
         <p
+          className="tl-platform-fraction"
           style={{
             fontFamily: "Inter, sans-serif",
-            fontWeight: 400,
-            fontSize: 15,
-            color: "#6B6460",
+            fontWeight: 500,
+            fontSize: 18,
+            color: "#4C1D95",
             marginBottom: 40,
           }}
         >
@@ -280,16 +281,18 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
                 <button
                   onClick={onOpenDemo}
                   style={{
-                    background: "transparent",
+                    background: "#4C1D95",
                     border: "none",
-                    padding: 0,
+                    padding: "12px 24px",
                     fontFamily: "Inter, sans-serif",
-                    fontWeight: 600,
-                    fontSize: 12,
-                    color: "#4C1D95",
-                    textDecoration: "underline",
-                    textUnderlineOffset: 3,
+                    fontWeight: 700,
+                    fontSize: 13,
+                    color: "#FFFFFF",
+                    borderRadius: 8,
                     cursor: "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
                   }}
                 >
                   Explore in the live demo →
@@ -307,13 +310,14 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
                 className="tl-platform-preview"
                 style={{
                   background: "#FAFAF8",
-                  border: "0.5px solid #E5E0DA",
-                  borderRadius: 12,
+                  border: "1px solid hsl(0 0% 90%)",
+                  borderRadius: 16,
                   overflow: "hidden",
                   pointerEvents: "none",
                   userSelect: "none",
                   position: "relative",
                   height: 460,
+                  boxShadow: "0 12px 32px rgba(0,0,0,0.06)",
                 }}
               >
                 <div
@@ -331,6 +335,28 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
                 </div>
               </motion.div>
             </AnimatePresence>
+
+            <div style={{ marginTop: 8 }}>
+              <button
+                onClick={onOpenDemo}
+                style={{
+                  background: "#4C1D95",
+                  border: "none",
+                  padding: "12px 24px",
+                  fontFamily: "Inter, sans-serif",
+                  fontWeight: 700,
+                  fontSize: 13,
+                  color: "#FFFFFF",
+                  borderRadius: 8,
+                  cursor: "pointer",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                }}
+              >
+                Explore in the live demo →
+              </button>
+            </div>
           </div>
         </div>
 
