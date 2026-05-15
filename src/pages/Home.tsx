@@ -1219,7 +1219,7 @@ const Home = () => {
           </div>
         </section>
         {/* SECTION — INTRODUCING TEMPLEDGER */}
-        <section className="tl-section-introducing" style={{ background: "#FAFAF8", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-introducing" style={{ background: "#F5F3FF", padding: "80px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <motion.div
               initial={{ opacity: 0, y: 24 }}
@@ -1342,7 +1342,7 @@ const Home = () => {
         <section
           className="tl-section-compound"
           style={{
-            background: "linear-gradient(180deg, #FFFFFF 0%, #F8F5FF 30%, #EDE9FE 55%, #5B21B6 85%, #2E1065 100%)",
+            background: "linear-gradient(180deg, #F5F3FF 0%, #FFFFFF 35%, #FFFFFF 100%)",
             padding: "80px 48px",
             margin: 0,
             width: "100%",
@@ -1568,6 +1568,7 @@ const Home = () => {
             </motion.div>
           </div>
         </section>
+        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 35%, #2E1065 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION — INTELLIGENT WORKFORCE ORCHESTRATION */}
         <section
@@ -1827,9 +1828,10 @@ const Home = () => {
             </div>
           </div>
         </section>
+        <div aria-hidden style={{ height: 60, background: "linear-gradient(180deg, #2E1065 0%, #1A0A3D 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 4 — THE OUTCOME */}
-        <section className="tl-section-outcome" style={{ background: "#2E1065", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-outcome" style={{ background: "#1A0A3D", padding: "80px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <div
               style={{
@@ -2042,7 +2044,7 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #2E1065 0%, #2E1065 35%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #1A0A3D 0%, #1A0A3D 35%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 5 — HOW IT WORKS */}
         <section id="how-it-works" className="tl-section-how" style={{ background: C.surface, padding: "80px 48px", margin: 0, width: "100%" }}>
