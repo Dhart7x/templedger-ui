@@ -769,31 +769,29 @@ const Home = () => {
                 />
               </div>
             </motion.div>
-            {/* HARD WHITE SPACER — guarantees 80px white gap before purple block */}
-            <div
-              style={{
-                height: '80px',
-                width: '100%',
-                background: '#FFFFFF',
-                display: 'block',
-                flexShrink: 0,
-                position: 'relative',
-                zIndex: 2,
-              }}
-            />
-            {/* ELEMENT 3 — HIDDEN COSTS */}
-            <div
-              className="tl-hidden-costs"
-              style={{
-                background: "#2E1065",
-                marginLeft: -48,
-                marginRight: -48,
-                marginTop: 0,
-                marginBottom: 0,
-                padding: "56px 48px 48px",
-              }}
-            >
-              <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          </div>
+        </section>
+
+        {/* HARD WHITE SPACER — guarantees 80px white gap before purple block */}
+        <div
+          style={{
+            height: '80px',
+            width: '100%',
+            background: '#FFFFFF',
+          }}
+        />
+
+        {/* SECTION — COST OF INACTION (full-width dark block) */}
+        <section
+          className="tl-hidden-costs"
+          style={{
+            background: "#2E1065",
+            padding: "56px 48px 48px",
+            margin: 0,
+            width: "100%",
+          }}
+        >
+          <div style={{ maxWidth: 900, margin: "0 auto" }}>
               {/* Header block */}
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
@@ -912,10 +910,7 @@ const Home = () => {
                 </motion.div>
               ))}
 
-              </div>
-            </div>
           </div>
-          
         </section>
 
 
