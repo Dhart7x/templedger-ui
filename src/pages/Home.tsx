@@ -2026,13 +2026,13 @@ const Home = () => {
               <div
                 style={{
                   fontFamily: FONT,
-                  fontSize: 12,
+                  fontSize: 11,
                   fontWeight: 600,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  color: "#FFFFFF",
+                  color: "rgba(255, 255, 255, 0.6)",
                   paddingBottom: 12,
-                  borderBottom: "1px solid rgba(255, 255, 255, 0.15)",
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
                   marginBottom: 16,
                 }}
               >
@@ -2041,13 +2041,13 @@ const Home = () => {
               <div
                 style={{
                   fontFamily: FONT,
-                  fontSize: 12,
+                  fontSize: 11,
                   fontWeight: 600,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  color: "#FFFFFF",
+                  color: "rgba(255, 255, 255, 0.6)",
                   paddingBottom: 12,
-                  borderBottom: "1px solid rgba(255, 255, 255, 0.15)",
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
                   marginBottom: 16,
                 }}
               >
