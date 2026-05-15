@@ -252,7 +252,8 @@ html, body { overflow-x: hidden; }
     .tl-hover-a:hover { transform: translateY(-4px); }
     .tl-hover-b:hover { transform: scale(1.015); }
     .tl-hover-c:hover .tl-hover-c-arrow { transform: translateX(4px); }
-  .tl-hover-d:hover { transform: translateY(-2px); }
+    .tl-hover-d:hover { transform: translateY(-2px); }
+  }
 }
 
 /* ============================================================
@@ -279,6 +280,5 @@ html, body { overflow-x: hidden; }
       transform: translateY(-4px);
     }
   }
-}
 }
 
