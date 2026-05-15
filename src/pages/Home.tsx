@@ -311,8 +311,8 @@ const Home = () => {
           /* REVEAL */
           .tl-section-reveal { padding: 48px 20px !important; }
           .tl-section-reveal h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
-          .tl-section-reveal .tl-reveal-block { font-size: 13px !important; width: 100% !important; max-width: 100% !important; }
-          .tl-section-reveal .tl-reveal-close { font-size: 15px !important; }
+          .tl-reveal-body { font-size: 12px !important; }
+          .tl-reveal-close { font-size: 16px !important; margin-top: 32px !important; padding-top: 20px !important; }
 
           /* THE COST */
           .tl-section-cost { padding: 48px 20px !important; }
