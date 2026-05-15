@@ -1842,9 +1842,10 @@ const Home = () => {
                             display: "inline-flex",
                             alignItems: "center",
                             justifyContent: "center",
+                            flexShrink: 0,
                           }}
                         >
-                          <Icon size={11} color={card.iconColor} strokeWidth={2.25} />
+                          <Icon size={12} color={card.iconColor} strokeWidth={2.5} />
                         </span>
                         <span
                           style={{
