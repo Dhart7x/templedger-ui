@@ -1005,7 +1005,7 @@ const Home = () => {
             </motion.p>
           </div>
         </section>
-        <div aria-hidden style={{ height: 80, background: "linear-gradient(180deg, #1A0A3D 0%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #1A0A3D 0%, #1A0A3D 35%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 3 — THE COST */}
         <section className="tl-section-cost" style={{ background: "#FAFAF8", padding: "80px 48px", margin: 0, width: "100%" }}>
