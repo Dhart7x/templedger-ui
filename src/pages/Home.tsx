@@ -1338,6 +1338,7 @@ const Home = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.4, delay: 0.3 + i * 0.1, ease: "easeOut" }}
+                  className="tl-hover-c"
                   style={{
                     background: "#FFFFFF",
                     border: "1px solid rgba(76, 29, 149, 0.1)",
@@ -1360,6 +1361,7 @@ const Home = () => {
                     }}
                   >
                     {card.header}
+                    <span className="tl-hover-c-arrow" aria-hidden="true">→</span>
                   </div>
                   <p
                     style={{
