@@ -279,6 +279,9 @@ const Home = () => {
         /* Section intro paragraph margin-bottom */
         .tl-section-intro { margin-bottom: 48px !important; }
 
+        /* The Cost — numbered argument rows */
+        .tl-cost-row + .tl-cost-row { border-top: 1px solid rgba(76, 29, 149, 0.15) !important; }
+
         @media (max-width: 768px) {
           /* GLOBAL */
           html, body { overflow-x: hidden !important; }
@@ -302,6 +305,13 @@ const Home = () => {
 
           /* Section intro paragraph margin-bottom mobile */
           .tl-section-intro { margin-bottom: 32px !important; }
+
+          /* The Cost — collapse rows on mobile */
+          .tl-cost-row { grid-template-columns: 1fr !important; gap: 4px !important; padding: 16px 0 !important; }
+          .tl-cost-row-num { font-size: 16px !important; }
+          .tl-cost-row-title { font-size: 18px !important; }
+          .tl-cost-row-body { font-size: 12px !important; }
+          h2.tl-section-h2 + .tl-cost-rows, .tl-section-cost h2 { margin-bottom: 32px !important; }
 
           /* INVOICE / REAL COST */
           .tl-section-invoice { padding: 48px 20px !important; }
@@ -962,25 +972,61 @@ const Home = () => {
                 color: C.fg,
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
-                marginBottom: 24,
+                marginBottom: 40,
               }}
             >
               Three structural costs. Compounding every week.
             </h2>
-            <div className="tl-cost-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32 }}>
-              {costs.map((c, i) => (
+            <div className="tl-cost-rows">
+              {[
+                { n: "01", t: "Not knowing.", b: "Every assumption your operation runs on has a price attached to it." },
+                { n: "02", t: "Disconnection.", b: "The gap between an agency summary and operational reality is where the cost lives." },
+                { n: "03", t: "Reactivity.", b: "Reactive operations don't prevent costs. They absorb them." },
+              ].map((row, i, arr) => (
                 <motion.div
-                  key={i}
+                  key={row.n}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.5, delay: i * 0.12, ease: "easeOut" }}
-                  style={{ padding: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
+                  className="tl-cost-row"
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "60px 240px 1fr",
+                    gap: 32,
+                    alignItems: "baseline",
+                    padding: "20px 0",
+                    borderTop: "1px solid rgba(76, 29, 149, 0.15)",
+                    borderBottom: i === arr.length - 1 ? "1px solid rgba(76, 29, 149, 0.15)" : "none",
+                  }}
                 >
-                  <div style={{ fontWeight: 800, fontSize: 18, color: C.fg, marginBottom: 10 }}>
-                    {c.t}
+                  <div className="tl-cost-row-num" style={{
+                    fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                    fontSize: 20,
+                    fontWeight: 600,
+                    color: "rgba(76, 29, 149, 0.4)",
+                  }}>
+                    {row.n}
                   </div>
-                  <div style={{ fontSize: 14, color: C.muted, lineHeight: 1.7 }}>{c.b}</div>
+                  <div className="tl-cost-row-title" style={{
+                    fontFamily: FONT,
+                    fontSize: 20,
+                    fontWeight: 600,
+                    color: "#2E1065",
+                    margin: 0,
+                  }}>
+                    {row.t}
+                  </div>
+                  <div className="tl-cost-row-body" style={{
+                    fontFamily: FONT,
+                    fontSize: 13,
+                    fontWeight: 400,
+                    color: "rgba(0, 0, 0, 0.65)",
+                    lineHeight: 1.55,
+                    margin: 0,
+                  }}>
+                    {row.b}
+                  </div>
                 </motion.div>
               ))}
             </div>
