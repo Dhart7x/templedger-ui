@@ -1471,7 +1471,7 @@ const Home = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.45, delay: i * 0.1, ease: "easeOut" }}
-                  className="tl-hover-a"
+                  className="tl-hover-pillar-dark"
                   style={{
                     background: "rgba(255, 255, 255, 0.04)",
                     border: "1px solid rgba(255, 255, 255, 0.1)",
