@@ -1015,7 +1015,7 @@ const Home = () => {
                     lineHeight: 1.35,
                   }}
                 >
-                  And your management team carrying all of it. And more.
+                  Management carry all of this, and more.
                 </div>
                 <div
                   className="tl-meta-b"
@@ -1028,7 +1028,7 @@ const Home = () => {
                     fontFamily: FONT,
                   }}
                 >
-                  Every variable above is a manual problem in your operation today. Time spent verifying attendance, chasing no-shows, managing agency relationships. The cost of the variables. Then the cost of managing them.
+                  Every variable above is a manual problem in your operation today. Time spent verifying attendance, chasing no-shows, managing agency relationships is an operational distraction and cost.
                 </div>
               </motion.div>
 
