@@ -1219,7 +1219,7 @@ const Home = () => {
           </div>
         </section>
         {/* SECTION — INTRODUCING TEMPLEDGER */}
-        <section className="tl-section-introducing" style={{ background: "#FAFAF8", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-introducing" style={{ background: "#F5F3FF", padding: "80px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <motion.div
               initial={{ opacity: 0, y: 24 }}
