@@ -869,7 +869,7 @@ const Home = () => {
                 </div>
               </motion.div>
 
-              {/* Seven cost cards in three-column grid */}
+              {/* Six cost cards in three-column grid */}
               <div
                 className="tl-cost-grid"
                 style={{
@@ -902,12 +902,8 @@ const Home = () => {
                   a: "Without verified clock events, unverified hours reach payroll unchallenged. By the time it surfaces it has already been paid.",
                 },
                 {
-                  q: "A compliance breach on your site is your liability, not the agency's.",
-                  a: "Right to work violations, expired certifications, unsigned contracts. The fine, the reputational damage and the legal exposure sit with you. Not them.",
-                },
-                {
-                  q: "You're paying agency margin on workers who should already be yours.",
-                  a: "Agency contracts define a conversion window. Most businesses never act on it because nobody has the visibility. The margin keeps running. Your best people become someone else's permanent employees.",
+                  q: "Your liability. Their margin.",
+                  a: "Compliance breaches and conversion windows both sit with you. Right to work violations, expired certifications, agency margin running on workers who should already be yours. The agency carries none of it.",
                 },
               ].map((block, i) => (
                 <motion.div
