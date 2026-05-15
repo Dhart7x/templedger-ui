@@ -276,6 +276,9 @@ const Home = () => {
         /* H2 margin-bottom global */
         h2, .tl-section-h2, .tl-intel-h2, .tl-outcome-h2, .tl-solution-h2, .tl-contact-h2 { margin-bottom: 24px !important; }
 
+        /* Section intro paragraph margin-bottom */
+        .tl-section-intro { margin-bottom: 48px !important; }
+
         @media (max-width: 768px) {
           /* GLOBAL */
           html, body { overflow-x: hidden !important; }
@@ -296,6 +299,9 @@ const Home = () => {
 
           /* H2 margin-bottom mobile */
           h2, .tl-section-h2, .tl-intel-h2, .tl-outcome-h2, .tl-solution-h2, .tl-contact-h2 { margin-bottom: 16px !important; }
+
+          /* Section intro paragraph margin-bottom mobile */
+          .tl-section-intro { margin-bottom: 32px !important; }
 
           /* INVOICE / REAL COST */
           .tl-section-invoice { padding: 48px 20px !important; }
@@ -1331,6 +1337,7 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
+              className="tl-section-intro"
               style={{
                 fontFamily: FONT,
                 fontWeight: 400,
@@ -1438,7 +1445,7 @@ const Home = () => {
               The platform earns its category.
             </motion.h2>
             <p
-              className="tl-compound-intro"
+              className="tl-compound-intro tl-section-intro"
               style={{
                 fontFamily: FONT,
                 fontWeight: 400,
@@ -1674,13 +1681,13 @@ const Home = () => {
                 This is what that intelligence looks like.
               </h2>
               <p
+                className="tl-section-intro"
                 style={{
                   fontFamily: FONT,
                   fontWeight: 400,
                   fontSize: 15,
                   color: "rgba(0,0,0,0.6)",
                   lineHeight: 1.65,
-                  marginBottom: 32,
                   maxWidth: 560,
                 }}
               >
@@ -1942,6 +1949,7 @@ const Home = () => {
               This is what changes.
             </motion.h2>
             <motion.p
+              className="tl-section-intro"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
@@ -2123,7 +2131,7 @@ const Home = () => {
             >
               This isn't off the shelf, one-size-fits-all software.
             </h2>
-            <p className="tl-section-sub" style={{ fontSize: 15, color: C.muted, lineHeight: 1.65, marginBottom: 48 }}>
+            <p className="tl-section-sub tl-section-intro" style={{ fontSize: 15, color: C.muted, lineHeight: 1.65, marginBottom: 48 }}>
               TempLedger is implemented by a team of forward deployed experts embedded in your operation from day one. You provide one point of contact. We handle everything else.
             </p>
             <div
@@ -2234,7 +2242,7 @@ const Home = () => {
             >
               Ready to take control of your contingent workforce?
             </h2>
-            <p className="tl-contact-sub"
+            <p className="tl-contact-sub tl-section-intro"
               style={{
                 fontFamily: FONT,
                 fontWeight: 500,
