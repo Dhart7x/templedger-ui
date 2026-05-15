@@ -897,7 +897,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div style={{ height: '96px', background: '#FFFFFF', width: '100%' }} />
+          
         </section>
 
 
