@@ -1664,7 +1664,7 @@ const Home = () => {
                   left: 0,
                   right: 0,
                   height: 2,
-                  background: "#4C1D95",
+                  background: "#FFFFFF",
                   borderRadius: 1,
                   transformOrigin: "left",
                 }}
