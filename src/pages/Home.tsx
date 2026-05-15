@@ -2044,7 +2044,7 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #2E1065 0%, #2E1065 35%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #1A0A3D 0%, #1A0A3D 35%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 5 — HOW IT WORKS */}
         <section id="how-it-works" className="tl-section-how" style={{ background: C.surface, padding: "80px 48px", margin: 0, width: "100%" }}>
