@@ -1568,6 +1568,7 @@ const Home = () => {
             </motion.div>
           </div>
         </section>
+        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 35%, #2E1065 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION — INTELLIGENT WORKFORCE ORCHESTRATION */}
         <section
