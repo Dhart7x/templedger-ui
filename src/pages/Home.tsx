@@ -1249,7 +1249,7 @@ const Home = () => {
                 marginBottom: 48,
               }}
             >
-              TempLedger is an agency management platform built for the business that carries the spend, the risk and the operational consequence. Not for the agency. Not for an intermediary. For you.
+              TempLedger is an agency management platform built for the business that carries the spend, the risk and the operational consequence.
             </motion.p>
             <div className="tl-pillars" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, alignItems: "stretch", marginBottom: 48 }}>
               {[
