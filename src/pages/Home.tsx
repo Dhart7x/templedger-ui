@@ -1247,7 +1247,7 @@ const Home = () => {
                 textAlign: "left",
               }}
             >
-              Without synchronization, failure is built into the model.
+              Failure is built into the model.
             </motion.div>
           </div>
         </section>
