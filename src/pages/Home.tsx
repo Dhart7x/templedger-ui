@@ -2401,6 +2401,7 @@ const Home = () => {
                 ].map((tile) => (
                   <div
                     key={tile.name}
+                    className="tl-hover-d"
                     style={{
                       background: "#FFFFFF",
                       border: "1px solid rgba(76, 29, 149, 0.1)",
