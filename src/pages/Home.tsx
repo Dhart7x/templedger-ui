@@ -772,35 +772,35 @@ const Home = () => {
           </div>
         </section>
 
-        {/* TRANSITION — white → cost-of-inaction purple (hold white, late fade to avoid lavender midpoint) */}
+        {/* TRANSITION — white → cream cost-of-inaction section */}
         <div
           aria-hidden
           style={{
-            height: 120,
+            height: 60,
             width: '100%',
-            background: 'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 35%, #2E1065 100%)',
+            background: 'linear-gradient(to bottom, #FFFFFF 0%, #FAFAF8 100%)',
             margin: 0,
           }}
         />
 
-        {/* SECTION — COST OF INACTION (full-width dark block) */}
+        {/* SECTION — COST OF INACTION (light cream block, two-column cards) */}
         <section
           className="tl-hidden-costs"
           style={{
-            background: "#2E1065",
-            padding: "56px 48px 48px",
+            background: "#FAFAF8",
+            padding: "56px 48px 0",
             margin: 0,
             width: "100%",
           }}
         >
-          <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
               {/* Header block */}
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                style={{ marginBottom: 48 }}
+                style={{ marginBottom: 64 }}
               >
                 <div style={{ marginTop: 0, maxWidth: 760 }}>
                   <div
@@ -814,10 +814,10 @@ const Home = () => {
                       fontSize: 10,
                       letterSpacing: "0.18em",
                       textTransform: "uppercase",
-                      color: "rgba(255,255,255,0.5)",
+                      color: "#4C1D95",
                     }}
                   >
-                    <span style={{ width: 24, height: 2, background: "rgba(255,255,255,0.3)" }} />
+                    <span style={{ width: 24, height: 2, background: "rgba(76,29,149,0.4)" }} />
                     COST OF INACTION
                   </div>
                   <div
@@ -826,7 +826,7 @@ const Home = () => {
                       fontFamily: FONT,
                       fontWeight: 800,
                       fontSize: 32,
-                      color: "#FFFFFF",
+                      color: "#2E1065",
                       letterSpacing: "-0.022em",
                       lineHeight: 1.2,
                       marginTop: 0,
@@ -837,7 +837,16 @@ const Home = () => {
                 </div>
               </motion.div>
 
-              {/* Seven question blocks */}
+              {/* Seven cost cards in two-column grid */}
+              <div
+                className="tl-cost-grid"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  columnGap: 14,
+                  rowGap: 14,
+                }}
+              >
               {[
                 {
                   q: "Shifts are never assigned to the optimal worker or the optimal agency. Because everyone is operating blind.",
@@ -867,31 +876,30 @@ const Home = () => {
                   q: "You're paying agency margin on workers who should already be yours.",
                   a: "Agency contracts define a conversion window. Most businesses never act on it because nobody has the visibility. The margin keeps running. Your best people become someone else's permanent employees.",
                 },
-              ].map((block, i, arr) => (
+              ].map((block, i) => (
                 <motion.div
                   key={i}
                   className="tl-cost-block"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.45, delay: i * 0.1, ease: "easeOut" }}
+                  transition={{ duration: 0.45, delay: (i % 2) * 0.05 + Math.floor(i / 2) * 0.08, ease: "easeOut" }}
                   style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 10,
-                    padding: "10px 0",
-                    borderBottom: i === arr.length - 1 ? "none" : "0.5px solid rgba(255,255,255,0.08)",
+                    background: "rgba(76, 29, 149, 0.04)",
+                    border: "1px solid rgba(76, 29, 149, 0.12)",
+                    borderRadius: 8,
+                    padding: "24px 28px",
                   }}
                 >
                   <div
                     className="tl-cost-question"
                     style={{
                       fontFamily: FONT,
-                      fontWeight: 700,
+                      fontWeight: 600,
                       fontSize: 18,
-                      color: "#FFFFFF",
-                      lineHeight: 1.45,
-                      maxWidth: 640,
+                      color: "#2E1065",
+                      lineHeight: 1.35,
+                      marginBottom: 8,
                     }}
                   >
                     {block.q}
@@ -902,22 +910,23 @@ const Home = () => {
                       fontFamily: FONT,
                       fontWeight: 400,
                       fontSize: 14,
-                      color: "rgba(255,255,255,0.5)",
-                      lineHeight: 1.7,
-                      maxWidth: 580,
+                      color: "rgba(0, 0, 0, 0.6)",
+                      lineHeight: 1.55,
                     }}
                   >
                     {block.a}
                   </div>
                 </motion.div>
               ))}
+              </div>
 
           </div>
         </section>
 
 
-        {/* TRANSITION — cost-of-inaction purple to reveal darker purple */}
-        <div aria-hidden style={{ height: 60, background: "linear-gradient(180deg, #2E1065 0%, #1A0A3D 100%)", margin: 0, width: "100%" }} />
+        {/* TRANSITION — cream cost-of-inaction → reveal dark purple */}
+        <div aria-hidden style={{ height: 60, background: "linear-gradient(180deg, #FAFAF8 0%, #1A0A3D 100%)", margin: 0, width: "100%" }} />
+
 
         {/* SECTION 3b — THE REVEAL */}
         <section className="tl-section-reveal" style={{ background: "#1A0A3D", padding: "80px 48px", margin: 0, width: "100%" }}>
