@@ -1672,6 +1672,7 @@ const Home = () => {
                       lineHeight: 1.55,
                     }}
                   >
+                    <span style={{ fontWeight: 600 }}>{phase.boldPrefix} </span>
                     {phase.body}
                   </div>
                 </motion.div>
