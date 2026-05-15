@@ -1634,7 +1634,7 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="tl-compound-h2"
+              className="tl-compound-h2 !mb-8 md:!mb-12"
               style={{
                 fontFamily: "'Bricolage Grotesque', sans-serif",
                 fontWeight: 600,
@@ -1642,26 +1642,11 @@ const Home = () => {
                 color: "#2E1065",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
-                marginBottom: 0,
+                marginBottom: 48,
               }}
             >
               Stops the bleed today. Sees the patterns tomorrow.
             </motion.h2>
-            <p
-              className="tl-compound-intro tl-section-intro"
-              style={{
-                fontFamily: FONT,
-                fontWeight: 400,
-                fontSize: 14,
-                color: "rgba(0, 0, 0, 0.6)",
-                lineHeight: 1.55,
-                maxWidth: 720,
-                marginTop: 8,
-                marginBottom: 56,
-              }}
-            >
-              Margin recovery starts from day one. The platform's intelligence compounds with every shift, becoming a true workforce orchestration system as your operational data deepens.
-            </p>
 
             {/* Horizontal timeline */}
             <div style={{ position: "relative", padding: "0 4px" }}>
@@ -1790,13 +1775,11 @@ const Home = () => {
               {[
                 {
                   title: "Margin recovery.",
-                  boldPrefix: "From day one.",
-                  body: "Verified clocking. Real-time compliance. Authorization controls. Automated reconciliation. Agency performance derived from system data rather than self-reports. The bleed stops the day hardware goes live. And much more.",
+                  body: "Verified clocking, real-time compliance, authorization controls. The bleed stops the day hardware goes live.",
                 },
                 {
                   title: "Intelligent workforce orchestration.",
-                  boldPrefix: "Sharpens with every shift.",
-                  body: "Shift gaps predicted. Conversion candidates identified. Spend anomalies flagged. Cost creep surfaced. Agency redistribution recommended. The platform stops describing your operation and starts orchestrating it. And much more.",
+                  body: "Shift gaps predicted, conversion candidates surfaced, anomalies flagged. The platform starts orchestrating, not describing.",
                 },
               ].map((phase, i) => (
                 <motion.div
@@ -1807,7 +1790,7 @@ const Home = () => {
                   transition={{ duration: 0.5, delay: 0.3 + i * 0.15, ease: "easeOut" }}
                 >
                   <div
-                    className="tl-compound-phase-title"
+                    className="tl-compound-phase-title flex items-start min-h-[2.4em]"
                     style={{
                       fontFamily: FONT,
                       fontWeight: 600,
@@ -1820,7 +1803,7 @@ const Home = () => {
                     {phase.title}
                   </div>
                   <div
-                    className="tl-compound-phase-body"
+                    className="tl-compound-phase-body min-h-[56px] md:min-h-[60px]"
                     style={{
                       fontFamily: FONT,
                       fontWeight: 400,
@@ -1829,7 +1812,6 @@ const Home = () => {
                       lineHeight: 1.55,
                     }}
                   >
-                    <span style={{ fontWeight: 600 }}>{phase.boldPrefix} </span>
                     {phase.body}
                   </div>
                 </motion.div>
