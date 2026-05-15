@@ -2497,13 +2497,14 @@ const Home = () => {
               {steps.map((s, idx) => (
                 <motion.div
                   key={s.n}
-                  className="tl-step-card"
+                  className="tl-step-card tl-hover-a"
                   initial={{ opacity: 0, y: 32 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.5, delay: idx * 0.12, ease: "easeOut" }}
                   style={{
                     background: "#FFFFFF",
+                    border: "1px solid rgba(76, 29, 149, 0.1)",
                     padding: 28,
                     display: "grid",
                     gridTemplateRows: "auto auto 1fr",
