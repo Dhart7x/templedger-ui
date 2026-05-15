@@ -935,7 +935,7 @@ const Home = () => {
               ].map((block, i) => (
                 <motion.div
                   key={i}
-                  className="tl-cost-block"
+                  className="tl-cost-block tl-hover-d"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
