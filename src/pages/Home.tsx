@@ -620,7 +620,7 @@ const Home = () => {
 
       <div className="tl-nav-spacer" style={{ paddingTop: 56, background: "#4C1D95", margin: 0 }}>
         {/* SECTION 1 — HERO */}
-        <section className="tl-hero" style={{ background: "#4C1D95", padding: "96px 48px 0", margin: 0, width: "100%", minHeight: 520 }}>
+        <section className="tl-hero" style={{ background: "#4C1D95", padding: "96px 48px 80px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <h1
               className="tl-hero-h1"
