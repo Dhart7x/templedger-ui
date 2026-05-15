@@ -273,6 +273,9 @@ const Home = () => {
         .tl-cost-answer { font-size: 13px !important; font-weight: 400 !important; color: rgba(0, 0, 0, 0.55) !important; line-height: 1.55 !important; font-family: 'Inter', system-ui, sans-serif !important; }
         .tl-cost-grid { gap: 12px !important; }
 
+        /* H2 margin-bottom global */
+        h2, .tl-section-h2, .tl-intel-h2, .tl-outcome-h2, .tl-solution-h2, .tl-contact-h2 { margin-bottom: 24px !important; }
+
         @media (max-width: 768px) {
           /* GLOBAL */
           html, body { overflow-x: hidden !important; }
