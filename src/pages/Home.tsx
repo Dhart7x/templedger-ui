@@ -308,6 +308,7 @@ const Home = () => {
           .tl-cost-grid { grid-template-columns: 1fr 1fr !important; }
         }
 
+        @media (max-width: 767px) {
           /* REVEAL */
           .tl-section-reveal { padding: 48px 20px !important; }
           .tl-section-reveal h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
