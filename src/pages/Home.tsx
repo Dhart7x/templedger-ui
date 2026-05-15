@@ -308,6 +308,23 @@ const Home = () => {
           .tl-cost-grid { grid-template-columns: 1fr 1fr !important; }
         }
 
+        @media (min-width: 768px) {
+          .tl-intel-grid {
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+            gap: 12px !important;
+            align-items: stretch !important;
+          }
+          .tl-intel-card {
+            width: auto !important;
+            max-width: none !important;
+            display: grid !important;
+            grid-template-rows: auto 1fr auto auto !important;
+            gap: 0 !important;
+            min-width: 0 !important;
+          }
+        }
+
         @media (max-width: 767px) {
           /* REVEAL */
           .tl-section-reveal { padding: 48px 20px !important; }
