@@ -1663,8 +1663,8 @@ const Home = () => {
                   color: "#4C1D95",
                 }}
               >
-                <span style={{ width: 24, height: 2, background: "#4C1D95", opacity: 0.5 }} />
-                — INTELLIGENT WORKFORCE ORCHESTRATION
+                <span style={{ width: 24, height: 2, background: "#4C1D95" }} />
+                INTELLIGENT WORKFORCE ORCHESTRATION
               </div>
               <h2
                 className="tl-intel-h2"
