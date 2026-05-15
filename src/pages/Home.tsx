@@ -1101,7 +1101,7 @@ const Home = () => {
         <section
           className="tl-section-compound"
           style={{
-            background: "linear-gradient(180deg, #FFFFFF 0%, #F8F5FF 50%, #FFFFFF 100%)",
+            background: "linear-gradient(180deg, #FFFFFF 0%, #F8F5FF 35%, #EDE9FE 65%, #4C1D95 100%)",
             padding: "80px 48px",
             margin: 0,
             width: "100%",
