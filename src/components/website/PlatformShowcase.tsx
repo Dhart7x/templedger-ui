@@ -5,8 +5,6 @@ import ClientLiveSnapshot from "@/components/presentation/demo/views/ClientLiveS
 import ClientPayroll from "@/components/presentation/demo/views/ClientPayroll";
 import ClientBilling from "@/components/presentation/demo/views/ClientBilling";
 import AllocationRecommendationPreview from "./platformPreviews/AllocationRecommendationPreview";
-import SchedulePreview from "./platformPreviews/SchedulePreview";
-import PermissionsPreview from "./platformPreviews/PermissionsPreview";
 import DirectHirePreview from "./platformPreviews/DirectHirePreview";
 import AgencyPerformancePreview from "./platformPreviews/AgencyPerformancePreview";
 import ComplianceDocsPreview from "./platformPreviews/ComplianceDocsPreview";
