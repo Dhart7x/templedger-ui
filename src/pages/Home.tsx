@@ -1488,7 +1488,7 @@ const Home = () => {
                 marginBottom: 0,
               }}
             >
-              The platform earns its category.
+              Two outcomes. One platform.
             </motion.h2>
             <p
               className="tl-compound-intro tl-section-intro"
@@ -1503,7 +1503,7 @@ const Home = () => {
                 marginBottom: 56,
               }}
             >
-              Margin recovery is immediate. Intelligence compounds from month six onward.
+              Margin recovery starts from day one. The platform's intelligence compounds with every shift, becoming a true workforce orchestration system as your operational data deepens.
             </p>
 
             {/* Horizontal timeline */}
@@ -1613,7 +1613,7 @@ const Home = () => {
                     color: "#4C1D95",
                   }}
                 >
-                  MONTH SIX
+                  COMPOUNDING
                 </span>
                 <span style={{ color: "rgba(76, 29, 149, 0.5)" }}>ONGOING</span>
               </div>
@@ -1633,10 +1633,12 @@ const Home = () => {
               {[
                 {
                   title: "Margin recovery.",
+                  boldPrefix: "From day one.",
                   body: "Verified clocking. Real-time compliance. Authorization controls. Automated reconciliation. Agency performance derived from system data rather than self-reports. The bleed stops the day hardware goes live. And much more.",
                 },
                 {
                   title: "Intelligent workforce orchestration.",
+                  boldPrefix: "Sharpens with every shift.",
                   body: "Shift gaps predicted. Conversion candidates identified. Spend anomalies flagged. Cost creep surfaced. Agency redistribution recommended. The platform stops describing your operation and starts orchestrating it. And much more.",
                 },
               ].map((phase, i) => (
@@ -1670,6 +1672,7 @@ const Home = () => {
                       lineHeight: 1.55,
                     }}
                   >
+                    <span style={{ fontWeight: 600 }}>{phase.boldPrefix} </span>
                     {phase.body}
                   </div>
                 </motion.div>
