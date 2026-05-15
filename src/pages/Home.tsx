@@ -1461,8 +1461,8 @@ const Home = () => {
             </motion.p>
             <div className="tl-pillars" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, alignItems: "stretch", marginBottom: 48 }}>
               {[
-                { word: "Transparency.", title: "A shared system.", body: "Every agency, every worker, every shift, in one place. Both sides operating on the same live record. No summaries. No lag." },
-                { word: "Accountability.", title: "Verified by default.", body: "Attendance captured at source. Compliance checked continuously. Payroll derived from verified data. Accuracy is the architecture." },
+                { word: "Visibility.", title: "A shared live record.", body: "Every agency, every worker, every shift, in one place. Both sides operating on the same live record. No summaries. No lag." },
+                { word: "Verification.", title: "Accuracy as architecture.", body: "Attendance captured at source. Compliance checked continuously. Payroll derived from verified data. Accuracy is the architecture." },
                 { word: "Control.", title: "Set the rules. Enforce them.", body: "Authorization tiers, booking distribution, spend visibility, all configured to your operation. Owned by you. Not outsourced." },
               ].map((p, i) => (
                 <motion.div
