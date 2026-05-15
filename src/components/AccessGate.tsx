@@ -82,10 +82,11 @@ const AccessGate = ({ children }: AccessGateProps) => {
         <div
           style={{
             background: "#FFFFFF",
-            borderRadius: 16,
-            padding: "40px 36px",
-            width: 360,
-            boxShadow: "0 32px 64px rgba(0,0,0,0.25)",
+            borderRadius: 20,
+            padding: "48px 40px",
+            width: 380,
+            border: "1px solid hsl(0 0% 92%)",
+            boxShadow: "0 24px 64px rgba(30, 10, 80, 0.25), 0 8px 16px rgba(30, 10, 80, 0.12)",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -96,12 +97,24 @@ const AccessGate = ({ children }: AccessGateProps) => {
           <div
             style={{
               fontFamily: FONT,
+              fontWeight: 700,
+              fontSize: 10,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "hsl(0 0% 60%)",
+              marginBottom: 16,
+            }}
+          >
+            PRIVATE ACCESS
+          </div>
+          <div
+            style={{
+              fontFamily: FONT,
               fontWeight: 800,
               fontSize: 14,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
               color: "#4C1D95",
-              marginBottom: 4,
             }}
           >
             TEMP LEDGER
@@ -111,26 +124,19 @@ const AccessGate = ({ children }: AccessGateProps) => {
               fontFamily: FONT,
               fontWeight: 400,
               fontSize: 12,
-              color: "#9B9590",
-              marginBottom: 32,
+              color: "hsl(0 0% 45%)",
+              marginTop: 8,
+              marginBottom: 40,
             }}
           >
             Intelligent Workforce Orchestration
           </div>
           <div
             style={{
-              width: 32,
-              height: 1.5,
-              background: "#E5E0DA",
-              margin: "0 auto 32px",
-            }}
-          />
-          <div
-            style={{
               fontFamily: FONT,
-              fontWeight: 500,
+              fontWeight: 400,
               fontSize: 14,
-              color: "#6B6460",
+              color: "hsl(0 0% 50%)",
               marginBottom: 16,
             }}
           >
@@ -141,6 +147,7 @@ const AccessGate = ({ children }: AccessGateProps) => {
             type="password"
             autoFocus
             value={code}
+            placeholder="Access code"
             onChange={(e) => {
               setCode(e.target.value);
               if (error) setError(false);
@@ -153,26 +160,26 @@ const AccessGate = ({ children }: AccessGateProps) => {
             }}
             style={{
               width: "100%",
-              background: "#FAFAF8",
-              border: `1px solid ${error ? "#C4391A" : "#E5E0DA"}`,
+              background: "hsl(0 0% 98%)",
+              border: `1px solid ${error ? "#C4391A" : "hsl(0 0% 88%)"}`,
               borderRadius: 10,
-              padding: "14px 18px",
+              padding: "14px 16px",
               fontFamily: FONT,
-              fontWeight: 700,
-              fontSize: 18,
-              letterSpacing: "0.25em",
-              color: "#0D0D0B",
+              fontWeight: 400,
+              fontSize: 16,
+              letterSpacing: "0.1em",
+              color: "hsl(0 0% 15%)",
               textAlign: "center",
-              textTransform: "lowercase",
               outline: "none",
               transition: "border-color 0.2s",
               boxSizing: "border-box",
+              marginBottom: 16,
             }}
             onFocus={(e) => {
               if (!error) e.currentTarget.style.borderColor = "#4C1D95";
             }}
             onBlur={(e) => {
-              if (!error) e.currentTarget.style.borderColor = "#E5E0DA";
+              if (!error) e.currentTarget.style.borderColor = "hsl(0 0% 88%)";
             }}
           />
           {error && (
@@ -182,7 +189,7 @@ const AccessGate = ({ children }: AccessGateProps) => {
                 fontWeight: 400,
                 fontSize: 12,
                 color: "#C4391A",
-                marginTop: 8,
+                marginBottom: 10,
                 animation: "tl-fade-in 0.2s ease",
                 alignSelf: "flex-start",
               }}
@@ -194,15 +201,15 @@ const AccessGate = ({ children }: AccessGateProps) => {
             type="button"
             onClick={submit}
             style={{
-              marginTop: 14,
               width: "100%",
+              height: 48,
               background: "#4C1D95",
               color: "#FFFFFF",
               fontFamily: FONT,
-              fontWeight: 700,
+              fontWeight: 600,
               fontSize: 14,
-              borderRadius: 8,
-              padding: 12,
+              letterSpacing: "0.02em",
+              borderRadius: 10,
               border: "none",
               cursor: "pointer",
               transition: "background 0.15s",
@@ -212,17 +219,6 @@ const AccessGate = ({ children }: AccessGateProps) => {
           >
             Enter
           </button>
-          <div
-            style={{
-              fontFamily: FONT,
-              fontWeight: 400,
-              fontSize: 11,
-              color: "#9B9590",
-              marginTop: 20,
-            }}
-          >
-            Private access only.
-          </div>
         </div>
       </div>
     </>
