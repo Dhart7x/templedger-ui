@@ -2066,25 +2066,43 @@ const Home = () => {
               {/* Left column */}
               <div>
                 {[
-                  "Operational visibility",
-                  "Retention",
-                  "Productivity",
-                  "Workforce stability",
-                  "Agency accountability",
+                  { arrow: "▲", text: "Operational visibility" },
+                  { arrow: "▲", text: "Retention" },
+                  { arrow: "▲", text: "Productivity" },
+                  { arrow: "▲", text: "Workforce stability" },
+                  { arrow: "▲", text: "Agency accountability" },
                 ].map((item, i, arr) => (
                   <div
-                    key={item}
+                    key={item.text}
                     style={{
-                      fontFamily: FONT,
-                      fontSize: window.innerWidth >= 768 ? 16 : 15,
-                      fontWeight: 500,
-                      color: "#FFFFFF",
-                      lineHeight: 1.5,
-                      padding: "14px 0",
-                      borderBottom: i < arr.length - 1 ? "1px solid rgba(255, 255, 255, 0.06)" : "none",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 12,
+                      padding: "16px 0",
+                      borderBottom: i < arr.length - 1 ? "1px solid rgba(255, 255, 255, 0.08)" : "none",
                     }}
                   >
-                    {item}
+                    <span
+                      style={{
+                        fontSize: 10,
+                        color: "rgba(255, 255, 255, 0.5)",
+                        display: "inline-block",
+                        lineHeight: 1,
+                      }}
+                    >
+                      {item.arrow}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: FONT,
+                        fontSize: window.innerWidth >= 768 ? 18 : 16,
+                        fontWeight: 500,
+                        color: "#FFFFFF",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {item.text}
+                    </span>
                   </div>
                 ))}
               </div>
