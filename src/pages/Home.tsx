@@ -336,6 +336,7 @@ const Home = () => {
         @media (min-width: 768px) and (max-width: 1023px) {
           .tl-cost-grid { grid-template-columns: 1fr 1fr !important; }
           .tl-alt-cards { grid-template-columns: 1fr !important; }
+          .tl-integrations-grid { grid-template-columns: repeat(3, 1fr) !important; }
         }
 
         @media (min-width: 768px) {
@@ -399,6 +400,11 @@ const Home = () => {
           .tl-platform-grid p { font-size: 12px !important; }
           .tl-platform-preview { height: 360px !important; }
           .tl-platform-preview > div { transform: scale(0.55) !important; transform-origin: top left !important; width: 182% !important; }
+
+          /* INTEGRATIONS STRIP */
+          .tl-section-integrations { padding: 32px 24px !important; }
+          .tl-section-integrations h2 { font-size: 18px !important; }
+          .tl-integrations-grid { grid-template-columns: repeat(2, 1fr) !important; }
 
           /* COMPOUNDING INTELLIGENCE */
           .tl-section-compound { padding: 64px 20px !important; }
@@ -1507,10 +1513,106 @@ const Home = () => {
         </section>
 
 
-        {/* SECTION — PLATFORM SHOWCASE */}
-        <PlatformShowcase onOpenDemo={() => setDemoGateOpen(true)} />
+		{/* SECTION — PLATFORM SHOWCASE */}
+		<PlatformShowcase onOpenDemo={() => setDemoGateOpen(true)} />
 
-        {/* SECTION — COMPOUNDING INTELLIGENCE */}
+		{/* SECTION — INTEGRATIONS STRIP */}
+		<section
+			className="tl-section-integrations"
+			style={{
+				background: "#FAFAF8",
+				padding: "40px 48px",
+				margin: 0,
+				width: "100%",
+			}}
+		>
+			<div style={{ maxWidth: 1100, margin: "0 auto" }}>
+				<div
+					style={{
+						display: "flex",
+						alignItems: "center",
+						gap: 10,
+						marginBottom: 8,
+						fontFamily: FONT,
+						fontWeight: 500,
+						fontSize: 9,
+						letterSpacing: "0.12em",
+						textTransform: "uppercase",
+						color: "#4C1D95",
+					}}
+				>
+					<span style={{ width: 24, height: 2, background: "#4C1D95" }} />
+					Fits Your Stack
+				</div>
+				<h2
+					style={{
+						fontFamily: FONT,
+						fontWeight: 600,
+						fontSize: 20,
+						color: "#1a1a1a",
+						lineHeight: 1.3,
+						marginBottom: 32,
+						letterSpacing: "-0.02em",
+					}}
+				>
+					Connects to the systems your finance and ops teams already run.
+				</h2>
+				<div
+					className="tl-integrations-grid"
+					style={{
+						display: "grid",
+						gridTemplateColumns: "repeat(6, 1fr)",
+						gap: 12,
+					}}
+				>
+					{[
+						{ name: "Workday", cat: "HRIS" },
+						{ name: "SAP", cat: "ERP" },
+						{ name: "NetSuite", cat: "ERP" },
+						{ name: "Coupa", cat: "PROCUREMENT" },
+						{ name: "ADP", cat: "PAYROLL" },
+						{ name: "Bullhorn", cat: "AGENCY CRM" },
+					].map((tile) => (
+						<div
+							key={tile.name}
+							style={{
+								background: "#FFFFFF",
+								border: "1px solid rgba(76, 29, 149, 0.08)",
+								borderRadius: 6,
+								padding: "16px 12px",
+								textAlign: "center",
+							}}
+						>
+							<div
+								style={{
+									fontFamily: FONT,
+									fontWeight: 600,
+									fontSize: 13,
+									color: "#2E1065",
+									letterSpacing: "0.02em",
+									margin: 0,
+								}}
+							>
+								{tile.name}
+							</div>
+							<div
+								style={{
+									fontFamily: FONT,
+									fontWeight: 400,
+									fontSize: 9,
+									color: "rgba(0, 0, 0, 0.45)",
+									marginTop: 2,
+								}}
+							>
+								{tile.cat}
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		{/* SECTION — COMPOUNDING INTELLIGENCE */}
         <section
           className="tl-section-compound"
           style={{
