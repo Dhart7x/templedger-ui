@@ -1641,7 +1641,7 @@ const Home = () => {
                 fontFamily: "'Bricolage Grotesque', sans-serif",
                 fontWeight: 600,
                 fontSize: 32,
-                color: "#2E1065",
+                color: "#FFFFFF",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
                 marginBottom: 48,
