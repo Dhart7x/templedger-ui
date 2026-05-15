@@ -1394,24 +1394,6 @@ const Home = () => {
                 </motion.div>
               ))}
             </div>
-            <motion.div
-              className="tl-locked-line"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
-              style={{
-                paddingTop: 32,
-                fontFamily: FONT,
-                fontWeight: 700,
-                fontSize: 24,
-                color: "#0D0D0B",
-                textAlign: "center",
-                lineHeight: 1.5,
-              }}
-            >
-              TempLedger is not an HR tool. It is a financial control tool that happens to live in HR's domain.
-            </motion.div>
           </div>
         </section>
 
