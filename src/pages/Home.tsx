@@ -864,7 +864,7 @@ const Home = () => {
                       marginTop: 0,
                     }}
                   >
-                    But how much is all of this costing your business?
+                    But how much is all of this<br />costing your business?
                   </div>
                 </div>
               </motion.div>
@@ -2081,7 +2081,7 @@ const Home = () => {
                 marginTop: 32,
                 paddingTop: 32,
                 borderTop: "1px solid rgba(255, 255, 255, 0.12)",
-                textAlign: "center",
+                textAlign: "left",
               }}
             >
               <div
