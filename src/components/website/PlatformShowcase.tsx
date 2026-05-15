@@ -76,7 +76,7 @@ const TABS = [
     label: "COMPLIANCE",
     headline: "Every worker's documents verified before they reach your site.",
     body:
-      "Compliance status is checked continuously — not assumed. Right to work, certifications and contracts are verified for every worker on every shift. Non-compliant workers are blocked automatically before they arrive. The risk stays with the agency.",
+      "Compliance status is checked continuously, not assumed. Right to work, certifications and contracts are verified for every worker on every shift. Non-compliant workers are blocked automatically before they arrive. The risk stays with the agency.",
     Component: ComplianceDocsPreview,
   },
   {
