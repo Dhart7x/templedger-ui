@@ -2256,7 +2256,7 @@ const Home = () => {
         <footer className="tl-footer"
           style={{
             background: "#1A0A3D",
-            borderTop: "0.5px solid rgba(255,255,255,0.08)",
+            borderTop: "none",
             padding: "24px 48px",
             display: "flex",
             justifyContent: "space-between",
