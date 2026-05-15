@@ -910,27 +910,27 @@ const Home = () => {
               {[
                 {
                   q: "Inflated hours, ghost shifts, late clock-outs, questionable overtime.",
-                  a: "Without verified clock events, unverified hours reach payroll unchallenged. By the time it surfaces it has already been paid.",
+                  a: "Unverified hours reach payroll unchallenged. By the time it surfaces, you've already paid.",
                 },
                 {
                   q: "Compliance breaches on your site are your liability, not the agency's.",
-                  a: "Right to work violations, expired certifications, unsigned contracts. The fine, the reputational damage and the legal exposure sit with you.",
+                  a: "Right to work violations, expired certifications, unsigned contracts. The fine and legal exposure sit with you.",
                 },
                 {
                   q: "You're paying agency margin on workers who should already be yours.",
-                  a: "Agency contracts define a conversion window. Most businesses never act on it because nobody has the visibility. The margin keeps running.",
+                  a: "Conversion windows close because nobody has the visibility. The margin keeps running on workers who should be yours.",
                 },
                 {
                   q: "Headcount authorized at site level without financial controls.",
-                  a: "Spend decisions made without finance visibility, on commitments that compound week over week. Without a system to prevent it, it never stops.",
+                  a: "Spend decisions made at site level, without finance visibility. Compounds every week. Nothing stops it.",
                 },
                 {
                   q: "Unplanned overtime and poor shift distribution both have a cost.",
-                  a: "Overtime and poor distribution are symptoms of the same root problem. Workers who don't get enough hours leave. Every departure costs.",
+                  a: "Same root problem, two symptoms. Workers who don't get enough hours leave. Every departure costs.",
                 },
                 {
                   q: "Shifts are never assigned to the optimal worker or optimal agency.",
-                  a: "Filling a no-show needs speed. Planning ahead needs quality and cost. That distinction requires data nobody currently has. Everyone is operating blind.",
+                  a: "No-shows need speed. Planning ahead needs quality and cost. That distinction requires data nobody has. Operating blind.",
                 },
               ].map((block, i) => (
                 <motion.div
