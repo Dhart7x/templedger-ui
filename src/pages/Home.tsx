@@ -1710,8 +1710,8 @@ const Home = () => {
                       width: 16,
                       height: 16,
                       borderRadius: "50%",
-                      background: "#4C1D95",
-                      border: "3px solid #FFFFFF",
+                      background: "#FFFFFF",
+                      border: "3px solid #2E1065",
                       boxSizing: "content-box",
                       marginTop: -3,
                     }}
