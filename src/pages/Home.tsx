@@ -1633,10 +1633,12 @@ const Home = () => {
               {[
                 {
                   title: "Margin recovery.",
+                  boldPrefix: "From day one.",
                   body: "Verified clocking. Real-time compliance. Authorization controls. Automated reconciliation. Agency performance derived from system data rather than self-reports. The bleed stops the day hardware goes live. And much more.",
                 },
                 {
                   title: "Intelligent workforce orchestration.",
+                  boldPrefix: "Sharpens with every shift.",
                   body: "Shift gaps predicted. Conversion candidates identified. Spend anomalies flagged. Cost creep surfaced. Agency redistribution recommended. The platform stops describing your operation and starts orchestrating it. And much more.",
                 },
               ].map((phase, i) => (
