@@ -5,8 +5,6 @@ import ClientLiveSnapshot from "@/components/presentation/demo/views/ClientLiveS
 import ClientPayroll from "@/components/presentation/demo/views/ClientPayroll";
 import ClientBilling from "@/components/presentation/demo/views/ClientBilling";
 import AllocationRecommendationPreview from "./platformPreviews/AllocationRecommendationPreview";
-import SchedulePreview from "./platformPreviews/SchedulePreview";
-import PermissionsPreview from "./platformPreviews/PermissionsPreview";
 import DirectHirePreview from "./platformPreviews/DirectHirePreview";
 import AgencyPerformancePreview from "./platformPreviews/AgencyPerformancePreview";
 import ComplianceDocsPreview from "./platformPreviews/ComplianceDocsPreview";
@@ -22,7 +20,7 @@ const TABS = [
     label: "LIVE DASHBOARD",
     headline: "Both sides. Same view. Real time.",
     body:
-      "Exceptions surface the moment they happen. For both the client and the agency simultaneously. No waiting for a report. No summary. The same live record, shared.",
+      "Exceptions and shift gaps surface the moment they happen, for both the client and the agency simultaneously. The same live record, shared. The schedule sits inside the same view, so coverage is visible before it becomes a problem.",
     Component: ClientLiveSnapshot,
   },
   {
@@ -35,48 +33,21 @@ const TABS = [
     Component: AllocationRecommendationPreview,
   },
   {
-    id: "payroll",
-    nav: "Payroll Sequence",
-    label: "PAYROLL SEQUENCE",
-    headline: "Scheduled. Clocked in. Clocked out. Approved. Compliant. Paid.",
-    body:
-      "Every worker follows the same verified sequence before appearing on the payroll report. No step can be skipped. No hour goes unverified. The sequence is the guarantee.",
-    Component: ClientPayroll,
-  },
-  {
-    id: "invoiceclarity",
-    nav: "Invoice Clarity",
-    label: "INVOICE CLARITY",
+    id: "invoicepayroll",
+    nav: "Invoice & Payroll",
+    label: "INVOICE & PAYROLL",
     headline: "Every invoice line traces back to a verified clock event.",
     body:
-      "TempLedger derives your invoice total directly from verified payroll hours, broken down by cost centre. No estimates. No reconciliation calls. No disputes. The number on the invoice is the number the system verified.",
+      "Every worker follows the same verified sequence — scheduled, clocked in, clocked out, approved, compliant, paid — and TempLedger derives your invoice total directly from those verified payroll hours, broken down by cost centre. No estimates. No reconciliation calls. No disputes.",
     Component: ClientBilling,
   },
   {
-    id: "schedule",
-    nav: "Schedule Visibility",
-    label: "SCHEDULE VISIBILITY",
-    headline: "See every gap before it becomes a problem. Then let the system fill it.",
-    body:
-      "The schedule shows coverage in real time. Gaps are flagged before the shift. Intelligent allocation reallocates bookings to the agency best placed to fill them.",
-    Component: SchedulePreview,
-  },
-  {
-    id: "permissions",
-    nav: "Permissions",
-    label: "PERMISSIONS",
+    id: "compliance",
+    nav: "Compliance & Permissions",
+    label: "COMPLIANCE & PERMISSIONS",
     headline: "HR sets the rules. The system enforces them.",
     body:
-      "Define exactly what each level of management can and cannot do, by department. Shift managers operate within the boundaries you set. No more unauthorized headcount. No more off-system bookings.",
-    Component: PermissionsPreview,
-  },
-  {
-    id: "compliance",
-    nav: "Compliance",
-    label: "COMPLIANCE",
-    headline: "Every worker's documents verified before they reach your site.",
-    body:
-      "Compliance status is checked continuously, not assumed. Right to work, certifications and contracts are verified for every worker on every shift. Non-compliant workers are blocked automatically before they arrive. The risk stays with the agency.",
+      "Compliance status is checked continuously, not assumed. Right to work, certifications and contracts are verified for every worker on every shift. Non-compliant workers are blocked automatically before they arrive. Permissions you define determine exactly what each level of management can do, by department, so shift managers operate within the boundaries you set.",
     Component: ComplianceDocsPreview,
   },
   {
