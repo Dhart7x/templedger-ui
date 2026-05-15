@@ -1488,7 +1488,7 @@ const Home = () => {
                 marginBottom: 0,
               }}
             >
-              Two outcomes. One platform.
+              Stops the bleed today. Sees the patterns tomorrow.
             </motion.h2>
             <p
               className="tl-compound-intro tl-section-intro"
