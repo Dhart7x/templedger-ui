@@ -935,7 +935,7 @@ const Home = () => {
               ].map((block, i) => (
                 <motion.div
                   key={i}
-                  className="tl-cost-block"
+                  className="tl-cost-block tl-hover-d"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
@@ -1338,6 +1338,7 @@ const Home = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.4, delay: 0.3 + i * 0.1, ease: "easeOut" }}
+                  className="tl-hover-c"
                   style={{
                     background: "#FFFFFF",
                     border: "1px solid rgba(76, 29, 149, 0.1)",
@@ -1360,6 +1361,7 @@ const Home = () => {
                     }}
                   >
                     {card.header}
+                    <span className="tl-hover-c-arrow" aria-hidden="true">→</span>
                   </div>
                   <p
                     style={{
@@ -1469,9 +1471,10 @@ const Home = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.45, delay: i * 0.1, ease: "easeOut" }}
+                  className="tl-hover-a"
                   style={{
                     background: "#FFFFFF",
-                    border: "1px solid rgba(0,0,0,0.06)",
+                    border: "1px solid rgba(76, 29, 149, 0.1)",
                     boxShadow: "0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04)",
                     borderRadius: 12,
                     padding: "32px 28px",
@@ -1992,7 +1995,7 @@ const Home = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" }}
-                    className="tl-intel-card"
+                    className="tl-intel-card tl-hover-b"
                     style={{
                       background: "#FFFFFF",
                       border: "1px solid rgba(0,0,0,0.06)",
@@ -2398,6 +2401,7 @@ const Home = () => {
                 ].map((tile) => (
                   <div
                     key={tile.name}
+                    className="tl-hover-d"
                     style={{
                       background: "#FFFFFF",
                       border: "1px solid rgba(76, 29, 149, 0.1)",
@@ -2494,13 +2498,14 @@ const Home = () => {
               {steps.map((s, idx) => (
                 <motion.div
                   key={s.n}
-                  className="tl-step-card"
+                  className="tl-step-card tl-hover-a"
                   initial={{ opacity: 0, y: 32 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.5, delay: idx * 0.12, ease: "easeOut" }}
                   style={{
                     background: "#FFFFFF",
+                    border: "1px solid rgba(76, 29, 149, 0.1)",
                     padding: 28,
                     display: "grid",
                     gridTemplateRows: "auto auto 1fr",

@@ -180,3 +180,79 @@
 
 html, body { overflow-x: hidden; }
 
+/* ============================================================
+   HOMEPAGE CARD HOVER TREATMENTS
+   ============================================================ */
+.tl-hover-a,
+.tl-hover-b,
+.tl-hover-c,
+.tl-hover-d {
+  cursor: pointer;
+  transition:
+    border-color 320ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 320ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    background-color 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.tl-hover-c-arrow {
+  display: inline-block;
+  opacity: 0;
+  margin-left: 4px;
+  color: #4C1D95;
+  font-size: 14px;
+  transition:
+    opacity 280ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 280ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  transform: translateX(0);
+}
+
+@media (hover: hover) {
+  .tl-hover-a:hover {
+    border-color: rgba(76, 29, 149, 0.4) !important;
+    box-shadow: 0 12px 32px rgba(76, 29, 149, 0.12) !important;
+  }
+
+  .tl-hover-b {
+    transition:
+      border-color 360ms cubic-bezier(0.22, 0.61, 0.36, 1),
+      box-shadow 360ms cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 360ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .tl-hover-b:hover {
+    box-shadow:
+      0 0 0 1px #4C1D95,
+      0 8px 24px rgba(76, 29, 149, 0.15) !important;
+  }
+
+  .tl-hover-c {
+    transition:
+      border-color 280ms cubic-bezier(0.22, 0.61, 0.36, 1),
+      box-shadow 280ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .tl-hover-c:hover {
+    box-shadow: 0 0 0 1px #4C1D95 !important;
+  }
+  .tl-hover-c:hover .tl-hover-c-arrow {
+    opacity: 1;
+  }
+
+  .tl-hover-d {
+    transition:
+      border-color 280ms cubic-bezier(0.22, 0.61, 0.36, 1),
+      box-shadow 280ms cubic-bezier(0.22, 0.61, 0.36, 1),
+      background-color 280ms cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 280ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .tl-hover-d:hover {
+    background: rgba(76, 29, 149, 0.05) !important;
+    border-color: rgba(76, 29, 149, 0.2) !important;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tl-hover-a:hover { transform: translateY(-4px); }
+    .tl-hover-b:hover { transform: scale(1.015); }
+    .tl-hover-c:hover .tl-hover-c-arrow { transform: translateX(4px); }
+    .tl-hover-d:hover { transform: translateY(-2px); }
+  }
+}
+
