@@ -1320,17 +1320,14 @@ const Home = () => {
             >
               {[
                 {
-                  tag: "AGENCIES",
                   header: "They squeeze the agency, not the problem.",
                   body: "MSP margin comes from your agencies' margin. Agencies absorb the squeeze on every booking they win, with no improvement to the relationship that produced it.",
                 },
                 {
-                  tag: "DISTANCE",
                   header: "They add a layer. They don't fix the one underneath.",
                   body: "The variables continue to happen. Every shift, every week. The MSP becomes one more reporting layer on a system that already had too many.",
                 },
                 {
-                  tag: "PRIORITY",
                   header: "The best workers go where the relationship is direct.",
                   body: "Agencies route their top talent to direct accounts. You get lower fill rates, slower response, and second-tier service.",
                 },
@@ -1347,28 +1344,10 @@ const Home = () => {
                     borderRadius: 8,
                     padding: 22,
                     display: "grid",
-                    gridTemplateRows: "auto auto 1fr",
+                    gridTemplateRows: "auto 1fr",
                     gap: 0,
                   }}
                 >
-                  <div style={{ paddingBottom: 14 }}>
-                    <span
-                      style={{
-                        display: "inline-block",
-                        padding: "2px 8px",
-                        background: "rgba(226, 75, 74, 0.1)",
-                        border: "1px solid rgba(226, 75, 74, 0.25)",
-                        borderRadius: 4,
-                        color: "#B82F2E",
-                        fontSize: 9,
-                        fontWeight: 600,
-                        letterSpacing: "0.06em",
-                        fontFamily: FONT,
-                      }}
-                    >
-                      {`\u25BC ${card.tag}`}
-                    </span>
-                  </div>
                   <div
                     style={{
                       color: "#2E1065",
