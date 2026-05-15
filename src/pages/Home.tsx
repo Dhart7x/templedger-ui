@@ -957,6 +957,59 @@ const Home = () => {
               ))}
               </div>
 
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
+                style={{
+                  background: "#2E1065",
+                  borderRadius: 6,
+                  padding: "24px 28px",
+                  marginTop: 12,
+                }}
+              >
+                <div
+                  style={{
+                    color: "rgba(255,255,255,0.6)",
+                    fontSize: 9,
+                    fontWeight: 600,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    marginBottom: 10,
+                    fontFamily: FONT,
+                  }}
+                >
+                  — The Compounding Cost
+                </div>
+                <div
+                  className="tl-meta-h"
+                  style={{
+                    color: "#FFFFFF",
+                    fontSize: 18,
+                    fontWeight: 600,
+                    marginBottom: 10,
+                    fontFamily: FONT,
+                    lineHeight: 1.35,
+                  }}
+                >
+                  And your management team carrying all of it. And more.
+                </div>
+                <div
+                  className="tl-meta-b"
+                  style={{
+                    color: "rgba(255,255,255,0.7)",
+                    fontSize: 13,
+                    fontWeight: 400,
+                    lineHeight: 1.55,
+                    margin: 0,
+                    fontFamily: FONT,
+                  }}
+                >
+                  Every variable above is a manual problem in your operation today. Time spent verifying attendance, chasing no-shows, managing agency relationships. The cost of the variables. Then the cost of managing them.
+                </div>
+              </motion.div>
+
           </div>
         </section>
 
