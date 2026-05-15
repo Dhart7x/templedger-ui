@@ -1363,8 +1363,9 @@ const Home = () => {
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.45, delay: i * 0.1, ease: "easeOut" }}
                   style={{
-                    background: "#FAFAF8",
-                    border: "0.5px solid #E5E0DA",
+                    background: "#FFFFFF",
+                    border: "1px solid rgba(0,0,0,0.06)",
+                    boxShadow: "0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04)",
                     borderRadius: 12,
                     padding: "32px 28px",
                     display: "grid",
