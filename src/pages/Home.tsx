@@ -234,7 +234,7 @@ const Home = () => {
     },
     {
       n: "02",
-      t: "We optimize before we configure",
+      t: "We fix the process before we install the system.",
       b: "We identify where the inefficiencies live and how to resolve them. The platform is configured around what we find, not the other way around.",
     },
     {
