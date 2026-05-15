@@ -1134,11 +1134,12 @@ const Home = () => {
 
             {/* Three-column grid */}
             <div
+              className="tl-structure-grid"
               style={{
                 display: "grid",
                 gridTemplateColumns: window.innerWidth >= 1024 ? "1fr 1fr 1fr" : "1fr",
                 gap: 24,
-                alignItems: "start",
+                alignItems: "stretch",
               }}
             >
               {[
@@ -1148,7 +1149,7 @@ const Home = () => {
                 },
                 {
                   label: "SYSTEM SEPARATION",
-                  body: "Time and attendance sits in a separate system. No shared record of what was scheduled or who showed up.",
+                  body: "Time and attendance lives in a separate system. No shared record of who showed up.",
                 },
                 {
                   label: "REACTIVITY",
@@ -1161,6 +1162,10 @@ const Home = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.45, delay: i * 0.1, ease: "easeOut" }}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
                 >
                   {/* Top divider */}
                   <div
@@ -1194,6 +1199,8 @@ const Home = () => {
                       fontWeight: 400,
                       color: "rgba(255, 255, 255, 0.7)",
                       lineHeight: 1.55,
+                      minHeight: 56,
+                      flex: 1,
                     }}
                   >
                     {col.body}
