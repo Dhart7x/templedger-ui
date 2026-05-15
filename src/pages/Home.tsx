@@ -910,7 +910,7 @@ const Home = () => {
               {[
                 {
                   q: "Inflated hours, ghost shifts, late clock-outs, questionable overtime.",
-                  a: "Without verified clock events, unverified hours reach payroll unchallenged. By the time it surfaces it has already been paid.",
+                  a: "Unverified hours reach payroll unchallenged. By the time it surfaces, you've already paid.",
                 },
                 {
                   q: "Compliance breaches on your site are your liability, not the agency's.",
