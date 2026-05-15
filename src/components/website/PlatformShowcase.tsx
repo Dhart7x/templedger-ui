@@ -1,79 +1,416 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { DemoProvider } from "@/components/presentation/demo/DemoContext";
-import ClientLiveSnapshot from "@/components/presentation/demo/views/ClientLiveSnapshot";
-import ClientPayroll from "@/components/presentation/demo/views/ClientPayroll";
-import ClientBilling from "@/components/presentation/demo/views/ClientBilling";
-import AllocationRecommendationPreview from "./platformPreviews/AllocationRecommendationPreview";
-import DirectHirePreview from "./platformPreviews/DirectHirePreview";
-import AgencyPerformancePreview from "./platformPreviews/AgencyPerformancePreview";
-import ComplianceDocsPreview from "./platformPreviews/ComplianceDocsPreview";
 
 interface Props {
   onOpenDemo: () => void;
 }
 
-const TABS = [
-  {
-    id: "dashboard",
-    nav: "Live Dashboard",
-    label: "LIVE DASHBOARD",
-    headline: "Both sides. Same view. Real time.",
-    body:
-      "Exceptions and shift gaps surface the moment they happen, for both the client and the agency simultaneously. The same live record, shared. The schedule sits inside the same view, so coverage is visible before it becomes a problem.",
-    Component: ClientLiveSnapshot,
-  },
-  {
-    id: "allocation",
-    nav: "Intelligent Allocation",
-    label: "INTELLIGENT ALLOCATION",
-    headline: "The system chose this agency. Here's why.",
-    body:
-      "Booking distribution based on real-time availability, proximity and verified performance, not habit. The logic is shown. The decision is yours to confirm.",
-    Component: AllocationRecommendationPreview,
-  },
-  {
-    id: "invoicepayroll",
-    nav: "Invoice & Payroll",
-    label: "INVOICE & PAYROLL",
-    headline: "Every invoice line traces back to a verified clock event.",
-    body:
-      "Every worker follows the same verified sequence — scheduled, clocked in, clocked out, approved, compliant, paid — and TempLedger derives your invoice total directly from those verified payroll hours, broken down by cost centre. No estimates. No reconciliation calls. No disputes.",
-    Component: ClientBilling,
-  },
-  {
-    id: "compliance",
-    nav: "Compliance & Permissions",
-    label: "COMPLIANCE & PERMISSIONS",
-    headline: "HR sets the rules. The system enforces them.",
-    body:
-      "Compliance status is checked continuously, not assumed. Right to work, certifications and contracts are verified for every worker on every shift. Non-compliant workers are blocked automatically before they arrive. Permissions you define determine exactly what each level of management can do, by department, so shift managers operate within the boundaries you set.",
-    Component: ComplianceDocsPreview,
-  },
-  {
-    id: "directhire",
-    nav: "Direct Hire Pipeline",
-    label: "DIRECT HIRE PIPELINE",
-    headline: "Convert your best agency workers into permanent employees.",
-    body:
-      "Every temp worker builds a verified performance record inside TempLedger. Hours served, departments trained, attendance rate, compliance history. All tracked automatically. The workers worth converting are already ranked. You just have to act on it.",
-    Component: DirectHirePreview,
-  },
-  {
-    id: "agencyperf",
-    nav: "Agency Performance",
-    label: "AGENCY PERFORMANCE",
-    headline: "Performance derived from the system. Not from what agencies tell you.",
-    body:
-      "Every metric, fill rate, attendance, response time, compliance rate, is generated automatically from verified data. No self-reporting. No disputes. The agencies that perform get more work. The ones that don't know exactly why.",
-    Component: AgencyPerformancePreview,
-  },
+const PURPLE = "#4C1D95";
+const DEEP_PURPLE = "#2E1065";
+
+const PANELS = [
+  { id: "dashboard", nav: "Live Dashboard" },
+  { id: "allocation", nav: "Intelligent Allocation" },
+  { id: "invoicepayroll", nav: "Invoice & Payroll" },
+  { id: "compliance", nav: "Compliance & Permissions" },
+  { id: "directhire", nav: "Direct Hire Pipeline" },
+  { id: "agencyperf", nav: "Agency Performance" },
 ];
+
+const ROTATION_MS = 7000;
+
+// Shared atoms
+const PanelHeader = ({
+  title,
+  subtitle,
+  badge,
+}: {
+  title: string;
+  subtitle: string;
+  badge?: { text: string; bg: string; color: string };
+}) => (
+  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16, gap: 16 }}>
+    <div>
+      <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: DEEP_PURPLE }}>{title}</div>
+      <div style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "rgba(0,0,0,0.5)", marginTop: 2 }}>{subtitle}</div>
+    </div>
+    {badge && (
+      <span
+        style={{
+          background: badge.bg,
+          color: badge.color,
+          fontFamily: "Inter, sans-serif",
+          fontSize: 10,
+          fontWeight: 700,
+          letterSpacing: "0.08em",
+          padding: "4px 8px",
+          borderRadius: 4,
+          whiteSpace: "nowrap",
+        }}
+      >
+        {badge.text}
+      </span>
+    )}
+  </div>
+);
+
+const ClosingLine = ({ children }: { children: React.ReactNode }) => (
+  <p style={{ color: "rgba(0,0,0,0.65)", fontFamily: "Inter, sans-serif", fontSize: 12, marginTop: 14, lineHeight: 1.5 }}>{children}</p>
+);
+
+const cardBorder = "1px solid rgba(76,29,149,0.12)";
+
+// Panel 1
+const Panel1 = () => {
+  const counters = [
+    { label: "NO-SHOW", n: 5, color: "#B82F2E" },
+    { label: "LATE", n: 5, color: "#B45309" },
+    { label: "OT", n: 3, color: "#B45309" },
+    { label: "NOT OUT", n: 2, color: "#B45309" },
+    { label: "RTW EXP", n: 2, color: "#B82F2E" },
+    { label: "TRAFFIC", n: 2, color: PURPLE },
+  ];
+  return (
+    <div>
+      <PanelHeader
+        title="Live Exceptions"
+        subtitle="Real-time exceptions requiring attention"
+        badge={{ text: "20 ACTIVE", bg: "rgba(226,75,74,0.1)", color: "#B82F2E" }}
+      />
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 8, marginBottom: 14 }}>
+        {counters.map((c) => (
+          <div key={c.label} style={{ background: "#FFFFFF", border: cardBorder, borderRadius: 4, padding: 8 }}>
+            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 8, fontWeight: 700, letterSpacing: "0.08em", color: "rgba(0,0,0,0.55)" }}>
+              {c.label}
+            </div>
+            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: 700, color: c.color, marginTop: 4 }}>{c.n}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{ background: "#FFFFFF", border: cardBorder, borderRadius: 6, padding: 14 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+          <div>
+            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: "#0D0D0B" }}>Marcus Webb</div>
+            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "rgba(0,0,0,0.6)", marginTop: 2 }}>
+              Overtime Triggered · Baltimore, MD · Pinnacle Staffing
+            </div>
+          </div>
+          <span style={{ background: "rgba(180,83,9,0.12)", color: "#B45309", fontSize: 10, fontWeight: 700, padding: "3px 7px", borderRadius: 4 }}>
+            OVERTIME
+          </span>
+        </div>
+        <div style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "rgba(0,0,0,0.7)", marginTop: 8 }}>
+          Marcus has been on shift for 6h 42m. Overtime threshold reached.
+        </div>
+      </div>
+      <ClosingLine>Live exceptions surface the moment they happen, for you and your agencies simultaneously.</ClosingLine>
+    </div>
+  );
+};
+
+// Panel 2
+const Panel2 = () => (
+  <div>
+    <PanelHeader
+      title="New Booking · Friday 06:00 · Cold Storage"
+      subtitle="18 workers needed · Forklift certified"
+      badge={{ text: "RECOMMENDATION READY", bg: "rgba(76,29,149,0.1)", color: PURPLE }}
+    />
+    <div style={{ background: "#FFFFFF", border: `2px solid ${PURPLE}`, borderRadius: 8, padding: 16, marginBottom: 10 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <span style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 700, color: "#0D0D0B" }}>Workforce Direct</span>
+          <span style={{ background: PURPLE, color: "#FFFFFF", fontSize: 9, fontWeight: 700, padding: "3px 7px", borderRadius: 4, letterSpacing: "0.08em" }}>
+            RECOMMENDED
+          </span>
+        </div>
+        <div style={{ fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: 700, color: PURPLE }}>94%</div>
+      </div>
+      <div style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "rgba(0,0,0,0.7)", lineHeight: 1.55, marginBottom: 12 }}>
+        7 workers trained on this department are off today. Highest Friday morning fill rate of your three agencies. Lower charge rate than current night-shift mix.
+      </div>
+      <button
+        style={{
+          background: PURPLE,
+          color: "#FFFFFF",
+          border: "none",
+          padding: "8px 14px",
+          fontFamily: "Inter, sans-serif",
+          fontSize: 12,
+          fontWeight: 700,
+          borderRadius: 6,
+          cursor: "pointer",
+        }}
+      >
+        Submit booking →
+      </button>
+    </div>
+    {[
+      { name: "Pinnacle Staffing", score: "73%" },
+      { name: "Meridian Recruitment", score: "68%" },
+    ].map((a) => (
+      <div
+        key={a.name}
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          border: cardBorder,
+          borderRadius: 6,
+          padding: "10px 14px",
+          marginBottom: 6,
+          background: "#FFFFFF",
+        }}
+      >
+        <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#0D0D0B" }}>{a.name}</span>
+        <span style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: "rgba(0,0,0,0.6)" }}>{a.score}</span>
+      </div>
+    ))}
+    <ClosingLine>Every booking arrives with a recommendation backed by operational data and the rationale behind it.</ClosingLine>
+  </div>
+);
+
+// Panel 3
+const Panel3 = () => {
+  const rows = [
+    { l: "Agency hours billed", s: "1,247 hours · matches verified clock events", v: "$18,234" },
+    { l: "Overtime", s: "42 hours · pre-authorized", v: "$2,860" },
+    { l: "Agency margin", s: "Contracted rate · no variance", v: "$3,626" },
+  ];
+  return (
+    <div>
+      <PanelHeader
+        title="Pinnacle Staffing · Week 19"
+        subtitle="Submitted 14 May · Auto-reconciled against shift ledger"
+        badge={{ text: "✓ APPROVED", bg: "rgba(34,197,94,0.1)", color: "#15803D" }}
+      />
+      <div style={{ background: "#FFFFFF", border: cardBorder, borderRadius: 8, overflow: "hidden" }}>
+        {rows.map((r, i) => (
+          <div
+            key={r.l}
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1.4fr 2fr auto auto",
+              gap: 12,
+              alignItems: "center",
+              padding: "12px 14px",
+              borderBottom: i < rows.length - 1 ? cardBorder : "none",
+            }}
+          >
+            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 600, color: "#0D0D0B" }}>{r.l}</div>
+            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "rgba(0,0,0,0.55)" }}>{r.s}</div>
+            <span style={{ background: "rgba(34,197,94,0.12)", color: "#15803D", fontSize: 9, fontWeight: 700, padding: "3px 6px", borderRadius: 3, letterSpacing: "0.08em" }}>
+              VERIFIED
+            </span>
+            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: "#0D0D0B", minWidth: 70, textAlign: "right" }}>{r.v}</div>
+          </div>
+        ))}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr auto",
+            alignItems: "center",
+            padding: "14px",
+            background: "rgba(76,29,149,0.06)",
+          }}
+        >
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 700, color: DEEP_PURPLE }}>Invoice total</div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: 700, color: DEEP_PURPLE }}>$24,720</div>
+        </div>
+      </div>
+      <ClosingLine>Invoices reconcile automatically against the verified shift ledger. Reconciliation overhead drops to zero.</ClosingLine>
+    </div>
+  );
+};
+
+// Panel 4
+const Panel4 = () => {
+  const tiers = [
+    { l: "Standard shift booking", r: "Site manager" },
+    { l: "Overtime > 4 hours", r: "Ops director" },
+    { l: "Spend > $25K weekly", r: "Finance approval" },
+  ];
+  return (
+    <div>
+      <PanelHeader
+        title="Compliance Status · All Sites"
+        subtitle="Continuous validation across 347 active workers"
+        badge={{ text: "340 / 347 VALID", bg: "rgba(34,197,94,0.1)", color: "#15803D" }}
+      />
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 12 }}>
+        <div style={{ background: "#FFFFFF", border: "1px solid rgba(34,197,94,0.5)", borderRadius: 6, padding: 12 }}>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", color: "#15803D" }}>RIGHT TO WORK</div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 600, color: "#0D0D0B", marginTop: 4 }}>347 valid</div>
+        </div>
+        <div style={{ background: "#FFFFFF", border: "1px solid rgba(184,47,46,0.5)", borderRadius: 6, padding: 12 }}>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", color: "#B82F2E" }}>CERTIFICATIONS</div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 600, color: "#0D0D0B", marginTop: 4 }}>3 expiring · 14 days</div>
+        </div>
+      </div>
+      <div style={{ background: "#FFFFFF", border: cardBorder, borderRadius: 6, overflow: "hidden" }}>
+        <div style={{ padding: "8px 12px", background: "rgba(76,29,149,0.06)", fontFamily: "Inter, sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", color: DEEP_PURPLE }}>
+          OUTBOUND DISPATCH · AUTHORIZATION TIERS
+        </div>
+        {tiers.map((t, i) => (
+          <div
+            key={t.l}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: "10px 12px",
+              borderTop: i === 0 ? "none" : cardBorder,
+              fontFamily: "Inter, sans-serif",
+              fontSize: 12,
+            }}
+          >
+            <span style={{ color: "#0D0D0B" }}>{t.l}</span>
+            <span style={{ color: PURPLE, fontWeight: 600 }}>→ {t.r}</span>
+          </div>
+        ))}
+      </div>
+      <ClosingLine>Compliance is checked continuously, not periodically. Authorization tiers configured to your operation.</ClosingLine>
+    </div>
+  );
+};
+
+// Panel 5
+const Panel5 = () => (
+  <div>
+    <PanelHeader
+      title="Conversion Eligible · This Quarter"
+      subtitle="Workers approaching conversion window"
+      badge={{ text: "3 ELIGIBLE", bg: "rgba(76,29,149,0.1)", color: PURPLE }}
+    />
+    <div style={{ background: "#FFFFFF", border: cardBorder, borderRadius: 8, padding: 16 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
+        <div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 700, color: "#0D0D0B" }}>James Okafor</div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "rgba(0,0,0,0.6)", marginTop: 2 }}>
+            Inbound Warehouse · MHE Operations · Meridian Recruitment
+          </div>
+        </div>
+        <span style={{ background: "rgba(34,197,94,0.12)", color: "#15803D", fontSize: 9, fontWeight: 700, padding: "3px 7px", borderRadius: 4, letterSpacing: "0.08em" }}>
+          FEE WAIVABLE
+        </span>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, marginBottom: 14 }}>
+        {[
+          { l: "VERIFIED HOURS", v: "520" },
+          { l: "ATTENDANCE", v: "97%" },
+          { l: "COMPLIANCE", v: "Clean" },
+        ].map((s) => (
+          <div key={s.l} style={{ background: "rgba(76,29,149,0.04)", borderRadius: 4, padding: 10 }}>
+            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", color: "rgba(0,0,0,0.55)" }}>{s.l}</div>
+            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 700, color: DEEP_PURPLE, marginTop: 4 }}>{s.v}</div>
+          </div>
+        ))}
+      </div>
+      <button
+        style={{
+          background: PURPLE,
+          color: "#FFFFFF",
+          border: "none",
+          padding: "8px 14px",
+          fontFamily: "Inter, sans-serif",
+          fontSize: 12,
+          fontWeight: 700,
+          borderRadius: 6,
+          cursor: "pointer",
+        }}
+      >
+        Initiate conversion →
+      </button>
+    </div>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px", marginTop: 8, fontFamily: "Inter, sans-serif", fontSize: 11, color: "rgba(0,0,0,0.6)" }}>
+      <span>+2 additional workers eligible</span>
+      <a style={{ color: PURPLE, fontWeight: 600, cursor: "pointer" }}>View all →</a>
+    </div>
+    <ClosingLine>Conversion windows surfaced before they close. Margin recovered before the fee resets.</ClosingLine>
+  </div>
+);
+
+// Panel 6
+const Panel6 = () => {
+  const rows = [
+    { a: "Workforce Direct", fr: "94%", frColor: "#15803D", ns: "2.1%", ch: "$18.40" },
+    { a: "Pinnacle Staffing", fr: "73%", frColor: "#B45309", ns: "8.4%", ch: "$21.80" },
+    { a: "Meridian Recruitment", fr: "68%", frColor: "#B45309", ns: "6.1%", ch: "$19.20" },
+  ];
+  return (
+    <div>
+      <PanelHeader title="Agency Scorecard · Last 30 Days" subtitle="Performance from system data, not self-reports" />
+      <div style={{ background: "#FFFFFF", border: cardBorder, borderRadius: 8, overflow: "hidden" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "2fr 1fr 1fr 1fr",
+            gap: 12,
+            padding: "10px 14px",
+            background: "rgba(76,29,149,0.08)",
+            fontFamily: "Inter, sans-serif",
+            fontSize: 10,
+            fontWeight: 700,
+            letterSpacing: "0.08em",
+            color: DEEP_PURPLE,
+          }}
+        >
+          <span>AGENCY</span>
+          <span>FILL RATE</span>
+          <span>NO-SHOW</span>
+          <span>CHARGE</span>
+        </div>
+        {rows.map((r, i) => (
+          <div
+            key={r.a}
+            style={{
+              display: "grid",
+              gridTemplateColumns: "2fr 1fr 1fr 1fr",
+              gap: 12,
+              padding: "12px 14px",
+              borderTop: i === 0 ? "none" : cardBorder,
+              fontFamily: "Inter, sans-serif",
+              fontSize: 12,
+            }}
+          >
+            <span style={{ color: "#0D0D0B", fontWeight: 600 }}>{r.a}</span>
+            <span style={{ color: r.frColor, fontWeight: 700 }}>{r.fr}</span>
+            <span style={{ color: "#0D0D0B" }}>{r.ns}</span>
+            <span style={{ color: "#0D0D0B" }}>{r.ch}</span>
+          </div>
+        ))}
+      </div>
+      <ClosingLine>Every metric derived from verified shift data. Agencies can no longer self-report performance.</ClosingLine>
+    </div>
+  );
+};
+
+const PANEL_COMPONENTS = [Panel1, Panel2, Panel3, Panel4, Panel5, Panel6];
 
 const PlatformShowcase = ({ onOpenDemo }: Props) => {
   const [active, setActive] = useState(0);
-  const tab = TABS[active];
-  const Active = tab.Component;
+  const [paused, setPaused] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const startInterval = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setActive((a) => (a + 1) % PANELS.length);
+    }, ROTATION_MS);
+  };
+
+  useEffect(() => {
+    if (!paused) startInterval();
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [paused]);
+
+  const jumpTo = (i: number) => {
+    setActive(i);
+    if (!paused) startInterval();
+  };
+
+  const Active = PANEL_COMPONENTS[active];
 
   return (
     <section
@@ -93,10 +430,10 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
             fontSize: 10,
             letterSpacing: "0.18em",
             textTransform: "uppercase",
-            color: "#4C1D95",
+            color: PURPLE,
           }}
         >
-          <div style={{ width: 24, height: 2, background: "#4C1D95" }} />
+          <div style={{ width: 24, height: 2, background: PURPLE }} />
           THE PLATFORM
         </div>
 
@@ -114,202 +451,133 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
           Margin recovery, at scale.
         </h2>
         <p
-          className="tl-platform-fraction"
           style={{
             fontFamily: "Inter, sans-serif",
             fontWeight: 500,
             fontSize: 18,
-            color: "#4C1D95",
-            marginBottom: 40,
+            color: PURPLE,
+            marginBottom: 36,
           }}
         >
           This is a fraction of what's inside.
         </p>
 
-        {/* Two column: tab list + content */}
+        {/* Rotating panel container */}
         <div
-          className="tl-platform-grid"
+          className="tl-platform-rotator"
           style={{
-            display: "grid",
-            gridTemplateColumns: "200px 1fr",
-            gap: 24,
-            alignItems: "start",
+            background: "#FAFAF8",
+            border: "1px solid rgba(76,29,149,0.08)",
+            borderRadius: 12,
+            padding: 28,
+            minHeight: 480,
+            position: "relative",
+            overflow: "hidden",
           }}
         >
-          {/* Left column — tab list */}
-          <div
-            className="tl-platform-tablist"
-            style={{
-              borderRight: "0.5px solid #E7E5E4",
-              paddingRight: 16,
-            }}
-          >
-            <div
-              className="tl-platform-tablabel"
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontWeight: 700,
-                fontSize: 9,
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-                color: "#9B9590",
-                marginBottom: 8,
-                paddingLeft: 12,
-              }}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={PANELS[active].id}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
             >
-              PLATFORM VIEWS
-            </div>
-            {TABS.map((t, i) => {
-              const isActive = i === active;
-              return (
-                <button
-                  key={t.id}
-                  className={`tl-platform-tab${isActive ? " is-active" : ""}`}
-                  onClick={() => setActive(i)}
-                  onMouseEnter={(e) => {
-                    if (!isActive) {
-                      e.currentTarget.style.background = "#FAFAF8";
-                      e.currentTarget.style.color = "#44403C";
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isActive) {
-                      e.currentTarget.style.background = "transparent";
-                      e.currentTarget.style.color = "#78716C";
-                    }
-                  }}
-                  style={{
-                    display: "block",
-                    width: "100%",
-                    textAlign: "left",
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: 12,
-                    fontWeight: isActive ? 700 : 500,
-                    padding: isActive ? "9px 12px 9px 11px" : "9px 12px",
-                    borderRadius: "0 6px 6px 0",
-                    border: "none",
-                    borderLeft: isActive ? "3px solid #4C1D95" : "none",
-                    background: isActive ? "#F5F3FF" : "transparent",
-                    color: isActive ? "#4C1D95" : "#78716C",
-                    cursor: "pointer",
-                    transition: "all 0.15s",
-                  }}
-                >
-                  {t.nav}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Right column — context + preview */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={tab.id + "-ctx"}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                <div
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontWeight: 700,
-                    fontSize: 9,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.14em",
-                    color: "#4C1D95",
-                    marginBottom: 4,
-                  }}
-                >
-                  {tab.label}
-                </div>
-                <h3
-                  style={{
-                    fontFamily: "'Bricolage Grotesque', sans-serif",
-                    fontWeight: 800,
-                    fontSize: 18,
-                    color: "#0D0D0B",
-                    lineHeight: 1.3,
-                    marginBottom: 8,
-                  }}
-                >
-                  {tab.headline}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontWeight: 400,
-                    fontSize: 13,
-                    color: "#6B6460",
-                    lineHeight: 1.65,
-                    maxWidth: 520,
-                    marginBottom: 10,
-                  }}
-                >
-                  {tab.body}
-                </p>
-                <button
-                  onClick={onOpenDemo}
-                  style={{
-                    background: "#4C1D95",
-                    border: "none",
-                    padding: "12px 24px",
-                    fontFamily: "Inter, sans-serif",
-                    fontWeight: 700,
-                    fontSize: 13,
-                    color: "#FFFFFF",
-                    borderRadius: 8,
-                    cursor: "pointer",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                  }}
-                >
-                  Explore in the live demo →
-                </button>
-              </motion.div>
-            </AnimatePresence>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={tab.id + "-preview"}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className="tl-platform-preview"
-                style={{
-                  background: "#FFFFFF",
-                  border: "1px solid rgba(0, 0, 0, 0.06)",
-                  borderRadius: 16,
-                  overflow: "hidden",
-                  pointerEvents: "none",
-                  userSelect: "none",
-                  position: "relative",
-                  height: 460,
-                  boxShadow: "0 12px 32px rgba(0,0,0,0.06)",
-                }}
-              >
-                <div
-                  style={{
-                    transform: "scale(0.65)",
-                    transformOrigin: "top left",
-                    width: "154%",
-                    height: "auto",
-                    overflow: "hidden",
-                  }}
-                >
-                  <DemoProvider>
-                    <Active />
-                  </DemoProvider>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-          </div>
+              <Active />
+            </motion.div>
+          </AnimatePresence>
         </div>
 
+        {/* Rotation controls */}
+        <div style={{ display: "flex", gap: 16, alignItems: "center", marginTop: 20, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: 4 }}>
+            {PANELS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => jumpTo(i)}
+                aria-label={`Go to panel ${i + 1}`}
+                style={{
+                  width: 24,
+                  height: 4,
+                  borderRadius: 2,
+                  border: "none",
+                  padding: 0,
+                  background: i === active ? PURPLE : "rgba(76,29,149,0.2)",
+                  cursor: "pointer",
+                  transition: "background 0.2s",
+                }}
+              />
+            ))}
+          </div>
+
+          {!paused ? (
+            <button
+              onClick={() => setPaused(true)}
+              style={{
+                background: "#FFFFFF",
+                border: "1px solid rgba(76,29,149,0.2)",
+                padding: "6px 10px",
+                borderRadius: 4,
+                fontFamily: "Inter, sans-serif",
+                fontSize: 12,
+                color: PURPLE,
+                cursor: "pointer",
+              }}
+            >
+              ⏸ Pause
+            </button>
+          ) : (
+            <button
+              onClick={() => setPaused(false)}
+              style={{
+                background: "#FFFFFF",
+                border: "1px solid rgba(76,29,149,0.2)",
+                padding: "6px 10px",
+                borderRadius: 4,
+                fontFamily: "Inter, sans-serif",
+                fontSize: 12,
+                color: PURPLE,
+                cursor: "pointer",
+              }}
+            >
+              ▶ Resume
+            </button>
+          )}
+
+          <span
+            style={{
+              marginLeft: "auto",
+              fontFamily: "Inter, sans-serif",
+              fontSize: 11,
+              color: "rgba(0,0,0,0.5)",
+            }}
+          >
+            {PANELS[active].nav} · {active + 1} of {PANELS.length}
+          </span>
+        </div>
+
+        {/* Explore CTA */}
+        <div style={{ marginTop: 24 }}>
+          <button
+            onClick={onOpenDemo}
+            style={{
+              background: PURPLE,
+              border: "none",
+              padding: "12px 24px",
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 700,
+              fontSize: 13,
+              color: "#FFFFFF",
+              borderRadius: 8,
+              cursor: "pointer",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+            }}
+          >
+            Explore in the live demo →
+          </button>
+        </div>
       </div>
     </section>
   );
