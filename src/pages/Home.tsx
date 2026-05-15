@@ -1828,9 +1828,10 @@ const Home = () => {
             </div>
           </div>
         </section>
+        <div aria-hidden style={{ height: 60, background: "linear-gradient(180deg, #2E1065 0%, #1A0A3D 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 4 — THE OUTCOME */}
-        <section className="tl-section-outcome" style={{ background: "#2E1065", padding: "80px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-outcome" style={{ background: "#1A0A3D", padding: "80px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <div
               style={{
