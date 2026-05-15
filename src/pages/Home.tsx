@@ -2026,13 +2026,13 @@ const Home = () => {
               <div
                 style={{
                   fontFamily: FONT,
-                  fontSize: 12,
+                  fontSize: 11,
                   fontWeight: 600,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  color: "#FFFFFF",
+                  color: "rgba(255, 255, 255, 0.6)",
                   paddingBottom: 12,
-                  borderBottom: "1px solid rgba(255, 255, 255, 0.15)",
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
                   marginBottom: 16,
                 }}
               >
@@ -2041,13 +2041,13 @@ const Home = () => {
               <div
                 style={{
                   fontFamily: FONT,
-                  fontSize: 12,
+                  fontSize: 11,
                   fontWeight: 600,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
-                  color: "#FFFFFF",
+                  color: "rgba(255, 255, 255, 0.6)",
                   paddingBottom: 12,
-                  borderBottom: "1px solid rgba(255, 255, 255, 0.15)",
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
                   marginBottom: 16,
                 }}
               >
@@ -2066,25 +2066,43 @@ const Home = () => {
               {/* Left column */}
               <div>
                 {[
-                  "Operational visibility",
-                  "Retention",
-                  "Productivity",
-                  "Workforce stability",
-                  "Agency accountability",
+                  { arrow: "▲", text: "Operational visibility" },
+                  { arrow: "▲", text: "Retention" },
+                  { arrow: "▲", text: "Productivity" },
+                  { arrow: "▲", text: "Workforce stability" },
+                  { arrow: "▲", text: "Agency accountability" },
                 ].map((item, i, arr) => (
                   <div
-                    key={item}
+                    key={item.text}
                     style={{
-                      fontFamily: FONT,
-                      fontSize: window.innerWidth >= 768 ? 16 : 15,
-                      fontWeight: 500,
-                      color: "#FFFFFF",
-                      lineHeight: 1.5,
-                      padding: "14px 0",
-                      borderBottom: i < arr.length - 1 ? "1px solid rgba(255, 255, 255, 0.06)" : "none",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 12,
+                      padding: "16px 0",
+                      borderBottom: i < arr.length - 1 ? "1px solid rgba(255, 255, 255, 0.08)" : "none",
                     }}
                   >
-                    {item}
+                    <span
+                      style={{
+                        fontSize: 10,
+                        color: "rgba(255, 255, 255, 0.5)",
+                        display: "inline-block",
+                        lineHeight: 1,
+                      }}
+                    >
+                      {item.arrow}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: FONT,
+                        fontSize: window.innerWidth >= 768 ? 18 : 16,
+                        fontWeight: 500,
+                        color: "#FFFFFF",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {item.text}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -2092,25 +2110,43 @@ const Home = () => {
               {/* Right column */}
               <div>
                 {[
-                  "Compliance exposure",
-                  "Overtime",
-                  "Reconciliation overhead",
-                  "Fraud risk",
-                  "Management burden",
+                  { arrow: "▼", text: "Compliance exposure" },
+                  { arrow: "▼", text: "Overtime" },
+                  { arrow: "▼", text: "Reconciliation overhead" },
+                  { arrow: "▼", text: "Fraud risk" },
+                  { arrow: "▼", text: "Management burden" },
                 ].map((item, i, arr) => (
                   <div
-                    key={item}
+                    key={item.text}
                     style={{
-                      fontFamily: FONT,
-                      fontSize: window.innerWidth >= 768 ? 16 : 15,
-                      fontWeight: 500,
-                      color: "#FFFFFF",
-                      lineHeight: 1.5,
-                      padding: "14px 0",
-                      borderBottom: i < arr.length - 1 ? "1px solid rgba(255, 255, 255, 0.06)" : "none",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 12,
+                      padding: "16px 0",
+                      borderBottom: i < arr.length - 1 ? "1px solid rgba(255, 255, 255, 0.08)" : "none",
                     }}
                   >
-                    {item}
+                    <span
+                      style={{
+                        fontSize: 10,
+                        color: "rgba(255, 255, 255, 0.5)",
+                        display: "inline-block",
+                        lineHeight: 1,
+                      }}
+                    >
+                      {item.arrow}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: FONT,
+                        fontSize: window.innerWidth >= 768 ? 18 : 16,
+                        fontWeight: 500,
+                        color: "#FFFFFF",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {item.text}
+                    </span>
                   </div>
                 ))}
               </div>
