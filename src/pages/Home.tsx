@@ -1687,7 +1687,7 @@ const Home = () => {
                       width: 12,
                       height: 12,
                       borderRadius: "50%",
-                      background: "#4C1D95",
+                      background: "#FFFFFF",
                       marginTop: 2,
                     }}
                   />
