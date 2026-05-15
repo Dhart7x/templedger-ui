@@ -571,7 +571,7 @@ const Home = () => {
 
       <div className="tl-nav-spacer" style={{ paddingTop: 56, background: "#4C1D95", margin: 0 }}>
         {/* SECTION 1 — HERO */}
-        <section className="tl-hero" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #4C1D95 20%, #5B21B6 45%, rgba(91,33,182,0.6) 65%, rgba(91,33,182,0.15) 82%, rgba(255,255,255,0) 100%)", padding: "80px 48px 60px", margin: 0, width: "100%", minHeight: 520 }}>
+        <section className="tl-hero" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #4C1D95 20%, #5B21B6 45%, rgba(91,33,182,0.6) 65%, rgba(91,33,182,0.15) 82%, rgba(255,255,255,0) 100%)", padding: "80px 48px 0", margin: 0, width: "100%", minHeight: 520 }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <h1
               className="tl-hero-h1"
