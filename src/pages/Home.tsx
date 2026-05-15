@@ -293,9 +293,9 @@ const Home = () => {
           /* COST OF INACTION (hidden costs) */
           .tl-hidden-costs { margin: 0 -20px !important; padding: 56px 20px !important; border-radius: 0 !important; }
           .tl-hidden-costs h2 { font-size: 26px !important; letter-spacing: -0.02em !important; }
-          .tl-cost-block { padding: 20px 0 !important; }
-          .tl-cost-question { font-size: 15px !important; font-weight: 700 !important; }
-          .tl-cost-answer { font-size: 13px !important; line-height: 1.65 !important; }
+          .tl-cost-grid { grid-template-columns: 1fr !important; }
+          .tl-cost-question { font-size: 16px !important; }
+          .tl-cost-answer { font-size: 13px !important; }
           .tl-cost-closing { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
           .tl-cost-closing-right { text-align: left !important; }
 
