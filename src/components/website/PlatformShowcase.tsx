@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 
 interface Props {
   onOpenDemo: () => void;
@@ -386,15 +385,44 @@ const Panel6 = () => {
 
 const PANEL_COMPONENTS = [Panel1, Panel2, Panel3, Panel4, Panel5, Panel6];
 
+const PANEL_GAP = 16;
+const TRANSITION_MS = 600;
+const TRANSITION_EASE = "cubic-bezier(0.22, 0.61, 0.36, 1)";
+
 const PlatformShowcase = ({ onOpenDemo }: Props) => {
-  const [active, setActive] = useState(0);
+  // index can run from 0..PANELS.length (last is the Panel-1 duplicate for seamless loop)
+  const [index, setIndex] = useState(0);
+  const [animate, setAnimate] = useState(true);
   const [paused, setPaused] = useState(false);
+  const [containerW, setContainerW] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const outerRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchDeltaX = useRef(0);
+
+  const active = index % PANELS.length;
+
+  const panelPct = isMobile ? 0.9 : 0.88;
+  const panelWidth = containerW > 0 ? containerW * panelPct : 0;
+  const translatePx = -(index * (panelWidth + PANEL_GAP));
+
+  // Measure container
+  useLayoutEffect(() => {
+    const measure = () => {
+      if (outerRef.current) setContainerW(outerRef.current.clientWidth);
+      setIsMobile(window.innerWidth < 768);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
 
   const startInterval = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
-      setActive((a) => (a + 1) % PANELS.length);
+      setAnimate(true);
+      setIndex((i) => i + 1);
     }, ROTATION_MS);
   };
 
@@ -405,12 +433,58 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
     };
   }, [paused]);
 
+  const onTransitionEnd = () => {
+    // After landing on the duplicate (index === PANELS.length), snap back to 0 with no animation
+    if (index >= PANELS.length) {
+      setAnimate(false);
+      setIndex(0);
+    }
+  };
+
+  // Re-enable animation after the silent snap
+  useEffect(() => {
+    if (!animate) {
+      const id = requestAnimationFrame(() => {
+        // double-RAF to ensure the no-transition style is committed first
+        requestAnimationFrame(() => setAnimate(true));
+      });
+      return () => cancelAnimationFrame(id);
+    }
+  }, [animate]);
+
   const jumpTo = (i: number) => {
-    setActive(i);
+    setAnimate(true);
+    setIndex(i);
     if (!paused) startInterval();
   };
 
-  const Active = PANEL_COMPONENTS[active];
+  // Touch / swipe support (mobile)
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchDeltaX.current = 0;
+  };
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX.current == null) return;
+    touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
+  };
+  const onTouchEnd = () => {
+    if (touchStartX.current == null) return;
+    const threshold = panelWidth * 0.25;
+    if (touchDeltaX.current <= -threshold) {
+      setAnimate(true);
+      setIndex((i) => i + 1);
+      if (!paused) startInterval();
+    } else if (touchDeltaX.current >= threshold) {
+      setAnimate(true);
+      setIndex((i) => Math.max(0, i - 1));
+      if (!paused) startInterval();
+    }
+    touchStartX.current = null;
+    touchDeltaX.current = 0;
+  };
+
+  // Track items: 6 panels + duplicate of panel 1 for seamless loop
+  const trackItems = [...PANELS, PANELS[0]];
 
   return (
     <section
@@ -464,28 +538,56 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
 
         {/* Rotating panel container */}
         <div
-          className="tl-platform-rotator"
+          ref={outerRef}
+          className="tl-platform-carousel"
           style={{
-            background: "#FAFAF8",
-            border: "1px solid rgba(76,29,149,0.08)",
-            borderRadius: 12,
-            padding: 28,
-            minHeight: 480,
             position: "relative",
+            width: "100%",
             overflow: "hidden",
           }}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
         >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={PANELS[active].id}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-            >
-              <Active />
-            </motion.div>
-          </AnimatePresence>
+          <div
+            className="tl-platform-track"
+            onTransitionEnd={onTransitionEnd}
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              gap: PANEL_GAP,
+              transform: `translateX(${translatePx}px)`,
+              transition: animate ? `transform ${TRANSITION_MS}ms ${TRANSITION_EASE}` : "none",
+              willChange: "transform",
+            }}
+          >
+            {trackItems.map((p, i) => {
+              const Cmp = PANEL_COMPONENTS[i % PANELS.length];
+              const isActive = i === index;
+              return (
+                <div
+                  key={`${p.id}-${i}`}
+                  style={{
+                    flexShrink: 0,
+                    width: panelWidth || `${panelPct * 100}%`,
+                    background: "#FAFAF8",
+                    border: "1px solid rgba(76,29,149,0.08)",
+                    borderRadius: 12,
+                    padding: 28,
+                    minHeight: 480,
+                    boxSizing: "border-box",
+                    opacity: isActive ? 1 : 0.4,
+                    filter: isActive ? "none" : "saturate(0.7)",
+                    transition: animate
+                      ? `opacity ${TRANSITION_MS}ms ${TRANSITION_EASE}, filter ${TRANSITION_MS}ms ${TRANSITION_EASE}`
+                      : "none",
+                  }}
+                >
+                  <Cmp />
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         {/* Rotation controls */}
