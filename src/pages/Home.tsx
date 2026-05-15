@@ -306,6 +306,13 @@ const Home = () => {
           /* Section intro paragraph margin-bottom mobile */
           .tl-section-intro { margin-bottom: 32px !important; }
 
+          /* The Cost — collapse rows on mobile */
+          .tl-cost-row { grid-template-columns: 1fr !important; gap: 4px !important; padding: 16px 0 !important; }
+          .tl-cost-row-num { font-size: 16px !important; }
+          .tl-cost-row-title { font-size: 18px !important; }
+          .tl-cost-row-body { font-size: 12px !important; }
+          h2.tl-section-h2 + .tl-cost-rows, .tl-section-cost h2 { margin-bottom: 32px !important; }
+
           /* INVOICE / REAL COST */
           .tl-section-invoice { padding: 48px 20px !important; }
           .tl-invoice-card { max-width: 100% !important; width: 100% !important; }
