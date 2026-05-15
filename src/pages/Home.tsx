@@ -393,6 +393,11 @@ const Home = () => {
           .tl-section-h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
           .tl-section-tag { font-size: 9px !important; }
           .tl-section-sub { font-size: 13px !important; max-width: 100% !important; }
+
+          /* INTELLIGENT WORKFORCE ORCHESTRATION */
+          .tl-section-intel { padding: 56px 20px !important; }
+          .tl-intel-h2 { font-size: 26px !important; letter-spacing: -0.02em !important; }
+          .tl-intel-grid { grid-template-columns: 1fr !important; }
         }
 
       `}</style>
