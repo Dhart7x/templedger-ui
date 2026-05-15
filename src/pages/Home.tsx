@@ -1449,189 +1449,196 @@ const Home = () => {
                 color: "#0D0D0B",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
-                marginBottom: 12,
+                marginBottom: 0,
               }}
             >
-              The platform learns your operation.
+              The platform earns its category.
             </motion.h2>
             <p
+              className="tl-compound-intro"
               style={{
                 fontFamily: FONT,
                 fontWeight: 400,
-                fontSize: 16,
-                color: "#6B6460",
-                lineHeight: 1.7,
-                maxWidth: 600,
+                fontSize: 14,
+                color: "rgba(0, 0, 0, 0.6)",
+                lineHeight: 1.55,
+                maxWidth: 720,
+                marginTop: 8,
                 marginBottom: 56,
               }}
             >
-              Every shift, every booking, every exception builds a verified data record specific to your sites, your agencies and your workforce. The system gets smarter with every shift that runs through it.
+              Margin recovery is immediate. Intelligence compounds from month six onward.
             </p>
 
-            <div style={{ position: "relative" }}>
+            {/* Horizontal timeline */}
+            <div style={{ position: "relative", padding: "0 4px" }}>
+              {/* Timeline line */}
               <motion.div
-                className="tl-compound-line"
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                 style={{
                   position: "absolute",
-                  top: 28,
-                  left: "16.5%",
-                  width: "67%",
+                  top: 7,
+                  left: 0,
+                  right: 0,
                   height: 2,
-                  background: "linear-gradient(to right, #4C1D95, #7C3AED, #4C1D95)",
-                  zIndex: 0,
+                  background: "#4C1D95",
+                  borderRadius: 1,
                   transformOrigin: "left",
                 }}
               />
+
+              {/* Markers + labels row */}
               <div
-                className="tl-compound-stages"
                 style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(3, 1fr)",
-                  gap: 0,
                   position: "relative",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                  height: 16,
                 }}
               >
-                {[
-                  {
-                    time: "DAY ONE",
-                    title: "Structured and verified.",
-                    body:
-                      "The system works because the data is shared. Both sides. Real time. Verified at source. Every decision backed by a live operational record.",
-                  },
-                  {
-                    time: "MONTH SIX",
-                    title: "Learning your operation.",
-                    body:
-                      "Patterns emerge. The system identifies which shifts run short, which agencies respond fastest, which workers are worth converting. Recommendations sharpen with every shift.",
-                  },
-                  {
-                    time: "YEAR TWO",
-                    title: "A model of your workforce.",
-                    body:
-                      "The platform has seen your operation across hundreds of shifts. It anticipates problems before they happen. Forecasts before you ask. No competitor can replicate what it knows about your sites.",
-                  },
-                ].map((s, i) => (
-                  <motion.div
-                    key={s.time}
-                    className="tl-compound-stage"
-                    initial={{ opacity: 0, y: 32 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: i * 0.15, ease: "easeOut" }}
+                {/* DAY ONE marker (left) */}
+                <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                  <div
                     style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      textAlign: "center",
-                      position: "relative",
-                      zIndex: 1,
-                      padding: "0 24px",
+                      width: 12,
+                      height: 12,
+                      borderRadius: "50%",
+                      background: "#4C1D95",
+                      marginTop: 2,
                     }}
-                  >
-                    <div
-                      style={{
-                        width: 56,
-                        height: 56,
-                        borderRadius: "50%",
-                        background: "#4C1D95",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        marginBottom: 16,
-                        flexShrink: 0,
-                      }}
-                    >
-                      <div style={{ width: 16, height: 16, borderRadius: "50%", background: "#FFFFFF" }} />
-                    </div>
-                    <div
-                      style={{
-                        fontFamily: FONT,
-                        fontWeight: 700,
-                        fontSize: 10,
-                        letterSpacing: "0.14em",
-                        textTransform: "uppercase",
-                        color: "#4C1D95",
-                        marginBottom: 8,
-                      }}
-                    >
-                      {s.time}
-                    </div>
-                    <div
-                      style={{
-                        fontFamily: "'Bricolage Grotesque', sans-serif",
-                        fontWeight: 700,
-                        fontSize: 16,
-                        color: "#0D0D0B",
-                        marginBottom: 8,
-                        lineHeight: 1.3,
-                      }}
-                    >
-                      {s.title}
-                    </div>
-                    <div
-                      className="tl-compound-stage-body"
-                      style={{
-                        fontFamily: FONT,
-                        fontWeight: 400,
-                        fontSize: 13,
-                        color: "#6B6460",
-                        lineHeight: 1.65,
-                        maxWidth: 260,
-                      }}
-                    >
-                      {s.body}
-                    </div>
-                  </motion.div>
-                ))}
+                  />
+                </div>
+
+                {/* MONTH SIX marker (center) */}
+                <div
+                  style={{
+                    position: "absolute",
+                    left: "50%",
+                    top: 0,
+                    transform: "translateX(-50%)",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 16,
+                      height: 16,
+                      borderRadius: "50%",
+                      background: "#4C1D95",
+                      border: "3px solid #FFFFFF",
+                      boxSizing: "content-box",
+                      marginTop: -3,
+                    }}
+                  />
+                </div>
+
+                {/* ONGOING marker (right arrowhead) */}
+                <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+                  <div
+                    style={{
+                      width: 0,
+                      height: 0,
+                      borderTop: "5px solid transparent",
+                      borderBottom: "5px solid transparent",
+                      borderLeft: "8px solid #4C1D95",
+                      marginTop: 3,
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Labels row */}
+              <div
+                style={{
+                  position: "relative",
+                  marginTop: 12,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                  fontFamily: FONT,
+                  fontSize: 10,
+                  fontWeight: 600,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                }}
+              >
+                <span style={{ color: "#4C1D95" }}>DAY ONE</span>
+                <span
+                  style={{
+                    position: "absolute",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    color: "#4C1D95",
+                  }}
+                >
+                  MONTH SIX
+                </span>
+                <span style={{ color: "rgba(76, 29, 149, 0.5)" }}>ONGOING</span>
               </div>
             </div>
 
-            <motion.div
-              className="tl-compound-bottom"
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
+            {/* Phase blocks */}
+            <div
+              className="tl-compound-phases"
               style={{
-                marginTop: 56,
-                padding: "32px 40px",
-                background: "#4C1D95",
-                borderRadius: 12,
+                marginTop: 32,
                 display: "grid",
-                gridTemplateColumns: "1fr auto",
+                gridTemplateColumns: window.innerWidth >= 768 ? "1fr 1fr" : "1fr",
                 gap: 32,
-                alignItems: "center",
+                alignItems: "start",
               }}
             >
-              <div
-                style={{
-                  fontFamily: "'Bricolage Grotesque', sans-serif",
-                  fontWeight: 700,
-                  fontSize: 20,
-                  color: "#FFFFFF",
-                  lineHeight: 1.5,
-                }}
-              >
-                Your site data compounds into intelligent workforce orchestration.
-              </div>
-              <div
-                className="tl-compound-bottom-right"
-                style={{
-                  fontFamily: FONT,
-                  fontWeight: 400,
-                  fontSize: 14,
-                  color: "rgba(255,255,255,0.55)",
-                  textAlign: "right",
-                  lineHeight: 1.6,
-                }}
-              >
-                Across thousands of shifts. From month six onwards.
-              </div>
-            </motion.div>
+              {[
+                {
+                  title: "Margin recovery.",
+                  body: "Verified clocking. Real-time compliance. Authorization controls. Automated reconciliation. Agency performance derived from system data rather than self-reports. The bleed stops the day hardware goes live. And much more.",
+                },
+                {
+                  title: "Intelligent workforce orchestration.",
+                  body: "Shift gaps predicted. Conversion candidates identified. Spend anomalies flagged. Cost creep surfaced. Agency redistribution recommended. The platform stops describing your operation and starts orchestrating it. And much more.",
+                },
+              ].map((phase, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.3 + i * 0.15, ease: "easeOut" }}
+                >
+                  <div
+                    className="tl-compound-phase-title"
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 600,
+                      fontSize: 18,
+                      color: "#2E1065",
+                      marginBottom: 10,
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {phase.title}
+                  </div>
+                  <div
+                    className="tl-compound-phase-body"
+                    style={{
+                      fontFamily: FONT,
+                      fontWeight: 400,
+                      fontSize: 13,
+                      color: "rgba(0, 0, 0, 0.65)",
+                      lineHeight: 1.55,
+                    }}
+                  >
+                    {phase.body}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
         <div aria-hidden style={{ height: 80, background: "linear-gradient(to bottom, #FFFFFF 0%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
