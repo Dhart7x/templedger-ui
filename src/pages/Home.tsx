@@ -400,6 +400,11 @@ const Home = () => {
           .tl-platform-preview { height: 360px !important; }
           .tl-platform-preview > div { transform: scale(0.55) !important; transform-origin: top left !important; width: 182% !important; }
 
+          /* INTEGRATIONS STRIP */
+          .tl-section-integrations { padding: 32px 24px !important; }
+          .tl-section-integrations h2 { font-size: 18px !important; }
+          .tl-integrations-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
           /* COMPOUNDING INTELLIGENCE */
           .tl-section-compound { padding: 64px 20px !important; }
           .tl-compound-h2 { font-size: 24px !important; letter-spacing: -0.02em !important; }
