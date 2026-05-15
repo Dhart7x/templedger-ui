@@ -1503,7 +1503,7 @@ const Home = () => {
                 marginBottom: 56,
               }}
             >
-              Margin recovery is immediate. Intelligence compounds from month six onward.
+              Margin recovery starts from day one. The platform's intelligence compounds with every shift, becoming a true workforce orchestration system as your operational data deepens.
             </p>
 
             {/* Horizontal timeline */}
