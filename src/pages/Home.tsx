@@ -673,7 +673,7 @@ const Home = () => {
         </section>
 
         {/* Hero → white fade */}
-        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #4C1D95 0%, #4C1D95 70%, #FFFFFF 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #4C1D95 0%, #4C1D95 75%, #FFFFFF 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 2 — THE INVOICE VISUAL */}
         <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "32px 48px 0", position: "relative", zIndex: 1, margin: 0, width: "100%" }}>
@@ -988,7 +988,7 @@ const Home = () => {
 
 
         {/* TRANSITION — cream cost-of-inaction → reveal dark purple */}
-        <div aria-hidden style={{ height: 60, background: "linear-gradient(180deg, #FAFAF8 0%, #1A0A3D 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #FAFAF8 0%, #FAFAF8 75%, #1A0A3D 100%)", margin: 0, width: "100%" }} />
 
 
         {/* SECTION 3b — THE REVEAL */}
@@ -1123,7 +1123,7 @@ const Home = () => {
             </motion.div>
           </div>
         </section>
-        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #1A0A3D 0%, #1A0A3D 35%, #FFFFFF 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #1A0A3D 0%, #1A0A3D 75%, #FFFFFF 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 3c — THE ALTERNATIVE */}
         <section className="tl-section-alternative" style={{ background: "#FFFFFF", padding: "80px 48px", margin: 0, width: "100%" }}>
@@ -1909,7 +1909,7 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <div aria-hidden style={{ height: 80, background: "linear-gradient(180deg, #FAFAF8 0%, #1A0A3D 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #FAFAF8 0%, #FAFAF8 75%, #1A0A3D 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 4 — THE OUTCOME */}
         <section className="tl-section-outcome" style={{ background: "#1A0A3D", padding: "80px 48px", margin: 0, width: "100%" }}>
@@ -2088,7 +2088,7 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #1A0A3D 0%, #1A0A3D 35%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #1A0A3D 0%, #1A0A3D 75%, #FAFAF8 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 5 — HOW IT WORKS */}
         <section id="how-it-works" className="tl-section-how" style={{ background: C.surface, padding: "80px 48px", margin: 0, width: "100%" }}>
@@ -2209,7 +2209,7 @@ const Home = () => {
             </div>
           </motion.div>
         </section>
-        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #FAFAF8 0%, #FAFAF8 35%, #4C1D95 100%)", margin: 0, width: "100%" }} />
+        <div aria-hidden style={{ height: 120, background: "linear-gradient(to bottom, #FAFAF8 0%, #FAFAF8 75%, #4C1D95 100%)", margin: 0, width: "100%" }} />
 
         {/* SECTION 6 — CONTACT */}
         <section id="contact" className="tl-section-contact" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #3B1578 40%, #2E1065 70%, #1A0A3D 100%)", padding: "80px 48px", margin: 0, width: "100%" }}>
