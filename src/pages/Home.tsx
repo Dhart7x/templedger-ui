@@ -2093,7 +2093,23 @@ const Home = () => {
         {/* SECTION 5 — HOW IT WORKS */}
         <section id="how-it-works" className="tl-section-how" style={{ background: C.surface, padding: "80px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <SectionTag>How It Works</SectionTag>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                marginBottom: 16,
+                fontFamily: FONT,
+                fontWeight: 700,
+                fontSize: 10,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#4C1D95",
+              }}
+            >
+              <span style={{ width: 24, height: 2, background: "#4C1D95" }} />
+              How It Works
+            </div>
             <h2 className="tl-section-h2"
               style={{
                 fontWeight: 800,
