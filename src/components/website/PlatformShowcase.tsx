@@ -277,8 +277,8 @@ const Panel3 = () => (
   </div>
 );
 
-// Panel 6
-const Panel6 = () => {
+// Panel 4
+const Panel4 = () => {
   const rows = [
     { a: "Workforce Direct", fr: "94%", frColor: "#15803D", ns: "2.1%", ch: "$18.40" },
     { a: "Pinnacle Staffing", fr: "73%", frColor: "#B45309", ns: "8.4%", ch: "$21.80" },
