@@ -332,7 +332,7 @@ const Panel4 = () => {
   );
 };
 
-const PANEL_COMPONENTS = [Panel1, Panel2, Panel3, Panel4, Panel5, Panel6];
+const PANEL_COMPONENTS = [Panel1, Panel2, Panel3, Panel4];
 
 const PANEL_GAP = 16;
 const TRANSITION_MS = 600;
