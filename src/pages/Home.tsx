@@ -421,12 +421,9 @@ const Home = () => {
           .tl-compliance-left p { font-size: 12px !important; }
 
           /* CREDIBILITY STRIP */
-          .tl-credibility-strip { padding: 28px 24px !important; }
-          .tl-credibility-inner { grid-template-columns: 1fr !important; gap: 24px !important; text-align: center !important; }
-          .tl-credibility-divider { display: none !important; }
-          .tl-credibility-left p { max-width: none !important; font-size: 13px !important; }
-          .tl-credibility-right { flex-direction: column !important; gap: 16px !important; justify-content: center !important; }
-          .tl-credibility-right > div > div:first-child { font-size: 20px !important; }
+          .tl-credibility-strip { padding: 40px 24px !important; }
+          .tl-credibility-inner { max-width: 100% !important; }
+          .tl-credibility-inner p { font-size: 16px !important; }
 
           /* OUTCOME */
           .tl-section-outcome { padding: 64px 20px !important; }
@@ -2564,7 +2561,7 @@ const Home = () => {
 			className="tl-credibility-strip"
 			style={{
 				background: "#FAFAF8",
-				padding: "36px 48px",
+				padding: "48px 48px",
 				borderTop: "1px solid rgba(76, 29, 149, 0.1)",
 				borderBottom: "1px solid rgba(76, 29, 149, 0.1)",
 				width: "100%",
@@ -2574,96 +2571,40 @@ const Home = () => {
 			<div
 				className="tl-credibility-inner"
 				style={{
-					maxWidth: 1100,
-					margin: "0 auto",
-					display: "grid",
-					gridTemplateColumns: "auto 1fr auto",
-					gap: 32,
+					display: "flex",
+					flexDirection: "column",
 					alignItems: "center",
+					textAlign: "center",
+					maxWidth: 720,
+					margin: "0 auto",
 				}}
 			>
-				{/* Left Block */}
-				<div className="tl-credibility-left">
-					<div
-						style={{
+				<div
+					style={{
 						fontFamily: FONT,
 						fontWeight: 600,
 						fontSize: 9,
 						letterSpacing: "0.1em",
 						textTransform: "uppercase",
 						color: "rgba(76, 29, 149, 0.5)",
-						marginBottom: 4,
-					}}
-					>
-						— BUILT BY
-					</div>
-					<p
-						style={{
-						fontFamily: FONT,
-						fontWeight: 600,
-						fontSize: 14,
-						color: "#2E1065",
-						lineHeight: 1.4,
-						margin: 0,
-						maxWidth: 360,
-					}}
-					>
-						Operators who've run agency workforces, not engineers who've imagined them.
-					</p>
-				</div>
-
-				{/* Divider */}
-				<div
-					className="tl-credibility-divider"
-					style={{
-						width: 1,
-						height: 32,
-						background: "rgba(76, 29, 149, 0.15)",
-					}}
-				/>
-
-				{/* Right Block — Stats */}
-				<div
-					className="tl-credibility-right"
-					style={{
-						display: "flex",
-						gap: 32,
-						alignItems: "center",
+						marginBottom: 8,
 					}}
 				>
-					{[
-						{ num: "15+", label: "YEARS IN AGENCY OPS" },
-						{ num: "$2B+", label: "AGENCY SPEND MANAGED" },
-						{ num: "UK + US", label: "MARKETS RUN" },
-					].map((stat) => (
-						<div key={stat.label} style={{ textAlign: "center" }}>
-							<div
-								style={{
-									fontFamily: FONT,
-									fontWeight: 700,
-									fontSize: 24,
-									color: "#2E1065",
-									lineHeight: 1,
-								}}
-							>
-								{stat.num}
-							</div>
-							<div
-								style={{
-									fontFamily: FONT,
-									fontWeight: 500,
-									fontSize: 10,
-									letterSpacing: "0.05em",
-									color: "rgba(0, 0, 0, 0.6)",
-									marginTop: 2,
-									textTransform: "uppercase",
-								}}
-							>
-								{stat.label}
-							</div>
-						</div>
-					))}
+					— BUILT BY
 				</div>
+				<p
+					style={{
+					fontFamily: FONT,
+					fontWeight: 600,
+					fontSize: 18,
+					color: "#2E1065",
+					lineHeight: 1.4,
+					margin: 0,
+					maxWidth: 600,
+				}}
+				>
+					Operators who've run agency workforces, not engineers who've imagined them.
+				</p>
 			</div>
 		</section>
 
