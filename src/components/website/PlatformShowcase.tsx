@@ -222,60 +222,82 @@ const Panel2 = () => (
 
 
 // Panel 3
-const Panel3 = () => (
-  <div>
-    <PanelHeader
-      title="Conversion Eligible · This Quarter"
-      subtitle="Workers approaching conversion window"
-      badge={{ text: "3 ELIGIBLE", bg: "rgba(76,29,149,0.1)", color: PURPLE }}
-    />
-    <div style={{ background: "#FFFFFF", border: cardBorder, borderRadius: 8, padding: 16 }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
+const Panel3 = () => {
+  const workers = [
+    { name: "James Okafor", agency: "Meridian Recruitment", hours: "520", attendance: "97%", trained: "MHE Ops, Inbound, Returns", status: "FEE WAIVABLE", statusGreen: true },
+    { name: "Lucia Marchetti", agency: "Workforce Direct", hours: "487", attendance: "98%", trained: "Outbound, Cold Storage", status: "FEE WAIVABLE", statusGreen: true },
+    { name: "Hassan Mahmood", agency: "Pinnacle Staffing", hours: "462", attendance: "95%", trained: "Inbound, MHE Ops", status: "FEE WAIVABLE", statusGreen: true },
+    { name: "Folake Adeyemi", agency: "Meridian Recruitment", hours: "441", attendance: "94%", trained: "Returns, Outbound", status: "APPROACHING", statusGreen: false },
+    { name: "Marek Wojcik", agency: "Workforce Direct", hours: "428", attendance: "96%", trained: "MHE Ops, Inbound", status: "APPROACHING", statusGreen: false },
+    { name: "Anaya Krishnan", agency: "Pinnacle Staffing", hours: "412", attendance: "99%", trained: "Cold Storage, Inbound", status: "APPROACHING", statusGreen: false },
+    { name: "Tomás Herrera", agency: "Meridian Recruitment", hours: "398", attendance: "93%", trained: "Outbound, Returns", status: "APPROACHING", statusGreen: false },
+  ];
+
+  return (
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12, gap: 16 }}>
         <div>
-          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 700, color: "#0D0D0B" }}>James Okafor</div>
-          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "rgba(0,0,0,0.6)", marginTop: 2 }}>
-            Inbound Warehouse · MHE Operations · Meridian Recruitment
-          </div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: DEEP_PURPLE }}>Conversion Eligible · This Quarter</div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "rgba(0,0,0,0.5)", marginTop: 2 }}>Workers approaching their fee waiver threshold</div>
         </div>
-        <span style={{ background: "rgba(34,197,94,0.12)", color: "#15803D", fontSize: 9, fontWeight: 700, padding: "3px 7px", borderRadius: 4, letterSpacing: "0.08em" }}>
-          FEE WAIVABLE
+        <span style={{ background: "rgba(76,29,149,0.1)", color: PURPLE, fontFamily: "Inter, sans-serif", fontSize: 10, fontWeight: 600, padding: "2px 8px", borderRadius: 4, whiteSpace: "nowrap" }}>
+          7 ELIGIBLE
         </span>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, marginBottom: 14 }}>
-        {[
-          { l: "VERIFIED HOURS", v: "520" },
-          { l: "ATTENDANCE", v: "97%" },
-          { l: "COMPLIANCE", v: "Clean" },
-        ].map((s) => (
-          <div key={s.l} style={{ background: "rgba(76,29,149,0.04)", borderRadius: 4, padding: 10 }}>
-            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", color: "rgba(0,0,0,0.55)" }}>{s.l}</div>
-            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 700, color: DEEP_PURPLE, marginTop: 4 }}>{s.v}</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+        {workers.map((w) => (
+          <div
+            key={w.name}
+            style={{
+              background: "#FFFFFF",
+              border: "1px solid rgba(76,29,149,0.1)",
+              borderRadius: 6,
+              padding: "9px 12px",
+              display: "grid",
+              gridTemplateColumns: "1.4fr 1fr 1fr 1fr auto",
+              gap: 10,
+              alignItems: "center",
+            }}
+          >
+            <div>
+              <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: "#1a1a1a", marginBottom: 1 }}>{w.name}</div>
+              <div style={{ fontFamily: "Inter, sans-serif", fontSize: 9, color: "rgba(0,0,0,0.5)" }}>{w.agency}</div>
+            </div>
+            <div>
+              <div style={{ fontFamily: "Inter, sans-serif", fontSize: 8, fontWeight: 600, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em" }}>HOURS</div>
+              <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: DEEP_PURPLE }}>{w.hours}</div>
+            </div>
+            <div>
+              <div style={{ fontFamily: "Inter, sans-serif", fontSize: 8, fontWeight: 600, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em" }}>ATTENDANCE</div>
+              <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: DEEP_PURPLE }}>{w.attendance}</div>
+            </div>
+            <div>
+              <div style={{ fontFamily: "Inter, sans-serif", fontSize: 8, fontWeight: 600, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em" }}>TRAINED IN</div>
+              <div style={{ fontFamily: "Inter, sans-serif", fontSize: 9, color: "rgba(0,0,0,0.65)", lineHeight: 1.3 }}>{w.trained}</div>
+            </div>
+            <div>
+              <span
+                style={{
+                  background: w.statusGreen ? "rgba(34,197,94,0.1)" : "rgba(186,117,23,0.1)",
+                  color: w.statusGreen ? "#15803D" : "#BA7517",
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: 8,
+                  fontWeight: 600,
+                  padding: "2px 7px",
+                  borderRadius: 3,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {w.status}
+              </span>
+            </div>
           </div>
         ))}
       </div>
-      <button
-        style={{
-          background: PURPLE,
-          color: "#FFFFFF",
-          border: "none",
-          padding: "8px 14px",
-          fontFamily: "Inter, sans-serif",
-          fontSize: 12,
-          fontWeight: 700,
-          borderRadius: 6,
-          cursor: "pointer",
-        }}
-      >
-        Initiate conversion →
-      </button>
+      <ClosingLine>Conversion windows surfaced before they close. Margin recovered before the fee resets.</ClosingLine>
     </div>
-    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px", marginTop: 8, fontFamily: "Inter, sans-serif", fontSize: 11, color: "rgba(0,0,0,0.6)" }}>
-      <span>+2 additional workers eligible</span>
-      <a style={{ color: PURPLE, fontWeight: 600, cursor: "pointer" }}>View all →</a>
-    </div>
-    <ClosingLine>Conversion windows surfaced before they close. Margin recovered before the fee resets.</ClosingLine>
-  </div>
-);
+  );
+};
 
 // Panel 4
 const Panel4 = () => {
