@@ -61,46 +61,67 @@ const cardBorder = "1px solid rgba(76,29,149,0.12)";
 
 // Panel 1
 const Panel1 = () => {
-  const counters = [
-    { label: "NO-SHOW", n: 5, color: "#B82F2E" },
-    { label: "LATE", n: 5, color: "#B45309" },
-    { label: "OT", n: 3, color: "#B45309" },
-    { label: "NOT OUT", n: 2, color: "#B45309" },
-    { label: "RTW EXP", n: 2, color: "#B82F2E" },
-    { label: "TRAFFIC", n: 2, color: PURPLE },
+  const rows = [
+    {
+      name: "Marcus Webb",
+      tag: "OVERTIME TRIGGERED",
+      tagBg: "rgba(186,117,23,0.1)",
+      tagColor: "#BA7517",
+      meta: "Baltimore, MD · MHE Operations · Pinnacle Staffing",
+      insight: "37 workers across your agencies are trained in this dept and averaging 21 hours this week.",
+    },
+    {
+      name: "Daniel Reeves",
+      tag: "NO-SHOW",
+      tagBg: "rgba(226,75,74,0.1)",
+      tagColor: "#B82F2E",
+      meta: "Dallas Fort-Worth · Inbound Warehouse · Workforce Direct",
+      insight: "5 forklift-certified workers are clocked out within 8 miles. Average response 47 mins.",
+    },
+    {
+      name: "Adaeze Iroh",
+      tag: "NO-SHOW",
+      tagBg: "rgba(226,75,74,0.1)",
+      tagColor: "#B82F2E",
+      meta: "Baltimore, MD · Cold Storage · Meridian Recruitment",
+      insight: "3rd no-show this month for Adaeze. Pattern detected. Suggest removing from priority pool.",
+    },
+    {
+      name: "Sergio Ramos",
+      tag: "UNSCHEDULED ON SITE",
+      tagBg: "rgba(76,29,149,0.1)",
+      tagColor: "#4C1D95",
+      meta: "Dallas Fort-Worth · Outbound Dispatch · Workforce Direct",
+      insight: "Worker not booked but clocked in. Sergio is forklift-certified. Daniel Reeves is no-show, same site.",
+    },
   ];
   return (
     <div>
-      <PanelHeader
-        title="Live Exceptions"
-        subtitle="Real-time exceptions requiring attention"
-        badge={{ text: "20 ACTIVE", bg: "rgba(226,75,74,0.1)", color: "#B82F2E" }}
-      />
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 8, marginBottom: 14 }}>
-        {counters.map((c) => (
-          <div key={c.label} style={{ background: "#FFFFFF", border: cardBorder, borderRadius: 4, padding: 8 }}>
-            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 8, fontWeight: 700, letterSpacing: "0.08em", color: "rgba(0,0,0,0.55)" }}>
-              {c.label}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14, gap: 16 }}>
+        <div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: DEEP_PURPLE, marginBottom: 2 }}>Live Exceptions</div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "rgba(0,0,0,0.5)" }}>Real-time exceptions, each with the next action</div>
+        </div>
+        <span style={{ background: "rgba(226,75,74,0.1)", color: "#B82F2E", fontFamily: "Inter, sans-serif", fontSize: 10, fontWeight: 600, padding: "2px 8px", borderRadius: 4, whiteSpace: "nowrap" }}>
+          4 ACTIVE
+        </span>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+        {rows.map((r) => (
+          <div key={r.name} style={{ background: "#FFFFFF", border: "1px solid rgba(76,29,149,0.1)", borderRadius: 6, padding: "10px 12px", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 }}>
+            <div style={{ flex: 1 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+                <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: "#1a1a1a" }}>{r.name}</span>
+                <span style={{ background: r.tagBg, color: r.tagColor, fontFamily: "Inter, sans-serif", fontSize: 8, fontWeight: 600, padding: "1px 5px", borderRadius: 3 }}>{r.tag}</span>
+              </div>
+              <div style={{ fontFamily: "Inter, sans-serif", fontSize: 9, color: "rgba(0,0,0,0.5)", marginTop: 3 }}>{r.meta}</div>
             </div>
-            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: 700, color: c.color, marginTop: 4 }}>{c.n}</div>
+            <div style={{ flex: 1.4, borderLeft: "1px solid rgba(76,29,149,0.08)", paddingLeft: 12 }}>
+              <div style={{ fontFamily: "Inter, sans-serif", fontSize: 8, fontWeight: 600, color: "#4C1D95", letterSpacing: "0.05em", marginBottom: 2 }}>INSIGHT</div>
+              <div style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "rgba(0,0,0,0.7)", lineHeight: 1.4 }}>{r.insight}</div>
+            </div>
           </div>
         ))}
-      </div>
-      <div style={{ background: "#FFFFFF", border: cardBorder, borderRadius: 6, padding: 14 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-          <div>
-            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: "#0D0D0B" }}>Marcus Webb</div>
-            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "rgba(0,0,0,0.6)", marginTop: 2 }}>
-              Overtime Triggered · Baltimore, MD · Pinnacle Staffing
-            </div>
-          </div>
-          <span style={{ background: "rgba(180,83,9,0.12)", color: "#B45309", fontSize: 10, fontWeight: 700, padding: "3px 7px", borderRadius: 4 }}>
-            OVERTIME
-          </span>
-        </div>
-        <div style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "rgba(0,0,0,0.7)", marginTop: 8 }}>
-          Marcus has been on shift for 6h 42m. Overtime threshold reached.
-        </div>
       </div>
       <ClosingLine>Live exceptions surface the moment they happen, for you and your agencies simultaneously.</ClosingLine>
     </div>
