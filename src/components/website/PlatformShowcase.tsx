@@ -221,8 +221,8 @@ const Panel2 = () => (
 
 
 
-// Panel 5
-const Panel5 = () => (
+// Panel 3
+const Panel3 = () => (
   <div>
     <PanelHeader
       title="Conversion Eligible · This Quarter"
