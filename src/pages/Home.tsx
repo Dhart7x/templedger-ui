@@ -1647,7 +1647,7 @@ const Home = () => {
                 marginBottom: 48,
               }}
             >
-              Stops what's leaking. Predicts what's next.
+              Stop what's leaking. Predict what's next.
             </motion.h2>
 
             {/* Horizontal timeline */}
