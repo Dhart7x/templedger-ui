@@ -1881,7 +1881,7 @@ const Home = () => {
                   maxWidth: 560,
                 }}
               >
-                Six examples of insights the system surfaces, in your operation, in your language.
+                Six examples of insights surfaced by compounding data effects.
               </p>
             </motion.div>
 
