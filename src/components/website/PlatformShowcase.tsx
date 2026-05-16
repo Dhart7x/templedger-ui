@@ -10,8 +10,6 @@ const DEEP_PURPLE = "#2E1065";
 const PANELS = [
   { id: "dashboard", nav: "Live Dashboard" },
   { id: "allocation", nav: "Intelligent Allocation" },
-  { id: "invoicepayroll", nav: "Invoice & Payroll" },
-  { id: "compliance", nav: "Compliance & Permissions" },
   { id: "directhire", nav: "Direct Hire Pipeline" },
   { id: "agencyperf", nav: "Agency Performance" },
 ];
