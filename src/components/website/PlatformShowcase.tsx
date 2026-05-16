@@ -10,8 +10,6 @@ const DEEP_PURPLE = "#2E1065";
 const PANELS = [
   { id: "dashboard", nav: "Live Dashboard" },
   { id: "allocation", nav: "Intelligent Allocation" },
-  { id: "invoicepayroll", nav: "Invoice & Payroll" },
-  { id: "compliance", nav: "Compliance & Permissions" },
   { id: "directhire", nav: "Direct Hire Pipeline" },
   { id: "agencyperf", nav: "Agency Performance" },
 ];
@@ -221,111 +219,10 @@ const Panel2 = () => (
   </div>
 );
 
+
+
 // Panel 3
-const Panel3 = () => {
-  const rows = [
-    { l: "Agency hours billed", s: "1,247 hours · matches verified clock events", v: "$18,234" },
-    { l: "Overtime", s: "42 hours · pre-authorized", v: "$2,860" },
-    { l: "Agency margin", s: "Contracted rate · no variance", v: "$3,626" },
-  ];
-  return (
-    <div>
-      <PanelHeader
-        title="Pinnacle Staffing · Week 19"
-        subtitle="Submitted 14 May · Auto-reconciled against shift ledger"
-        badge={{ text: "✓ APPROVED", bg: "rgba(34,197,94,0.1)", color: "#15803D" }}
-      />
-      <div style={{ background: "#FFFFFF", border: cardBorder, borderRadius: 8, overflow: "hidden" }}>
-        {rows.map((r, i) => (
-          <div
-            key={r.l}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1.4fr 2fr auto auto",
-              gap: 12,
-              alignItems: "center",
-              padding: "12px 14px",
-              borderBottom: i < rows.length - 1 ? cardBorder : "none",
-            }}
-          >
-            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 600, color: "#0D0D0B" }}>{r.l}</div>
-            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "rgba(0,0,0,0.55)" }}>{r.s}</div>
-            <span style={{ background: "rgba(34,197,94,0.12)", color: "#15803D", fontSize: 9, fontWeight: 700, padding: "3px 6px", borderRadius: 3, letterSpacing: "0.08em" }}>
-              VERIFIED
-            </span>
-            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: "#0D0D0B", minWidth: 70, textAlign: "right" }}>{r.v}</div>
-          </div>
-        ))}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr auto",
-            alignItems: "center",
-            padding: "14px",
-            background: "rgba(76,29,149,0.06)",
-          }}
-        >
-          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 700, color: DEEP_PURPLE }}>Invoice total</div>
-          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: 700, color: DEEP_PURPLE }}>$24,720</div>
-        </div>
-      </div>
-      <ClosingLine>Invoices reconcile automatically against the verified shift ledger. Reconciliation overhead drops to zero.</ClosingLine>
-    </div>
-  );
-};
-
-// Panel 4
-const Panel4 = () => {
-  const tiers = [
-    { l: "Standard shift booking", r: "Site manager" },
-    { l: "Overtime > 4 hours", r: "Ops director" },
-    { l: "Spend > $25K weekly", r: "Finance approval" },
-  ];
-  return (
-    <div>
-      <PanelHeader
-        title="Compliance Status · All Sites"
-        subtitle="Continuous validation across 347 active workers"
-        badge={{ text: "340 / 347 VALID", bg: "rgba(34,197,94,0.1)", color: "#15803D" }}
-      />
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 12 }}>
-        <div style={{ background: "#FFFFFF", border: "1px solid rgba(34,197,94,0.5)", borderRadius: 6, padding: 12 }}>
-          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", color: "#15803D" }}>RIGHT TO WORK</div>
-          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 600, color: "#0D0D0B", marginTop: 4 }}>347 valid</div>
-        </div>
-        <div style={{ background: "#FFFFFF", border: "1px solid rgba(184,47,46,0.5)", borderRadius: 6, padding: 12 }}>
-          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", color: "#B82F2E" }}>CERTIFICATIONS</div>
-          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 600, color: "#0D0D0B", marginTop: 4 }}>3 expiring · 14 days</div>
-        </div>
-      </div>
-      <div style={{ background: "#FFFFFF", border: cardBorder, borderRadius: 6, overflow: "hidden" }}>
-        <div style={{ padding: "8px 12px", background: "rgba(76,29,149,0.06)", fontFamily: "Inter, sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", color: DEEP_PURPLE }}>
-          OUTBOUND DISPATCH · AUTHORIZATION TIERS
-        </div>
-        {tiers.map((t, i) => (
-          <div
-            key={t.l}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              padding: "10px 12px",
-              borderTop: i === 0 ? "none" : cardBorder,
-              fontFamily: "Inter, sans-serif",
-              fontSize: 12,
-            }}
-          >
-            <span style={{ color: "#0D0D0B" }}>{t.l}</span>
-            <span style={{ color: PURPLE, fontWeight: 600 }}>→ {t.r}</span>
-          </div>
-        ))}
-      </div>
-      <ClosingLine>Compliance is checked continuously, not periodically. Authorization tiers configured to your operation.</ClosingLine>
-    </div>
-  );
-};
-
-// Panel 5
-const Panel5 = () => (
+const Panel3 = () => (
   <div>
     <PanelHeader
       title="Conversion Eligible · This Quarter"
@@ -380,8 +277,8 @@ const Panel5 = () => (
   </div>
 );
 
-// Panel 6
-const Panel6 = () => {
+// Panel 4
+const Panel4 = () => {
   const rows = [
     { a: "Workforce Direct", fr: "94%", frColor: "#15803D", ns: "2.1%", ch: "$18.40" },
     { a: "Pinnacle Staffing", fr: "73%", frColor: "#B45309", ns: "8.4%", ch: "$21.80" },
@@ -435,7 +332,7 @@ const Panel6 = () => {
   );
 };
 
-const PANEL_COMPONENTS = [Panel1, Panel2, Panel3, Panel4, Panel5, Panel6];
+const PANEL_COMPONENTS = [Panel1, Panel2, Panel3, Panel4];
 
 const PANEL_GAP = 16;
 const TRANSITION_MS = 600;
