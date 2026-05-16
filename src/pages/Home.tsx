@@ -244,8 +244,8 @@ const Home = () => {
     },
     {
       n: "04",
-      t: "We stay",
-      b: "Live on one shift first. We maintain, refine and expand at a pace that works for you. We stay until you're confident. Not until we are.",
+      t: "Then you run it.",
+      b: "Once you're live, you run the operation. We support, refine, and expand at the pace you set.",
     },
   ];
 
