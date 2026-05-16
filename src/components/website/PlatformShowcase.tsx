@@ -220,55 +220,6 @@ const Panel2 = () => (
 );
 
 
-// Panel 4
-const Panel4 = () => {
-  const tiers = [
-    { l: "Standard shift booking", r: "Site manager" },
-    { l: "Overtime > 4 hours", r: "Ops director" },
-    { l: "Spend > $25K weekly", r: "Finance approval" },
-  ];
-  return (
-    <div>
-      <PanelHeader
-        title="Compliance Status · All Sites"
-        subtitle="Continuous validation across 347 active workers"
-        badge={{ text: "340 / 347 VALID", bg: "rgba(34,197,94,0.1)", color: "#15803D" }}
-      />
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 12 }}>
-        <div style={{ background: "#FFFFFF", border: "1px solid rgba(34,197,94,0.5)", borderRadius: 6, padding: 12 }}>
-          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", color: "#15803D" }}>RIGHT TO WORK</div>
-          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 600, color: "#0D0D0B", marginTop: 4 }}>347 valid</div>
-        </div>
-        <div style={{ background: "#FFFFFF", border: "1px solid rgba(184,47,46,0.5)", borderRadius: 6, padding: 12 }}>
-          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", color: "#B82F2E" }}>CERTIFICATIONS</div>
-          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 600, color: "#0D0D0B", marginTop: 4 }}>3 expiring · 14 days</div>
-        </div>
-      </div>
-      <div style={{ background: "#FFFFFF", border: cardBorder, borderRadius: 6, overflow: "hidden" }}>
-        <div style={{ padding: "8px 12px", background: "rgba(76,29,149,0.06)", fontFamily: "Inter, sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.1em", color: DEEP_PURPLE }}>
-          OUTBOUND DISPATCH · AUTHORIZATION TIERS
-        </div>
-        {tiers.map((t, i) => (
-          <div
-            key={t.l}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              padding: "10px 12px",
-              borderTop: i === 0 ? "none" : cardBorder,
-              fontFamily: "Inter, sans-serif",
-              fontSize: 12,
-            }}
-          >
-            <span style={{ color: "#0D0D0B" }}>{t.l}</span>
-            <span style={{ color: PURPLE, fontWeight: 600 }}>→ {t.r}</span>
-          </div>
-        ))}
-      </div>
-      <ClosingLine>Compliance is checked continuously, not periodically. Authorization tiers configured to your operation.</ClosingLine>
-    </div>
-  );
-};
 
 // Panel 5
 const Panel5 = () => (
