@@ -691,7 +691,7 @@ const Home = () => {
                 marginBottom: 36,
               }}
             >
-              You know the spend. You don't know the cost.
+              The spend is visible. The true cost sits beyond it.
             </motion.p>
             <motion.button
               className="tl-hero-cta"
