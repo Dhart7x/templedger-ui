@@ -131,62 +131,93 @@ const Panel1 = () => {
 // Panel 2
 const Panel2 = () => (
   <div>
-    <PanelHeader
-      title="New Booking · Friday 06:00 · Cold Storage"
-      subtitle="18 workers needed · Forklift certified"
-      badge={{ text: "RECOMMENDATION READY", bg: "rgba(76,29,149,0.1)", color: PURPLE }}
-    />
-    <div style={{ background: "#FFFFFF", border: `2px solid ${PURPLE}`, borderRadius: 8, padding: 16, marginBottom: 10 }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 700, color: "#0D0D0B" }}>Workforce Direct</span>
-          <span style={{ background: PURPLE, color: "#FFFFFF", fontSize: 9, fontWeight: 700, padding: "3px 7px", borderRadius: 4, letterSpacing: "0.08em" }}>
-            RECOMMENDED
-          </span>
+    {/* Block 1 — Shift Requirements Input */}
+    <div style={{ background: "#FFFFFF", border: "1px solid rgba(76,29,149,0.08)", borderRadius: 6, padding: 12, marginBottom: 10, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
+      <div style={{ flex: 1 }}>
+        <div style={{ fontFamily: "Inter, sans-serif", fontSize: 8, fontWeight: 600, color: "rgba(0,0,0,0.5)", letterSpacing: "0.06em", marginBottom: 6 }}>SHIFT REQUIREMENTS</div>
+        <div style={{ display: "flex", gap: 8 }}>
+          {[
+            { label: "WORKERS", value: "12" },
+            { label: "TYPE", value: "Warehouse" },
+            { label: "SHIFT", value: "06:00" },
+          ].map((c) => (
+            <div key={c.label} style={{ background: "#FAFAF8", border: "1px solid rgba(76,29,149,0.1)", borderRadius: 4, padding: "4px 8px", display: "flex", alignItems: "center", gap: 4 }}>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: 8, color: "rgba(0,0,0,0.45)" }}>{c.label}</span>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: DEEP_PURPLE }}>{c.value}</span>
+            </div>
+          ))}
         </div>
-        <div style={{ fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: 700, color: PURPLE }}>94%</div>
       </div>
-      <div style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "rgba(0,0,0,0.7)", lineHeight: 1.55, marginBottom: 12 }}>
-        7 workers trained on this department are off today. Highest Friday morning fill rate of your three agencies. Lower charge rate than current night-shift mix.
+      <div style={{ position: "relative" }}>
+        <button style={{ background: PURPLE, color: "#FFFFFF", border: "none", padding: "8px 12px", borderRadius: 5, fontFamily: "Inter, sans-serif", fontSize: 10, fontWeight: 600, cursor: "pointer" }}>
+          Intelligent Allocation →
+        </button>
+        <svg width="14" height="20" viewBox="0 0 14 20" style={{ position: "absolute", right: -6, bottom: -8 }} aria-hidden="true">
+          <path d="M1 1 L1 15 L4.5 12 L7 18 L9 17 L6.5 11 L11 11 Z" fill="#FFFFFF" stroke="#1a1a1a" strokeWidth="1" strokeLinejoin="round" />
+        </svg>
       </div>
-      <button
-        style={{
-          background: PURPLE,
-          color: "#FFFFFF",
-          border: "none",
-          padding: "8px 14px",
-          fontFamily: "Inter, sans-serif",
-          fontSize: 12,
-          fontWeight: 700,
-          borderRadius: 6,
-          cursor: "pointer",
-        }}
-      >
-        Submit booking →
-      </button>
     </div>
+
+    {/* Block 2 — Optimize For */}
+    <div style={{ background: "#FFFFFF", border: "1px solid rgba(76,29,149,0.08)", borderRadius: 6, padding: 12, marginBottom: 10 }}>
+      <div style={{ fontFamily: "Inter, sans-serif", fontSize: 8, fontWeight: 600, color: "rgba(0,0,0,0.5)", letterSpacing: "0.06em", marginBottom: 8 }}>OPTIMIZE FOR</div>
+      <div style={{ display: "flex", gap: 8 }}>
+        {[
+          { title: "SPEED", sub: "Fastest fill rate", selected: true },
+          { title: "COST", sub: "Lowest charge rate", selected: false },
+          { title: "QUALITY", sub: "Best performance scores", selected: false },
+        ].map((p) => (
+          <div
+            key={p.title}
+            style={{
+              flex: 1,
+              background: p.selected ? PURPLE : "#FFFFFF",
+              border: p.selected ? "none" : "1px solid rgba(76,29,149,0.1)",
+              color: p.selected ? "#FFFFFF" : "rgba(0,0,0,0.55)",
+              borderRadius: 4,
+              padding: "8px 10px",
+              textAlign: "center",
+            }}
+          >
+            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600 }}>{p.title}</div>
+            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 8, opacity: 0.7, marginTop: 2 }}>{p.sub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Block 3 — Recommendation Result */}
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+      <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: DEEP_PURPLE }}>Recommended split, optimized for Speed</div>
+      <span style={{ background: "rgba(76,29,149,0.1)", color: PURPLE, fontFamily: "Inter, sans-serif", fontSize: 9, fontWeight: 600, padding: "2px 8px", borderRadius: 4 }}>2 AGENCIES · 12 WORKERS</span>
+    </div>
+
     {[
-      { name: "Pinnacle Staffing", score: "73%" },
-      { name: "Meridian Recruitment", score: "68%" },
-    ].map((a) => (
+      { name: "Workforce Direct", workers: "7 WORKERS", resp: "Avg response 32 mins", body: "Highest morning fill rate of your three agencies. 12 forklift-certified workers clocked out within 8 miles of site.", primary: true },
+      { name: "Pinnacle Staffing", workers: "5 WORKERS", resp: "Avg response 41 mins", body: "Backup capacity to complete the shift. Strong 06:00 fill history on Tuesdays at this site.", primary: false },
+    ].map((r) => (
       <div
-        key={a.name}
+        key={r.name}
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          border: cardBorder,
-          borderRadius: 6,
-          padding: "10px 14px",
-          marginBottom: 6,
           background: "#FFFFFF",
+          border: r.primary ? `2px solid ${PURPLE}` : "1px solid rgba(76,29,149,0.15)",
+          borderRadius: 6,
+          padding: 12,
+          marginBottom: r.primary ? 6 : 0,
         }}
       >
-        <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#0D0D0B" }}>{a.name}</span>
-        <span style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: "rgba(0,0,0,0.6)" }}>{a.score}</span>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 600, color: DEEP_PURPLE }}>{r.name}</span>
+            <span style={{ background: "rgba(76,29,149,0.1)", color: PURPLE, fontFamily: "Inter, sans-serif", fontSize: 8, fontWeight: 600, padding: "1px 5px", borderRadius: 3 }}>{r.workers}</span>
+          </div>
+          <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: PURPLE }}>{r.resp}</span>
+        </div>
+        <p style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "rgba(0,0,0,0.65)", lineHeight: 1.45, margin: 0 }}>{r.body}</p>
       </div>
     ))}
-    <ClosingLine>Every booking arrives with a recommendation backed by operational data and the rationale behind it.</ClosingLine>
+
+    <ClosingLine>Every booking arrives with a recommendation backed by operational data, optimized to your priority.</ClosingLine>
   </div>
 );
 
