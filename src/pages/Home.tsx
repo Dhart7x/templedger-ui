@@ -2603,7 +2603,7 @@ const Home = () => {
 					maxWidth: 600,
 				}}
 				>
-					Operators who've run agency workforces, not engineers who've imagined them.
+					Operators who've run agency workforces. Not vendors who've sold to them.
 				</p>
 			</div>
 		</section>
