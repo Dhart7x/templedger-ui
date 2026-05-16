@@ -219,58 +219,6 @@ const Panel2 = () => (
   </div>
 );
 
-// Panel 3
-const Panel3 = () => {
-  const rows = [
-    { l: "Agency hours billed", s: "1,247 hours · matches verified clock events", v: "$18,234" },
-    { l: "Overtime", s: "42 hours · pre-authorized", v: "$2,860" },
-    { l: "Agency margin", s: "Contracted rate · no variance", v: "$3,626" },
-  ];
-  return (
-    <div>
-      <PanelHeader
-        title="Pinnacle Staffing · Week 19"
-        subtitle="Submitted 14 May · Auto-reconciled against shift ledger"
-        badge={{ text: "✓ APPROVED", bg: "rgba(34,197,94,0.1)", color: "#15803D" }}
-      />
-      <div style={{ background: "#FFFFFF", border: cardBorder, borderRadius: 8, overflow: "hidden" }}>
-        {rows.map((r, i) => (
-          <div
-            key={r.l}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1.4fr 2fr auto auto",
-              gap: 12,
-              alignItems: "center",
-              padding: "12px 14px",
-              borderBottom: i < rows.length - 1 ? cardBorder : "none",
-            }}
-          >
-            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 600, color: "#0D0D0B" }}>{r.l}</div>
-            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "rgba(0,0,0,0.55)" }}>{r.s}</div>
-            <span style={{ background: "rgba(34,197,94,0.12)", color: "#15803D", fontSize: 9, fontWeight: 700, padding: "3px 6px", borderRadius: 3, letterSpacing: "0.08em" }}>
-              VERIFIED
-            </span>
-            <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: "#0D0D0B", minWidth: 70, textAlign: "right" }}>{r.v}</div>
-          </div>
-        ))}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr auto",
-            alignItems: "center",
-            padding: "14px",
-            background: "rgba(76,29,149,0.06)",
-          }}
-        >
-          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 700, color: DEEP_PURPLE }}>Invoice total</div>
-          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: 700, color: DEEP_PURPLE }}>$24,720</div>
-        </div>
-      </div>
-      <ClosingLine>Invoices reconcile automatically against the verified shift ledger. Reconciliation overhead drops to zero.</ClosingLine>
-    </div>
-  );
-};
 
 // Panel 4
 const Panel4 = () => {
