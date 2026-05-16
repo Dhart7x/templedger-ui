@@ -301,55 +301,134 @@ const Panel3 = () => {
 
 // Panel 4
 const Panel4 = () => {
+  const GREEN = "#15803D";
+  const AMBER = "#BA7517";
+  const RED = "#B82F2E";
+  const PURPLE = "#2E1065";
   const rows = [
-    { a: "Workforce Direct", fr: "94%", frColor: "#15803D", ns: "2.1%", ch: "$18.40" },
-    { a: "Pinnacle Staffing", fr: "73%", frColor: "#B45309", ns: "8.4%", ch: "$21.80" },
-    { a: "Meridian Recruitment", fr: "68%", frColor: "#B45309", ns: "6.1%", ch: "$19.20" },
+    { a: "Workforce Direct",     vs: 38, fill: { v: "94%",  c: GREEN }, ns: { v: "2.1%", c: GREEN }, resp: { v: "32m", c: GREEN }, att: { v: "14%", c: GREEN }, regs: 22, ch: "$18.40" },
+    { a: "Pinnacle Staffing",    vs: 27, fill: { v: "73%",  c: AMBER }, ns: { v: "8.4%", c: RED },   resp: { v: "47m", c: AMBER }, att: { v: "24%", c: AMBER }, regs: 11, ch: "$21.80" },
+    { a: "Meridian Recruitment", vs: 19, fill: { v: "68%",  c: AMBER }, ns: { v: "6.1%", c: AMBER }, resp: { v: "53m", c: AMBER }, att: { v: "31%", c: RED },   regs: 7,  ch: "$19.20" },
+    { a: "Apex Labor Partners",  vs: 11, fill: { v: "89%",  c: GREEN }, ns: { v: "3.4%", c: GREEN }, resp: { v: "38m", c: GREEN }, att: { v: "17%", c: GREEN }, regs: 9,  ch: "$19.80" },
+    { a: "Vector Workforce",     vs: 5,  fill: { v: "61%",  c: RED },   ns: { v: "7.2%", c: AMBER }, resp: { v: "64m", c: RED },   att: { v: "22%", c: AMBER }, regs: 3,  ch: "$20.40" },
+  ];
+  const grid = "1.5fr 0.9fr 0.7fr 0.8fr 0.9fr 0.7fr 0.8fr 0.7fr";
+  const headers = ["AGENCY", "VOL SHARE", "FILL", "NO-SHOW", "RESPONSE", "ATTRIT'N", "NEW REGS", "CHARGE"];
+  const toggleOpts = [
+    { l: "WEEK", sel: false },
+    { l: "MONTH", sel: true },
+    { l: "YTD", sel: false },
+  ];
+  const chips = [
+    { cat: "SITE", val: "All sites" },
+    { cat: "DEPT", val: "All departments" },
+    { cat: "SHIFT", val: "All shifts" },
   ];
   return (
     <div>
-      <PanelHeader title="Agency Scorecard · Last 30 Days" subtitle="Performance from system data, not self-reports" />
-      <div style={{ background: "#FFFFFF", border: cardBorder, borderRadius: 8, overflow: "hidden" }}>
+      {/* Top row */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+        <div>
+          <div style={{ color: PURPLE, fontSize: 13, fontWeight: 600, fontFamily: "Inter, sans-serif" }}>Agency Performance</div>
+          <div style={{ color: "rgba(0,0,0,0.5)", fontSize: 10, fontFamily: "Inter, sans-serif", marginTop: 2 }}>
+            Every metric derived from system data, not self-reports
+          </div>
+        </div>
+        <div style={{ display: "flex", background: "#FFFFFF", border: "1px solid rgba(76,29,149,0.12)", borderRadius: 4, padding: 2 }}>
+          {toggleOpts.map((t) => (
+            <span
+              key={t.l}
+              style={{
+                padding: "3px 9px",
+                fontSize: 9,
+                fontWeight: 600,
+                cursor: "pointer",
+                fontFamily: "Inter, sans-serif",
+                color: t.sel ? "#FFFFFF" : "rgba(0,0,0,0.5)",
+                background: t.sel ? "#4C1D95" : "transparent",
+                borderRadius: t.sel ? 3 : 0,
+              }}
+            >
+              {t.l}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Filter row */}
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 12 }}>
+        <span style={{ color: "rgba(0,0,0,0.4)", fontSize: 9, fontWeight: 600, letterSpacing: "0.06em", fontFamily: "Inter, sans-serif" }}>FILTER</span>
+        {chips.map((c) => (
+          <div
+            key={c.cat}
+            style={{
+              background: "#FFFFFF",
+              border: "1px solid rgba(76,29,149,0.12)",
+              borderRadius: 4,
+              padding: "4px 8px",
+              display: "flex",
+              alignItems: "center",
+              gap: 4,
+              cursor: "pointer",
+              fontFamily: "Inter, sans-serif",
+            }}
+          >
+            <span style={{ color: "rgba(0,0,0,0.45)", fontSize: 8, fontWeight: 600, textTransform: "uppercase" }}>{c.cat}</span>
+            <span style={{ color: PURPLE, fontSize: 10, fontWeight: 600 }}>{c.val}</span>
+            <span style={{ color: "rgba(76,29,149,0.5)", fontSize: 8 }}>▾</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Scorecard table */}
+      <div style={{ background: "#FFFFFF", border: "1px solid rgba(76,29,149,0.08)", borderRadius: 6, overflow: "hidden" }}>
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "2fr 1fr 1fr 1fr",
-            gap: 12,
-            padding: "10px 14px",
-            background: "rgba(76,29,149,0.08)",
+            gridTemplateColumns: grid,
+            gap: 8,
+            padding: "8px 12px",
+            background: "rgba(76,29,149,0.05)",
+            borderBottom: "1px solid rgba(76,29,149,0.08)",
             fontFamily: "Inter, sans-serif",
-            fontSize: 10,
-            fontWeight: 700,
-            letterSpacing: "0.08em",
-            color: DEEP_PURPLE,
           }}
         >
-          <span>AGENCY</span>
-          <span>FILL RATE</span>
-          <span>NO-SHOW</span>
-          <span>CHARGE</span>
+          {headers.map((h) => (
+            <span key={h} style={{ color: "rgba(0,0,0,0.55)", fontSize: 8, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+              {h}
+            </span>
+          ))}
         </div>
         {rows.map((r, i) => (
           <div
             key={r.a}
             style={{
               display: "grid",
-              gridTemplateColumns: "2fr 1fr 1fr 1fr",
-              gap: 12,
-              padding: "12px 14px",
-              borderTop: i === 0 ? "none" : cardBorder,
+              gridTemplateColumns: grid,
+              gap: 8,
+              padding: "11px 12px",
+              borderBottom: i === rows.length - 1 ? "none" : "1px solid rgba(76,29,149,0.05)",
+              alignItems: "center",
               fontFamily: "Inter, sans-serif",
-              fontSize: 12,
             }}
           >
-            <span style={{ color: "#0D0D0B", fontWeight: 600 }}>{r.a}</span>
-            <span style={{ color: r.frColor, fontWeight: 700 }}>{r.fr}</span>
-            <span style={{ color: "#0D0D0B" }}>{r.ns}</span>
-            <span style={{ color: "#0D0D0B" }}>{r.ch}</span>
+            <span style={{ color: "#1a1a1a", fontSize: 11, fontWeight: 600 }}>{r.a}</span>
+            <div>
+              <div style={{ height: 4, background: "rgba(76,29,149,0.1)", borderRadius: 2, overflow: "hidden" }}>
+                <div style={{ width: `${r.vs}%`, height: "100%", background: "#4C1D95", borderRadius: 2 }} />
+              </div>
+              <div style={{ color: PURPLE, fontSize: 10, fontWeight: 600, marginTop: 3 }}>{r.vs}%</div>
+            </div>
+            <span style={{ color: r.fill.c, fontSize: 11, fontWeight: 600 }}>{r.fill.v}</span>
+            <span style={{ color: r.ns.c, fontSize: 11, fontWeight: 600 }}>{r.ns.v}</span>
+            <span style={{ color: r.resp.c, fontSize: 11, fontWeight: 600 }}>{r.resp.v}</span>
+            <span style={{ color: r.att.c, fontSize: 11, fontWeight: 600 }}>{r.att.v}</span>
+            <span style={{ color: PURPLE, fontSize: 11, fontWeight: 600 }}>{r.regs}</span>
+            <span style={{ color: "rgba(0,0,0,0.7)", fontSize: 11 }}>{r.ch}</span>
           </div>
         ))}
       </div>
-      <ClosingLine>Every metric derived from verified shift data. Agencies can no longer self-report performance.</ClosingLine>
+      <ClosingLine>Total agency visibility, sliced by site, department, or shift. The system is the source of truth.</ClosingLine>
     </div>
   );
 };
