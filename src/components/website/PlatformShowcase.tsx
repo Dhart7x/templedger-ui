@@ -10,6 +10,7 @@ const DEEP_PURPLE = "#2E1065";
 const PANELS = [
   { id: "dashboard", nav: "Live Dashboard" },
   { id: "allocation", nav: "Intelligent Allocation" },
+  { id: "payroll", nav: "Payroll" },
   { id: "directhire", nav: "Direct Hire Pipeline" },
   { id: "agencyperf", nav: "Agency Performance" },
 ];
@@ -433,7 +434,152 @@ const Panel4 = () => {
   );
 };
 
-const PANEL_COMPONENTS = [Panel1, Panel2, Panel3, Panel4];
+// Panel Payroll
+const PanelPayroll = () => {
+  const GREEN = "#15803D";
+  const RED = "#B82F2E";
+  const grid = "1.5fr 0.55fr 0.7fr 0.7fr 0.7fr 0.85fr 0.85fr 0.7fr";
+  const headers = ["WORKER", "HRS", "SCHED", "CLOCK IN", "CLOCK OUT", "MGR APPR", "COMPLIANCE", "PAY"];
+  const verified = [
+    { name: "Aaron Chen", meta: "Inbound Warehouse · Workforce Direct", hours: "38.5", pay: "$708" },
+    { name: "Lucia Marchetti", meta: "Cold Storage · Workforce Direct", hours: "40.0", pay: "$760" },
+    { name: "Marcus Webb", meta: "MHE Operations · Pinnacle Staffing", hours: "42.0", pay: "$924" },
+    { name: "Anaya Krishnan", meta: "Cold Storage · Pinnacle Staffing", hours: "38.0", pay: "$684" },
+    { name: "Tomás Herrera", meta: "Outbound Dispatch · Meridian", hours: "40.0", pay: "$768" },
+    { name: "Folake Adeyemi", meta: "Returns Processing · Meridian", hours: "36.5", pay: "$657" },
+  ];
+  const exceptions = [
+    {
+      name: "Sergio Ramos",
+      meta: "Outbound Dispatch · Workforce Direct",
+      hours: "8.0",
+      gates: [false, true, true, false, true],
+      note: "Worker clocked in without a booked shift. Site supervisor must approve to proceed.",
+    },
+    {
+      name: "Hassan Mahmood",
+      meta: "MHE Operations · Pinnacle Staffing",
+      hours: "47.5",
+      gates: [true, true, true, false, true],
+      note: "7.5 hours of overtime not pre-authorized. Ops director sign-off required.",
+    },
+  ];
+  const gateMark = (ok: boolean) => (
+    <span style={{ color: ok ? GREEN : RED, fontSize: 12, fontWeight: 700, fontFamily: "Inter, sans-serif" }}>
+      {ok ? "✓" : "✗"}
+    </span>
+  );
+  return (
+    <div>
+      {/* Top row */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12, gap: 16 }}>
+        <div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: DEEP_PURPLE, marginBottom: 2 }}>
+            Payroll · Week 19 · Baltimore, MD
+          </div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "rgba(0,0,0,0.5)" }}>
+            Verified against scheduled, clocked, approved, and compliant. Then billable.
+          </div>
+        </div>
+        <span style={{ background: "rgba(34,197,94,0.1)", color: GREEN, fontFamily: "Inter, sans-serif", fontSize: 10, fontWeight: 600, padding: "2px 8px", borderRadius: 4, whiteSpace: "nowrap" }}>
+          6 OF 8 VERIFIED
+        </span>
+      </div>
+
+      {/* Column headers */}
+      <div style={{ display: "grid", gridTemplateColumns: grid, gap: 6, padding: "6px 12px", marginBottom: 4 }}>
+        {headers.map((h, i) => (
+          <span
+            key={h}
+            style={{
+              color: "rgba(0,0,0,0.45)",
+              fontSize: 8,
+              fontWeight: 600,
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              fontFamily: "Inter, sans-serif",
+              textAlign: i === headers.length - 1 ? "right" : "left",
+            }}
+          >
+            {h}
+          </span>
+        ))}
+      </div>
+
+      {/* Verified worker rows */}
+      <div style={{ background: "#FFFFFF", border: "1px solid rgba(76,29,149,0.1)", borderRadius: 6, overflow: "hidden", marginBottom: 8 }}>
+        {verified.map((w, i) => (
+          <div
+            key={w.name}
+            style={{
+              display: "grid",
+              gridTemplateColumns: grid,
+              gap: 6,
+              padding: "9px 12px",
+              borderBottom: i === verified.length - 1 ? "none" : "1px solid rgba(76,29,149,0.05)",
+              alignItems: "center",
+            }}
+          >
+            <div>
+              <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: "#1a1a1a", marginBottom: 1 }}>{w.name}</div>
+              <div style={{ fontFamily: "Inter, sans-serif", fontSize: 8, color: "rgba(0,0,0,0.5)" }}>{w.meta}</div>
+            </div>
+            <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: DEEP_PURPLE }}>{w.hours}</span>
+            {[0, 1, 2, 3, 4].map((g) => (
+              <span key={g}>{gateMark(true)}</span>
+            ))}
+            <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: DEEP_PURPLE, textAlign: "right" }}>{w.pay}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Exceptions header */}
+      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6, marginTop: 12 }}>
+        <span style={{ color: RED, fontFamily: "Inter, sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: "0.05em" }}>
+          EXCEPTIONS · HELD FROM PAYROLL
+        </span>
+        <span style={{ background: "rgba(226,75,74,0.1)", color: RED, fontFamily: "Inter, sans-serif", fontSize: 9, fontWeight: 600, padding: "1px 6px", borderRadius: 3 }}>
+          2
+        </span>
+      </div>
+
+      {/* Exception rows */}
+      <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+        {exceptions.map((ex) => (
+          <div
+            key={ex.name}
+            style={{
+              background: "#FFFFFF",
+              border: "1px solid rgba(226,75,74,0.2)",
+              borderLeft: "3px solid #E24B4A",
+              borderRadius: 6,
+              padding: "9px 12px",
+            }}
+          >
+            <div style={{ display: "grid", gridTemplateColumns: grid, gap: 6, alignItems: "center" }}>
+              <div>
+                <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: "#1a1a1a", marginBottom: 1 }}>{ex.name}</div>
+                <div style={{ fontFamily: "Inter, sans-serif", fontSize: 8, color: "rgba(0,0,0,0.5)" }}>{ex.meta}</div>
+              </div>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600, color: DEEP_PURPLE }}>{ex.hours}</span>
+              {ex.gates.map((g, i) => (
+                <span key={i}>{gateMark(g)}</span>
+              ))}
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "rgba(0,0,0,0.45)", textAlign: "right" }}>—</span>
+            </div>
+            <div style={{ marginTop: 6, color: RED, fontFamily: "Inter, sans-serif", fontSize: 9, lineHeight: 1.4 }}>
+              {ex.note}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <ClosingLine>Payroll derived from verified data. Exceptions held for sign-off, never quietly paid or billed.</ClosingLine>
+    </div>
+  );
+};
+
+const PANEL_COMPONENTS = [Panel1, Panel2, PanelPayroll, Panel3, Panel4];
 
 const PANEL_GAP = 16;
 const TRANSITION_MS = 600;
