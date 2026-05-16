@@ -1454,7 +1454,7 @@ const Home = () => {
                 marginBottom: 48,
               }}
             >
-              TempLedger is an agency management platform built for the business that carries the spend, the risk and the operational consequence.
+              TempLedger is not an HR tool. It is a financial control tool that happens to live in HR's domain.
             </motion.p>
             <div className="tl-pillars" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, alignItems: "stretch", marginBottom: 48 }}>
               {[
@@ -2640,20 +2640,6 @@ const Home = () => {
             >
               Ready to take control of your contingent workforce?
             </h2>
-            <p className="tl-contact-sub tl-section-intro"
-              style={{
-                fontFamily: FONT,
-                fontWeight: 500,
-                fontSize: 18,
-                color: "#FFFFFF",
-                lineHeight: 1.5,
-                marginTop: 16,
-                marginBottom: 48,
-                textAlign: "center",
-              }}
-            >
-              TempLedger is not an HR tool. It is a financial control tool that happens to live in HR's domain.
-            </p>
             <div style={{ maxWidth: 480, margin: "0 auto" }}>
               {submitted ? (
                 <div style={{ fontWeight: 500, fontSize: 16, color: "#FFFFFF", textAlign: "center" }}>
