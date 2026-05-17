@@ -1881,7 +1881,7 @@ const Home = () => {
                   marginBottom: 10,
                 }}
               >
-                This is what that intelligence looks like.
+                Intelligence the surface produces.
               </h2>
               <p
                 className="tl-section-intro"
@@ -1894,7 +1894,7 @@ const Home = () => {
                   maxWidth: 560,
                 }}
               >
-                Six examples of insights surfaced by compounding data effects.
+                Six examples of what the system surfaces once your operation runs through it.
               </p>
             </motion.div>
 
