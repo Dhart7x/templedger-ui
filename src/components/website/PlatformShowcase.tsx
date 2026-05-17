@@ -682,7 +682,94 @@ const PanelInvoice = () => {
   );
 };
 
-const PANEL_COMPONENTS = [Panel1, Panel2, PanelPayroll, PanelInvoice, Panel3, Panel4];
+const PanelPermissions = () => {
+  const departments = [
+    { name: "Inbound Warehouse", selected: true },
+    { name: "MHE Operations", selected: false },
+    { name: "Cold Storage", selected: false },
+    { name: "Outbound Dispatch", selected: false },
+    { name: "Returns Processing", selected: false },
+  ];
+  const rows = [
+    { role: "Shift Coordinator", person: "Diane Reyes", shift: "Early · 06:00", perms: [false, false, false, false] },
+    { role: "Shift Coordinator", person: "Marcus Thompson", shift: "Mid · 14:00", perms: [true, false, false, false] },
+    { role: "Shift Coordinator", person: "Jamal Carter", shift: "Late · 22:00", perms: [false, false, false, false] },
+    { role: "Site Manager", person: "Lauren O'Brien", shift: "All shifts", perms: [true, true, true, false] },
+    { role: "Ops Director", person: "Daniel Park", shift: "All shifts", perms: [true, true, true, true] },
+  ];
+  const headers = ["ROLE", "SHIFT", "REQUEST REPLACEMENT", "REQUEST ADDITIONAL", "AUTHORIZE OVERTIME", "APPROVE HOURS"];
+  const gridCols = "1.6fr 0.9fr 1fr 1fr 1fr 1fr";
+
+  const Toggle = ({ on }: { on: boolean }) => (
+    <div style={{ width: 28, height: 14, background: on ? PURPLE : "rgba(0,0,0,0.15)", borderRadius: 8, position: "relative", margin: "0 auto" }}>
+      <div style={{ width: 10, height: 10, background: "#FFFFFF", borderRadius: "50%", position: "absolute", top: 2, [on ? "right" : "left"]: 2 } as React.CSSProperties} />
+    </div>
+  );
+
+  return (
+    <div>
+      {/* Top row */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10, gap: 16 }}>
+        <div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: DEEP_PURPLE, marginBottom: 2 }}>
+            Permissions · Baltimore, MD
+          </div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "rgba(0,0,0,0.5)" }}>
+            Superadmin view · authorize what each role can do, by department and shift
+          </div>
+        </div>
+        <span style={{ background: "rgba(76,29,149,0.1)", color: PURPLE, padding: "2px 8px", borderRadius: 4, fontSize: 10, fontWeight: 600, fontFamily: "Inter, sans-serif" }}>
+          SUPERADMIN
+        </span>
+      </div>
+
+      {/* Department selector */}
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 12, flexWrap: "wrap" }}>
+        <span style={{ color: "rgba(0,0,0,0.4)", fontFamily: "Inter, sans-serif", fontSize: 9, fontWeight: 600, letterSpacing: "0.06em" }}>DEPARTMENT</span>
+        {departments.map((d) => d.selected ? (
+          <span key={d.name} style={{ background: PURPLE, borderRadius: 4, padding: "4px 8px", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 4 }}>
+            <span style={{ color: "#FFFFFF", fontFamily: "Inter, sans-serif", fontSize: 10, fontWeight: 600 }}>{d.name}</span>
+            <span style={{ color: "rgba(255,255,255,0.7)", fontSize: 8 }}>▾</span>
+          </span>
+        ) : (
+          <span key={d.name} style={{ background: "#FFFFFF", border: "1px solid rgba(76,29,149,0.12)", borderRadius: 4, padding: "4px 8px", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 4 }}>
+            <span style={{ color: "rgba(0,0,0,0.55)", fontFamily: "Inter, sans-serif", fontSize: 10 }}>{d.name}</span>
+            <span style={{ color: "rgba(76,29,149,0.5)", fontSize: 8 }}>▸</span>
+          </span>
+        ))}
+      </div>
+
+      {/* Matrix */}
+      <div style={{ background: "#FFFFFF", border: "1px solid rgba(76,29,149,0.1)", borderRadius: 6, overflow: "hidden" }}>
+        <div style={{ display: "grid", gridTemplateColumns: gridCols, gap: 8, background: "rgba(76,29,149,0.04)", borderBottom: "1px solid rgba(76,29,149,0.08)", padding: "8px 14px" }}>
+          {headers.map((h, i) => (
+            <div key={h} style={{ color: "rgba(0,0,0,0.55)", fontFamily: "Inter, sans-serif", fontSize: 8, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", textAlign: i >= 2 ? "center" : "left" }}>
+              {h}
+            </div>
+          ))}
+        </div>
+        {rows.map((r, ri) => (
+          <div key={r.person} style={{ display: "grid", gridTemplateColumns: gridCols, gap: 8, padding: "9px 14px", borderBottom: ri === rows.length - 1 ? "none" : "1px solid rgba(76,29,149,0.05)", alignItems: "center" }}>
+            <div>
+              <div style={{ color: "#1a1a1a", fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600 }}>{r.role}</div>
+              <div style={{ color: "rgba(0,0,0,0.5)", fontFamily: "Inter, sans-serif", fontSize: 8 }}>{r.person}</div>
+            </div>
+            <div style={{ color: "rgba(0,0,0,0.7)", fontFamily: "Inter, sans-serif", fontSize: 10 }}>{r.shift}</div>
+            {r.perms.map((p, pi) => (
+              <Toggle key={pi} on={p} />
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <ClosingLine>
+        Financial control by architecture. Policy enforced as default, configured to your operation, audit-trailed by the system.
+      </ClosingLine>
+    </div>
+  );
+};
+
+const PANEL_COMPONENTS = [Panel1, Panel2, PanelPayroll, PanelInvoice, PanelPermissions, Panel3, Panel4];
 
 const PANEL_GAP = 16;
 const TRANSITION_MS = 600;
