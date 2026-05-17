@@ -877,6 +877,12 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
       className="tl-section-platform"
       style={{ background: "#FFFFFF", padding: "80px 48px", margin: 0, width: "100%" }}
     >
+      <style>{`
+        @media (max-width: 767px) {
+          .tl-platform-carousel { min-height: 480px !important; }
+          .tl-platform-track { min-height: 480px !important; }
+        }
+      `}</style>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         {/* Section tag */}
         <div
@@ -930,6 +936,7 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
             position: "relative",
             width: "100%",
             overflow: "hidden",
+            minHeight: 540,
           }}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
@@ -941,7 +948,9 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
             style={{
               display: "flex",
               flexDirection: "row",
+              alignItems: "stretch",
               gap: PANEL_GAP,
+              minHeight: 540,
               transform: `translateX(${translatePx}px)`,
               transition: animate ? `transform ${TRANSITION_MS}ms ${TRANSITION_EASE}` : "none",
               willChange: "transform",
@@ -953,6 +962,7 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
               return (
                 <div
                   key={`${p.id}-${i}`}
+                  className="tl-platform-panel"
                   style={{
                     flexShrink: 0,
                     width: panelWidth || `${panelPct * 100}%`,
@@ -960,16 +970,20 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
                     border: "1px solid rgba(76,29,149,0.08)",
                     borderRadius: 12,
                     padding: 28,
-                    minHeight: 480,
                     boxSizing: "border-box",
                     opacity: isActive ? 1 : 0.4,
                     filter: isActive ? "none" : "saturate(0.7)",
                     transition: animate
                       ? `opacity ${TRANSITION_MS}ms ${TRANSITION_EASE}, filter ${TRANSITION_MS}ms ${TRANSITION_EASE}`
                       : "none",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
                   }}
                 >
-                  <Cmp />
+                  <div style={{ width: "100%" }}>
+                    <Cmp />
+                  </div>
                 </div>
               );
             })}
