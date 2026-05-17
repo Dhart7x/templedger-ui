@@ -1881,7 +1881,7 @@ const Home = () => {
                   marginBottom: 10,
                 }}
               >
-                Intelligence the surface produces.
+                What the data starts telling you.
               </h2>
               <p
                 className="tl-section-intro"
@@ -1894,7 +1894,7 @@ const Home = () => {
                   maxWidth: 560,
                 }}
               >
-                Six examples of what the system surfaces once your operation runs through it.
+                Six examples that surface once your operation has been running through it.
               </p>
             </motion.div>
 
