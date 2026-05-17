@@ -1816,6 +1816,22 @@ const Home = () => {
                 </motion.div>
               ))}
             </div>
+
+            {/* Transition sentence */}
+            <p
+              style={{
+                color: "#FFFFFF",
+                fontFamily: FONT,
+                fontSize: window.innerWidth >= 768 ? 16 : 14,
+                fontWeight: 600,
+                lineHeight: 1.4,
+                maxWidth: 720,
+                margin: "40px auto 0",
+                textAlign: "center",
+              }}
+            >
+              Every interaction on the surface feeds the system. Over time, it stops describing your operation and starts orchestrating it.
+            </p>
           </div>
         </section>
 
