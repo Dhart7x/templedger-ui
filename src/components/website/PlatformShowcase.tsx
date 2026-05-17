@@ -11,6 +11,7 @@ const PANELS = [
   { id: "dashboard", nav: "Live Dashboard" },
   { id: "allocation", nav: "Intelligent Allocation" },
   { id: "payroll", nav: "Payroll" },
+  { id: "invoice", nav: "Invoice" },
   { id: "directhire", nav: "Direct Hire Pipeline" },
   { id: "agencyperf", nav: "Agency Performance" },
 ];
