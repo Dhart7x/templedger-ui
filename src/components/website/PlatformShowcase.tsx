@@ -953,6 +953,7 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
               return (
                 <div
                   key={`${p.id}-${i}`}
+                  className="tl-platform-panel"
                   style={{
                     flexShrink: 0,
                     width: panelWidth || `${panelPct * 100}%`,
@@ -960,16 +961,20 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
                     border: "1px solid rgba(76,29,149,0.08)",
                     borderRadius: 12,
                     padding: 28,
-                    minHeight: 480,
                     boxSizing: "border-box",
                     opacity: isActive ? 1 : 0.4,
                     filter: isActive ? "none" : "saturate(0.7)",
                     transition: animate
                       ? `opacity ${TRANSITION_MS}ms ${TRANSITION_EASE}, filter ${TRANSITION_MS}ms ${TRANSITION_EASE}`
                       : "none",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
                   }}
                 >
-                  <Cmp />
+                  <div style={{ width: "100%" }}>
+                    <Cmp />
+                  </div>
                 </div>
               );
             })}
