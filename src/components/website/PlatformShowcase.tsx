@@ -908,7 +908,7 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
             marginBottom: 8,
           }}
         >
-          Margin recovery, at scale.
+          The operational surface.
         </h2>
         <p
           style={{
@@ -919,7 +919,7 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
             marginBottom: 36,
           }}
         >
-          This is a fraction of what's inside.
+          Every function your operation runs through, in one system.
         </p>
 
         {/* Rotating panel container */}
