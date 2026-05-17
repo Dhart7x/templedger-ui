@@ -1881,7 +1881,7 @@ const Home = () => {
                   marginBottom: 10,
                 }}
               >
-                Intelligence the surface produces.
+                What the data starts telling you.
               </h2>
               <p
                 className="tl-section-intro"
