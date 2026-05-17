@@ -1894,7 +1894,7 @@ const Home = () => {
                   maxWidth: 560,
                 }}
               >
-                Six examples of what the system surfaces once your operation runs through it.
+                Six examples that surface once your operation has been running through it.
               </p>
             </motion.div>
 
