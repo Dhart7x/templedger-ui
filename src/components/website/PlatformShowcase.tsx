@@ -877,6 +877,12 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
       className="tl-section-platform"
       style={{ background: "#FFFFFF", padding: "80px 48px", margin: 0, width: "100%" }}
     >
+      <style>{`
+        @media (max-width: 767px) {
+          .tl-platform-carousel { min-height: 480px !important; }
+          .tl-platform-track { min-height: 480px !important; }
+        }
+      `}</style>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         {/* Section tag */}
         <div
