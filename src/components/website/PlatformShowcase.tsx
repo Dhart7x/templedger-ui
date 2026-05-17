@@ -930,6 +930,7 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
             position: "relative",
             width: "100%",
             overflow: "hidden",
+            minHeight: 540,
           }}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
