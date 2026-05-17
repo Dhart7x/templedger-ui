@@ -11,6 +11,7 @@ const PANELS = [
   { id: "dashboard", nav: "Live Dashboard" },
   { id: "allocation", nav: "Intelligent Allocation" },
   { id: "payroll", nav: "Payroll" },
+  { id: "invoice", nav: "Invoice" },
   { id: "directhire", nav: "Direct Hire Pipeline" },
   { id: "agencyperf", nav: "Agency Performance" },
 ];
@@ -579,7 +580,108 @@ const PanelPayroll = () => {
   );
 };
 
-const PANEL_COMPONENTS = [Panel1, Panel2, PanelPayroll, Panel3, Panel4];
+const PanelInvoice = () => {
+  const statuses = ["Payroll verified", "Charge rates applied", "Cost centers allocated", "Reconciled · no variance"];
+  const agencies = [
+    { name: "Workforce Direct", sub: "22 workers · Inbound Warehouse, Cold Storage", hours: "847", payroll: "$15,631", invoice: "$25,542" },
+    { name: "Pinnacle Staffing", sub: "17 workers · Inbound Warehouse, MHE Operations", hours: "660", payroll: "$13,958", invoice: "$23,828" },
+    { name: "Meridian Recruitment", sub: "22 workers · Cold Storage, Outbound Dispatch, Returns Processing", hours: "833", payroll: "$15,494", invoice: "$26,277" },
+  ];
+  const eyebrow: React.CSSProperties = {
+    color: "rgba(0,0,0,0.45)", fontFamily: "Inter, sans-serif", fontSize: 8, fontWeight: 600, letterSpacing: "0.05em", textTransform: "uppercase",
+  };
+  return (
+    <div>
+      {/* Top row */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10, gap: 16 }}>
+        <div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: 600, color: DEEP_PURPLE, marginBottom: 2 }}>
+            Invoice Reconciliation · Week 19 · Baltimore, MD
+          </div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "rgba(0,0,0,0.5)" }}>
+            Per-agency invoices built from verified payroll and contracted rates
+          </div>
+        </div>
+        <button
+          type="button"
+          style={{ background: "#FFFFFF", border: "1px solid rgba(76,29,149,0.2)", color: PURPLE, padding: "5px 10px", borderRadius: 4, fontSize: 9, fontWeight: 600, fontFamily: "Inter, sans-serif", cursor: "pointer", whiteSpace: "nowrap" }}
+        >
+          Export all ↗
+        </button>
+      </div>
+
+      {/* Status strip */}
+      <div style={{ background: "#FFFFFF", border: "1px solid rgba(76,29,149,0.1)", borderRadius: 6, padding: "8px 12px", marginBottom: 12, display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
+        {statuses.map((s) => (
+          <span key={s} style={{ display: "flex", alignItems: "center", gap: 5 }}>
+            <span style={{ display: "inline-block", width: 6, height: 6, background: "#22C55E", borderRadius: "50%" }} />
+            <span style={{ color: "rgba(0,0,0,0.55)", fontFamily: "Inter, sans-serif", fontSize: 9 }}>{s}</span>
+          </span>
+        ))}
+        <span style={{ marginLeft: "auto", color: "rgba(0,0,0,0.4)", fontFamily: "Inter, sans-serif", fontSize: 9 }}>
+          Last refresh · 2 mins ago
+        </span>
+      </div>
+
+      {/* Agency blocks */}
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        {agencies.map((a) => (
+          <div key={a.name} style={{ background: "#FFFFFF", border: "1px solid rgba(76,29,149,0.1)", borderRadius: 6, padding: "12px 14px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8, gap: 12 }}>
+              <div>
+                <div style={{ fontFamily: "Inter, sans-serif", color: "#1a1a1a", fontSize: 12, fontWeight: 600, marginBottom: 1 }}>{a.name}</div>
+                <div style={{ fontFamily: "Inter, sans-serif", color: "rgba(0,0,0,0.5)", fontSize: 9 }}>{a.sub}</div>
+              </div>
+              <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                <span style={{ background: "rgba(34,197,94,0.1)", color: "#15803D", padding: "2px 7px", borderRadius: 3, fontSize: 8, fontWeight: 600, fontFamily: "Inter, sans-serif" }}>VERIFIED</span>
+                <button type="button" style={{ background: "#FFFFFF", border: "1px solid rgba(76,29,149,0.2)", color: PURPLE, padding: "3px 8px", borderRadius: 3, fontSize: 9, fontWeight: 600, fontFamily: "Inter, sans-serif", cursor: "pointer" }}>
+                  Export ↗
+                </button>
+              </div>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 8, paddingTop: 8, borderTop: "1px solid rgba(76,29,149,0.05)" }}>
+              <div>
+                <div style={eyebrow}>HOURS</div>
+                <div style={{ fontFamily: "Inter, sans-serif", color: DEEP_PURPLE, fontSize: 12, fontWeight: 600, marginTop: 2 }}>{a.hours}</div>
+              </div>
+              <div>
+                <div style={eyebrow}>PAYROLL</div>
+                <div style={{ fontFamily: "Inter, sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 12, marginTop: 2 }}>{a.payroll}</div>
+              </div>
+              <div>
+                <div style={eyebrow}>CHARGE RATES</div>
+                <div style={{ fontFamily: "Inter, sans-serif", color: "rgba(0,0,0,0.7)", fontSize: 11, marginTop: 2 }}>Applied</div>
+              </div>
+              <div style={{ textAlign: "right" }}>
+                <div style={eyebrow}>INVOICE VALUE</div>
+                <div style={{ fontFamily: "Inter, sans-serif", color: DEEP_PURPLE, fontSize: 14, fontWeight: 700, marginTop: 2 }}>{a.invoice}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Total card */}
+      <div style={{ marginTop: 10, background: DEEP_PURPLE, borderRadius: 6, padding: "12px 14px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div>
+          <div style={{ color: "rgba(255,255,255,0.7)", fontFamily: "Inter, sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: "0.05em", marginBottom: 1 }}>
+            TOTAL INVOICE VALUE · WEEK 19
+          </div>
+          <div style={{ color: "rgba(255,255,255,0.5)", fontFamily: "Inter, sans-serif", fontSize: 9 }}>
+            61 workers · 2,340 verified hours · 3 agencies
+          </div>
+        </div>
+        <div style={{ color: "#FFFFFF", fontFamily: "Inter, sans-serif", fontSize: 20, fontWeight: 700 }}>$75,647</div>
+      </div>
+
+      <ClosingLine>
+        Agency invoices built from verified payroll and contracted rates. Configure cost-center splits, agency exports, and ERP feeds to your operation.
+      </ClosingLine>
+    </div>
+  );
+};
+
+const PANEL_COMPONENTS = [Panel1, Panel2, PanelPayroll, PanelInvoice, Panel3, Panel4];
 
 const PANEL_GAP = 16;
 const TRANSITION_MS = 600;
