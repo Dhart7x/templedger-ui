@@ -942,7 +942,9 @@ const PlatformShowcase = ({ onOpenDemo }: Props) => {
             style={{
               display: "flex",
               flexDirection: "row",
+              alignItems: "stretch",
               gap: PANEL_GAP,
+              minHeight: 540,
               transform: `translateX(${translatePx}px)`,
               transition: animate ? `transform ${TRANSITION_MS}ms ${TRANSITION_EASE}` : "none",
               willChange: "transform",
