@@ -1,5 +1,4 @@
-import { Bell, Check, Clock, AlertTriangle, Users, FileText, Building2, Calendar, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Bell, BellOff, CheckCheck, Clock, AlertTriangle, Users, FileText, Building2, Calendar, ArrowRight, Info } from "lucide-react";
 import { useDemoContext } from "../DemoContext";
 
 interface DemoNotificationsProps {
