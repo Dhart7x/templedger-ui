@@ -1048,20 +1048,12 @@ export const ViewSchedule = () => {
 // ─── Main Component ──────────────────────────────────────────────────────────
 
 const ClientSchedule = () => {
+  const [tab, setTab] = useState<"upload" | "view">("upload");
   return (
-    <div className="p-4 md:p-6 space-y-6">
-      <div>
-        <h1 className="text-lg md:text-xl font-bold text-foreground">Schedule</h1>
-        <p className="text-xs text-muted-foreground">Manage and view workforce schedules</p>
-      </div>
-      <Tabs defaultValue="upload" className="space-y-5">
-        <TabsList className="grid w-full max-w-sm grid-cols-2">
-          <TabsTrigger value="upload" className="gap-2 text-xs"><Upload className="w-3.5 h-3.5" />Upload New</TabsTrigger>
-          <TabsTrigger value="view" className="gap-2 text-xs"><Eye className="w-3.5 h-3.5" />View Schedule</TabsTrigger>
-        </TabsList>
-        <TabsContent value="upload"><UploadPanel /></TabsContent>
-        <TabsContent value="view"><ViewSchedule /></TabsContent>
-      </Tabs>
+    <div style={{ padding: "28px 36px" }}>
+      <SchedulePageHeader subline="Manage and view workforce schedules" />
+      <ScheduleTabSwitcher value={tab} onChange={setTab} />
+      {tab === "upload" ? <UploadPanel /> : <ViewSchedule />}
     </div>
   );
 };
