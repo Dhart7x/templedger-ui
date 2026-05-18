@@ -762,7 +762,7 @@ const Home = () => {
                 border: "0.5px solid #E5E0DA",
                 borderRadius: 12,
                 overflow: "hidden",
-                maxWidth: 560,
+                maxWidth: 520,
                 margin: "0 auto",
                 boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
               }}
