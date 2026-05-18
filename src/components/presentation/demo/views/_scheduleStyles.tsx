@@ -330,18 +330,19 @@ export const ScheduleGridTable = ({
 
   return (
     <div style={{ background: "#fff", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden" }}>
-      <div style={{ overflowX: "auto" }}>
-        <div style={{ minWidth: 980 }}>
+      <div style={{ overflow: "hidden" }}>
+        <div>
           {/* Header */}
           <div style={{
-            padding: "12px 0",
+            padding: "10px 0",
             borderBottom: "1px solid var(--border-purple)",
             background: "rgba(76, 29, 149, 0.02)",
             display: "grid",
             gridTemplateColumns: gridCols,
             alignItems: "center",
+            minHeight: 36,
           }}>
-            <div style={{ ...headerCellStyle, textAlign: "left" }}>Department / Role</div>
+            <div style={{ ...headerCellStyle, textAlign: "left" }}>Dept / Role</div>
             <div style={{ ...headerCellStyle, textAlign: "left" }}>Shift</div>
             {days.map((d) => (
               <div key={d} style={{ ...headerCellStyle, textAlign: "center" }}>{d}</div>
