@@ -1617,10 +1617,10 @@ const Home = () => {
             <div
               className="tl-compound-phases"
               style={{
-                marginTop: 32,
+                marginTop: 56,
                 display: "grid",
                 gridTemplateColumns: window.innerWidth >= 768 ? "1fr 1fr" : "1fr",
-                gap: 32,
+                gap: 56,
                 alignItems: "start",
               }}
             >
