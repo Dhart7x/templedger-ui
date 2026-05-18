@@ -749,7 +749,7 @@ const Home = () => {
                 textAlign: "center",
               }}
             >
-              This is what the invoice shows.
+              Here's what makes up your agency spend.
             </p>
             <motion.div
               className="tl-invoice-card"
