@@ -38,6 +38,7 @@ import AgencyLiveSnapshot from "./demo/views/AgencyLiveSnapshot";
 import AgencyNewOrder from "./demo/views/AgencyNewOrder";
 import AgencySchedule from "./demo/views/AgencySchedule";
 import AgencyWorkers from "./demo/views/AgencyWorkers";
+import AgencySignals from "./demo/views/AgencySignals";
 
 // Shared views
 import DemoChatbot from "./demo/views/DemoChatbot";
