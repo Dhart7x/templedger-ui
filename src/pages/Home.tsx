@@ -2314,8 +2314,8 @@ const Home = () => {
             {/* Closing line */}
             <div
               style={{
-                marginTop: 40,
-                paddingTop: 24,
+                marginTop: 24,
+                paddingTop: 16,
                 borderTop: "1px solid rgba(255, 255, 255, 0.15)",
                 textAlign: "left",
               }}
