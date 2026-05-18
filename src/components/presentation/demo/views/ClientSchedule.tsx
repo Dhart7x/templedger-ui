@@ -1,10 +1,10 @@
 import { useState, useCallback } from "react";
-import { Calendar, Upload, FileSpreadsheet, Eye, ChevronDown, X, CheckCircle, Users, Building2, Zap, DollarSign, TrendingUp, Send, ChevronRight, Minus, Plus, AlertTriangle, Bell, BarChart2 } from "lucide-react";
+import { Calendar, Upload, FileSpreadsheet, ChevronDown, X, CheckCircle, Users, Building2, Zap, DollarSign, TrendingUp, Send, ChevronRight, Minus, Plus, AlertTriangle, Bell, BarChart2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useDemoContext } from "../DemoContext";
 import WorkerProfileModal from "../WorkerProfileModal";
+import { SchedulePageHeader, ScheduleTabSwitcher, UploadDropZone, FilterDropdown, LegendTipBar, ScheduleGridTable, eyebrowStyle } from "./_scheduleStyles";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
