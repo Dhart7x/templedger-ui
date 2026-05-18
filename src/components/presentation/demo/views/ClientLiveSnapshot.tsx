@@ -512,22 +512,26 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
             const sevColor = severityVar(exception.type);
             const isLast = idx === filteredExceptions.length - 1;
 
+            const isMarcus = exception.type === "overtime" && exception.workerName === "Marcus Webb";
+            const hasResolutionActions = hasUpdate && exception.resolution && !exception.resolution.acknowledged;
+
             return (
               <div
                 key={exception.id}
                 onClick={() => setSelectedExceptionId(isSelected ? null : exception.id)}
                 style={{
-                  padding: "20px 24px",
+                  padding: "16px 24px",
                   borderBottom: isLast ? "none" : "1px solid var(--border-purple)",
                   display: "flex",
                   gap: 24,
-                  alignItems: "flex-start",
+                  alignItems: "center",
                   cursor: "pointer",
                   background: hasUpdate ? "rgba(76, 29, 149, 0.03)" : "transparent",
                   boxShadow: isSelected ? "inset 3px 0 0 var(--brand-purple)" : "none",
                   transition: "background 120ms ease",
                 }}
               >
+                {/* LEFT: content */}
                 <div style={{ flex: 1, minWidth: 0 }}>
                   {/* Top line */}
                   <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
@@ -585,7 +589,6 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
                     {hasUpdate && (
                       <span
                         style={{
-                          marginLeft: "auto",
                           padding: "2px 8px",
                           background: "rgba(76, 29, 149, 0.1)",
                           color: "var(--brand-purple)",
@@ -602,7 +605,7 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
                     )}
                   </div>
 
-                  {/* Meta line */}
+                  {/* Meta line — single line, mono */}
                   <div style={{ ...monoLabel, marginTop: 6, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
                     <MapPin size={11} style={{ color: "var(--text-muted)" }} />
                     <span>{exception.site}</span>
@@ -627,59 +630,36 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
                     )}
                   </div>
 
-                  {/* Description */}
-                  {exception.description && (
-                    <p style={{ marginTop: 10, fontFamily: "var(--font-body)", fontSize: 13, color: "var(--text-primary)", lineHeight: 1.5 }}>
+                  {/* Description — only when it adds info not already in meta (e.g. replacement details) */}
+                  {exception.description && !isMarcus && exception.type !== "overtime" && (
+                    <p style={{ marginTop: 8, fontFamily: "var(--font-body)", fontSize: 13, color: "var(--text-primary)", lineHeight: 1.5 }}>
                       {exception.description}
                     </p>
                   )}
 
-                  {/* Overtime contextual note */}
-                  {exception.type === "overtime" && exception.workerName !== "Marcus Webb" && (
+                  {/* Marcus Webb / Overtime — inline insight strip */}
+                  {exception.type === "overtime" && (
                     <div
                       style={{
-                        marginTop: 12,
-                        padding: "12px 14px",
+                        marginTop: 8,
+                        padding: "10px 14px",
                         background: "rgba(76, 29, 149, 0.05)",
                         borderRadius: 4,
                         display: "flex",
                         alignItems: "center",
-                        gap: 8,
+                        gap: 12,
+                        flexWrap: "wrap",
                       }}
                     >
-                      <Users size={12} style={{ color: "var(--brand-purple)", flexShrink: 0 }} />
-                      <span style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "var(--text-secondary)" }}>
-                        29 available workers to cover this shift within 3 miles of site.
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Marcus Webb insight strip */}
-                  {exception.type === "overtime" && exception.workerName === "Marcus Webb" && (
-                    <>
-                      <p style={{ marginTop: 10, fontFamily: "var(--font-body)", fontSize: 13, color: "var(--text-primary)", lineHeight: 1.5 }}>
-                        Marcus Webb has been on shift for 6h 42m. Overtime threshold reached.
-                      </p>
-
-                      <div
-                        style={{
-                          marginTop: 12,
-                          padding: "12px 14px",
-                          background: "rgba(76, 29, 149, 0.05)",
-                          borderRadius: 4,
-                        }}
-                      >
-                        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                          <Users size={12} style={{ color: "var(--brand-purple)", flexShrink: 0 }} />
-                          <span style={{ fontFamily: "var(--font-mono-labels)", fontWeight: 500, fontSize: 11, color: "var(--brand-purple)" }}>
-                            37 available workers
-                          </span>
-                        </div>
-                        <p style={{ marginTop: 4, fontFamily: "var(--font-body)", fontSize: 12, color: "var(--text-secondary)" }}>
-                          across 3 agencies within 3 miles of site who can cover this shift
-                        </p>
-                        <div style={{ marginTop: 8, display: "flex", flexWrap: "wrap", gap: 6 }}>
-                          {["Workforce Direct · 14 workers", "Pinnacle Staffing · 12 workers", "Meridian Recruitment · 11 workers"].map((p) => (
+                      <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                        <Users size={12} style={{ color: "var(--brand-purple)", flexShrink: 0 }} />
+                        <span style={{ fontFamily: "var(--font-mono-labels)", fontWeight: 500, fontSize: 11, color: "var(--brand-purple)" }}>
+                          {isMarcus ? "37 available · 3 agencies · within 3 miles" : "29 available · within 3 miles"}
+                        </span>
+                      </div>
+                      {isMarcus && (
+                        <div style={{ display: "inline-flex", flexWrap: "wrap", gap: 6 }}>
+                          {["Workforce Direct · 14", "Pinnacle Staffing · 12", "Meridian Recruitment · 11"].map((p) => (
                             <span
                               key={p}
                               style={{
@@ -698,42 +678,22 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
                             </span>
                           ))}
                         </div>
-                      </div>
-
-                      <div style={{ display: "flex", gap: 8, marginTop: 14, flexWrap: "wrap" }}>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            toast.success("Intelligent Allocation initiated", {
-                              description: "Pre-populated with Outbound Dispatch · 14:00 shift requirements",
-                            });
-                          }}
-                          style={primaryActionBtn}
-                        >
-                          Run Intelligent Allocation
-                        </button>
-                        <button
-                          onClick={(e) => { e.stopPropagation(); toast("Shift manager notified"); }}
-                          style={secondaryActionBtn}
-                        >
-                          Alert Shift Manager
-                        </button>
-                      </div>
-                    </>
+                      )}
+                    </div>
                   )}
 
-                  {/* Resolution Status */}
+                  {/* Resolution status (read-only summary) */}
                   {exception.resolution && (
                     <div
                       style={{
-                        marginTop: 12,
-                        padding: "12px 14px",
+                        marginTop: 10,
+                        padding: "10px 14px",
                         background: "var(--cream-tint)",
                         border: "1px solid var(--border-purple)",
                         borderRadius: 4,
                       }}
                     >
-                      <div style={{ ...eyebrowStyle, color: "var(--text-secondary)", marginBottom: 6 }}>Agency Response</div>
+                      <div style={{ ...eyebrowStyle, color: "var(--text-secondary)", marginBottom: 4 }}>Agency Response</div>
                       <div style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "var(--text-primary)" }}>
                         {exception.resolution.resolutionType === "on-the-way" ? (
                           <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
@@ -761,41 +721,12 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
                           </span>
                         )}
                       </div>
-
-                      {!exception.resolution.acknowledged && isSelected && (
-                        <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="flex-1 text-xs h-8 gap-1"
-                            onClick={(e) => { e.stopPropagation(); handleExceptionResponse(exception.id, "request-replacement"); }}
-                          >
-                            <RefreshCw className="w-3 h-3" />
-                            Request Replacement
-                          </Button>
-                          <Button
-                            size="sm"
-                            className="flex-1 text-xs h-8 gap-1"
-                            onClick={(e) => { e.stopPropagation(); handleExceptionResponse(exception.id, "accepted"); }}
-                          >
-                            <Check className="w-3 h-3" />
-                            Approve
-                          </Button>
-                        </div>
-                      )}
-
-                      {exception.resolution.acknowledged && (
-                        <div style={{ marginTop: 8, display: "inline-flex", alignItems: "center", gap: 6, color: "var(--status-green)", fontFamily: "var(--font-mono-labels)", fontSize: 11 }}>
-                          <CheckCircle size={12} />
-                          Approved
-                        </div>
-                      )}
                     </div>
                   )}
 
-                  {/* Awaiting agency response */}
+                  {/* Awaiting agency response — keep, NEW info not in meta */}
                   {!exception.resolution && (exception.type === "no-show" || exception.type === "late") && (
-                    <div style={{ marginTop: 10, display: "flex", alignItems: "center", gap: 6 }}>
+                    <div style={{ marginTop: 8, display: "flex", alignItems: "center", gap: 6 }}>
                       <Clock size={11} style={{ color: "var(--status-amber)" }} />
                       <span style={{ fontFamily: "var(--font-mono-labels)", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>
                         Awaiting agency response...
@@ -803,20 +734,7 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
                     </div>
                   )}
 
-                  {/* Mark as Actioned */}
-                  {!showActionModal && (
-                    <div style={{ marginTop: 14 }}>
-                      <button
-                        onClick={(e) => { e.stopPropagation(); handleMarkAsActioned(exception.id); }}
-                        style={tertiaryActionBtn}
-                      >
-                        <CheckSquare size={12} />
-                        Mark as Actioned
-                      </button>
-                    </div>
-                  )}
-
-                  {/* Inline Action Modal */}
+                  {/* Inline Action Modal — full width below content */}
                   {showActionModal && (
                     <div
                       onClick={(e) => e.stopPropagation()}
@@ -833,7 +751,7 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
                         value={actionNote}
                         onChange={(e) => setActionNote(e.target.value)}
                         placeholder="Describe what was done..."
-                        rows={4}
+                        rows={3}
                         style={{
                           width: "100%",
                           borderRadius: 4,
@@ -858,6 +776,85 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
                     </div>
                   )}
                 </div>
+
+                {/* RIGHT: action block */}
+                {!showActionModal && (
+                  <div
+                    onClick={(e) => e.stopPropagation()}
+                    style={{ width: 200, flexShrink: 0, display: "flex", flexDirection: "column", gap: 6, alignSelf: "center" }}
+                  >
+                    {isMarcus ? (
+                      <>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toast.success("Intelligent Allocation initiated", {
+                              description: "Pre-populated with Outbound Dispatch · 14:00 shift requirements",
+                            });
+                          }}
+                          style={{ ...primaryActionBtn, width: "100%", justifyContent: "center" }}
+                        >
+                          Run Allocation
+                        </button>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); toast("Shift manager notified"); }}
+                          style={{ ...secondaryActionBtn, width: "100%", justifyContent: "center" }}
+                        >
+                          Alert Manager
+                        </button>
+                      </>
+                    ) : hasResolutionActions ? (
+                      <>
+                        <Button
+                          size="sm"
+                          className="w-full text-xs h-8 gap-1"
+                          onClick={(e) => { e.stopPropagation(); handleExceptionResponse(exception.id, "accepted"); }}
+                        >
+                          <Check className="w-3 h-3" />
+                          Approve
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="w-full text-xs h-8 gap-1"
+                          onClick={(e) => { e.stopPropagation(); handleExceptionResponse(exception.id, "request-replacement"); }}
+                        >
+                          <RefreshCw className="w-3 h-3" />
+                          Request Replace
+                        </Button>
+                      </>
+                    ) : exception.resolution?.acknowledged ? (
+                      <div style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "var(--status-green)", fontFamily: "var(--font-mono-labels)", fontSize: 11, justifyContent: "center" }}>
+                        <CheckCircle size={12} />
+                        Approved
+                      </div>
+                    ) : null}
+                    <button
+                      onClick={(e) => { e.stopPropagation(); handleMarkAsActioned(exception.id); }}
+                      onMouseEnter={(e) => { e.currentTarget.style.color = "var(--text-primary)"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.color = "var(--text-secondary)"; }}
+                      style={{
+                        padding: "6px 0 0 0",
+                        background: "transparent",
+                        border: "none",
+                        fontFamily: "var(--font-mono-headers)",
+                        fontWeight: 500,
+                        fontSize: 10,
+                        letterSpacing: "0.06em",
+                        textTransform: "uppercase",
+                        color: "var(--text-secondary)",
+                        display: "inline-flex",
+                        gap: 5,
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <CheckSquare size={11} />
+                      Mark as Actioned
+                    </button>
+                  </div>
+                )}
               </div>
             );
           })}
