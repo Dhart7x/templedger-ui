@@ -152,6 +152,16 @@ const ClientAgencies = ({ onViewWorker }: ClientAgenciesProps) => {
     );
   };
 
+  const attendanceColor = (v: number) =>
+    v >= 95 ? "var(--status-green)" : v >= 85 ? "var(--status-amber)" : "var(--status-red)";
+  const attritionColor = (v: number) =>
+    v <= 10 ? "var(--status-green)" : v <= 20 ? "var(--status-amber)" : "var(--status-red)";
+  const responseColor = (minStr: string) => {
+    const m = parseInt(minStr);
+    return m <= 15 ? "var(--status-green)" : m <= 30 ? "var(--status-amber)" : "var(--status-red)";
+  };
+
+  // Keep legacy helper to avoid touching the modal section
   const getPerformanceColor = (value: number, type: "attendance" | "punctuality" | "attrition" | "fillRate") => {
     if (type === "attrition") {
       if (value <= 5) return "text-green-500";
@@ -170,165 +180,320 @@ const ClientAgencies = ({ onViewWorker }: ClientAgenciesProps) => {
 
   const currentMetrics = (agency: Agency) => agency.performance[timePeriod];
 
+  const totalDeployed = agencies.reduce((a, ag) => a + ag.activeWorkers, 0);
+  const avgAttendance = (agencies.reduce((a, ag) => a + currentMetrics(ag).attendance, 0) / agencies.length).toFixed(1);
+  const avgResponse = Math.round(agencies.reduce((a, ag) => a + parseInt(currentMetrics(ag).responseTime), 0) / agencies.length);
+
+  const eyebrow: React.CSSProperties = {
+    fontFamily: "'IBM Plex Mono', monospace",
+    fontWeight: 500,
+    fontSize: 10,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    color: "var(--brand-purple)",
+  };
+
+  const kpiLabel: React.CSSProperties = {
+    fontFamily: "'IBM Plex Mono', monospace",
+    fontWeight: 500,
+    fontSize: 10,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    color: "var(--text-secondary)",
+  };
+
+  const colHeader: React.CSSProperties = {
+    fontFamily: "'IBM Plex Mono', monospace",
+    fontWeight: 500,
+    fontSize: 10,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    color: "var(--text-secondary)",
+  };
+
+  const metricCell: React.CSSProperties = {
+    fontFamily: "'JetBrains Mono', monospace",
+    fontWeight: 500,
+    fontSize: 13,
+    textAlign: "center",
+  };
+
+  const gridCols = "1.6fr 110px repeat(7, 1fr) 90px";
+
   return (
-    <div className="p-4 md:p-6 space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
+    <div style={{ padding: 24 }}>
+      {/* PART 1 — Header */}
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 22 }}>
         <div>
-          <h1 className="text-lg md:text-xl font-bold text-foreground">Agencies</h1>
-          <p className="text-xs text-muted-foreground">Manage and monitor agency performance</p>
+          <div style={{ ...eyebrow, marginBottom: 8 }}>— AGENCIES</div>
+          <h1 style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 26, color: "var(--text-primary)", margin: 0, marginBottom: 4 }}>
+            Agencies
+          </h1>
+          <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, color: "var(--text-secondary)", margin: 0 }}>
+            Manage and monitor agency performance
+          </p>
         </div>
-        <div className="flex items-center bg-card border border-border rounded-lg">
-          {(["week", "month", "year"] as const).map((period) => (
-            <button
-              key={period}
-              onClick={() => setTimePeriod(period)}
-              className={`px-4 py-1.5 text-xs capitalize transition-colors ${
-                timePeriod === period
-                  ? "bg-primary text-primary-foreground rounded-lg"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {period}
-            </button>
-          ))}
+        {/* Week/Month/Year segmented control */}
+        <div
+          style={{
+            display: "inline-flex",
+            background: "var(--white)",
+            border: "1px solid var(--border-purple)",
+            borderRadius: 4,
+            padding: 3,
+            gap: 3,
+          }}
+        >
+          {(["week", "month", "year"] as const).map((period) => {
+            const active = timePeriod === period;
+            return (
+              <button
+                key={period}
+                onClick={() => setTimePeriod(period)}
+                style={{
+                  height: 30,
+                  padding: "0 14px",
+                  borderRadius: 3,
+                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontWeight: 500,
+                  fontSize: 11,
+                  letterSpacing: "0.06em",
+                  textTransform: "uppercase",
+                  cursor: "pointer",
+                  border: "none",
+                  transition: "background 120ms ease",
+                  background: active ? "var(--deep-purple)" : "transparent",
+                  color: active ? "var(--cream)" : "var(--text-secondary)",
+                }}
+                onMouseEnter={(e) => { if (!active) e.currentTarget.style.background = "var(--cream-tint)"; }}
+                onMouseLeave={(e) => { if (!active) e.currentTarget.style.background = "transparent"; }}
+              >
+                {period}
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* Summary Cards */}
-      <div className="grid grid-cols-4 gap-3">
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <Building2 className="w-4 h-4 text-muted-foreground" />
-            <span className="text-xs text-muted-foreground">Active Agencies</span>
+      {/* PART 2 — Top Summary Strip */}
+      <div
+        style={{
+          display: "flex",
+          background: "var(--white)",
+          border: "1px solid var(--border-purple)",
+          borderRadius: 6,
+          padding: "20px 0",
+          marginBottom: 22,
+        }}
+      >
+        {[
+          { Icon: Building2, label: "ACTIVE AGENCIES", value: agencies.length.toString(), color: "var(--brand-purple)" },
+          { Icon: Users, label: "DEPLOYED NOW", value: totalDeployed.toString(), color: "var(--status-green)" },
+          { Icon: TrendingUp, label: "AVG ATTENDANCE", value: `${avgAttendance}%`, color: "var(--status-green)" },
+          { Icon: Clock, label: "AVG RESPONSE", value: `${avgResponse} min`, color: "var(--brand-purple)" },
+        ].map((c, i, arr) => (
+          <div
+            key={c.label}
+            style={{
+              flex: 1,
+              padding: "0 24px",
+              borderRight: i === arr.length - 1 ? "none" : "1px solid var(--border-purple)",
+              display: "flex",
+              flexDirection: "column",
+              gap: 8,
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <c.Icon size={12} style={{ color: c.color }} />
+              <span style={kpiLabel}>{c.label}</span>
+            </div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 26, lineHeight: 1, color: "var(--text-primary)" }}>
+              {c.value}
+            </div>
           </div>
-          <p className="text-xl font-bold">{agencies.length}</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <Users className="w-4 h-4 text-green-500" />
-            <span className="text-xs text-muted-foreground">Deployed Now</span>
+        ))}
+      </div>
+
+      {/* PART 3 — Agency Performance Block Header */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
+        <div>
+          <div style={{ ...eyebrow, marginBottom: 6 }}>— AGENCY PERFORMANCE</div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, color: "var(--text-secondary)" }}>
+            Every metric derived from system data, not self-reports
           </div>
-          <p className="text-xl font-bold text-green-500">{agencies.reduce((a, ag) => a + ag.activeWorkers, 0)}</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <TrendingUp className="w-4 h-4 text-primary" />
-            <span className="text-xs text-muted-foreground">Avg Attendance</span>
-          </div>
-          <p className="text-xl font-bold text-primary">
-            {(agencies.reduce((a, ag) => a + currentMetrics(ag).attendance, 0) / agencies.length).toFixed(1)}%
-          </p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <Clock className="w-4 h-4 text-muted-foreground" />
-            <span className="text-xs text-muted-foreground">Avg Response</span>
-          </div>
-          <p className="text-xl font-bold">
-            {Math.round(agencies.reduce((a, ag) => a + parseInt(currentMetrics(ag).responseTime), 0) / agencies.length)} min
-          </p>
         </div>
       </div>
 
-      {/* Agency List */}
-      <div className="space-y-3">
-        {agencies.map((agency) => {
+      {/* PART 4 — Agency Table */}
+      <div style={{ background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden" }}>
+        {/* Column headers */}
+        <div
+          style={{
+            padding: "13px 20px",
+            borderBottom: "1px solid var(--border-purple)",
+            background: "rgba(76, 29, 149, 0.02)",
+            display: "grid",
+            gridTemplateColumns: gridCols,
+            gap: 14,
+            alignItems: "center",
+          }}
+        >
+          <span style={{ ...colHeader, textAlign: "left" }}>AGENCY</span>
+          <span style={{ ...colHeader, textAlign: "center" }}>DEPLOYED</span>
+          <span style={{ ...colHeader, textAlign: "center" }}>ATTENDANCE</span>
+          <span style={{ ...colHeader, textAlign: "center" }}>PUNCTUALITY</span>
+          <span style={{ ...colHeader, textAlign: "center" }}>FILL RATE</span>
+          <span style={{ ...colHeader, textAlign: "center" }}>ATTRITION</span>
+          <span style={{ ...colHeader, textAlign: "center" }}>RESPONSE</span>
+          <span style={{ ...colHeader, textAlign: "center" }}>AVG RATE</span>
+          <span style={{ ...colHeader, textAlign: "center" }}>NEW REGS</span>
+          <span />
+        </div>
+
+        {agencies.map((agency, idx) => {
           const isExpanded = expandedAgencies.includes(agency.id);
-          const metrics = currentMetrics(agency);
+          const m = currentMetrics(agency);
+          const sharePct = totalDeployed > 0 ? Math.round((agency.activeWorkers / totalDeployed) * 100) : 0;
+          const isLast = idx === agencies.length - 1;
           return (
-            <div key={agency.id} className="bg-card border border-border rounded-lg overflow-hidden">
-              {/* Agency Header */}
-              <div className="p-4 cursor-pointer hover:bg-muted/30 transition-colors" onClick={() => toggleAgency(agency.id)}>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-3">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-semibold text-base">{agency.name}</h3>
-                        <div className="flex items-center gap-0.5">
-                          <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                          <span className="text-sm font-medium">{agency.rating}</span>
-                        </div>
-                      </div>
-                      <p className="text-xs text-muted-foreground">
-                        {agency.activeWorkers} deployed / {agency.totalWorkers} total workers
-                      </p>
-                    </div>
+            <div key={agency.id}>
+              <div
+                onClick={() => toggleAgency(agency.id)}
+                style={{
+                  padding: "16px 20px",
+                  borderBottom: !isExpanded && isLast ? "none" : "1px solid var(--border-purple)",
+                  display: "grid",
+                  gridTemplateColumns: gridCols,
+                  gap: 14,
+                  alignItems: "center",
+                  cursor: "pointer",
+                  transition: "background 120ms ease",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "var(--cream-tint)")}
+                onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+              >
+                {/* AGENCY */}
+                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                  <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                    <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 14, color: "var(--text-primary)" }}>
+                      {agency.name}
+                    </span>
+                    <span style={{ display: "inline-flex", gap: 4, alignItems: "center" }}>
+                      <Star size={11} style={{ color: "#D97706", fill: "#D97706" }} />
+                      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 11, color: "var(--text-secondary)" }}>
+                        {agency.rating}
+                      </span>
+                    </span>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <button
-                      onClick={(e) => { e.stopPropagation(); setSelectedAgency(agency); }}
-                      className="text-xs text-primary hover:underline"
-                    >
-                      View Details
-                    </button>
-                    {isExpanded ? <ChevronUp className="w-5 h-5 text-muted-foreground" /> : <ChevronDown className="w-5 h-5 text-muted-foreground" />}
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>
+                    {agency.activeWorkers} deployed · {agency.totalWorkers} total workers
                   </div>
                 </div>
 
-                {/* Performance Metrics Row — 9 columns */}
-                <div className="grid grid-cols-3 md:grid-cols-9 gap-3">
-                  <div>
-                    <p className="text-xs text-muted-foreground">Attendance</p>
-                    <p className={`text-sm font-semibold ${getPerformanceColor(metrics.attendance, "attendance")}`}>{metrics.attendance}%</p>
+                {/* DEPLOYED + vol share bar */}
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 16, color: "var(--brand-purple)" }}>
+                    {agency.activeWorkers}
+                  </span>
+                  <div style={{ width: 60, height: 3, background: "var(--cream-tint)", borderRadius: 2, overflow: "hidden" }}>
+                    <div style={{ height: "100%", width: `${sharePct}%`, background: "var(--brand-purple)", borderRadius: 2 }} />
                   </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">Punctuality</p>
-                    <p className={`text-sm font-semibold ${getPerformanceColor(metrics.punctuality, "punctuality")}`}>{metrics.punctuality}%</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">Fill Rate</p>
-                    <p className={`text-sm font-semibold ${getPerformanceColor(metrics.fillRate, "fillRate")}`}>{metrics.fillRate}%</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">Attrition</p>
-                    <p className={`text-sm font-semibold ${getPerformanceColor(metrics.attrition, "attrition")}`}>{metrics.attrition}%</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">Response</p>
-                    <p className="text-sm font-semibold">{metrics.responseTime}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">Avg ETA</p>
-                    <p className="text-sm font-semibold">{metrics.avgEta}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">Avg Rate</p>
-                    <p className="text-sm font-semibold">{metrics.avgRate}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">Standby</p>
-                    <p className="text-sm font-semibold text-primary">{metrics.standbyWorkers}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">New Reg</p>
-                    <p className="text-sm font-semibold text-primary">+{metrics.newRegistrations}</p>
-                  </div>
+                </div>
+
+                {/* metrics */}
+                <span style={{ ...metricCell, color: attendanceColor(m.attendance) }}>{m.attendance}%</span>
+                <span style={{ ...metricCell, color: attendanceColor(m.punctuality) }}>{m.punctuality}%</span>
+                <span style={{ ...metricCell, color: attendanceColor(m.fillRate) }}>{m.fillRate}%</span>
+                <span style={{ ...metricCell, color: attritionColor(m.attrition) }}>{m.attrition}%</span>
+                <span style={{ ...metricCell, color: responseColor(m.responseTime) }}>{m.responseTime}</span>
+                <span style={{ ...metricCell, color: "var(--text-primary)" }}>{m.avgRate}</span>
+                <span style={{ ...metricCell, color: "var(--text-primary)" }}>+{m.newRegistrations}</span>
+
+                {/* Details */}
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setSelectedAgency(agency); }}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 5,
+                      padding: 0,
+                      background: "transparent",
+                      border: "none",
+                      fontFamily: "'IBM Plex Mono', monospace",
+                      fontWeight: 500,
+                      fontSize: 11,
+                      letterSpacing: "0.06em",
+                      textTransform: "uppercase",
+                      color: "var(--brand-purple)",
+                      cursor: "pointer",
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.textDecoration = "underline")}
+                    onMouseLeave={(e) => (e.currentTarget.style.textDecoration = "none")}
+                  >
+                    Details
+                    <ChevronRight size={11} style={{ color: "var(--brand-purple)" }} />
+                  </button>
                 </div>
               </div>
 
-              {/* Expanded Site/Department Breakdown */}
+              {/* Expanded panel — preserves site/department breakdown */}
               {isExpanded && (
-                <div className="border-t border-border bg-muted/20 p-4">
-                  <h4 className="text-xs font-semibold text-muted-foreground mb-3 uppercase tracking-wider">
-                    Site & Department Breakdown
-                  </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div
+                  style={{
+                    background: "var(--cream-tint)",
+                    borderTop: "1px dashed var(--border-purple)",
+                    borderBottom: isLast ? "none" : "1px solid var(--border-purple)",
+                    padding: "18px 24px",
+                    display: "grid",
+                    gridTemplateColumns: "repeat(4, 1fr)",
+                    gap: 18,
+                  }}
+                >
+                  <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                    <span style={{ ...kpiLabel, fontSize: 10, letterSpacing: "0.1em" }}>AVG ETA</span>
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 16, color: "var(--text-primary)" }}>
+                      {m.avgEta}
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                    <span style={{ ...kpiLabel, fontSize: 10, letterSpacing: "0.1em" }}>STANDBY</span>
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 16, color: "var(--text-primary)" }}>
+                      {m.standbyWorkers}
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                    <span style={{ ...kpiLabel, fontSize: 10, letterSpacing: "0.1em" }}>TIME TO FILL</span>
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 16, color: "var(--text-primary)" }}>
+                      {m.timeToFill}
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                    <span style={{ ...kpiLabel, fontSize: 10, letterSpacing: "0.1em" }}>TOTAL WORKERS</span>
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 16, color: "var(--text-primary)" }}>
+                      {agency.totalWorkers}
+                    </span>
+                  </div>
+                  {/* Site + Department breakdown — preserved */}
+                  <div style={{ gridColumn: "1 / -1", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12, marginTop: 4 }}>
                     {agency.sites.map((site) => (
-                      <div key={site.name} className="bg-card rounded-lg p-3 border border-border">
-                        <div className="flex items-center gap-2 mb-2">
-                          <MapPin className="w-3.5 h-3.5 text-muted-foreground" />
-                          <span className="text-sm font-medium">{site.name}</span>
-                          <span className="text-xs text-muted-foreground ml-auto">{site.workers} workers</span>
+                      <div key={site.name} style={{ background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 4, padding: 12 }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
+                          <MapPin size={12} style={{ color: "var(--text-secondary)" }} />
+                          <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>{site.name}</span>
+                          <span style={{ marginLeft: "auto", fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: "var(--text-secondary)" }}>
+                            {site.workers} workers
+                          </span>
                         </div>
-                        <div className="space-y-1.5">
+                        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                           {site.departments.map((dept) => (
-                            <div key={dept.name} className="flex items-center justify-between text-xs">
-                              <div className="flex items-center gap-1.5">
-                                <Briefcase className="w-3 h-3 text-muted-foreground" />
-                                <span className="text-muted-foreground">{dept.name}</span>
-                              </div>
-                              <span className="font-medium">{dept.workers}</span>
+                            <div key={dept.name} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                              <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontFamily: "Inter, sans-serif", fontSize: 11, color: "var(--text-secondary)" }}>
+                                <Briefcase size={10} /> {dept.name}
+                              </span>
+                              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 11, color: "var(--text-primary)" }}>
+                                {dept.workers}
+                              </span>
                             </div>
                           ))}
                         </div>
