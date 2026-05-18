@@ -904,28 +904,28 @@ const Home = () => {
               >
               {[
                 {
-                  q: "Inflated hours, ghost shifts, late clock-outs, questionable overtime.",
-                  a: "Unverified hours reach payroll unchallenged. By the time it surfaces, you've already paid.",
+                  q: "You're paying for hours that were never worked.",
+                  a: "Inflated hours, ghost shifts, late clock-outs, questionable overtime — unverified payroll runs through and the money is gone before anyone audits it.",
                 },
                 {
-                  q: "Compliance breaches on your site are your liability, not the agency's.",
-                  a: "Right to work violations, expired certifications, unsigned contracts. The fine and legal exposure sit with you.",
+                  q: "You're carrying compliance risk that belongs to the agency.",
+                  a: "Right-to-work violations, expired certifications, unsigned contracts. When the regulator shows up, the agency points at you. The fine sits with you.",
                 },
                 {
-                  q: "You're paying agency margin on workers who should already be yours.",
-                  a: "Conversion windows close because nobody has the visibility. The margin keeps running on workers who should be yours.",
+                  q: "You're paying margin on workers who should already be yours.",
+                  a: "Conversion windows close because nobody surfaces them. The agency keeps billing margin on workers you've been paying for long enough to own.",
                 },
                 {
-                  q: "Headcount authorized at site level without financial controls.",
-                  a: "Spend decisions made at site level, without finance visibility. Compounds every week. Nothing stops it.",
+                  q: "You're authorizing spend with no financial control.",
+                  a: "Headcount decisions happen at site level, without finance in the loop. Every authorization compounds. Nothing stops it.",
                 },
                 {
-                  q: "Unplanned overtime and poor shift distribution both have a cost.",
-                  a: "Same root problem, two symptoms. Workers who don't get enough hours leave. Every departure costs.",
+                  q: "You're paying for overtime and attrition you didn't choose.",
+                  a: "Workers who get too many hours burn out. Workers who get too few leave. Both cost. Both stem from how shifts get distributed in the first place.",
                 },
                 {
-                  q: "Shifts are never assigned to the optimal worker or optimal agency.",
-                  a: "No-shows need speed. Planning ahead needs quality and cost. That distinction requires data nobody has. Operating blind.",
+                  q: "You're allocating shifts blind.",
+                  a: "No-shows need speed. Forward planning needs quality and price. Without the data to tell the difference, every shift goes to whichever agency picks up the phone first.",
                 },
               ].map((block, i) => (
                 <motion.div
