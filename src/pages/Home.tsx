@@ -2086,7 +2086,7 @@ const Home = () => {
                       display: "grid",
                       gridTemplateColumns: "32px 1fr",
                       gap: 16,
-                      padding: "8px 0",
+                      padding: "10px 0",
                       borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
                       alignItems: "baseline",
                     }}
