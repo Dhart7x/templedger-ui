@@ -802,8 +802,7 @@ const Home = () => {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    minHeight: 48,
-                    padding: "0 20px",
+                    padding: "12px 20px",
                     borderBottom: "0.5px solid #FAFAF8",
                   }}
                 >
