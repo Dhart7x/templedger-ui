@@ -2141,12 +2141,12 @@ const Home = () => {
               transition={{ duration: 0.5, ease: "easeOut" }}
               style={{
                 fontFamily: FONT,
-                fontWeight: 800,
-                fontSize: 32,
+                fontWeight: 500,
+                fontSize: 26,
                 color: "#FFFFFF",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
-                marginBottom: 8,
+                marginBottom: 6,
               }}
             >
               This is what changes.
