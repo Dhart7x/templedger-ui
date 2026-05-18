@@ -243,7 +243,7 @@ const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
               key={candidate.id}
               onClick={() => setSelectedCandidate(candidate)}
               style={{
-                padding: "14px 20px",
+                padding: "16px 20px",
                 borderBottom: idx === arr.length - 1 ? "none" : "1px solid var(--border-purple)",
                 display: "grid",
                 gridTemplateColumns: "40px 1.6fr 1.4fr 100px 100px 90px 80px 140px 30px",
@@ -255,45 +255,42 @@ const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
               onMouseEnter={(e) => (e.currentTarget.style.background = "var(--cream-tint)")}
               onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
             >
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 14, color: "var(--brand-purple)" }}>
+              <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 14, color: "var(--brand-purple)", letterSpacing: "-0.01em" }}>
                 {idx + 1}
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 2, minWidth: 0 }}>
                 <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                   <button
                     onClick={(e) => { e.stopPropagation(); handleWorkerClick(candidate.name); }}
-                    style={{ background: "none", border: 0, padding: 0, fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 13, color: "var(--text-primary)", cursor: "pointer", textAlign: "left" }}
+                    style={{ background: "none", border: 0, padding: 0, fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 13, color: "var(--text-primary)", cursor: "pointer", textAlign: "left", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
                   >
                     {candidate.name}
                   </button>
-                  <span style={{ display: "inline-flex", gap: 4, alignItems: "center" }}>
+                  <span style={{ display: "inline-flex", gap: 3, alignItems: "center", flexShrink: 0 }}>
                     <Star style={{ width: 10, height: 10, fill: "#D97706", color: "#D97706" }} />
                     <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 11, color: "var(--text-secondary)" }}>
                       {candidate.rating}
                     </span>
                   </span>
                 </div>
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>
-                  {candidate.department} · <span style={{ color: "var(--brand-purple)", fontWeight: 500 }}>{candidate.agency}</span>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  <span style={{ color: "var(--brand-purple)", fontWeight: 500 }}>{candidate.agency}</span> · {candidate.department}
                 </div>
               </div>
-              <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-                <MapPin style={{ width: 12, height: 12, color: "var(--text-muted)" }} />
-                <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>{candidate.site}</span>
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>{candidate.department}</span>
-                </div>
+              <div style={{ display: "flex", gap: 6, alignItems: "center", minWidth: 0 }}>
+                <MapPin style={{ width: 12, height: 12, color: "var(--text-muted)", flexShrink: 0 }} />
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{candidate.site}</span>
               </div>
-              <div style={{ textAlign: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 13, color: "var(--text-primary)" }}>
+              <div style={{ textAlign: "center", fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 13, color: "var(--text-primary)", letterSpacing: "-0.01em" }}>
                 {candidate.timeServed}mo
               </div>
-              <div style={{ textAlign: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 13, color: attendanceColor(candidate.attendance) }}>
+              <div style={{ textAlign: "center", fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 13, color: attendanceColor(candidate.attendance), letterSpacing: "-0.01em" }}>
                 {candidate.attendance}%
               </div>
-              <div style={{ textAlign: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>
+              <div style={{ textAlign: "center", fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 13, color: "var(--text-primary)", letterSpacing: "-0.01em" }}>
                 {candidate.hoursWorked.toLocaleString()}
               </div>
-              <div style={{ textAlign: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>
+              <div style={{ textAlign: "center", fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 13, color: "var(--text-primary)", letterSpacing: "-0.01em" }}>
                 {candidate.departments.length}
               </div>
               <div style={{ textAlign: "center" }}>
