@@ -1673,13 +1673,13 @@ const Home = () => {
             {/* Transition sentence */}
             <p
               style={{
-                color: "#FFFFFF",
+                color: "#FAFAF8",
                 fontFamily: FONT,
                 fontSize: window.innerWidth >= 768 ? 16 : 14,
                 fontWeight: 600,
-                lineHeight: 1.4,
-                maxWidth: 720,
-                margin: "40px auto 0",
+                lineHeight: 1.65,
+                maxWidth: 640,
+                margin: "64px auto 0",
                 textAlign: "center",
               }}
             >
