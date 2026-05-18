@@ -718,7 +718,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 2 — THE INVOICE VISUAL */}
-        <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "32px 48px 0", position: "relative", zIndex: 1, margin: 0, width: "100%" }}>
+        <section className="tl-section-invoice" style={{ background: "#FFFFFF", padding: "24px 48px 0", position: "relative", zIndex: 1, margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 900, margin: "0 auto" }}>
             <div
               style={{
@@ -749,7 +749,7 @@ const Home = () => {
                 textAlign: "center",
               }}
             >
-              This is the information captured on a typical invoice from your agency.
+              This is what the invoice shows.
             </p>
             <motion.div
               className="tl-invoice-card"
@@ -762,14 +762,13 @@ const Home = () => {
                 border: "0.5px solid #E5E0DA",
                 borderRadius: 12,
                 overflow: "hidden",
-                maxWidth: 560,
+                maxWidth: 520,
                 margin: "0 auto",
                 boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
               }}
             >
               <div
                 style={{
-                  background: "#FAFAF8",
                   borderBottom: "0.5px solid #E5E0DA",
                   padding: "14px 20px",
                   display: "flex",
@@ -779,12 +778,12 @@ const Home = () => {
               >
                 <span
                   style={{
-                    fontFamily: FONT,
-                    fontWeight: 700,
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontWeight: 500,
                     fontSize: 11,
                     letterSpacing: "0.1em",
                     textTransform: "uppercase",
-                    color: "#9B9590",
+                    color: "var(--text-secondary)",
                   }}
                 >
                   AGENCY INVOICE
@@ -803,8 +802,7 @@ const Home = () => {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    minHeight: 48,
-                    padding: "0 20px",
+                    padding: "12px 20px",
                     borderBottom: "0.5px solid #FAFAF8",
                   }}
                 >
@@ -819,7 +817,7 @@ const Home = () => {
               ))}
               <div
                 style={{
-                  padding: "14px 20px",
+                  padding: "12px 20px",
                   borderTop: "1px solid #E5E0DA",
                   background: "#FAFAF8",
                   display: "flex",
