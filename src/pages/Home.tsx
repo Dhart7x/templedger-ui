@@ -2725,7 +2725,7 @@ const Home = () => {
                     style={{
                       width: "100%",
                       background: "#FFFFFF",
-                      color: "#2E1065",
+                      color: "#1A0A3D",
                       fontWeight: 700,
                       fontSize: 14,
                       borderRadius: 8,
