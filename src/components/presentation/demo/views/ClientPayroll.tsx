@@ -72,7 +72,7 @@ const monoLabel: React.CSSProperties = {
   letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-secondary)",
 };
 
-const GATE_LABELS = ["SCHED", "CLOCK IN", "CLOCK OUT", "MGR APPR", "COMPLY"];
+const GATE_LABELS = ["SCH", "IN", "OUT", "APPR", "CMPL"];
 
 type GateState = "pass" | "fail" | "pending";
 
@@ -80,24 +80,24 @@ const GateChip = ({ state, label }: { state: GateState; label: string }) => {
   const styles: Record<GateState, { bg: string; color: string; icon: JSX.Element }> = {
     pass: {
       bg: "rgba(22, 163, 74, 0.1)", color: "var(--status-green)",
-      icon: <Check size={9} style={{ color: "var(--status-green)" }} strokeWidth={3} />,
+      icon: <Check size={8} style={{ color: "var(--status-green)" }} strokeWidth={3} />,
     },
     fail: {
       bg: "rgba(185, 28, 28, 0.1)", color: "var(--status-red)",
-      icon: <X size={9} style={{ color: "var(--status-red)" }} strokeWidth={3} />,
+      icon: <X size={8} style={{ color: "var(--status-red)" }} strokeWidth={3} />,
     },
     pending: {
       bg: "var(--cream-tint)", color: "var(--text-muted)",
-      icon: <Circle size={9} style={{ color: "var(--text-muted)" }} />,
+      icon: <Circle size={8} style={{ color: "var(--text-muted)" }} />,
     },
   };
   const s = styles[state];
   return (
     <span style={{
-      padding: "3px 8px", background: s.bg, color: s.color, borderRadius: 3,
-      display: "inline-flex", gap: 5, alignItems: "center",
+      padding: "2px 6px", background: s.bg, color: s.color, borderRadius: 3,
+      display: "inline-flex", gap: 4, alignItems: "center", whiteSpace: "nowrap",
       fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 9,
-      letterSpacing: "0.06em", textTransform: "uppercase",
+      letterSpacing: "0.04em", textTransform: "uppercase", flexShrink: 0,
     }}>
       {s.icon}
       {label}
@@ -106,7 +106,7 @@ const GateChip = ({ state, label }: { state: GateState; label: string }) => {
 };
 
 const GateRow = ({ states }: { states: GateState[] }) => (
-  <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap" }}>
+  <div style={{ display: "flex", gap: 4, alignItems: "center", flexWrap: "nowrap", overflow: "hidden" }}>
     {states.map((st, i) => <GateChip key={i} state={st} label={GATE_LABELS[i]} />)}
   </div>
 );
@@ -245,7 +245,7 @@ const ClientPayroll = () => {
             {verified.map((entry, idx) => (
               <div key={idx} style={{
                 display: "grid", gridTemplateColumns: "1.4fr 90px 1.3fr 90px", gap: 18,
-                padding: "14px 20px", alignItems: "center",
+                padding: "16px 20px", alignItems: "center",
                 borderBottom: idx === verified.length - 1 ? "none" : "1px solid var(--border-purple)",
               }}>
                 <WorkerCell worker={entry.worker} agency={entry.agency} department={entry.department} />
@@ -300,7 +300,7 @@ const ClientPayroll = () => {
             {exceptions.map((entry, idx) => (
               <div key={entry.id} style={{
                 display: "grid", gridTemplateColumns: "1.4fr 1.3fr 130px 90px", gap: 18,
-                padding: "14px 20px", alignItems: "center",
+                padding: "16px 20px", alignItems: "center",
                 borderBottom: idx === exceptions.length - 1 ? "none" : "1px solid var(--border-purple)",
               }}>
                 <WorkerCell
@@ -395,7 +395,7 @@ const ClientPayroll = () => {
 
           {/* Verified hours block */}
           <div style={{ padding: 18, borderBottom: "1px solid var(--border-purple)", borderLeft: "3px solid var(--status-green)" }}>
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 32, color: "var(--status-green)", lineHeight: 1, marginBottom: 4 }}>
+            <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 32, color: "var(--status-green)", lineHeight: 1, marginBottom: 4, letterSpacing: "-0.01em" }}>
               {currentVerifiedHours}
             </div>
             <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 12, color: "var(--text-secondary)" }}>
@@ -403,7 +403,7 @@ const ClientPayroll = () => {
             </div>
             <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 8 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                <span style={monoLabel}>WORKERS ON VERIFIED PAYROLL</span>
+                <span style={monoLabel}>WORKERS VERIFIED</span>
                 <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>{verified.length}</span>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
@@ -420,7 +420,7 @@ const ClientPayroll = () => {
 
           {/* Payroll exceptions block */}
           <div style={{ padding: 18, borderBottom: "1px solid var(--border-purple)", borderLeft: "3px solid var(--status-red)" }}>
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 32, color: "var(--status-red)", lineHeight: 1, marginBottom: 4 }}>
+            <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 32, color: "var(--status-red)", lineHeight: 1, marginBottom: 4, letterSpacing: "-0.01em" }}>
               {exceptions.length}
             </div>
             <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 12, color: "var(--text-secondary)" }}>

@@ -265,16 +265,17 @@ export const shiftChipStyle = (label: string): React.CSSProperties => {
   };
   const m = map[label] || { bg: "rgba(76, 29, 149, 0.06)", color: "var(--brand-purple)" };
   return {
-    padding: "3px 10px",
+    padding: "2px 6px",
     borderRadius: 3,
     fontFamily: "'JetBrains Mono', monospace",
     fontWeight: 500,
-    fontSize: 11,
+    fontSize: 10,
     letterSpacing: "0.04em",
     textTransform: "uppercase",
     display: "inline-block",
     background: m.bg,
     color: m.color,
+    whiteSpace: "nowrap",
   };
 };
 
@@ -303,13 +304,13 @@ export const ScheduleGridTable = ({
   onCellClick?: (info: { row: { role: string }; shiftKey: string; day: string }) => void;
   renderCellOverlay?: (info: { cellKey: string; cell: { required: number; workers: unknown[] }; row: { role: string }; shiftLabel: string; day: string }) => React.ReactNode;
 }) => {
-  const gridCols = "220px 100px repeat(7, 1fr) 90px";
+  const gridCols = "minmax(120px, 150px) 70px repeat(7, minmax(0, 1fr)) 70px";
   const headerCellStyle: React.CSSProperties = {
-    padding: "0 14px",
+    padding: "0 8px",
     fontFamily: "'IBM Plex Mono', monospace",
     fontWeight: 500,
     fontSize: 10,
-    letterSpacing: "0.12em",
+    letterSpacing: "0.1em",
     textTransform: "uppercase",
     color: "var(--text-secondary)",
     borderRight: "1px solid var(--border-purple)",
@@ -329,18 +330,19 @@ export const ScheduleGridTable = ({
 
   return (
     <div style={{ background: "#fff", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden" }}>
-      <div style={{ overflowX: "auto" }}>
-        <div style={{ minWidth: 980 }}>
+      <div style={{ overflow: "hidden" }}>
+        <div>
           {/* Header */}
           <div style={{
-            padding: "12px 0",
+            padding: "10px 0",
             borderBottom: "1px solid var(--border-purple)",
             background: "rgba(76, 29, 149, 0.02)",
             display: "grid",
             gridTemplateColumns: gridCols,
             alignItems: "center",
+            minHeight: 36,
           }}>
-            <div style={{ ...headerCellStyle, textAlign: "left" }}>Department / Role</div>
+            <div style={{ ...headerCellStyle, textAlign: "left" }}>Dept / Role</div>
             <div style={{ ...headerCellStyle, textAlign: "left" }}>Shift</div>
             {days.map((d) => (
               <div key={d} style={{ ...headerCellStyle, textAlign: "center" }}>{d}</div>
@@ -370,35 +372,43 @@ export const ScheduleGridTable = ({
               >
                 {/* Dept / Role */}
                 <div style={{
-                  padding: 14,
+                  padding: "8px 10px",
                   borderRight: "1px solid var(--border-purple)",
                   display: "flex",
                   flexDirection: "column",
-                  gap: 3,
+                  gap: 2,
                   justifyContent: "center",
+                  minWidth: 0,
+                  minHeight: 44,
                 }}>
                   {isFirstShift && (
                     <>
                       <span style={{
                         fontFamily: "'IBM Plex Mono', monospace",
                         fontWeight: 500,
-                        fontSize: 10,
-                        letterSpacing: "0.12em",
+                        fontSize: 9,
+                        letterSpacing: "0.1em",
                         textTransform: "uppercase",
                         color: "var(--brand-purple)",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
                       }}>{row.department}</span>
                       <span style={{
                         fontFamily: "Inter, sans-serif",
                         fontWeight: 500,
-                        fontSize: 13,
+                        fontSize: 12,
                         color: "var(--text-primary)",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
                       }}>{row.role}</span>
                     </>
                   )}
                 </div>
 
                 {/* Shift */}
-                <div style={{ padding: 14, borderRight: "1px solid var(--border-purple)", display: "flex", alignItems: "center" }}>
+                <div style={{ padding: "8px 8px", borderRight: "1px solid var(--border-purple)", display: "flex", alignItems: "center", minHeight: 44 }}>
                   <span style={shiftChipStyle(shift.label)}>{shift.label}</span>
                 </div>
 
@@ -415,7 +425,7 @@ export const ScheduleGridTable = ({
                       key={day}
                       onClick={() => onCellClick?.({ row, shiftKey: shift.key, day })}
                       style={{
-                        padding: "12px 14px",
+                        padding: "8px 6px",
                         borderRight: "1px solid var(--border-purple)",
                         display: "flex",
                         alignItems: "center",
@@ -424,6 +434,7 @@ export const ScheduleGridTable = ({
                         cursor: "pointer",
                         transition: "background 120ms ease",
                         background: "#fff",
+                        minHeight: 44,
                       }}
                       onMouseEnter={(e) => (e.currentTarget.style.background = "var(--cream-tint)")}
                       onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
@@ -438,15 +449,16 @@ export const ScheduleGridTable = ({
                       )}
                       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
                         <span style={{
-                          fontFamily: "'JetBrains Mono', monospace",
+                          fontFamily: "Inter, sans-serif",
                           fontWeight: 600,
-                          fontSize: 14,
+                          fontSize: 13,
+                          letterSpacing: "-0.01em",
                           color: statusColor ?? "var(--text-muted)",
                         }}>{filled}</span>
                         <span style={{
                           fontFamily: "'JetBrains Mono', monospace",
                           fontWeight: 400,
-                          fontSize: 10,
+                          fontSize: 9,
                           color: "var(--text-muted)",
                         }}>/ {req}</span>
                       </div>
@@ -457,24 +469,26 @@ export const ScheduleGridTable = ({
 
                 {/* Total */}
                 <div style={{
-                  padding: "12px 14px",
+                  padding: "8px 8px",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "flex-end",
                   justifyContent: "center",
                   gap: 1,
                   background: "rgba(76, 29, 149, 0.02)",
+                  minHeight: 44,
                 }}>
                   <span style={{
-                    fontFamily: "'JetBrains Mono', monospace",
+                    fontFamily: "Inter, sans-serif",
                     fontWeight: 600,
-                    fontSize: 14,
+                    fontSize: 13,
+                    letterSpacing: "-0.01em",
                     color: "var(--text-primary)",
                   }}>{totalFilled}</span>
                   <span style={{
                     fontFamily: "'JetBrains Mono', monospace",
                     fontWeight: 400,
-                    fontSize: 10,
+                    fontSize: 9,
                     color: "var(--text-muted)",
                   }}>/ {totalRequired}</span>
                 </div>
