@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { Search, Filter, Users, Clock, Plus, MapPin, Star, Calendar, Car, Bus, Check, UserPlus } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Search, MapPin, Star, Calendar, Car, Bus, Check, UserPlus, ChevronDown } from "lucide-react";
 import { useDemoContext } from "../DemoContext";
 
 // Extended worker data
@@ -56,9 +53,37 @@ interface AgencyWorkersProps {
   onViewWorker?: (workerName: string) => void;
 }
 
+const eyebrowStyle: React.CSSProperties = {
+  fontFamily: "'IBM Plex Mono', monospace",
+  fontWeight: 500, fontSize: 10, letterSpacing: "0.14em",
+  textTransform: "uppercase", color: "var(--brand-purple)", marginBottom: 8,
+};
+const h1Style: React.CSSProperties = {
+  fontFamily: "'IBM Plex Mono', monospace",
+  fontWeight: 500, fontSize: 26, color: "var(--text-primary)",
+  marginBottom: 4, lineHeight: 1.1,
+};
+const sublineStyle: React.CSSProperties = {
+  fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13,
+  color: "var(--text-secondary)",
+};
+const monoPrefix: React.CSSProperties = {
+  fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500,
+  fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase",
+  color: "var(--text-secondary)",
+};
+const monoValue: React.CSSProperties = {
+  fontFamily: "'JetBrains Mono', monospace", fontWeight: 500,
+  fontSize: 12, color: "var(--text-primary)",
+};
+const headerCell: React.CSSProperties = {
+  fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500,
+  fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase",
+  color: "var(--text-secondary)",
+};
+
 const AgencyWorkers = ({ tab = "live", onViewWorker }: AgencyWorkersProps) => {
   const { allocateWorker, allocations } = useDemoContext();
-  const [activeTab, setActiveTab] = useState<"live" | "standby" | "new">(tab);
   const [searchQuery, setSearchQuery] = useState("");
   const [departmentFilter, setDepartmentFilter] = useState("all");
   const [timeFilter, setTimeFilter] = useState<"week" | "month" | "quarter" | "year">("week");
@@ -74,7 +99,6 @@ const AgencyWorkers = ({ tab = "live", onViewWorker }: AgencyWorkersProps) => {
     const regDate = new Date(date);
     const now = new Date();
     const diffDays = Math.floor((now.getTime() - regDate.getTime()) / (1000 * 60 * 60 * 24));
-    
     switch (timeFilter) {
       case "week": return diffDays <= 7;
       case "month": return diffDays <= 30;
@@ -103,407 +127,400 @@ const AgencyWorkers = ({ tab = "live", onViewWorker }: AgencyWorkersProps) => {
     setAllocationModal(null);
   };
 
-  const isWorkerAllocated = (workerId: string) => {
-    return allocations.some(a => a.workerId === workerId);
-  };
+  const isWorkerAllocated = (workerId: string) =>
+    allocations.some(a => a.workerId === workerId);
 
   const handleWorkerClick = (name: string) => {
-    if (onViewWorker) {
-      onViewWorker(name);
-    }
+    if (onViewWorker) onViewWorker(name);
   };
 
+  const attendanceColor = (a: number) =>
+    a >= 95 ? "var(--status-green)" : a >= 85 ? "var(--status-amber)" : "var(--status-red)";
+
   const getStatusBadge = (status: string) => {
-    switch (status) {
-      case "ready": return <span className="px-2 py-0.5 text-xs rounded-full bg-green-500/20 text-green-500">Ready</span>;
-      case "pending-induction": return <span className="px-2 py-0.5 text-xs rounded-full bg-amber-500/20 text-amber-500">Induction Pending</span>;
-      case "documents-pending": return <span className="px-2 py-0.5 text-xs rounded-full bg-destructive/20 text-destructive">Docs Pending</span>;
-      default: return null;
-    }
+    const map: Record<string, { bg: string; color: string; label: string }> = {
+      "ready": { bg: "rgba(34,197,94,0.12)", color: "var(--status-green)", label: "READY" },
+      "pending-induction": { bg: "rgba(217,119,6,0.12)", color: "var(--status-amber)", label: "INDUCTION" },
+      "documents-pending": { bg: "rgba(220,38,38,0.12)", color: "var(--status-red)", label: "DOCS PENDING" },
+    };
+    const s = map[status];
+    if (!s) return null;
+    return (
+      <span style={{
+        padding: "2px 8px", borderRadius: 3, background: s.bg, color: s.color,
+        fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 10,
+        letterSpacing: "0.04em", textTransform: "uppercase",
+      }}>{s.label}</span>
+    );
+  };
+
+  const Dropdown = ({ prefix, value, onChange, options }: { prefix: string; value: string; onChange: (v: string) => void; options: { value: string; label: string }[] }) => (
+    <div style={{ position: "relative", height: 36, display: "inline-flex", alignItems: "center" }}>
+      <div style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", display: "flex", alignItems: "center", gap: 8, pointerEvents: "none", zIndex: 1 }}>
+        <span style={monoPrefix}>{prefix}</span>
+        <span style={monoValue}>{options.find(o => o.value === value)?.label || ""}</span>
+      </div>
+      <ChevronDown size={12} style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", color: "var(--brand-purple)", pointerEvents: "none", zIndex: 1 }} />
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        style={{
+          height: 36, padding: "0 32px 0 14px",
+          background: "var(--white)", border: "1px solid var(--border-purple)",
+          borderRadius: 4, cursor: "pointer",
+          fontFamily: "'JetBrains Mono', monospace", fontSize: 12,
+          color: "transparent", appearance: "none", WebkitAppearance: "none",
+          minWidth: 200,
+        }}
+      >
+        {options.map(o => <option key={o.value} value={o.value} style={{ color: "var(--text-primary)" }}>{o.label}</option>)}
+      </select>
+    </div>
+  );
+
+  const SearchInput = () => (
+    <div style={{ position: "relative", width: 280 }}>
+      <Search size={14} style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)", pointerEvents: "none" }} />
+      <input
+        type="text"
+        placeholder="Search by name..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        onFocus={(e) => { e.currentTarget.style.borderColor = "var(--brand-purple)"; }}
+        onBlur={(e) => { e.currentTarget.style.borderColor = "var(--border-purple)"; }}
+        style={{
+          height: 36, width: "100%", background: "var(--white)",
+          border: "1px solid var(--border-purple)", borderRadius: 4,
+          padding: "0 12px 0 36px", fontFamily: "Inter, sans-serif",
+          fontWeight: 400, fontSize: 13, color: "var(--text-primary)", outline: "none",
+        }}
+      />
+    </div>
+  );
+
+  const renderLive = () => {
+    const filtered = liveWorkers
+      .filter(w => searchQuery === "" || w.name.toLowerCase().includes(searchQuery.toLowerCase()))
+      .filter(w => departmentFilter === "all" || w.department === departmentFilter);
+    const tpl = "1.5fr 1.2fr 1fr 90px 90px 90px 90px";
+    return (
+      <div style={{ background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden" }}>
+        <div style={{ display: "grid", gridTemplateColumns: tpl, gap: 16, padding: "13px 24px", borderBottom: "1px solid var(--border-purple)", background: "rgba(76, 29, 149, 0.02)", alignItems: "center" }}>
+          <div style={headerCell}>WORKER</div>
+          <div style={headerCell}>DEPARTMENT</div>
+          <div style={headerCell}>SHIFT</div>
+          <div style={headerCell}>CLOCK IN</div>
+          <div style={{ ...headerCell, textAlign: "right" }}>HOURS TODAY</div>
+          <div style={{ ...headerCell, textAlign: "right" }}>HOURS (WEEK)</div>
+          <div style={{ ...headerCell, textAlign: "right" }}>ATTENDANCE</div>
+        </div>
+        {filtered.map((w, idx) => (
+          <div
+            key={w.id}
+            onClick={() => handleWorkerClick(w.name)}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "var(--cream-tint)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "var(--white)"; }}
+            style={{
+              display: "grid", gridTemplateColumns: tpl, gap: 16,
+              padding: "14px 24px",
+              borderBottom: idx === filtered.length - 1 ? "none" : "1px solid var(--border-purple)",
+              alignItems: "center", cursor: "pointer", transition: "background 120ms ease", background: "var(--white)",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ width: 30, height: 30, borderRadius: "50%", background: "rgba(76, 29, 149, 0.1)", color: "var(--brand-purple)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 11 }}>
+                {w.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                  <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 13, color: "var(--text-primary)" }}>{w.name}</span>
+                  <span style={{ display: "inline-flex", gap: 3, alignItems: "center" }}>
+                    <Star size={10} fill="#D97706" color="#D97706" />
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 11, color: "var(--text-secondary)" }}>{w.rating}</span>
+                  </span>
+                </div>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>{w.role}</span>
+              </div>
+            </div>
+            <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>{w.department}</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>{w.shift}</span>
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>{w.location}</span>
+            </div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 13, color: "var(--status-green)" }}>{w.clockIn}</div>
+            <div style={{ textAlign: "right", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>{w.hoursToday}h</div>
+            <div style={{ textAlign: "right", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>{w.hoursWeek}h</div>
+            <div style={{ textAlign: "right", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 13, color: attendanceColor(w.attendance) }}>{w.attendance}%</div>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  const renderStandby = () => {
+    const filtered = standbyWorkers
+      .filter(w => searchQuery === "" || w.name.toLowerCase().includes(searchQuery.toLowerCase()))
+      .filter(w => departmentFilter === "all" || w.department === departmentFilter);
+    const tpl = "1.5fr 1.2fr 1fr 1fr 90px 100px";
+    return (
+      <div style={{ background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden" }}>
+        <div style={{ display: "grid", gridTemplateColumns: tpl, gap: 16, padding: "13px 24px", borderBottom: "1px solid var(--border-purple)", background: "rgba(76, 29, 149, 0.02)", alignItems: "center" }}>
+          <div style={headerCell}>WORKER</div>
+          <div style={headerCell}>DEPARTMENT</div>
+          <div style={headerCell}>PREFERRED</div>
+          <div style={headerCell}>LAST SHIFT</div>
+          <div style={{ ...headerCell, textAlign: "right" }}>ATTENDANCE</div>
+          <div style={{ ...headerCell, textAlign: "right" }}>ACTION</div>
+        </div>
+        {filtered.map((w, idx) => {
+          const allocated = isWorkerAllocated(w.id);
+          return (
+            <div
+              key={w.id}
+              style={{
+                display: "grid", gridTemplateColumns: tpl, gap: 16,
+                padding: "14px 24px",
+                borderBottom: idx === filtered.length - 1 ? "none" : "1px solid var(--border-purple)",
+                alignItems: "center", transition: "background 120ms ease", background: "var(--white)",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "var(--cream-tint)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "var(--white)"; }}
+            >
+              <div onClick={() => handleWorkerClick(w.name)} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}>
+                <div style={{ width: 30, height: 30, borderRadius: "50%", background: "rgba(76, 29, 149, 0.1)", color: "var(--brand-purple)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 11 }}>
+                  {w.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                  <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                    <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 13, color: "var(--text-primary)" }}>{w.name}</span>
+                    <Star size={10} fill="#D97706" color="#D97706" />
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 11, color: "var(--text-secondary)" }}>{w.rating}</span>
+                  </div>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>{w.role}</span>
+                </div>
+              </div>
+              <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>{w.department}</div>
+              <div style={{ display: "flex", gap: 4 }}>
+                {w.preferredShifts.map(s => (
+                  <span key={s} style={{ width: 20, height: 20, borderRadius: 3, background: "var(--cream-tint)", border: "1px solid var(--border-purple)", display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 10, color: "var(--text-primary)" }}>{s}</span>
+                ))}
+              </div>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>{w.lastShift}</div>
+              <div style={{ textAlign: "right", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 13, color: attendanceColor(w.attendance) }}>{w.attendance}%</div>
+              <div style={{ textAlign: "right" }}>
+                {allocated ? (
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 4, padding: "2px 8px", borderRadius: 3, background: "rgba(34,197,94,0.12)", color: "var(--status-green)", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.04em", textTransform: "uppercase" }}>
+                    <Check size={10} /> Allocated
+                  </span>
+                ) : (
+                  <button
+                    onClick={() => setAllocationModal(w)}
+                    onMouseEnter={(e) => { e.currentTarget.style.background = "#3B1577"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = "var(--deep-purple)"; }}
+                    style={{
+                      height: 28, padding: "0 12px", background: "var(--deep-purple)",
+                      color: "var(--cream)", border: "none", borderRadius: 4,
+                      fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 10,
+                      letterSpacing: "0.06em", textTransform: "uppercase", cursor: "pointer",
+                      display: "inline-flex", alignItems: "center", gap: 6,
+                    }}
+                  >
+                    <Calendar size={11} /> Allocate
+                  </button>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  const renderNew = () => {
+    const tpl = "1.5fr 1fr 100px 1fr 1fr 120px";
+    return (
+      <div style={{ background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden" }}>
+        <div style={{ display: "grid", gridTemplateColumns: tpl, gap: 16, padding: "13px 24px", borderBottom: "1px solid var(--border-purple)", background: "rgba(76, 29, 149, 0.02)", alignItems: "center" }}>
+          <div style={headerCell}>WORKER</div>
+          <div style={headerCell}>ROLE</div>
+          <div style={headerCell}>REGISTERED</div>
+          <div style={headerCell}>PREFERRED</div>
+          <div style={headerCell}>EXPERIENCE</div>
+          <div style={headerCell}>STATUS</div>
+        </div>
+        {filteredNewRegistered.map((w, idx) => (
+          <div
+            key={w.id}
+            onClick={() => handleWorkerClick(w.name)}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "var(--cream-tint)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "var(--white)"; }}
+            style={{
+              display: "grid", gridTemplateColumns: tpl, gap: 16,
+              padding: "14px 24px",
+              borderBottom: idx === filteredNewRegistered.length - 1 ? "none" : "1px solid var(--border-purple)",
+              alignItems: "center", cursor: "pointer", transition: "background 120ms ease", background: "var(--white)",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ width: 30, height: 30, borderRadius: "50%", background: "rgba(76, 29, 149, 0.1)", color: "var(--brand-purple)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 11 }}>
+                {w.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 13, color: "var(--text-primary)" }}>{w.name}</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>{w.role}</span>
+              </div>
+            </div>
+            <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>{w.role}</div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>
+              {new Date(w.registeredDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}
+            </div>
+            <div style={{ display: "flex", gap: 4 }}>
+              {w.preferredShifts.length > 0 ? w.preferredShifts.map(s => (
+                <span key={s} style={{ width: 20, height: 20, borderRadius: 3, background: "var(--cream-tint)", border: "1px solid var(--border-purple)", display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 10, color: "var(--text-primary)" }}>{s}</span>
+              )) : <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: "var(--text-muted)" }}>—</span>}
+            </div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>
+              {w.experience.length > 0 ? w.experience.join(", ") : "None"}
+            </div>
+            <div>{getStatusBadge(w.status)}</div>
+          </div>
+        ))}
+      </div>
+    );
   };
 
   return (
-    <div className="p-4 md:p-6 space-y-6">
+    <div style={{ display: "flex", flexDirection: "column" }}>
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 22 }}>
         <div>
-          <h1 className="text-lg md:text-xl font-bold text-foreground">Workers</h1>
-          <p className="text-xs text-muted-foreground">Manage your workforce at Apex Distribution Ltd</p>
+          <div style={eyebrowStyle}>— WORKERS</div>
+          <h1 style={h1Style}>Workers</h1>
+          <p style={sublineStyle}>Manage your workforce at Apex Distribution Ltd</p>
         </div>
-        <Button className="gap-2">
-          <UserPlus className="w-4 h-4" />
+        <button
+          onMouseEnter={(e) => { e.currentTarget.style.background = "#3B1577"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = "var(--deep-purple)"; }}
+          style={{
+            height: 36, padding: "0 16px", background: "var(--deep-purple)",
+            color: "var(--cream)", fontFamily: "'IBM Plex Mono', monospace",
+            fontWeight: 500, fontSize: 11, letterSpacing: "0.06em",
+            textTransform: "uppercase", border: "none", borderRadius: 4,
+            display: "inline-flex", alignItems: "center", gap: 6, cursor: "pointer",
+          }}
+        >
+          <UserPlus size={12} />
           Register Worker
-        </Button>
+        </button>
       </div>
 
-      {/* Tabs */}
-      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "live" | "standby" | "new")}>
-        <TabsList className="bg-muted/50 gap-4">
-          <TabsTrigger value="live" className="gap-2 data-[state=active]:bg-green-500/10 data-[state=active]:text-green-500">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            Live Workers
-            <span className="bg-green-500/20 text-green-500 px-1.5 py-0.5 rounded text-xs">{liveWorkers.length}</span>
-          </TabsTrigger>
-          <TabsTrigger value="standby" className="gap-2 data-[state=active]:bg-amber-500/10 data-[state=active]:text-amber-500">
-            <Clock className="w-3 h-3" />
-            Standby
-            <span className="bg-muted text-muted-foreground px-1.5 py-0.5 rounded text-xs">{standbyWorkers.length}</span>
-          </TabsTrigger>
-          <TabsTrigger value="new" className="gap-2 data-[state=active]:bg-primary/10 data-[state=active]:text-primary">
-            <UserPlus className="w-3 h-3" />
-            New Registered
-            <span className="bg-primary/20 text-primary px-1.5 py-0.5 rounded text-xs">{filteredNewRegistered.length}</span>
-          </TabsTrigger>
-        </TabsList>
+      {/* Search + filters row */}
+      <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap", marginBottom: 18 }}>
+        <SearchInput />
+        <Dropdown prefix="DEPT" value={departmentFilter} onChange={setDepartmentFilter} options={[
+          { value: "all", label: "All Departments" },
+          { value: "Pick and Pack", label: "Pick and Pack" },
+          { value: "Inbound Warehouse", label: "Inbound Warehouse" },
+          { value: "Outbound Dispatch", label: "Outbound Dispatch" },
+          { value: "Returns Processing", label: "Returns Processing" },
+          { value: "Goods In", label: "Goods In" },
+        ]} />
+        {tab === "new" && (
+          <Dropdown prefix="PERIOD" value={timeFilter} onChange={(v) => setTimeFilter(v as "week" | "month" | "quarter" | "year")} options={[
+            { value: "week", label: "Week" },
+            { value: "month", label: "Month" },
+            { value: "quarter", label: "Quarter" },
+            { value: "year", label: "Year" },
+          ]} />
+        )}
+      </div>
 
-        {/* Live Workers Tab */}
-        <TabsContent value="live" className="mt-4 space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input
-                placeholder="Search by name..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9"
-              />
-            </div>
-            <select
-              value={departmentFilter}
-              onChange={(e) => setDepartmentFilter(e.target.value)}
-              className="text-xs bg-card border border-border rounded px-2 py-1.5"
-            >
-              <option value="all">All Departments</option>
-              <option value="Pick and Pack">Picking</option>
-              <option value="Pick and Pack">Packing</option>
-              <option value="Inbound Warehouse">Warehouse</option>
-              <option value="Outbound Dispatch">Loading</option>
-              <option value="Returns Processing">Quality</option>
-            </select>
-          </div>
-
-          <div className="bg-card border border-border rounded-lg overflow-hidden">
-            <table className="w-full text-sm">
-              <thead className="bg-muted/50">
-                <tr>
-                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Worker</th>
-                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Department</th>
-                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Shift</th>
-                  <th className="text-center px-4 py-3 font-medium text-muted-foreground">Clock In</th>
-                  <th className="text-right px-4 py-3 font-medium text-muted-foreground">Hours Today</th>
-                  <th className="text-right px-4 py-3 font-medium text-muted-foreground">Hours (Week)</th>
-                  <th className="text-right px-4 py-3 font-medium text-muted-foreground">Attendance</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {liveWorkers
-                  .filter(w => searchQuery === "" || w.name.toLowerCase().includes(searchQuery.toLowerCase()))
-                  .filter(w => departmentFilter === "all" || w.department === departmentFilter)
-                  .map((worker) => (
-                    <tr key={worker.id} className="hover:bg-muted/30 transition-colors">
-                      <td className="px-4 py-3">
-                        <button onClick={() => handleWorkerClick(worker.name)} className="text-left hover:underline">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center text-xs font-bold text-green-500">
-                              {worker.name.split(" ").map(n => n[0]).join("")}
-                            </div>
-                            <div>
-                              <p className="font-medium text-foreground">{worker.name}</p>
-                              <p className="text-xs text-muted-foreground">{worker.role}</p>
-                            </div>
-                          </div>
-                        </button>
-                      </td>
-                      <td className="px-4 py-3 text-muted-foreground">{worker.department}</td>
-                      <td className="px-4 py-3">
-                        <span className="text-foreground">{worker.shift}</span>
-                        <span className="text-xs text-muted-foreground ml-2">{worker.location}</span>
-                      </td>
-                      <td className="px-4 py-3 text-center">
-                        <span className="text-green-500 font-medium">{worker.clockIn}</span>
-                      </td>
-                      <td className="px-4 py-3 text-right font-medium">{worker.hoursToday}h</td>
-                      <td className="px-4 py-3 text-right font-medium">{worker.hoursWeek}h</td>
-                      <td className="px-4 py-3 text-right">
-                        <span className={`font-medium ${worker.attendance >= 95 ? "text-green-500" : "text-amber-500"}`}>
-                          {worker.attendance}%
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          </div>
-        </TabsContent>
-
-        {/* Standby Workers Tab */}
-        <TabsContent value="standby" className="mt-4 space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input
-                placeholder="Search by name..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9"
-              />
-            </div>
-            <select
-              value={departmentFilter}
-              onChange={(e) => setDepartmentFilter(e.target.value)}
-              className="text-xs bg-card border border-border rounded px-2 py-1.5"
-            >
-              <option value="all">All Departments</option>
-              <option value="Pick and Pack">Picking</option>
-              <option value="Pick and Pack">Packing</option>
-              <option value="Inbound Warehouse">Warehouse</option>
-              <option value="Outbound Dispatch">Loading</option>
-              <option value="Returns Processing">Quality</option>
-            </select>
-          </div>
-
-          <div className="bg-card border border-border rounded-lg overflow-hidden divide-y divide-border">
-            {standbyWorkers
-              .filter(w => searchQuery === "" || w.name.toLowerCase().includes(searchQuery.toLowerCase()))
-              .filter(w => departmentFilter === "all" || w.department === departmentFilter)
-              .map((worker) => {
-                const allocated = isWorkerAllocated(worker.id);
-                return (
-                  <div key={worker.id} className="p-4 hover:bg-muted/30 transition-colors">
-                    <div className="flex items-center justify-between">
-                      <button onClick={() => handleWorkerClick(worker.name)} className="flex items-center gap-4 text-left hover:underline">
-                        <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center text-sm font-bold text-amber-500">
-                          {worker.name.split(" ").map(n => n[0]).join("")}
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <p className="font-medium">{worker.name}</p>
-                            <div className="flex items-center gap-0.5">
-                              <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
-                              <span className="text-xs">{worker.rating}</span>
-                            </div>
-                            {allocated && (
-                              <span className="text-xs bg-green-500/20 text-green-500 px-1.5 py-0.5 rounded flex items-center gap-1">
-                                <Check className="w-3 h-3" />
-                                Allocated
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-xs text-muted-foreground">{worker.role} • {worker.department}</p>
-                        </div>
-                      </button>
-                      
-                      <div className="flex items-center gap-6">
-                        <div className="text-center">
-                          <p className="text-sm font-medium">{worker.preferredShifts.join(", ")}</p>
-                          <p className="text-xs text-muted-foreground">Preferred</p>
-                        </div>
-                        <div className="text-center">
-                          <p className="text-sm text-muted-foreground">{worker.lastShift}</p>
-                          <p className="text-xs text-muted-foreground">Last Shift</p>
-                        </div>
-                        <div className="text-center">
-                          <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                            <Car className="w-3 h-3" />
-                            <span>{worker.distance.carTime}</span>
-                          </div>
-                          <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                            <Bus className="w-3 h-3" />
-                            <span>{worker.distance.publicTransportTime}</span>
-                          </div>
-                        </div>
-                        <div className="text-center">
-                          <p className={`text-sm font-medium ${worker.attendance >= 95 ? "text-green-500" : "text-amber-500"}`}>
-                            {worker.attendance}%
-                          </p>
-                          <p className="text-xs text-muted-foreground">Attendance</p>
-                        </div>
-                        {!allocated && (
-                          <Button 
-                            size="sm" 
-                            className="gap-1"
-                            onClick={() => setAllocationModal(worker)}
-                          >
-                            <Calendar className="w-3 h-3" />
-                            Allocate
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
-        </TabsContent>
-
-        {/* New Registered Tab */}
-        <TabsContent value="new" className="mt-4 space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input
-                placeholder="Search by name..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9"
-              />
-            </div>
-            <div className="flex items-center gap-1 bg-muted/50 p-1 rounded-lg">
-              {(["week", "month", "quarter", "year"] as const).map((period) => (
-                <button
-                  key={period}
-                  onClick={() => setTimeFilter(period)}
-                  className={`px-3 py-1.5 text-xs rounded transition-colors ${
-                    timeFilter === period
-                      ? "bg-background text-foreground shadow-sm"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {period.charAt(0).toUpperCase() + period.slice(1)}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-3 gap-3 mb-4">
-            <div className="bg-card border border-border rounded-lg p-3">
-              <p className="text-xs text-muted-foreground">This {timeFilter}</p>
-              <p className="text-xl font-bold text-primary">{filteredNewRegistered.length}</p>
-            </div>
-            <div className="bg-card border border-border rounded-lg p-3">
-              <p className="text-xs text-muted-foreground">Ready to Deploy</p>
-              <p className="text-xl font-bold text-green-500">{filteredNewRegistered.filter(w => w.status === "ready").length}</p>
-            </div>
-            <div className="bg-card border border-border rounded-lg p-3">
-              <p className="text-xs text-muted-foreground">Pending</p>
-              <p className="text-xl font-bold text-amber-500">{filteredNewRegistered.filter(w => w.status !== "ready").length}</p>
-            </div>
-          </div>
-
-          <div className="bg-card border border-border rounded-lg overflow-hidden divide-y divide-border">
-            {filteredNewRegistered.map((worker) => (
-              <div key={worker.id} className="p-4 hover:bg-muted/30 transition-colors">
-                <div className="flex items-center justify-between">
-                  <button onClick={() => handleWorkerClick(worker.name)} className="flex items-center gap-4 text-left hover:underline">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-sm font-bold text-primary">
-                      {worker.name.split(" ").map(n => n[0]).join("")}
-                    </div>
-                    <div>
-                      <p className="font-medium">{worker.name}</p>
-                      <p className="text-xs text-muted-foreground">{worker.role}</p>
-                    </div>
-                  </button>
-                  
-                  <div className="flex items-center gap-6">
-                    <div className="text-center">
-                      <p className="text-sm font-medium">{new Date(worker.registeredDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</p>
-                      <p className="text-xs text-muted-foreground">Registered</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-sm font-medium">{worker.preferredShifts.join(", ") || "—"}</p>
-                      <p className="text-xs text-muted-foreground">Preferred</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-sm font-medium">{worker.experience.length > 0 ? worker.experience.join(", ") : "None"}</p>
-                      <p className="text-xs text-muted-foreground">Experience</p>
-                    </div>
-                    <div>
-                      {getStatusBadge(worker.status)}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </TabsContent>
-      </Tabs>
+      {tab === "live" && renderLive()}
+      {tab === "standby" && renderStandby()}
+      {tab === "new" && renderNew()}
 
       {/* Allocation Modal */}
       {allocationModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-card border border-border rounded-xl p-6 max-w-md w-full mx-4">
-            <h2 className="text-lg font-semibold mb-2">Allocate Worker</h2>
-            <p className="text-sm text-muted-foreground mb-4">
-              Assign <strong>{allocationModal.name}</strong> to a shift
+        <div style={{ position: "fixed", inset: 0, background: "rgba(15, 8, 30, 0.5)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50 }}>
+          <div style={{
+            background: "var(--white)", border: "1px solid var(--border-purple)",
+            borderRadius: 8, padding: 24, maxWidth: 480, width: "calc(100% - 32px)",
+            boxShadow: "0 20px 60px rgba(15, 8, 30, 0.25)",
+          }}>
+            <div style={eyebrowStyle}>— ALLOCATE WORKER</div>
+            <h2 style={{ ...h1Style, fontSize: 20, marginBottom: 6 }}>Allocate Worker</h2>
+            <p style={{ ...sublineStyle, marginBottom: 16 }}>
+              Assign <strong style={{ color: "var(--text-primary)" }}>{allocationModal.name}</strong> to a shift
             </p>
-            
-            <div className="mb-4 p-3 bg-muted/30 rounded-lg border border-border">
-              <div className="flex items-center gap-4 text-sm">
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-muted-foreground" />
-                  <span>{allocationModal.distance.miles} miles away</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Car className="w-4 h-4 text-muted-foreground" />
-                  <span>{allocationModal.distance.carTime}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Bus className="w-4 h-4 text-muted-foreground" />
-                  <span>{allocationModal.distance.publicTransportTime}</span>
-                </div>
+
+            <div style={{
+              marginBottom: 16, padding: 12, background: "var(--cream-tint)",
+              borderRadius: 4, border: "1px solid var(--border-purple)",
+              display: "flex", gap: 16, flexWrap: "wrap",
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <MapPin size={12} style={{ color: "var(--text-muted)" }} />
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: "var(--text-primary)" }}>{allocationModal.distance.miles} mi</span>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <Car size={12} style={{ color: "var(--text-muted)" }} />
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: "var(--text-primary)" }}>{allocationModal.distance.carTime}</span>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <Bus size={12} style={{ color: "var(--text-muted)" }} />
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: "var(--text-primary)" }}>{allocationModal.distance.publicTransportTime}</span>
               </div>
             </div>
-            
-            <div className="space-y-4">
-              <div>
-                <label className="text-sm text-muted-foreground">Site</label>
-                <select 
-                  value={allocation.site}
-                  onChange={(e) => setAllocation({ ...allocation, site: e.target.value })}
-                  className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm"
-                >
-                  <option>Heathrow DC</option>
-                  <option>Coventry Hub</option>
-                  <option>Birmingham DC</option>
-                </select>
-              </div>
-              <div>
-                <label className="text-sm text-muted-foreground">Department</label>
-                <select 
-                  value={allocation.department}
-                  onChange={(e) => setAllocation({ ...allocation, department: e.target.value })}
-                  className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm"
-                >
-                  <option>Picking</option>
-                  <option>Packing</option>
-                  <option>Warehouse</option>
-                  <option>Goods In</option>
-                  <option>Loading</option>
-                </select>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="text-sm text-muted-foreground">Shift</label>
-                  <select 
-                    value={allocation.shift}
-                    onChange={(e) => setAllocation({ ...allocation, shift: e.target.value })}
-                    className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm"
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {[
+                { label: "Site", value: allocation.site, key: "site", opts: ["Heathrow DC", "Coventry Hub", "Birmingham DC"] },
+                { label: "Department", value: allocation.department, key: "department", opts: ["Pick and Pack", "Inbound Warehouse", "Outbound Dispatch", "Goods In", "Returns Processing"] },
+                { label: "Shift", value: allocation.shift, key: "shift", opts: ["06:00–14:00", "14:00–22:00", "22:00–06:00"] },
+                { label: "Date", value: allocation.date, key: "date", opts: ["Mon 10 Feb", "Tue 11 Feb", "Wed 12 Feb"] },
+              ].map((field) => (
+                <div key={field.key}>
+                  <div style={{ ...monoPrefix, marginBottom: 6 }}>{field.label}</div>
+                  <select
+                    value={field.value}
+                    onChange={(e) => setAllocation({ ...allocation, [field.key]: e.target.value })}
+                    style={{
+                      width: "100%", height: 36, padding: "0 12px",
+                      background: "var(--cream-tint)", border: "1px solid var(--border-purple)",
+                      borderRadius: 4, fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: 12, color: "var(--text-primary)", outline: "none",
+                    }}
                   >
-                    <option>06:00–14:00</option>
-                    <option>14:00–22:00</option>
-                    <option>22:00–06:00</option>
+                    {field.opts.map(o => <option key={o} value={o}>{o}</option>)}
                   </select>
                 </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">Date</label>
-                  <select 
-                    value={allocation.date}
-                    onChange={(e) => setAllocation({ ...allocation, date: e.target.value })}
-                    className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm"
-                  >
-                    <option>Mon 10 Feb</option>
-                    <option>Tue 11 Feb</option>
-                    <option>Wed 12 Feb</option>
-                  </select>
-                </div>
-              </div>
+              ))}
             </div>
-            <div className="flex justify-end gap-2 mt-6">
-              <Button variant="outline" onClick={() => setAllocationModal(null)}>Cancel</Button>
-              <Button onClick={handleAllocate} className="gap-2">
-                <Check className="w-4 h-4" />
+
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, marginTop: 20 }}>
+              <button
+                onClick={() => setAllocationModal(null)}
+                style={{
+                  height: 36, padding: "0 16px", background: "transparent",
+                  border: "1px solid var(--border-purple)", borderRadius: 4,
+                  color: "var(--text-secondary)", fontFamily: "'IBM Plex Mono', monospace",
+                  fontWeight: 500, fontSize: 11, letterSpacing: "0.06em",
+                  textTransform: "uppercase", cursor: "pointer",
+                }}
+              >Cancel</button>
+              <button
+                onClick={handleAllocate}
+                style={{
+                  height: 36, padding: "0 16px", background: "var(--deep-purple)",
+                  color: "var(--cream)", border: "none", borderRadius: 4,
+                  fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 11,
+                  letterSpacing: "0.06em", textTransform: "uppercase", cursor: "pointer",
+                  display: "inline-flex", alignItems: "center", gap: 6,
+                }}
+              >
+                <Check size={12} />
                 Confirm Allocation
-              </Button>
+              </button>
             </div>
           </div>
         </div>
