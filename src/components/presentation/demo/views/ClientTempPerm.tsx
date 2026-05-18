@@ -198,7 +198,7 @@ const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
                 {c.label}
               </span>
             </div>
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 26, color: "var(--text-primary)", lineHeight: 1 }}>
+            <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 26, color: "var(--text-primary)", lineHeight: 1, letterSpacing: "-0.01em" }}>
               {c.value}
             </div>
           </div>
