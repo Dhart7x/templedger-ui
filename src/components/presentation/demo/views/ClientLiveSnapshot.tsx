@@ -224,24 +224,24 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
             <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value as ExceptionType | "all")}
-              style={selectStyle}
+              style={{ ...selectStyle, minWidth: 130 }}
             >
-              <option value="all">All Types</option>
-              <option value="no-show">No-Show</option>
-              <option value="late">Late</option>
-              <option value="overtime">Overtime</option>
-              <option value="clocked-in-not-out">Clocked In, Not Out</option>
-              <option value="rtw-expired">RTW Expired</option>
-              <option value="traffic-alert">Traffic Alert</option>
-              <option value="not-scheduled">Not Scheduled</option>
+              <option value="all">Type: All</option>
+              <option value="no-show">Type: No-Show</option>
+              <option value="late">Type: Late</option>
+              <option value="overtime">Type: Overtime</option>
+              <option value="clocked-in-not-out">Type: Not Clocked</option>
+              <option value="rtw-expired">Type: RTW Expired</option>
+              <option value="traffic-alert">Type: Traffic</option>
+              <option value="not-scheduled">Type: Not Sched</option>
             </select>
             <ChevronDown size={10} style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", color: "var(--brand-purple)", pointerEvents: "none" }} />
           </div>
 
           <div style={{ position: "relative" }}>
-            <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} style={selectStyle}>
-              <option value="all">All Sites</option>
-              {sites.map(site => (<option key={site} value={site}>{site}</option>))}
+            <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} style={{ ...selectStyle, minWidth: 120 }}>
+              <option value="all">Site: All</option>
+              {sites.map(site => (<option key={site} value={site}>{`Site: ${site}`}</option>))}
             </select>
             <ChevronDown size={10} style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", color: "var(--brand-purple)", pointerEvents: "none" }} />
           </div>
