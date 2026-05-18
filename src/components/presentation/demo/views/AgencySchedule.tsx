@@ -117,38 +117,46 @@ const AgencyUploadPanel = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
-          <Upload className="w-4 h-4 text-primary" /> Upload Worker Schedule
-        </h3>
-        <div
-          onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}
-          className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-all cursor-pointer ${isDragging ? "border-primary bg-primary/5 scale-[1.01]" : uploadedFile ? "border-green-500/50 bg-green-500/5" : "border-border hover:border-primary/50 hover:bg-muted/30"}`}
-          onClick={() => document.getElementById("agency-schedule-file-input")?.click()}
-        >
-          <input id="agency-schedule-file-input" type="file" accept=".xlsx,.xls,.csv" className="hidden" onChange={handleFileSelect} />
-          {!uploadedFile ? (
-            <div className="space-y-3">
-              <div className="w-14 h-14 mx-auto rounded-xl bg-primary/10 flex items-center justify-center">
-                <FileSpreadsheet className="w-7 h-7 text-primary" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-foreground">Drag & drop your schedule file here</p>
-                <p className="text-xs text-muted-foreground mt-1">or click to browse • .xlsx, .xls, .csv supported</p>
-              </div>
+    <div>
+      <UploadDropZone
+        title="Upload Worker Schedule"
+        isDragging={isDragging}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        onClick={() => document.getElementById("agency-schedule-file-input")?.click()}
+      >
+        <input id="agency-schedule-file-input" type="file" accept=".xlsx,.xls,.csv" className="hidden" onChange={handleFileSelect} />
+        {!uploadedFile ? (
+          <>
+            <div style={{
+              width: 48, height: 48,
+              background: "rgba(76, 29, 149, 0.08)",
+              borderRadius: 8,
+              display: "flex", alignItems: "center", justifyContent: "center",
+            }}>
+              <FileSpreadsheet size={22} color="var(--brand-purple)" />
             </div>
-          ) : (
-            <div className="flex items-center justify-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center"><CheckCircle className="w-5 h-5 text-green-500" /></div>
-              <div className="text-left"><p className="text-sm font-medium text-foreground">{uploadedFile.name}</p><p className="text-xs text-muted-foreground">Ready to submit</p></div>
-              <button onClick={(e) => { e.stopPropagation(); setUploadedFile(null); }} className="ml-4 p-1 rounded hover:bg-muted"><X className="w-4 h-4 text-muted-foreground" /></button>
+            <div style={{ textAlign: "center" }}>
+              <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 14, color: "var(--text-primary)" }}>
+                Drag &amp; drop your schedule file here
+              </p>
+              <p style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)", marginTop: 6 }}>
+                or click to browse · .xlsx, .xls, .csv supported
+              </p>
             </div>
-          )}
-        </div>
-      </div>
+          </>
+        ) : (
+          <div className="flex items-center justify-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center"><CheckCircle className="w-5 h-5 text-green-500" /></div>
+            <div className="text-left"><p className="text-sm font-medium text-foreground">{uploadedFile.name}</p><p className="text-xs text-muted-foreground">Ready to submit</p></div>
+            <button onClick={(e) => { e.stopPropagation(); setUploadedFile(null); }} className="ml-4 p-1 rounded hover:bg-muted"><X className="w-4 h-4 text-muted-foreground" /></button>
+          </div>
+        )}
+      </UploadDropZone>
+
       {uploadedFile && (
-        <div className="space-y-4 bg-card border border-border rounded-xl p-5">
+        <div className="space-y-4 bg-card border border-border rounded-xl p-5 mt-6">
           <h4 className="text-sm font-semibold text-foreground">Assign Schedule Details</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1.5">
@@ -173,8 +181,9 @@ const AgencyUploadPanel = () => {
           <Button onClick={handleSubmit} className="w-full gap-2 mt-2"><Upload className="w-4 h-4" />Submit Schedule</Button>
         </div>
       )}
+
       {showSuccess && (
-        <div className="flex items-center gap-3 p-4 rounded-xl bg-green-500/10 border border-green-500/30">
+        <div className="flex items-center gap-3 p-4 rounded-xl bg-green-500/10 border border-green-500/30 mt-6">
           <CheckCircle className="w-5 h-5 text-green-500" />
           <div><p className="text-sm font-medium text-green-500">Schedule uploaded successfully</p><p className="text-xs text-muted-foreground">Client has been notified.</p></div>
         </div>
