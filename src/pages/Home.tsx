@@ -508,6 +508,7 @@ const Home = () => {
           {[
             { label: "How It Works", action: scrollToHowItWorks },
             { label: "Resources", action: () => {} },
+            { label: "vs MSPs", action: () => { window.location.href = "/vs-msps"; } },
             { label: "Contact", action: scrollToContact },
           ].map((l) => (
             <a
