@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UserCheck, Clock, TrendingUp, Star, Building2, Filter, ChevronRight, MapPin, Send, Bell } from "lucide-react";
+import { UserCheck, Clock, TrendingUp, Star, Building2, Filter, ChevronRight, ChevronDown, MapPin, Send, Bell, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDemoContext } from "../DemoContext";
 
@@ -86,143 +86,235 @@ const ClientTempPerm = ({ onViewWorker }: ClientTempPermProps) => {
     setSelectedCandidate(null);
   };
 
+  const siteLabel = siteFilter === "all" ? "All Sites" : siteFilter;
+  const deptLabel = departmentFilter === "all" ? "All Departments" : departmentFilter === "warehouse operative" ? "Inbound Warehouse" : "MHE";
+  const agencyLabel = agencyFilter === "all" ? "All Agencies" : agencyFilter;
+
+  const attendanceColor = (a: number) =>
+    a >= 95 ? "var(--status-green)" : a >= 85 ? "var(--status-amber)" : "var(--status-red)";
+
+  const dropdownStyle: React.CSSProperties = {
+    height: 34,
+    padding: "0 14px",
+    background: "var(--white)",
+    border: "1px solid var(--border-purple)",
+    borderRadius: 4,
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 8,
+    cursor: "pointer",
+    position: "relative",
+  };
+  const prefixStyle: React.CSSProperties = {
+    fontFamily: "'IBM Plex Mono', monospace",
+    fontWeight: 500,
+    fontSize: 10,
+    letterSpacing: "0.1em",
+    textTransform: "uppercase",
+    color: "var(--text-secondary)",
+  };
+  const valueStyle: React.CSSProperties = {
+    fontFamily: "'JetBrains Mono', monospace",
+    fontWeight: 500,
+    fontSize: 12,
+    color: "var(--text-primary)",
+  };
+  const nativeSelectStyle: React.CSSProperties = {
+    position: "absolute",
+    inset: 0,
+    opacity: 0,
+    width: "100%",
+    height: "100%",
+    cursor: "pointer",
+    border: 0,
+  };
+
   return (
-    <div className="p-4 md:p-6 space-y-6">
+    <div style={{ padding: "20px 24px" }}>
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 22 }}>
         <div>
-          <h1 className="text-lg md:text-xl font-bold text-foreground">Temp-to-Perm</h1>
-          <p className="text-xs text-muted-foreground">Workers eligible for permanent conversion</p>
+          <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--brand-purple)", marginBottom: 8 }}>
+            — TEMP-PERM
+          </div>
+          <h1 style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 26, color: "var(--text-primary)", marginBottom: 4, lineHeight: 1.1 }}>
+            Temp-to-Perm
+          </h1>
+          <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, color: "var(--text-secondary)" }}>
+            Workers eligible for permanent conversion
+          </p>
         </div>
-        <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-muted-foreground" />
-          <select
-            value={siteFilter}
-            onChange={(e) => setSiteFilter(e.target.value)}
-            className="text-xs bg-card border border-border rounded px-2 py-1.5"
-          >
-            <option value="all">All Sites</option>
-            <option value="Baltimore, MD">Baltimore, MD</option>
-            <option value="Las Vegas, NV">Las Vegas, NV</option>
-            <option value="Dallas Fort-Worth, TX">Dallas Fort-Worth, TX</option>
-            <option value="Baltimore, MD">Baltimore, MD</option>
-            <option value="Las Vegas, NV">Las Vegas, NV</option>
-          </select>
-          <select
-            value={departmentFilter}
-            onChange={(e) => setDepartmentFilter(e.target.value)}
-            className="text-xs bg-card border border-border rounded px-2 py-1.5"
-          >
-            <option value="all">All Departments</option>
-            <option value="warehouse operative">Inbound Warehouse</option>
-            <option value="mhe">MHE</option>
-          </select>
-          <select
-            value={agencyFilter}
-            onChange={(e) => setAgencyFilter(e.target.value)}
-            className="text-xs bg-card border border-border rounded px-2 py-1.5"
-          >
-            <option value="all">All Agencies</option>
-            <option value="Workforce Direct">Workforce Direct</option>
-            <option value="Pinnacle Staffing">Pinnacle Staffing</option>
-            <option value="Meridian Recruitment">Meridian Recruitment</option>
-          </select>
+        <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+          <div style={{ width: 34, height: 34, background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 4, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Filter style={{ width: 14, height: 14, color: "var(--brand-purple)" }} />
+          </div>
+          <div style={dropdownStyle}>
+            <span style={prefixStyle}>SITE</span>
+            <span style={valueStyle}>{siteLabel}</span>
+            <ChevronDown style={{ width: 12, height: 12, color: "var(--brand-purple)" }} />
+            <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} style={nativeSelectStyle}>
+              <option value="all">All Sites</option>
+              <option value="Baltimore, MD">Baltimore, MD</option>
+              <option value="Las Vegas, NV">Las Vegas, NV</option>
+              <option value="Dallas Fort-Worth, TX">Dallas Fort-Worth, TX</option>
+            </select>
+          </div>
+          <div style={dropdownStyle}>
+            <span style={prefixStyle}>DEPT</span>
+            <span style={valueStyle}>{deptLabel}</span>
+            <ChevronDown style={{ width: 12, height: 12, color: "var(--brand-purple)" }} />
+            <select value={departmentFilter} onChange={(e) => setDepartmentFilter(e.target.value)} style={nativeSelectStyle}>
+              <option value="all">All Departments</option>
+              <option value="warehouse operative">Inbound Warehouse</option>
+              <option value="mhe">MHE</option>
+            </select>
+          </div>
+          <div style={dropdownStyle}>
+            <span style={prefixStyle}>AGENCY</span>
+            <span style={valueStyle}>{agencyLabel}</span>
+            <ChevronDown style={{ width: 12, height: 12, color: "var(--brand-purple)" }} />
+            <select value={agencyFilter} onChange={(e) => setAgencyFilter(e.target.value)} style={nativeSelectStyle}>
+              <option value="all">All Agencies</option>
+              <option value="Workforce Direct">Workforce Direct</option>
+              <option value="Pinnacle Staffing">Pinnacle Staffing</option>
+              <option value="Meridian Recruitment">Meridian Recruitment</option>
+            </select>
+          </div>
         </div>
       </div>
 
-      {/* Summary */}
-      <div className="grid grid-cols-4 gap-3">
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <UserCheck className="w-4 h-4 text-green-500" />
-            <span className="text-xs text-muted-foreground">Eligible</span>
+      {/* KPI Strip */}
+      <div style={{ display: "flex", background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 6, padding: "20px 0", marginBottom: 22 }}>
+        {[
+          { Icon: UserCheck, color: "var(--status-green)", label: "Eligible", value: String(eligibleCount) },
+          { Icon: Clock, color: "var(--brand-purple)", label: "Avg Time Served", value: "15 mo" },
+          { Icon: TrendingUp, color: "var(--status-green)", label: "Avg Attendance", value: "97%" },
+          { Icon: Star, color: "var(--status-amber)", label: "Top Rated 4.8+", value: "5" },
+        ].map((c, i, arr) => (
+          <div key={c.label} style={{ flex: 1, padding: "0 24px", borderRight: i === arr.length - 1 ? "none" : "1px solid var(--border-purple)", display: "flex", flexDirection: "column", gap: 6 }}>
+            <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+              <c.Icon style={{ width: 12, height: 12, color: c.color }} />
+              <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-secondary)" }}>
+                {c.label}
+              </span>
+            </div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 26, color: "var(--text-primary)", lineHeight: 1 }}>
+              {c.value}
+            </div>
           </div>
-          <p className="text-xl font-bold text-green-500">{eligibleCount}</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <Clock className="w-4 h-4 text-muted-foreground" />
-            <span className="text-xs text-muted-foreground">Avg Time Served</span>
+        ))}
+      </div>
+
+      {/* Recommended Candidates header */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
+        <div>
+          <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--brand-purple)", marginBottom: 6 }}>
+            — RECOMMENDED CANDIDATES
           </div>
-          <p className="text-xl font-bold">15 mo</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <TrendingUp className="w-4 h-4 text-muted-foreground" />
-            <span className="text-xs text-muted-foreground">Avg Attendance</span>
-          </div>
-          <p className="text-xl font-bold">97%</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <Star className="w-4 h-4 text-amber-500" />
-            <span className="text-xs text-muted-foreground">Top Rated (4.8+)</span>
-          </div>
-          <p className="text-xl font-bold">5</p>
+          <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, color: "var(--text-secondary)" }}>
+            Sorted by time served, attendance, and multi-skill capability
+          </p>
         </div>
       </div>
 
-      {/* Candidates List */}
-      <div className="bg-card border border-border rounded-lg overflow-hidden">
-        <div className="p-3 border-b border-border">
-          <h2 className="text-sm font-semibold">Recommended Candidates</h2>
-          <p className="text-xs text-muted-foreground">Sorted by time served, attendance, and multi-skill capability</p>
-        </div>
-        <div className="divide-y divide-border">
-          {getSortedCandidates().map((candidate, idx) => (
-            <div
-              key={candidate.id}
-              className="p-4 flex items-center justify-between hover:bg-muted/30 transition-colors"
-            >
-              <button onClick={() => handleWorkerClick(candidate.name)} className="flex items-center gap-4 text-left hover:underline">
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-sm font-bold text-primary">
-                  {idx + 1}
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <p className="font-medium">{candidate.name}</p>
-                    <div className="flex items-center gap-0.5">
-                      <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
-                      <span className="text-xs font-medium">{candidate.rating}</span>
-                    </div>
-                  </div>
-                  <p className="text-xs text-muted-foreground">{candidate.role} • {candidate.agency}</p>
-                </div>
-              </button>
-              <div className="flex items-center gap-6">
-                <div className="text-center">
-                  <div className="flex items-center gap-1">
-                    <MapPin className="w-3 h-3 text-muted-foreground" />
-                    <p className="text-sm font-medium">{candidate.site}</p>
-                  </div>
-                  <p className="text-xs text-muted-foreground">{candidate.department}</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-sm font-bold">{candidate.timeServed}mo</p>
-                  <p className="text-xs text-muted-foreground">Time Served</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-sm font-bold text-green-500">{candidate.attendance}%</p>
-                  <p className="text-xs text-muted-foreground">Attendance</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-sm font-bold">{candidate.hoursWorked.toLocaleString()}</p>
-                  <p className="text-xs text-muted-foreground">Hours</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-sm font-bold">{candidate.departments.length}</p>
-                  <p className="text-xs text-muted-foreground">Depts</p>
-                </div>
-                <button
-                  onClick={() => setSelectedCandidate(candidate)}
-                  className="p-2 hover:bg-muted rounded-lg transition-colors"
-                >
-                  <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                </button>
-              </div>
+      {/* Candidates Table */}
+      <div style={{ background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden" }}>
+        <div style={{ padding: "13px 20px", borderBottom: "1px solid var(--border-purple)", background: "rgba(76, 29, 149, 0.02)", display: "grid", gridTemplateColumns: "40px 1.6fr 1.4fr 100px 100px 90px 80px 140px 30px", gap: 14, alignItems: "center" }}>
+          {[
+            { l: "#", a: "left" },
+            { l: "WORKER", a: "left" },
+            { l: "SITE", a: "left" },
+            { l: "TIME SERVED", a: "center" },
+            { l: "ATTENDANCE", a: "center" },
+            { l: "HOURS", a: "center" },
+            { l: "DEPTS", a: "center" },
+            { l: "ELIGIBILITY", a: "center" },
+            { l: "", a: "right" },
+          ].map((h, i) => (
+            <div key={i} style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-secondary)", textAlign: h.a as any }}>
+              {h.l}
             </div>
           ))}
         </div>
+        {getSortedCandidates().map((candidate, idx, arr) => {
+          const feeWaivable = candidate.timeServed >= 18 && candidate.attendance >= 95;
+          return (
+            <div
+              key={candidate.id}
+              onClick={() => setSelectedCandidate(candidate)}
+              style={{
+                padding: "14px 20px",
+                borderBottom: idx === arr.length - 1 ? "none" : "1px solid var(--border-purple)",
+                display: "grid",
+                gridTemplateColumns: "40px 1.6fr 1.4fr 100px 100px 90px 80px 140px 30px",
+                gap: 14,
+                alignItems: "center",
+                cursor: "pointer",
+                transition: "background 120ms ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "var(--cream-tint)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+            >
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 14, color: "var(--brand-purple)" }}>
+                {idx + 1}
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); handleWorkerClick(candidate.name); }}
+                    style={{ background: "none", border: 0, padding: 0, fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 13, color: "var(--text-primary)", cursor: "pointer", textAlign: "left" }}
+                  >
+                    {candidate.name}
+                  </button>
+                  <span style={{ display: "inline-flex", gap: 4, alignItems: "center" }}>
+                    <Star style={{ width: 10, height: 10, fill: "#D97706", color: "#D97706" }} />
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 11, color: "var(--text-secondary)" }}>
+                      {candidate.rating}
+                    </span>
+                  </span>
+                </div>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>
+                  {candidate.department} · <span style={{ color: "var(--brand-purple)", fontWeight: 500 }}>{candidate.agency}</span>
+                </div>
+              </div>
+              <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                <MapPin style={{ width: 12, height: 12, color: "var(--text-muted)" }} />
+                <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>{candidate.site}</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>{candidate.department}</span>
+                </div>
+              </div>
+              <div style={{ textAlign: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 13, color: "var(--text-primary)" }}>
+                {candidate.timeServed}mo
+              </div>
+              <div style={{ textAlign: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 13, color: attendanceColor(candidate.attendance) }}>
+                {candidate.attendance}%
+              </div>
+              <div style={{ textAlign: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>
+                {candidate.hoursWorked.toLocaleString()}
+              </div>
+              <div style={{ textAlign: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>
+                {candidate.departments.length}
+              </div>
+              <div style={{ textAlign: "center" }}>
+                {feeWaivable ? (
+                  <span style={{ padding: "3px 10px", background: "rgba(22, 163, 74, 0.1)", borderRadius: 3, fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--status-green)", display: "inline-flex", gap: 4, alignItems: "center" }}>
+                    <Check style={{ width: 9, height: 9, color: "var(--status-green)" }} />
+                    FEE WAIVABLE
+                  </span>
+                ) : (
+                  <span style={{ padding: "3px 10px", background: "rgba(217, 119, 6, 0.1)", borderRadius: 3, fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--status-amber)", display: "inline-flex", gap: 4, alignItems: "center" }}>
+                    <Clock style={{ width: 9, height: 9, color: "var(--status-amber)" }} />
+                    APPROACHING
+                  </span>
+                )}
+              </div>
+              <div style={{ textAlign: "right" }}>
+                <ChevronRight style={{ width: 14, height: 14, color: "var(--text-muted)" }} />
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* Candidate Detail Modal */}
