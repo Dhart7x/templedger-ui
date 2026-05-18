@@ -245,7 +245,7 @@ const ClientPayroll = () => {
             {verified.map((entry, idx) => (
               <div key={idx} style={{
                 display: "grid", gridTemplateColumns: "1.4fr 90px 1.3fr 90px", gap: 18,
-                padding: "14px 20px", alignItems: "center",
+                padding: "16px 20px", alignItems: "center",
                 borderBottom: idx === verified.length - 1 ? "none" : "1px solid var(--border-purple)",
               }}>
                 <WorkerCell worker={entry.worker} agency={entry.agency} department={entry.department} />
@@ -300,7 +300,7 @@ const ClientPayroll = () => {
             {exceptions.map((entry, idx) => (
               <div key={entry.id} style={{
                 display: "grid", gridTemplateColumns: "1.4fr 1.3fr 130px 90px", gap: 18,
-                padding: "14px 20px", alignItems: "center",
+                padding: "16px 20px", alignItems: "center",
                 borderBottom: idx === exceptions.length - 1 ? "none" : "1px solid var(--border-purple)",
               }}>
                 <WorkerCell
