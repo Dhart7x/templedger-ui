@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { 
-  MapPin, Users, Clock, AlertTriangle, CheckCircle, Filter, TrendingUp, 
-  Send, Car, LogOut, ShieldAlert, MessageSquare, Info
+import {
+  MapPin, Clock, AlertTriangle, CheckCircle, Filter, TrendingUp,
+  Send, Car, LogOut, ShieldAlert, MessageSquare, Info, ChevronDown
 } from "lucide-react";
 import { useDemoContext, ExceptionType } from "../DemoContext";
-import { Button } from "@/components/ui/button";
 import ExceptionResolutionModal from "../ExceptionResolutionModal";
 
 const getExceptionLabel = (type: ExceptionType): string => {
@@ -19,33 +18,99 @@ const getExceptionLabel = (type: ExceptionType): string => {
   }
 };
 
-const getExceptionIcon = (type: ExceptionType) => {
+const severityVar = (type: ExceptionType): string => {
   switch (type) {
-    case "no-show": return <AlertTriangle className="w-4 h-4 text-destructive" />;
-    case "late": return <Clock className="w-4 h-4 text-amber-500" />;
-    case "overtime": return <TrendingUp className="w-4 h-4 text-purple-500" />;
-    case "clocked-in-not-out": return <LogOut className="w-4 h-4 text-orange-500" />;
-    case "rtw-expired": return <ShieldAlert className="w-4 h-4 text-destructive" />;
-    case "traffic-alert": return <Car className="w-4 h-4 text-amber-500" />;
-    default: return <AlertTriangle className="w-4 h-4 text-muted-foreground" />;
+    case "no-show": return "var(--status-red)";
+    case "late": return "var(--status-amber)";
+    case "overtime": return "var(--brand-purple)";
+    case "clocked-in-not-out": return "var(--status-orange)";
+    case "rtw-expired": return "var(--status-red)";
+    case "traffic-alert": return "var(--status-amber)";
+    default: return "var(--text-muted)";
   }
 };
 
-const getExceptionBgColor = (type: ExceptionType): string => {
+const severityRgba = (type: ExceptionType, alpha = 0.1): string => {
   switch (type) {
-    case "no-show": return "bg-destructive/10 border-destructive/30";
-    case "late": return "bg-amber-500/10 border-amber-500/30";
-    case "overtime": return "bg-purple-500/10 border-purple-500/30";
-    case "clocked-in-not-out": return "bg-orange-500/10 border-orange-500/30";
-    case "rtw-expired": return "bg-destructive/10 border-destructive/30";
-    case "traffic-alert": return "bg-amber-500/10 border-amber-500/30";
-    default: return "bg-muted/10 border-border";
+    case "no-show": return `rgba(185, 28, 28, ${alpha})`;
+    case "late": return `rgba(217, 119, 6, ${alpha})`;
+    case "overtime": return `rgba(76, 29, 149, ${alpha})`;
+    case "clocked-in-not-out": return `rgba(234, 88, 12, ${alpha})`;
+    case "rtw-expired": return `rgba(185, 28, 28, ${alpha})`;
+    case "traffic-alert": return `rgba(217, 119, 6, ${alpha})`;
+    default: return `rgba(138, 138, 133, ${alpha})`;
   }
 };
 
-// Check if exception type is resolvable by agency
-const isResolvable = (type: ExceptionType): boolean => {
-  return type === "no-show" || type === "late";
+const getExceptionIcon = (type: ExceptionType, size = 14) => {
+  const color = severityVar(type);
+  const style = { color, flexShrink: 0 } as const;
+  switch (type) {
+    case "no-show": return <AlertTriangle size={size} style={style} />;
+    case "late": return <Clock size={size} style={style} />;
+    case "overtime": return <TrendingUp size={size} style={style} />;
+    case "clocked-in-not-out": return <LogOut size={size} style={style} />;
+    case "rtw-expired": return <ShieldAlert size={size} style={style} />;
+    case "traffic-alert": return <Car size={size} style={style} />;
+    default: return <AlertTriangle size={size} style={style} />;
+  }
+};
+
+const isResolvable = (type: ExceptionType): boolean => type === "no-show" || type === "late";
+
+const eyebrowStyle: React.CSSProperties = {
+  fontFamily: "var(--font-mono-headers)",
+  fontWeight: 500,
+  fontSize: 10,
+  letterSpacing: "0.14em",
+  textTransform: "uppercase",
+  color: "var(--brand-purple)",
+};
+
+const monoLabel: React.CSSProperties = {
+  fontFamily: "var(--font-mono-labels)",
+  fontWeight: 400,
+  fontSize: 11,
+  color: "var(--text-secondary)",
+};
+
+const selectStyle: React.CSSProperties = {
+  height: 32,
+  padding: "0 28px 0 12px",
+  background: "var(--white)",
+  border: "1px solid var(--border-purple)",
+  borderRadius: 4,
+  fontFamily: "var(--font-mono-labels)",
+  fontWeight: 400,
+  fontSize: 11,
+  letterSpacing: "0.04em",
+  textTransform: "uppercase",
+  color: "var(--text-primary)",
+  cursor: "pointer",
+  appearance: "none",
+  WebkitAppearance: "none",
+  MozAppearance: "none",
+  backgroundImage: "none",
+};
+
+const resolveBtn: React.CSSProperties = {
+  height: 32,
+  padding: "0 14px",
+  background: "var(--white)",
+  border: "1px solid var(--border-purple)",
+  color: "var(--deep-purple)",
+  fontFamily: "var(--font-mono-headers)",
+  fontWeight: 500,
+  fontSize: 11,
+  letterSpacing: "0.06em",
+  textTransform: "uppercase",
+  borderRadius: 4,
+  display: "inline-flex",
+  alignItems: "center",
+  gap: 6,
+  cursor: "pointer",
+  flexShrink: 0,
+  transition: "background 120ms ease",
 };
 
 interface AgencyLiveSnapshotProps {
@@ -53,7 +118,7 @@ interface AgencyLiveSnapshotProps {
 }
 
 const AgencyLiveSnapshot = ({ onViewWorker }: AgencyLiveSnapshotProps) => {
-  const { exceptions, notifications, updateExceptionStatus } = useDemoContext();
+  const { exceptions, updateExceptionStatus } = useDemoContext();
   const [typeFilter, setTypeFilter] = useState<ExceptionType | "all">("all");
   const [selectedExceptionForResolution, setSelectedExceptionForResolution] = useState<{
     id: string;
@@ -63,28 +128,23 @@ const AgencyLiveSnapshot = ({ onViewWorker }: AgencyLiveSnapshotProps) => {
     type: string;
   } | null>(null);
 
-  // Filter exceptions
   const openExceptions = exceptions.filter(e => e.status !== "resolved");
   const filteredExceptions = openExceptions.filter(e => {
     if (typeFilter !== "all" && e.type !== typeFilter) return false;
     return true;
   });
 
-  // Exceptions requiring resolution (no-show, late without response yet)
   const resolvableExceptions = openExceptions.filter(e => isResolvable(e.type) && !e.resolution);
-  
-  // Client replacement requests
   const clientRequests = openExceptions.filter(e => e.resolution?.clientResponse === "request-replacement");
 
-  // Count by type
-  const counts = {
-    noShow: openExceptions.filter(e => e.type === "no-show").length,
-    late: openExceptions.filter(e => e.type === "late").length,
-    overtime: openExceptions.filter(e => e.type === "overtime").length,
-    clockedInNotOut: openExceptions.filter(e => e.type === "clocked-in-not-out").length,
-    rtwExpired: openExceptions.filter(e => e.type === "rtw-expired").length,
-    trafficAlert: openExceptions.filter(e => e.type === "traffic-alert").length,
-  };
+  const counters: { type: ExceptionType; label: string; count: number; icon: typeof AlertTriangle }[] = [
+    { type: "no-show", label: "No-Show", icon: AlertTriangle, count: openExceptions.filter(e => e.type === "no-show").length },
+    { type: "late", label: "Late", icon: Clock, count: openExceptions.filter(e => e.type === "late").length },
+    { type: "overtime", label: "Overtime", icon: TrendingUp, count: openExceptions.filter(e => e.type === "overtime").length },
+    { type: "clocked-in-not-out", label: "Not Clocked Out", icon: LogOut, count: openExceptions.filter(e => e.type === "clocked-in-not-out").length },
+    { type: "rtw-expired", label: "RTW Expired", icon: ShieldAlert, count: openExceptions.filter(e => e.type === "rtw-expired").length },
+    { type: "traffic-alert", label: "Traffic", icon: Car, count: openExceptions.filter(e => e.type === "traffic-alert").length },
+  ];
 
   const handleAcknowledge = (exceptionId: string) => {
     updateExceptionStatus(exceptionId, "resolving", {
@@ -99,355 +159,424 @@ const AgencyLiveSnapshot = ({ onViewWorker }: AgencyLiveSnapshotProps) => {
   };
 
   const handleWorkerClick = (workerName: string) => {
-    if (onViewWorker) {
-      onViewWorker(workerName);
-    }
+    if (onViewWorker) onViewWorker(workerName);
   };
 
   return (
     <>
-      <div className="p-4 md:p-6 space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
+      <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+        {/* PART 1 — Header */}
+        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16 }}>
           <div>
-            <h1 className="text-lg md:text-xl font-bold text-foreground">Live Exceptions</h1>
-            <p className="text-xs text-muted-foreground">Exceptions requiring agency action</p>
-          </div>
-          <div className="flex items-center gap-2">
-            <Filter className="w-4 h-4 text-muted-foreground" />
-            <select
-              value={typeFilter}
-              onChange={(e) => setTypeFilter(e.target.value as ExceptionType | "all")}
-              className="text-xs bg-card border border-border rounded px-2 py-1.5"
+            <div style={{ ...eyebrowStyle, marginBottom: 8 }}>— Live Exceptions</div>
+            <h1
+              style={{
+                fontFamily: "var(--font-mono-headers)",
+                fontWeight: 500,
+                fontSize: 26,
+                color: "var(--text-primary)",
+                lineHeight: 1.2,
+                margin: "0 0 4px 0",
+                letterSpacing: 0,
+              }}
             >
-              <option value="all">All Types</option>
-              <option value="no-show">No-Show</option>
-              <option value="late">Late</option>
-              <option value="overtime">Overtime</option>
-              <option value="clocked-in-not-out">Clocked In, Not Out</option>
-              <option value="rtw-expired">RTW Expired</option>
-              <option value="traffic-alert">Traffic Alert</option>
-            </select>
+              Live Exceptions
+            </h1>
+            <p style={{ fontFamily: "var(--font-body)", fontWeight: 400, fontSize: 13, color: "var(--text-secondary)", margin: 0 }}>
+              Exceptions requiring agency action
+            </p>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
+            <div
+              style={{
+                width: 32,
+                height: 32,
+                background: "var(--white)",
+                border: "1px solid var(--border-purple)",
+                borderRadius: 4,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              aria-hidden
+            >
+              <Filter size={14} style={{ color: "var(--brand-purple)" }} />
+            </div>
+            <div style={{ position: "relative" }}>
+              <select
+                value={typeFilter}
+                onChange={(e) => setTypeFilter(e.target.value as ExceptionType | "all")}
+                style={selectStyle}
+              >
+                <option value="all">All Types</option>
+                <option value="no-show">No-Show</option>
+                <option value="late">Late</option>
+                <option value="overtime">Overtime</option>
+                <option value="clocked-in-not-out">Clocked In, Not Out</option>
+                <option value="rtw-expired">RTW Expired</option>
+                <option value="traffic-alert">Traffic Alert</option>
+              </select>
+              <ChevronDown size={10} style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", color: "var(--brand-purple)", pointerEvents: "none" }} />
+            </div>
           </div>
         </div>
 
-        {/* Priority Alert: Client Replacement Requests */}
+        {/* Priority alert: client replacement requests (preserved) */}
         {clientRequests.length > 0 && (
-          <div className="p-3 bg-destructive/10 border border-destructive/30 rounded-lg animate-pulse">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <AlertTriangle className="w-4 h-4 text-destructive" />
-                <span className="text-sm font-medium text-destructive">
-                  {clientRequests.length} replacement request{clientRequests.length > 1 ? "s" : ""} from client
-                </span>
-              </div>
-              <span className="text-xs text-destructive">Urgent action required</span>
+          <div
+            style={{
+              padding: "12px 18px",
+              background: "rgba(185, 28, 28, 0.06)",
+              border: "1px solid rgba(185, 28, 28, 0.2)",
+              borderLeft: "3px solid var(--status-red)",
+              borderRadius: 4,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 12,
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <AlertTriangle size={14} style={{ color: "var(--status-red)" }} />
+              <span style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>
+                {clientRequests.length} replacement request{clientRequests.length > 1 ? "s" : ""} from client
+              </span>
             </div>
+            <span style={{ ...monoLabel }}>Urgent action required</span>
           </div>
         )}
 
-        {/* Resolvable Exceptions Alert */}
+        {/* PART 2 — Amber Response Banner */}
         {resolvableExceptions.length > 0 && (
-          <div className="p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <MessageSquare className="w-4 h-4 text-amber-500" />
-                <span className="text-sm font-medium text-amber-500">
-                  {resolvableExceptions.length} exception{resolvableExceptions.length > 1 ? "s" : ""} awaiting your response
-                </span>
-              </div>
-              <span className="text-xs text-amber-500">Click "Resolve" to notify client</span>
+          <div
+            style={{
+              padding: "12px 18px",
+              background: "rgba(217, 119, 6, 0.06)",
+              border: "1px solid rgba(217, 119, 6, 0.2)",
+              borderLeft: "3px solid var(--status-amber)",
+              borderRadius: 4,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 12,
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <MessageSquare size={14} style={{ color: "var(--status-amber)" }} />
+              <span style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>
+                {resolvableExceptions.length} exception{resolvableExceptions.length > 1 ? "s" : ""} awaiting your response
+              </span>
             </div>
+            <span style={{ ...monoLabel }}>Click "Resolve" to notify client</span>
           </div>
         )}
 
-        {/* Exception Count Cards */}
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
-          <div className="bg-card border border-border rounded-lg p-3 cursor-pointer hover:bg-muted/30 transition-colors"
-               onClick={() => setTypeFilter(typeFilter === "no-show" ? "all" : "no-show")}>
-            <div className="flex items-center gap-2 mb-1">
-              <AlertTriangle className="w-4 h-4 text-destructive" />
-              <span className="text-xs text-muted-foreground">No-Show</span>
-            </div>
-            <p className="text-xl font-bold text-destructive">{counts.noShow}</p>
-          </div>
-          <div className="bg-card border border-border rounded-lg p-3 cursor-pointer hover:bg-muted/30 transition-colors"
-               onClick={() => setTypeFilter(typeFilter === "late" ? "all" : "late")}>
-            <div className="flex items-center gap-2 mb-1">
-              <Clock className="w-4 h-4 text-amber-500" />
-              <span className="text-xs text-muted-foreground">Late</span>
-            </div>
-            <p className="text-xl font-bold text-amber-500">{counts.late}</p>
-          </div>
-          <div className="bg-card border border-border rounded-lg p-3 cursor-pointer hover:bg-muted/30 transition-colors"
-               onClick={() => setTypeFilter(typeFilter === "overtime" ? "all" : "overtime")}>
-            <div className="flex items-center gap-2 mb-1">
-              <TrendingUp className="w-4 h-4 text-purple-500" />
-              <span className="text-xs text-muted-foreground">Overtime</span>
-            </div>
-            <p className="text-xl font-bold text-purple-500">{counts.overtime}</p>
-          </div>
-          <div className="bg-card border border-border rounded-lg p-3 cursor-pointer hover:bg-muted/30 transition-colors"
-               onClick={() => setTypeFilter(typeFilter === "clocked-in-not-out" ? "all" : "clocked-in-not-out")}>
-            <div className="flex items-center gap-2 mb-1">
-              <LogOut className="w-4 h-4 text-orange-500" />
-              <span className="text-xs text-muted-foreground">Not Clocked Out</span>
-            </div>
-            <p className="text-xl font-bold text-orange-500">{counts.clockedInNotOut}</p>
-          </div>
-          <div className="bg-card border border-border rounded-lg p-3 cursor-pointer hover:bg-muted/30 transition-colors"
-               onClick={() => setTypeFilter(typeFilter === "rtw-expired" ? "all" : "rtw-expired")}>
-            <div className="flex items-center gap-2 mb-1">
-              <ShieldAlert className="w-4 h-4 text-destructive" />
-              <span className="text-xs text-muted-foreground">RTW Expired</span>
-            </div>
-            <p className="text-xl font-bold text-destructive">{counts.rtwExpired}</p>
-          </div>
-          <div className="bg-card border border-border rounded-lg p-3 cursor-pointer hover:bg-muted/30 transition-colors"
-               onClick={() => setTypeFilter(typeFilter === "traffic-alert" ? "all" : "traffic-alert")}>
-            <div className="flex items-center gap-2 mb-1">
-              <Car className="w-4 h-4 text-amber-500" />
-              <span className="text-xs text-muted-foreground">Traffic</span>
-            </div>
-            <p className="text-xl font-bold text-amber-500">{counts.trafficAlert}</p>
-          </div>
+        {/* PART 3 — Counters */}
+        <div
+          style={{
+            display: "flex",
+            background: "var(--white)",
+            border: "1px solid var(--border-purple)",
+            borderRadius: 6,
+            padding: "18px 0",
+          }}
+        >
+          {counters.map((c, i) => {
+            const Icon = c.icon;
+            const color = severityVar(c.type);
+            const active = typeFilter === c.type;
+            return (
+              <button
+                key={c.type}
+                onClick={() => setTypeFilter(active ? "all" : c.type)}
+                style={{
+                  flex: 1,
+                  padding: "0 20px",
+                  borderRight: i === counters.length - 1 ? "none" : "1px solid var(--border-purple)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 6,
+                  background: "transparent",
+                  border: "none",
+                  borderRightStyle: i === counters.length - 1 ? undefined : "solid",
+                  borderRightColor: i === counters.length - 1 ? undefined : "var(--border-purple)",
+                  borderRightWidth: i === counters.length - 1 ? undefined : 1,
+                  cursor: "pointer",
+                  textAlign: "left",
+                  alignItems: "flex-start",
+                  opacity: active ? 1 : 0.95,
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                  <Icon size={12} style={{ color }} />
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono-headers)",
+                      fontWeight: 500,
+                      fontSize: 10,
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      color: "var(--text-secondary)",
+                    }}
+                  >
+                    {c.label}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    fontFamily: "var(--font-mono-labels)",
+                    fontWeight: 600,
+                    fontSize: 26,
+                    color: "var(--text-primary)",
+                    lineHeight: 1,
+                  }}
+                >
+                  {c.count}
+                </div>
+                <div style={{ width: 22, height: 2, background: color, borderRadius: 1 }} />
+              </button>
+            );
+          })}
         </div>
 
-        {/* Exceptions List */}
-        <div className="bg-card border border-border rounded-lg">
-          <div className="p-3 border-b border-border flex items-center justify-between">
-            <div>
-              <h2 className="text-sm font-semibold">All Exceptions</h2>
-              <p className="text-xs text-muted-foreground">{filteredExceptions.length} active</p>
-            </div>
-            <span className="text-xs bg-destructive/20 text-destructive px-2 py-0.5 rounded">
-              {resolvableExceptions.length} need response
-            </span>
+        {/* PART 4 — All Exceptions Header */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: -14 }}>
+          <div>
+            <div style={{ ...eyebrowStyle, marginBottom: 6 }}>— All Exceptions</div>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "var(--text-secondary)", margin: 0 }}>
+              {filteredExceptions.length} active
+            </p>
           </div>
-          <div className="divide-y divide-border max-h-[500px] overflow-y-auto">
-            {filteredExceptions.map((exception) => {
-              const needsResolution = isResolvable(exception.type) && !exception.resolution;
-              const hasClientRequest = exception.resolution?.clientResponse === "request-replacement";
-              
-              return (
-                <div
-                  key={exception.id}
-                  className={`p-4 transition-colors ${
-                    hasClientRequest ? "bg-destructive/5" : needsResolution ? "bg-amber-500/5" : ""
-                  } hover:bg-muted/30`}
-                >
-                  <div className="flex items-start gap-3">
+          <span
+            style={{
+              padding: "4px 10px",
+              background: "rgba(217, 119, 6, 0.1)",
+              borderRadius: 3,
+              fontFamily: "var(--font-mono-labels)",
+              fontWeight: 500,
+              fontSize: 11,
+              color: "var(--status-amber)",
+              letterSpacing: "0.04em",
+              textTransform: "uppercase",
+            }}
+          >
+            {resolvableExceptions.length} need response
+          </span>
+        </div>
+
+        {/* PART 5 — Feed */}
+        <div style={{ background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden" }}>
+          {filteredExceptions.map((exception, idx) => {
+            const needsResolution = isResolvable(exception.type) && !exception.resolution;
+            const hasClientRequest = exception.resolution?.clientResponse === "request-replacement";
+            const sevColor = severityVar(exception.type);
+            const isLast = idx === filteredExceptions.length - 1;
+
+            return (
+              <div
+                key={exception.id}
+                style={{
+                  padding: "18px 24px",
+                  borderBottom: isLast ? "none" : "1px solid var(--border-purple)",
+                  display: "flex",
+                  gap: 20,
+                  alignItems: "center",
+                  background: hasClientRequest
+                    ? "rgba(185, 28, 28, 0.03)"
+                    : needsResolution
+                      ? "rgba(217, 119, 6, 0.03)"
+                      : "transparent",
+                }}
+              >
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  {/* Top line */}
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
                     {getExceptionIcon(exception.type)}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-2">
-                          {exception.type !== "traffic-alert" ? (
-                            <button
-                              onClick={() => handleWorkerClick(exception.workerName)}
-                              className="text-sm font-medium hover:text-primary hover:underline truncate"
-                            >
-                              {exception.workerName}
-                            </button>
-                          ) : (
-                            <span className="text-sm font-medium">{exception.workerName}</span>
-                          )}
-                          <span className={`text-xs px-2 py-0.5 rounded-full ${getExceptionBgColor(exception.type)}`}>
-                            {getExceptionLabel(exception.type)}
-                          </span>
-                        </div>
-                        
-                        {/* Action Button */}
-                        {needsResolution && (
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            className="text-xs h-7 gap-1 shrink-0"
-                            onClick={() => setSelectedExceptionForResolution({
-                              id: exception.id,
-                              workerId: exception.workerId,
-                              workerName: exception.workerName,
-                              department: exception.department,
-                              type: exception.type,
-                            })}
-                          >
-                            <Send className="w-3 h-3" />
-                            Resolve
-                          </Button>
-                        )}
-                        {hasClientRequest && (
-                          <Button
-                            size="sm"
-                            className="text-xs h-7 gap-1 shrink-0 bg-destructive hover:bg-destructive/90"
-                            onClick={() => setSelectedExceptionForResolution({
-                              id: exception.id,
-                              workerId: exception.workerId,
-                              workerName: exception.workerName,
-                              department: exception.department,
-                              type: exception.type,
-                            })}
-                          >
-                            <Send className="w-3 h-3" />
-                            Send Replacement
-                          </Button>
-                        )}
-                        {!isResolvable(exception.type) && !exception.resolution && (
-                          <Button
-                            size="sm"
-                            variant="ghost"
-                            className="text-xs h-7 gap-1 shrink-0"
-                            onClick={() => handleAcknowledge(exception.id)}
-                          >
-                            <Info className="w-3 h-3" />
-                            Acknowledge
-                          </Button>
-                        )}
-                      </div>
-                      
-                      {/* Exception Details */}
-                      <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
-                        <span className="flex items-center gap-1">
-                          <MapPin className="w-3 h-3" />
-                          {exception.site}
+                    {exception.type !== "traffic-alert" ? (
+                      <button
+                        onClick={() => handleWorkerClick(exception.workerName)}
+                        style={{
+                          fontFamily: "var(--font-body)",
+                          fontWeight: 600,
+                          fontSize: 15,
+                          color: "var(--text-primary)",
+                          background: "transparent",
+                          border: "none",
+                          padding: 0,
+                          cursor: "pointer",
+                        }}
+                      >
+                        {exception.workerName}
+                      </button>
+                    ) : (
+                      <span style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: 15, color: "var(--text-primary)" }}>
+                        {exception.workerName}
+                      </span>
+                    )}
+                    <span
+                      style={{
+                        padding: "2px 8px",
+                        borderRadius: 3,
+                        fontFamily: "var(--font-mono-labels)",
+                        fontWeight: 500,
+                        fontSize: 10,
+                        letterSpacing: "0.06em",
+                        textTransform: "uppercase",
+                        background: severityRgba(exception.type, 0.1),
+                        color: sevColor,
+                      }}
+                    >
+                      {getExceptionLabel(exception.type)}
+                    </span>
+                  </div>
+
+                  {/* Meta line */}
+                  <div style={{ ...monoLabel, marginTop: 6, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+                    <MapPin size={11} style={{ color: "var(--text-muted)" }} />
+                    <span>{exception.site}</span>
+                    <span>·</span>
+                    <span>{exception.department}</span>
+                    <span>·</span>
+                    <span>{exception.shift}</span>
+                    {exception.type === "late" && exception.lateMinutes && (
+                      <>
+                        <span>·</span>
+                        <span style={{ color: "var(--status-amber)", fontWeight: 500 }}>{exception.lateMinutes} min late</span>
+                      </>
+                    )}
+                    {exception.type === "overtime" && exception.overtimeMinutes && (
+                      <>
+                        <span>·</span>
+                        <span style={{ color: "var(--brand-purple)", fontWeight: 500 }}>{exception.overtimeMinutes} min overtime</span>
+                      </>
+                    )}
+                    {exception.type === "clocked-in-not-out" && exception.clockInTime && (
+                      <>
+                        <span>·</span>
+                        <span style={{ color: "var(--status-orange)", fontWeight: 500 }}>Clocked in at {exception.clockInTime}</span>
+                      </>
+                    )}
+                    {exception.type === "rtw-expired" && exception.rtwExpiryDate && (
+                      <>
+                        <span>·</span>
+                        <span style={{ color: "var(--status-red)", fontWeight: 500 }}>Expired: {exception.rtwExpiryDate}</span>
+                      </>
+                    )}
+                    {exception.type === "traffic-alert" && (
+                      <>
+                        <span>·</span>
+                        <span style={{ color: exception.trafficSeverity === "severe" ? "var(--status-red)" : "var(--status-amber)", fontWeight: 500 }}>
+                          {exception.trafficSeverity === "severe" ? "Severe" : "Moderate"}
                         </span>
-                        <span>{exception.department}</span>
-                        <span>{exception.shift}</span>
-                        
-                        {/* Type-specific details */}
-                        {exception.type === "late" && exception.lateMinutes && (
-                          <span className="text-amber-500 font-medium">{exception.lateMinutes} min late</span>
-                        )}
-                        {exception.type === "overtime" && exception.overtimeMinutes && (
-                          <span className="text-purple-500 font-medium">{exception.overtimeMinutes} min overtime</span>
-                        )}
-                        {exception.type === "clocked-in-not-out" && exception.clockInTime && (
-                          <span className="text-orange-500 font-medium">Clocked in at {exception.clockInTime}</span>
-                        )}
-                        {exception.type === "rtw-expired" && exception.rtwExpiryDate && (
-                          <span className="text-destructive font-medium">Expired: {exception.rtwExpiryDate}</span>
-                        )}
-                        {exception.type === "traffic-alert" && (
-                          <>
-                            <span className={exception.trafficSeverity === "severe" ? "text-destructive font-medium" : "text-amber-500 font-medium"}>
-                              {exception.trafficSeverity === "severe" ? "Severe" : "Moderate"}
-                            </span>
-                            <span>~{exception.affectedWorkers} workers may be delayed</span>
-                          </>
-                        )}
-                      </div>
+                        <span>·</span>
+                        <span>~{exception.affectedWorkers} workers may be delayed</span>
+                      </>
+                    )}
+                  </div>
 
-                      {/* Overtime contextual note */}
-                      {exception.type === "overtime" && exception.workerName !== "Marcus Webb" && (
-                        <div
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 8,
-                            marginTop: 6,
-                            padding: "8px 12px",
-                            background: "#EDE9FE",
-                            borderRadius: 6,
-                            borderLeft: "3px solid #4C1D95",
-                          }}
-                        >
-                          <Users className="w-3.5 h-3.5" style={{ color: "#4C1D95", flexShrink: 0 }} />
-                          <span
-                            style={{
-                              fontFamily: "Inter, sans-serif",
-                              fontWeight: 500,
-                              fontSize: 12,
-                              color: "#4C1D95",
-                              lineHeight: 1.5,
-                            }}
-                          >
-                            29 available workers to cover this shift within 3 miles of site.
-                          </span>
-                        </div>
-                      )}
-
-                      {/* Marcus Webb — agency-side overtime */}
-                      {exception.type === "overtime" && exception.workerName === "Marcus Webb" && (
-                        <div style={{ marginTop: 8 }}>
-                          <div style={{ marginBottom: 6 }}>
-                            <span
-                              style={{
-                                background: "#FEF3C7",
-                                color: "#92400E",
-                                fontFamily: "Inter, sans-serif",
-                                fontWeight: 600,
-                                fontSize: 10,
-                                textTransform: "uppercase",
-                                letterSpacing: "0.06em",
-                                padding: "3px 8px",
-                                borderRadius: 4,
-                              }}
-                            >
-                              Awaiting client response
-                            </span>
-                          </div>
-                          <p
-                            style={{
-                              fontFamily: "Inter, sans-serif",
-                              fontWeight: 400,
-                              fontSize: 12,
-                              color: "#6B6460",
-                              lineHeight: 1.5,
-                              margin: 0,
-                            }}
-                          >
-                            Overtime alert — Marcus Webb (Outbound Dispatch) has exceeded threshold. Client has been notified. Await instruction.
-                          </p>
-                        </div>
-                      )}
-
-                      {/* Resolution Status */}
-                      {exception.resolution && (
-                        <div className="mt-2 p-2 bg-muted/50 rounded border border-border">
-                          <div className="text-xs text-muted-foreground flex items-center justify-between">
-                            <span>
-                              {exception.resolution.resolutionType === "on-the-way" && (
-                                <>Notified client: On the way — ETA {exception.resolution.etaMinutes} mins</>
-                              )}
-                              {exception.resolution.resolutionType === "replaced" && (
-                                <>Notified client: Replacement {exception.resolution.replacementWorkerName} — ETA {exception.resolution.replacementEtaMinutes} mins</>
-                              )}
-                              {exception.resolution.resolutionType === "acknowledged" && (
-                                <>Acknowledged</>
-                              )}
-                            </span>
-                            {exception.resolution.acknowledged ? (
-                              <span className="text-green-500 flex items-center gap-1">
-                                <CheckCircle className="w-3 h-3" />
-                                Client approved
-                              </span>
-                            ) : exception.resolution.clientResponse === "request-replacement" ? (
-                              <span className="text-destructive flex items-center gap-1">
-                                <AlertTriangle className="w-3 h-3" />
-                                Client requested replacement
-                              </span>
-                            ) : (
-                              <span className="text-muted-foreground">Awaiting client response</span>
-                            )}
-                          </div>
-                        </div>
+                  {/* Resolution status (preserved, restyled) */}
+                  {exception.resolution && (
+                    <div
+                      style={{
+                        marginTop: 10,
+                        padding: "10px 12px",
+                        background: "var(--cream-tint)",
+                        border: "1px solid var(--border-purple)",
+                        borderRadius: 4,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: 12,
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <span style={{ fontFamily: "var(--font-body)", fontSize: 12, color: "var(--text-secondary)" }}>
+                        {exception.resolution.resolutionType === "on-the-way" && (
+                          <>Notified client: On the way, ETA <strong style={{ fontFamily: "var(--font-mono-labels)", color: "var(--text-primary)" }}>{exception.resolution.etaMinutes} mins</strong></>
+                        )}
+                        {exception.resolution.resolutionType === "replaced" && (
+                          <>Notified client: Replacement <strong style={{ color: "var(--text-primary)" }}>{exception.resolution.replacementWorkerName}</strong>, ETA <strong style={{ fontFamily: "var(--font-mono-labels)", color: "var(--text-primary)" }}>{exception.resolution.replacementEtaMinutes} mins</strong></>
+                        )}
+                        {exception.resolution.resolutionType === "acknowledged" && (<>Acknowledged</>)}
+                      </span>
+                      {exception.resolution.acknowledged ? (
+                        <span style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "var(--status-green)", fontFamily: "var(--font-mono-labels)", fontSize: 11 }}>
+                          <CheckCircle size={12} />
+                          Client approved
+                        </span>
+                      ) : exception.resolution.clientResponse === "request-replacement" ? (
+                        <span style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "var(--status-red)", fontFamily: "var(--font-mono-labels)", fontSize: 11 }}>
+                          <AlertTriangle size={12} />
+                          Client requested replacement
+                        </span>
+                      ) : (
+                        <span style={{ ...monoLabel }}>Awaiting client response</span>
                       )}
                     </div>
-                  </div>
+                  )}
                 </div>
-              );
-            })}
-            
-            {filteredExceptions.length === 0 && (
-              <div className="p-8 text-center text-muted-foreground">
-                <CheckCircle className="w-10 h-10 mx-auto mb-3 opacity-50" />
-                <p className="text-sm font-medium">No active exceptions</p>
-                <p className="text-xs mt-1">All workers accounted for</p>
+
+                {/* Right block — single action */}
+                {needsResolution && (
+                  <button
+                    onClick={() => setSelectedExceptionForResolution({
+                      id: exception.id,
+                      workerId: exception.workerId,
+                      workerName: exception.workerName,
+                      department: exception.department,
+                      type: exception.type,
+                    })}
+                    onMouseEnter={(e) => { e.currentTarget.style.background = "var(--cream-tint)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = "var(--white)"; }}
+                    style={resolveBtn}
+                  >
+                    <Send size={12} style={{ color: "var(--deep-purple)" }} />
+                    Resolve
+                  </button>
+                )}
+                {hasClientRequest && (
+                  <button
+                    onClick={() => setSelectedExceptionForResolution({
+                      id: exception.id,
+                      workerId: exception.workerId,
+                      workerName: exception.workerName,
+                      department: exception.department,
+                      type: exception.type,
+                    })}
+                    onMouseEnter={(e) => { e.currentTarget.style.background = "var(--cream-tint)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = "var(--white)"; }}
+                    style={resolveBtn}
+                  >
+                    <Send size={12} style={{ color: "var(--deep-purple)" }} />
+                    Resolve
+                  </button>
+                )}
+                {!isResolvable(exception.type) && !exception.resolution && (
+                  <button
+                    onClick={() => handleAcknowledge(exception.id)}
+                    onMouseEnter={(e) => { e.currentTarget.style.background = "var(--cream-tint)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.background = "var(--white)"; }}
+                    style={resolveBtn}
+                  >
+                    <Info size={12} style={{ color: "var(--deep-purple)" }} />
+                    Resolve
+                  </button>
+                )}
               </div>
-            )}
-          </div>
+            );
+          })}
+
+          {filteredExceptions.length === 0 && (
+            <div style={{ padding: 32, textAlign: "center" }}>
+              <CheckCircle size={36} style={{ margin: "0 auto 12px", opacity: 0.5, color: "var(--text-muted)" }} />
+              <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 500, color: "var(--text-secondary)", margin: 0 }}>No active exceptions</p>
+              <p style={{ ...monoLabel, marginTop: 4 }}>All workers accounted for</p>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Exception Resolution Modal */}
       {selectedExceptionForResolution && (
         <ExceptionResolutionModal
           isOpen={!!selectedExceptionForResolution}
