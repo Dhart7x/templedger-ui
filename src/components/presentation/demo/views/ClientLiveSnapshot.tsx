@@ -430,7 +430,7 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
               <div
                 key={exception.id}
                 style={{
-                  padding: "20px 24px",
+                  padding: "16px 24px",
                   borderBottom: idx === actionedExceptions.length - 1 ? "none" : "1px solid var(--border-purple)",
                   display: "flex",
                   gap: 12,
