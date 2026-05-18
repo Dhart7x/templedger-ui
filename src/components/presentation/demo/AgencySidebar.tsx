@@ -196,7 +196,7 @@ const AgencySidebar = ({ activeView, onViewChange, notificationCount = 0, newOrd
                           }}
                           style={{
                             width: "100%",
-                            height: 28,
+                            height: 30,
                             padding: "0 10px",
                             marginBottom: 1,
                             display: "flex",
