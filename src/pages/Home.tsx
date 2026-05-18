@@ -817,7 +817,7 @@ const Home = () => {
               ))}
               <div
                 style={{
-                  padding: "14px 20px",
+                  padding: "12px 20px",
                   borderTop: "1px solid #E5E0DA",
                   background: "#FAFAF8",
                   display: "flex",
