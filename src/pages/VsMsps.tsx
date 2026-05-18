@@ -137,12 +137,12 @@ const VsMsps = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             style={{
-              fontFamily: MONO,
-              fontWeight: 500,
-              fontSize: 44,
+              fontFamily: FONT,
+              fontWeight: 800,
+              fontSize: 54,
               color: "#FAFAF8",
-              letterSpacing: "-0.02em",
-              lineHeight: 1.15,
+              letterSpacing: "-0.03em",
+              lineHeight: 1.08,
               marginBottom: 20,
               maxWidth: 820,
             }}
@@ -182,10 +182,10 @@ const VsMsps = () => {
               <Eyebrow label={a.eyebrow.replace(/^—\s*/, "")} />
               <h2
                 style={{
-                  fontFamily: MONO,
-                  fontWeight: 500,
+                  fontFamily: FONT,
+                  fontWeight: 600,
                   fontSize: 26,
-                  color: "#0D0D0B",
+                  color: "#2E1065",
                   letterSpacing: "-0.018em",
                   lineHeight: 1.25,
                   marginBottom: 12,
@@ -197,8 +197,8 @@ const VsMsps = () => {
                 style={{
                   fontFamily: FONT,
                   fontWeight: 400,
-                  fontSize: 15,
-                  color: "rgba(0,0,0,0.7)",
+                  fontSize: 13,
+                  color: "rgba(0,0,0,0.55)",
                   lineHeight: 1.6,
                   maxWidth: 680,
                   margin: 0,
@@ -217,11 +217,11 @@ const VsMsps = () => {
           <Eyebrow label="THE OUTCOME" dark />
           <div
             style={{
-              fontFamily: MONO,
+              fontFamily: FONT,
               fontWeight: 500,
-              fontSize: 36,
+              fontSize: 26,
               color: "#FAFAF8",
-              letterSpacing: "-0.02em",
+              letterSpacing: "-0.022em",
               lineHeight: 1.2,
             }}
           >
