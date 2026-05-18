@@ -210,6 +210,8 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
         return <AgencyWorkers tab="standby" onViewWorker={handleViewWorker} />;
       case "workers-new":
         return <AgencyWorkers tab="new" onViewWorker={handleViewWorker} />;
+      case "signals":
+        return <AgencySignals />;
       case "payroll":
         return <ClientPayroll />; // Reuse with different context
       case "billing":
