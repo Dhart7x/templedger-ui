@@ -1,5 +1,4 @@
 import { Eye, Calendar, ClipboardList, Building2, Users, DollarSign, FileText, TrendingUp, UserCheck, MessageCircle, Shield } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface ClientSidebarProps {
   activeView: string;
@@ -20,56 +19,177 @@ const navItems = [
   { id: "permissions", label: "Permissions", icon: Shield },
 ];
 
-const ClientSidebar = ({ activeView, onViewChange, notificationCount = 0 }: ClientSidebarProps) => {
+const ClientSidebar = ({ activeView, onViewChange }: ClientSidebarProps) => {
   return (
-    <div className="w-48 md:w-56 bg-card border-r border-border flex flex-col">
-      {/* Client Header */}
-      <div className="p-4 border-b border-border">
-        <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Client Portal</div>
-        <div className="text-sm font-semibold text-foreground">Apex Distribution Ltd</div>
-        <div className="text-xs text-muted-foreground">All Sites</div>
+    <div
+      style={{
+        width: 240,
+        flexShrink: 0,
+        background: "var(--white)",
+        borderRight: "1px solid var(--border-purple)",
+        padding: "20px 0",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      {/* Brand context block */}
+      <div
+        style={{
+          padding: "0 20px 20px 20px",
+          borderBottom: "1px solid var(--border-purple)",
+          marginBottom: 12,
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "var(--font-mono-headers)",
+            fontWeight: 500,
+            fontSize: 10,
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            color: "var(--brand-purple)",
+            marginBottom: 10,
+          }}
+        >
+          Client Portal
+        </div>
+        <div
+          style={{
+            fontFamily: "var(--font-body)",
+            fontWeight: 600,
+            fontSize: 15,
+            color: "var(--text-primary)",
+            lineHeight: 1.3,
+            marginBottom: 4,
+          }}
+        >
+          Apex Distribution Ltd
+        </div>
+        <div
+          style={{
+            fontFamily: "var(--font-mono-labels)",
+            fontWeight: 400,
+            fontSize: 11,
+            color: "var(--text-secondary)",
+          }}
+        >
+          All Sites
+        </div>
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 p-2 overflow-y-auto">
-        <ul className="space-y-1">
-          {navItems.map((item) => {
-            const isActive = activeView === item.id;
-            return (
-              <li key={item.id}>
-                <button
-                  onClick={() => onViewChange(item.id)}
-                  className={cn(
-                    "w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
-                    isActive
-                      ? "bg-primary/10 text-primary font-medium"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                  )}
+      {/* Tab list */}
+      <nav style={{ flex: 1, padding: "0 12px", overflowY: "auto" }}>
+        {navItems.map((item) => {
+          const isActive = activeView === item.id;
+          const Icon = item.icon;
+          return (
+            <button
+              key={item.id}
+              onClick={() => onViewChange(item.id)}
+              onMouseEnter={(e) => {
+                if (!isActive) e.currentTarget.style.background = "var(--cream-tint)";
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) e.currentTarget.style.background = "transparent";
+              }}
+              style={{
+                position: "relative",
+                width: "100%",
+                height: 34,
+                padding: "0 12px",
+                marginBottom: 1,
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                borderRadius: 3,
+                border: "none",
+                cursor: "pointer",
+                transition: "background 120ms ease",
+                background: isActive ? "var(--cream-tint)" : "transparent",
+                color: isActive ? "var(--text-primary)" : "var(--text-secondary)",
+                fontFamily: "var(--font-body)",
+                fontWeight: isActive ? 600 : 500,
+                fontSize: 13,
+                textAlign: "left",
+              }}
+            >
+              {isActive && (
+                <span
+                  aria-hidden
+                  style={{
+                    position: "absolute",
+                    left: -12,
+                    top: 6,
+                    width: 3,
+                    height: "calc(100% - 12px)",
+                    background: "var(--brand-purple)",
+                    borderRadius: "0 2px 2px 0",
+                  }}
+                />
+              )}
+              <Icon
+                size={14}
+                style={{ color: isActive ? "var(--brand-purple)" : "var(--text-muted)", flexShrink: 0 }}
+              />
+              <span style={{ flex: 1 }}>{item.label}</span>
+              {item.id === "bookings" && item.badge && (
+                <span
+                  style={{
+                    padding: "1px 7px",
+                    background: isActive ? "var(--brand-purple)" : "var(--cream-tint)",
+                    border: `1px solid ${isActive ? "var(--brand-purple)" : "var(--border-purple)"}`,
+                    borderRadius: 3,
+                    fontFamily: "var(--font-mono-labels)",
+                    fontWeight: 500,
+                    fontSize: 10,
+                    color: isActive ? "var(--cream)" : "var(--brand-purple)",
+                  }}
                 >
-                  <item.icon className="w-4 h-4" />
-                  <span className="flex-1 text-left">{item.label}</span>
-                  {item.id === "bookings" && item.badge && (
-                    <span className="text-xs bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded">{item.badge}</span>
-                  )}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+                  {item.badge}
+                </span>
+              )}
+            </button>
+          );
+        })}
       </nav>
 
-      {/* Chatbot Button */}
-      <div className="p-3 border-t border-border">
+      {/* Ask Assistant block */}
+      <div
+        style={{
+          marginTop: "auto",
+          padding: "16px 12px 0 12px",
+          borderTop: "1px solid var(--border-purple)",
+        }}
+      >
         <button
           onClick={() => onViewChange("chatbot")}
-          className={cn(
-            "w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm transition-colors",
-            activeView === "chatbot"
-              ? "bg-primary text-primary-foreground"
-              : "bg-primary/10 text-primary hover:bg-primary/20"
-          )}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "var(--white)";
+            e.currentTarget.style.borderColor = "var(--border-strong)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "var(--cream-tint)";
+            e.currentTarget.style.borderColor = "var(--border-purple)";
+          }}
+          style={{
+            height: 36,
+            width: "100%",
+            background: "var(--cream-tint)",
+            border: "1px solid var(--border-purple)",
+            borderRadius: 4,
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            padding: "0 12px",
+            cursor: "pointer",
+            transition: "background 120ms ease, border-color 120ms ease",
+            fontFamily: "var(--font-body)",
+            fontWeight: 500,
+            fontSize: 13,
+            color: "var(--text-primary)",
+          }}
         >
-          <MessageCircle className="w-4 h-4" />
+          <MessageCircle size={14} style={{ color: "var(--brand-purple)" }} />
           <span>Ask Assistant</span>
         </button>
       </div>
