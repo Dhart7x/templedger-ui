@@ -308,7 +308,7 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
                 opacity: active ? 1 : 0.95,
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 6, minHeight: 16 }}>
                 <Icon size={12} style={{ color }} />
                 <span
                   style={{
@@ -318,6 +318,7 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
                     letterSpacing: "0.12em",
                     textTransform: "uppercase",
                     color: "var(--text-secondary)",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {c.label}
@@ -325,9 +326,10 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
               </div>
               <div
                 style={{
-                  fontFamily: "var(--font-mono-labels)",
+                  fontFamily: "var(--font-body)",
                   fontWeight: 600,
                   fontSize: 26,
+                  letterSpacing: "-0.01em",
                   color: "var(--text-primary)",
                   lineHeight: 1,
                 }}
