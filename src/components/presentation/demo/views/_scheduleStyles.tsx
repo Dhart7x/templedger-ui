@@ -304,13 +304,13 @@ export const ScheduleGridTable = ({
   onCellClick?: (info: { row: { role: string }; shiftKey: string; day: string }) => void;
   renderCellOverlay?: (info: { cellKey: string; cell: { required: number; workers: unknown[] }; row: { role: string }; shiftLabel: string; day: string }) => React.ReactNode;
 }) => {
-  const gridCols = "220px 100px repeat(7, 1fr) 90px";
+  const gridCols = "minmax(120px, 150px) 70px repeat(7, minmax(0, 1fr)) 70px";
   const headerCellStyle: React.CSSProperties = {
-    padding: "0 14px",
+    padding: "0 8px",
     fontFamily: "'IBM Plex Mono', monospace",
     fontWeight: 500,
     fontSize: 10,
-    letterSpacing: "0.12em",
+    letterSpacing: "0.1em",
     textTransform: "uppercase",
     color: "var(--text-secondary)",
     borderRight: "1px solid var(--border-purple)",
