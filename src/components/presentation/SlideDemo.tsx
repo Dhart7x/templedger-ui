@@ -181,6 +181,8 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
         return <ClientBilling onViewChange={setActiveClientView} />;
       case "spend-analysis":
         return <ClientSpendAnalysis onViewWorker={handleViewWorker} />;
+      case "insights":
+        return <ClientInsights />;
       case "temp-perm":
         return <ClientTempPerm onViewWorker={handleViewWorker} />;
       case "notifications":
