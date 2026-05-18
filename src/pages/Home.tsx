@@ -2162,7 +2162,7 @@ const Home = () => {
                 fontWeight: 400,
                 fontSize: 15,
                 color: "rgba(255,255,255,0.55)",
-                marginBottom: 40,
+                marginBottom: 28,
               }}
             >
               The impact compounds with every shift, every week.
