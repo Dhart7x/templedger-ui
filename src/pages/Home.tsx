@@ -644,9 +644,9 @@ const Home = () => {
         </>
       )}
 
-      <div className="tl-nav-spacer" style={{ paddingTop: 56, background: "#4C1D95", margin: 0 }}>
+      <div className="tl-nav-spacer" style={{ paddingTop: 56, background: "#1A0A3D", margin: 0 }}>
         {/* SECTION 1 — HERO */}
-        <section className="tl-hero" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #4C1D95 85%, #2E1065 100%)", padding: "96px 48px 80px", margin: 0, width: "100%" }}>
+        <section className="tl-hero" style={{ background: "#1A0A3D", padding: "96px 48px 80px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <h1
               className="tl-hero-h1"
@@ -702,7 +702,7 @@ const Home = () => {
               whileHover={{ scale: 1.03 }}
               style={{
                 background: "#FFFFFF",
-                color: C.primary,
+                color: "#1A0A3D",
                 fontWeight: 700,
                 fontSize: 14,
                 borderRadius: 8,
@@ -2625,7 +2625,7 @@ const Home = () => {
 		</section>
 
 		{/* SECTION 6 — CONTACT */}
-        <section id="contact" className="tl-section-contact" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #3B1578 40%, #2E1065 70%, #1A0A3D 100%)", padding: "96px 48px", margin: 0, width: "100%" }}>
+        <section id="contact" className="tl-section-contact" style={{ background: "#1A0A3D", padding: "96px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
             <div
               style={{
@@ -2725,7 +2725,7 @@ const Home = () => {
                     style={{
                       width: "100%",
                       background: "#FFFFFF",
-                      color: "#2E1065",
+                      color: "#1A0A3D",
                       fontWeight: 700,
                       fontSize: 14,
                       borderRadius: 8,
