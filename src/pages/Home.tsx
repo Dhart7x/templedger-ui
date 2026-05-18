@@ -769,7 +769,6 @@ const Home = () => {
             >
               <div
                 style={{
-                  background: "#FAFAF8",
                   borderBottom: "0.5px solid #E5E0DA",
                   padding: "14px 20px",
                   display: "flex",
@@ -779,12 +778,12 @@ const Home = () => {
               >
                 <span
                   style={{
-                    fontFamily: FONT,
-                    fontWeight: 700,
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontWeight: 500,
                     fontSize: 11,
                     letterSpacing: "0.1em",
                     textTransform: "uppercase",
-                    color: "#9B9590",
+                    color: "var(--text-secondary)",
                   }}
                 >
                   AGENCY INVOICE
