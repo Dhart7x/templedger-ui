@@ -403,7 +403,7 @@ const ClientPayroll = () => {
             </div>
             <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 8 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                <span style={monoLabel}>WORKERS ON VERIFIED PAYROLL</span>
+                <span style={monoLabel}>WORKERS VERIFIED</span>
                 <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>{verified.length}</span>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
