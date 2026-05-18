@@ -988,7 +988,7 @@ const Home = () => {
               >
                 <div
                   style={{
-                    color: "rgba(255,255,255,0.6)",
+                    color: "#AFA9EC",
                     fontSize: 9,
                     fontWeight: 600,
                     letterSpacing: "0.12em",
