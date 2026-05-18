@@ -1648,7 +1648,7 @@ const Home = () => {
                       fontWeight: 600,
                       fontSize: 18,
                       color: "#FFFFFF",
-                      marginBottom: 10,
+                      marginBottom: 18,
                       lineHeight: 1.3,
                     }}
                   >
@@ -1660,8 +1660,8 @@ const Home = () => {
                       fontFamily: FONT,
                       fontWeight: 400,
                       fontSize: 13,
-                      color: "rgba(255, 255, 255, 0.7)",
-                      lineHeight: 1.55,
+                      color: "rgba(250, 250, 248, 0.72)",
+                      lineHeight: 1.65,
                     }}
                   >
                     {phase.body}
