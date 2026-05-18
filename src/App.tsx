@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import SalesDeck from "./pages/SalesDeck";
+import VsMsps from "./pages/VsMsps";
 import NotFound from "./pages/NotFound";
 import AccessGate from "./components/AccessGate";
 
