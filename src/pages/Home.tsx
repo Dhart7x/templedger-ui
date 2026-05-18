@@ -1250,7 +1250,7 @@ const Home = () => {
 
         {/* SECTION 3c — THE ALTERNATIVE (removed; moved to /vs-msps) */}
         {/* SECTION — INTRODUCING TEMPLEDGER */}
-        <section className="tl-section-introducing" style={{ background: "#2E1065", padding: "96px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-introducing" style={{ background: "#1A0A3D", padding: "96px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <motion.div
               initial={{ opacity: 0, y: 24 }}
