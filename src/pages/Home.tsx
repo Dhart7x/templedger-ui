@@ -1968,7 +1968,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 4 — THE OUTCOME */}
-        <section className="tl-section-outcome" style={{ background: "#1A0A3D", padding: "56px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-outcome" style={{ background: "#1A0A3D", padding: "34px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <div
               style={{
@@ -2086,7 +2086,7 @@ const Home = () => {
                       display: "grid",
                       gridTemplateColumns: "32px 1fr",
                       gap: 16,
-                      padding: "8px 0",
+                      padding: "10px 0",
                       borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
                       alignItems: "baseline",
                     }}
@@ -2132,7 +2132,7 @@ const Home = () => {
                       display: "grid",
                       gridTemplateColumns: "32px 1fr",
                       gap: 16,
-                      padding: "8px 0",
+                      padding: "10px 0",
                       borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
                       alignItems: "baseline",
                     }}
