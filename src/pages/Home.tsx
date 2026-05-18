@@ -1412,10 +1412,10 @@ const Home = () => {
                 fontSize: 10,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "rgba(255, 255, 255, 0.5)",
+                color: "#AFA9EC",
               }}
             >
-              <div style={{ width: 24, height: 2, background: "rgba(255, 255, 255, 0.5)" }} />
+              <div style={{ width: 24, height: 2, background: "#AFA9EC" }} />
               INTRODUCING TEMPLEDGER
             </motion.div>
             <motion.h2
