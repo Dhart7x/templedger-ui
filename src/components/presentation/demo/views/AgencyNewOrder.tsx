@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, X, MessageSquare, Clock, Users, MapPin, Send } from "lucide-react";
+import { Check, X, MessageSquare, Clock, Users, MapPin, Send, Inbox, Building2, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDemoContext } from "../DemoContext";
 
