@@ -1,9 +1,9 @@
 import { useState, useCallback } from "react";
-import { Calendar, Upload, FileSpreadsheet, Eye, ChevronDown, X, CheckCircle, Users, Building2, ChevronRight } from "lucide-react";
+import { Calendar, Upload, FileSpreadsheet, ChevronDown, X, CheckCircle, Building2, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useDemoContext } from "../DemoContext";
 import WorkerProfileModal from "../WorkerProfileModal";
+import { SchedulePageHeader, ScheduleTabSwitcher, UploadDropZone, FilterDropdown, LegendTipBar, ScheduleGridTable } from "./_scheduleStyles";
 
 // ─── Shared Data (mirrors ClientSchedule) ────────────────────────────────────
 
