@@ -774,38 +774,6 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
             );
           })}
       </div>
-
-      {/* Spend by Department */}
-      <div className="bg-card border border-border rounded-lg">
-        <div className="p-3 border-b border-border flex items-center justify-between">
-          <h2 className="text-sm font-semibold">By Department</h2>
-          <Briefcase className="w-4 h-4 text-muted-foreground" />
-        </div>
-        <div className="p-4">
-          <div className="grid grid-cols-5 gap-4">
-            {departmentSpend
-              .filter(dept => !subSelection || viewBy !== "by-department" || dept.name === subSelection)
-              .map((dept) => {
-              const data = getData(dept);
-              const overtimePercent = ((data.overtimeHours / data.hours) * 100).toFixed(1);
-              const highlighted = viewBy === "by-department" && subSelection === dept.name;
-              return (
-                <div key={dept.name} className={`p-3 bg-muted/30 rounded-lg ${highlighted ? "ring-2 ring-primary" : ""}`}>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium">{dept.name}</span>
-                  </div>
-                  <p className="text-lg font-bold">${data.amount.toLocaleString()}</p>
-                  <div className="text-xs text-muted-foreground mt-1 space-y-0.5">
-                    <p>{data.hours.toLocaleString()} hrs</p>
-                    <p>{data.workers} workers</p>
-                    <p className="text-amber-500">{overtimePercent}% OT</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
