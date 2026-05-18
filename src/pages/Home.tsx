@@ -2173,7 +2173,7 @@ const Home = () => {
               style={{
                 display: "grid",
                 gridTemplateColumns: window.innerWidth >= 768 ? "1fr 1fr" : "1fr",
-                columnGap: 48,
+                columnGap: 32,
                 marginBottom: 0,
               }}
             >
