@@ -1,5 +1,4 @@
-import { Bell, Check, Clock, AlertTriangle, Users, FileText, Building2, Calendar, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Bell, BellOff, CheckCheck, Clock, AlertTriangle, Users, FileText, Building2, Calendar, ArrowRight, Info } from "lucide-react";
 import { useDemoContext } from "../DemoContext";
 
 interface DemoNotificationsProps {
@@ -77,100 +76,173 @@ const DemoNotifications = ({ onNavigate }: DemoNotificationsProps) => {
     return date.toLocaleDateString();
   };
 
+  const getTypeIcon = (type: string) => {
+    switch (type) {
+      case "booking": return FileText;
+      case "exception": return AlertTriangle;
+      case "allocation": return Calendar;
+      case "action": return Users;
+      case "status-change": return Clock;
+      case "temp-perm": return Building2;
+      default: return Bell;
+    }
+  };
+
+  const getSourceTag = (n: typeof notifications[0]) => {
+    if (n.targetView === "both") return null;
+    if (n.targetView === "agency") {
+      return { label: "FROM CLIENT", bg: "rgba(217, 119, 6, 0.1)", color: "var(--status-amber)" };
+    }
+    return { label: "FROM AGENCY", bg: "rgba(76, 29, 149, 0.1)", color: "var(--brand-purple)" };
+  };
+
   return (
-    <div className="p-4 md:p-6 space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-            <Bell className="w-5 h-5 text-primary" />
+    <div style={{ padding: "20px 24px" }}>
+      {/* Page header */}
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 22 }}>
+        <div>
+          <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--brand-purple)", marginBottom: 8 }}>
+            — NOTIFICATIONS
           </div>
-          <div>
-            <h1 className="text-lg md:text-xl font-bold text-foreground">Notifications</h1>
-            <p className="text-xs text-muted-foreground">
-              {unreadCount > 0 ? `${unreadCount} unread` : "All caught up"}
-            </p>
-          </div>
+          <h1 style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 26, color: "var(--text-primary)", marginBottom: 4, lineHeight: 1.1 }}>
+            Notifications
+          </h1>
+          <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, color: "var(--text-secondary)" }}>
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, color: "var(--text-primary)" }}>{unreadCount}</span> unread
+          </p>
         </div>
         {unreadCount > 0 && (
-          <Button variant="outline" size="sm" onClick={clearNotifications} className="gap-2">
-            <Check className="w-4 h-4" />
+          <button
+            onClick={clearNotifications}
+            style={{
+              height: 34,
+              padding: "0 14px",
+              background: "var(--white)",
+              border: "1px solid var(--border-purple)",
+              color: "var(--text-secondary)",
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontWeight: 500,
+              fontSize: 11,
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              borderRadius: 4,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              cursor: "pointer",
+              transition: "background 120ms ease",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--cream-tint)")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "var(--white)")}
+          >
+            <CheckCheck style={{ width: 12, height: 12, color: "var(--text-secondary)" }} />
             Mark all read
-          </Button>
+          </button>
         )}
       </div>
 
-      {/* Notifications List */}
-      <div className="space-y-2">
-        {notifications.length === 0 ? (
-          <div className="text-center py-12">
-            <Bell className="w-12 h-12 text-muted-foreground mx-auto mb-4 opacity-50" />
-            <p className="text-sm text-muted-foreground">No notifications yet</p>
-            <p className="text-xs text-muted-foreground mt-1">
-              Actions in the demo will appear here
-            </p>
+      {/* Feed */}
+      {notifications.length === 0 ? (
+        <div style={{ background: "var(--white)", border: "1px dashed var(--border-purple)", borderRadius: 6, padding: "40px 24px", display: "flex", flexDirection: "column", alignItems: "center", gap: 12, marginBottom: 28 }}>
+          <div style={{ width: 44, height: 44, background: "rgba(76, 29, 149, 0.06)", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <BellOff style={{ width: 18, height: 18, color: "var(--brand-purple)" }} />
           </div>
-        ) : (
-          notifications.map((notification) => (
-            <div
-              key={notification.id}
-              onClick={() => handleNotificationClick(notification)}
-              className={`bg-card border rounded-lg p-4 cursor-pointer transition-all hover:bg-muted/30 ${
-                !notification.read ? "border-primary/30 bg-primary/5 shadow-sm" : "border-border"
-              }`}
-            >
-              <div className="flex items-start gap-3">
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${getIconColor(notification.type)}`}>
-                  {getIcon(notification.type)}
+          <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 14, color: "var(--text-primary)" }}>No notifications</div>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>You're all caught up.</div>
+        </div>
+      ) : (
+        <div style={{ background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden", marginBottom: 28 }}>
+          {notifications.map((n, idx, arr) => {
+            const Icon = getTypeIcon(n.type);
+            const unread = !n.read;
+            const tag = getSourceTag(n);
+            return (
+              <div
+                key={n.id}
+                onClick={() => handleNotificationClick(n)}
+                style={{
+                  padding: unread ? "18px 22px 18px 19px" : "18px 22px",
+                  borderBottom: idx === arr.length - 1 ? "none" : "1px solid var(--border-purple)",
+                  borderLeft: unread ? "3px solid var(--brand-purple)" : "none",
+                  background: unread ? "rgba(76, 29, 149, 0.03)" : "var(--white)",
+                  display: "flex",
+                  gap: 16,
+                  alignItems: "flex-start",
+                  position: "relative",
+                  transition: "background 120ms ease",
+                  cursor: "pointer",
+                }}
+              >
+                <div style={{ width: 36, height: 36, borderRadius: 6, background: "rgba(76, 29, 149, 0.08)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <Icon style={{ width: 16, height: 16, color: "var(--brand-purple)" }} />
                 </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <p className={`text-sm font-medium truncate ${!notification.read ? "text-foreground" : "text-muted-foreground"}`}>
-                      {notification.message}
-                    </p>
-                    {!notification.read && (
-                      <span className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
-                    )}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <p className="text-xs text-muted-foreground">
-                      {formatTimestamp(notification.timestamp)}
-                    </p>
-                    {notification.contextType && (
-                      <span className="flex items-center gap-1 text-xs text-primary hover:underline">
-                        {getContextLabel(notification.contextType)}
-                        <ArrowRight className="w-3 h-3" />
+                <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 6, minWidth: 0 }}>
+                  <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+                    <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 14, color: "var(--text-primary)" }}>
+                      {n.title || n.message}
+                    </span>
+                    {unread && <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--brand-purple)" }} />}
+                    {tag && (
+                      <span style={{ padding: "2px 8px", borderRadius: 3, fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase", background: tag.bg, color: tag.color }}>
+                        {tag.label}
                       </span>
                     )}
                   </div>
+                  <div style={{ display: "flex", gap: 5, alignItems: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>
+                    <Clock style={{ width: 11, height: 11, color: "var(--text-muted)" }} />
+                    {formatTimestamp(n.timestamp)}
+                  </div>
+                  {n.title && n.message && n.title !== n.message && (
+                    <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, lineHeight: 1.55, color: "var(--text-primary)", marginTop: 4 }}>
+                      {n.message}
+                    </div>
+                  )}
                 </div>
+                {n.contextType && (
+                  <button
+                    onClick={(e) => { e.stopPropagation(); handleNotificationClick(n); }}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 5,
+                      padding: 0,
+                      background: "transparent",
+                      border: "none",
+                      cursor: "pointer",
+                      fontFamily: "'IBM Plex Mono', monospace",
+                      fontWeight: 500,
+                      fontSize: 11,
+                      letterSpacing: "0.06em",
+                      textTransform: "uppercase",
+                      color: "var(--brand-purple)",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {getContextLabel(n.contextType)}
+                    <ArrowRight style={{ width: 11, height: 11, color: "var(--brand-purple)" }} />
+                  </button>
+                )}
               </div>
-              
-              {/* Context badge */}
-              {notification.targetView !== "both" && (
-                <div className="mt-2 pt-2 border-t border-border">
-                  <span className={`text-xs px-2 py-0.5 rounded ${
-                    notification.targetView === "agency" 
-                      ? "bg-amber-500/10 text-amber-500" 
-                      : "bg-primary/10 text-primary"
-                  }`}>
-                    {notification.targetView === "agency" ? "From Client" : "From Agency"}
-                  </span>
-                </div>
-              )}
-            </div>
-          ))
-        )}
-      </div>
+            );
+          })}
+        </div>
+      )}
 
-      {/* Instructions */}
-      <div className="text-center text-xs text-muted-foreground pt-4 border-t border-border">
-        <p className="mb-2 font-medium">Demo tip:</p>
-        <p>
-          Create a booking in Client View → Switch to Agency View to see it appear.
-          <br />
-          Accept or reject it → Switch back to see the update on the Client side.
-        </p>
+      {/* Demo tip footer */}
+      <div style={{ background: "rgba(76, 29, 149, 0.04)", border: "1px solid var(--border-purple)", borderLeft: "3px solid var(--brand-purple)", borderRadius: 4, padding: "16px 20px", display: "flex", gap: 14, alignItems: "flex-start" }}>
+        <div style={{ width: 28, height: 28, background: "rgba(76, 29, 149, 0.1)", borderRadius: 5, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <Info style={{ width: 14, height: 14, color: "var(--brand-purple)" }} />
+        </div>
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 4 }}>
+          <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--brand-purple)" }}>
+            DEMO TIP
+          </div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, lineHeight: 1.55, color: "var(--text-primary)" }}>
+            Create a booking in Client View → Switch to Agency View to see it appear.
+            <br />
+            Accept or reject it → Switch back to see the update on the Client side.
+          </div>
+        </div>
       </div>
     </div>
   );
