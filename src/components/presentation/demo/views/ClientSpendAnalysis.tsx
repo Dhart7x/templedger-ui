@@ -196,38 +196,154 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
     }
   };
 
+  const eyebrow: React.CSSProperties = {
+    fontFamily: "'IBM Plex Mono', monospace",
+    fontWeight: 500,
+    fontSize: 10,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    color: "var(--brand-purple)",
+  };
+  const kpiLabel: React.CSSProperties = {
+    fontFamily: "'IBM Plex Mono', monospace",
+    fontWeight: 500,
+    fontSize: 10,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    color: "var(--text-secondary)",
+  };
+  const colHeader: React.CSSProperties = {
+    fontFamily: "'IBM Plex Mono', monospace",
+    fontWeight: 500,
+    fontSize: 10,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase",
+    color: "var(--text-secondary)",
+  };
+  const statLabel: React.CSSProperties = {
+    fontFamily: "'IBM Plex Mono', monospace",
+    fontWeight: 500,
+    fontSize: 9,
+    letterSpacing: "0.1em",
+    textTransform: "uppercase",
+    color: "var(--text-secondary)",
+  };
+  const statValue: React.CSSProperties = {
+    fontFamily: "'JetBrains Mono', monospace",
+    fontWeight: 500,
+    fontSize: 11,
+    color: "var(--text-primary)",
+  };
+
+  const otOver = (pct: number) => pct > 5;
+  const overtimePct = totalHours > 0 ? (totalOvertimeHours / totalHours) * 100 : 0;
+
+  const totalSiteSpend = overallSpend.reduce((a, s) => a + getData(s).amount, 0);
+  const totalAgencySpend = agencySpend.reduce((a, ag) => a + getAgencyData(ag).amount, 0);
+  const totalDeptSpend = departmentSpend.reduce((a, d) => a + getData(d).amount, 0);
+
+  const ChangePill = ({ change }: { change: number }) => {
+    const positive = change >= 0;
+    const Icon = positive ? TrendingUp : TrendingDown;
+    return (
+      <span
+        style={{
+          padding: "1px 7px",
+          borderRadius: 3,
+          fontFamily: "'JetBrains Mono', monospace",
+          fontWeight: 500,
+          fontSize: 10,
+          letterSpacing: "0.02em",
+          display: "inline-flex",
+          gap: 3,
+          alignItems: "center",
+          background: positive ? "rgba(22, 163, 74, 0.1)" : "rgba(185, 28, 28, 0.1)",
+          color: positive ? "var(--status-green)" : "var(--status-red)",
+        }}
+      >
+        <Icon size={9} />
+        {positive ? "+" : ""}
+        {change}%
+      </span>
+    );
+  };
+
+  const ProgressBar = ({ pct, w = "100%" }: { pct: number; w?: string | number }) => (
+    <div style={{ width: w, height: 4, background: "var(--cream-tint)", borderRadius: 2, overflow: "hidden" }}>
+      <div style={{ height: "100%", width: `${Math.min(100, Math.max(0, pct))}%`, background: "var(--brand-purple)", borderRadius: 2 }} />
+    </div>
+  );
+
   return (
-    <div className="p-4 md:p-6 space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
+    <div style={{ padding: 24 }}>
+      {/* PART 1 — Header */}
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 22 }}>
         <div>
-          <h1 className="text-lg md:text-xl font-bold text-foreground">Spend Analysis</h1>
-          <p className="text-xs text-muted-foreground">Track and analyze agency spend</p>
+          <div style={{ ...eyebrow, marginBottom: 8 }}>— SPEND ANALYSIS</div>
+          <h1 style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 26, color: "var(--text-primary)", margin: 0, marginBottom: 4 }}>
+            Spend Analysis
+          </h1>
+          <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, color: "var(--text-secondary)", margin: 0 }}>
+            Track and analyze agency spend
+          </p>
         </div>
-        <div className="flex items-center gap-2">
-          {/* Hierarchical View Selector */}
-          <div className="relative">
+
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          {/* Hierarchical View Selector — preserved behavior, restyled */}
+          <div style={{ position: "relative" }}>
             <button
               onClick={() => setShowViewOptions(!showViewOptions)}
-              className="flex items-center gap-2 text-xs bg-card border border-border rounded px-3 py-1.5 hover:bg-muted/50 transition-colors"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                height: 36,
+                padding: "0 12px",
+                background: "var(--white)",
+                border: "1px solid var(--border-purple)",
+                borderRadius: 4,
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontWeight: 500,
+                fontSize: 11,
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+                color: "var(--text-primary)",
+                cursor: "pointer",
+              }}
             >
               <span>{getViewLabel()}</span>
-              <ChevronDown className="w-3 h-3" />
+              <ChevronDown size={12} style={{ color: "var(--brand-purple)" }} />
             </button>
-            
+
             {showViewOptions && (
-              <div className="absolute top-full right-0 mt-1 bg-card border border-border rounded-lg shadow-lg z-50 min-w-[200px]">
-                {/* Overall */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "100%",
+                  right: 0,
+                  marginTop: 4,
+                  background: "var(--white)",
+                  border: "1px solid var(--border-purple)",
+                  borderRadius: 4,
+                  zIndex: 50,
+                  minWidth: 220,
+                  overflow: "hidden",
+                }}
+              >
                 <button
                   onClick={() => handleViewChange("overall")}
-                  className={`w-full text-left px-3 py-2 text-xs hover:bg-muted/50 ${viewBy === "overall" && !subSelection ? "bg-primary/10 text-primary" : ""}`}
+                  className="w-full text-left px-3 py-2 text-xs hover:bg-muted/50"
+                  style={{
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: 11,
+                    color: viewBy === "overall" && !subSelection ? "var(--brand-purple)" : "var(--text-primary)",
+                    background: viewBy === "overall" && !subSelection ? "rgba(76, 29, 149, 0.04)" : "transparent",
+                  }}
                 >
                   Overall
                 </button>
-                
-                {/* By Site with sub-options */}
                 <Collapsible>
-                  <CollapsibleTrigger className="w-full flex items-center justify-between px-3 py-2 text-xs hover:bg-muted/50">
+                  <CollapsibleTrigger className="w-full flex items-center justify-between px-3 py-2 text-xs hover:bg-muted/50" style={{ fontFamily: "Inter, sans-serif", color: "var(--text-primary)" }}>
                     <span>By Site</span>
                     <ChevronDown className="w-3 h-3" />
                   </CollapsibleTrigger>
@@ -236,17 +352,16 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
                       <button
                         key={site}
                         onClick={() => { setViewBy("by-site"); handleSubSelection(site); }}
-                        className={`w-full text-left px-6 py-1.5 text-xs hover:bg-muted/50 ${viewBy === "by-site" && subSelection === site ? "bg-primary/10 text-primary" : "text-muted-foreground"}`}
+                        className="w-full text-left px-6 py-1.5 text-xs hover:bg-muted/50"
+                        style={{ fontFamily: "Inter, sans-serif", color: viewBy === "by-site" && subSelection === site ? "var(--brand-purple)" : "var(--text-secondary)" }}
                       >
                         {site}
                       </button>
                     ))}
                   </CollapsibleContent>
                 </Collapsible>
-                
-                {/* By Department with sub-options */}
                 <Collapsible>
-                  <CollapsibleTrigger className="w-full flex items-center justify-between px-3 py-2 text-xs hover:bg-muted/50">
+                  <CollapsibleTrigger className="w-full flex items-center justify-between px-3 py-2 text-xs hover:bg-muted/50" style={{ fontFamily: "Inter, sans-serif", color: "var(--text-primary)" }}>
                     <span>By Department</span>
                     <ChevronDown className="w-3 h-3" />
                   </CollapsibleTrigger>
@@ -255,17 +370,16 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
                       <button
                         key={dept}
                         onClick={() => { setViewBy("by-department"); handleSubSelection(dept); }}
-                        className={`w-full text-left px-6 py-1.5 text-xs hover:bg-muted/50 ${viewBy === "by-department" && subSelection === dept ? "bg-primary/10 text-primary" : "text-muted-foreground"}`}
+                        className="w-full text-left px-6 py-1.5 text-xs hover:bg-muted/50"
+                        style={{ fontFamily: "Inter, sans-serif", color: viewBy === "by-department" && subSelection === dept ? "var(--brand-purple)" : "var(--text-secondary)" }}
                       >
                         {dept}
                       </button>
                     ))}
                   </CollapsibleContent>
                 </Collapsible>
-                
-                {/* By Agency with sub-options */}
                 <Collapsible>
-                  <CollapsibleTrigger className="w-full flex items-center justify-between px-3 py-2 text-xs hover:bg-muted/50">
+                  <CollapsibleTrigger className="w-full flex items-center justify-between px-3 py-2 text-xs hover:bg-muted/50" style={{ fontFamily: "Inter, sans-serif", color: "var(--text-primary)" }}>
                     <span>By Agency</span>
                     <ChevronDown className="w-3 h-3" />
                   </CollapsibleTrigger>
@@ -274,219 +388,393 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
                       <button
                         key={agency}
                         onClick={() => { setViewBy("by-agency"); handleSubSelection(agency); }}
-                        className={`w-full text-left px-6 py-1.5 text-xs hover:bg-muted/50 ${viewBy === "by-agency" && subSelection === agency ? "bg-primary/10 text-primary" : "text-muted-foreground"}`}
+                        className="w-full text-left px-6 py-1.5 text-xs hover:bg-muted/50"
+                        style={{ fontFamily: "Inter, sans-serif", color: viewBy === "by-agency" && subSelection === agency ? "var(--brand-purple)" : "var(--text-secondary)" }}
                       >
                         {agency}
                       </button>
                     ))}
                   </CollapsibleContent>
                 </Collapsible>
-                
-                {/* Overtime */}
                 <button
                   onClick={() => handleViewChange("overtime")}
-                  className={`w-full text-left px-3 py-2 text-xs hover:bg-muted/50 border-t border-border ${viewBy === "overtime" ? "bg-primary/10 text-primary" : ""}`}
+                  className="w-full text-left px-3 py-2 text-xs hover:bg-muted/50"
+                  style={{
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontSize: 11,
+                    borderTop: "1px solid var(--border-purple)",
+                    color: viewBy === "overtime" ? "var(--brand-purple)" : "var(--text-primary)",
+                    background: viewBy === "overtime" ? "rgba(76, 29, 149, 0.04)" : "transparent",
+                  }}
                 >
                   Overtime Analysis
                 </button>
               </div>
             )}
           </div>
-          
-          <div className="flex items-center bg-card border border-border rounded">
-            {(["week", "month", "year"] as const).map((range) => (
-              <button
-                key={range}
-                onClick={() => setTimeRange(range)}
-                className={`px-3 py-1.5 text-xs capitalize ${
-                  timeRange === range ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {range}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
 
-      {/* Summary Cards */}
-      <div className="grid grid-cols-4 gap-3">
-        <div className="bg-card border border-border rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <DollarSign className="w-5 h-5 text-primary" />
-            <span className="text-sm text-muted-foreground">Total Spend</span>
-          </div>
-          <p className="text-2xl font-bold">${totalSpend.toLocaleString()}</p>
-          <p className="text-xs text-green-500 mt-1">This {timeRange}</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Clock className="w-5 h-5 text-muted-foreground" />
-            <span className="text-sm text-muted-foreground">Total Hours</span>
-          </div>
-          <p className="text-2xl font-bold">{totalHours.toLocaleString()}</p>
-          <p className="text-xs text-muted-foreground mt-1">Across all agencies</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <TrendingUp className="w-5 h-5 text-muted-foreground" />
-            <span className="text-sm text-muted-foreground">Avg Rate</span>
-          </div>
-          <p className="text-2xl font-bold">${avgRate.toFixed(2)}/hr</p>
-          <p className="text-xs text-amber-500 mt-1">Blended rate</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Users className="w-5 h-5 text-muted-foreground" />
-            <span className="text-sm text-muted-foreground">Overtime Hours</span>
-          </div>
-          <p className="text-2xl font-bold">{totalOvertimeHours.toLocaleString()}</p>
-          <p className="text-xs text-amber-500 mt-1">{((totalOvertimeHours / totalHours) * 100).toFixed(1)}% of total</p>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {/* Spend by Site */}
-        <div className="bg-card border border-border rounded-lg">
-          <div className="p-3 border-b border-border flex items-center justify-between">
-            <h2 className="text-sm font-semibold">By Site</h2>
-            <BarChart3 className="w-4 h-4 text-muted-foreground" />
-          </div>
-          <div className="p-4 space-y-4">
-            {overallSpend
-              .filter(item => !subSelection || viewBy !== "by-site" || item.category === subSelection)
-              .map((item) => {
-              const data = getData(item);
-              const highlighted = viewBy === "by-site" && subSelection === item.category;
+          {/* Week/Month/Year segmented control */}
+          <div
+            style={{
+              display: "inline-flex",
+              background: "var(--white)",
+              border: "1px solid var(--border-purple)",
+              borderRadius: 4,
+              padding: 3,
+              gap: 3,
+            }}
+          >
+            {(["week", "month", "year"] as const).map((range) => {
+              const active = timeRange === range;
               return (
-                <div key={item.category} className={`${highlighted ? "ring-2 ring-primary rounded-lg p-2 -mx-2" : ""}`}>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium">{item.category}</span>
-                    <div className="text-right">
-                      <span className="text-sm font-bold">${data.amount.toLocaleString()}</span>
-                      <span className={`ml-2 text-xs ${data.change >= 0 ? "text-green-500" : "text-destructive"}`}>
-                        {data.change >= 0 ? "+" : ""}
-                        {data.change}%
-                      </span>
-                    </div>
-                  </div>
-                  <div className="h-2 bg-muted rounded-full overflow-hidden">
-                    <div className="h-full bg-primary rounded-full" style={{ width: `${(data.amount / totalSpend) * 100}%` }} />
-                  </div>
-                  <div className="flex items-center gap-4 mt-1 text-xs text-muted-foreground">
-                    <span>{data.hours.toLocaleString()} hours</span>
-                    <span>{data.workers} workers</span>
-                    <span className="text-amber-500">{data.overtimeHours} OT hrs ({((data.overtimeHours / data.hours) * 100).toFixed(1)}%)</span>
-                  </div>
-                </div>
+                <button
+                  key={range}
+                  onClick={() => setTimeRange(range)}
+                  style={{
+                    height: 30,
+                    padding: "0 14px",
+                    borderRadius: 3,
+                    fontFamily: "'IBM Plex Mono', monospace",
+                    fontWeight: 500,
+                    fontSize: 11,
+                    letterSpacing: "0.06em",
+                    textTransform: "uppercase",
+                    cursor: "pointer",
+                    border: "none",
+                    transition: "background 120ms ease",
+                    background: active ? "var(--deep-purple)" : "transparent",
+                    color: active ? "var(--cream)" : "var(--text-secondary)",
+                  }}
+                  onMouseEnter={(e) => { if (!active) e.currentTarget.style.background = "var(--cream-tint)"; }}
+                  onMouseLeave={(e) => { if (!active) e.currentTarget.style.background = "transparent"; }}
+                >
+                  {range}
+                </button>
               );
             })}
           </div>
         </div>
+      </div>
 
-        {/* Spend by Agency - Clickable with Drill-down */}
-        <div className="bg-card border border-border rounded-lg">
-          <div className="p-3 border-b border-border flex items-center justify-between">
-            <h2 className="text-sm font-semibold">By Agency</h2>
-            <Building2 className="w-4 h-4 text-muted-foreground" />
+      {/* PART 2 — Top KPI Strip */}
+      <div
+        style={{
+          display: "flex",
+          background: "var(--white)",
+          border: "1px solid var(--border-purple)",
+          borderRadius: 6,
+          padding: "20px 0",
+          marginBottom: 22,
+        }}
+      >
+        {[
+          { Icon: DollarSign, label: "TOTAL SPEND", value: `$${totalSpend.toLocaleString()}`, sub: `This ${timeRange}`, valueColor: "var(--text-primary)", subColor: "var(--text-secondary)" },
+          { Icon: Clock, label: "TOTAL HOURS", value: totalHours.toLocaleString(), sub: "Across all agencies", valueColor: "var(--text-primary)", subColor: "var(--text-secondary)" },
+          { Icon: TrendingUp, label: "AVG RATE", value: `$${avgRate.toFixed(2)}/hr`, sub: "Blended rate", valueColor: "var(--text-primary)", subColor: "var(--text-secondary)" },
+          { Icon: AlertTriangle, label: "OVERTIME HOURS", value: totalOvertimeHours.toLocaleString(), sub: `${overtimePct.toFixed(1)}% of total`, valueColor: "var(--text-primary)", subColor: otOver(overtimePct) ? "var(--status-amber)" : "var(--text-secondary)" },
+        ].map((c, i, arr) => (
+          <div
+            key={c.label}
+            style={{
+              flex: 1,
+              padding: "0 24px",
+              borderRight: i === arr.length - 1 ? "none" : "1px solid var(--border-purple)",
+              display: "flex",
+              flexDirection: "column",
+              gap: 6,
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <c.Icon size={12} style={{ color: "var(--brand-purple)" }} />
+              <span style={kpiLabel}>{c.label}</span>
+            </div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 26, lineHeight: 1, color: c.valueColor }}>
+              {c.value}
+            </div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, letterSpacing: "0.02em", color: c.subColor, marginTop: 2 }}>
+              {c.sub}
+            </div>
           </div>
-          <div className="divide-y divide-border">
-            {agencySpend
-              .filter(agency => !subSelection || viewBy !== "by-agency" || agency.name === subSelection)
-              .map((agency, idx) => {
+        ))}
+      </div>
+
+      {/* PART 3 — Two-column breakdown */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 22 }}>
+        {/* By Site */}
+        <div style={{ background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden" }}>
+          <div
+            style={{
+              padding: "14px 18px",
+              borderBottom: "1px solid var(--border-purple)",
+              background: "rgba(76, 29, 149, 0.02)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <MapPin size={12} style={{ color: "var(--brand-purple)" }} />
+              <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--text-primary)" }}>
+                BY SITE
+              </span>
+            </div>
+            <div style={{ width: 24, height: 24, borderRadius: 3, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <BarChart3 size={12} style={{ color: "var(--text-secondary)" }} />
+            </div>
+          </div>
+          {overallSpend
+            .filter(item => !subSelection || viewBy !== "by-site" || item.category === subSelection)
+            .map((item, idx, arr) => {
+              const data = getData(item);
+              const sharePct = totalSiteSpend > 0 ? (data.amount / totalSiteSpend) * 100 : 0;
+              const otPct = data.hours > 0 ? (data.overtimeHours / data.hours) * 100 : 0;
+              return (
+                <div
+                  key={item.category}
+                  style={{
+                    padding: "14px 18px",
+                    borderBottom: idx === arr.length - 1 ? "none" : "1px solid var(--border-purple)",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 8,
+                  }}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                    <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>
+                      {item.category}
+                    </span>
+                    <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
+                      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 14, color: "var(--text-primary)" }}>
+                        ${data.amount.toLocaleString()}
+                      </span>
+                      <ChangePill change={data.change} />
+                    </div>
+                  </div>
+                  <ProgressBar pct={sharePct} />
+                  <div style={{ display: "flex", gap: 18, alignItems: "center", flexWrap: "wrap" }}>
+                    <span style={{ display: "inline-flex", gap: 4, alignItems: "baseline" }}>
+                      <span style={statLabel}>HOURS</span>
+                      <span style={statValue}>{data.hours.toLocaleString()}</span>
+                    </span>
+                    <span style={{ display: "inline-flex", gap: 4, alignItems: "baseline" }}>
+                      <span style={statLabel}>WORKERS</span>
+                      <span style={statValue}>{data.workers}</span>
+                    </span>
+                    <span style={{ display: "inline-flex", gap: 4, alignItems: "baseline" }}>
+                      <span style={statLabel}>OT HRS</span>
+                      <span style={{ ...statValue, color: otOver(otPct) ? "var(--status-amber)" : "var(--text-primary)" }}>
+                        {data.overtimeHours} ({otPct.toFixed(1)}%)
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+
+        {/* By Agency */}
+        <div style={{ background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden" }}>
+          <div
+            style={{
+              padding: "14px 18px",
+              borderBottom: "1px solid var(--border-purple)",
+              background: "rgba(76, 29, 149, 0.02)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <Building2 size={12} style={{ color: "var(--brand-purple)" }} />
+              <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--text-primary)" }}>
+                BY AGENCY
+              </span>
+            </div>
+            <div style={{ width: 24, height: 24, borderRadius: 3, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <BarChart3 size={12} style={{ color: "var(--text-secondary)" }} />
+            </div>
+          </div>
+          {agencySpend
+            .filter(agency => !subSelection || viewBy !== "by-agency" || agency.name === subSelection)
+            .map((agency, idx, arr) => {
               const data = getAgencyData(agency);
               const isExpanded = expandedAgency === agency.name;
-              const overtimePercent = ((data.overtimeHours / data.hours) * 100).toFixed(1);
-              const totalAgencySpend = agencySpend.reduce((a, ag) => a + getAgencyData(ag).amount, 0);
-              const percentage = ((data.amount / totalAgencySpend) * 100).toFixed(0);
-              const highlighted = viewBy === "by-agency" && subSelection === agency.name;
-
+              const otPct = data.hours > 0 ? (data.overtimeHours / data.hours) * 100 : 0;
+              const sharePct = totalAgencySpend > 0 ? (data.amount / totalAgencySpend) * 100 : 0;
+              const isLast = idx === arr.length - 1;
               return (
-                <div key={agency.name} className={`${highlighted ? "ring-2 ring-primary" : ""}`}>
+                <div key={agency.name}>
                   <div
-                    className="p-4 cursor-pointer hover:bg-muted/30 transition-colors"
                     onClick={() => toggleAgencyExpand(agency.name)}
+                    style={{
+                      padding: "14px 18px",
+                      borderBottom: !isExpanded && isLast ? "none" : "1px solid var(--border-purple)",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 8,
+                      cursor: "pointer",
+                      transition: "background 120ms ease",
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = "var(--cream-tint)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
                   >
-                    <div className="flex items-center gap-4">
-                      <div
-                        className={`w-3 h-3 rounded-full ${
-                          idx === 0 ? "bg-primary" : idx === 1 ? "bg-primary/60" : "bg-primary/30"
-                        }`}
-                      />
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-medium">{agency.name}</span>
-                            {isExpanded ? (
-                              <ChevronUp className="w-4 h-4 text-muted-foreground" />
-                            ) : (
-                              <ChevronDown className="w-4 h-4 text-muted-foreground" />
-                            )}
-                          </div>
-                          <span className="text-sm font-bold">${data.amount.toLocaleString()}</span>
-                        </div>
-                        <div className="flex items-center justify-between text-xs text-muted-foreground mt-1">
-                          <span>
-                            {data.hours.toLocaleString()} hrs • {data.workers} workers
-                          </span>
-                          <div className="flex items-center gap-2">
-                            <span className="text-amber-500">{overtimePercent}% OT</span>
-                            <span>{percentage}% of spend</span>
-                          </div>
-                        </div>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                      <span style={{ display: "inline-flex", gap: 6, alignItems: "center" }}>
+                        <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>
+                          {agency.name}
+                        </span>
+                        {idx === 0 && <Star size={11} style={{ color: "#D97706", fill: "#D97706" }} />}
+                      </span>
+                      <div style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
+                        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 14, color: "var(--text-primary)" }}>
+                          ${data.amount.toLocaleString()}
+                        </span>
+                        <ChangePill change={data.change} />
                       </div>
+                    </div>
+                    <ProgressBar pct={sharePct} />
+                    <div style={{ display: "flex", gap: 18, alignItems: "center", flexWrap: "wrap" }}>
+                      <span style={{ display: "inline-flex", gap: 4, alignItems: "baseline" }}>
+                        <span style={statLabel}>HOURS</span>
+                        <span style={statValue}>{data.hours.toLocaleString()}</span>
+                      </span>
+                      <span style={{ display: "inline-flex", gap: 4, alignItems: "baseline" }}>
+                        <span style={statLabel}>WORKERS</span>
+                        <span style={statValue}>{data.workers}</span>
+                      </span>
+                      <span style={{ display: "inline-flex", gap: 4, alignItems: "baseline" }}>
+                        <span style={statLabel}>OT HRS</span>
+                        <span style={{ ...statValue, color: otOver(otPct) ? "var(--status-amber)" : "var(--text-primary)" }}>
+                          {data.overtimeHours} ({otPct.toFixed(1)}%)
+                        </span>
+                      </span>
                     </div>
                   </div>
 
-                  {/* Expanded: Site & Department breakdown */}
                   {isExpanded && (
-                    <div className="px-4 pb-4 bg-muted/20">
-                      <div className="ml-7 space-y-3">
-                        {agency.sites.map((site) => {
-                          const siteOvertimeHours = site.departments.reduce((a, d) => a + d.overtimeHours, 0);
-                          const siteOvertimePercent = ((siteOvertimeHours / site.hours) * 100).toFixed(1);
-                          return (
-                            <div key={site.name} className="bg-card rounded-lg p-3 border border-border">
-                              <div className="flex items-center justify-between mb-2">
-                                <div className="flex items-center gap-2">
-                                  <MapPin className="w-3.5 h-3.5 text-muted-foreground" />
-                                  <span className="text-sm font-medium">{site.name}</span>
-                                </div>
-                                <div className="text-right">
-                                  <span className="text-sm font-bold">${site.amount.toLocaleString()}</span>
-                                  <span className="ml-2 text-xs text-amber-500">{siteOvertimePercent}% OT</span>
-                                </div>
-                              </div>
-                              <div className="space-y-1.5">
-                                {site.departments.map((dept) => {
-                                  const deptOtPercent = ((dept.overtimeHours / dept.hours) * 100).toFixed(1);
-                                  return (
-                                    <div key={dept.name} className="flex items-center justify-between text-xs">
-                                      <div className="flex items-center gap-1.5">
-                                        <Briefcase className="w-3 h-3 text-muted-foreground" />
-                                        <span>{dept.name}</span>
-                                      </div>
-                                      <div className="flex items-center gap-3">
-                                        <span className="text-muted-foreground">{dept.hours} hrs</span>
-                                        <span className="text-amber-500">{deptOtPercent}% OT</span>
-                                        <span className="font-medium">${dept.amount.toLocaleString()}</span>
-                                      </div>
-                                    </div>
-                                  );
-                                })}
-                              </div>
+                    <div style={{ padding: "14px 18px", background: "var(--cream-tint)", borderTop: "1px dashed var(--border-purple)", borderBottom: isLast ? "none" : "1px solid var(--border-purple)", display: "flex", flexDirection: "column", gap: 10 }}>
+                      {agency.sites.map((site) => {
+                        const siteOtHrs = site.departments.reduce((a, d) => a + d.overtimeHours, 0);
+                        const siteOtPct = site.hours > 0 ? (siteOtHrs / site.hours) * 100 : 0;
+                        return (
+                          <div key={site.name} style={{ background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 4, padding: 12 }}>
+                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                              <span style={{ display: "inline-flex", gap: 6, alignItems: "center" }}>
+                                <MapPin size={12} style={{ color: "var(--text-secondary)" }} />
+                                <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>{site.name}</span>
+                              </span>
+                              <span style={{ display: "inline-flex", gap: 8, alignItems: "baseline" }}>
+                                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 12, color: "var(--text-primary)" }}>
+                                  ${site.amount.toLocaleString()}
+                                </span>
+                                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: otOver(siteOtPct) ? "var(--status-amber)" : "var(--text-secondary)" }}>
+                                  {siteOtPct.toFixed(1)}% OT
+                                </span>
+                              </span>
                             </div>
-                          );
-                        })}
-                      </div>
+                            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                              {site.departments.map((dept) => {
+                                const deptOtPct = dept.hours > 0 ? (dept.overtimeHours / dept.hours) * 100 : 0;
+                                return (
+                                  <div key={dept.name} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                                    <span style={{ display: "inline-flex", gap: 4, alignItems: "center", fontFamily: "Inter, sans-serif", fontSize: 11, color: "var(--text-secondary)" }}>
+                                      <Briefcase size={10} /> {dept.name}
+                                    </span>
+                                    <span style={{ display: "inline-flex", gap: 10, alignItems: "baseline" }}>
+                                      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: "var(--text-secondary)" }}>{dept.hours} hrs</span>
+                                      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: otOver(deptOtPct) ? "var(--status-amber)" : "var(--text-secondary)" }}>
+                                        {deptOtPct.toFixed(1)}% OT
+                                      </span>
+                                      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 11, color: "var(--text-primary)" }}>
+                                        ${dept.amount.toLocaleString()}
+                                      </span>
+                                    </span>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
               );
             })}
+        </div>
+      </div>
+
+      {/* PART 4 — By Department */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+        <div>
+          <div style={{ ...eyebrow, marginBottom: 6 }}>— BY DEPARTMENT</div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, color: "var(--text-secondary)" }}>
+            Spend, hours and overtime by cost centre
           </div>
         </div>
       </div>
+
+      <div style={{ background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden", marginBottom: 22 }}>
+        <div
+          style={{
+            padding: "13px 20px",
+            borderBottom: "1px solid var(--border-purple)",
+            background: "rgba(76, 29, 149, 0.02)",
+            display: "grid",
+            gridTemplateColumns: "1.6fr 110px 110px 110px 110px 130px",
+            gap: 14,
+            alignItems: "center",
+          }}
+        >
+          <span style={{ ...colHeader, textAlign: "left" }}>DEPARTMENT</span>
+          <span style={{ ...colHeader, textAlign: "right" }}>SPEND</span>
+          <span style={{ ...colHeader, textAlign: "right" }}>HOURS</span>
+          <span style={{ ...colHeader, textAlign: "right" }}>WORKERS</span>
+          <span style={{ ...colHeader, textAlign: "right" }}>OT HRS</span>
+          <span style={{ ...colHeader, textAlign: "right" }}>SHARE</span>
+        </div>
+        {departmentSpend
+          .filter(dept => !subSelection || viewBy !== "by-department" || dept.name === subSelection)
+          .map((dept, idx, arr) => {
+            const data = getData(dept);
+            const otPct = data.hours > 0 ? (data.overtimeHours / data.hours) * 100 : 0;
+            const sharePct = totalDeptSpend > 0 ? (data.amount / totalDeptSpend) * 100 : 0;
+            return (
+              <div
+                key={dept.name}
+                style={{
+                  padding: "14px 20px",
+                  borderBottom: idx === arr.length - 1 ? "none" : "1px solid var(--border-purple)",
+                  display: "grid",
+                  gridTemplateColumns: "1.6fr 110px 110px 110px 110px 130px",
+                  gap: 14,
+                  alignItems: "center",
+                }}
+              >
+                <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>{dept.name}</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 13, color: "var(--text-primary)", textAlign: "right" }}>
+                  ${data.amount.toLocaleString()}
+                </span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)", textAlign: "right" }}>
+                  {data.hours.toLocaleString()}
+                </span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)", textAlign: "right" }}>
+                  {data.workers}
+                </span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: otOver(otPct) ? "var(--status-amber)" : "var(--text-primary)", textAlign: "right" }}>
+                  {data.overtimeHours.toLocaleString()} ({otPct.toFixed(1)}%)
+                </span>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 3 }}>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 11, color: "var(--text-primary)" }}>
+                    {sharePct.toFixed(0)}%
+                  </span>
+                  <ProgressBar pct={sharePct} w={80} />
+                </div>
+              </div>
+            );
+          })}
+      </div>
+    </div>
 
       {/* Spend by Department */}
       <div className="bg-card border border-border rounded-lg">
