@@ -2185,9 +2185,9 @@ const Home = () => {
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
                   color: "rgba(255, 255, 255, 0.6)",
-                  paddingBottom: 12,
+                  paddingBottom: 8,
                   borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
-                  marginBottom: 18,
+                  marginBottom: 12,
                 }}
               >
                 ▲ WHAT GOES UP
