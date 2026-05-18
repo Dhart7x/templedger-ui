@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plus, Check, X, MessageSquare, Clock, Users, Building2, Sparkles, Send, Loader2, DollarSign, Star, Pencil } from "lucide-react";
+import { Plus, Check, X, MessageSquare, Clock, Users, Building2, Sparkles, Send, Loader2, DollarSign, Star, Pencil, MapPin, Calendar, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDemoContext } from "../DemoContext";
 import { toast } from "sonner";
@@ -188,16 +188,34 @@ const ClientBookings = () => {
     setOverrideCounts({});
   };
 
+  const statusPill = (label: string, colorVar: string, rgba: string) => (
+    <span
+      style={{
+        padding: "2px 8px",
+        borderRadius: 3,
+        fontFamily: "'JetBrains Mono', monospace",
+        fontWeight: 500,
+        fontSize: 10,
+        letterSpacing: "0.06em",
+        textTransform: "uppercase",
+        background: rgba,
+        color: `var(${colorVar})`,
+      }}
+    >
+      {label}
+    </span>
+  );
+
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "pending":
-        return <span className="text-xs px-2 py-0.5 rounded bg-amber-500/20 text-amber-500">Pending</span>;
+        return statusPill("Pending", "--status-amber", "rgba(217, 119, 6, 0.1)");
       case "accepted":
-        return <span className="text-xs px-2 py-0.5 rounded bg-green-500/20 text-green-500">Accepted</span>;
+        return statusPill("Accepted", "--status-green", "rgba(22, 163, 74, 0.1)");
       case "rejected":
-        return <span className="text-xs px-2 py-0.5 rounded bg-destructive/20 text-destructive">Rejected</span>;
+        return statusPill("Rejected", "--status-red", "rgba(185, 28, 28, 0.1)");
       case "info-requested":
-        return <span className="text-xs px-2 py-0.5 rounded bg-primary/20 text-primary">Info Requested</span>;
+        return statusPill("Info Requested", "--brand-purple", "rgba(76, 29, 149, 0.1)");
       default:
         return null;
     }
@@ -205,303 +223,569 @@ const ClientBookings = () => {
 
   const priorityLabel = allocationPriority === "cost" ? "cheapest rate" : allocationPriority === "speed" ? "fastest availability" : "top performance";
 
+  const eyebrowStyle: React.CSSProperties = {
+    fontFamily: "'IBM Plex Mono', monospace",
+    fontWeight: 500,
+    fontSize: 10,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    color: "var(--brand-purple)",
+  };
+  const metaText: React.CSSProperties = {
+    fontFamily: "'JetBrains Mono', monospace",
+    fontWeight: 400,
+    fontSize: 11,
+    color: "var(--text-secondary)",
+  };
+  const monoUpper: React.CSSProperties = {
+    fontFamily: "'IBM Plex Mono', monospace",
+    fontWeight: 500,
+    fontSize: 11,
+    letterSpacing: "0.06em",
+    textTransform: "uppercase",
+  };
+
   return (
-    <div className="p-4 md:p-6 space-y-6">
+    <div style={{ padding: "28px 36px" }}>
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 24 }}>
         <div>
-          <h1 className="text-lg md:text-xl font-bold text-foreground">Bookings</h1>
-          <p className="text-xs text-muted-foreground">Request temporary workers from agencies</p>
+          <div style={{ ...eyebrowStyle, marginBottom: 8 }}>— BOOKINGS</div>
+          <h1 style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 26, color: "var(--text-primary)", marginBottom: 4, lineHeight: 1.2 }}>Bookings</h1>
+          <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, color: "var(--text-secondary)" }}>Request temporary workers from agencies</p>
         </div>
-        <Button onClick={() => setShowNewBooking(true)} className="gap-2">
-          <Plus className="w-4 h-4" />
+        <button
+          onClick={() => setShowNewBooking(true)}
+          style={{
+            height: 36,
+            padding: "0 16px",
+            background: "var(--deep-purple)",
+            color: "var(--cream)",
+            ...monoUpper,
+            borderRadius: 4,
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 6,
+            border: "none",
+            cursor: "pointer",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = "#3B1577")}
+          onMouseLeave={(e) => (e.currentTarget.style.background = "var(--deep-purple)")}
+        >
+          <Plus size={12} />
           New Booking
-        </Button>
+        </button>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex items-center gap-2">
+      <div style={{ display: "inline-flex", gap: 4, marginBottom: 20 }}>
         {[
           { key: "all", label: "All" },
           { key: "pending", label: "Pending", count: pendingCount },
           { key: "accepted", label: "Accepted" },
           { key: "rejected", label: "Rejected" },
-        ].map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setFilter(tab.key as typeof filter)}
-            className={`px-4 py-2 text-sm rounded-lg transition-colors ${
-              filter === tab.key
-                ? "bg-primary text-primary-foreground"
-                : "bg-card border border-border text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            {tab.label}
-            {tab.count !== undefined && tab.count > 0 && (
-              <span className="ml-2 bg-amber-500/20 text-amber-500 px-1.5 py-0.5 rounded text-xs">{tab.count}</span>
-            )}
-          </button>
-        ))}
+        ].map((tab) => {
+          const active = filter === tab.key;
+          return (
+            <button
+              key={tab.key}
+              onClick={() => setFilter(tab.key as typeof filter)}
+              style={{
+                height: 30,
+                padding: "0 14px",
+                borderRadius: 4,
+                ...monoUpper,
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                transition: "background 120ms ease",
+                background: active ? "var(--deep-purple)" : "var(--white, #fff)",
+                color: active ? "var(--cream)" : "var(--text-secondary)",
+                border: active ? "1px solid var(--deep-purple)" : "1px solid var(--border-purple)",
+              }}
+              onMouseEnter={(e) => { if (!active) e.currentTarget.style.background = "var(--cream-tint)"; }}
+              onMouseLeave={(e) => { if (!active) e.currentTarget.style.background = "#fff"; }}
+            >
+              {tab.label}
+              {tab.count !== undefined && tab.count > 0 && (
+                <span style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontWeight: 500,
+                  fontSize: 10,
+                  color: active ? "rgba(250, 250, 248, 0.7)" : "var(--text-muted)",
+                }}>· {tab.count}</span>
+              )}
+            </button>
+          );
+        })}
       </div>
 
       {/* Bookings List */}
-      <div className="space-y-3">
-        {filteredBookings.map((booking) => (
+      <div style={{ background: "#fff", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden" }}>
+        {filteredBookings.map((booking, idx) => (
           <div
             key={booking.id}
-            className={`bg-card border rounded-lg p-4 ${
-              booking.status === "pending" ? "border-amber-500/30" :
-              booking.status === "accepted" ? "border-green-500/30" :
-              booking.status === "info-requested" ? "border-primary/30" :
-              "border-destructive/30"
-            }`}
+            style={{
+              padding: "20px 24px",
+              borderBottom: idx === filteredBookings.length - 1 ? "none" : "1px solid var(--border-purple)",
+              display: "flex",
+              flexDirection: "column",
+              gap: 10,
+            }}
           >
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-sm font-semibold">{booking.role}</span>
-                  {getStatusBadge(booking.status)}
-                </div>
-                <div className="flex items-center gap-4 text-xs text-muted-foreground mb-2">
-                  <span className="flex items-center gap-1"><Users className="w-3 h-3" />{booking.quantity} worker{booking.quantity > 1 ? "s" : ""}</span>
-                  <span>{booking.site} • {booking.location}</span>
-                  <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{booking.shift}</span>
-                  <span>{booking.date}</span>
-                </div>
-                {booking.status === "pending" && booking.suggestedAgency && (
-                  <div className="flex items-center gap-2 mt-3">
-                    <div className="flex items-center gap-1.5 bg-primary/10 text-primary px-2 py-1 rounded text-xs">
-                      <Sparkles className="w-3 h-3" />Suggested: {booking.suggestedAgency}
-                    </div>
-                    <span className="text-xs text-muted-foreground">Based on availability and performance</span>
-                  </div>
-                )}
-                {booking.agency && booking.status === "accepted" && (
-                  <div className="flex items-center gap-1.5 mt-2 text-xs">
-                    <Building2 className="w-3 h-3 text-muted-foreground" />
-                    <span className="text-muted-foreground">Assigned to:</span>
-                    <span className="font-medium">{booking.agency}</span>
-                  </div>
-                )}
-                {booking.agencyNotes && (
-                  <div className="mt-3 p-2 bg-muted/50 rounded-lg border border-border">
-                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
-                      <MessageSquare className="w-3 h-3" />Agency Note
-                    </div>
-                    <p className="text-sm">{booking.agencyNotes}</p>
-                  </div>
-                )}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 15, color: "var(--text-primary)" }}>{booking.role}</span>
+                {getStatusBadge(booking.status)}
               </div>
               {booking.status === "info-requested" && (
-                <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm" className="gap-1 text-xs h-8"><Send className="w-3 h-3" />Reply</Button>
-                </div>
+                <Button variant="outline" size="sm" className="gap-1 text-xs h-8"><Send className="w-3 h-3" />Reply</Button>
               )}
             </div>
+
+            <div style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap" }}>
+              <span style={{ ...metaText, display: "flex", alignItems: "center", gap: 6 }}>
+                <Users size={12} color="var(--text-muted)" />
+                {booking.quantity} worker{booking.quantity > 1 ? "s" : ""}
+              </span>
+              <span style={{ ...metaText, display: "flex", alignItems: "center", gap: 6 }}>
+                <MapPin size={12} color="var(--text-muted)" />
+                {booking.site} · {booking.location}
+              </span>
+              <span style={{ ...metaText, display: "flex", alignItems: "center", gap: 6 }}>
+                <Clock size={12} color="var(--text-muted)" />
+                {booking.shift}
+              </span>
+              <span style={{ ...metaText, display: "flex", alignItems: "center", gap: 6 }}>
+                <Calendar size={12} color="var(--text-muted)" />
+                {booking.date}
+              </span>
+            </div>
+
+            {booking.status === "pending" && booking.suggestedAgency && (
+              <div style={{
+                marginTop: 4,
+                padding: "10px 12px",
+                background: "rgba(76, 29, 149, 0.05)",
+                borderRadius: 4,
+                display: "flex",
+                gap: 10,
+                alignItems: "center",
+                flexWrap: "wrap",
+              }}>
+                <Sparkles size={12} color="var(--brand-purple)" />
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 11, color: "var(--text-secondary)" }}>
+                  Suggested:{" "}
+                  <span style={{ color: "var(--brand-purple)" }}>{booking.suggestedAgency}</span>
+                </span>
+                <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "var(--text-secondary)" }}>
+                  · Based on availability and performance
+                </span>
+              </div>
+            )}
+
+            {booking.agency && booking.status === "accepted" && (
+              <div style={{ marginTop: 4, display: "flex", gap: 8, alignItems: "center" }}>
+                <Building2 size={12} color="var(--text-muted)" />
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>Assigned to:</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 11, color: "var(--brand-purple)" }}>{booking.agency}</span>
+              </div>
+            )}
+
+            {booking.agencyNotes && (
+              <div style={{ marginTop: 4, padding: "10px 12px", background: "var(--cream-tint)", borderRadius: 4 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: "var(--text-secondary)" }}>
+                  <MessageSquare size={12} />Agency Note
+                </div>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "var(--text-primary)" }}>{booking.agencyNotes}</p>
+              </div>
+            )}
           </div>
         ))}
         {filteredBookings.length === 0 && (
-          <div className="text-center py-12 text-muted-foreground"><p className="text-sm">No bookings found</p></div>
+          <div style={{ padding: "48px 24px", textAlign: "center", fontFamily: "Inter, sans-serif", fontSize: 13, color: "var(--text-secondary)" }}>No bookings found</div>
         )}
       </div>
 
       {/* New Booking Modal */}
       {showNewBooking && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-card border border-border rounded-xl p-6 max-w-lg w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <h2 className="text-lg font-semibold mb-4">New Booking</h2>
-            <div className="space-y-4">
-              <div>
-                <label className="text-sm text-muted-foreground">Role</label>
-                <select value={newBooking.role} onChange={(e) => setNewBooking({ ...newBooking, role: e.target.value })} className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm" disabled={isAllocating}>
-                  <option>Inbound Warehouse</option>
-                  <option>MHE Operations</option>
-                </select>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="text-sm text-muted-foreground">Quantity</label>
-                  <input type="number" value={newBooking.quantity} onChange={(e) => setNewBooking({ ...newBooking, quantity: Math.max(1, parseInt(e.target.value) || 1) })} min="1" className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm" disabled={isAllocating} />
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">Shift</label>
-                  <select value={newBooking.shift} onChange={(e) => setNewBooking({ ...newBooking, shift: e.target.value })} className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm" disabled={isAllocating}>
-                    <option>06:00–14:00</option>
-                    <option>14:00–22:00</option>
-                    <option>22:00–06:00</option>
-                  </select>
-                </div>
-              </div>
-              <div>
-                <label className="text-sm text-muted-foreground">Location</label>
-                <select value={newBooking.location} onChange={(e) => setNewBooking({ ...newBooking, location: e.target.value })} className="w-full mt-1 bg-background border border-border rounded-lg px-3 py-2 text-sm" disabled={isAllocating}>
-                  <option>Baltimore, MD - Zone A</option>
-                  <option>Baltimore, MD - Zone B</option>
-                  <option>Las Vegas, NV - Zone A</option>
-                  <option>Dallas Fort-Worth, TX - Zone A</option>
-                </select>
-              </div>
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(26, 10, 61, 0.4)",
+            backdropFilter: "blur(4px)",
+            WebkitBackdropFilter: "blur(4px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 50,
+            padding: 16,
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              maxWidth: 480,
+              background: "#fff",
+              borderRadius: 8,
+              border: "1px solid var(--border-purple)",
+              boxShadow: "0 8px 24px rgba(26, 10, 61, 0.12)",
+              padding: 28,
+              position: "relative",
+              maxHeight: "90vh",
+              overflowY: "auto",
+            }}
+          >
+            <button
+              onClick={resetModal}
+              disabled={isAllocating}
+              style={{
+                position: "absolute",
+                top: 14,
+                right: 14,
+                width: 28,
+                height: 28,
+                background: "transparent",
+                border: "none",
+                borderRadius: 4,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "var(--cream-tint)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+              aria-label="Close"
+            >
+              <X size={14} color="var(--text-muted)" />
+            </button>
 
-              {/* Intelligent Allocation */}
-              <div className="pt-2 space-y-3">
-                {!isAllocating && !allocationResult && (
-                  <>
+            <div style={{ marginBottom: 22 }}>
+              <div style={{ ...eyebrowStyle, marginBottom: 6 }}>— NEW BOOKING</div>
+              <h2 style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 20, color: "var(--text-primary)" }}>New Booking</h2>
+            </div>
+
+            {(() => {
+              const fieldLabel: React.CSSProperties = {
+                fontFamily: "'IBM Plex Mono', monospace",
+                fontWeight: 500,
+                fontSize: 10,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "var(--text-secondary)",
+                marginBottom: 6,
+                display: "block",
+              };
+              const inputStyle: React.CSSProperties = {
+                height: 38,
+                padding: "0 12px",
+                background: "var(--cream)",
+                border: "1px solid var(--border-purple)",
+                borderRadius: 4,
+                fontFamily: "Inter, sans-serif",
+                fontWeight: 400,
+                fontSize: 13,
+                color: "var(--text-primary)",
+                width: "100%",
+                outline: "none",
+              };
+              const selectStyle: React.CSSProperties = {
+                ...inputStyle,
+                appearance: "none",
+                WebkitAppearance: "none",
+                MozAppearance: "none",
+                paddingRight: 32,
+                backgroundImage: "none",
+              };
+              return (
+                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  <div>
+                    <label style={fieldLabel}>Role</label>
+                    <div style={{ position: "relative" }}>
+                      <select value={newBooking.role} onChange={(e) => setNewBooking({ ...newBooking, role: e.target.value })} style={selectStyle} disabled={isAllocating}>
+                        <option>Inbound Warehouse</option>
+                        <option>MHE Operations</option>
+                      </select>
+                      <ChevronDown size={12} color="var(--brand-purple)" style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }} />
+                    </div>
+                  </div>
+
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                     <div>
-                      <label className="text-xs text-muted-foreground uppercase tracking-wider mb-2 block">Allocation Priority</label>
-                      <div className="flex gap-1 p-1 bg-muted rounded-lg">
-                        {priorityOptions.map((opt) => {
-                          const Icon = opt.icon;
-                          const isActive = allocationPriority === opt.key;
-                          return (
-                            <button
-                              key={opt.key}
-                              onClick={() => setAllocationPriority(opt.key)}
-                              className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium transition-colors ${
-                                isActive ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
+                      <label style={fieldLabel}>Quantity</label>
+                      <input type="number" value={newBooking.quantity} onChange={(e) => setNewBooking({ ...newBooking, quantity: Math.max(1, parseInt(e.target.value) || 1) })} min="1" style={inputStyle} disabled={isAllocating} />
+                    </div>
+                    <div>
+                      <label style={fieldLabel}>Shift</label>
+                      <div style={{ position: "relative" }}>
+                        <select value={newBooking.shift} onChange={(e) => setNewBooking({ ...newBooking, shift: e.target.value })} style={selectStyle} disabled={isAllocating}>
+                          <option>06:00–14:00</option>
+                          <option>14:00–22:00</option>
+                          <option>22:00–06:00</option>
+                        </select>
+                        <ChevronDown size={12} color="var(--brand-purple)" style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }} />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label style={fieldLabel}>Location</label>
+                    <div style={{ position: "relative" }}>
+                      <select value={newBooking.location} onChange={(e) => setNewBooking({ ...newBooking, location: e.target.value })} style={selectStyle} disabled={isAllocating}>
+                        <option>Baltimore, MD - Zone A</option>
+                        <option>Baltimore, MD - Zone B</option>
+                        <option>Las Vegas, NV - Zone A</option>
+                        <option>Dallas Fort-Worth, TX - Zone A</option>
+                      </select>
+                      <ChevronDown size={12} color="var(--brand-purple)" style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }} />
+                    </div>
+                  </div>
+
+                  {/* Intelligent Allocation */}
+                  <div>
+                    {!isAllocating && !allocationResult && (
+                      <>
+                        <div style={{ marginTop: 6 }}>
+                          <label style={{ ...fieldLabel, marginBottom: 10 }}>Allocation Priority</label>
+                          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8 }}>
+                            {priorityOptions.map((opt) => {
+                              const Icon = opt.icon;
+                              const isActive = allocationPriority === opt.key;
+                              return (
+                                <button
+                                  key={opt.key}
+                                  onClick={() => setAllocationPriority(opt.key)}
+                                  style={{
+                                    padding: "14px 12px",
+                                    border: isActive ? "1px solid var(--deep-purple)" : "1px solid var(--border-purple)",
+                                    borderRadius: 4,
+                                    cursor: "pointer",
+                                    textAlign: "center",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: 4,
+                                    alignItems: "center",
+                                    transition: "background 120ms ease, border-color 120ms ease",
+                                    background: isActive ? "var(--deep-purple)" : "#fff",
+                                    color: isActive ? "var(--cream)" : "var(--text-secondary)",
+                                  }}
+                                  onMouseEnter={(e) => { if (!isActive) { e.currentTarget.style.background = "var(--cream-tint)"; e.currentTarget.style.borderColor = "var(--border-strong)"; } }}
+                                  onMouseLeave={(e) => { if (!isActive) { e.currentTarget.style.background = "#fff"; e.currentTarget.style.borderColor = "var(--border-purple)"; } }}
+                                >
+                                  <Icon size={12} color={isActive ? "var(--cream)" : "var(--brand-purple)"} />
+                                  <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 11, letterSpacing: "0.06em", textTransform: "uppercase" }}>{opt.label}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                          <div style={{
+                            marginTop: 8,
+                            padding: "10px 12px",
+                            background: "rgba(76, 29, 149, 0.04)",
+                            borderRadius: 4,
+                            fontFamily: "Inter, sans-serif",
+                            fontWeight: 400,
+                            fontSize: 12,
+                            color: "var(--text-secondary)",
+                            lineHeight: 1.5,
+                          }}>
+                            {allocationPriority === "cost" && "Prioritise agencies with the lowest avg hourly rate"}
+                            {allocationPriority === "speed" && "Prioritise agencies with lowest avg ETA to site"}
+                            {allocationPriority === "performance" && "Prioritise agencies with highest fill rate & attendance"}
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={runIntelligentAllocation}
+                          style={{
+                            marginTop: 16,
+                            height: 40,
+                            width: "100%",
+                            background: "rgba(76, 29, 149, 0.06)",
+                            border: "1px solid var(--border-purple)",
+                            color: "var(--brand-purple)",
+                            fontFamily: "'IBM Plex Mono', monospace",
+                            fontWeight: 500,
+                            fontSize: 12,
+                            letterSpacing: "0.06em",
+                            textTransform: "uppercase",
+                            borderRadius: 4,
+                            display: "inline-flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: 8,
+                            cursor: "pointer",
+                          }}
+                          onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(76, 29, 149, 0.1)")}
+                          onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(76, 29, 149, 0.06)")}
+                        >
+                          <Sparkles size={12} />
+                          Run Intelligent Allocation
+                        </button>
+                      </>
+                    )}
+
+                    {isAllocating && (
+                      <div className="w-full flex flex-col items-center justify-center gap-3 px-4 py-6 rounded-lg bg-primary/5 border border-primary/30">
+                        <Loader2 className="w-8 h-8 text-primary animate-spin" />
+                        <div className="text-center">
+                          <p className="font-medium text-primary">Optimising allocation...</p>
+                          <p className="text-xs text-muted-foreground mt-1">Scoring agencies by {priorityLabel}</p>
+                        </div>
+                      </div>
+                    )}
+
+                    {allocationResult && !isOverriding && (
+                      <div className="w-full rounded-lg bg-green-500/5 border border-green-500/30 overflow-hidden">
+                        <div className="flex items-center justify-between px-4 pt-3 pb-2">
+                          <div className="flex items-center gap-2">
+                            <Sparkles className="w-4 h-4 text-green-500" />
+                            <span className="text-sm font-medium text-green-500">
+                              {allocationResult.length > 1 ? "Split Allocation" : "Recommended Agency"}
+                            </span>
+                          </div>
+                          <button
+                            onClick={() => {
+                              const counts: Record<string, number> = {};
+                              allocationResult.forEach(e => { counts[e.agency] = e.count; });
+                              Object.values(agencyNames).forEach(name => { if (counts[name] === undefined) counts[name] = 0; });
+                              setOverrideCounts(counts);
+                              setIsOverriding(true);
+                            }}
+                            className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                          >
+                            <Pencil className="w-3 h-3" />Override
+                          </button>
+                        </div>
+
+                        <div className="px-4 pb-3 space-y-2.5">
+                          {allocationResult.map((entry, i) => (
+                            <div
+                              key={entry.agency}
+                              className={`flex items-center gap-3 p-2.5 rounded-lg ${
+                                i === 0 ? "bg-green-500/10 border border-green-500/20" : "bg-muted/50 border border-border"
                               }`}
                             >
-                              <Icon className="w-3.5 h-3.5" />{opt.label}
-                            </button>
-                          );
-                        })}
-                      </div>
-                      <p className="text-[10px] text-muted-foreground mt-1.5">
-                        {allocationPriority === "cost" && "Prioritise agencies with the lowest avg hourly rate"}
-                        {allocationPriority === "speed" && "Prioritise agencies with lowest avg ETA to site"}
-                        {allocationPriority === "performance" && "Prioritise agencies with highest fill rate & attendance"}
-                      </p>
-                    </div>
-
-                    <button
-                      onClick={runIntelligentAllocation}
-                      className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg border bg-primary/10 border-primary text-primary hover:bg-primary/20 transition-colors"
-                    >
-                      <Sparkles className="w-4 h-4" />
-                      <span className="font-medium">Run Intelligent Allocation</span>
-                    </button>
-                  </>
-                )}
-
-                {isAllocating && (
-                  <div className="w-full flex flex-col items-center justify-center gap-3 px-4 py-6 rounded-lg bg-primary/5 border border-primary/30">
-                    <Loader2 className="w-8 h-8 text-primary animate-spin" />
-                    <div className="text-center">
-                      <p className="font-medium text-primary">Optimising allocation...</p>
-                      <p className="text-xs text-muted-foreground mt-1">Scoring agencies by {priorityLabel}</p>
-                    </div>
-                  </div>
-                )}
-
-                {allocationResult && !isOverriding && (
-                  <div className="w-full rounded-lg bg-green-500/5 border border-green-500/30 overflow-hidden">
-                    <div className="flex items-center justify-between px-4 pt-3 pb-2">
-                      <div className="flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-green-500" />
-                        <span className="text-sm font-medium text-green-500">
-                          {allocationResult.length > 1 ? "Split Allocation" : "Recommended Agency"}
-                        </span>
-                      </div>
-                      <button
-                        onClick={() => {
-                          const counts: Record<string, number> = {};
-                          allocationResult.forEach(e => { counts[e.agency] = e.count; });
-                          Object.values(agencyNames).forEach(name => { if (counts[name] === undefined) counts[name] = 0; });
-                          setOverrideCounts(counts);
-                          setIsOverriding(true);
-                        }}
-                        className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        <Pencil className="w-3 h-3" />Override
-                      </button>
-                    </div>
-
-                    <div className="px-4 pb-3 space-y-2.5">
-                      {allocationResult.map((entry, i) => (
-                        <div
-                          key={entry.agency}
-                          className={`flex items-center gap-3 p-2.5 rounded-lg ${
-                            i === 0 ? "bg-green-500/10 border border-green-500/20" : "bg-muted/50 border border-border"
-                          }`}
-                        >
-                          <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                            <Building2 className="w-4 h-4 text-primary" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2">
-                              <span className="text-sm font-semibold">{entry.agency}</span>
-                              <span className="text-xs bg-foreground/10 text-foreground px-1.5 py-0.5 rounded font-medium">
-                                {entry.count} worker{entry.count > 1 ? "s" : ""}
-                              </span>
-                              {i === 0 && (
-                                <span className="text-[9px] bg-green-500/15 text-green-600 px-1.5 py-0.5 rounded">
-                                  Best {allocationPriority}
-                                </span>
-                              )}
+                              <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                                <Building2 className="w-4 h-4 text-primary" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-sm font-semibold">{entry.agency}</span>
+                                  <span className="text-xs bg-foreground/10 text-foreground px-1.5 py-0.5 rounded font-medium">
+                                    {entry.count} worker{entry.count > 1 ? "s" : ""}
+                                  </span>
+                                  {i === 0 && (
+                                    <span className="text-[9px] bg-green-500/15 text-green-600 px-1.5 py-0.5 rounded">
+                                      Best {allocationPriority}
+                                    </span>
+                                  )}
+                                </div>
+                                <p className="text-[11px] text-muted-foreground mt-0.5 truncate">{entry.detail}</p>
+                                <p className="text-[10px] text-muted-foreground/70 mt-0.5 line-clamp-2">{entry.rationale}</p>
+                              </div>
+                              {i === 0 && <Check className="w-4 h-4 text-green-500 shrink-0" />}
                             </div>
-                            <p className="text-[11px] text-muted-foreground mt-0.5 truncate">{entry.detail}</p>
-                            <p className="text-[10px] text-muted-foreground/70 mt-0.5 line-clamp-2">{entry.rationale}</p>
-                          </div>
-                          {i === 0 && <Check className="w-4 h-4 text-green-500 shrink-0" />}
+                          ))}
                         </div>
-                      ))}
-                    </div>
 
-                    <div className="px-4 pb-3">
-                      <button
-                        onClick={() => { setAllocationResult(null); setIsOverriding(false); }}
-                        className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        Re-run with different priority →
-                      </button>
-                    </div>
-                  </div>
-                )}
+                        <div className="px-4 pb-3">
+                          <button
+                            onClick={() => { setAllocationResult(null); setIsOverriding(false); }}
+                            className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                          >
+                            Re-run with different priority →
+                          </button>
+                        </div>
+                      </div>
+                    )}
 
-                {/* Override Mode */}
-                {allocationResult && isOverriding && (
-                  <div className="w-full rounded-lg border border-amber-500/30 bg-amber-500/5 overflow-hidden">
-                    <div className="px-4 pt-3 pb-2">
-                      <span className="text-sm font-medium text-amber-500">Adjust Split</span>
-                      <p className="text-[10px] text-muted-foreground mt-0.5">
-                        Total must equal {newBooking.quantity}. Currently: {Object.values(overrideCounts).reduce((s, v) => s + v, 0)}
-                      </p>
-                    </div>
-                    <div className="px-4 pb-3 space-y-2">
-                      {Object.values(agencyNames).map((name) => {
-                        const count = overrideCounts[name] ?? 0;
-                        return (
-                          <div key={name} className="flex items-center justify-between p-2 rounded-lg bg-muted/50 border border-border">
-                            <span className="text-sm font-medium">{name}</span>
-                            <div className="flex items-center gap-2">
-                              <button
-                                onClick={() => handleOverrideChange(name, -1)}
-                                className="w-6 h-6 rounded bg-background border border-border flex items-center justify-center text-xs hover:bg-muted transition-colors"
-                                disabled={count <= 0}
-                              >−</button>
-                              <span className="w-6 text-center text-sm font-semibold">{count}</span>
-                              <button
-                                onClick={() => handleOverrideChange(name, 1)}
-                                className="w-6 h-6 rounded bg-background border border-border flex items-center justify-center text-xs hover:bg-muted transition-colors"
-                                disabled={Object.values(overrideCounts).reduce((s, v) => s + v, 0) >= newBooking.quantity}
-                              >+</button>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                    <div className="flex gap-2 px-4 pb-3">
-                      <Button variant="outline" size="sm" className="flex-1 text-xs" onClick={() => setIsOverriding(false)}>Cancel</Button>
-                      <Button size="sm" className="flex-1 text-xs" onClick={applyOverride} disabled={Object.values(overrideCounts).reduce((s, v) => s + v, 0) !== newBooking.quantity}>Apply Split</Button>
-                    </div>
+                    {/* Override Mode */}
+                    {allocationResult && isOverriding && (
+                      <div className="w-full rounded-lg border border-amber-500/30 bg-amber-500/5 overflow-hidden">
+                        <div className="px-4 pt-3 pb-2">
+                          <span className="text-sm font-medium text-amber-500">Adjust Split</span>
+                          <p className="text-[10px] text-muted-foreground mt-0.5">
+                            Total must equal {newBooking.quantity}. Currently: {Object.values(overrideCounts).reduce((s, v) => s + v, 0)}
+                          </p>
+                        </div>
+                        <div className="px-4 pb-3 space-y-2">
+                          {Object.values(agencyNames).map((name) => {
+                            const count = overrideCounts[name] ?? 0;
+                            return (
+                              <div key={name} className="flex items-center justify-between p-2 rounded-lg bg-muted/50 border border-border">
+                                <span className="text-sm font-medium">{name}</span>
+                                <div className="flex items-center gap-2">
+                                  <button
+                                    onClick={() => handleOverrideChange(name, -1)}
+                                    className="w-6 h-6 rounded bg-background border border-border flex items-center justify-center text-xs hover:bg-muted transition-colors"
+                                    disabled={count <= 0}
+                                  >−</button>
+                                  <span className="w-6 text-center text-sm font-semibold">{count}</span>
+                                  <button
+                                    onClick={() => handleOverrideChange(name, 1)}
+                                    className="w-6 h-6 rounded bg-background border border-border flex items-center justify-center text-xs hover:bg-muted transition-colors"
+                                    disabled={Object.values(overrideCounts).reduce((s, v) => s + v, 0) >= newBooking.quantity}
+                                  >+</button>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div className="flex gap-2 px-4 pb-3">
+                          <Button variant="outline" size="sm" className="flex-1 text-xs" onClick={() => setIsOverriding(false)}>Cancel</Button>
+                          <Button size="sm" className="flex-1 text-xs" onClick={applyOverride} disabled={Object.values(overrideCounts).reduce((s, v) => s + v, 0) !== newBooking.quantity}>Apply Split</Button>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            </div>
-            <div className="flex justify-end gap-2 mt-6">
-              <Button variant="outline" onClick={resetModal} disabled={isAllocating}>Cancel</Button>
-              <Button onClick={handleCreateBooking} className="gap-2" disabled={isAllocating}>
-                <Send className="w-4 h-4" />Submit Booking
-              </Button>
+                </div>
+              );
+            })()}
+
+            <div style={{ marginTop: 22, display: "flex", justifyContent: "flex-end", gap: 10 }}>
+              <button
+                onClick={resetModal}
+                disabled={isAllocating}
+                style={{
+                  height: 36,
+                  padding: "0 16px",
+                  background: "#fff",
+                  border: "1px solid var(--border-purple)",
+                  color: "var(--text-secondary)",
+                  ...monoUpper,
+                  borderRadius: 4,
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "var(--cream-tint)")}
+                onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleCreateBooking}
+                disabled={isAllocating}
+                style={{
+                  height: 36,
+                  padding: "0 16px",
+                  background: "var(--deep-purple)",
+                  color: "var(--cream)",
+                  ...monoUpper,
+                  borderRadius: 4,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                  border: "none",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "#3B1577")}
+                onMouseLeave={(e) => (e.currentTarget.style.background = "var(--deep-purple)")}
+              >
+                <Send size={12} />
+                Submit Booking
+              </button>
             </div>
           </div>
         </div>
