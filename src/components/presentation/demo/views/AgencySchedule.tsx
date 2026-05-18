@@ -356,20 +356,12 @@ const AgencyViewSchedule = () => {
 // ─── Main Component ──────────────────────────────────────────────────────────
 
 const AgencySchedule = () => {
+  const [tab, setTab] = useState<"upload" | "view">("upload");
   return (
-    <div className="p-4 md:p-6 space-y-6">
-      <div>
-        <h1 className="text-lg md:text-xl font-bold text-foreground">Schedule</h1>
-        <p className="text-xs text-muted-foreground">Apex Distribution Ltd • View and manage workforce schedules</p>
-      </div>
-      <Tabs defaultValue="upload" className="space-y-5">
-        <TabsList className="grid w-full max-w-sm grid-cols-2">
-          <TabsTrigger value="upload" className="gap-2 text-xs"><Upload className="w-3.5 h-3.5" />Upload New</TabsTrigger>
-          <TabsTrigger value="view" className="gap-2 text-xs"><Eye className="w-3.5 h-3.5" />View Schedule</TabsTrigger>
-        </TabsList>
-        <TabsContent value="upload"><AgencyUploadPanel /></TabsContent>
-        <TabsContent value="view"><AgencyViewSchedule /></TabsContent>
-      </Tabs>
+    <div style={{ padding: "28px 36px" }}>
+      <SchedulePageHeader subline="Apex Distribution Ltd · View and manage workforce schedules" />
+      <ScheduleTabSwitcher value={tab} onChange={setTab} />
+      {tab === "upload" ? <AgencyUploadPanel /> : <AgencyViewSchedule />}
     </div>
   );
 };
