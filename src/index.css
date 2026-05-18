@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -176,6 +176,31 @@
 .demo-theme .font-mono-display,
 .demo-theme .font-mono-data {
   font-family: 'Inter', system-ui, sans-serif !important;
+}
+
+/* ============================================================
+   DEMO UI v2 — Visual refresh tokens
+   ============================================================ */
+.demo-theme {
+  --brand-purple:    #4C1D95;
+  --deep-purple:     #2E1065;
+  --darkest-purple:  #1A0A3D;
+  --cream:           #FAFAF8;
+  --cream-tint:      #F5F2EB;
+  --white:           #FFFFFF;
+  --border-purple:   rgba(76, 29, 149, 0.1);
+  --border-strong:   rgba(76, 29, 149, 0.18);
+  --text-primary:    #1A0A3D;
+  --text-secondary:  #52524e;
+  --text-muted:      #8a8a85;
+  --status-green:    #16A34A;
+  --status-amber:    #D97706;
+  --status-orange:   #EA580C;
+  --status-red:      #B91C1C;
+  --font-mono-headers: 'IBM Plex Mono', monospace;
+  --font-body:         'Inter', sans-serif;
+  --font-mono-labels:  'JetBrains Mono', monospace;
+  background-color: var(--cream);
 }
 
 html, body { overflow-x: hidden; }
