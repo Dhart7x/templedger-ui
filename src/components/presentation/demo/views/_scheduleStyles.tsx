@@ -425,7 +425,7 @@ export const ScheduleGridTable = ({
                       key={day}
                       onClick={() => onCellClick?.({ row, shiftKey: shift.key, day })}
                       style={{
-                        padding: "12px 14px",
+                        padding: "8px 6px",
                         borderRight: "1px solid var(--border-purple)",
                         display: "flex",
                         alignItems: "center",
@@ -434,6 +434,7 @@ export const ScheduleGridTable = ({
                         cursor: "pointer",
                         transition: "background 120ms ease",
                         background: "#fff",
+                        minHeight: 44,
                       }}
                       onMouseEnter={(e) => (e.currentTarget.style.background = "var(--cream-tint)")}
                       onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
@@ -448,15 +449,16 @@ export const ScheduleGridTable = ({
                       )}
                       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
                         <span style={{
-                          fontFamily: "'JetBrains Mono', monospace",
+                          fontFamily: "Inter, sans-serif",
                           fontWeight: 600,
-                          fontSize: 14,
+                          fontSize: 13,
+                          letterSpacing: "-0.01em",
                           color: statusColor ?? "var(--text-muted)",
                         }}>{filled}</span>
                         <span style={{
                           fontFamily: "'JetBrains Mono', monospace",
                           fontWeight: 400,
-                          fontSize: 10,
+                          fontSize: 9,
                           color: "var(--text-muted)",
                         }}>/ {req}</span>
                       </div>
@@ -467,24 +469,26 @@ export const ScheduleGridTable = ({
 
                 {/* Total */}
                 <div style={{
-                  padding: "12px 14px",
+                  padding: "8px 8px",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "flex-end",
                   justifyContent: "center",
                   gap: 1,
                   background: "rgba(76, 29, 149, 0.02)",
+                  minHeight: 44,
                 }}>
                   <span style={{
-                    fontFamily: "'JetBrains Mono', monospace",
+                    fontFamily: "Inter, sans-serif",
                     fontWeight: 600,
-                    fontSize: 14,
+                    fontSize: 13,
+                    letterSpacing: "-0.01em",
                     color: "var(--text-primary)",
                   }}>{totalFilled}</span>
                   <span style={{
                     fontFamily: "'JetBrains Mono', monospace",
                     fontWeight: 400,
-                    fontSize: 10,
+                    fontSize: 9,
                     color: "var(--text-muted)",
                   }}>/ {totalRequired}</span>
                 </div>
