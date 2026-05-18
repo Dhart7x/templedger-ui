@@ -1,9 +1,4 @@
-import { CheckCircle, AlertTriangle } from "lucide-react";
-
-const PURPLE = "#4C1D95";
-const PURPLE_LIGHT = "#F3EEFC";
-const VERIFIED_BG = "#EBF4EF";
-const VERIFIED_FG = "#16A34A";
+import { CheckCircle, Check, Download, Info } from "lucide-react";
 
 interface Row {
   department: string;
@@ -27,124 +22,366 @@ const rows: Row[] = [
 const totalHours = 1247;
 const totalAmount = 22840;
 
-const VerifiedBadge = () => (
-  <span
-    className="inline-flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded"
-    style={{ background: VERIFIED_BG, color: VERIFIED_FG }}
-  >
-    <CheckCircle className="w-2.5 h-2.5" /> Verified ✓
-  </span>
-);
-
 interface ClientBillingProps {
   onViewChange?: (view: string) => void;
   onViewWorker?: (workerName: string) => void;
 }
 
+// Group rows by agency, preserving first-seen order
+const agencyGroups = (() => {
+  const map = new Map<string, Row[]>();
+  rows.forEach((r) => {
+    if (!map.has(r.agency)) map.set(r.agency, []);
+    map.get(r.agency)!.push(r);
+  });
+  return Array.from(map.entries()).map(([agency, items]) => ({
+    agency,
+    items,
+    hours: items.reduce((s, r) => s + r.hours, 0),
+    subtotal: items.reduce((s, r) => s + r.subtotal, 0),
+  }));
+})();
+
+const VerifiedPill = () => (
+  <span
+    style={{
+      padding: "3px 10px",
+      background: "rgba(22, 163, 74, 0.1)",
+      borderRadius: 3,
+      fontFamily: "'JetBrains Mono', monospace",
+      fontWeight: 500,
+      fontSize: 10,
+      letterSpacing: "0.06em",
+      textTransform: "uppercase",
+      color: "var(--status-green)",
+      display: "inline-flex",
+      gap: 4,
+      alignItems: "center",
+    }}
+  >
+    <Check size={9} /> Verified
+  </span>
+);
+
+const ExportButton = () => (
+  <button
+    type="button"
+    style={{
+      height: 26,
+      padding: "0 10px",
+      background: "var(--white)",
+      border: "1px solid var(--border-purple)",
+      color: "var(--text-secondary)",
+      fontFamily: "'IBM Plex Mono', monospace",
+      fontWeight: 500,
+      fontSize: 10,
+      letterSpacing: "0.06em",
+      textTransform: "uppercase",
+      borderRadius: 3,
+      display: "inline-flex",
+      gap: 5,
+      alignItems: "center",
+      cursor: "pointer",
+    }}
+    onMouseEnter={(e) => (e.currentTarget.style.background = "var(--cream-tint)")}
+    onMouseLeave={(e) => (e.currentTarget.style.background = "var(--white)")}
+  >
+    <Download size={10} /> Export
+  </button>
+);
+
 const ClientBilling = (_: ClientBillingProps) => {
   return (
-    <div className="p-4 md:p-6 space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="font-mono text-base font-semibold" style={{ color: "#0D0D0B" }}>
-          Invoice Clarity
-        </h1>
-        <p className="text-xs mt-0.5" style={{ color: "#6B6460" }}>
-          Every line item traces back to a verified clock event.
-        </p>
+    <div style={{ padding: 24 }}>
+      {/* PART 1 — Header */}
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 22 }}>
+        <div>
+          <div
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontWeight: 500,
+              fontSize: 10,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "var(--brand-purple)",
+              marginBottom: 8,
+            }}
+          >
+            — BILLING
+          </div>
+          <h1
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontWeight: 500,
+              fontSize: 26,
+              color: "var(--text-primary)",
+              marginBottom: 4,
+              margin: 0,
+            }}
+          >
+            Invoice Clarity
+          </h1>
+          <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0" }}>
+            Every line item traces back to a verified clock event.
+          </p>
+        </div>
       </div>
 
-      {/* Summary Bar */}
-      <div className="grid grid-cols-3 gap-3">
-        <div className="bg-card border border-border rounded-xl p-4">
-          <p className="text-[10px] uppercase tracking-[0.12em]" style={{ color: "#6B6460" }}>
-            Verified Hours
-          </p>
-          <p className="font-mono text-2xl font-bold mt-1" style={{ color: PURPLE }}>
-            {totalHours.toLocaleString()} hrs
-          </p>
+      {/* PART 2 — Top Summary Strip */}
+      <div
+        style={{
+          display: "flex",
+          background: "var(--white)",
+          border: "1px solid var(--border-purple)",
+          borderRadius: 6,
+          padding: "20px 0",
+          marginBottom: 22,
+        }}
+      >
+        {/* Block 1 */}
+        <div style={{ flex: 1, padding: "0 26px", borderRight: "1px solid var(--border-purple)", display: "flex", flexDirection: "column", gap: 8 }}>
+          <div style={kpiLabel}>VERIFIED HOURS</div>
+          <div style={{ ...kpiValue, color: "var(--text-primary)" }}>{totalHours.toLocaleString()} hrs</div>
         </div>
-        <div className="bg-card border border-border rounded-xl p-4">
-          <p className="text-[10px] uppercase tracking-[0.12em]" style={{ color: "#6B6460" }}>
-            Agency Invoice Total
-          </p>
-          <p className="font-mono text-2xl font-bold mt-1" style={{ color: "#0D0D0B" }}>
-            £{totalAmount.toLocaleString()}
-          </p>
+        {/* Block 2 */}
+        <div style={{ flex: 1, padding: "0 26px", borderRight: "1px solid var(--border-purple)", display: "flex", flexDirection: "column", gap: 8 }}>
+          <div style={kpiLabel}>AGENCY INVOICE TOTAL</div>
+          <div style={{ ...kpiValue, color: "var(--text-primary)" }}>£{totalAmount.toLocaleString()}</div>
         </div>
-        <div className="rounded-xl p-4" style={{ background: PURPLE_LIGHT, border: `1px solid ${PURPLE}` }}>
-          <p className="text-[10px] uppercase tracking-[0.12em]" style={{ color: PURPLE }}>
-            Your Invoice Should Be
-          </p>
-          <p className="font-mono text-2xl font-bold mt-1" style={{ color: PURPLE }}>
-            £{totalAmount.toLocaleString()}
-          </p>
-          <div className="flex items-center gap-2 mt-1">
-            <span className="text-[10px]" style={{ color: PURPLE }}>Matches verified hours</span>
-            <VerifiedBadge />
+        {/* Block 3 — highlighted */}
+        <div style={{ flex: 1, padding: "0 26px", display: "flex", flexDirection: "column", gap: 8, background: "rgba(76, 29, 149, 0.04)" }}>
+          <div style={kpiLabel}>YOUR INVOICE SHOULD BE</div>
+          <div style={{ ...kpiValue, color: "var(--brand-purple)" }}>£{totalAmount.toLocaleString()}</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)", marginTop: 2 }}>
+            <span>Matches verified hours</span>
+            <span>·</span>
+            <CheckCircle size={11} style={{ color: "var(--status-green)" }} />
+            <span style={{ color: "var(--status-green)", fontWeight: 500 }}>Verified</span>
           </div>
         </div>
       </div>
 
-      {/* Breakdown Table */}
-      <div className="bg-card border border-border rounded-xl overflow-hidden">
-        <div className="px-4 py-3 border-b border-border">
-          <h2 className="text-[13px] font-semibold" style={{ color: "#0D0D0B" }}>
-            Breakdown by cost centre
-          </h2>
+      {/* PART 3 — Breakdown header */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
+        <div>
+          <div
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontWeight: 500,
+              fontSize: 10,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "var(--brand-purple)",
+              marginBottom: 6,
+            }}
+          >
+            — BREAKDOWN BY COST CENTRE
+          </div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, color: "var(--text-secondary)" }}>
+            Per-agency invoice built from verified payroll and contracted rates
+          </div>
         </div>
-        <table className="w-full text-xs">
-          <thead>
-            <tr className="text-left" style={{ background: "#FAFAF8" }}>
-              <th className="px-4 py-2 text-[10px] uppercase tracking-[0.1em] font-medium" style={{ color: "#6B6460" }}>Department</th>
-              <th className="px-4 py-2 text-[10px] uppercase tracking-[0.1em] font-medium" style={{ color: "#6B6460" }}>Agency</th>
-              <th className="px-4 py-2 text-[10px] uppercase tracking-[0.1em] font-medium text-right" style={{ color: "#6B6460" }}>Verified hrs</th>
-              <th className="px-4 py-2 text-[10px] uppercase tracking-[0.1em] font-medium text-right" style={{ color: "#6B6460" }}>Rate</th>
-              <th className="px-4 py-2 text-[10px] uppercase tracking-[0.1em] font-medium text-right" style={{ color: "#6B6460" }}>Subtotal</th>
-              <th className="px-4 py-2 text-[10px] uppercase tracking-[0.1em] font-medium" style={{ color: "#6B6460" }}>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r) => (
-              <tr key={r.department} className="border-t border-border">
-                <td className="px-4 py-2.5" style={{ color: "#0D0D0B" }}>{r.department}</td>
-                <td className="px-4 py-2.5" style={{ color: "#6B6460" }}>{r.agency}</td>
-                <td className="px-4 py-2.5 font-mono text-right" style={{ color: "#0D0D0B" }}>{r.hours} hrs</td>
-                <td className="px-4 py-2.5 font-mono text-right" style={{ color: "#6B6460" }}>£{r.rate.toFixed(2)}/hr</td>
-                <td className="px-4 py-2.5 font-mono text-right font-semibold" style={{ color: PURPLE }}>£{r.subtotal.toLocaleString()}</td>
-                <td className="px-4 py-2.5"><VerifiedBadge /></td>
-              </tr>
-            ))}
-          </tbody>
-          <tfoot>
-            <tr className="border-t border-border" style={{ background: "#FAFAF8" }}>
-              <td className="px-4 py-3 font-semibold" style={{ color: "#0D0D0B" }}>Total</td>
-              <td className="px-4 py-3" style={{ color: "#6B6460" }}>—</td>
-              <td className="px-4 py-3 font-mono text-right font-semibold" style={{ color: "#0D0D0B" }}>{totalHours.toLocaleString()} hrs</td>
-              <td className="px-4 py-3 text-right" style={{ color: "#6B6460" }}>—</td>
-              <td className="px-4 py-3 font-mono text-right font-bold" style={{ color: PURPLE }}>£{totalAmount.toLocaleString()}</td>
-              <td className="px-4 py-3" style={{ color: "#6B6460" }}>—</td>
-            </tr>
-          </tfoot>
-        </table>
       </div>
 
-      {/* Invoice Note Card */}
+      {/* PART 4 — Per-agency blocks */}
+      <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 22 }}>
+        {agencyGroups.map((g) => (
+          <div
+            key={g.agency}
+            style={{
+              background: "var(--white)",
+              border: "1px solid var(--border-purple)",
+              borderRadius: 6,
+              overflow: "hidden",
+            }}
+          >
+            {/* Block header */}
+            <div
+              style={{
+                padding: "16px 20px",
+                borderBottom: "1px solid var(--border-purple)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <div>
+                <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 15, color: "var(--text-primary)" }}>
+                  {g.agency}
+                </div>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)", marginTop: 2 }}>
+                  {g.items.length} departments · {g.hours} hrs
+                </div>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 8 }}>
+                <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 18, color: "var(--brand-purple)" }}>
+                    £{g.subtotal.toLocaleString()}
+                  </span>
+                  <VerifiedPill />
+                </div>
+                <ExportButton />
+              </div>
+            </div>
+
+            {/* Department rows */}
+            {g.items.map((r, idx) => (
+              <div
+                key={r.department}
+                style={{
+                  padding: "12px 20px",
+                  borderBottom: idx === g.items.length - 1 ? "none" : "1px solid var(--border-purple)",
+                  display: "grid",
+                  gridTemplateColumns: "1.6fr 100px 100px 100px",
+                  gap: 16,
+                  alignItems: "center",
+                }}
+              >
+                <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>
+                  {r.department}
+                </div>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)", textAlign: "right" }}>
+                  {r.hours} hrs
+                </div>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 12, color: "var(--text-secondary)", textAlign: "right" }}>
+                  £{r.rate.toFixed(2)}/hr
+                </div>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 13, color: "var(--text-primary)", textAlign: "right" }}>
+                  £{r.subtotal.toLocaleString()}
+                </div>
+              </div>
+            ))}
+
+            {/* Subtotal strip */}
+            <div
+              style={{
+                padding: "12px 20px",
+                background: "var(--cream-tint)",
+                borderTop: "1px solid var(--border-purple)",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontWeight: 500,
+                  fontSize: 10,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "var(--text-secondary)",
+                }}
+              >
+                AGENCY SUBTOTAL
+              </span>
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 14, color: "var(--brand-purple)" }}>
+                £{g.subtotal.toLocaleString()}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* PART 6 — Total bar */}
       <div
-        className="rounded-r-lg p-4"
-        style={{ background: PURPLE_LIGHT, borderLeft: `3px solid ${PURPLE}` }}
+        style={{
+          background: "var(--darkest-purple)",
+          borderRadius: 6,
+          padding: "18px 22px",
+          marginBottom: 22,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
       >
-        <h3 className="text-[13px] font-semibold mb-1" style={{ color: PURPLE }}>
-          How this works
-        </h3>
-        <p className="text-xs leading-relaxed" style={{ color: "#0D0D0B" }}>
-          TempLedger derives your invoice total directly from verified clock events.
-          Every hour on this invoice traces back to a biometric clock-in and clock-out.
-          No estimates. No disputes.
-        </p>
+        <div>
+          <div
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontWeight: 500,
+              fontSize: 10,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "rgba(250, 250, 248, 0.6)",
+              marginBottom: 4,
+            }}
+          >
+            — TOTAL INVOICE VALUE
+          </div>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "rgba(250, 250, 248, 0.7)" }}>
+            {totalHours.toLocaleString()} hrs · {agencyGroups.length} agencies
+          </div>
+        </div>
+        <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 28, color: "var(--cream)" }}>
+          £{totalAmount.toLocaleString()}
+        </div>
+      </div>
+
+      {/* PART 7 — How this works */}
+      <div
+        style={{
+          background: "rgba(76, 29, 149, 0.04)",
+          border: "1px solid var(--border-purple)",
+          borderLeft: "3px solid var(--brand-purple)",
+          borderRadius: 4,
+          padding: "16px 20px",
+          display: "flex",
+          gap: 14,
+          alignItems: "flex-start",
+        }}
+      >
+        <div
+          style={{
+            width: 28,
+            height: 28,
+            background: "rgba(76, 29, 149, 0.1)",
+            borderRadius: 5,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
+          }}
+        >
+          <Info size={14} style={{ color: "var(--brand-purple)" }} />
+        </div>
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 4 }}>
+          <div
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontWeight: 500,
+              fontSize: 12,
+              letterSpacing: "0.04em",
+              color: "var(--brand-purple)",
+            }}
+          >
+            How this works
+          </div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, lineHeight: 1.55, color: "var(--text-primary)" }}>
+            TempLedger derives your invoice total directly from verified clock events.
+            Every hour on this invoice traces back to a biometric clock-in and clock-out.
+            No estimates. No disputes.
+          </div>
+        </div>
       </div>
     </div>
   );
+};
+
+const kpiLabel: React.CSSProperties = {
+  fontFamily: "'IBM Plex Mono', monospace",
+  fontWeight: 500,
+  fontSize: 10,
+  letterSpacing: "0.12em",
+  textTransform: "uppercase",
+  color: "var(--text-secondary)",
+};
+
+const kpiValue: React.CSSProperties = {
+  fontFamily: "'JetBrains Mono', monospace",
+  fontWeight: 700,
+  fontSize: 28,
+  lineHeight: 1,
 };
 
 export default ClientBilling;
