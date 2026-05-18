@@ -2625,7 +2625,7 @@ const Home = () => {
 		</section>
 
 		{/* SECTION 6 — CONTACT */}
-        <section id="contact" className="tl-section-contact" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #3B1578 40%, #2E1065 70%, #1A0A3D 100%)", padding: "96px 48px", margin: 0, width: "100%" }}>
+        <section id="contact" className="tl-section-contact" style={{ background: "#1A0A3D", padding: "96px 48px", margin: 0, width: "100%" }}>
           <motion.div {...fadeIn} style={{ maxWidth: 640, margin: "0 auto", textAlign: "center" }}>
             <div
               style={{
