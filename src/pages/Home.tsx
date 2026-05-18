@@ -906,27 +906,27 @@ const Home = () => {
               {[
                 {
                   q: "Paying for hours that were never worked.",
-                  a: "Ghost shifts, late clock-outs, inflated overtime. Replacements ordered, both workers show up and both get paid. Without a system to catch it, the cheaper move is to let it through.",
+                  a: "Ghost shifts, late clock-outs, inflated overtime. Replacements ordered, both workers show up, both get paid. The cheaper move is to let it through.",
                 },
                 {
                   q: "Paying margin on workers who should already be yours.",
-                  a: "You have the right to convert workers at no fee after a set duration. It's never surfaced, and monitoring it loses to the daily fire-fighting. You keep paying margin you don't need to. Your best workers become someone else's best workers.",
+                  a: "You have the right to convert workers at no fee after a set duration. It's never surfaced. You keep paying margin you don't need to. Your best workers become someone else's.",
                 },
                 {
                   q: "Spend authorized at site level, with no financial control.",
-                  a: "Who can order replacements. Who can request volume uplift. Whether HR signs off on overtime. The rules exist on paper. At a systems level, they aren't enforced. Middle management defaults to the easier option, not the cheapest one. Every shift, every site, compounding.",
+                  a: "Who can order replacements. Who can request volume uplift. Whether HR signs off on overtime. The rules exist on paper. At a systems level, nothing enforces them.",
                 },
                 {
                   q: "Overtime distributed by default, not by design.",
-                  a: "46 workers skilled on the department, available for the shift. The easy option wins. Overtime goes to the worker already on site. The workers cycling at the bottom of the rotation leave. Attrition is the bill you didn't realize you were paying.",
+                  a: "46 workers skilled, available for the shift. The easy option wins. Overtime goes to the one already on site. The workers cycling at the bottom of the rotation leave.",
                 },
                 {
                   q: "Allocating shifts the way you always have.",
-                  a: "\"This is how we do it\" is the formula. Bookings aren't routed to the agency that can fill fastest, or cheapest, or to the one that's actually performing. Cost and productivity both suffer, and neither shows up on the invoice.",
+                  a: "\"This is how we do it\" is the formula. Bookings aren't routed to the agency that can fill fastest, or cheapest, or to the one that's actually performing.",
                 },
                 {
-                  q: "Compliance you can't verify at scale.",
-                  a: "Right-to-work, certifications, unsigned contracts. The assumption is everything checks out. The reality at scale is you have no way to confirm it. The reputational and commercial risk sits with you, not the agency.",
+                  q: "Compliance assumed. Never verified at scale.",
+                  a: "Right-to-work, certifications, unsigned contracts. The assumption is that everything checks out. The reality at scale is you have no way to confirm it. The risk sits with you.",
                 },
               ].map((block, i) => (
                 <motion.div
