@@ -1,71 +1,6 @@
 import { useState } from "react";
-import { Check } from "lucide-react";
+import { Check, X, Circle, CheckCircle, AlertTriangle, Send } from "lucide-react";
 import { toast } from "sonner";
-
-/* ─── Verification steps ─── */
-const verificationSteps = [
-  "Scheduled",
-  "Clocked In",
-  "Clocked Out",
-  "Manager Approved",
-  "Compliant",
-];
-
-const PURPLE = "#4C1D95";
-const MUTED_BORDER = "#D6D2CE";
-const MUTED_TEXT = "#9B948F";
-
-/* ─── Verification Chain ─── */
-const VerificationChain = ({ completed }: { completed: number }) => (
-  <div className="flex items-start gap-0 select-none">
-    {verificationSteps.map((step, i) => {
-      const isDone = i < completed;
-      const nextDone = i + 1 < completed;
-      return (
-        <div key={i} className="flex items-start">
-          <div className="flex flex-col items-center" style={{ width: 56 }}>
-            <div
-              className="flex items-center justify-center rounded-full"
-              style={{
-                width: 18,
-                height: 18,
-                background: isDone ? PURPLE : "transparent",
-                border: isDone ? `1px solid ${PURPLE}` : `1px solid ${MUTED_BORDER}`,
-              }}
-            >
-              {isDone ? (
-                <Check className="w-2.5 h-2.5" style={{ color: "#fff" }} strokeWidth={3} />
-              ) : (
-                <div className="rounded-full" style={{ width: 4, height: 4, background: MUTED_TEXT }} />
-              )}
-            </div>
-            <span
-              className="mt-1 text-center leading-tight"
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: 9,
-                color: isDone ? PURPLE : MUTED_TEXT,
-                fontWeight: isDone ? 500 : 400,
-              }}
-            >
-              {step}
-            </span>
-          </div>
-          {i < verificationSteps.length - 1 && (
-            <div
-              style={{
-                width: 18,
-                height: 1,
-                marginTop: 9,
-                background: isDone && nextDone ? PURPLE : MUTED_BORDER,
-              }}
-            />
-          )}
-        </div>
-      );
-    })}
-  </div>
-);
 
 /* ─── Types ─── */
 interface VerifiedEntry {
@@ -101,10 +36,10 @@ const verifiedEntries: VerifiedEntry[] = [
 ];
 
 const exceptionEntries: ExceptionEntry[] = [
-  { id: "EX-001", worker: "Fatima Al-Hassan", agency: "Workforce Direct", department: "MHE Operations", exceptionType: "No Clock-Out", exceptionColor: "text-orange-500 bg-orange-500/10", failingStep: "✗ Clock-out missing", stepsCompleted: [true, true, false, false, false], status: "open" },
-  { id: "EX-002", worker: "Emma Johansson", agency: "Pinnacle Staffing", department: "Inbound Warehouse", exceptionType: "Manager Approval Missing", exceptionColor: "text-amber-500 bg-amber-500/10", failingStep: "✗ Manager Approved", stepsCompleted: [true, true, true, false, false], status: "open" },
-  { id: "EX-NS-001", worker: "Kevin Wright", agency: "Pinnacle Staffing", department: "Inbound Warehouse", exceptionType: "Not Scheduled", exceptionColor: "text-purple-500 bg-purple-500/10", failingStep: "✗ Scheduled (worker not on roster)", stepsCompleted: [false, false, false, false, false], status: "open" },
-  { id: "EX-003", worker: "Diane Foster", agency: "Meridian Recruitment", department: "MHE Operations", exceptionType: "No Clock-In", exceptionColor: "text-destructive bg-destructive/10", failingStep: "✗ Clock-in missing", stepsCompleted: [true, false, false, false, false], status: "open" },
+  { id: "EX-001", worker: "Fatima Al-Hassan", agency: "Workforce Direct", department: "MHE Operations", exceptionType: "No Clock-Out", exceptionColor: "amber", failingStep: "✗ Clock-out missing", stepsCompleted: [true, true, false, false, false], status: "open" },
+  { id: "EX-002", worker: "Emma Johansson", agency: "Pinnacle Staffing", department: "Inbound Warehouse", exceptionType: "Manager Approval Missing", exceptionColor: "amber", failingStep: "✗ Manager Approved", stepsCompleted: [true, true, true, false, false], status: "open" },
+  { id: "EX-NS-001", worker: "Kevin Wright", agency: "Pinnacle Staffing", department: "Inbound Warehouse", exceptionType: "Not Scheduled", exceptionColor: "purple", failingStep: "✗ Scheduled (worker not on roster)", stepsCompleted: [false, false, false, false, false], status: "open" },
+  { id: "EX-003", worker: "Diane Foster", agency: "Meridian Recruitment", department: "MHE Operations", exceptionType: "No Clock-In", exceptionColor: "red", failingStep: "✗ Clock-in missing", stepsCompleted: [true, false, false, false, false], status: "open" },
 ];
 
 const resolveOptions = [
@@ -115,10 +50,7 @@ const resolveOptions = [
 ];
 
 /* ─── Derived totals ─── */
-const totalVerifiedHours = verifiedEntries.reduce((s, e) => s + e.totalHours, 0);
-const totalVerifiedWorkers = verifiedEntries.length;
 const avgRate = 13.00;
-const estimatedPayroll = totalVerifiedHours * avgRate;
 
 const agencyBreakdown = [
   { name: "Workforce Direct", hours: verifiedEntries.filter(e => e.agency === "Workforce Direct").reduce((s, e) => s + e.totalHours, 0) },
@@ -126,6 +58,92 @@ const agencyBreakdown = [
   { name: "Meridian Recruitment", hours: verifiedEntries.filter(e => e.agency === "Meridian Recruitment").reduce((s, e) => s + e.totalHours, 0) },
 ];
 const maxAgencyHours = Math.max(...agencyBreakdown.map(a => a.hours));
+
+/* ─── Style helpers ─── */
+const eyebrow: React.CSSProperties = {
+  fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 10,
+  letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--brand-purple)",
+};
+const subline: React.CSSProperties = {
+  fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, color: "var(--text-secondary)",
+};
+const monoLabel: React.CSSProperties = {
+  fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 10,
+  letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-secondary)",
+};
+
+const GATE_LABELS = ["SCHED", "CLOCK IN", "CLOCK OUT", "MGR APPR", "COMPLY"];
+
+type GateState = "pass" | "fail" | "pending";
+
+const GateChip = ({ state, label }: { state: GateState; label: string }) => {
+  const styles: Record<GateState, { bg: string; color: string; icon: JSX.Element }> = {
+    pass: {
+      bg: "rgba(22, 163, 74, 0.1)", color: "var(--status-green)",
+      icon: <Check size={9} style={{ color: "var(--status-green)" }} strokeWidth={3} />,
+    },
+    fail: {
+      bg: "rgba(185, 28, 28, 0.1)", color: "var(--status-red)",
+      icon: <X size={9} style={{ color: "var(--status-red)" }} strokeWidth={3} />,
+    },
+    pending: {
+      bg: "var(--cream-tint)", color: "var(--text-muted)",
+      icon: <Circle size={9} style={{ color: "var(--text-muted)" }} />,
+    },
+  };
+  const s = styles[state];
+  return (
+    <span style={{
+      padding: "3px 8px", background: s.bg, color: s.color, borderRadius: 3,
+      display: "inline-flex", gap: 5, alignItems: "center",
+      fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 9,
+      letterSpacing: "0.06em", textTransform: "uppercase",
+    }}>
+      {s.icon}
+      {label}
+    </span>
+  );
+};
+
+const GateRow = ({ states }: { states: GateState[] }) => (
+  <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap" }}>
+    {states.map((st, i) => <GateChip key={i} state={st} label={GATE_LABELS[i]} />)}
+  </div>
+);
+
+/* Compute gate states for verified (all pass) */
+const verifiedStates = (): GateState[] => Array(5).fill("pass");
+
+/* Compute gate states for exceptions: true=pass, first false=fail, rest=pending */
+const exceptionStates = (steps: boolean[]): GateState[] => {
+  const out: GateState[] = [];
+  let failed = false;
+  for (let i = 0; i < 5; i++) {
+    if (steps[i]) {
+      out.push("pass");
+    } else if (!failed) {
+      out.push("fail");
+      failed = true;
+    } else {
+      out.push("pending");
+    }
+  }
+  return out;
+};
+
+/* Exception tag pill colors */
+const tagPillStyle = (type: string): React.CSSProperties => {
+  if (type === "Not Scheduled") return {
+    background: "rgba(76, 29, 149, 0.1)", color: "var(--brand-purple)",
+  };
+  if (type === "RTW Expired" || type === "No Clock-In") return {
+    background: "rgba(185, 28, 28, 0.1)", color: "var(--status-red)",
+  };
+  // No Clock-Out, Manager Approval Missing, default amber
+  return {
+    background: "rgba(217, 119, 6, 0.1)", color: "var(--status-amber)",
+  };
+};
 
 /* ─── Component ─── */
 const ClientPayroll = () => {
@@ -158,196 +176,291 @@ const ClientPayroll = () => {
 
   const currentVerifiedHours = verified.reduce((s, e) => s + e.totalHours, 0);
   const currentEstPayroll = currentVerifiedHours * avgRate;
+  const hoursPendingResolution = exceptions.length * 16;
+
+  const WorkerCell = ({ worker, agency, department, extra }: { worker: string; agency: string; department: string; extra?: React.ReactNode }) => (
+    <div style={{ display: "flex", flexDirection: "column", gap: 2, minWidth: 0 }}>
+      <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 13, color: "var(--text-primary)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+        {worker}
+      </div>
+      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+        <span style={{ color: "var(--brand-purple)", fontWeight: 500 }}>{agency}</span>
+        {" · "}
+        {department}
+      </div>
+      {extra}
+    </div>
+  );
 
   return (
-    <div className="flex h-full">
-      {/* LEFT PANEL — 58% */}
-      <div className="w-[58%] border-r border-border overflow-y-auto p-5">
-        {/* Header */}
-        <div className="mb-5">
-          <h2 className="font-mono text-sm font-semibold" style={{ color: "#0D0D0B" }}>
-            Live Payroll Feed
-          </h2>
-          <p className="text-[11px] mt-0.5" style={{ color: "#6B6460" }}>
-            Shifts completing in real time · Week of 10 Feb 2025
-          </p>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      {/* Page header */}
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 22 }}>
+        <div>
+          <div style={{ ...eyebrow, marginBottom: 8 }}>— PAYROLL</div>
+          <h1 style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 26, color: "var(--text-primary)", marginBottom: 4, lineHeight: 1.1 }}>
+            Week of 10 Feb 2025
+          </h1>
+          <p style={subline}>Shifts completing in real time · All Sites</p>
         </div>
+      </div>
 
-        {/* SUB-SECTION A — Verified */}
-        <div className="border-l-2 border-green-500 pl-4 mb-6">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-[10px] uppercase tracking-[0.14em] font-medium text-green-500">
-              Verified
-            </span>
-            <span className="text-[10px] bg-green-500/15 text-green-600 px-2 py-0.5 rounded">
-              {verified.length}
-            </span>
+      {/* Two-column grid */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 320px", gap: 24, alignItems: "start" }}>
+
+        {/* LEFT — Live Payroll Feed */}
+        <div>
+          {/* Feed block header */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
+            <div>
+              <div style={{ ...eyebrow, marginBottom: 6 }}>— LIVE PAYROLL FEED</div>
+              <div style={subline}>Shifts completing in real time · Week of 10 Feb 2025</div>
+            </div>
           </div>
-          <div className="space-y-2">
+
+          {/* Verified section header */}
+          <div style={{
+            marginBottom: 12, padding: "10px 16px", background: "var(--white)",
+            border: "1px solid var(--border-purple)", borderLeft: "3px solid var(--status-green)",
+            borderRadius: 4, display: "flex", alignItems: "center", justifyContent: "space-between",
+          }}>
+            <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+              <CheckCircle size={14} style={{ color: "var(--status-green)" }} />
+              <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--status-green)" }}>
+                VERIFIED
+              </span>
+            </div>
+            <span style={{
+              padding: "3px 10px", background: "rgba(22, 163, 74, 0.1)", borderRadius: 3,
+              fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 11,
+              color: "var(--status-green)", letterSpacing: "0.04em",
+            }}>{verified.length}</span>
+          </div>
+
+          {/* Verified rows */}
+          <div style={{
+            background: "var(--white)", border: "1px solid var(--border-purple)",
+            borderRadius: 6, overflow: "hidden", marginBottom: 20,
+          }}>
             {verified.map((entry, idx) => (
-              <div key={idx} className="flex items-center gap-3 py-2">
-                {/* WORKER INFO (left) */}
-                <div className="min-w-0 flex-1">
-                  <div className="text-[13px] font-medium truncate" style={{ color: "#0D0D0B" }}>
-                    {entry.worker}
+              <div key={idx} style={{
+                display: "grid", gridTemplateColumns: "1.4fr 90px 1.3fr 90px", gap: 18,
+                padding: "14px 20px", alignItems: "center",
+                borderBottom: idx === verified.length - 1 ? "none" : "1px solid var(--border-purple)",
+              }}>
+                <WorkerCell worker={entry.worker} agency={entry.agency} department={entry.department} />
+                <div style={{ display: "flex", flexDirection: "column", gap: 2, alignItems: "flex-end", textAlign: "right" }}>
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 14, color: "var(--text-primary)" }}>
+                    {entry.totalHours}h
                   </div>
-                  <div className="text-[10px] truncate" style={{ color: "#6B6460" }}>
-                    {entry.agency} · {entry.department}
-                  </div>
-                </div>
-                {/* VERIFICATION SEQUENCE (center) */}
-                <div className="shrink-0">
-                  <VerificationChain completed={entry.stepsCompleted} />
-                </div>
-                {/* PAYROLL AMOUNT (right) */}
-                <div className="text-right shrink-0 w-24">
-                  <div className="text-[13px] font-bold text-green-500">{entry.totalHours}h</div>
-                  <div className="font-mono text-[11px]" style={{ color: "#0D0D0B" }}>
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--brand-purple)" }}>
                     £{(entry.totalHours * entry.hourlyRate).toLocaleString("en-GB", { minimumFractionDigits: 0 })}
                   </div>
+                </div>
+                <GateRow states={verifiedStates()} />
+                <div style={{ textAlign: "right" }}>
+                  <span style={{
+                    display: "inline-flex", padding: "3px 10px", borderRadius: 3,
+                    fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 10,
+                    letterSpacing: "0.06em", textTransform: "uppercase",
+                    background: "rgba(22, 163, 74, 0.1)", color: "var(--status-green)",
+                  }}>VERIFIED</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Exceptions section header */}
+          <div style={{
+            marginTop: 4, marginBottom: 12, padding: "10px 16px", background: "var(--white)",
+            border: "1px solid var(--border-purple)", borderLeft: "3px solid var(--status-red)",
+            borderRadius: 4, display: "flex", alignItems: "center", justifyContent: "space-between",
+          }}>
+            <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+              <AlertTriangle size={14} style={{ color: "var(--status-red)" }} />
+              <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--status-red)" }}>
+                EXCEPTIONS · HELD FROM PAYROLL
+              </span>
+              <span style={{ marginLeft: 8, fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>
+                Unresolved live issues
+              </span>
+            </div>
+            <span style={{
+              padding: "3px 10px", background: "rgba(185, 28, 28, 0.1)", borderRadius: 3,
+              fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 11,
+              color: "var(--status-red)",
+            }}>{exceptions.length}</span>
+          </div>
+
+          {/* Exceptions rows */}
+          <div style={{
+            background: "var(--white)", border: "1px solid var(--border-purple)",
+            borderRadius: 6, overflow: "hidden",
+          }}>
+            {exceptions.map((entry, idx) => (
+              <div key={entry.id} style={{
+                display: "grid", gridTemplateColumns: "1.4fr 1.3fr 130px 90px", gap: 18,
+                padding: "14px 20px", alignItems: "center",
+                borderBottom: idx === exceptions.length - 1 ? "none" : "1px solid var(--border-purple)",
+              }}>
+                <WorkerCell
+                  worker={entry.worker}
+                  agency={entry.agency}
+                  department={entry.department}
+                  extra={
+                    <div style={{ marginTop: 4 }}>
+                      <span style={{
+                        display: "inline-block", padding: "2px 8px", borderRadius: 3,
+                        fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 10,
+                        letterSpacing: "0.06em", textTransform: "uppercase",
+                        ...tagPillStyle(entry.exceptionType),
+                      }}>{entry.exceptionType}</span>
+                    </div>
+                  }
+                />
+                <GateRow states={exceptionStates(entry.stepsCompleted)} />
+                <div style={{ display: "flex", flexDirection: "column", gap: 4, alignItems: "flex-end" }}>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 11, color: "var(--status-red)" }}>
+                    Blocked · {entry.id}
+                  </span>
+                  {entry.status === "in-review" && (
+                    <span style={{
+                      padding: "2px 8px", borderRadius: 3,
+                      background: "rgba(217, 119, 6, 0.1)", color: "var(--status-amber)",
+                      fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 10,
+                      letterSpacing: "0.06em", textTransform: "uppercase",
+                    }}>In Review</span>
+                  )}
+                </div>
+                <div style={{ textAlign: "right", position: "relative" }}>
+                  {entry.status === "open" && (
+                    <div style={{ position: "relative", display: "inline-block" }}>
+                      <button
+                        onClick={() => setResolveDropdown(resolveDropdown === entry.id ? null : entry.id)}
+                        onMouseEnter={(e) => { e.currentTarget.style.background = "var(--cream-tint)"; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.background = "var(--white)"; }}
+                        style={{
+                          height: 30, padding: "0 12px", background: "var(--white)",
+                          border: "1px solid var(--border-purple)", color: "var(--deep-purple)",
+                          fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 10,
+                          letterSpacing: "0.06em", textTransform: "uppercase", borderRadius: 4,
+                          display: "inline-flex", alignItems: "center", gap: 6, cursor: "pointer",
+                        }}
+                      >
+                        <Send size={11} style={{ color: "var(--deep-purple)" }} />
+                        Resolve
+                      </button>
+                      {resolveDropdown === entry.id && (
+                        <div style={{
+                          position: "absolute", right: 0, top: "100%", marginTop: 4, zIndex: 50,
+                          background: "var(--white)", border: "1px solid var(--border-purple)",
+                          borderRadius: 4, width: 220, overflow: "hidden",
+                        }}>
+                          {resolveOptions.map((opt) => (
+                            <button
+                              key={opt}
+                              onClick={() => handleResolve(entry.id, opt)}
+                              onMouseEnter={(e) => { e.currentTarget.style.background = "var(--cream-tint)"; }}
+                              onMouseLeave={(e) => { e.currentTarget.style.background = "var(--white)"; }}
+                              style={{
+                                width: "100%", textAlign: "left", padding: "8px 12px",
+                                fontFamily: "Inter, sans-serif", fontSize: 12,
+                                color: "var(--text-primary)", background: "var(--white)",
+                                border: "none", cursor: "pointer",
+                              }}
+                            >{opt}</button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* SUB-SECTION B — Exceptions */}
-        <div className="border-l-2 border-destructive pl-4">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-3">
-              <span className="text-[10px] uppercase tracking-[0.14em] font-medium text-destructive">
-                Exceptions
-              </span>
-              <span className="text-[10px] bg-destructive/15 text-destructive px-2 py-0.5 rounded">
-                {exceptions.length}
-              </span>
+        {/* RIGHT — Week to Date side panel */}
+        <div style={{
+          background: "var(--white)", border: "1px solid var(--border-purple)",
+          borderRadius: 6, overflow: "hidden",
+        }}>
+          {/* Top header */}
+          <div style={{ padding: "14px 18px", borderBottom: "1px solid var(--border-purple)" }}>
+            <div style={{ ...eyebrow, marginBottom: 4 }}>— WEEK TO DATE</div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>
+              As of Wednesday 8pm · Wk 10 Feb
             </div>
-            <span className="text-[9px]" style={{ color: "#6B6460" }}>Unresolved live issues</span>
           </div>
-          <div className="space-y-2">
-            {exceptions.map((entry) => {
-              const completed = entry.stepsCompleted.filter(Boolean).length;
-              return (
-                <div key={entry.id} className="flex items-center gap-3 py-2 relative">
-                  {/* WORKER INFO (left) */}
-                  <div className="min-w-0 flex-1">
-                    <div className="text-[13px] font-medium truncate" style={{ color: "#0D0D0B" }}>
-                      {entry.worker}
-                    </div>
-                    <div className="text-[10px] truncate" style={{ color: "#6B6460" }}>
-                      {entry.agency} · {entry.department}
-                    </div>
-                    <div className="mt-0.5">
-                      <span className={`text-[10px] px-1.5 py-0.5 rounded ${entry.exceptionColor}`}>
-                        {entry.exceptionType}
-                      </span>
-                    </div>
-                  </div>
-                  {/* VERIFICATION SEQUENCE (center) */}
-                  <div className="shrink-0">
-                    <VerificationChain completed={completed} />
-                  </div>
-                  {/* RIGHT */}
-                  <div className="flex flex-col items-end gap-1 shrink-0 w-24">
-                    <span className="text-[10px] text-destructive">Blocked · {entry.id}</span>
-                    {entry.status === "in-review" ? (
-                      <span className="text-[10px] text-amber-500 bg-amber-500/10 px-1.5 py-0.5 rounded">In Review</span>
-                    ) : (
-                      <div className="relative">
-                        <button
-                          onClick={() => setResolveDropdown(resolveDropdown === entry.id ? null : entry.id)}
-                          className="text-[11px] border border-border rounded px-2 py-0.5 text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors"
-                        >
-                          Resolve
-                        </button>
-                        {resolveDropdown === entry.id && (
-                          <div className="absolute right-0 top-full mt-1 z-50 bg-card border border-border rounded-lg shadow-lg w-52 overflow-hidden">
-                            {resolveOptions.map((opt) => (
-                              <button
-                                key={opt}
-                                onClick={() => handleResolve(entry.id, opt)}
-                                className="w-full text-left px-3 py-2 text-xs hover:bg-muted/50 text-foreground transition-colors"
-                              >
-                                {opt}
-                              </button>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
 
-      {/* RIGHT PANEL — 42% */}
-      <div className="w-[42%] overflow-y-auto p-5">
-        {/* Header */}
-        <div className="mb-5">
-          <h2 className="font-mono text-sm font-semibold" style={{ color: "#0D0D0B" }}>
-            Week to Date
-          </h2>
-          <p className="text-[11px] mt-0.5" style={{ color: "#6B6460" }}>
-            As of Wednesday 8pm · Wk 10 Feb
-          </p>
-        </div>
+          {/* Verified hours block */}
+          <div style={{ padding: 18, borderBottom: "1px solid var(--border-purple)", borderLeft: "3px solid var(--status-green)" }}>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 32, color: "var(--status-green)", lineHeight: 1, marginBottom: 4 }}>
+              {currentVerifiedHours}
+            </div>
+            <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 12, color: "var(--text-secondary)" }}>
+              verified hours
+            </div>
+            <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 8 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                <span style={monoLabel}>WORKERS ON VERIFIED PAYROLL</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>{verified.length}</span>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                <span style={monoLabel}>EST. PAYROLL THIS WEEK</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>
+                  £{currentEstPayroll.toLocaleString("en-GB", { minimumFractionDigits: 0 })}
+                </span>
+              </div>
+            </div>
+            <div style={{ marginTop: 8, fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 10, color: "var(--text-muted)", letterSpacing: "0.04em" }}>
+              (final on Friday close)
+            </div>
+          </div>
 
-        {/* Verified Summary */}
-        <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-4 mb-3">
-          <div className="mb-3">
-            <span className="font-mono text-[32px] font-bold text-green-500">{currentVerifiedHours}</span>
-            <p className="text-[11px]" style={{ color: "#6B6460" }}>verified hours</p>
-          </div>
-          <div className="mb-3">
-            <span className="font-mono text-[22px]" style={{ color: "#0D0D0B" }}>{verified.length}</span>
-            <p className="text-[11px]" style={{ color: "#6B6460" }}>workers on verified payroll</p>
-          </div>
-          <div>
-            <span className="font-mono text-lg" style={{ color: "#0D0D0B" }}>
-              £{currentEstPayroll.toLocaleString("en-GB", { minimumFractionDigits: 0 })}
-            </span>
-            <p className="text-[11px]" style={{ color: "#6B6460" }}>estimated payroll this week</p>
-            <p className="text-[9px]" style={{ color: "#6B6460" }}>(final on Friday close)</p>
-          </div>
-        </div>
-
-        {/* Exceptions Summary */}
-        <div className="bg-destructive/5 border border-destructive/20 rounded-lg p-4 mb-3">
-          <div className="mb-3">
-            <span className="font-mono text-[32px] font-bold text-destructive">{exceptions.length}</span>
-            <p className="text-[11px]" style={{ color: "#6B6460" }}>payroll exceptions</p>
-          </div>
-          <div className="mb-3">
-            <span className="font-mono text-[22px]" style={{ color: "#0D0D0B" }}>{exceptions.length * 16}</span>
-            <p className="text-[11px]" style={{ color: "#6B6460" }}>hours pending resolution</p>
-          </div>
-          <div className="bg-destructive/10 border border-destructive/20 rounded-md p-2.5">
-            <p className="text-[11px] leading-relaxed" style={{ color: "#6B6460" }}>
+          {/* Payroll exceptions block */}
+          <div style={{ padding: 18, borderBottom: "1px solid var(--border-purple)", borderLeft: "3px solid var(--status-red)" }}>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 32, color: "var(--status-red)", lineHeight: 1, marginBottom: 4 }}>
+              {exceptions.length}
+            </div>
+            <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 12, color: "var(--text-secondary)" }}>
+              payroll exceptions
+            </div>
+            <div style={{ marginTop: 14, display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+              <span style={monoLabel}>HOURS PENDING RESOLUTION</span>
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>{hoursPendingResolution}</span>
+            </div>
+            <div style={{
+              marginTop: 10, padding: "8px 10px", background: "rgba(185, 28, 28, 0.05)",
+              borderRadius: 3, fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 11,
+              color: "var(--text-secondary)", lineHeight: 1.5,
+            }}>
               Unresolved exceptions will not appear on the verified invoice. Resolve before week close to include on billing.
-            </p>
+            </div>
           </div>
-        </div>
 
-        {/* Agency Breakdown */}
-        <div>
-          <p className="text-[10px] uppercase tracking-[0.12em] mb-2" style={{ color: "#6B6460" }}>
-            Verified hours by agency
-          </p>
-          <div className="space-y-3">
-            {agencyBreakdown.map((agency) => (
-              <div key={agency.name}>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs" style={{ color: "#0D0D0B" }}>{agency.name}</span>
-                  <span className="font-mono text-xs text-green-500">{agency.hours}h</span>
+          {/* Verified hours by agency */}
+          <div style={{ padding: 18 }}>
+            <div style={{
+              fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 10,
+              letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-secondary)",
+              marginBottom: 12,
+            }}>VERIFIED HOURS BY AGENCY</div>
+            {agencyBreakdown.map((agency, i) => (
+              <div key={agency.name} style={{
+                marginBottom: i === agencyBreakdown.length - 1 ? 0 : 10,
+                display: "flex", flexDirection: "column", gap: 5,
+              }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                  <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>{agency.name}</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>{agency.hours}h</span>
                 </div>
-                <div className="h-1.5 bg-muted rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-green-500 rounded-full transition-all"
-                    style={{ width: `${(agency.hours / maxAgencyHours) * 100}%` }}
-                  />
+                <div style={{ width: "100%", height: 4, background: "var(--cream-tint)", borderRadius: 2, overflow: "hidden" }}>
+                  <div style={{
+                    height: "100%",
+                    width: `${maxAgencyHours > 0 ? (agency.hours / maxAgencyHours) * 100 : 0}%`,
+                    background: "var(--brand-purple)", borderRadius: 2,
+                  }} />
                 </div>
               </div>
             ))}
