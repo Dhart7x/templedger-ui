@@ -1968,7 +1968,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 4 — THE OUTCOME */}
-        <section className="tl-section-outcome" style={{ background: "#1A0A3D", padding: "56px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-outcome" style={{ background: "#1A0A3D", padding: "34px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <div
               style={{
