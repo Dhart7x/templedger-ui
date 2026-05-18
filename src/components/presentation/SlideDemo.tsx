@@ -221,29 +221,39 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
 
   // Main demo UI
   return (
-    <div className="demo-theme w-full h-full flex flex-col" style={{ background: "hsl(var(--background))", color: "hsl(var(--foreground))" }}>
-      {/* Demo Header */}
+    <div className="demo-theme w-full h-full flex flex-col" style={{ background: "var(--cream)", color: "var(--text-primary)" }}>
+      {/* Demo Top Bar */}
       <div
-        className="flex items-center justify-between px-4 py-3"
-        style={{ background: "#4C1D95", borderBottom: "0.5px solid #3B1578" }}
+        style={{
+          height: 56,
+          flexShrink: 0,
+          background: "var(--darkest-purple)",
+          borderBottom: "1px solid rgba(250, 250, 248, 0.08)",
+          padding: "0 24px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
       >
-        <div />
+        {/* Left — Home button (placeholder spacer; actual Home link lives in SalesDeck) */}
+        <div style={{ width: 88 }} />
 
-        {/* View Mode Pills */}
+        {/* Center — segmented view toggle */}
         <div
           role="tablist"
           aria-label="View mode"
           style={{
             display: "inline-flex",
-            gap: 4,
-            padding: 4,
-            borderRadius: 999,
-            background: "rgba(255,255,255,0.08)",
+            background: "rgba(250, 250, 248, 0.06)",
+            border: "1px solid rgba(250, 250, 248, 0.12)",
+            borderRadius: 4,
+            padding: 3,
+            gap: 3,
           }}
         >
           {([
-            { key: "client", label: "Client View" },
-            { key: "agency", label: "Agency View" },
+            { key: "client", label: "CLIENT" },
+            { key: "agency", label: "AGENCY" },
           ] as const).map((opt) => {
             const active = viewMode === opt.key;
             return (
@@ -253,19 +263,27 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
                 role="tab"
                 aria-selected={active}
                 onClick={() => setViewMode(opt.key)}
+                onMouseEnter={(e) => {
+                  if (!active) e.currentTarget.style.background = "rgba(250, 250, 248, 0.06)";
+                }}
+                onMouseLeave={(e) => {
+                  if (!active) e.currentTarget.style.background = "transparent";
+                }}
                 style={{
                   appearance: "none",
                   border: "none",
                   cursor: "pointer",
-                  pointerEvents: "auto",
-                  padding: "6px 16px",
-                  borderRadius: 999,
-                  fontSize: 13,
-                  fontWeight: 600,
-                  letterSpacing: "0.01em",
+                  height: 26,
+                  padding: "0 14px",
+                  borderRadius: 3,
+                  fontFamily: "var(--font-mono-headers)",
+                  fontWeight: 500,
+                  fontSize: 11,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
                   transition: "background 120ms ease, color 120ms ease",
-                  background: active ? "#FFFFFF" : "rgba(255,255,255,0.2)",
-                  color: active ? "#4C1D95" : "rgba(255,255,255,0.7)",
+                  background: active ? "var(--cream)" : "transparent",
+                  color: active ? "var(--deep-purple)" : "rgba(250, 250, 248, 0.6)",
                 }}
               >
                 {opt.label}
@@ -274,25 +292,52 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
           })}
         </div>
 
-        {/* Right side controls */}
-        <div className="flex items-center gap-3">
-          
-          
-          {/* Notification Bell */}
+        {/* Right — bell icon button */}
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <button
             onClick={() => {
-              if (viewMode === "client") {
-                setActiveClientView("notifications");
-              } else {
-                setActiveAgencyView("notifications");
-              }
+              if (viewMode === "client") setActiveClientView("notifications");
+              else setActiveAgencyView("notifications");
             }}
-            className="relative p-2 rounded-lg transition-colors"
-            style={{ background: "transparent" }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(250,250,248,0.06)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
+            style={{
+              position: "relative",
+              width: 32,
+              height: 32,
+              background: "transparent",
+              border: "1px solid rgba(250, 250, 248, 0.12)",
+              borderRadius: 4,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              transition: "background 120ms ease",
+            }}
+            aria-label="Notifications"
           >
-            <Bell className="w-5 h-5" style={{ color: "rgba(255,255,255,0.85)" }} />
+            <Bell size={14} style={{ color: "rgba(250,250,248,0.85)" }} />
             {unreadCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full flex items-center justify-center">
+              <span
+                style={{
+                  position: "absolute",
+                  top: -4,
+                  right: -4,
+                  width: 16,
+                  height: 16,
+                  background: "var(--status-red)",
+                  border: "2px solid var(--darkest-purple)",
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: "var(--font-mono-labels)",
+                  fontWeight: 600,
+                  fontSize: 9,
+                  color: "var(--cream)",
+                  lineHeight: 1,
+                }}
+              >
                 {unreadCount > 9 ? "9+" : unreadCount}
               </span>
             )}
@@ -306,7 +351,8 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="flex-1 flex overflow-hidden m-4 rounded-lg border border-border"
+        className="flex-1 flex overflow-hidden"
+        style={{ background: "var(--cream)" }}
       >
         {viewMode === "client" ? (
           <>
@@ -315,7 +361,12 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
               onViewChange={setActiveClientView}
               notificationCount={unreadCount}
             />
-            <div className="flex-1 overflow-auto bg-background">{renderClientView()}</div>
+            <div
+              className="flex-1 overflow-auto"
+              style={{ background: "var(--cream)", padding: "28px 36px" }}
+            >
+              {renderClientView()}
+            </div>
           </>
         ) : (
           <>
@@ -325,7 +376,12 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
               notificationCount={unreadCount}
               newOrderCount={pendingBookingsCount}
             />
-            <div className="flex-1 overflow-auto bg-background">{renderAgencyView()}</div>
+            <div
+              className="flex-1 overflow-auto"
+              style={{ background: "var(--cream)", padding: "28px 36px" }}
+            >
+              {renderAgencyView()}
+            </div>
           </>
         )}
       </motion.div>
