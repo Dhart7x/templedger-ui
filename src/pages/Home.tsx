@@ -702,7 +702,7 @@ const Home = () => {
               whileHover={{ scale: 1.03 }}
               style={{
                 background: "#FFFFFF",
-                color: C.primary,
+                color: "#1A0A3D",
                 fontWeight: 700,
                 fontSize: 14,
                 borderRadius: 8,
