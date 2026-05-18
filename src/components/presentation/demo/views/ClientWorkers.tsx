@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { Search, Filter, Users, Clock, CheckCircle, Building2, MapPin, Star, UserPlus, Car, Bus } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Search, Filter, Users, Clock, MapPin, Star, UserPlus, UserCheck, Car, Bus, ChevronDown } from "lucide-react";
 
 interface LiveWorker {
   id: string;
@@ -89,6 +87,42 @@ interface ClientWorkersProps {
   onViewWorker?: (workerName: string) => void;
 }
 
+const eyebrowStyle: React.CSSProperties = {
+  fontFamily: "'IBM Plex Mono', monospace",
+  fontWeight: 500, fontSize: 10, letterSpacing: "0.14em",
+  textTransform: "uppercase", color: "var(--brand-purple)",
+  marginBottom: 8,
+};
+const h1Style: React.CSSProperties = {
+  fontFamily: "'IBM Plex Mono', monospace",
+  fontWeight: 500, fontSize: 26, color: "var(--text-primary)",
+  marginBottom: 4, lineHeight: 1.1,
+};
+const sublineStyle: React.CSSProperties = {
+  fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13,
+  color: "var(--text-secondary)",
+};
+const monoLabel: React.CSSProperties = {
+  fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500,
+  fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase",
+  color: "var(--text-secondary)",
+};
+const monoPrefix: React.CSSProperties = {
+  fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500,
+  fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase",
+  color: "var(--text-secondary)",
+};
+const monoValue: React.CSSProperties = {
+  fontFamily: "'JetBrains Mono', monospace", fontWeight: 500,
+  fontSize: 12, color: "var(--text-primary)",
+};
+const headerCell: React.CSSProperties = {
+  fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500,
+  fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase",
+  color: "var(--text-secondary)",
+};
+const GRID_TEMPLATE = "1.5fr 1.2fr 1fr 1.2fr 1fr 90px 100px";
+
 const ClientWorkers = ({ onViewWorker }: ClientWorkersProps) => {
   const [activeTab, setActiveTab] = useState<"live" | "standby" | "new">("live");
   const [searchQuery, setSearchQuery] = useState("");
@@ -100,7 +134,6 @@ const ClientWorkers = ({ onViewWorker }: ClientWorkersProps) => {
     const regDate = new Date(date);
     const now = new Date();
     const diffDays = Math.floor((now.getTime() - regDate.getTime()) / (1000 * 60 * 60 * 24));
-    
     switch (timeFilter) {
       case "week": return diffDays <= 7;
       case "month": return diffDays <= 30;
@@ -133,360 +166,372 @@ const ClientWorkers = ({ onViewWorker }: ClientWorkersProps) => {
   });
 
   const handleWorkerClick = (name: string) => {
-    if (onViewWorker) {
-      onViewWorker(name);
-    }
+    if (onViewWorker) onViewWorker(name);
   };
 
+  const attendanceColor = (a: number) =>
+    a >= 95 ? "var(--status-green)" : a >= 85 ? "var(--status-amber)" : "var(--status-red)";
+
   const getStatusBadge = (status: string) => {
-    switch (status) {
-      case "ready": return <span className="px-2 py-0.5 text-xs rounded-full bg-green-500/20 text-green-500">Ready</span>;
-      case "pending-induction": return <span className="px-2 py-0.5 text-xs rounded-full bg-amber-500/20 text-amber-500">Induction Pending</span>;
-      case "documents-pending": return <span className="px-2 py-0.5 text-xs rounded-full bg-destructive/20 text-destructive">Docs Pending</span>;
-      default: return null;
+    const map: Record<string, { bg: string; color: string; label: string }> = {
+      "ready": { bg: "rgba(34,197,94,0.12)", color: "var(--status-green)", label: "READY" },
+      "pending-induction": { bg: "rgba(217,119,6,0.12)", color: "var(--status-amber)", label: "INDUCTION" },
+      "documents-pending": { bg: "rgba(220,38,38,0.12)", color: "var(--status-red)", label: "DOCS PENDING" },
+    };
+    const s = map[status];
+    if (!s) return null;
+    return (
+      <span style={{
+        padding: "2px 8px", borderRadius: 3, background: s.bg, color: s.color,
+        fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 10,
+        letterSpacing: "0.04em", textTransform: "uppercase",
+      }}>{s.label}</span>
+    );
+  };
+
+  // Sub-filter pills
+  const SubPill = ({ id, label, count, dotColor }: { id: "live" | "standby" | "new"; label: string; count: number; dotColor?: string }) => {
+    const active = activeTab === id;
+    return (
+      <button
+        onClick={() => setActiveTab(id)}
+        onMouseEnter={(e) => { if (!active) e.currentTarget.style.background = "var(--cream-tint)"; }}
+        onMouseLeave={(e) => { if (!active) e.currentTarget.style.background = "var(--white)"; }}
+        style={{
+          height: 30, padding: "0 14px", borderRadius: 4,
+          fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 11,
+          letterSpacing: "0.06em", textTransform: "uppercase",
+          cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 8,
+          transition: "background 120ms ease",
+          background: active ? "var(--deep-purple)" : "var(--white)",
+          border: active ? "1px solid var(--deep-purple)" : "1px solid var(--border-purple)",
+          color: active ? "var(--cream)" : "var(--text-secondary)",
+        }}
+      >
+        {dotColor && (
+          <span style={{
+            width: 6, height: 6, borderRadius: "50%",
+            background: active ? "rgba(250,250,248,0.8)" : dotColor,
+          }} />
+        )}
+        <span>{label}</span>
+        <span style={{
+          fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 10,
+          color: active ? "rgba(250,250,248,0.7)" : "var(--text-muted)",
+        }}>{count}</span>
+      </button>
+    );
+  };
+
+  const Dropdown = ({ prefix, value, onChange, options }: { prefix: string; value: string; onChange: (v: string) => void; options: { value: string; label: string }[] }) => (
+    <div style={{
+      position: "relative", height: 36,
+      display: "inline-flex", alignItems: "center",
+    }}>
+      <div style={{
+        position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)",
+        display: "flex", alignItems: "center", gap: 8, pointerEvents: "none", zIndex: 1,
+      }}>
+        <span style={monoPrefix}>{prefix}</span>
+        <span style={monoValue}>{options.find(o => o.value === value)?.label || ""}</span>
+      </div>
+      <ChevronDown size={12} style={{
+        position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)",
+        color: "var(--brand-purple)", pointerEvents: "none", zIndex: 1,
+      }} />
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        style={{
+          height: 36, padding: "0 32px 0 14px",
+          background: "var(--white)", border: "1px solid var(--border-purple)",
+          borderRadius: 4, cursor: "pointer",
+          fontFamily: "'JetBrains Mono', monospace", fontSize: 12,
+          color: "transparent", appearance: "none", WebkitAppearance: "none",
+          minWidth: 180,
+        }}
+      >
+        {options.map(o => <option key={o.value} value={o.value} style={{ color: "var(--text-primary)" }}>{o.label}</option>)}
+      </select>
+    </div>
+  );
+
+  const renderTable = () => {
+    if (activeTab === "live") {
+      return (
+        <div style={{ background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden" }}>
+          <div style={{
+            display: "grid", gridTemplateColumns: GRID_TEMPLATE, gap: 16,
+            padding: "13px 24px", borderBottom: "1px solid var(--border-purple)",
+            background: "rgba(76, 29, 149, 0.02)", alignItems: "center",
+          }}>
+            <div style={headerCell}>WORKER</div>
+            <div style={headerCell}>AGENCY</div>
+            <div style={headerCell}>SITE</div>
+            <div style={headerCell}>DEPARTMENT</div>
+            <div style={headerCell}>STATUS</div>
+            <div style={{ ...headerCell, textAlign: "right" }}>HOURS (WEEK)</div>
+            <div style={{ ...headerCell, textAlign: "right" }}>ATTENDANCE</div>
+          </div>
+          {filteredLive.map((w, idx) => (
+            <div
+              key={w.id}
+              onClick={() => handleWorkerClick(w.name)}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "var(--cream-tint)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "var(--white)"; }}
+              style={{
+                display: "grid", gridTemplateColumns: GRID_TEMPLATE, gap: 16,
+                padding: "14px 24px",
+                borderBottom: idx === filteredLive.length - 1 ? "none" : "1px solid var(--border-purple)",
+                alignItems: "center", cursor: "pointer",
+                transition: "background 120ms ease", background: "var(--white)",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <div style={{
+                  width: 30, height: 30, borderRadius: "50%",
+                  background: "rgba(76, 29, 149, 0.1)", color: "var(--brand-purple)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontFamily: "'JetBrains Mono', monospace", fontWeight: 600,
+                  fontSize: 11, letterSpacing: "0.02em",
+                }}>{w.name.split(" ").map(n => n[0]).join("").slice(0, 2)}</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                  <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                    <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 13, color: "var(--text-primary)" }}>{w.name}</span>
+                    <span style={{ display: "inline-flex", gap: 3, alignItems: "center" }}>
+                      <Star size={10} fill="#D97706" color="#D97706" />
+                      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 11, color: "var(--text-secondary)" }}>{w.rating}</span>
+                    </span>
+                  </div>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>{w.role}</span>
+                </div>
+              </div>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--brand-purple)" }}>{w.agency}</div>
+              <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                <MapPin size={12} style={{ color: "var(--text-muted)" }} />
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 12, color: "var(--text-primary)" }}>{w.site}</span>
+              </div>
+              <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>{w.department}</div>
+              <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--status-green)" }} />
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--status-green)" }}>On site</span>
+              </div>
+              <div style={{ textAlign: "right", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>{w.hoursWeek}h</div>
+              <div style={{ textAlign: "right", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 13, color: attendanceColor(w.attendance) }}>{w.attendance}%</div>
+            </div>
+          ))}
+        </div>
+      );
     }
+    if (activeTab === "standby") {
+      const tpl = "1.5fr 1.2fr 1fr 1.2fr 1fr 100px 90px";
+      return (
+        <div style={{ background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden" }}>
+          <div style={{ display: "grid", gridTemplateColumns: tpl, gap: 16, padding: "13px 24px", borderBottom: "1px solid var(--border-purple)", background: "rgba(76, 29, 149, 0.02)", alignItems: "center" }}>
+            <div style={headerCell}>WORKER</div>
+            <div style={headerCell}>AGENCY</div>
+            <div style={headerCell}>SITE</div>
+            <div style={headerCell}>DEPARTMENT</div>
+            <div style={headerCell}>SHIFTS</div>
+            <div style={headerCell}>LAST WORKED</div>
+            <div style={{ ...headerCell, textAlign: "right" }}>RATING</div>
+          </div>
+          {filteredStandby.map((w, idx) => (
+            <div
+              key={w.id}
+              onClick={() => handleWorkerClick(w.name)}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "var(--cream-tint)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "var(--white)"; }}
+              style={{
+                display: "grid", gridTemplateColumns: tpl, gap: 16,
+                padding: "14px 24px",
+                borderBottom: idx === filteredStandby.length - 1 ? "none" : "1px solid var(--border-purple)",
+                alignItems: "center", cursor: "pointer", transition: "background 120ms ease", background: "var(--white)",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <div style={{ width: 30, height: 30, borderRadius: "50%", background: "rgba(76, 29, 149, 0.1)", color: "var(--brand-purple)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 11 }}>
+                  {w.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                  <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 13, color: "var(--text-primary)" }}>{w.name}</span>
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>{w.role}</span>
+                </div>
+              </div>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--brand-purple)" }}>{w.agency}</div>
+              <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                <MapPin size={12} style={{ color: "var(--text-muted)" }} />
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 12, color: "var(--text-primary)" }}>{w.site}</span>
+              </div>
+              <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>{w.department}</div>
+              <div style={{ display: "flex", gap: 4 }}>
+                {w.preferredShifts.map(s => (
+                  <span key={s} style={{ width: 20, height: 20, borderRadius: 3, background: "var(--cream-tint)", border: "1px solid var(--border-purple)", display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 10, color: "var(--text-primary)" }}>{s}</span>
+                ))}
+              </div>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>{w.lastShift}</div>
+              <div style={{ textAlign: "right", display: "inline-flex", justifyContent: "flex-end", alignItems: "center", gap: 4 }}>
+                <Star size={10} fill="#D97706" color="#D97706" />
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 13, color: "var(--text-primary)" }}>{w.rating}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+    // new
+    const tpl = "1.5fr 1.2fr 1fr 1.2fr 120px 1fr";
+    return (
+      <div style={{ background: "var(--white)", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden" }}>
+        <div style={{ display: "grid", gridTemplateColumns: tpl, gap: 16, padding: "13px 24px", borderBottom: "1px solid var(--border-purple)", background: "rgba(76, 29, 149, 0.02)", alignItems: "center" }}>
+          <div style={headerCell}>WORKER</div>
+          <div style={headerCell}>AGENCY</div>
+          <div style={headerCell}>SITE</div>
+          <div style={headerCell}>ROLE</div>
+          <div style={headerCell}>STATUS</div>
+          <div style={headerCell}>EXPERIENCE</div>
+        </div>
+        {filteredNew.map((w, idx) => (
+          <div
+            key={w.id}
+            onClick={() => handleWorkerClick(w.name)}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "var(--cream-tint)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "var(--white)"; }}
+            style={{
+              display: "grid", gridTemplateColumns: tpl, gap: 16,
+              padding: "14px 24px",
+              borderBottom: idx === filteredNew.length - 1 ? "none" : "1px solid var(--border-purple)",
+              alignItems: "center", cursor: "pointer", transition: "background 120ms ease", background: "var(--white)",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ width: 30, height: 30, borderRadius: "50%", background: "rgba(76, 29, 149, 0.1)", color: "var(--brand-purple)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 11 }}>
+                {w.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 13, color: "var(--text-primary)" }}>{w.name}</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>Registered {w.registeredDate}</span>
+              </div>
+            </div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--brand-purple)" }}>{w.agency}</div>
+            <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+              <MapPin size={12} style={{ color: "var(--text-muted)" }} />
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 12, color: "var(--text-primary)" }}>{w.site}</span>
+            </div>
+            <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>{w.role}</div>
+            <div>{getStatusBadge(w.status)}</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+              {w.experience.length > 0 ? w.experience.map(e => (
+                <span key={e} style={{ padding: "2px 6px", borderRadius: 3, background: "rgba(76, 29, 149, 0.08)", fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 10, color: "var(--brand-purple)" }}>{e}</span>
+              )) : <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: "var(--text-muted)" }}>No prior exp</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
   };
 
   return (
-    <div className="p-4 md:p-6 space-y-6">
+    <div style={{ padding: "0", display: "flex", flexDirection: "column" }}>
       {/* Header */}
-      <div>
-        <h1 className="text-lg md:text-xl font-bold text-foreground">Workers</h1>
-        <p className="text-xs text-muted-foreground">View all workers across agencies</p>
-      </div>
-
-      {/* Summary */}
-      <div className="grid grid-cols-4 gap-3">
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <Users className="w-4 h-4 text-muted-foreground" />
-            <span className="text-xs text-muted-foreground">Total</span>
-          </div>
-          <p className="text-xl font-bold">{liveWorkers.length + standbyWorkers.length}</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <CheckCircle className="w-4 h-4 text-green-500" />
-            <span className="text-xs text-muted-foreground">Live</span>
-          </div>
-          <p className="text-xl font-bold text-green-500">{liveWorkers.length}</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <Clock className="w-4 h-4 text-amber-500" />
-            <span className="text-xs text-muted-foreground">Standby</span>
-          </div>
-          <p className="text-xl font-bold text-amber-500">{standbyWorkers.length}</p>
-        </div>
-        <div className="bg-card border border-border rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <UserPlus className="w-4 h-4 text-primary" />
-            <span className="text-xs text-muted-foreground">New ({timeFilter})</span>
-          </div>
-          <p className="text-xl font-bold text-primary">{filteredNew.length}</p>
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 22 }}>
+        <div>
+          <div style={eyebrowStyle}>— WORKERS</div>
+          <h1 style={h1Style}>Workers</h1>
+          <p style={sublineStyle}>View all workers across agencies</p>
         </div>
       </div>
 
-      {/* Tabs */}
-      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "live" | "standby" | "new")}>
-        <TabsList className="bg-muted/50 gap-4">
-          <TabsTrigger value="live" className="gap-2 data-[state=active]:bg-green-500/10 data-[state=active]:text-green-500">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            Live Workers
-            <span className="bg-green-500/20 text-green-500 px-1.5 py-0.5 rounded text-xs">{filteredLive.length}</span>
-          </TabsTrigger>
-          <TabsTrigger value="standby" className="gap-2 data-[state=active]:bg-amber-500/10 data-[state=active]:text-amber-500">
-            <Clock className="w-3 h-3" />
-            Standby
-            <span className="bg-muted text-muted-foreground px-1.5 py-0.5 rounded text-xs">{filteredStandby.length}</span>
-          </TabsTrigger>
-          <TabsTrigger value="new" className="gap-2 data-[state=active]:bg-primary/10 data-[state=active]:text-primary">
-            <UserPlus className="w-3 h-3" />
-            New Registered
-            <span className="bg-primary/20 text-primary px-1.5 py-0.5 rounded text-xs">{filteredNew.length}</span>
-          </TabsTrigger>
-        </TabsList>
-
-        {/* Live Tab */}
-        <TabsContent value="live" className="mt-4 space-y-4">
-          <div className="flex items-center gap-3 flex-wrap">
-            <div className="relative flex-1 min-w-[200px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input placeholder="Search by name..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9" />
-            </div>
-            <div className="flex items-center gap-2">
-              <Filter className="w-4 h-4 text-muted-foreground" />
-              <select value={agencyFilter} onChange={(e) => setAgencyFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
-                <option value="all">All Agencies</option>
-                <option value="Workforce Direct">Workforce Direct</option>
-                <option value="Pinnacle Staffing">Pinnacle Staffing</option>
-                <option value="Meridian Recruitment">Meridian Recruitment</option>
-              </select>
-              <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
-                <option value="all">All Sites</option>
-                <option value="Baltimore, MD">Baltimore, MD</option>
-                <option value="Las Vegas, NV">Las Vegas, NV</option>
-                <option value="Dallas Fort-Worth, TX">Dallas Fort-Worth, TX</option>
-                <option value="Baltimore, MD">Baltimore, MD</option>
-                <option value="Las Vegas, NV">Las Vegas, NV</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="bg-card border border-border rounded-lg overflow-hidden">
-            <table className="w-full text-sm">
-              <thead className="bg-muted/50">
-                <tr>
-                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Worker</th>
-                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Agency</th>
-                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Site</th>
-                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Department</th>
-                  <th className="text-center px-4 py-3 font-medium text-muted-foreground">Status</th>
-                  <th className="text-right px-4 py-3 font-medium text-muted-foreground">Hours (Week)</th>
-                  <th className="text-right px-4 py-3 font-medium text-muted-foreground">Attendance</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {filteredLive.map((worker) => (
-                  <tr key={worker.id} className="hover:bg-muted/30 transition-colors">
-                    <td className="px-4 py-3">
-                      <button onClick={() => handleWorkerClick(worker.name)} className="text-left hover:underline">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center text-xs font-bold text-green-500">
-                            {worker.name.split(" ").map(n => n[0]).join("")}
-                          </div>
-                          <div>
-                            <div className="flex items-center gap-2">
-                              <p className="font-medium">{worker.name}</p>
-                              <div className="flex items-center gap-0.5">
-                                <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
-                                <span className="text-xs">{worker.rating}</span>
-                              </div>
-                            </div>
-                            <p className="text-xs text-muted-foreground">{worker.role}</p>
-                          </div>
-                        </div>
-                      </button>
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">{worker.agency}</td>
-                    <td className="px-4 py-3">
-                      <div className="flex items-center gap-1">
-                        <MapPin className="w-3 h-3 text-muted-foreground" />
-                        <span className="text-sm">{worker.site}</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">{worker.department}</td>
-                    <td className="px-4 py-3 text-center">
-                      <div className="flex items-center justify-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                        <span className="text-xs text-green-500">On site</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-right font-medium">{worker.hoursWeek}h</td>
-                    <td className="px-4 py-3 text-right">
-                      <span className={`font-medium ${worker.attendance >= 95 ? "text-green-500" : worker.attendance >= 90 ? "text-amber-500" : "text-destructive"}`}>
-                        {worker.attendance}%
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </TabsContent>
-
-        {/* Standby Tab */}
-        <TabsContent value="standby" className="mt-4 space-y-4">
-          <div className="flex items-center gap-3 flex-wrap">
-            <div className="relative flex-1 min-w-[200px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input placeholder="Search standby workers..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9" />
-            </div>
-            <div className="flex items-center gap-2">
-              <Filter className="w-4 h-4 text-muted-foreground" />
-              <select value={agencyFilter} onChange={(e) => setAgencyFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
-                <option value="all">All Agencies</option>
-                <option value="Workforce Direct">Workforce Direct</option>
-                <option value="Pinnacle Staffing">Pinnacle Staffing</option>
-                <option value="Meridian Recruitment">Meridian Recruitment</option>
-              </select>
-              <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
-                <option value="all">All Sites</option>
-                <option value="Baltimore, MD">Baltimore, MD</option>
-                <option value="Las Vegas, NV">Las Vegas, NV</option>
-                <option value="Dallas Fort-Worth, TX">Dallas Fort-Worth, TX</option>
-                <option value="Baltimore, MD">Baltimore, MD</option>
-                <option value="Las Vegas, NV">Las Vegas, NV</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="bg-card border border-border rounded-lg overflow-hidden">
-            <table className="w-full text-sm">
-              <thead className="bg-muted/50">
-                <tr>
-                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Worker</th>
-                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Agency</th>
-                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Site</th>
-                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Department</th>
-                  <th className="text-center px-4 py-3 font-medium text-muted-foreground">Shifts</th>
-                  <th className="text-center px-4 py-3 font-medium text-muted-foreground">Last Worked</th>
-                  <th className="text-center px-4 py-3 font-medium text-muted-foreground">Distance</th>
-                  <th className="text-right px-4 py-3 font-medium text-muted-foreground">Rating</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {filteredStandby.map((worker) => (
-                  <tr key={worker.id} className="hover:bg-muted/30 transition-colors">
-                    <td className="px-4 py-3">
-                      <button onClick={() => handleWorkerClick(worker.name)} className="text-left hover:underline">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-amber-500/10 flex items-center justify-center text-xs font-bold text-amber-500">
-                            {worker.name.split(" ").map(n => n[0]).join("")}
-                          </div>
-                          <div>
-                            <p className="font-medium">{worker.name}</p>
-                            <p className="text-xs text-muted-foreground">{worker.role}</p>
-                          </div>
-                        </div>
-                      </button>
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">{worker.agency}</td>
-                    <td className="px-4 py-3">
-                      <div className="flex items-center gap-1">
-                        <MapPin className="w-3 h-3 text-muted-foreground" />
-                        <span className="text-sm">{worker.site}</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">{worker.department}</td>
-                    <td className="px-4 py-3 text-center">
-                      <div className="flex items-center justify-center gap-1">
-                        {worker.preferredShifts.map((s) => (
-                          <span key={s} className="w-5 h-5 rounded bg-muted flex items-center justify-center text-[10px] font-medium">{s}</span>
-                        ))}
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-center text-muted-foreground text-xs">{worker.lastShift}</td>
-                    <td className="px-4 py-3 text-center">
-                      <div className="flex flex-col items-center text-xs">
-                        <span className="font-medium">{worker.distance.miles} mi</span>
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                          <span className="flex items-center gap-0.5"><Car className="w-3 h-3" /> {worker.distance.carTime}</span>
-                          <span className="flex items-center gap-0.5"><Bus className="w-3 h-3" /> {worker.distance.publicTransportTime}</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-right">
-                      <div className="flex items-center justify-end gap-0.5">
-                        <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
-                        <span className="font-medium">{worker.rating}</span>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </TabsContent>
-
-        {/* New Registered Tab */}
-        <TabsContent value="new" className="mt-4 space-y-4">
-          <div className="flex items-center gap-3 flex-wrap">
-            <div className="relative flex-1 min-w-[200px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input placeholder="Search new registrations..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-9" />
-            </div>
-            <div className="flex items-center gap-2">
-              <Filter className="w-4 h-4 text-muted-foreground" />
-              <select value={agencyFilter} onChange={(e) => setAgencyFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
-                <option value="all">All Agencies</option>
-                <option value="Workforce Direct">Workforce Direct</option>
-                <option value="Pinnacle Staffing">Pinnacle Staffing</option>
-                <option value="Meridian Recruitment">Meridian Recruitment</option>
-              </select>
-              <select value={siteFilter} onChange={(e) => setSiteFilter(e.target.value)} className="text-xs bg-card border border-border rounded px-2 py-1.5">
-                <option value="all">All Sites</option>
-                <option value="Baltimore, MD">Baltimore, MD</option>
-                <option value="Las Vegas, NV">Las Vegas, NV</option>
-                <option value="Dallas Fort-Worth, TX">Dallas Fort-Worth, TX</option>
-                <option value="Baltimore, MD">Baltimore, MD</option>
-                <option value="Las Vegas, NV">Las Vegas, NV</option>
-              </select>
-              <div className="flex items-center bg-card border border-border rounded">
-                {(["week", "month", "quarter", "year"] as const).map((t) => (
-                  <button
-                    key={t}
-                    onClick={() => setTimeFilter(t)}
-                    className={`px-2 py-1 text-xs capitalize ${timeFilter === t ? "bg-primary text-primary-foreground" : "text-muted-foreground"}`}
-                  >
-                    {t}
-                  </button>
-                ))}
+      {/* Counter strip */}
+      <div style={{
+        display: "flex", background: "var(--white)",
+        border: "1px solid var(--border-purple)", borderRadius: 6,
+        padding: "18px 0", marginBottom: 22,
+      }}>
+        {[
+          { key: "total", label: "Total", icon: Users, color: "var(--brand-purple)", value: liveWorkers.length + standbyWorkers.length },
+          { key: "live", label: "Live", icon: UserCheck, color: "var(--status-green)", value: liveWorkers.length },
+          { key: "standby", label: "Standby", icon: Clock, color: "var(--status-amber)", value: standbyWorkers.length },
+          { key: "new", label: `New (${timeFilter})`, icon: UserPlus, color: "var(--brand-purple)", value: filteredNew.length },
+        ].map((c, i, arr) => {
+          const Icon = c.icon;
+          return (
+            <div key={c.key} style={{
+              flex: 1, padding: "0 20px",
+              borderRight: i === arr.length - 1 ? "none" : "1px solid var(--border-purple)",
+              display: "flex", flexDirection: "column", gap: 6,
+            }}>
+              <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                <Icon size={12} style={{ color: c.color }} />
+                <span style={monoLabel}>{c.label}</span>
               </div>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 26, color: "var(--text-primary)", lineHeight: 1 }}>{c.value}</div>
+              <div style={{ width: 22, height: 2, background: c.color, borderRadius: 1 }} />
             </div>
-          </div>
+          );
+        })}
+      </div>
 
-          <div className="bg-card border border-border rounded-lg overflow-hidden">
-            <table className="w-full text-sm">
-              <thead className="bg-muted/50">
-                <tr>
-                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Worker</th>
-                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Agency</th>
-                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Site</th>
-                  <th className="text-left px-4 py-3 font-medium text-muted-foreground">Role</th>
-                  <th className="text-center px-4 py-3 font-medium text-muted-foreground">Status</th>
-                  <th className="text-center px-4 py-3 font-medium text-muted-foreground">Experience</th>
-                  <th className="text-center px-4 py-3 font-medium text-muted-foreground">Availability</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {filteredNew.map((worker) => (
-                  <tr key={worker.id} className="hover:bg-muted/30 transition-colors">
-                    <td className="px-4 py-3">
-                      <button onClick={() => handleWorkerClick(worker.name)} className="text-left hover:underline">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">
-                            {worker.name.split(" ").map(n => n[0]).join("")}
-                          </div>
-                          <div>
-                            <p className="font-medium">{worker.name}</p>
-                            <p className="text-xs text-muted-foreground">Registered {worker.registeredDate}</p>
-                          </div>
-                        </div>
-                      </button>
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">{worker.agency}</td>
-                    <td className="px-4 py-3">
-                      <div className="flex items-center gap-1">
-                        <MapPin className="w-3 h-3 text-muted-foreground" />
-                        <span className="text-sm">{worker.site}</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">{worker.role}</td>
-                    <td className="px-4 py-3 text-center">{getStatusBadge(worker.status)}</td>
-                    <td className="px-4 py-3 text-center">
-                      <div className="flex items-center justify-center gap-1 flex-wrap">
-                        {worker.experience.length > 0 ? worker.experience.map((exp) => (
-                          <span key={exp} className="px-1.5 py-0.5 rounded bg-primary/10 text-primary text-[10px]">{exp}</span>
-                        )) : (
-                          <span className="text-xs text-muted-foreground">No prior exp</span>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-center">
-                      <div className="flex items-center justify-center gap-1">
-                        {worker.preferredShifts.map((s) => (
-                          <span key={s} className="w-5 h-5 rounded bg-muted flex items-center justify-center text-[10px] font-medium">{s}</span>
-                        ))}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </TabsContent>
-      </Tabs>
+      {/* Sub-filter pills */}
+      <div style={{ display: "inline-flex", gap: 4, marginBottom: 16 }}>
+        <SubPill id="live" label="Live Workers" count={filteredLive.length} dotColor="var(--status-green)" />
+        <SubPill id="standby" label="Standby" count={filteredStandby.length} />
+        <SubPill id="new" label="New Registered" count={filteredNew.length} />
+      </div>
+
+      {/* Search + filters row */}
+      <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap", marginBottom: 18 }}>
+        <div style={{ position: "relative", width: 280 }}>
+          <Search size={14} style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)", pointerEvents: "none" }} />
+          <input
+            type="text"
+            placeholder="Search by name..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={(e) => { e.currentTarget.style.borderColor = "var(--brand-purple)"; }}
+            onBlur={(e) => { e.currentTarget.style.borderColor = "var(--border-purple)"; }}
+            style={{
+              height: 36, width: "100%",
+              background: "var(--white)", border: "1px solid var(--border-purple)",
+              borderRadius: 4, padding: "0 12px 0 36px",
+              fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13,
+              color: "var(--text-primary)", outline: "none",
+            }}
+          />
+        </div>
+        <button style={{
+          width: 36, height: 36, background: "var(--white)",
+          border: "1px solid var(--border-purple)", borderRadius: 4,
+          display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
+        }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = "var(--cream-tint)"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = "var(--white)"; }}
+        >
+          <Filter size={14} style={{ color: "var(--brand-purple)" }} />
+        </button>
+        <Dropdown prefix="AGENCY" value={agencyFilter} onChange={setAgencyFilter} options={[
+          { value: "all", label: "All Agencies" },
+          { value: "Workforce Direct", label: "Workforce Direct" },
+          { value: "Pinnacle Staffing", label: "Pinnacle Staffing" },
+          { value: "Meridian Recruitment", label: "Meridian Recruitment" },
+        ]} />
+        <Dropdown prefix="SITE" value={siteFilter} onChange={setSiteFilter} options={[
+          { value: "all", label: "All Sites" },
+          { value: "Baltimore, MD", label: "Baltimore, MD" },
+          { value: "Las Vegas, NV", label: "Las Vegas, NV" },
+          { value: "Dallas Fort-Worth, TX", label: "Dallas Fort-Worth, TX" },
+        ]} />
+        {activeTab === "new" && (
+          <Dropdown prefix="PERIOD" value={timeFilter} onChange={(v) => setTimeFilter(v as "week" | "month" | "quarter" | "year")} options={[
+            { value: "week", label: "Week" },
+            { value: "month", label: "Month" },
+            { value: "quarter", label: "Quarter" },
+            { value: "year", label: "Year" },
+          ]} />
+        )}
+      </div>
+
+      {renderTable()}
     </div>
   );
 };
