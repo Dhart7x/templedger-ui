@@ -1,4 +1,4 @@
-import { Eye, Calendar, ClipboardList, Building2, Users, DollarSign, FileText, TrendingUp, UserCheck, MessageCircle, Shield } from "lucide-react";
+import { Eye, Calendar, ClipboardList, Building2, Users, DollarSign, FileText, TrendingUp, UserCheck, MessageCircle, Shield, Sparkles } from "lucide-react";
 
 interface ClientSidebarProps {
   activeView: string;
