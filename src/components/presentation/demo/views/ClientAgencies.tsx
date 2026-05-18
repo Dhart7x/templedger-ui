@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Building2, TrendingUp, Clock, Users, Star, FileText, ChevronDown, ChevronUp, MapPin, Briefcase, Zap, DollarSign, UserPlus } from "lucide-react";
+import { Building2, TrendingUp, Clock, Users, Star, FileText, ChevronDown, ChevronUp, ChevronRight, MapPin, Briefcase, Zap, DollarSign, UserPlus } from "lucide-react";
 import { agencyStats, agencyWorkers } from "../agencyDemoData";
 
 // ─── Derive data from agencyDemoData ─────────────────────────────────────────
