@@ -905,28 +905,28 @@ const Home = () => {
               >
               {[
                 {
-                  q: "You're paying for hours that were never worked.",
-                  a: "Inflated hours, ghost shifts, late clock-outs, questionable overtime — unverified payroll runs through and the money is gone before anyone audits it.",
+                  q: "Paying for hours that were never worked.",
+                  a: "Ghost shifts, late clock-outs, inflated overtime. Replacements ordered, both workers show up and both get paid. Without a system to catch it, the cheaper move is to let it through.",
                 },
                 {
-                  q: "You're carrying compliance risk that belongs to the agency.",
-                  a: "Right-to-work violations, expired certifications, unsigned contracts. When the regulator shows up, the agency points at you. The fine sits with you.",
+                  q: "Paying margin on workers who should already be yours.",
+                  a: "You have the right to convert workers at no fee after a set duration. It's never surfaced, and monitoring it loses to the daily fire-fighting. You keep paying margin you don't need to. Your best workers become someone else's best workers.",
                 },
                 {
-                  q: "You're paying margin on workers who should already be yours.",
-                  a: "Conversion windows close because nobody surfaces them. The agency keeps billing margin on workers you've been paying for long enough to own.",
+                  q: "Spend authorized at site level, with no financial control.",
+                  a: "Who can order replacements. Who can request volume uplift. Whether HR signs off on overtime. The rules exist on paper. At a systems level, they aren't enforced. Middle management defaults to the easier option, not the cheapest one. Every shift, every site, compounding.",
                 },
                 {
-                  q: "You're authorizing spend with no financial control.",
-                  a: "Headcount decisions happen at site level, without finance in the loop. Every authorization compounds. Nothing stops it.",
+                  q: "Overtime distributed by default, not by design.",
+                  a: "46 workers skilled on the department, available for the shift. The easy option wins. Overtime goes to the worker already on site. The workers cycling at the bottom of the rotation leave. Attrition is the bill you didn't realize you were paying.",
                 },
                 {
-                  q: "You're paying for overtime and attrition you didn't choose.",
-                  a: "Workers who get too many hours burn out. Workers who get too few leave. Both cost. Both stem from how shifts get distributed in the first place.",
+                  q: "Allocating shifts the way you always have.",
+                  a: "\"This is how we do it\" is the formula. Bookings aren't routed to the agency that can fill fastest, or cheapest, or to the one that's actually performing. Cost and productivity both suffer, and neither shows up on the invoice.",
                 },
                 {
-                  q: "You're allocating shifts blind.",
-                  a: "No-shows need speed. Forward planning needs quality and price. Without the data to tell the difference, every shift goes to whichever agency picks up the phone first.",
+                  q: "Compliance you can't verify at scale.",
+                  a: "Right-to-work, certifications, unsigned contracts. The assumption is everything checks out. The reality at scale is you have no way to confirm it. The reputational and commercial risk sits with you, not the agency.",
                 },
               ].map((block, i) => (
                 <motion.div
