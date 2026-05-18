@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plus, Check, X, MessageSquare, Clock, Users, Building2, Sparkles, Send, Loader2, DollarSign, Star, Pencil } from "lucide-react";
+import { Plus, Check, X, MessageSquare, Clock, Users, Building2, Sparkles, Send, Loader2, DollarSign, Star, Pencil, MapPin, Calendar, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDemoContext } from "../DemoContext";
 import { toast } from "sonner";
