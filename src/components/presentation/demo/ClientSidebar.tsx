@@ -1,4 +1,4 @@
-import { Eye, Calendar, ClipboardList, Building2, Users, DollarSign, FileText, TrendingUp, UserCheck, MessageCircle, Shield } from "lucide-react";
+import { Eye, Calendar, ClipboardList, Building2, Users, DollarSign, FileText, TrendingUp, UserCheck, MessageCircle, Shield, Sparkles } from "lucide-react";
 
 interface ClientSidebarProps {
   activeView: string;
@@ -15,6 +15,7 @@ const navItems = [
   { id: "payroll", label: "Payroll", icon: DollarSign },
   { id: "billing", label: "Billing", icon: FileText },
   { id: "spend-analysis", label: "Spend Analysis", icon: TrendingUp },
+  { id: "insights", label: "Insights", icon: Sparkles },
   { id: "temp-perm", label: "Temp-Perm", icon: UserCheck },
   { id: "permissions", label: "Permissions", icon: Shield },
 ];

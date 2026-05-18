@@ -28,6 +28,7 @@ import ClientWorkers from "./demo/views/ClientWorkers";
 import ClientPayroll from "./demo/views/ClientPayroll";
 import ClientBilling from "./demo/views/ClientBilling";
 import ClientSpendAnalysis from "./demo/views/ClientSpendAnalysis";
+import ClientInsights from "./demo/views/ClientInsights";
 import ClientTempPerm from "./demo/views/ClientTempPerm";
 import ClientExceptions from "./demo/views/ClientExceptions";
 import ClientPermissions from "./demo/views/ClientPermissions";
@@ -180,6 +181,8 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
         return <ClientBilling onViewChange={setActiveClientView} />;
       case "spend-analysis":
         return <ClientSpendAnalysis onViewWorker={handleViewWorker} />;
+      case "insights":
+        return <ClientInsights />;
       case "temp-perm":
         return <ClientTempPerm onViewWorker={handleViewWorker} />;
       case "notifications":
