@@ -72,7 +72,7 @@ const monoLabel: React.CSSProperties = {
   letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-secondary)",
 };
 
-const GATE_LABELS = ["SCHED", "CLOCK IN", "CLOCK OUT", "MGR APPR", "COMPLY"];
+const GATE_LABELS = ["SCH", "IN", "OUT", "APPR", "CMPL"];
 
 type GateState = "pass" | "fail" | "pending";
 
@@ -80,24 +80,24 @@ const GateChip = ({ state, label }: { state: GateState; label: string }) => {
   const styles: Record<GateState, { bg: string; color: string; icon: JSX.Element }> = {
     pass: {
       bg: "rgba(22, 163, 74, 0.1)", color: "var(--status-green)",
-      icon: <Check size={9} style={{ color: "var(--status-green)" }} strokeWidth={3} />,
+      icon: <Check size={8} style={{ color: "var(--status-green)" }} strokeWidth={3} />,
     },
     fail: {
       bg: "rgba(185, 28, 28, 0.1)", color: "var(--status-red)",
-      icon: <X size={9} style={{ color: "var(--status-red)" }} strokeWidth={3} />,
+      icon: <X size={8} style={{ color: "var(--status-red)" }} strokeWidth={3} />,
     },
     pending: {
       bg: "var(--cream-tint)", color: "var(--text-muted)",
-      icon: <Circle size={9} style={{ color: "var(--text-muted)" }} />,
+      icon: <Circle size={8} style={{ color: "var(--text-muted)" }} />,
     },
   };
   const s = styles[state];
   return (
     <span style={{
-      padding: "3px 8px", background: s.bg, color: s.color, borderRadius: 3,
-      display: "inline-flex", gap: 5, alignItems: "center",
+      padding: "2px 6px", background: s.bg, color: s.color, borderRadius: 3,
+      display: "inline-flex", gap: 4, alignItems: "center", whiteSpace: "nowrap",
       fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 9,
-      letterSpacing: "0.06em", textTransform: "uppercase",
+      letterSpacing: "0.04em", textTransform: "uppercase", flexShrink: 0,
     }}>
       {s.icon}
       {label}
@@ -106,7 +106,7 @@ const GateChip = ({ state, label }: { state: GateState; label: string }) => {
 };
 
 const GateRow = ({ states }: { states: GateState[] }) => (
-  <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap" }}>
+  <div style={{ display: "flex", gap: 4, alignItems: "center", flexWrap: "nowrap", overflow: "hidden" }}>
     {states.map((st, i) => <GateChip key={i} state={st} label={GATE_LABELS[i]} />)}
   </div>
 );
