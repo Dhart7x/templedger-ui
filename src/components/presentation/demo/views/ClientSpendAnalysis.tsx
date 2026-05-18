@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TrendingUp, DollarSign, Building2, Clock, Users, BarChart3, ChevronDown, ChevronUp, MapPin, Briefcase } from "lucide-react";
+import { TrendingUp, TrendingDown, DollarSign, Building2, Clock, Users, BarChart3, ChevronDown, ChevronUp, MapPin, Briefcase, AlertTriangle, Star } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 interface SpendByPeriod {
