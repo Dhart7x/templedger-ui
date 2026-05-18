@@ -1,4 +1,4 @@
-import { Eye, ClipboardList, Calendar, Users, DollarSign, FileText, Bell, MessageCircle, UserCheck, Clock, UserPlus } from "lucide-react";
+import { Eye, ClipboardList, Calendar, Users, DollarSign, FileText, Bell, MessageCircle, UserCheck, Clock, UserPlus, Sparkles } from "lucide-react";
 
 interface AgencySidebarProps {
   activeView: string;
@@ -12,6 +12,7 @@ const navItems = [
   { id: "new-order", label: "Bookings", icon: ClipboardList },
   { id: "schedule", label: "Schedule", icon: Calendar },
   { id: "workers", label: "Workers", icon: Users },
+  { id: "signals", label: "Signals", icon: Sparkles },
   { id: "payroll", label: "Payroll", icon: DollarSign },
   { id: "billing", label: "Billing", icon: FileText },
   { id: "notifications", label: "Notifications", icon: Bell },
