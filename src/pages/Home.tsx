@@ -644,9 +644,9 @@ const Home = () => {
         </>
       )}
 
-      <div className="tl-nav-spacer" style={{ paddingTop: 56, background: "#4C1D95", margin: 0 }}>
+      <div className="tl-nav-spacer" style={{ paddingTop: 56, background: "#1A0A3D", margin: 0 }}>
         {/* SECTION 1 — HERO */}
-        <section className="tl-hero" style={{ background: "linear-gradient(180deg, #4C1D95 0%, #4C1D95 85%, #2E1065 100%)", padding: "96px 48px 80px", margin: 0, width: "100%" }}>
+        <section className="tl-hero" style={{ background: "#1A0A3D", padding: "96px 48px 80px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
             <h1
               className="tl-hero-h1"
