@@ -265,16 +265,17 @@ export const shiftChipStyle = (label: string): React.CSSProperties => {
   };
   const m = map[label] || { bg: "rgba(76, 29, 149, 0.06)", color: "var(--brand-purple)" };
   return {
-    padding: "3px 10px",
+    padding: "2px 6px",
     borderRadius: 3,
     fontFamily: "'JetBrains Mono', monospace",
     fontWeight: 500,
-    fontSize: 11,
+    fontSize: 10,
     letterSpacing: "0.04em",
     textTransform: "uppercase",
     display: "inline-block",
     background: m.bg,
     color: m.color,
+    whiteSpace: "nowrap",
   };
 };
 
