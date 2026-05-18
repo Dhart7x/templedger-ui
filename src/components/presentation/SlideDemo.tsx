@@ -38,6 +38,7 @@ import AgencyLiveSnapshot from "./demo/views/AgencyLiveSnapshot";
 import AgencyNewOrder from "./demo/views/AgencyNewOrder";
 import AgencySchedule from "./demo/views/AgencySchedule";
 import AgencyWorkers from "./demo/views/AgencyWorkers";
+import AgencySignals from "./demo/views/AgencySignals";
 
 // Shared views
 import DemoChatbot from "./demo/views/DemoChatbot";
@@ -209,6 +210,8 @@ const SlideDemoContent = ({ onDemoStateChange }: SlideDemoProps) => {
         return <AgencyWorkers tab="standby" onViewWorker={handleViewWorker} />;
       case "workers-new":
         return <AgencyWorkers tab="new" onViewWorker={handleViewWorker} />;
+      case "signals":
+        return <AgencySignals />;
       case "payroll":
         return <ClientPayroll />; // Reuse with different context
       case "billing":
