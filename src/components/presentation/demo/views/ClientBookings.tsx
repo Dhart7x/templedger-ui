@@ -223,103 +223,188 @@ const ClientBookings = () => {
 
   const priorityLabel = allocationPriority === "cost" ? "cheapest rate" : allocationPriority === "speed" ? "fastest availability" : "top performance";
 
+  const eyebrowStyle: React.CSSProperties = {
+    fontFamily: "'IBM Plex Mono', monospace",
+    fontWeight: 500,
+    fontSize: 10,
+    letterSpacing: "0.14em",
+    textTransform: "uppercase",
+    color: "var(--brand-purple)",
+  };
+  const metaText: React.CSSProperties = {
+    fontFamily: "'JetBrains Mono', monospace",
+    fontWeight: 400,
+    fontSize: 11,
+    color: "var(--text-secondary)",
+  };
+  const monoUpper: React.CSSProperties = {
+    fontFamily: "'IBM Plex Mono', monospace",
+    fontWeight: 500,
+    fontSize: 11,
+    letterSpacing: "0.06em",
+    textTransform: "uppercase",
+  };
+
   return (
-    <div className="p-4 md:p-6 space-y-6">
+    <div style={{ padding: "28px 36px" }}>
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 24 }}>
         <div>
-          <h1 className="text-lg md:text-xl font-bold text-foreground">Bookings</h1>
-          <p className="text-xs text-muted-foreground">Request temporary workers from agencies</p>
+          <div style={{ ...eyebrowStyle, marginBottom: 8 }}>— BOOKINGS</div>
+          <h1 style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500, fontSize: 26, color: "var(--text-primary)", marginBottom: 4, lineHeight: 1.2 }}>Bookings</h1>
+          <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, color: "var(--text-secondary)" }}>Request temporary workers from agencies</p>
         </div>
-        <Button onClick={() => setShowNewBooking(true)} className="gap-2">
-          <Plus className="w-4 h-4" />
+        <button
+          onClick={() => setShowNewBooking(true)}
+          style={{
+            height: 36,
+            padding: "0 16px",
+            background: "var(--deep-purple)",
+            color: "var(--cream)",
+            ...monoUpper,
+            borderRadius: 4,
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 6,
+            border: "none",
+            cursor: "pointer",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = "#3B1577")}
+          onMouseLeave={(e) => (e.currentTarget.style.background = "var(--deep-purple)")}
+        >
+          <Plus size={12} />
           New Booking
-        </Button>
+        </button>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex items-center gap-2">
+      <div style={{ display: "inline-flex", gap: 4, marginBottom: 20 }}>
         {[
           { key: "all", label: "All" },
           { key: "pending", label: "Pending", count: pendingCount },
           { key: "accepted", label: "Accepted" },
           { key: "rejected", label: "Rejected" },
-        ].map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setFilter(tab.key as typeof filter)}
-            className={`px-4 py-2 text-sm rounded-lg transition-colors ${
-              filter === tab.key
-                ? "bg-primary text-primary-foreground"
-                : "bg-card border border-border text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            {tab.label}
-            {tab.count !== undefined && tab.count > 0 && (
-              <span className="ml-2 bg-amber-500/20 text-amber-500 px-1.5 py-0.5 rounded text-xs">{tab.count}</span>
-            )}
-          </button>
-        ))}
+        ].map((tab) => {
+          const active = filter === tab.key;
+          return (
+            <button
+              key={tab.key}
+              onClick={() => setFilter(tab.key as typeof filter)}
+              style={{
+                height: 30,
+                padding: "0 14px",
+                borderRadius: 4,
+                ...monoUpper,
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                transition: "background 120ms ease",
+                background: active ? "var(--deep-purple)" : "var(--white, #fff)",
+                color: active ? "var(--cream)" : "var(--text-secondary)",
+                border: active ? "1px solid var(--deep-purple)" : "1px solid var(--border-purple)",
+              }}
+              onMouseEnter={(e) => { if (!active) e.currentTarget.style.background = "var(--cream-tint)"; }}
+              onMouseLeave={(e) => { if (!active) e.currentTarget.style.background = "#fff"; }}
+            >
+              {tab.label}
+              {tab.count !== undefined && tab.count > 0 && (
+                <span style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontWeight: 500,
+                  fontSize: 10,
+                  color: active ? "rgba(250, 250, 248, 0.7)" : "var(--text-muted)",
+                }}>· {tab.count}</span>
+              )}
+            </button>
+          );
+        })}
       </div>
 
       {/* Bookings List */}
-      <div className="space-y-3">
-        {filteredBookings.map((booking) => (
+      <div style={{ background: "#fff", border: "1px solid var(--border-purple)", borderRadius: 6, overflow: "hidden" }}>
+        {filteredBookings.map((booking, idx) => (
           <div
             key={booking.id}
-            className={`bg-card border rounded-lg p-4 ${
-              booking.status === "pending" ? "border-amber-500/30" :
-              booking.status === "accepted" ? "border-green-500/30" :
-              booking.status === "info-requested" ? "border-primary/30" :
-              "border-destructive/30"
-            }`}
+            style={{
+              padding: "20px 24px",
+              borderBottom: idx === filteredBookings.length - 1 ? "none" : "1px solid var(--border-purple)",
+              display: "flex",
+              flexDirection: "column",
+              gap: 10,
+            }}
           >
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-sm font-semibold">{booking.role}</span>
-                  {getStatusBadge(booking.status)}
-                </div>
-                <div className="flex items-center gap-4 text-xs text-muted-foreground mb-2">
-                  <span className="flex items-center gap-1"><Users className="w-3 h-3" />{booking.quantity} worker{booking.quantity > 1 ? "s" : ""}</span>
-                  <span>{booking.site} • {booking.location}</span>
-                  <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{booking.shift}</span>
-                  <span>{booking.date}</span>
-                </div>
-                {booking.status === "pending" && booking.suggestedAgency && (
-                  <div className="flex items-center gap-2 mt-3">
-                    <div className="flex items-center gap-1.5 bg-primary/10 text-primary px-2 py-1 rounded text-xs">
-                      <Sparkles className="w-3 h-3" />Suggested: {booking.suggestedAgency}
-                    </div>
-                    <span className="text-xs text-muted-foreground">Based on availability and performance</span>
-                  </div>
-                )}
-                {booking.agency && booking.status === "accepted" && (
-                  <div className="flex items-center gap-1.5 mt-2 text-xs">
-                    <Building2 className="w-3 h-3 text-muted-foreground" />
-                    <span className="text-muted-foreground">Assigned to:</span>
-                    <span className="font-medium">{booking.agency}</span>
-                  </div>
-                )}
-                {booking.agencyNotes && (
-                  <div className="mt-3 p-2 bg-muted/50 rounded-lg border border-border">
-                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
-                      <MessageSquare className="w-3 h-3" />Agency Note
-                    </div>
-                    <p className="text-sm">{booking.agencyNotes}</p>
-                  </div>
-                )}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <span style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 15, color: "var(--text-primary)" }}>{booking.role}</span>
+                {getStatusBadge(booking.status)}
               </div>
               {booking.status === "info-requested" && (
-                <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm" className="gap-1 text-xs h-8"><Send className="w-3 h-3" />Reply</Button>
-                </div>
+                <Button variant="outline" size="sm" className="gap-1 text-xs h-8"><Send className="w-3 h-3" />Reply</Button>
               )}
             </div>
+
+            <div style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap" }}>
+              <span style={{ ...metaText, display: "flex", alignItems: "center", gap: 6 }}>
+                <Users size={12} color="var(--text-muted)" />
+                {booking.quantity} worker{booking.quantity > 1 ? "s" : ""}
+              </span>
+              <span style={{ ...metaText, display: "flex", alignItems: "center", gap: 6 }}>
+                <MapPin size={12} color="var(--text-muted)" />
+                {booking.site} · {booking.location}
+              </span>
+              <span style={{ ...metaText, display: "flex", alignItems: "center", gap: 6 }}>
+                <Clock size={12} color="var(--text-muted)" />
+                {booking.shift}
+              </span>
+              <span style={{ ...metaText, display: "flex", alignItems: "center", gap: 6 }}>
+                <Calendar size={12} color="var(--text-muted)" />
+                {booking.date}
+              </span>
+            </div>
+
+            {booking.status === "pending" && booking.suggestedAgency && (
+              <div style={{
+                marginTop: 4,
+                padding: "10px 12px",
+                background: "rgba(76, 29, 149, 0.05)",
+                borderRadius: 4,
+                display: "flex",
+                gap: 10,
+                alignItems: "center",
+                flexWrap: "wrap",
+              }}>
+                <Sparkles size={12} color="var(--brand-purple)" />
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 11, color: "var(--text-secondary)" }}>
+                  Suggested:{" "}
+                  <span style={{ color: "var(--brand-purple)" }}>{booking.suggestedAgency}</span>
+                </span>
+                <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "var(--text-secondary)" }}>
+                  · Based on availability and performance
+                </span>
+              </div>
+            )}
+
+            {booking.agency && booking.status === "accepted" && (
+              <div style={{ marginTop: 4, display: "flex", gap: 8, alignItems: "center" }}>
+                <Building2 size={12} color="var(--text-muted)" />
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)" }}>Assigned to:</span>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 11, color: "var(--brand-purple)" }}>{booking.agency}</span>
+              </div>
+            )}
+
+            {booking.agencyNotes && (
+              <div style={{ marginTop: 4, padding: "10px 12px", background: "var(--cream-tint)", borderRadius: 4 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: "var(--text-secondary)" }}>
+                  <MessageSquare size={12} />Agency Note
+                </div>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "var(--text-primary)" }}>{booking.agencyNotes}</p>
+              </div>
+            )}
           </div>
         ))}
         {filteredBookings.length === 0 && (
-          <div className="text-center py-12 text-muted-foreground"><p className="text-sm">No bookings found</p></div>
+          <div style={{ padding: "48px 24px", textAlign: "center", fontFamily: "Inter, sans-serif", fontSize: 13, color: "var(--text-secondary)" }}>No bookings found</div>
         )}
       </div>
 
