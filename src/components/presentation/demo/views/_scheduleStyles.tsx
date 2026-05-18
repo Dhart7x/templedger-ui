@@ -372,35 +372,43 @@ export const ScheduleGridTable = ({
               >
                 {/* Dept / Role */}
                 <div style={{
-                  padding: 14,
+                  padding: "8px 10px",
                   borderRight: "1px solid var(--border-purple)",
                   display: "flex",
                   flexDirection: "column",
-                  gap: 3,
+                  gap: 2,
                   justifyContent: "center",
+                  minWidth: 0,
+                  minHeight: 44,
                 }}>
                   {isFirstShift && (
                     <>
                       <span style={{
                         fontFamily: "'IBM Plex Mono', monospace",
                         fontWeight: 500,
-                        fontSize: 10,
-                        letterSpacing: "0.12em",
+                        fontSize: 9,
+                        letterSpacing: "0.1em",
                         textTransform: "uppercase",
                         color: "var(--brand-purple)",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
                       }}>{row.department}</span>
                       <span style={{
                         fontFamily: "Inter, sans-serif",
                         fontWeight: 500,
-                        fontSize: 13,
+                        fontSize: 12,
                         color: "var(--text-primary)",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
                       }}>{row.role}</span>
                     </>
                   )}
                 </div>
 
                 {/* Shift */}
-                <div style={{ padding: 14, borderRight: "1px solid var(--border-purple)", display: "flex", alignItems: "center" }}>
+                <div style={{ padding: "8px 8px", borderRight: "1px solid var(--border-purple)", display: "flex", alignItems: "center", minHeight: 44 }}>
                   <span style={shiftChipStyle(shift.label)}>{shift.label}</span>
                 </div>
 
