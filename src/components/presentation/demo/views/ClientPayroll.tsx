@@ -395,7 +395,7 @@ const ClientPayroll = () => {
 
           {/* Verified hours block */}
           <div style={{ padding: 18, borderBottom: "1px solid var(--border-purple)", borderLeft: "3px solid var(--status-green)" }}>
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 32, color: "var(--status-green)", lineHeight: 1, marginBottom: 4 }}>
+            <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 32, color: "var(--status-green)", lineHeight: 1, marginBottom: 4, letterSpacing: "-0.01em" }}>
               {currentVerifiedHours}
             </div>
             <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 12, color: "var(--text-secondary)" }}>
