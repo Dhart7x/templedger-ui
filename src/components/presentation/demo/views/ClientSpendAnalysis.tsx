@@ -774,7 +774,6 @@ const ClientSpendAnalysis = ({ onViewWorker }: ClientSpendAnalysisProps) => {
             );
           })}
       </div>
-    </div>
 
       {/* Spend by Department */}
       <div className="bg-card border border-border rounded-lg">
