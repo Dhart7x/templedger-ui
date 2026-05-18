@@ -1617,10 +1617,10 @@ const Home = () => {
             <div
               className="tl-compound-phases"
               style={{
-                marginTop: 32,
+                marginTop: 56,
                 display: "grid",
                 gridTemplateColumns: window.innerWidth >= 768 ? "1fr 1fr" : "1fr",
-                gap: 32,
+                gap: 56,
                 alignItems: "start",
               }}
             >
@@ -1648,7 +1648,7 @@ const Home = () => {
                       fontWeight: 600,
                       fontSize: 18,
                       color: "#FFFFFF",
-                      marginBottom: 10,
+                      marginBottom: 18,
                       lineHeight: 1.3,
                     }}
                   >
@@ -1660,8 +1660,8 @@ const Home = () => {
                       fontFamily: FONT,
                       fontWeight: 400,
                       fontSize: 13,
-                      color: "rgba(255, 255, 255, 0.7)",
-                      lineHeight: 1.55,
+                      color: "rgba(250, 250, 248, 0.72)",
+                      lineHeight: 1.65,
                     }}
                   >
                     {phase.body}
@@ -1673,13 +1673,13 @@ const Home = () => {
             {/* Transition sentence */}
             <p
               style={{
-                color: "#FFFFFF",
+                color: "#FAFAF8",
                 fontFamily: FONT,
                 fontSize: window.innerWidth >= 768 ? 16 : 14,
                 fontWeight: 600,
-                lineHeight: 1.4,
-                maxWidth: 720,
-                margin: "40px auto 0",
+                lineHeight: 1.65,
+                maxWidth: 640,
+                margin: "64px auto 0",
                 textAlign: "center",
               }}
             >
