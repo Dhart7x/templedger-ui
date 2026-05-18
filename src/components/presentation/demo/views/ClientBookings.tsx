@@ -188,16 +188,34 @@ const ClientBookings = () => {
     setOverrideCounts({});
   };
 
+  const statusPill = (label: string, colorVar: string, rgba: string) => (
+    <span
+      style={{
+        padding: "2px 8px",
+        borderRadius: 3,
+        fontFamily: "'JetBrains Mono', monospace",
+        fontWeight: 500,
+        fontSize: 10,
+        letterSpacing: "0.06em",
+        textTransform: "uppercase",
+        background: rgba,
+        color: `var(${colorVar})`,
+      }}
+    >
+      {label}
+    </span>
+  );
+
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "pending":
-        return <span className="text-xs px-2 py-0.5 rounded bg-amber-500/20 text-amber-500">Pending</span>;
+        return statusPill("Pending", "--status-amber", "rgba(217, 119, 6, 0.1)");
       case "accepted":
-        return <span className="text-xs px-2 py-0.5 rounded bg-green-500/20 text-green-500">Accepted</span>;
+        return statusPill("Accepted", "--status-green", "rgba(22, 163, 74, 0.1)");
       case "rejected":
-        return <span className="text-xs px-2 py-0.5 rounded bg-destructive/20 text-destructive">Rejected</span>;
+        return statusPill("Rejected", "--status-red", "rgba(185, 28, 28, 0.1)");
       case "info-requested":
-        return <span className="text-xs px-2 py-0.5 rounded bg-primary/20 text-primary">Info Requested</span>;
+        return statusPill("Info Requested", "--brand-purple", "rgba(76, 29, 149, 0.1)");
       default:
         return null;
     }
