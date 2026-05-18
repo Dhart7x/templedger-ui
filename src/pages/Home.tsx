@@ -2115,7 +2115,7 @@ const Home = () => {
         </section>
 
         {/* SECTION 4 — THE OUTCOME */}
-        <section className="tl-section-outcome" style={{ background: "#1A0A3D", padding: "96px 48px", margin: 0, width: "100%" }}>
+        <section className="tl-section-outcome" style={{ background: "#1A0A3D", padding: "56px 48px", margin: 0, width: "100%" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <div
               style={{
@@ -2141,12 +2141,12 @@ const Home = () => {
               transition={{ duration: 0.5, ease: "easeOut" }}
               style={{
                 fontFamily: FONT,
-                fontWeight: 800,
-                fontSize: 32,
+                fontWeight: 500,
+                fontSize: 26,
                 color: "#FFFFFF",
                 letterSpacing: "-0.022em",
                 lineHeight: 1.2,
-                marginBottom: 8,
+                marginBottom: 6,
               }}
             >
               This is what changes.
@@ -2162,7 +2162,7 @@ const Home = () => {
                 fontWeight: 400,
                 fontSize: 15,
                 color: "rgba(255,255,255,0.55)",
-                marginBottom: 40,
+                marginBottom: 28,
               }}
             >
               The impact compounds with every shift, every week.
@@ -2173,7 +2173,7 @@ const Home = () => {
               style={{
                 display: "grid",
                 gridTemplateColumns: window.innerWidth >= 768 ? "1fr 1fr" : "1fr",
-                columnGap: 48,
+                columnGap: 32,
                 marginBottom: 0,
               }}
             >
@@ -2185,9 +2185,9 @@ const Home = () => {
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
                   color: "rgba(255, 255, 255, 0.6)",
-                  paddingBottom: 12,
+                  paddingBottom: 8,
                   borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
-                  marginBottom: 18,
+                  marginBottom: 12,
                 }}
               >
                 ▲ WHAT GOES UP
@@ -2200,9 +2200,9 @@ const Home = () => {
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
                   color: "rgba(255, 255, 255, 0.6)",
-                  paddingBottom: 12,
+                  paddingBottom: 8,
                   borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
-                  marginBottom: 18,
+                  marginBottom: 12,
                 }}
               >
                 ▼ WHAT COMES DOWN
@@ -2214,7 +2214,7 @@ const Home = () => {
               style={{
                 display: "grid",
                 gridTemplateColumns: window.innerWidth >= 768 ? "1fr 1fr" : "1fr",
-                columnGap: 48,
+                columnGap: 32,
                 alignItems: "start",
               }}
             >
@@ -2233,7 +2233,7 @@ const Home = () => {
                       display: "grid",
                       gridTemplateColumns: "32px 1fr",
                       gap: 16,
-                      padding: "14px 0",
+                      padding: "8px 0",
                       borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
                       alignItems: "baseline",
                     }}
@@ -2279,7 +2279,7 @@ const Home = () => {
                       display: "grid",
                       gridTemplateColumns: "32px 1fr",
                       gap: 16,
-                      padding: "14px 0",
+                      padding: "8px 0",
                       borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
                       alignItems: "baseline",
                     }}
@@ -2314,8 +2314,8 @@ const Home = () => {
             {/* Closing line */}
             <div
               style={{
-                marginTop: 40,
-                paddingTop: 24,
+                marginTop: 24,
+                paddingTop: 16,
                 borderTop: "1px solid rgba(255, 255, 255, 0.15)",
                 textAlign: "left",
               }}
