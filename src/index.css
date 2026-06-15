@@ -172,19 +172,26 @@
 
   --border-purple:   rgba(76, 29, 149, 0.10);
   --border-strong:   rgba(76, 29, 149, 0.16);
-  --hairline:        rgba(26, 10, 61, 0.08);
+  --hairline:        #ECE8F5;
 
   --text-primary:    #1A0A3D;
   --text-secondary:  #55456C;
-  --text-muted:      #8A82A0;
+  --text-muted:      #55456C;
 
   /* Desaturated, calm status palette */
   --status-green:    #4F7A5A;   /* muted teal-green */
   --status-amber:    #B8893A;   /* soft amber */
   --status-orange:   #B86A4A;   /* muted clay/terracotta */
-  --status-red:      #A04A3F;   /* muted clay-red */
+  --status-red:      #A04A3F;   /* muted clay */
   --status-slate:    #5C6478;   /* slate */
   --status-teal:     #4E7A78;   /* muted teal */
+
+  /* Status backgrounds (soft tints) */
+  --status-clay-bg:    #F4E3DF;  /* NO-SHOW / red-ish */
+  --status-amber-bg:   #F5EAD3;  /* LATE / TRAFFIC */
+  --status-slate-bg:   #E4E6EC;  /* NOT SCHED */
+  --status-purple-bg:  #E4DFF5;  /* OVERTIME / accent */
+  --status-green-bg:   #E2ECE4;
 
   /* Typography stack */
   --font-body:         'Inter', system-ui, sans-serif;
@@ -192,10 +199,10 @@
   --font-mono-labels:  'IBM Plex Mono', monospace;
 
   /* Elevation */
-  --elev-1: 0 1px 2px rgba(26, 10, 61, 0.04), 0 1px 1px rgba(26, 10, 61, 0.02);
-  --elev-2: 0 2px 6px rgba(26, 10, 61, 0.05), 0 1px 2px rgba(26, 10, 61, 0.03);
-  --elev-3: 0 8px 24px rgba(26, 10, 61, 0.06), 0 2px 4px rgba(26, 10, 61, 0.03);
-  --radius-app: 8px;
+  --elev-1: 0 1px 3px rgba(26, 10, 61, 0.06), 0 1px 2px rgba(26, 10, 61, 0.04);
+  --elev-2: 0 2px 6px rgba(26, 10, 61, 0.06), 0 1px 2px rgba(26, 10, 61, 0.04);
+  --elev-3: 0 8px 24px rgba(26, 10, 61, 0.07), 0 2px 4px rgba(26, 10, 61, 0.04);
+  --radius-app: 10px;
 
   background-color: var(--cream);
   color: var(--text-primary);
@@ -278,6 +285,158 @@
 .demo-theme [class*="rounded-full"][class*="bg-green"] {
   font-weight: 500;
   letter-spacing: 0.02em;
+  font-size: 11px !important;
+  padding: 3px 8px !important;
+  border-radius: 10px !important;
+}
+
+/* ============================================================
+   Global inline-style overrides — color, border, surface remap.
+   Components hardcode hex values in style props; force-map them
+   to the enterprise token palette so every tab inherits.
+   ============================================================ */
+
+/* Primary ink — heading / name text */
+.demo-theme [style*="color: #0D0D0B"],
+.demo-theme [style*="color:#0D0D0B"],
+.demo-theme [style*="color: #000000"],
+.demo-theme [style*="color:#000000"],
+.demo-theme [style*="color: #000"],
+.demo-theme [style*="color:#000"],
+.demo-theme [style*="color: rgb(13, 13, 11)"],
+.demo-theme [style*="var(--text-primary)"][style*="color"] {
+  color: #1A0A3D !important;
+}
+
+/* Secondary / mid text */
+.demo-theme [style*="color: #6B6460"],
+.demo-theme [style*="color:#6B6460"],
+.demo-theme [style*="color: #52524e"],
+.demo-theme [style*="color:#52524e"],
+.demo-theme [style*="color: #9B9590"],
+.demo-theme [style*="color:#9B9590"],
+.demo-theme [style*="color: #8a8a85"],
+.demo-theme [style*="color:#8a8a85"],
+.demo-theme [style*="color: #8A82A0"],
+.demo-theme [style*="color:#8A82A0"] {
+  color: #55456C !important;
+}
+
+/* Purple accent text / links */
+.demo-theme [style*="color: #5B21B6"],
+.demo-theme [style*="color:#5B21B6"],
+.demo-theme [style*="color: #6D28D9"],
+.demo-theme [style*="color:#6D28D9"],
+.demo-theme [style*="color: #7C3AED"],
+.demo-theme [style*="color:#7C3AED"] {
+  color: #4C1D95 !important;
+}
+
+/* Status text — desaturate */
+.demo-theme [style*="color: #C4391A"],
+.demo-theme [style*="color:#C4391A"],
+.demo-theme [style*="color: #B91C1C"],
+.demo-theme [style*="color:#B91C1C"],
+.demo-theme [style*="color: #DC2626"],
+.demo-theme [style*="color:#DC2626"],
+.demo-theme [style*="color: #EF4444"],
+.demo-theme [style*="color:#EF4444"] {
+  color: #A04A3F !important;
+}
+.demo-theme [style*="color: #EA580C"],
+.demo-theme [style*="color:#EA580C"],
+.demo-theme [style*="color: #F97316"],
+.demo-theme [style*="color:#F97316"] {
+  color: #B86A4A !important;
+}
+.demo-theme [style*="color: #D97706"],
+.demo-theme [style*="color:#D97706"],
+.demo-theme [style*="color: #F59E0B"],
+.demo-theme [style*="color:#F59E0B"],
+.demo-theme [style*="color: #CA8A04"],
+.demo-theme [style*="color:#CA8A04"] {
+  color: #B8893A !important;
+}
+.demo-theme [style*="color: #16A34A"],
+.demo-theme [style*="color:#16A34A"],
+.demo-theme [style*="color: #15803D"],
+.demo-theme [style*="color:#15803D"],
+.demo-theme [style*="color: #16803C"],
+.demo-theme [style*="color:#16803C"],
+.demo-theme [style*="color: #22C55E"],
+.demo-theme [style*="color:#22C55E"] {
+  color: #4F7A5A !important;
+}
+
+/* Status pill backgrounds — soften */
+.demo-theme [style*="background: #FEE2E2"],
+.demo-theme [style*="background:#FEE2E2"],
+.demo-theme [style*="background: #FECACA"],
+.demo-theme [style*="background-color: #FEE2E2"] {
+  background-color: #F4E3DF !important;
+  color: #A04A3F !important;
+}
+.demo-theme [style*="background: #FFEDD5"],
+.demo-theme [style*="background:#FFEDD5"],
+.demo-theme [style*="background: #FED7AA"] {
+  background-color: #F1E0D5 !important;
+  color: #B86A4A !important;
+}
+.demo-theme [style*="background: #FEF3C7"],
+.demo-theme [style*="background:#FEF3C7"],
+.demo-theme [style*="background: #FDE68A"],
+.demo-theme [style*="background: #FEF9C3"] {
+  background-color: #F5EAD3 !important;
+  color: #B8893A !important;
+}
+.demo-theme [style*="background: #DCFCE7"],
+.demo-theme [style*="background:#DCFCE7"],
+.demo-theme [style*="background: #BBF7D0"],
+.demo-theme [style*="background: #D1FAE5"] {
+  background-color: #E2ECE4 !important;
+  color: #4F7A5A !important;
+}
+.demo-theme [style*="background: #EDE9FE"],
+.demo-theme [style*="background:#EDE9FE"],
+.demo-theme [style*="background: #DDD6FE"],
+.demo-theme [style*="background: #E9D5FF"] {
+  background-color: #E4DFF5 !important;
+  color: #4C1D95 !important;
+}
+
+/* Borders — remap legacy beige hairlines to lavender hairline */
+.demo-theme [style*="#E5E0DA"] {
+  border-color: #ECE8F5 !important;
+}
+.demo-theme [style*="border: 1px solid rgba(76, 29, 149, 0.1"],
+.demo-theme [style*="border:1px solid rgba(76, 29, 149, 0.1"],
+.demo-theme [style*="border-bottom: 1px solid rgba(76"],
+.demo-theme [style*="border-top: 1px solid rgba(76"] {
+  border-color: #ECE8F5 !important;
+}
+
+/* Background — page surfaces stay cream; cards stay white.
+   Force the heaviest legacy white page surfaces to cream. */
+.demo-theme {
+  background-color: #FAFAF8 !important;
+}
+
+/* Standardise rounded radius on app surfaces (skip circles & small chips) */
+.demo-theme [style*="border-radius: 4px"]:not([style*="50%"]):not([style*="width: 4"]):not([style*="height: 4"]),
+.demo-theme [style*="border-radius: 6px"]:not([style*="50%"]),
+.demo-theme [style*="border-radius: 8px"]:not([style*="50%"]),
+.demo-theme [style*="border-radius: 12px"]:not([style*="50%"]),
+.demo-theme [style*="border-radius:8px"]:not([style*="50%"]),
+.demo-theme [style*="border-radius:12px"]:not([style*="50%"]) {
+  border-radius: 10px !important;
+}
+
+/* Inputs / dropdowns: cream fill, lavender hairline */
+.demo-theme input,
+.demo-theme select,
+.demo-theme textarea {
+  border-radius: 10px;
+  border-color: #ECE8F5;
 }
 
 html, body { overflow-x: hidden; }
