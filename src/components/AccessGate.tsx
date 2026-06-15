@@ -2,7 +2,7 @@ import { useState, useEffect, ReactNode, useRef } from "react";
 
 const STORAGE_KEY = "tl_access";
 const STORAGE_VALUE = "granted";
-const ACCESS_CODE = "templedger101";
+const ACCESS_CODE = "demoaccess1";
 const FONT = "'Inter', system-ui, sans-serif";
 
 interface AccessGateProps {
