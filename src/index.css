@@ -126,50 +126,94 @@
   }
 }
 
-/* Scoped light theme for the Demo UI only. */
+/* ============================================================
+   Scoped light theme for the Demo UI only.
+   Enterprise / CFO-grade visual system.
+   ============================================================ */
 .demo-theme {
-  --background: 0 0% 100%;
-  --foreground: 60 9% 5%;
+  /* shadcn tokens (HSL, no hash) */
+  --background: 60 20% 98%;          /* cream #FAFAF8 */
+  --foreground: 256 65% 14%;         /* darkest ink #1A0A3D */
   --card: 0 0% 100%;
-  --card-foreground: 60 9% 5%;
+  --card-foreground: 256 65% 14%;
   --popover: 0 0% 100%;
-  --popover-foreground: 60 9% 5%;
-  --primary: 263 69% 35%;
+  --popover-foreground: 256 65% 14%;
+  --primary: 263 69% 35%;            /* brand purple #4C1D95 */
   --primary-foreground: 0 0% 100%;
-  --secondary: 60 11% 95%;
-  --secondary-foreground: 60 9% 5%;
-  --muted: 60 11% 95%;
-  --muted-foreground: 24 5% 40%;
-  --accent: 252 87% 96%;
+  --secondary: 252 38% 92%;          /* lavender wash #E4DFF5 */
+  --secondary-foreground: 256 65% 14%;
+  --muted: 252 38% 95%;
+  --muted-foreground: 264 22% 35%;   /* mid text #55456C */
+  --accent: 252 38% 92%;
   --accent-foreground: 263 69% 35%;
-  --destructive: 11 78% 44%;
+  --destructive: 10 45% 45%;         /* muted clay */
   --destructive-foreground: 0 0% 100%;
-  --border: 36 18% 88%;
-  --input: 36 18% 88%;
+  --border: 252 30% 90%;             /* faint lavender-grey hairline */
+  --input: 252 30% 90%;
   --ring: 263 69% 35%;
-  --sidebar-background: 60 11% 95%;
-  --sidebar-foreground: 24 5% 40%;
+  --sidebar-background: 60 20% 98%;
+  --sidebar-foreground: 264 22% 35%;
   --sidebar-primary: 263 69% 35%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 252 87% 96%;
+  --sidebar-accent: 252 38% 92%;
   --sidebar-accent-foreground: 263 69% 35%;
-  --sidebar-border: 36 18% 88%;
+  --sidebar-border: 252 30% 90%;
   --sidebar-ring: 263 69% 35%;
 
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
+  /* Brand tokens (raw hex, used inline) */
+  --brand-purple:    #4C1D95;
+  --deep-purple:     #2E1065;
+  --darkest-purple:  #1A0A3D;
+  --soft-lavender:   #AFA9EC;
+  --lavender-wash:   #E4DFF5;
+  --cream:           #FAFAF8;
+  --cream-tint:      #F5F2EB;
+  --white:           #FFFFFF;
+
+  --border-purple:   rgba(76, 29, 149, 0.10);
+  --border-strong:   rgba(76, 29, 149, 0.16);
+  --hairline:        rgba(26, 10, 61, 0.08);
+
+  --text-primary:    #1A0A3D;
+  --text-secondary:  #55456C;
+  --text-muted:      #8A82A0;
+
+  /* Desaturated, calm status palette */
+  --status-green:    #4F7A5A;   /* muted teal-green */
+  --status-amber:    #B8893A;   /* soft amber */
+  --status-orange:   #B86A4A;   /* muted clay/terracotta */
+  --status-red:      #A04A3F;   /* muted clay-red */
+  --status-slate:    #5C6478;   /* slate */
+  --status-teal:     #4E7A78;   /* muted teal */
+
+  /* Typography stack */
+  --font-body:         'Inter', system-ui, sans-serif;
+  --font-mono-headers: 'Inter', system-ui, sans-serif;
+  --font-mono-labels:  'IBM Plex Mono', monospace;
+
+  /* Elevation */
+  --elev-1: 0 1px 2px rgba(26, 10, 61, 0.04), 0 1px 1px rgba(26, 10, 61, 0.02);
+  --elev-2: 0 2px 6px rgba(26, 10, 61, 0.05), 0 1px 2px rgba(26, 10, 61, 0.03);
+  --elev-3: 0 8px 24px rgba(26, 10, 61, 0.06), 0 2px 4px rgba(26, 10, 61, 0.03);
+  --radius-app: 8px;
+
+  background-color: var(--cream);
+  color: var(--text-primary);
   font-family: 'Inter', system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
 }
 
+/* Headings: Inter, restrained weight, tight tracking */
 .demo-theme h1,
 .demo-theme h2,
 .demo-theme h3,
 .demo-theme h4,
 .demo-theme h5,
 .demo-theme h6 {
-  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.025em;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  color: var(--text-primary);
 }
 
 .demo-theme .font-mono,
@@ -178,29 +222,62 @@
   font-family: 'Inter', system-ui, sans-serif !important;
 }
 
-/* ============================================================
-   DEMO UI v2 — Visual refresh tokens
-   ============================================================ */
-.demo-theme {
-  --brand-purple:    #4C1D95;
-  --deep-purple:     #2E1065;
-  --darkest-purple:  #1A0A3D;
-  --cream:           #FAFAF8;
-  --cream-tint:      #F5F2EB;
-  --white:           #FFFFFF;
-  --border-purple:   rgba(76, 29, 149, 0.1);
-  --border-strong:   rgba(76, 29, 149, 0.18);
-  --text-primary:    #1A0A3D;
-  --text-secondary:  #52524e;
-  --text-muted:      #8a8a85;
-  --status-green:    #16A34A;
-  --status-amber:    #D97706;
-  --status-orange:   #EA580C;
-  --status-red:      #B91C1C;
-  --font-mono-headers: 'IBM Plex Mono', monospace;
-  --font-body:         'Inter', sans-serif;
-  --font-mono-labels:  'JetBrains Mono', monospace;
-  background-color: var(--cream);
+/* ------------------------------------------------------------
+   Global inline-style font remap.
+   Components hardcode font-family in style props; override here.
+   - JetBrains Mono → Inter everywhere.
+   - IBM Plex Mono → Inter, EXCEPT for small uppercase labels
+     (eyebrows / tags), which keep Plex Mono for the label look.
+   ------------------------------------------------------------ */
+.demo-theme [style*="JetBrains Mono"] {
+  font-family: 'Inter', system-ui, sans-serif !important;
+}
+.demo-theme [style*="IBM Plex Mono"] {
+  font-family: 'Inter', system-ui, sans-serif !important;
+  letter-spacing: -0.012em;
+}
+.demo-theme [style*="IBM Plex Mono"][style*="uppercase"] {
+  font-family: 'IBM Plex Mono', monospace !important;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+/* Soften any hard pure-black or near-black inline color to the ink token */
+.demo-theme [style*="#000"],
+.demo-theme [style*="#0D0D0B"] {
+  /* purely cosmetic safety net; do not force */
+}
+
+/* ------------------------------------------------------------
+   Surface & elevation defaults inside the demo
+   ------------------------------------------------------------ */
+.demo-theme .bg-card,
+.demo-theme [class*="rounded-lg"].bg-card {
+  background-color: #FFFFFF;
+  box-shadow: var(--elev-1);
+  border-color: var(--hairline);
+}
+
+/* Hairline divider helper */
+.demo-theme hr,
+.demo-theme .divide-y > * + * {
+  border-color: var(--hairline) !important;
+}
+
+/* Buttons: restrained primary, deepen on hover */
+.demo-theme button[class*="bg-primary"]:hover,
+.demo-theme .bg-primary:hover {
+  background-color: var(--deep-purple) !important;
+}
+
+/* Pills / badges: soften filled colored backgrounds */
+.demo-theme [class*="rounded-full"][class*="bg-red"],
+.demo-theme [class*="rounded-full"][class*="bg-orange"],
+.demo-theme [class*="rounded-full"][class*="bg-amber"],
+.demo-theme [class*="rounded-full"][class*="bg-yellow"],
+.demo-theme [class*="rounded-full"][class*="bg-green"] {
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 html, body { overflow-x: hidden; }
