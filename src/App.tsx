@@ -4,9 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from "./pages/Home";
 import SalesDeck from "./pages/SalesDeck";
-import VsMsps from "./pages/VsMsps";
 import NotFound from "./pages/NotFound";
 import AccessGate from "./components/AccessGate";
 
@@ -20,10 +18,7 @@ const App = () => (
       <AccessGate>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/demo" element={<SalesDeck />} />
-            <Route path="/vs-msps" element={<VsMsps />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="/" element={<SalesDeck />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
