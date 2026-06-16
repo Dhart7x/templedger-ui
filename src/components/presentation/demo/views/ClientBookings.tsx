@@ -5,7 +5,8 @@ import { useDemoContext } from "../DemoContext";
 import { toast } from "sonner";
 import { agencyStats } from "../agencyDemoData";
 
-type AllocationPriority = "cost" | "speed" | "performance";
+type AllocationPriority = "cost" | "speed" | "stability" | "performance";
+type BookingType = "recurring" | "replacement" | "uplift";
 
 interface AllocationEntry {
   agency: string;
@@ -47,6 +48,15 @@ function computeAllocation(
         rationale = `${name} has ${s.standbyWorkers} workers on standby with an average of ${s.avgEtaMinutes} minutes to site — fastest of your three agencies.`;
         break;
       }
+      case "stability": {
+        // Fixed weekly split representing the established core-worker pattern
+        const stabilityShare: Record<string, number> = { AG001: 0.45, AG002: 0.35, AG003: 0.20 };
+        score = stabilityShare[id];
+        const coreWorkers = Math.round(stabilityShare[id] * 20);
+        detail = `${coreWorkers} core workers on standing rota`;
+        rationale = `${name} holds a fixed ${Math.round(stabilityShare[id] * 100)}% weekly share — same core workers return each week to maintain continuity.`;
+        break;
+      }
       case "performance": {
         score = (s.fillRate + s.attendancePct) / 2;
         detail = `${s.fillRate}% fill rate · ${s.attendancePct}% attendance`;
@@ -62,6 +72,17 @@ function computeAllocation(
 
   if (quantity <= 1) {
     return [{ ...scored[0], count: 1 }];
+  }
+
+  // Stability splits proportionally across all 3 agencies to preserve the standing rota
+  if (priority === "stability") {
+    const totalScore = scored.reduce((s, e) => s + e.score, 0);
+    const raw = scored.map(e => quantity * (e.score / totalScore));
+    const counts = raw.map(r => Math.floor(r));
+    let remainder = quantity - counts.reduce((s, v) => s + v, 0);
+    const fractions = raw.map((r, i) => ({ i, frac: r - Math.floor(r) })).sort((a, b) => b.frac - a.frac);
+    for (let k = 0; k < remainder; k++) counts[fractions[k % fractions.length].i] += 1;
+    return scored.map((e, i) => ({ ...e, count: counts[i] })).filter(e => e.count > 0);
   }
 
   // Split across top 2 agencies proportionally
@@ -80,6 +101,7 @@ function computeAllocation(
 const priorityOptions: { key: AllocationPriority; label: string; icon: typeof DollarSign }[] = [
   { key: "cost", label: "Cost", icon: DollarSign },
   { key: "speed", label: "Speed", icon: Clock },
+  { key: "stability", label: "Stability", icon: Users },
   { key: "performance", label: "Performance", icon: Star },
 ];
 
@@ -91,6 +113,7 @@ const ClientBookings = () => {
   const [allocationResult, setAllocationResult] = useState<AllocationEntry[] | null>(null);
   const [allocationPriority, setAllocationPriority] = useState<AllocationPriority>("cost");
   const [isOverriding, setIsOverriding] = useState(false);
+  const [bookingType, setBookingType] = useState<BookingType>("recurring");
   const [overrideCounts, setOverrideCounts] = useState<Record<string, number>>({});
   const [newBooking, setNewBooking] = useState({
     role: "Inbound Warehouse",
@@ -142,6 +165,8 @@ const ClientBookings = () => {
     setIsAllocating(false);
     setIsOverriding(false);
     setOverrideCounts({});
+    setBookingType("recurring");
+    setAllocationPriority("cost");
     setNewBooking({
       role: "Inbound Warehouse",
       quantity: 1,
@@ -221,7 +246,7 @@ const ClientBookings = () => {
     }
   };
 
-  const priorityLabel = allocationPriority === "cost" ? "cheapest rate" : allocationPriority === "speed" ? "fastest availability" : "top performance";
+  const priorityLabel = allocationPriority === "cost" ? "cheapest rate" : allocationPriority === "speed" ? "fastest availability" : allocationPriority === "stability" ? "standing weekly split" : "top performance";
 
   const eyebrowStyle: React.CSSProperties = {
     fontFamily: "'IBM Plex Mono', monospace",
@@ -502,6 +527,18 @@ const ClientBookings = () => {
               return (
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                   <div>
+                    <label style={fieldLabel}>Booking Type</label>
+                    <div style={{ position: "relative" }}>
+                      <select value={bookingType} onChange={(e) => setBookingType(e.target.value as BookingType)} style={selectStyle} disabled={isAllocating}>
+                        <option value="recurring">Recurring</option>
+                        <option value="replacement">No-Show / Replacement</option>
+                        <option value="uplift">Uplift</option>
+                      </select>
+                      <ChevronDown size={12} color="var(--brand-purple)" style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }} />
+                    </div>
+                  </div>
+
+                  <div>
                     <label style={fieldLabel}>Role</label>
                     <div style={{ position: "relative" }}>
                       <select value={newBooking.role} onChange={(e) => setNewBooking({ ...newBooking, role: e.target.value })} style={selectStyle} disabled={isAllocating}>
@@ -549,7 +586,7 @@ const ClientBookings = () => {
                       <>
                         <div style={{ marginTop: 6 }}>
                           <label style={{ ...fieldLabel, marginBottom: 10 }}>Allocation Priority</label>
-                          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8 }}>
+                          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8 }}>
                             {priorityOptions.map((opt) => {
                               const Icon = opt.icon;
                               const isActive = allocationPriority === opt.key;
@@ -593,6 +630,7 @@ const ClientBookings = () => {
                           }}>
                             {allocationPriority === "cost" && "Prioritise agencies with the lowest avg hourly rate"}
                             {allocationPriority === "speed" && "Prioritise agencies with lowest avg ETA to site"}
+                            {allocationPriority === "stability" && "Lock the same weekly split across agencies so the same core workers return each week"}
                             {allocationPriority === "performance" && "Prioritise agencies with highest fill rate & attendance"}
                           </div>
                         </div>
