@@ -14,34 +14,27 @@ interface SiteGroup {
   departments: DeptRow[];
 }
 
-// Site → department breakdown. All department subtotals exceed $100,548.01.
+// Site → department breakdown. Every figure is between $100k and $340k.
 const sites: SiteGroup[] = [
   {
     site: "Baltimore Distribution Center",
     location: "Baltimore, MD",
     departments: [
-      { department: "Inbound Warehouse", agency: "Workforce Direct", hours: 8412, rate: 28.45 },
-      { department: "Outbound Dispatch", agency: "Pinnacle Staffing", hours: 7984, rate: 29.10 },
-      { department: "Pick and Pack", agency: "Meridian Recruitment", hours: 6218, rate: 26.80 },
-      { department: "MHE Operations", agency: "Workforce Direct", hours: 5141, rate: 32.40 },
+      { department: "Inbound Warehouse", agency: "Workforce Direct", hours: 3678, rate: 28.50 },
     ],
   },
   {
     site: "Las Vegas Fulfillment Hub",
     location: "Las Vegas, NV",
     departments: [
-      { department: "Inbound Warehouse", agency: "Pinnacle Staffing", hours: 6842, rate: 27.90 },
-      { department: "Pick and Pack", agency: "Workforce Direct", hours: 5318, rate: 26.55 },
-      { department: "Cold Storage", agency: "Meridian Recruitment", hours: 4127, rate: 31.20 },
+      { department: "Outbound Dispatch", agency: "Pinnacle Staffing", hours: 3813, rate: 28.40 },
     ],
   },
   {
     site: "Dallas Fort-Worth Cross-Dock",
     location: "Dallas Fort-Worth, TX",
     departments: [
-      { department: "Outbound Dispatch", agency: "Workforce Direct", hours: 7240, rate: 28.75 },
-      { department: "MHE Operations", agency: "Pinnacle Staffing", hours: 4982, rate: 33.10 },
-      { department: "Returns Processing", agency: "Meridian Recruitment", hours: 3941, rate: 26.25 },
+      { department: "Pick and Pack", agency: "Meridian Recruitment", hours: 3592, rate: 28.45 },
     ],
   },
 ];
