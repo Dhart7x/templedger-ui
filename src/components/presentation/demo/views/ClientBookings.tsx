@@ -113,6 +113,7 @@ const ClientBookings = () => {
   const [allocationResult, setAllocationResult] = useState<AllocationEntry[] | null>(null);
   const [allocationPriority, setAllocationPriority] = useState<AllocationPriority>("cost");
   const [isOverriding, setIsOverriding] = useState(false);
+  const [bookingType, setBookingType] = useState<BookingType>("recurring");
   const [overrideCounts, setOverrideCounts] = useState<Record<string, number>>({});
   const [newBooking, setNewBooking] = useState({
     role: "Inbound Warehouse",
