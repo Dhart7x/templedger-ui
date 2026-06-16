@@ -574,7 +574,7 @@ const ClientBookings = () => {
                       <>
                         <div style={{ marginTop: 6 }}>
                           <label style={{ ...fieldLabel, marginBottom: 10 }}>Allocation Priority</label>
-                          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8 }}>
+                          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8 }}>
                             {priorityOptions.map((opt) => {
                               const Icon = opt.icon;
                               const isActive = allocationPriority === opt.key;
