@@ -113,8 +113,8 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
   const [actionNote, setActionNote] = useState("");
 
   // Filter exceptions
-  const openExceptions = exceptions.filter(e => e.status !== "resolved" && e.status !== "actioned");
-  const actionedExceptions = exceptions.filter(e => e.status === "actioned");
+  const openExceptions = exceptions.filter(e => e.status !== "resolved" && e.status !== "actioned" && e.type !== "traffic-alert");
+  const actionedExceptions = exceptions.filter(e => e.status === "actioned" && e.type !== "traffic-alert");
   const filteredExceptions = openExceptions
     .filter(e => {
       if (typeFilter !== "all" && e.type !== typeFilter) return false;
@@ -135,9 +135,8 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
     { type: "no-show", label: "No-Show", icon: AlertTriangle, count: openExceptions.filter(e => e.type === "no-show").length },
     { type: "late", label: "Late", icon: Clock, count: openExceptions.filter(e => e.type === "late").length },
     { type: "overtime", label: "Overtime", icon: TrendingUp, count: openExceptions.filter(e => e.type === "overtime").length },
-    { type: "clocked-in-not-out", label: "Not Clocked", icon: LogOut, count: openExceptions.filter(e => e.type === "clocked-in-not-out").length },
+    { type: "clocked-in-not-out", label: "Not Clocked Out", icon: LogOut, count: openExceptions.filter(e => e.type === "clocked-in-not-out").length },
     { type: "rtw-expired", label: "RTW Expired", icon: ShieldAlert, count: openExceptions.filter(e => e.type === "rtw-expired").length },
-    { type: "traffic-alert", label: "Traffic", icon: Car, count: openExceptions.filter(e => e.type === "traffic-alert").length },
     { type: "not-scheduled", label: "Not Sched", icon: UserX, count: openExceptions.filter(e => e.type === "not-scheduled").length },
   ];
 
@@ -230,9 +229,8 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
               <option value="no-show">Type: No-Show</option>
               <option value="late">Type: Late</option>
               <option value="overtime">Type: Overtime</option>
-              <option value="clocked-in-not-out">Type: Not Clocked</option>
+              <option value="clocked-in-not-out">Type: Not Clocked Out</option>
               <option value="rtw-expired">Type: RTW Expired</option>
-              <option value="traffic-alert">Type: Traffic</option>
               <option value="not-scheduled">Type: Not Sched</option>
             </select>
             <ChevronDown size={10} style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", color: "var(--brand-purple)", pointerEvents: "none" }} />
@@ -326,10 +324,9 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
               </div>
               <div
                 style={{
-                  fontFamily: "var(--font-body)",
+                  fontFamily: "var(--font-mono-labels)",
                   fontWeight: 600,
                   fontSize: 26,
-                  letterSpacing: "-0.01em",
                   color: "var(--text-primary)",
                   lineHeight: 1,
                 }}

@@ -128,7 +128,7 @@ const AgencyLiveSnapshot = ({ onViewWorker }: AgencyLiveSnapshotProps) => {
     type: string;
   } | null>(null);
 
-  const openExceptions = exceptions.filter(e => e.status !== "resolved");
+  const openExceptions = exceptions.filter(e => e.status !== "resolved" && e.type !== "traffic-alert");
   const filteredExceptions = openExceptions.filter(e => {
     if (typeFilter !== "all" && e.type !== typeFilter) return false;
     return true;
@@ -143,7 +143,6 @@ const AgencyLiveSnapshot = ({ onViewWorker }: AgencyLiveSnapshotProps) => {
     { type: "overtime", label: "Overtime", icon: TrendingUp, count: openExceptions.filter(e => e.type === "overtime").length },
     { type: "clocked-in-not-out", label: "Not Clocked Out", icon: LogOut, count: openExceptions.filter(e => e.type === "clocked-in-not-out").length },
     { type: "rtw-expired", label: "RTW Expired", icon: ShieldAlert, count: openExceptions.filter(e => e.type === "rtw-expired").length },
-    { type: "traffic-alert", label: "Traffic", icon: Car, count: openExceptions.filter(e => e.type === "traffic-alert").length },
   ];
 
   const handleAcknowledge = (exceptionId: string) => {
@@ -215,7 +214,7 @@ const AgencyLiveSnapshot = ({ onViewWorker }: AgencyLiveSnapshotProps) => {
                 <option value="overtime">Overtime</option>
                 <option value="clocked-in-not-out">Clocked In, Not Out</option>
                 <option value="rtw-expired">RTW Expired</option>
-                <option value="traffic-alert">Traffic Alert</option>
+                
               </select>
               <ChevronDown size={10} style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", color: "var(--brand-purple)", pointerEvents: "none" }} />
             </div>
