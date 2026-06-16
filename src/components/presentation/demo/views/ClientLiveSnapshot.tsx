@@ -113,8 +113,8 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
   const [actionNote, setActionNote] = useState("");
 
   // Filter exceptions
-  const openExceptions = exceptions.filter(e => e.status !== "resolved" && e.status !== "actioned");
-  const actionedExceptions = exceptions.filter(e => e.status === "actioned");
+  const openExceptions = exceptions.filter(e => e.status !== "resolved" && e.status !== "actioned" && e.type !== "traffic-alert");
+  const actionedExceptions = exceptions.filter(e => e.status === "actioned" && e.type !== "traffic-alert");
   const filteredExceptions = openExceptions
     .filter(e => {
       if (typeFilter !== "all" && e.type !== typeFilter) return false;
