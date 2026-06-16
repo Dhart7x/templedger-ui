@@ -135,9 +135,8 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
     { type: "no-show", label: "No-Show", icon: AlertTriangle, count: openExceptions.filter(e => e.type === "no-show").length },
     { type: "late", label: "Late", icon: Clock, count: openExceptions.filter(e => e.type === "late").length },
     { type: "overtime", label: "Overtime", icon: TrendingUp, count: openExceptions.filter(e => e.type === "overtime").length },
-    { type: "clocked-in-not-out", label: "Not Clocked", icon: LogOut, count: openExceptions.filter(e => e.type === "clocked-in-not-out").length },
+    { type: "clocked-in-not-out", label: "Not Clocked Out", icon: LogOut, count: openExceptions.filter(e => e.type === "clocked-in-not-out").length },
     { type: "rtw-expired", label: "RTW Expired", icon: ShieldAlert, count: openExceptions.filter(e => e.type === "rtw-expired").length },
-    { type: "traffic-alert", label: "Traffic", icon: Car, count: openExceptions.filter(e => e.type === "traffic-alert").length },
     { type: "not-scheduled", label: "Not Sched", icon: UserX, count: openExceptions.filter(e => e.type === "not-scheduled").length },
   ];
 
