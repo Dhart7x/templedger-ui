@@ -5,7 +5,8 @@ import { useDemoContext } from "../DemoContext";
 import { toast } from "sonner";
 import { agencyStats } from "../agencyDemoData";
 
-type AllocationPriority = "cost" | "speed" | "performance";
+type AllocationPriority = "cost" | "speed" | "stability" | "performance";
+type BookingType = "recurring" | "replacement" | "uplift";
 
 interface AllocationEntry {
   agency: string;
