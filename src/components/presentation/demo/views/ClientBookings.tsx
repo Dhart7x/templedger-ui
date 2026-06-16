@@ -74,6 +74,17 @@ function computeAllocation(
     return [{ ...scored[0], count: 1 }];
   }
 
+  // Stability splits proportionally across all 3 agencies to preserve the standing rota
+  if (priority === "stability") {
+    const totalScore = scored.reduce((s, e) => s + e.score, 0);
+    const raw = scored.map(e => quantity * (e.score / totalScore));
+    const counts = raw.map(r => Math.floor(r));
+    let remainder = quantity - counts.reduce((s, v) => s + v, 0);
+    const fractions = raw.map((r, i) => ({ i, frac: r - Math.floor(r) })).sort((a, b) => b.frac - a.frac);
+    for (let k = 0; k < remainder; k++) counts[fractions[k % fractions.length].i] += 1;
+    return scored.map((e, i) => ({ ...e, count: counts[i] })).filter(e => e.count > 0);
+  }
+
   // Split across top 2 agencies proportionally
   const top2 = scored.slice(0, 2);
   const totalScore = top2.reduce((s, e) => s + e.score, 0);
@@ -90,6 +101,7 @@ function computeAllocation(
 const priorityOptions: { key: AllocationPriority; label: string; icon: typeof DollarSign }[] = [
   { key: "cost", label: "Cost", icon: DollarSign },
   { key: "speed", label: "Speed", icon: Clock },
+  { key: "stability", label: "Stability", icon: Users },
   { key: "performance", label: "Performance", icon: Star },
 ];
 
