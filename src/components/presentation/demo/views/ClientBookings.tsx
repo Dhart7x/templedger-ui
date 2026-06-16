@@ -527,6 +527,18 @@ const ClientBookings = () => {
               return (
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                   <div>
+                    <label style={fieldLabel}>Booking Type</label>
+                    <div style={{ position: "relative" }}>
+                      <select value={bookingType} onChange={(e) => setBookingType(e.target.value as BookingType)} style={selectStyle} disabled={isAllocating}>
+                        <option value="recurring">Recurring</option>
+                        <option value="replacement">No-Show / Replacement</option>
+                        <option value="uplift">Uplift</option>
+                      </select>
+                      <ChevronDown size={12} color="var(--brand-purple)" style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }} />
+                    </div>
+                  </div>
+
+                  <div>
                     <label style={fieldLabel}>Role</label>
                     <div style={{ position: "relative" }}>
                       <select value={newBooking.role} onChange={(e) => setNewBooking({ ...newBooking, role: e.target.value })} style={selectStyle} disabled={isAllocating}>
