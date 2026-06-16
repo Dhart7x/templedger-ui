@@ -48,6 +48,15 @@ function computeAllocation(
         rationale = `${name} has ${s.standbyWorkers} workers on standby with an average of ${s.avgEtaMinutes} minutes to site — fastest of your three agencies.`;
         break;
       }
+      case "stability": {
+        // Fixed weekly split representing the established core-worker pattern
+        const stabilityShare: Record<string, number> = { AG001: 0.45, AG002: 0.35, AG003: 0.20 };
+        score = stabilityShare[id];
+        const coreWorkers = Math.round(stabilityShare[id] * 20);
+        detail = `${coreWorkers} core workers on standing rota`;
+        rationale = `${name} holds a fixed ${Math.round(stabilityShare[id] * 100)}% weekly share — same core workers return each week to maintain continuity.`;
+        break;
+      }
       case "performance": {
         score = (s.fillRate + s.attendancePct) / 2;
         detail = `${s.fillRate}% fill rate · ${s.attendancePct}% attendance`;
