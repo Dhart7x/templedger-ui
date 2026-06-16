@@ -246,7 +246,7 @@ const ClientBookings = () => {
     }
   };
 
-  const priorityLabel = allocationPriority === "cost" ? "cheapest rate" : allocationPriority === "speed" ? "fastest availability" : "top performance";
+  const priorityLabel = allocationPriority === "cost" ? "cheapest rate" : allocationPriority === "speed" ? "fastest availability" : allocationPriority === "stability" ? "standing weekly split" : "top performance";
 
   const eyebrowStyle: React.CSSProperties = {
     fontFamily: "'IBM Plex Mono', monospace",
