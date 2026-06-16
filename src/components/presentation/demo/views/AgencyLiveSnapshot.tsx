@@ -143,7 +143,6 @@ const AgencyLiveSnapshot = ({ onViewWorker }: AgencyLiveSnapshotProps) => {
     { type: "overtime", label: "Overtime", icon: TrendingUp, count: openExceptions.filter(e => e.type === "overtime").length },
     { type: "clocked-in-not-out", label: "Not Clocked Out", icon: LogOut, count: openExceptions.filter(e => e.type === "clocked-in-not-out").length },
     { type: "rtw-expired", label: "RTW Expired", icon: ShieldAlert, count: openExceptions.filter(e => e.type === "rtw-expired").length },
-    { type: "traffic-alert", label: "Traffic", icon: Car, count: openExceptions.filter(e => e.type === "traffic-alert").length },
   ];
 
   const handleAcknowledge = (exceptionId: string) => {
