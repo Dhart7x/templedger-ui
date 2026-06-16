@@ -214,7 +214,7 @@ const AgencyLiveSnapshot = ({ onViewWorker }: AgencyLiveSnapshotProps) => {
                 <option value="overtime">Overtime</option>
                 <option value="clocked-in-not-out">Clocked In, Not Out</option>
                 <option value="rtw-expired">RTW Expired</option>
-                <option value="traffic-alert">Traffic Alert</option>
+                
               </select>
               <ChevronDown size={10} style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", color: "var(--brand-purple)", pointerEvents: "none" }} />
             </div>
