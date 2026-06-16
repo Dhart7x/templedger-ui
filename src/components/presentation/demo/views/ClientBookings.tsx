@@ -618,6 +618,7 @@ const ClientBookings = () => {
                           }}>
                             {allocationPriority === "cost" && "Prioritise agencies with the lowest avg hourly rate"}
                             {allocationPriority === "speed" && "Prioritise agencies with lowest avg ETA to site"}
+                            {allocationPriority === "stability" && "Lock the same weekly split across agencies so the same core workers return each week"}
                             {allocationPriority === "performance" && "Prioritise agencies with highest fill rate & attendance"}
                           </div>
                         </div>
