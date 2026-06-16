@@ -311,7 +311,7 @@ const ClientInsights = () => {
               marginBottom: 8,
             }}
           >
-            — INSIGHTS
+            — VERITY · AI COST AGENT
           </div>
           <h1
             style={{
@@ -324,7 +324,7 @@ const ClientInsights = () => {
               marginBottom: 4,
             }}
           >
-            What the data starts telling you.
+            Verity — cost insights and signals.
           </h1>
           <p
             style={{
@@ -335,7 +335,7 @@ const ClientInsights = () => {
               margin: 0,
             }}
           >
-            Six findings surfaced from Apex's operating data. Updated continuously.
+            Verity surfaces cost-related signals from Apex's verified payroll and billing data. Updated continuously.
           </p>
         </div>
         <div style={{ display: "flex", gap: 10 }}>
