@@ -128,7 +128,7 @@ const AgencyLiveSnapshot = ({ onViewWorker }: AgencyLiveSnapshotProps) => {
     type: string;
   } | null>(null);
 
-  const openExceptions = exceptions.filter(e => e.status !== "resolved");
+  const openExceptions = exceptions.filter(e => e.status !== "resolved" && e.type !== "traffic-alert");
   const filteredExceptions = openExceptions.filter(e => {
     if (typeFilter !== "all" && e.type !== typeFilter) return false;
     return true;
