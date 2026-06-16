@@ -153,14 +153,61 @@ const ClientSidebar = ({ activeView, onViewChange }: ClientSidebarProps) => {
         })}
       </nav>
 
-      {/* Ask Assistant block */}
-      <div
-        style={{
-          marginTop: "auto",
-          padding: "16px 12px 0 12px",
-          borderTop: "1px solid var(--border-purple)",
-        }}
-      >
+      {/* Verity — AI cost-insights agent */}
+      <div style={{ marginTop: "auto", padding: "12px 12px 0 12px", borderTop: "1px solid var(--border-purple)" }}>
+        {(() => {
+          const verityActive = activeView === "insights";
+          return (
+            <button
+              onClick={() => onViewChange("insights")}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = verityActive ? "var(--darkest-purple)" : "#2E1065";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = verityActive ? "var(--darkest-purple)" : "var(--deep-purple)";
+              }}
+              style={{
+                width: "100%",
+                height: 44,
+                background: verityActive ? "var(--darkest-purple)" : "var(--deep-purple)",
+                border: "1px solid var(--darkest-purple)",
+                borderRadius: 4,
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                padding: "0 12px",
+                cursor: "pointer",
+                transition: "background 120ms ease",
+                color: "var(--cream)",
+                marginBottom: 8,
+              }}
+            >
+              <span
+                style={{
+                  width: 22,
+                  height: 22,
+                  borderRadius: 4,
+                  background: "rgba(250, 250, 248, 0.12)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                }}
+              >
+                <Sparkles size={12} style={{ color: "var(--cream)" }} />
+              </span>
+              <span style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", lineHeight: 1.15 }}>
+                <span style={{ fontFamily: "var(--font-mono-headers)", fontWeight: 600, fontSize: 13, letterSpacing: "0.04em", color: "var(--cream)" }}>
+                  Verity
+                </span>
+                <span style={{ fontFamily: "var(--font-mono-labels)", fontWeight: 400, fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase", color: "rgba(250, 250, 248, 0.65)" }}>
+                  AI cost agent
+                </span>
+              </span>
+            </button>
+          );
+        })()}
+
         <button
           onClick={() => onViewChange("chatbot")}
           onMouseEnter={(e) => {
