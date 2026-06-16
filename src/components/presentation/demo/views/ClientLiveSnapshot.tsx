@@ -229,9 +229,8 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
               <option value="no-show">Type: No-Show</option>
               <option value="late">Type: Late</option>
               <option value="overtime">Type: Overtime</option>
-              <option value="clocked-in-not-out">Type: Not Clocked</option>
+              <option value="clocked-in-not-out">Type: Not Clocked Out</option>
               <option value="rtw-expired">Type: RTW Expired</option>
-              <option value="traffic-alert">Type: Traffic</option>
               <option value="not-scheduled">Type: Not Sched</option>
             </select>
             <ChevronDown size={10} style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", color: "var(--brand-purple)", pointerEvents: "none" }} />
