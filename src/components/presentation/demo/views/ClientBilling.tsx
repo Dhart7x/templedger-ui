@@ -146,12 +146,12 @@ const ClientBilling = (_: ClientBillingProps) => {
         {/* Block 2 */}
         <div style={{ flex: 1, padding: "0 26px", borderRight: "1px solid var(--border-purple)", display: "flex", flexDirection: "column", gap: 8 }}>
           <div style={kpiLabel}>AGENCY INVOICE TOTAL</div>
-          <div style={{ ...kpiValue, color: "var(--text-primary)" }}>£{totalAmount.toLocaleString()}</div>
+          <div style={{ ...kpiValue, color: "var(--text-primary)" }}>${totalAmount.toLocaleString()}</div>
         </div>
         {/* Block 3 — highlighted */}
         <div style={{ flex: 1, padding: "0 26px", display: "flex", flexDirection: "column", gap: 8, background: "rgba(76, 29, 149, 0.04)" }}>
           <div style={kpiLabel}>YOUR INVOICE SHOULD BE</div>
-          <div style={{ ...kpiValue, color: "var(--brand-purple)" }}>£{totalAmount.toLocaleString()}</div>
+          <div style={{ ...kpiValue, color: "var(--brand-purple)" }}>${totalAmount.toLocaleString()}</div>
           <div style={{ display: "flex", alignItems: "center", gap: 6, fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)", marginTop: 2 }}>
             <span>Matches verified hours</span>
             <span>·</span>
@@ -216,7 +216,7 @@ const ClientBilling = (_: ClientBillingProps) => {
               <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 8 }}>
                 <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                   <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 18, color: "var(--brand-purple)" }}>
-                    £{g.subtotal.toLocaleString()}
+                    ${g.subtotal.toLocaleString()}
                   </span>
                   <VerifiedPill />
                 </div>
@@ -244,10 +244,10 @@ const ClientBilling = (_: ClientBillingProps) => {
                   {r.hours} hrs
                 </div>
                 <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 12, color: "var(--text-secondary)", textAlign: "right" }}>
-                  £{r.rate.toFixed(2)}/hr
+                  ${r.rate.toFixed(2)}/hr
                 </div>
                 <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 13, color: "var(--text-primary)", textAlign: "right" }}>
-                  £{r.subtotal.toLocaleString()}
+                  ${r.subtotal.toLocaleString()}
                 </div>
               </div>
             ))}
@@ -276,7 +276,7 @@ const ClientBilling = (_: ClientBillingProps) => {
                 AGENCY SUBTOTAL
               </span>
               <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 14, color: "var(--brand-purple)" }}>
-                £{g.subtotal.toLocaleString()}
+                ${g.subtotal.toLocaleString()}
               </span>
             </div>
           </div>
@@ -314,7 +314,7 @@ const ClientBilling = (_: ClientBillingProps) => {
           </div>
         </div>
         <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 28, color: "var(--cream)" }}>
-          £{totalAmount.toLocaleString()}
+          ${totalAmount.toLocaleString()}
         </div>
       </div>
 

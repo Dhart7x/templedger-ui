@@ -254,7 +254,7 @@ const ClientPayroll = () => {
                     {entry.totalHours}h
                   </div>
                   <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--brand-purple)" }}>
-                    £{(entry.totalHours * entry.hourlyRate).toLocaleString("en-GB", { minimumFractionDigits: 0 })}
+                    ${(entry.totalHours * entry.hourlyRate).toLocaleString("en-GB", { minimumFractionDigits: 0 })}
                   </div>
                 </div>
                 <GateRow states={verifiedStates()} />
@@ -409,7 +409,7 @@ const ClientPayroll = () => {
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
                 <span style={monoLabel}>EST. PAYROLL THIS WEEK</span>
                 <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)" }}>
-                  £{currentEstPayroll.toLocaleString("en-GB", { minimumFractionDigits: 0 })}
+                  ${currentEstPayroll.toLocaleString("en-GB", { minimumFractionDigits: 0 })}
                 </span>
               </div>
             </div>
