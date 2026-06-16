@@ -324,10 +324,9 @@ const ClientLiveSnapshot = ({ onViewWorker }: ClientLiveSnapshotProps) => {
               </div>
               <div
                 style={{
-                  fontFamily: "var(--font-body)",
+                  fontFamily: "var(--font-mono-labels)",
                   fontWeight: 600,
                   fontSize: 26,
-                  letterSpacing: "-0.01em",
                   color: "var(--text-primary)",
                   lineHeight: 1,
                 }}
