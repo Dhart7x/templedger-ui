@@ -165,6 +165,8 @@ const ClientBookings = () => {
     setIsAllocating(false);
     setIsOverriding(false);
     setOverrideCounts({});
+    setBookingType("recurring");
+    setAllocationPriority("cost");
     setNewBooking({
       role: "Inbound Warehouse",
       quantity: 1,
