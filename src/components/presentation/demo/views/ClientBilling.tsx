@@ -1,46 +1,96 @@
-import { CheckCircle, Check, Download, Info } from "lucide-react";
+import { CheckCircle, Check, Download, Info, ChevronDown } from "lucide-react";
+import { useState } from "react";
 
-interface Row {
+interface DeptRow {
   department: string;
   agency: string;
   hours: number;
-  rate: number;
-  subtotal: number;
-  status: "verified" | "query";
-  note?: string;
+  rate: number; // blended charge rate $/hr
 }
 
-const rows: Row[] = [
-  { department: "Inbound Warehouse", agency: "Workforce Direct", hours: 312, rate: 14.50, subtotal: 4524, status: "verified" },
-  { department: "Outbound Dispatch", agency: "Pinnacle Staffing", hours: 284, rate: 15.20, subtotal: 4317, status: "verified" },
-  { department: "Pick and Pack", agency: "Meridian Recruitment", hours: 198, rate: 13.80, subtotal: 2732, status: "verified" },
-  { department: "MHE Operations", agency: "Workforce Direct", hours: 241, rate: 17.40, subtotal: 4193, status: "verified" },
-  { department: "Cold Storage", agency: "Pinnacle Staffing", hours: 142, rate: 16.10, subtotal: 2286, status: "verified" },
-  { department: "Returns Processing", agency: "Meridian Recruitment", hours: 70, rate: 13.80, subtotal: 966, status: "verified" },
+interface SiteGroup {
+  site: string;
+  location: string;
+  departments: DeptRow[];
+}
+
+// Site → department breakdown. All department subtotals exceed $100,548.01.
+const sites: SiteGroup[] = [
+  {
+    site: "Baltimore Distribution Center",
+    location: "Baltimore, MD",
+    departments: [
+      { department: "Inbound Warehouse", agency: "Workforce Direct", hours: 8412, rate: 28.45 },
+      { department: "Outbound Dispatch", agency: "Pinnacle Staffing", hours: 7984, rate: 29.10 },
+      { department: "Pick and Pack", agency: "Meridian Recruitment", hours: 6218, rate: 26.80 },
+      { department: "MHE Operations", agency: "Workforce Direct", hours: 5141, rate: 32.40 },
+    ],
+  },
+  {
+    site: "Las Vegas Fulfillment Hub",
+    location: "Las Vegas, NV",
+    departments: [
+      { department: "Inbound Warehouse", agency: "Pinnacle Staffing", hours: 6842, rate: 27.90 },
+      { department: "Pick and Pack", agency: "Workforce Direct", hours: 5318, rate: 26.55 },
+      { department: "Cold Storage", agency: "Meridian Recruitment", hours: 4127, rate: 31.20 },
+    ],
+  },
+  {
+    site: "Dallas Fort-Worth Cross-Dock",
+    location: "Dallas Fort-Worth, TX",
+    departments: [
+      { department: "Outbound Dispatch", agency: "Workforce Direct", hours: 7240, rate: 28.75 },
+      { department: "MHE Operations", agency: "Pinnacle Staffing", hours: 4982, rate: 33.10 },
+      { department: "Returns Processing", agency: "Meridian Recruitment", hours: 3941, rate: 26.25 },
+    ],
+  },
 ];
 
-const totalHours = 1247;
-const totalAmount = 22840;
+// Add a few cents of variance so subtotals look like real verified amounts (not round).
+const centsOffset = (siteIdx: number, deptIdx: number) => {
+  const seed = (siteIdx * 7 + deptIdx * 13 + 41) % 100;
+  return seed / 100;
+};
+
+const formatUSD = (n: number) =>
+  `$${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+interface DeptRowWithTotal extends DeptRow {
+  subtotal: number;
+}
+
+interface ComputedSite {
+  site: string;
+  location: string;
+  departments: DeptRowWithTotal[];
+  hours: number;
+  subtotal: number;
+  agencyCount: number;
+}
+
+const computedSites: ComputedSite[] = sites.map((s, si) => {
+  const departments = s.departments.map((d, di) => ({
+    ...d,
+    subtotal: Math.round(d.hours * d.rate * 100) / 100 + centsOffset(si, di),
+  }));
+  return {
+    site: s.site,
+    location: s.location,
+    departments,
+    hours: departments.reduce((sum, d) => sum + d.hours, 0),
+    subtotal: departments.reduce((sum, d) => sum + d.subtotal, 0),
+    agencyCount: new Set(departments.map((d) => d.agency)).size,
+  };
+});
+
+const totalHours = computedSites.reduce((s, x) => s + x.hours, 0);
+const totalAmount = computedSites.reduce((s, x) => s + x.subtotal, 0);
+const agencyInvoiceTotal = totalAmount; // verified payroll has trickled down — amounts match
 
 interface ClientBillingProps {
   onViewChange?: (view: string) => void;
   onViewWorker?: (workerName: string) => void;
 }
-
-// Group rows by agency, preserving first-seen order
-const agencyGroups = (() => {
-  const map = new Map<string, Row[]>();
-  rows.forEach((r) => {
-    if (!map.has(r.agency)) map.set(r.agency, []);
-    map.get(r.agency)!.push(r);
-  });
-  return Array.from(map.entries()).map(([agency, items]) => ({
-    agency,
-    items,
-    hours: items.reduce((s, r) => s + r.hours, 0),
-    subtotal: items.reduce((s, r) => s + r.subtotal, 0),
-  }));
-})();
 
 const VerifiedPill = () => (
   <span
@@ -63,7 +113,7 @@ const VerifiedPill = () => (
   </span>
 );
 
-const ExportButton = () => (
+const ExportButton = ({ label = "Export" }: { label?: string }) => (
   <button
     type="button"
     style={{
@@ -86,11 +136,18 @@ const ExportButton = () => (
     onMouseEnter={(e) => (e.currentTarget.style.background = "var(--cream-tint)")}
     onMouseLeave={(e) => (e.currentTarget.style.background = "var(--white)")}
   >
-    <Download size={10} /> Export
+    <Download size={10} /> {label}
   </button>
 );
 
 const ClientBilling = (_: ClientBillingProps) => {
+  const [openSites, setOpenSites] = useState<Record<string, boolean>>(() =>
+    Object.fromEntries(computedSites.map((s) => [s.site, true]))
+  );
+
+  const toggle = (site: string) =>
+    setOpenSites((prev) => ({ ...prev, [site]: !prev[site] }));
+
   return (
     <div style={{ padding: 24 }}>
       {/* PART 1 — Header */}
@@ -119,10 +176,10 @@ const ClientBilling = (_: ClientBillingProps) => {
               margin: 0,
             }}
           >
-            Invoice Clarity
+            Verified Invoices
           </h1>
           <p style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, color: "var(--text-secondary)", margin: "4px 0 0" }}>
-            Every line item traces back to a verified clock event.
+            Payroll-verified hours, multiplied by contracted agency rates, by site and department.
           </p>
         </div>
       </div>
@@ -138,22 +195,19 @@ const ClientBilling = (_: ClientBillingProps) => {
           marginBottom: 22,
         }}
       >
-        {/* Block 1 */}
         <div style={{ flex: 1, padding: "0 26px", borderRight: "1px solid var(--border-purple)", display: "flex", flexDirection: "column", gap: 8 }}>
           <div style={kpiLabel}>VERIFIED HOURS</div>
           <div style={{ ...kpiValue, color: "var(--text-primary)" }}>{totalHours.toLocaleString()} hrs</div>
         </div>
-        {/* Block 2 */}
         <div style={{ flex: 1, padding: "0 26px", borderRight: "1px solid var(--border-purple)", display: "flex", flexDirection: "column", gap: 8 }}>
           <div style={kpiLabel}>AGENCY INVOICE TOTAL</div>
-          <div style={{ ...kpiValue, color: "var(--text-primary)" }}>${totalAmount.toLocaleString()}</div>
+          <div style={{ ...kpiValue, color: "var(--text-primary)" }}>{formatUSD(agencyInvoiceTotal)}</div>
         </div>
-        {/* Block 3 — highlighted */}
         <div style={{ flex: 1, padding: "0 26px", display: "flex", flexDirection: "column", gap: 8, background: "rgba(76, 29, 149, 0.04)" }}>
           <div style={kpiLabel}>YOUR INVOICE SHOULD BE</div>
-          <div style={{ ...kpiValue, color: "var(--brand-purple)" }}>${totalAmount.toLocaleString()}</div>
+          <div style={{ ...kpiValue, color: "var(--brand-purple)" }}>{formatUSD(totalAmount)}</div>
           <div style={{ display: "flex", alignItems: "center", gap: 6, fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)", marginTop: 2 }}>
-            <span>Matches verified hours</span>
+            <span>Matches verified payroll</span>
             <span>·</span>
             <CheckCircle size={11} style={{ color: "var(--status-green)" }} />
             <span style={{ color: "var(--status-green)", fontWeight: 500 }}>Verified</span>
@@ -175,112 +229,164 @@ const ClientBilling = (_: ClientBillingProps) => {
               marginBottom: 6,
             }}
           >
-            — BREAKDOWN BY COST CENTRE
+            — BREAKDOWN BY SITE &amp; DEPARTMENT
           </div>
           <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, color: "var(--text-secondary)" }}>
-            Per-agency invoice built from verified payroll and contracted rates
+            Verified payroll has trickled into billing. Each line is hours × contracted agency rate.
           </div>
         </div>
       </div>
 
-      {/* PART 4 — Per-agency blocks */}
+      {/* PART 4 — Per-site blocks */}
       <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 22 }}>
-        {agencyGroups.map((g) => (
-          <div
-            key={g.agency}
-            style={{
-              background: "var(--white)",
-              border: "1px solid var(--border-purple)",
-              borderRadius: 6,
-              overflow: "hidden",
-            }}
-          >
-            {/* Block header */}
+        {computedSites.map((s) => {
+          const isOpen = openSites[s.site];
+          return (
             <div
+              key={s.site}
               style={{
-                padding: "16px 20px",
-                borderBottom: "1px solid var(--border-purple)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
+                background: "var(--white)",
+                border: "1px solid var(--border-purple)",
+                borderRadius: 6,
+                overflow: "hidden",
               }}
             >
-              <div>
-                <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 15, color: "var(--text-primary)" }}>
-                  {g.agency}
-                </div>
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)", marginTop: 2 }}>
-                  {g.items.length} departments · {g.hours} hrs
-                </div>
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 8 }}>
-                <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 18, color: "var(--brand-purple)" }}>
-                    ${g.subtotal.toLocaleString()}
-                  </span>
-                  <VerifiedPill />
-                </div>
-                <ExportButton />
-              </div>
-            </div>
-
-            {/* Department rows */}
-            {g.items.map((r, idx) => (
-              <div
-                key={r.department}
+              {/* Site header */}
+              <button
+                onClick={() => toggle(s.site)}
                 style={{
-                  padding: "12px 20px",
-                  borderBottom: idx === g.items.length - 1 ? "none" : "1px solid var(--border-purple)",
-                  display: "grid",
-                  gridTemplateColumns: "1.6fr 100px 100px 100px",
-                  gap: 16,
+                  width: "100%",
+                  padding: "18px 20px",
+                  borderBottom: isOpen ? "1px solid var(--border-purple)" : "none",
+                  display: "flex",
                   alignItems: "center",
+                  justifyContent: "space-between",
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                  textAlign: "left",
                 }}
               >
-                <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>
-                  {r.department}
+                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  <ChevronDown
+                    size={14}
+                    style={{
+                      color: "var(--brand-purple)",
+                      transform: isOpen ? "rotate(0)" : "rotate(-90deg)",
+                      transition: "transform 120ms ease",
+                    }}
+                  />
+                  <div>
+                    <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: 15, color: "var(--text-primary)" }}>
+                      {s.site}
+                    </div>
+                    <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "var(--text-secondary)", marginTop: 2 }}>
+                      {s.location} · {s.departments.length} departments · {s.agencyCount} agencies · {s.hours.toLocaleString()} hrs
+                    </div>
+                  </div>
                 </div>
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)", textAlign: "right" }}>
-                  {r.hours} hrs
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 8 }}>
+                  <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 20, color: "var(--brand-purple)" }}>
+                      {formatUSD(s.subtotal)}
+                    </span>
+                    <VerifiedPill />
+                  </div>
                 </div>
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 12, color: "var(--text-secondary)", textAlign: "right" }}>
-                  ${r.rate.toFixed(2)}/hr
-                </div>
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 13, color: "var(--text-primary)", textAlign: "right" }}>
-                  ${r.subtotal.toLocaleString()}
-                </div>
-              </div>
-            ))}
+              </button>
 
-            {/* Subtotal strip */}
-            <div
-              style={{
-                padding: "12px 20px",
-                background: "var(--cream-tint)",
-                borderTop: "1px solid var(--border-purple)",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontWeight: 500,
-                  fontSize: 10,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color: "var(--text-secondary)",
-                }}
-              >
-                AGENCY SUBTOTAL
-              </span>
-              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 14, color: "var(--brand-purple)" }}>
-                ${g.subtotal.toLocaleString()}
-              </span>
+              {isOpen && (
+                <>
+                  {/* Column headers */}
+                  <div
+                    style={{
+                      padding: "10px 20px",
+                      background: "var(--cream-tint)",
+                      borderBottom: "1px solid var(--border-purple)",
+                      display: "grid",
+                      gridTemplateColumns: "1.6fr 1.2fr 110px 120px 160px",
+                      gap: 16,
+                      alignItems: "center",
+                      fontFamily: "'IBM Plex Mono', monospace",
+                      fontWeight: 500,
+                      fontSize: 10,
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      color: "var(--text-secondary)",
+                    }}
+                  >
+                    <div>Department</div>
+                    <div>Agency</div>
+                    <div style={{ textAlign: "right" }}>Hours</div>
+                    <div style={{ textAlign: "right" }}>Rate</div>
+                    <div style={{ textAlign: "right" }}>Verified Invoice</div>
+                  </div>
+
+                  {s.departments.map((r, idx) => (
+                    <div
+                      key={r.department + r.agency}
+                      style={{
+                        padding: "14px 20px",
+                        borderBottom: idx === s.departments.length - 1 ? "none" : "1px solid var(--border-purple)",
+                        display: "grid",
+                        gridTemplateColumns: "1.6fr 1.2fr 110px 120px 160px",
+                        gap: 16,
+                        alignItems: "center",
+                      }}
+                    >
+                      <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: 13, color: "var(--text-primary)" }}>
+                        {r.department}
+                      </div>
+                      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 12, color: "var(--text-secondary)" }}>
+                        {r.agency}
+                      </div>
+                      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500, fontSize: 12, color: "var(--text-primary)", textAlign: "right" }}>
+                        {r.hours.toLocaleString()} hrs
+                      </div>
+                      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 12, color: "var(--text-secondary)", textAlign: "right" }}>
+                        ${r.rate.toFixed(2)}/hr
+                      </div>
+                      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 14, color: "var(--text-primary)", textAlign: "right" }}>
+                        {formatUSD(r.subtotal)}
+                      </div>
+                    </div>
+                  ))}
+
+                  {/* Site subtotal strip */}
+                  <div
+                    style={{
+                      padding: "14px 20px",
+                      background: "rgba(76, 29, 149, 0.04)",
+                      borderTop: "1px solid var(--border-purple)",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: "'IBM Plex Mono', monospace",
+                        fontWeight: 500,
+                        fontSize: 10,
+                        letterSpacing: "0.12em",
+                        textTransform: "uppercase",
+                        color: "var(--text-secondary)",
+                      }}
+                    >
+                      Site Subtotal
+                    </span>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 16, color: "var(--brand-purple)" }}>
+                        {formatUSD(s.subtotal)}
+                      </span>
+                      <ExportButton label="Export Site" />
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* PART 6 — Total bar */}
@@ -288,7 +394,7 @@ const ClientBilling = (_: ClientBillingProps) => {
         style={{
           background: "var(--darkest-purple)",
           borderRadius: 6,
-          padding: "18px 22px",
+          padding: "20px 24px",
           marginBottom: 22,
           display: "flex",
           alignItems: "center",
@@ -307,14 +413,14 @@ const ClientBilling = (_: ClientBillingProps) => {
               marginBottom: 4,
             }}
           >
-            — TOTAL INVOICE VALUE
+            — TOTAL VERIFIED INVOICE VALUE
           </div>
           <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 400, fontSize: 11, color: "rgba(250, 250, 248, 0.7)" }}>
-            {totalHours.toLocaleString()} hrs · {agencyGroups.length} agencies
+            {totalHours.toLocaleString()} hrs · {computedSites.length} sites · 3 agencies
           </div>
         </div>
-        <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 28, color: "var(--cream)" }}>
-          ${totalAmount.toLocaleString()}
+        <div style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 32, color: "var(--cream)" }}>
+          {formatUSD(totalAmount)}
         </div>
       </div>
 
@@ -358,9 +464,9 @@ const ClientBilling = (_: ClientBillingProps) => {
             How this works
           </div>
           <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 400, fontSize: 13, lineHeight: 1.55, color: "var(--text-primary)" }}>
-            TempLedger derives your invoice total directly from verified clock events.
-            Every hour on this invoice traces back to a biometric clock-in and clock-out.
-            No estimates. No disputes.
+            Verified payroll trickles into billing. Hours that cleared the 10-step execution chain are
+            multiplied by each agency's contracted rate, producing a verified invoice amount per site
+            and department. No estimates. No disputes.
           </div>
         </div>
       </div>
