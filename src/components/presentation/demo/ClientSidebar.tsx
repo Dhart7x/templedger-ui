@@ -15,7 +15,6 @@ const navItems = [
   { id: "payroll", label: "Payroll", icon: DollarSign },
   { id: "billing", label: "Billing", icon: FileText },
   { id: "spend-analysis", label: "Spend Analysis", icon: TrendingUp },
-  { id: "insights", label: "Insights", icon: Sparkles },
   { id: "temp-perm", label: "Temp-Perm", icon: UserCheck },
   { id: "permissions", label: "Permissions", icon: Shield },
 ];
