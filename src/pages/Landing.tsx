@@ -205,8 +205,10 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
         justifyContent: "center",
         background: C.beige,
         overflow: "hidden",
-        minHeight: "100vh",
-        padding: "120px 32px",
+        height: "100vh",
+        boxSizing: "border-box",
+        padding: "0 32px",
+
       }}
     >
       {/* Soft radial light wash */}
@@ -476,21 +478,6 @@ const Problem = () => (
           + more
         </span>
       </div>
-
-      <p
-        style={{
-          fontFamily: sans,
-          fontWeight: 500,
-          fontSize: "clamp(22px, 2.4vw, 30px)",
-          lineHeight: 1.25,
-          letterSpacing: "-0.02em",
-          color: C.purple,
-          maxWidth: 760,
-          margin: "56px 0 0",
-        }}
-      >
-        And between it all, 3 to 5 percent of your agency spend leaks out unverified.
-      </p>
     </div>
   </section>
 );
