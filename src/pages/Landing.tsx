@@ -813,7 +813,7 @@ const DashedDownArrow = ({ height = 56 }: { height?: number }) => (
 const FALL_DURATION = 900;
 const FALL_INTERVAL = 1350;
 
-type Flyer = { id: number; label: string; text: string; isMore: boolean; x: number; y: number; dx: number; dy: number };
+type Flyer = { id: number; label: string; text: string; x: number; y: number; dx: number; dy: number };
 
 const useFallingData = () => {
   const stageRef = useRef<HTMLDivElement | null>(null);
@@ -830,7 +830,7 @@ const useFallingData = () => {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const labels = SOURCE_CLUSTERS.flatMap((c) => [...c.items, ...(c.more ? [`+more:${c.title}`] : [])]);
+    const labels = SOURCE_CLUSTERS.flatMap((c) => c.items);
     let i = 0;
     let idCounter = 0;
     const timers: number[] = [];
@@ -876,8 +876,7 @@ const useFallingData = () => {
       const dx = t.left + t.width / 2 - (p.left + p.width / 2);
       const dy = t.top + t.height / 2 - (p.top + p.height / 2);
       const id = ++idCounter;
-      const isMore = label.startsWith("+more:");
-      setFlyer({ id, label, text: isMore ? "+ more" : label, isMore, x, y, dx, dy });
+      setFlyer({ id, label, text: label, x, y, dx, dy });
       setHidden((h) => new Set(h).add(label));
       later(() => {
         setFlyer((f) => (f && f.id === id ? null : f));
