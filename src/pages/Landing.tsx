@@ -338,6 +338,8 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
 
 
         </h1>
+        </div>
+
 
         <p
           className="tl-sub"
