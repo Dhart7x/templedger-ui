@@ -52,6 +52,7 @@ Deno.serve(async (req) => {
           body: JSON.stringify({
             data: {
               title,
+              description: `${title} captured from the TempLedger website form`,
               api_slug: slug,
               type: "text",
               is_required: false,
