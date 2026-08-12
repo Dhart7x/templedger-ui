@@ -91,9 +91,9 @@ Deno.serve(async (req) => {
   const firstName = nameParts[0];
   const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "";
 
-  // 1. Create the person record in Attio.
-  const person = await attio(`/objects/people/records`, {
-    method: "POST",
+  // 1. Create or update the person record in Attio, matched on email.
+  const person = await attio(`/objects/people/records?matching_attribute=email_addresses`, {
+    method: "PUT",
     body: JSON.stringify({
       data: {
         values: {
