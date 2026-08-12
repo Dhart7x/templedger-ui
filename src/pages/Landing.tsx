@@ -269,10 +269,10 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
                     style={{
                       position: "absolute",
                       left: 0,
-                      top: "52%",
+                      top: "48%",
                       height: 3,
                       background: C.indigo,
-                      opacity: struck || dropped ? 0.45 : 0,
+                      opacity: struck || dropped ? 0.6 : 0,
                       width: struck || dropped ? "100%" : "0%",
                       transform: "translateY(-50%)",
                       transition: reducedMotion ? "none" : "width 400ms ease-out, opacity 200ms ease-out",
