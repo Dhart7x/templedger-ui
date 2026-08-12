@@ -12,7 +12,7 @@ const JoinWaitlistModal = ({ open, onClose }: Props) => (
     title="Join the waitlist"
     submitLabel="Join Waitlist"
     successTitle="You're on the list."
-    successBody="We'll reach out when your cohort opens."
+    successBody="Thank you for your interest in TempLedger. You'll hear from us as early access opens."
   />
 );
 
