@@ -562,20 +562,6 @@ const Problem = () => (
         </span>
       </div>
 
-      <p
-        style={{
-          fontFamily: sans,
-          fontWeight: 600,
-          fontSize: 22,
-          lineHeight: 1.4,
-          letterSpacing: "-0.01em",
-          color: C.indigo,
-          margin: "64px 0 0",
-        }}
-      >
-        Effort doesn't fix structural problems.
-      </p>
-    </div>
   </section>
 );
 
