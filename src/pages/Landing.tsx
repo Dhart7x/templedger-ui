@@ -51,23 +51,23 @@ const PageStyles = () => (
       100% { opacity: 0; transform: translateY(8px); }
     }
     .tl-scroll-cue {
-      opacity: 0.3;
+      opacity: 0.45;
       animation: tl-scroll-cue 2.8s ease-in-out infinite;
     }
     @keyframes tl-dash-flow { to { stroke-dashoffset: -18px; } }
     .tl-dash-flow { animation: tl-dash-flow 1s linear infinite; }
     @keyframes tl-ring-pulse {
-      0% { transform: scale(1); opacity: 0.9; }
-      60% { transform: scale(1.045); opacity: 0.35; }
-      100% { transform: scale(1); opacity: 0.9; }
+      0% { transform: scale(1); opacity: 1; }
+      60% { transform: scale(1.075); opacity: 0.5; }
+      100% { transform: scale(1); opacity: 1; }
     }
     .tl-ring { animation: tl-ring-pulse 4s ease-in-out infinite; }
     @media (prefers-reduced-motion: reduce) {
-      .tl-scroll-cue { animation: none; opacity: 0.3; }
+      .tl-scroll-cue { animation: none; opacity: 0.45; }
       .tl-dash-flow, .tl-ring { animation: none !important; }
     }
     @media (max-width: 720px) {
-      .tl-h1 { font-size: 32px !important; line-height: 1.12 !important; }
+      .tl-h1 { font-size: 36px !important; line-height: 1.12 !important; }
       .tl-br-desktop { display: none; }
       .tl-problem-h2 { font-size: 30px !important; }
       .tl-sub { font-size: 16px !important; }
@@ -226,7 +226,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
         overflow: "hidden",
         height: "100vh",
         boxSizing: "border-box",
-        padding: "0 32px",
+        padding: "0 32px 72px",
 
       }}
     >
@@ -263,7 +263,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           style={{
             fontFamily: sans,
             fontWeight: 600,
-            fontSize: "clamp(34px, 4.9vw, 64px)",
+            fontSize: "clamp(38px, 5.5vw, 72px)",
             lineHeight: 1.08,
             letterSpacing: "-0.03em",
             color: C.indigo,
@@ -322,7 +322,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
             color: C.indigo,
             opacity: 0.7,
             maxWidth: 620,
-            margin: "26px 0 0",
+            margin: "18px 0 0",
           }}
         >
           Cut costs and boost productivity with real-time and predictive insights.
@@ -330,7 +330,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
 
         <div
           className="tl-hero-actions"
-          style={{ display: "flex", gap: 12, marginTop: 40, justifyContent: "center" }}
+          style={{ display: "flex", gap: 12, marginTop: 26, justifyContent: "center" }}
         >
           <button
             className="tl-btn-primary"
@@ -348,8 +348,11 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
       <button
         aria-label="Scroll to problem section"
         onClick={() => {
-          const el = document.getElementById("problem");
-          if (el) el.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
+          const heading = document.querySelector<HTMLElement>("#problem .tl-problem-h2");
+          const el = heading ?? document.getElementById("problem");
+          if (!el) return;
+          const top = el.getBoundingClientRect().top + window.scrollY - (72 + 96);
+          window.scrollTo({ top, behavior: reducedMotion ? "auto" : "smooth" });
         }}
         style={{
           position: "absolute",
@@ -367,8 +370,8 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
       >
         <span className="tl-scroll-cue" style={{ color: C.indigo, display: "block", lineHeight: 0 }}>
           <svg
-            width="28"
-            height="28"
+            width="34"
+            height="34"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -563,10 +566,10 @@ const CAPABILITY_PILLS = [
 
 const capPillBase: React.CSSProperties = {
   fontFamily: body,
-  fontSize: 15,
+  fontSize: 18,
   fontWeight: 400,
   lineHeight: 1.2,
-  padding: "10px 20px",
+  padding: "12px 24px",
   borderRadius: 999,
   whiteSpace: "nowrap",
 };
@@ -614,16 +617,18 @@ const RightNode = () => (
     }}
   >
     <div style={{ ...nodeTitle, color: C.white }}>Machine learning</div>
-    <div style={{ ...nodeSub, color: "rgba(255,255,255,0.55)" }}>learns every shift</div>
+    <div style={{ ...nodeSub, color: "rgba(255,255,255,0.55)" }}>
+      learns every agency, person, shift, department, site
+    </div>
   </div>
 );
 
 const CenterPill = () => (
   <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
     {[
-      { inset: -18, color: "#C9C2EE", delay: "0s" },
-      { inset: -38, color: "#DCD7F3", delay: "0.8s" },
-      { inset: -58, color: C.violetShadow, delay: "1.6s" },
+      { inset: -20, color: "#9C8FE0", delay: "0s" },
+      { inset: -42, color: "#B3A8E8", delay: "0.8s" },
+      { inset: -64, color: "#C9C2EE", delay: "1.6s" },
     ].map((r) => (
       <div
         key={r.inset}
@@ -644,15 +649,15 @@ const CenterPill = () => (
         position: "relative",
         background: C.purple,
         borderRadius: 999,
-        padding: "18px 34px",
+        padding: "26px 48px",
         display: "flex",
         alignItems: "center",
-        gap: 12,
+        gap: 16,
         whiteSpace: "nowrap",
       }}
     >
-      <img src={symbolUrl} alt="" style={{ height: 26, width: "auto", display: "block", filter: "brightness(0) invert(1)" }} />
-      <span style={{ fontFamily: sans, fontWeight: 600, fontSize: 22, color: C.white, letterSpacing: "-0.01em" }}>
+      <img src={symbolUrl} alt="" style={{ height: 38, width: "auto", display: "block", filter: "brightness(0) invert(1)" }} />
+      <span style={{ fontFamily: sans, fontWeight: 600, fontSize: 32, color: C.white, letterSpacing: "-0.01em" }}>
         TempLedger
       </span>
     </div>
@@ -801,8 +806,8 @@ const Reveal = () => (
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
-          gap: 10,
-          maxWidth: 560,
+          gap: 14,
+          maxWidth: 760,
           margin: "28px 0 0",
         }}
       >
