@@ -51,15 +51,15 @@ const PageStyles = () => (
       100% { opacity: 0; transform: translateY(8px); }
     }
     .tl-scroll-cue {
-      opacity: 0.3;
+      opacity: 0.45;
       animation: tl-scroll-cue 2.8s ease-in-out infinite;
     }
     @keyframes tl-dash-flow { to { stroke-dashoffset: -18px; } }
     .tl-dash-flow { animation: tl-dash-flow 1s linear infinite; }
     @keyframes tl-ring-pulse {
-      0% { transform: scale(1); opacity: 0.9; }
-      60% { transform: scale(1.045); opacity: 0.35; }
-      100% { transform: scale(1); opacity: 0.9; }
+      0% { transform: scale(1); opacity: 1; }
+      60% { transform: scale(1.075); opacity: 0.5; }
+      100% { transform: scale(1); opacity: 1; }
     }
     .tl-ring { animation: tl-ring-pulse 4s ease-in-out infinite; }
     @media (prefers-reduced-motion: reduce) {
