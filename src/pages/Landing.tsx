@@ -248,7 +248,10 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           Manage your contingent workforce on{" "}
           <span style={{ display: "inline-block", position: "relative" }}>
             {/* Ghost text reserves the full final width from the first frame */}
-            <span style={{ visibility: "hidden" }}>{`relationships${TYPED_TEXT}`}</span>
+            <span style={{ visibility: "hidden" }}>
+              relationships
+              <span style={{ whiteSpace: "nowrap" }}>{TYPED_TEXT}</span>
+            </span>
 
             {/* Animated layer positioned over the ghost */}
             <span style={{ position: "absolute", left: 0, top: 0, width: "100%" }}>
