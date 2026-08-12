@@ -1,5 +1,6 @@
 import { useEffect, useState, FormEvent } from "react";
 import symbolUrl from "@/assets/templedger-symbol.png";
+import { supabase } from "@/integrations/supabase/client";
 
 const C = {
   purple: "#4C1D95",
