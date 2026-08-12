@@ -1,83 +1,44 @@
 import { useEffect, useState } from "react";
+import {
+  C,
+  Eyebrow,
+  PrimaryButton,
+  Reveal,
+  SecondaryButton,
+  mono,
+} from "@/components/landing/shared";
+import {
+  Footer,
+  FoundingSection,
+  HowItWorksSection,
+  IntelligenceSection,
+  PlatformSection,
+} from "@/components/landing/sections";
 
-const C = {
-  purple: "#4C1D95",
-  purpleDark: "#3B1578",
-  indigo: "#14082E",
-  beige: "#FAFAF8",
-  lavender: "#AFA9EC",
-  violetShadow: "#E4DFF5",
-  lightPurple: "#F0EBFA",
-  white: "#FFFFFF",
-  black: "#000000",
-};
+const NAV_LINKS = [
+  { label: "Platform", href: "#platform" },
+  { label: "Intelligence", href: "#intelligence" },
+  { label: "How it works", href: "#how-it-works" },
+];
 
-const mono: React.CSSProperties = {
-  fontFamily: "'JetBrains Mono', monospace",
-  textTransform: "uppercase",
-  letterSpacing: "0.1em",
-};
-
-const Eyebrow = ({ children }: { children: React.ReactNode }) => (
-  <div
-    style={{
-      ...mono,
-      fontSize: 11,
-      fontWeight: 500,
-      color: C.purple,
-      display: "inline-flex",
-      alignItems: "center",
-      gap: 10,
-    }}
-  >
-    <span style={{ width: 18, height: 1, background: C.purple, display: "inline-block" }} />
-    {children}
-  </div>
+const ResponsiveStyles = () => (
+  <style>{`
+    @media (max-width: 900px) {
+      .tl-nav-links { display: none !important; }
+      .tl-nav-secondary { display: none !important; }
+      .tl-menu-button { display: inline-flex !important; }
+      .tl-cols-3, .tl-cols-4, .tl-cols-2, .tl-cols-stats { grid-template-columns: 1fr !important; }
+      .tl-feature-row { grid-template-columns: 1fr !important; gap: 32px !important; }
+      .tl-feature-row > div { order: 0 !important; }
+      .tl-section { padding: 80px 20px !important; }
+      .tl-footer-top { flex-direction: column !important; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition-duration: 1ms !important; }
+    }
+  `}</style>
 );
 
-const PrimaryButton = ({ children }: { children: React.ReactNode }) => (
-  <button
-    type="button"
-    style={{
-      background: C.purple,
-      color: C.white,
-      border: "none",
-      borderRadius: 8,
-      padding: "12px 22px",
-      fontFamily: "'Inter', system-ui, sans-serif",
-      fontSize: 14,
-      fontWeight: 500,
-      cursor: "pointer",
-      transition: "background 160ms ease",
-    }}
-    onMouseEnter={(e) => (e.currentTarget.style.background = C.purpleDark)}
-    onMouseLeave={(e) => (e.currentTarget.style.background = C.purple)}
-  >
-    {children}
-  </button>
-);
-
-const SecondaryButton = ({ children }: { children: React.ReactNode }) => (
-  <button
-    type="button"
-    style={{
-      background: C.white,
-      color: C.indigo,
-      border: `1px solid ${C.violetShadow}`,
-      borderRadius: 8,
-      padding: "12px 22px",
-      fontFamily: "'Inter', system-ui, sans-serif",
-      fontSize: 14,
-      fontWeight: 500,
-      cursor: "pointer",
-      transition: "border-color 160ms ease, background 160ms ease",
-    }}
-    onMouseEnter={(e) => (e.currentTarget.style.borderColor = C.lavender)}
-    onMouseLeave={(e) => (e.currentTarget.style.borderColor = C.violetShadow)}
-  >
-    {children}
-  </button>
-);
 
 const Nav = () => {
   const [scrolled, setScrolled] = useState(false);
