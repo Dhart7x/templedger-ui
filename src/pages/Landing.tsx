@@ -985,7 +985,7 @@ const Reveal = () => {
           }}
         >
           {SOURCE_CLUSTERS.map((c) => (
-            <SourceCluster key={c.title} {...c} registerPill={registerPill} />
+            <SourceCluster key={c.title} {...c} registerPill={registerPill} hidden={hidden} cycleKey={cycleKey} />
           ))}
         </div>
 
