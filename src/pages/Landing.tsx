@@ -63,11 +63,11 @@ const PageStyles = () => (
     }
     .tl-ring { animation: tl-ring-pulse 4s ease-in-out infinite; }
     @media (prefers-reduced-motion: reduce) {
-      .tl-scroll-cue { animation: none; opacity: 0.3; }
+      .tl-scroll-cue { animation: none; opacity: 0.45; }
       .tl-dash-flow, .tl-ring { animation: none !important; }
     }
     @media (max-width: 720px) {
-      .tl-h1 { font-size: 32px !important; line-height: 1.12 !important; }
+      .tl-h1 { font-size: 36px !important; line-height: 1.12 !important; }
       .tl-br-desktop { display: none; }
       .tl-problem-h2 { font-size: 30px !important; }
       .tl-sub { font-size: 16px !important; }
