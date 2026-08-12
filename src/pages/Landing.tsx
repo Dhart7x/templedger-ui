@@ -78,9 +78,8 @@ const PageStyles = () => (
       .tl-equation-line { display: block; }
       .tl-diagram-desktop { display: none !important; }
       .tl-diagram-mobile { display: flex !important; }
-      .tl-node { width: min(100%, 300px) !important; height: auto !important; min-height: 184px; }
+      .tl-node-sm { width: min(100%, 300px) !important; }
     }
-    .tl-node { width: 220px; height: 184px; border-radius: 24px; }
 
 
   `}</style>
