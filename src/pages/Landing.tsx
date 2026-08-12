@@ -1068,8 +1068,8 @@ const Reveal = () => {
       </div>
 
 
-      <div style={{ marginTop: 72 }}>
-        <DownArrow height={56} />
+      <div style={{ marginTop: 44 }}>
+        <DownArrow height={28} />
       </div>
 
       <div
