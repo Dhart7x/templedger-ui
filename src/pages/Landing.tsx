@@ -725,14 +725,14 @@ const nodeStatus: React.CSSProperties = {
 };
 
 const DataNode = () => (
-  <div className="tl-node" style={{ ...nodeBase, background: C.white, border: `1px solid ${C.violetShadow}` }}>
+  <div className="tl-node-sm" style={{ ...nodeBase, background: C.white, border: `1px solid ${C.violetShadow}` }}>
     <div style={{ ...nodeTitle, color: C.indigo }}>Data</div>
     <div style={{ ...nodeStatus, color: C.purple }}>Connected.</div>
   </div>
 );
 
 const MLNode = () => (
-  <div className="tl-node" style={{ ...nodeBase, background: C.indigo }}>
+  <div className="tl-node-sm" style={{ ...nodeBase, background: C.indigo }}>
     <div style={{ ...nodeTitle, color: C.white }}>Machine learning</div>
     <div style={{ ...nodeStatus, color: C.lavender }}>Compounding.</div>
   </div>
