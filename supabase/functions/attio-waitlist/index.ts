@@ -31,8 +31,31 @@ Deno.serve(async (req) => {
 
   if (!key()) return json({ error: "Attio API key not configured" }, 500);
 
-  // Inspection helper: GET returns the list config + its attributes.
+  // Inspection / one-time setup helper.
   if (req.method === "GET") {
+    const url = new URL(req.url);
+    if (url.searchParams.get("setup") === "1") {
+      const results: Record<string, unknown> = {};
+      for (const [slug, title] of Object.entries(LIST_ATTRS)) {
+        const r = await attio(`/lists/${LIST_ID}/attributes`, {
+          method: "POST",
+          body: JSON.stringify({
+            data: {
+              title,
+              api_slug: slug,
+              type: "text",
+              is_required: false,
+              is_unique: false,
+              is_multiselect: false,
+              default_value: null,
+              config: {},
+            },
+          }),
+        });
+        results[slug] = { status: r.status, ok: r.ok, body: r.ok ? "created" : r.json };
+      }
+      return json(results);
+    }
     const list = await attio(`/lists/${LIST_ID}`);
     const attrs = await attio(`/lists/${LIST_ID}/attributes`);
     return json({ list: list.json, attributes: attrs.json });
