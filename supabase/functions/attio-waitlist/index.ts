@@ -35,6 +35,30 @@ Deno.serve(async (req) => {
 
   if (!key()) return json({ error: "Attio API key not configured" }, 500);
 
+  const url = new URL(req.url);
+  const setup = url.searchParams.get("setup");
+  if (req.method === "GET" && setup && LISTS[setup]) {
+    const attrs = [
+      ["Company", "company", "Company name from the website form"],
+      ["Job title", "job_title", "Job title from the website form"],
+      ["Region", "region", "Region selected on the website form"],
+      ["Annual agency spend", "annual_agency_spend", "Annual agency spend from the website form"],
+      ["Agency workforce size", "agency_workforce_size", "Agency workforce size from the website form"],
+      ["Source", "source", "Which website form was submitted"],
+    ];
+    const results: unknown[] = [];
+    for (const [title, api_slug, description] of attrs) {
+      const r = await attio(`/lists/${LISTS[setup]}/attributes`, {
+        method: "POST",
+        body: JSON.stringify({
+          data: { title, api_slug, description, type: "text", is_multiselect: false, is_required: false, is_unique: false, config: {} },
+        }),
+      });
+      results.push({ api_slug, ok: r.ok, status: r.status });
+    }
+    return json({ setup, results });
+  }
+
   if (req.method !== "POST") return json({ error: "Method not allowed" }, 405);
 
   let body: Record<string, unknown>;
