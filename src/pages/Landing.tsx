@@ -40,6 +40,10 @@ const PageStyles = () => (
       vertical-align: baseline;
       animation: tl-caret-blink 1s step-end infinite;
     }
+    .tl-equation-line {
+      display: inline;
+      white-space: nowrap;
+    }
     @keyframes tl-scroll-cue {
       0% { opacity: 1; transform: translateY(0); }
       65% { opacity: 0; transform: translateY(8px); }
