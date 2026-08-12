@@ -155,6 +155,13 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
   }, []);
 
   useEffect(() => {
+    const onScroll = () => setPastHero(window.scrollY > 100);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
     if (reducedMotion) {
       setPhase("done");
       setTypedIndex(TYPED_TEXT.length);
