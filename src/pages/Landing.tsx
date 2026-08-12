@@ -955,7 +955,7 @@ const Reveal = () => {
         position: "relative",
         zIndex: 1,
         width: "100%",
-        maxWidth: 1024,
+        maxWidth: 1200,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
