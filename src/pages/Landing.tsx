@@ -151,10 +151,10 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
 
     const timers: number[] = [];
 
-    // 1000ms hold → strike draws (400ms) → hold (400ms) → drop (350ms) → type
-    timers.push(window.setTimeout(() => setPhase("striking"), 1000));
-    timers.push(window.setTimeout(() => setPhase("struck"), 1400));
-    timers.push(window.setTimeout(() => setPhase("dropping"), 1800));
+    // 2000ms hold → strike draws (400ms) → hold (400ms) → drop (350ms) → type
+    timers.push(window.setTimeout(() => setPhase("striking"), 2000));
+    timers.push(window.setTimeout(() => setPhase("struck"), 2400));
+    timers.push(window.setTimeout(() => setPhase("dropping"), 2800));
     timers.push(
       window.setTimeout(() => {
         setPhase("typing");
@@ -171,7 +171,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           }
         };
         typeNext();
-      }, 2150)
+      }, 3150)
     );
 
     return () => timers.forEach(window.clearTimeout);
