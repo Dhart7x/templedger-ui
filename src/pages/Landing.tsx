@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import logoUrl from "@/assets/templedger-logo.png";
 import BookDemoModal from "@/components/BookDemoModal";
+import JoinWaitlistModal from "@/components/JoinWaitlistModal";
 
 const C = {
   purple: "#4C1D95",
@@ -50,7 +51,7 @@ const buttonBase: React.CSSProperties = {
   whiteSpace: "nowrap",
 };
 
-const Nav = ({ onBookDemo }: { onBookDemo: () => void }) => {
+const Nav = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWaitlist: () => void }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -94,7 +95,7 @@ const Nav = ({ onBookDemo }: { onBookDemo: () => void }) => {
         </a>
 
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <button className="tl-btn-secondary tl-nav-secondary" style={buttonBase}>
+          <button className="tl-btn-secondary tl-nav-secondary" style={buttonBase} onClick={onJoinWaitlist}>
             Join Waitlist
           </button>
           <button className="tl-btn-primary" style={buttonBase} onClick={onBookDemo}>
@@ -106,7 +107,7 @@ const Nav = ({ onBookDemo }: { onBookDemo: () => void }) => {
   );
 };
 
-const Hero = ({ onBookDemo }: { onBookDemo: () => void }) => (
+const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWaitlist: () => void }) => (
   <section
     style={{
       position: "relative",
@@ -190,7 +191,7 @@ const Hero = ({ onBookDemo }: { onBookDemo: () => void }) => (
         >
           Book Demo
         </button>
-        <button className="tl-btn-secondary" style={{ ...buttonBase, padding: "14px 26px", fontSize: 16 }}>
+        <button className="tl-btn-secondary" style={{ ...buttonBase, padding: "14px 26px", fontSize: 16 }} onClick={onJoinWaitlist}>
           Join Waitlist
         </button>
       </div>
