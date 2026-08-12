@@ -996,9 +996,9 @@ const Reveal = () => {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 28,
+            gap: "clamp(52px, 5.2vw, 78px)",
             alignItems: "start",
-            width: 960,
+            width: "min(1140px, 100%)",
             maxWidth: "100%",
           }}
         >
