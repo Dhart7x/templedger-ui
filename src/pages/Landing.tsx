@@ -566,10 +566,10 @@ const CAPABILITY_PILLS = [
 
 const capPillBase: React.CSSProperties = {
   fontFamily: body,
-  fontSize: 15,
+  fontSize: 18,
   fontWeight: 400,
   lineHeight: 1.2,
-  padding: "10px 20px",
+  padding: "12px 24px",
   borderRadius: 999,
   whiteSpace: "nowrap",
 };
