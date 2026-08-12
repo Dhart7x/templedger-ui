@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logoUrl from "@/assets/templedger-logo.png";
 import symbolUrl from "@/assets/templedger-symbol.png";
 import BookDemoModal from "@/components/BookDemoModal";
@@ -62,10 +62,25 @@ const PageStyles = () => (
       100% { transform: scale(1); opacity: 1; }
     }
     .tl-ring { animation: tl-ring-pulse 4s ease-in-out infinite; }
+    @keyframes tl-fly-x { from { transform: translateX(0); } to { transform: translateX(var(--tl-dx, 0px)); } }
+    @keyframes tl-fly-y {
+      from { transform: translateY(0) scale(1); opacity: 0.95; }
+      70% { opacity: 0.8; }
+      to { transform: translateY(var(--tl-dy, 0px)) scale(0.5); opacity: 0; }
+    }
+    .tl-fly-x { animation: tl-fly-x var(--tl-dur, 900ms) linear forwards; }
+    .tl-fly-y { animation: tl-fly-y var(--tl-dur, 900ms) cubic-bezier(0.45, 0, 0.75, 1) forwards; }
+    @keyframes tl-ingest {
+      0% { transform: scale(1); }
+      45% { transform: scale(0.945); }
+      100% { transform: scale(1); }
+    }
+    .tl-ingest { animation: tl-ingest 150ms ease-out; }
     @media (prefers-reduced-motion: reduce) {
       .tl-scroll-cue { animation: none; opacity: 0.45; }
-      .tl-dash-flow, .tl-ring { animation: none !important; }
+      .tl-dash-flow, .tl-ring, .tl-fly-x, .tl-fly-y, .tl-ingest { animation: none !important; }
     }
+
     @media (max-width: 720px) {
       .tl-h1 { font-size: 36px !important; line-height: 1.12 !important; }
       .tl-br-desktop { display: none; }
@@ -569,10 +584,10 @@ const CAPABILITY_PILLS = [
 
 const capPillBase: React.CSSProperties = {
   fontFamily: body,
-  fontSize: 18,
+  fontSize: 15,
   fontWeight: 400,
   lineHeight: 1.2,
-  padding: "12px 24px",
+  padding: "10px 20px",
   borderRadius: 999,
   whiteSpace: "nowrap",
 };
@@ -581,29 +596,29 @@ const SOURCE_CLUSTERS = [
   {
     title: "Agency CRM",
     descriptor: "the workforce record",
-    items: ["Names", "Skills", "Certifications", "Pay rates"],
+    items: ["Names", "Skills", "Certifications", "Shift preferences", "Pay rates", "Performance", "Contracts"],
     more: true,
   },
   {
     title: "Time & Attendance",
     descriptor: "who, where, when",
-    items: ["Clock events", "Locations", "Hours"],
+    items: ["Clock events", "Locations", "Hours", "Breaks", "Overtime"],
     more: false,
   },
   {
     title: "Emails & phone calls",
     descriptor: "the unrecorded layer",
-    items: ["Requests", "Approvals", "Exceptions"],
+    items: ["Staffing requests", "Replacements", "No-shows", "Approvals", "Pay queries", "Exceptions"],
     more: true,
   },
 ];
 
 const smallPill: React.CSSProperties = {
   fontFamily: body,
-  fontSize: 13,
+  fontSize: 12,
   fontWeight: 400,
   lineHeight: 1.2,
-  padding: "7px 14px",
+  padding: "6px 12px",
   borderRadius: 999,
   whiteSpace: "nowrap",
 };
@@ -613,11 +628,13 @@ const SourceCluster = ({
   descriptor,
   items,
   more,
+  registerPill,
 }: {
   title: string;
   descriptor: string;
   items: string[];
   more: boolean;
+  registerPill?: (label: string, el: HTMLElement | null) => void;
 }) => (
   <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
     <div style={{ fontFamily: body, fontSize: 15, fontWeight: 500, lineHeight: 1.2, color: C.indigo }}>
@@ -635,10 +652,11 @@ const SourceCluster = ({
     >
       {descriptor}
     </div>
-    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 8, marginTop: 12 }}>
+    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 7, marginTop: 12 }}>
       {items.map((it) => (
         <span
           key={it}
+          ref={registerPill ? (el) => registerPill(it, el) : undefined}
           style={{ ...smallPill, background: C.lightPurple, border: `1px solid ${C.violetShadow}`, color: C.indigo }}
         >
           {it}
@@ -653,53 +671,11 @@ const SourceCluster = ({
   </div>
 );
 
-const ConvergeLines = () => (
-  <svg
-    aria-hidden
-    width="960"
-    height="92"
-    viewBox="0 0 960 92"
-    fill="none"
-    style={{ display: "block", maxWidth: "100%" }}
-  >
-    <path
-      className="tl-dash-flow"
-      d="M160 0 C160 44, 128 40, 112 72"
-      stroke="#7C5BC7"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeDasharray="8 8"
-      fill="none"
-    />
-    <path
-      className="tl-dash-flow"
-      d="M480 0 C480 46, 220 34, 122 72"
-      stroke="#7C5BC7"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeDasharray="8 8"
-      fill="none"
-    />
-    <path
-      className="tl-dash-flow"
-      d="M800 0 C800 52, 300 30, 134 74"
-      stroke="#7C5BC7"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeDasharray="8 8"
-      fill="none"
-    />
-    <path d="M110 84 L104 71 L118 73 Z" fill={C.purple} />
-    <path d="M121 84 L114.5 72 L128 74 Z" fill={C.purple} />
-    <path d="M133 86 L127 74 L140 77 Z" fill={C.purple} />
-  </svg>
-);
-
 const nodeBase: React.CSSProperties = {
-  width: 200,
-  minHeight: 96,
-  borderRadius: 24,
-  padding: "20px 22px",
+  width: 160,
+  minHeight: 78,
+  borderRadius: 20,
+  padding: "16px 18px",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -709,22 +685,26 @@ const nodeBase: React.CSSProperties = {
 
 const nodeTitle: React.CSSProperties = {
   fontFamily: body,
-  fontSize: 18,
+  fontSize: 15,
   fontWeight: 500,
   lineHeight: 1.2,
 };
 
 const nodeStatus: React.CSSProperties = {
   fontFamily: body,
-  fontSize: 15,
+  fontSize: 12.5,
   fontStyle: "italic",
   fontWeight: 400,
   lineHeight: 1.2,
   marginTop: 4,
 };
 
-const DataNode = () => (
-  <div className="tl-node-sm" style={{ ...nodeBase, background: C.white, border: `1px solid ${C.violetShadow}` }}>
+const DataNode = ({ innerRef }: { innerRef?: React.Ref<HTMLDivElement> }) => (
+  <div
+    ref={innerRef}
+    className="tl-node-sm"
+    style={{ ...nodeBase, background: C.white, border: `1px solid ${C.violetShadow}` }}
+  >
     <div style={{ ...nodeTitle, color: C.indigo }}>Data</div>
     <div style={{ ...nodeStatus, color: C.purple }}>Connected.</div>
   </div>
@@ -739,9 +719,9 @@ const MLNode = () => (
 
 const Connector = ({ flip = false }: { flip?: boolean }) => (
   <svg
-    width="104"
+    width="96"
     height="16"
-    viewBox="0 0 104 16"
+    viewBox="0 0 96 16"
     fill="none"
     style={{ transform: flip ? "scaleX(-1)" : undefined, flexShrink: 0 }}
   >
@@ -749,23 +729,23 @@ const Connector = ({ flip = false }: { flip?: boolean }) => (
       className="tl-dash-flow"
       x1="0"
       y1="8"
-      x2="86"
+      x2="78"
       y2="8"
       stroke="#7C5BC7"
       strokeWidth="2"
       strokeLinecap="round"
       strokeDasharray="8 8"
     />
-    <path d="M96 8 L84 2.5 L84 13.5 Z" fill={C.purple} />
+    <path d="M88 8 L76 2.5 L76 13.5 Z" fill={C.purple} />
   </svg>
 );
 
 const CenterPill = () => (
   <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
     {[
-      { inset: -20, color: "#9C8FE0", delay: "0s" },
-      { inset: -42, color: "#B3A8E8", delay: "0.8s" },
-      { inset: -64, color: "#C9C2EE", delay: "1.6s" },
+      { inset: -16, color: "#9C8FE0", delay: "0s" },
+      { inset: -34, color: "#B3A8E8", delay: "0.8s" },
+      { inset: -52, color: "#C9C2EE", delay: "1.6s" },
     ].map((r) => (
       <div
         key={r.inset}
@@ -786,15 +766,15 @@ const CenterPill = () => (
         position: "relative",
         background: C.purple,
         borderRadius: 999,
-        padding: "26px 44px 26px 52px",
+        padding: "21px 36px 21px 42px",
         display: "flex",
         alignItems: "center",
-        gap: 14,
+        gap: 12,
         whiteSpace: "nowrap",
       }}
     >
-      <img src={symbolUrl} alt="" style={{ height: 38, width: "auto", display: "block", filter: "brightness(0) invert(1)" }} />
-      <span style={{ fontFamily: sans, fontWeight: 600, fontSize: 32, color: C.white, letterSpacing: "-0.01em" }}>
+      <img src={symbolUrl} alt="" style={{ height: 30, width: "auto", display: "block", filter: "brightness(0) invert(1)" }} />
+      <span style={{ fontFamily: sans, fontWeight: 600, fontSize: 26, color: C.white, letterSpacing: "-0.01em" }}>
         TempLedger
       </span>
     </div>
@@ -826,7 +806,73 @@ const DashedDownArrow = ({ height = 56 }: { height?: number }) => (
   </svg>
 );
 
-const Reveal = () => (
+const FALL_DURATION = 900;
+const FALL_INTERVAL = 1350;
+
+type Flyer = { id: number; label: string; x: number; y: number; dx: number; dy: number };
+
+const useFallingData = () => {
+  const stageRef = useRef<HTMLDivElement | null>(null);
+  const dataRef = useRef<HTMLDivElement | null>(null);
+  const pillsRef = useRef<Map<string, HTMLElement>>(new Map());
+  const [flyer, setFlyer] = useState<Flyer | null>(null);
+  const [ingest, setIngest] = useState(0);
+
+  const registerPill = (label: string, el: HTMLElement | null) => {
+    if (el) pillsRef.current.set(label, el);
+    else pillsRef.current.delete(label);
+  };
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const labels = SOURCE_CLUSTERS.flatMap((c) => c.items);
+    let i = 0;
+    let idCounter = 0;
+    const timers: number[] = [];
+
+    const step = () => {
+      const stage = stageRef.current;
+      const target = dataRef.current;
+      if (!stage || !target) return;
+      // rotate across clusters: interleave for visual variety
+      const label = labels[i % labels.length];
+      i += 1;
+      const el = pillsRef.current.get(label);
+      if (!el) return;
+      const s = stage.getBoundingClientRect();
+      const p = el.getBoundingClientRect();
+      const t = target.getBoundingClientRect();
+      if (p.width === 0 || t.width === 0) return;
+      const x = p.left - s.left;
+      const y = p.top - s.top;
+      const dx = t.left + t.width / 2 - (p.left + p.width / 2);
+      const dy = t.top + t.height / 2 - (p.top + p.height / 2);
+      const id = ++idCounter;
+      setFlyer({ id, label, x, y, dx, dy });
+      timers.push(
+        window.setTimeout(() => {
+          setFlyer((f) => (f && f.id === id ? null : f));
+          setIngest((n) => n + 1);
+        }, FALL_DURATION),
+      );
+    };
+
+    const kick = window.setTimeout(step, 600);
+    const interval = window.setInterval(step, FALL_INTERVAL);
+    return () => {
+      window.clearTimeout(kick);
+      window.clearInterval(interval);
+      timers.forEach((t) => window.clearTimeout(t));
+    };
+  }, []);
+
+  return { stageRef, dataRef, registerPill, flyer, ingest };
+};
+
+const Reveal = () => {
+  const { stageRef, dataRef, registerPill, flyer, ingest } = useFallingData();
+
+  return (
   <section
     style={{
       position: "relative",
@@ -883,12 +929,14 @@ const Reveal = () => (
 
       {/* Desktop diagram */}
       <div
+        ref={stageRef}
         className="tl-diagram-desktop"
         style={{
+          position: "relative",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          margin: "80px 0 0",
+          margin: "72px 0 0",
           width: "100%",
         }}
       >
@@ -896,18 +944,16 @@ const Reveal = () => (
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 24,
+            gap: 28,
             alignItems: "start",
             width: 960,
             maxWidth: "100%",
           }}
         >
           {SOURCE_CLUSTERS.map((c) => (
-            <SourceCluster key={c.title} {...c} />
+            <SourceCluster key={c.title} {...c} registerPill={registerPill} />
           ))}
         </div>
-
-        <ConvergeLines />
 
         <div
           style={{
@@ -917,15 +963,48 @@ const Reveal = () => (
             gap: 0,
             width: 960,
             maxWidth: "100%",
-            marginTop: 4,
+            marginTop: 96,
           }}
         >
-          <DataNode />
+          <div key={ingest} className="tl-ingest">
+            <DataNode innerRef={dataRef} />
+          </div>
           <Connector />
           <CenterPill />
           <Connector flip />
           <MLNode />
         </div>
+
+        {flyer && (
+          <div
+            aria-hidden
+            className="tl-fly-x"
+            style={{
+              position: "absolute",
+              left: flyer.x,
+              top: flyer.y,
+              pointerEvents: "none",
+              zIndex: 3,
+              ["--tl-dx" as string]: `${flyer.dx}px`,
+              ["--tl-dur" as string]: `${FALL_DURATION}ms`,
+            }}
+          >
+            <span
+              className="tl-fly-y"
+              style={{
+                display: "inline-block",
+                ...smallPill,
+                background: C.lightPurple,
+                border: `1px solid ${C.violetShadow}`,
+                color: C.indigo,
+                ["--tl-dy" as string]: `${flyer.dy}px`,
+                ["--tl-dur" as string]: `${FALL_DURATION}ms`,
+              }}
+            >
+              {flyer.label}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Mobile diagram */}
@@ -941,12 +1020,9 @@ const Reveal = () => (
         }}
       >
         {SOURCE_CLUSTERS.map((c) => (
-          <React.Fragment key={c.title}>
-            <div style={{ width: "min(100%, 320px)" }}>
-              <SourceCluster {...c} />
-            </div>
-            <DashedDownArrow height={30} />
-          </React.Fragment>
+          <div key={c.title} style={{ width: "min(100%, 320px)", marginBottom: 22 }}>
+            <SourceCluster {...c} />
+          </div>
         ))}
         <DataNode />
         <DashedDownArrow height={44} />
@@ -967,8 +1043,8 @@ const Reveal = () => (
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
-          gap: 14,
-          maxWidth: 760,
+          gap: 12,
+          maxWidth: 720,
           margin: "28px 0 0",
         }}
       >
@@ -998,7 +1074,9 @@ const Reveal = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
+
 
 
 
