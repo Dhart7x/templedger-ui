@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import logoUrl from "@/assets/templedger-logo.png";
 import symbolUrl from "@/assets/templedger-symbol.png";
 import BookDemoModal from "@/components/BookDemoModal";
