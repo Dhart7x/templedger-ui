@@ -226,9 +226,42 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           textAlign: "center",
         }}
       >
+        {/* Fixed-height slot: sized by a hidden clone of the final headline so
+            the subheader and buttons never move as the line count changes. */}
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <h1
+            aria-hidden
+            className="tl-h1"
+            style={{
+              fontFamily: sans,
+              fontWeight: 600,
+              fontSize: "clamp(40px, 5.6vw, 72px)",
+              lineHeight: 1.05,
+              letterSpacing: "-0.03em",
+              maxWidth: 940,
+              margin: 0,
+              visibility: "hidden",
+              pointerEvents: "none",
+            }}
+          >
+            Manage your contingent workforce on {TYPED_TEXT}
+          </h1>
         <h1
           className="tl-h1"
           style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "100%",
             fontFamily: sans,
             fontWeight: 600,
             fontSize: "clamp(40px, 5.6vw, 72px)",
@@ -239,11 +272,15 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
             margin: 0,
           }}
         >
+
           Manage your contingent workforce on{" "}
           <span style={{ display: "inline-grid", position: "relative", whiteSpace: "nowrap" }}>
-            {/* Ghost text reserves the widest of both strings from the first frame */}
-            <span style={{ visibility: "hidden", gridArea: "1 / 1" }}>{OLD_TEXT}</span>
-            <span style={{ visibility: "hidden", gridArea: "1 / 1" }}>{TYPED_TEXT}</span>
+            {/* Ghost text sizes the slot to whichever string is on screen.
+                The swap happens only while the slot is empty (start of typing). */}
+            <span style={{ visibility: "hidden", gridArea: "1 / 1" }}>
+              {phase === "typing" || phase === "done" ? TYPED_TEXT : OLD_TEXT}
+            </span>
+
 
             {/* Struck word layer — drops within its own space */}
             {wordMounted && (
@@ -301,6 +338,8 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
 
 
         </h1>
+        </div>
+
 
         <p
           className="tl-sub"
