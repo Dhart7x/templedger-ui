@@ -78,7 +78,10 @@ const PageStyles = () => (
       .tl-equation-line { display: block; }
       .tl-diagram-desktop { display: none !important; }
       .tl-diagram-mobile { display: flex !important; }
+      .tl-node { width: min(100%, 300px) !important; height: auto !important; min-height: 184px; }
     }
+    .tl-node { width: 220px; height: 184px; border-radius: 24px; }
+
 
   `}</style>
 );
@@ -576,50 +579,83 @@ const capPillBase: React.CSSProperties = {
 
 const nodeTitle: React.CSSProperties = {
   fontFamily: body,
-  fontSize: 16,
+  fontSize: 18,
   fontWeight: 500,
-  lineHeight: 1.3,
+  lineHeight: 1.2,
 };
 
-const nodeSub: React.CSSProperties = {
+const nodeStatus: React.CSSProperties = {
   fontFamily: body,
-  fontSize: 13,
+  fontSize: 15,
   fontStyle: "italic",
   fontWeight: 400,
-  lineHeight: 1.4,
+  lineHeight: 1.2,
   marginTop: 4,
+};
+
+const nodeList: React.CSSProperties = {
+  fontFamily: body,
+  fontSize: 13,
+  fontWeight: 400,
+  lineHeight: 1.6,
+  margin: "14px 0 0",
+  padding: 0,
+  listStyle: "none",
 };
 
 const LeftNode = () => (
   <div
+    className="tl-node tl-node-left"
     style={{
       background: C.white,
       border: `1px solid ${C.violetShadow}`,
-      borderRadius: 999,
-      padding: "18px 30px",
-      textAlign: "center",
-      maxWidth: 260,
+      borderRadius: 24,
+      width: 220,
+      height: 184,
+      padding: 22,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      textAlign: "left",
+      boxSizing: "border-box",
     }}
   >
-    <div style={{ ...nodeTitle, color: C.indigo }}>Your workforce data</div>
-    <div style={{ ...nodeSub, color: "#8A8698" }}>scattered across agencies and systems</div>
+    <div style={{ ...nodeTitle, color: C.indigo }}>Data</div>
+    <div style={{ ...nodeStatus, color: C.purple }}>Connected.</div>
+    <ul style={{ ...nodeList, color: "rgba(20,8,46,0.6)" }}>
+      <li>Worker profiles</li>
+      <li>Time and attendance</li>
+      <li>Schedules</li>
+      <li>Communications</li>
+    </ul>
   </div>
 );
 
 const RightNode = () => (
   <div
+    className="tl-node tl-node-right"
     style={{
       background: C.indigo,
-      borderRadius: 999,
-      padding: "18px 30px",
-      textAlign: "center",
-      maxWidth: 260,
+      borderRadius: 24,
+      width: 220,
+      height: 184,
+      padding: 22,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      textAlign: "left",
+      boxSizing: "border-box",
     }}
   >
     <div style={{ ...nodeTitle, color: C.white }}>Machine learning</div>
-    <div style={{ ...nodeSub, color: "rgba(255,255,255,0.55)" }}>
-      learns every agency, person, shift, department, site
-    </div>
+    <div style={{ ...nodeStatus, color: C.lavender }}>Compounding.</div>
+    <ul style={{ ...nodeList, color: "rgba(255,255,255,0.6)" }}>
+      <li>Agencies</li>
+      <li>People</li>
+      <li>Shifts</li>
+      <li>Departments</li>
+      <li>Sites</li>
+    </ul>
   </div>
 );
 
@@ -649,10 +685,10 @@ const CenterPill = () => (
         position: "relative",
         background: C.purple,
         borderRadius: 999,
-        padding: "26px 48px",
+        padding: "26px 44px 26px 52px",
         display: "flex",
         alignItems: "center",
-        gap: 16,
+        gap: 14,
         whiteSpace: "nowrap",
       }}
     >
@@ -663,6 +699,7 @@ const CenterPill = () => (
     </div>
   </div>
 );
+
 
 const Connector = ({ flip = false }: { flip?: boolean }) => (
   <svg width="140" height="16" viewBox="0 0 140 16" fill="none" style={{ transform: flip ? "scaleX(-1)" : undefined, overflow: "visible" }}>
