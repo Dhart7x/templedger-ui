@@ -83,9 +83,10 @@ export interface LeadModalProps {
   submitLabel: string;
   successTitle: string;
   successBody: string;
+  successExtra?: React.ReactNode;
 }
 
-const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBody }: LeadModalProps) => {
+const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBody, successExtra }: LeadModalProps) => {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
   // "form" -> submitted; an optional scheduling step can be inserted between them later.
