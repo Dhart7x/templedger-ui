@@ -255,6 +255,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                 >
                   {successBody}
                 </p>
+                {successExtra}
                 <button
                   onClick={onClose}
                   style={{
