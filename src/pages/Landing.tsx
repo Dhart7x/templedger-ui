@@ -255,46 +255,15 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           }}
         >
           Manage your contingent workforce on{" "}
-          <span style={{ display: "inline-block", position: "relative" }}>
-            {/* Ghost text reserves the full final width from the first frame */}
-            <span style={{ visibility: "hidden" }}>
-              relationships
-              <span style={{ whiteSpace: "nowrap" }}>{TYPED_TEXT}</span>
-            </span>
+          <span style={{ display: "inline-grid", position: "relative", whiteSpace: "nowrap" }}>
+            {/* Ghost text reserves the widest of both strings from the first frame */}
+            <span style={{ visibility: "hidden", gridArea: "1 / 1" }}>{DELETE_TEXT}</span>
+            <span style={{ visibility: "hidden", gridArea: "1 / 1" }}>{TYPED_TEXT}</span>
 
-            {/* Animated layer positioned over the ghost */}
-            <span style={{ position: "absolute", left: 0, top: 0, width: "100%" }}>
-              <span
-                style={{
-                  color: C.indigo,
-                  opacity: isStruck ? 0.35 : 1,
-                  transition: reducedMotion ? "none" : "opacity 400ms ease-out",
-                  position: "relative",
-                }}
-              >
-                relationships
-                <span
-                  aria-hidden
-                  style={{
-                    position: "absolute",
-                    left: 0,
-                    top: "50%",
-                    height: 2,
-                    background: C.indigo,
-                    opacity: isStruck ? 0.35 : 0,
-                    width: isStruck ? "100%" : "0%",
-                    transform: "translateY(-50%)",
-                    transition: reducedMotion ? "none" : "width 400ms ease-out, opacity 400ms ease-out",
-                    pointerEvents: "none",
-                  }}
-                />
-              </span>
-
-              {showPeriod && <span style={{ color: C.indigo }}>.</span>}
-
-              {showTyped && (
-                <span style={{ color: C.purple, whiteSpace: "nowrap" }}>{TYPED_TEXT.slice(0, typedIndex)}</span>
-              )}
+            {/* Animated layer */}
+            <span style={{ gridArea: "1 / 1", textAlign: "left" }}>
+              <span style={{ color: C.indigo }}>{DELETE_TEXT.slice(0, deleteIndex)}</span>
+              <span style={{ color: C.purple }}>{TYPED_TEXT.slice(0, typedIndex)}</span>
 
               {caretMounted && (
                 <span
@@ -308,6 +277,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
               )}
             </span>
           </span>
+
         </h1>
 
         <p
