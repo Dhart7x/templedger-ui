@@ -40,6 +40,10 @@ const PageStyles = () => (
       vertical-align: baseline;
       animation: tl-caret-blink 1s step-end infinite;
     }
+    .tl-equation-line {
+      display: inline;
+      white-space: nowrap;
+    }
     @keyframes tl-scroll-cue {
       0% { opacity: 1; transform: translateY(0); }
       65% { opacity: 0; transform: translateY(8px); }
@@ -61,6 +65,7 @@ const PageStyles = () => (
       .tl-hero-actions > button { width: 100%; }
       .tl-nav-inner { padding: 0 20px !important; }
       .tl-nav-secondary { display: none !important; }
+      .tl-equation-line { display: block; }
     }
   `}</style>
 );
@@ -393,6 +398,40 @@ const pillBase: React.CSSProperties = {
   whiteSpace: "nowrap",
 };
 
+const EquationPlus = () => (
+  <svg
+    width="0.8em"
+    height="0.8em"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke={C.purple}
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    vectorEffect="non-scaling-stroke"
+    style={{ display: "inline-block", verticalAlign: "middle", margin: "0 10px" }}
+  >
+    <line x1="12" y1="4" x2="12" y2="20" />
+    <line x1="4" y1="12" x2="20" y2="12" />
+  </svg>
+);
+
+const EquationEquals = () => (
+  <svg
+    width="0.8em"
+    height="0.8em"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke={C.purple}
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    vectorEffect="non-scaling-stroke"
+    style={{ display: "inline-block", verticalAlign: "middle", margin: "0 10px" }}
+  >
+    <line x1="4" y1="9" x2="20" y2="9" />
+    <line x1="4" y1="15" x2="20" y2="15" />
+  </svg>
+);
+
 const Problem = () => (
   <section
     id="problem"
@@ -445,7 +484,7 @@ const Problem = () => (
           margin: 0,
         }}
       >
-        Third-party labor demands relentless coordination.
+        <span className="tl-equation-line">Multiple agencies</span><span className="tl-equation-line"><EquationPlus /> high volume</span><span className="tl-equation-line"><EquationEquals /> relentless coordination.</span>
       </h2>
 
       <div
