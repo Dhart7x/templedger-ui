@@ -676,7 +676,18 @@ const SourceCluster = ({
         </span>
       ))}
       {more && (
-        <span style={{ ...smallPill, background: C.purple, border: `1px solid ${C.purple}`, color: C.white }}>
+        <span
+          key={`more-${title}-${cycleKey ?? 0}`}
+          ref={registerPill ? (el) => registerPill(`+more:${title}`, el) : undefined}
+          style={{
+            ...smallPill,
+            background: C.purple,
+            border: `1px solid ${C.purple}`,
+            color: C.white,
+            visibility: hidden?.has(`+more:${title}`) ? "hidden" : "visible",
+            animation: hidden?.has(`+more:${title}`) ? undefined : "tl-cluster-in 500ms ease-out both",
+          }}
+        >
           + more
         </span>
       )}
