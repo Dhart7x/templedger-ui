@@ -621,10 +621,10 @@ const SOURCE_CLUSTERS: {
 
 const smallPill: React.CSSProperties = {
   fontFamily: body,
-  fontSize: 12,
+  fontSize: 11,
   fontWeight: 400,
   lineHeight: 1.2,
-  padding: "6px 12px",
+  padding: "5px 10px",
   borderRadius: 999,
   whiteSpace: "nowrap",
 };
