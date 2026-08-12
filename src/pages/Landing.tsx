@@ -226,7 +226,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
         overflow: "hidden",
         height: "100vh",
         boxSizing: "border-box",
-        padding: "0 32px",
+        padding: "0 32px 72px",
 
       }}
     >
