@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import logoUrl from "@/assets/templedger-logo.png";
+import BookDemoModal from "@/components/BookDemoModal";
 
 const C = {
   purple: "#4C1D95",
