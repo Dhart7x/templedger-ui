@@ -83,17 +83,29 @@ const Nav = () => {
           justifyContent: "space-between",
         }}
       >
-        <span
-          style={{
-            fontFamily: sans,
-            fontWeight: 600,
-            fontSize: 19,
-            letterSpacing: "-0.02em",
-            color: C.indigo,
-          }}
-        >
-          TempLedger
-        </span>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div
+            aria-hidden
+            style={{
+              width: 28,
+              height: 28,
+              borderRadius: "50%",
+              background: C.purple,
+              flexShrink: 0,
+            }}
+          />
+          <span
+            style={{
+              fontFamily: sans,
+              fontWeight: 600,
+              fontSize: 19,
+              letterSpacing: "-0.02em",
+              color: C.indigo,
+            }}
+          >
+            TempLedger
+          </span>
+        </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <button className="tl-btn-secondary tl-nav-secondary" style={buttonBase}>
@@ -126,31 +138,13 @@ const Hero = () => (
       aria-hidden
       style={{
         position: "absolute",
-        top: "42%",
+        top: "48%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: "min(1500px, 130vw)",
-        height: "min(1100px, 105vh)",
-        background: `radial-gradient(closest-side, ${C.lavender}59, ${C.lightPurple}66 45%, rgba(250,250,248,0) 78%)`,
-        filter: "blur(40px)",
-        pointerEvents: "none",
-      }}
-    />
-
-    {/* Brand symbol watermark — placeholder circle, swap for real SVG */}
-    <div
-      aria-hidden
-      style={{
-        position: "absolute",
-        top: "46%",
-        left: "56%",
-        transform: "translate(-50%, -50%)",
-        width: "65vh",
-        height: "65vh",
-        borderRadius: "50%",
-        background: `radial-gradient(circle, ${C.lavender} 0%, ${C.lavender} 72%, ${C.lavender}00 100%)`,
-        opacity: 0.16,
-        filter: "blur(6px)",
+        width: "min(1600px, 140vw)",
+        height: "min(1200px, 115vh)",
+        background: `radial-gradient(ellipse at center, ${C.lavender}40 0%, ${C.lightPurple}50 35%, ${C.violetShadow}20 60%, rgba(250,250,248,0) 82%)`,
+        filter: "blur(70px)",
         pointerEvents: "none",
       }}
     />
