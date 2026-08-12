@@ -214,7 +214,8 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
         justifyContent: "center",
         background: C.beige,
         overflow: "hidden",
-        padding: "120px 32px 48px",
+        minHeight: "100vh",
+        padding: "120px 32px",
       }}
     >
       {/* Soft radial light wash */}
