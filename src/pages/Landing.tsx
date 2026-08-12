@@ -161,7 +161,28 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           margin: 0,
         }}
       >
-        Manage your contingent workforce on compounding data.
+        Manage your contingent workforce on{" "}
+        <span style={{ whiteSpace: "nowrap" }}>
+          <span style={{ position: "relative", color: C.indigo, opacity: 0.35 }}>
+            relationships
+            <span
+              aria-hidden
+              style={{
+                position: "absolute",
+                left: 0,
+                right: 0,
+                top: "50%",
+                height: 2,
+                background: C.indigo,
+                opacity: 0.35,
+                transform: "translateY(-50%)",
+                pointerEvents: "none",
+              }}
+            />
+          </span>
+          {"\u00A0"}
+          <span style={{ color: C.purple }}>compounding data.</span>
+        </span>
       </h1>
 
       <p
