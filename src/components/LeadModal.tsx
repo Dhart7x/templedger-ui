@@ -21,6 +21,7 @@ type Region = "USA" | "UK" | "";
 
 interface FormState {
   name: string;
+  email: string;
   company: string;
   jobTitle: string;
   region: Region;
@@ -30,6 +31,7 @@ interface FormState {
 
 const emptyForm: FormState = {
   name: "",
+  email: "",
   company: "",
   jobTitle: "",
   region: "",
@@ -140,6 +142,9 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
   const validate = () => {
     const e: Record<string, string> = {};
     if (!form.name.trim()) e.name = "Please add your name";
+    const email = form.email.trim();
+    if (!email) e.email = "Please add your email";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 255) e.email = "Please enter a valid email";
     if (!form.company.trim()) e.company = "Please add your company";
     if (!form.jobTitle.trim()) e.jobTitle = "Please add your job title";
     if (!form.region) e.region = "Please select a region";
@@ -339,6 +344,20 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                       {...inputProps("name")}
                     />
                     {errors.name && <div style={errorTextStyle}>{errors.name}</div>}
+                  </div>
+
+                  <div style={{ marginBottom: 16 }}>
+                    <label style={labelStyle} htmlFor="tl-email">Work email<Req /></label>
+                    <input
+                      id="tl-email"
+                      type="email"
+                      autoComplete="email"
+                      maxLength={255}
+                      value={form.email}
+                      onChange={(e) => set("email", e.target.value)}
+                      {...inputProps("email")}
+                    />
+                    {errors.email && <div style={errorTextStyle}>{errors.email}</div>}
                   </div>
 
                   <div style={{ marginBottom: 16 }}>

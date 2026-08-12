@@ -72,6 +72,7 @@ Deno.serve(async (req) => {
     typeof v === "string" ? v.trim().slice(0, max) : "";
 
   const name = str(body.name);
+  const email = str(body.email, 255).toLowerCase();
   const company = str(body.company);
   const jobTitle = str(body.jobTitle);
   const region = str(body.region, 20);
@@ -81,7 +82,8 @@ Deno.serve(async (req) => {
   const listKey = str(body.list, 20) === "demo" ? "demo" : "waitlist";
   const LIST_ID = LISTS[listKey];
 
-  if (!name || !company || !jobTitle || !region || !workforce) {
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!name || !email || !emailValid || !company || !jobTitle || !region || !workforce) {
     return json({ error: "Missing required fields" }, 400);
   }
 
@@ -89,13 +91,14 @@ Deno.serve(async (req) => {
   const firstName = nameParts[0];
   const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "";
 
-  // 1. Create the person record in Attio.
-  const person = await attio(`/objects/people/records`, {
-    method: "POST",
+  // 1. Create or update the person record in Attio, matched on email.
+  const person = await attio(`/objects/people/records?matching_attribute=email_addresses`, {
+    method: "PUT",
     body: JSON.stringify({
       data: {
         values: {
           name: [{ first_name: firstName, last_name: lastName, full_name: name }],
+          email_addresses: [{ email_address: email }],
           job_title: jobTitle,
           description: `${source} signup — ${company} (${region})`,
         },
@@ -112,6 +115,7 @@ Deno.serve(async (req) => {
 
   // 2. Add the person to the waitlist list with the form answers as entry values.
   const notes = [
+    `Email: ${email}`,
     `Company: ${company}`,
     `Job title: ${jobTitle}`,
     `Region: ${region}`,
