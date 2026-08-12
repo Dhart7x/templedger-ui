@@ -829,10 +829,11 @@ const useFallingData = () => {
   const pillsRef = useRef<Map<string, HTMLElement>>(new Map());
   const [flyer, setFlyer] = useState<Flyer | null>(null);
   const [ingest, setIngest] = useState(0);
+  const [hidden, setHidden] = useState<Set<string>>(new Set());
+  const [cycleKey, setCycleKey] = useState(0);
 
   const registerPill = (label: string, el: HTMLElement | null) => {
     if (el) pillsRef.current.set(label, el);
-    else pillsRef.current.delete(label);
   };
 
   useEffect(() => {
@@ -841,45 +842,66 @@ const useFallingData = () => {
     let i = 0;
     let idCounter = 0;
     const timers: number[] = [];
+    const later = (fn: () => void, ms: number) => {
+      timers.push(window.setTimeout(fn, ms));
+    };
 
     const step = () => {
       const stage = stageRef.current;
       const target = dataRef.current;
-      if (!stage || !target) return;
-      // rotate across clusters: interleave for visual variety
-      const label = labels[i % labels.length];
+      if (!stage || !target) {
+        later(step, FALL_INTERVAL);
+        return;
+      }
+
+      if (i >= labels.length) {
+        // all pills ingested: pause, then repopulate and restart
+        later(() => {
+          setHidden(new Set());
+          setCycleKey((n) => n + 1);
+          i = 0;
+          later(step, 900);
+        }, 900);
+        return;
+      }
+
+      const label = labels[i];
       i += 1;
       const el = pillsRef.current.get(label);
-      if (!el) return;
+      if (!el) {
+        later(step, FALL_INTERVAL);
+        return;
+      }
       const s = stage.getBoundingClientRect();
       const p = el.getBoundingClientRect();
       const t = target.getBoundingClientRect();
-      if (p.width === 0 || t.width === 0) return;
+      if (p.width === 0 || t.width === 0) {
+        later(step, FALL_INTERVAL);
+        return;
+      }
       const x = p.left - s.left;
       const y = p.top - s.top;
       const dx = t.left + t.width / 2 - (p.left + p.width / 2);
       const dy = t.top + t.height / 2 - (p.top + p.height / 2);
       const id = ++idCounter;
       setFlyer({ id, label, x, y, dx, dy });
-      timers.push(
-        window.setTimeout(() => {
-          setFlyer((f) => (f && f.id === id ? null : f));
-          setIngest((n) => n + 1);
-        }, FALL_DURATION),
-      );
+      setHidden((h) => new Set(h).add(label));
+      later(() => {
+        setFlyer((f) => (f && f.id === id ? null : f));
+        setIngest((n) => n + 1);
+      }, FALL_DURATION);
+      later(step, FALL_INTERVAL);
     };
 
-    const kick = window.setTimeout(step, 600);
-    const interval = window.setInterval(step, FALL_INTERVAL);
+    later(step, 600);
     return () => {
-      window.clearTimeout(kick);
-      window.clearInterval(interval);
       timers.forEach((t) => window.clearTimeout(t));
     };
   }, []);
 
-  return { stageRef, dataRef, registerPill, flyer, ingest };
+  return { stageRef, dataRef, registerPill, flyer, ingest, hidden, cycleKey };
 };
+
 
 const Reveal = () => {
   const { stageRef, dataRef, registerPill, flyer, ingest } = useFallingData();
