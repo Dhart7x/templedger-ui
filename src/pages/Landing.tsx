@@ -86,7 +86,7 @@ const Nav = () => {
       >
         <a href="/" style={{ display: "flex", alignItems: "center", lineHeight: 0 }}>
           <img
-            src={logoAsset.url}
+            src={logoUrl}
             alt="TempLedger"
             style={{ height: 32, width: "auto", display: "block" }}
           />
