@@ -98,6 +98,11 @@ const PageStyles = () => (
       .tl-node-sm { width: min(100%, 300px) !important; }
     }
 
+    @media (max-width: 1000px) {
+      .tl-diagram-desktop { display: none !important; }
+      .tl-diagram-mobile { display: flex !important; }
+    }
+
 
   `}</style>
 );
