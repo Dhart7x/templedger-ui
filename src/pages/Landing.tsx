@@ -458,10 +458,10 @@ const PROBLEM_PILLS = [
 
 const pillBase: React.CSSProperties = {
   fontFamily: body,
-  fontSize: 15,
+  fontSize: 18,
   fontWeight: 400,
   lineHeight: 1.2,
-  padding: "9px 18px",
+  padding: "12px 24px",
   borderRadius: 999,
   whiteSpace: "nowrap",
 };
@@ -472,7 +472,7 @@ const Problem = () => (
     style={{
       position: "relative",
       background: "transparent",
-      padding: "80px 32px 120px",
+      padding: "96px 32px",
       display: "flex",
       justifyContent: "center",
     }}
@@ -498,7 +498,7 @@ const Problem = () => (
         position: "relative",
         zIndex: 1,
         width: "100%",
-        maxWidth: 900,
+        maxWidth: 1024,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -526,8 +526,8 @@ const Problem = () => (
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
-          gap: 10,
-          maxWidth: 620,
+          gap: 12,
+          maxWidth: 1024,
           margin: "40px 0 0",
         }}
       >
@@ -555,6 +555,21 @@ const Problem = () => (
           + more
         </span>
       </div>
+
+      <p
+        style={{
+          fontFamily: sans,
+          fontWeight: 500,
+          fontSize: "clamp(22px, 2.4vw, 30px)",
+          lineHeight: 1.25,
+          letterSpacing: "-0.02em",
+          color: C.purple,
+          maxWidth: 760,
+          margin: "56px 0 0",
+        }}
+      >
+        And between it all, 3 to 5 percent of your agency spend leaks out unverified.
+      </p>
     </div>
   </section>
 );
