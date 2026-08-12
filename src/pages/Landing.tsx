@@ -494,50 +494,53 @@ const Landing = () => {
             margin: "0 auto",
           }}
         >
+          <Reveal>
+            <div
+              style={{
+                ...mono,
+                fontSize: 11,
+                fontWeight: 500,
+                color: C.lavender,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 10,
+              }}
+            >
+              <span style={{ width: 18, height: 1, background: C.lavender, display: "inline-block" }} />
+              The Problem
+            </div>
+
+            <h2
+              style={{
+                fontFamily: "'IBM Plex Sans', system-ui, sans-serif",
+                fontWeight: 600,
+                fontSize: "clamp(30px, 3.6vw, 44px)",
+                lineHeight: 1.12,
+                letterSpacing: "-0.025em",
+                color: C.white,
+                margin: "22px 0 0",
+                maxWidth: 720,
+              }}
+            >
+              Labor is your biggest controllable cost. It is also your least visible.
+            </h2>
+
+            <p
+              style={{
+                fontFamily: "'Inter', system-ui, sans-serif",
+                fontSize: 17,
+                lineHeight: 1.7,
+                color: "rgba(255, 255, 255, 0.65)",
+                margin: "20px 0 0",
+                maxWidth: 640,
+              }}
+            >
+              Agency labor data lives across staffing providers, timekeeping systems, spreadsheets, and payroll files. By the time finance sees the cost, the shift is worked, the invoice is sent, and the money is gone.
+            </p>
+          </Reveal>
+
           <div
-            style={{
-              ...mono,
-              fontSize: 11,
-              fontWeight: 500,
-              color: C.lavender,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 10,
-            }}
-          >
-            <span style={{ width: 18, height: 1, background: C.lavender, display: "inline-block" }} />
-            The Problem
-          </div>
-
-          <h2
-            style={{
-              fontFamily: "'IBM Plex Sans', system-ui, sans-serif",
-              fontWeight: 600,
-              fontSize: "clamp(30px, 3.6vw, 44px)",
-              lineHeight: 1.12,
-              letterSpacing: "-0.025em",
-              color: C.white,
-              margin: "22px 0 0",
-              maxWidth: 720,
-            }}
-          >
-            Labor is your biggest controllable cost. It is also your least visible.
-          </h2>
-
-          <p
-            style={{
-              fontFamily: "'Inter', system-ui, sans-serif",
-              fontSize: 17,
-              lineHeight: 1.7,
-              color: "rgba(255, 255, 255, 0.65)",
-              margin: "20px 0 0",
-              maxWidth: 640,
-            }}
-          >
-            Agency labor data lives across staffing providers, timekeeping systems, spreadsheets, and payroll files. By the time finance sees the cost, the shift is worked, the invoice is sent, and the money is gone.
-          </p>
-
-          <div
+            className="tl-cols-stats"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
@@ -549,44 +552,53 @@ const Landing = () => {
               { number: "5+", label: "disconnected systems holding your workforce data" },
               { number: "30 days", label: "typical lag between hours worked and cost visibility" },
               { number: "0", label: "platforms built to control agency labor cost as it happens" },
-            ].map((stat) => (
-              <div
-                key={stat.number}
-                style={{
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                  borderRadius: 10,
-                  padding: "32px",
-                }}
-              >
+            ].map((stat, i) => (
+              <Reveal key={stat.number} delay={i * 60}>
                 <div
                   style={{
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: "clamp(32px, 3vw, 42px)",
-                    fontWeight: 500,
-                    color: C.white,
-                    letterSpacing: "-0.02em",
+                    height: "100%",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    borderRadius: 10,
+                    padding: "32px",
                   }}
                 >
-                  {stat.number}
+                  <div
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "clamp(32px, 3vw, 42px)",
+                      fontWeight: 500,
+                      color: C.white,
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
+                    {stat.number}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "'Inter', system-ui, sans-serif",
+                      fontSize: 15,
+                      lineHeight: 1.55,
+                      color: "rgba(255, 255, 255, 0.65)",
+                      marginTop: 14,
+                    }}
+                  >
+                    {stat.label}
+                  </div>
                 </div>
-                <div
-                  style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
-                    fontSize: 15,
-                    lineHeight: 1.55,
-                    color: "rgba(255, 255, 255, 0.65)",
-                    marginTop: 14,
-                  }}
-                >
-                  {stat.label}
-                </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
+
+      <PlatformSection />
+      <IntelligenceSection />
+      <HowItWorksSection />
+      <FoundingSection />
+      <Footer />
     </div>
   );
 };
 
 export default Landing;
+
