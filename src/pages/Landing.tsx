@@ -78,9 +78,8 @@ const PageStyles = () => (
       .tl-equation-line { display: block; }
       .tl-diagram-desktop { display: none !important; }
       .tl-diagram-mobile { display: flex !important; }
-      .tl-node { width: min(100%, 300px) !important; height: auto !important; min-height: 184px; }
+      .tl-node-sm { width: min(100%, 300px) !important; }
     }
-    .tl-node { width: 220px; height: 184px; border-radius: 24px; }
 
 
   `}</style>
@@ -559,121 +558,6 @@ const Problem = () => (
 );
 
 
-const SOURCE_CARDS = [
-  {
-    title: "Agency CRM",
-    descriptor: "the workforce record",
-    items: ["Names", "Skills", "Certifications", "Pay rates", "+ more"],
-  },
-  {
-    title: "Time & Attendance",
-    descriptor: "who, where, when",
-    items: ["Clock events", "Locations", "Hours"],
-  },
-  {
-    title: "Emails & phone calls",
-    descriptor: "the unrecorded layer",
-    items: ["Requests", "Approvals", "Exceptions", "+ more"],
-  },
-];
-
-const SourceCard = ({
-  title,
-  descriptor,
-  items,
-}: {
-  title: string;
-  descriptor: string;
-  items: string[];
-}) => (
-  <div
-    className="tl-source-card"
-    style={{
-      background: C.white,
-      border: `1px solid ${C.violetShadow}`,
-      borderRadius: 20,
-      padding: "16px 18px",
-      display: "flex",
-      flexDirection: "column",
-      textAlign: "left",
-      boxSizing: "border-box",
-    }}
-  >
-    <div style={{ fontFamily: body, fontSize: 15, fontWeight: 500, lineHeight: 1.2, color: C.indigo }}>
-      {title}
-    </div>
-    <div
-      style={{
-        fontFamily: body,
-        fontSize: 12.5,
-        fontStyle: "italic",
-        lineHeight: 1.3,
-        marginTop: 3,
-        color: "rgba(20,8,46,0.45)",
-      }}
-    >
-      {descriptor}
-    </div>
-    <ul
-      style={{
-        fontFamily: body,
-        fontSize: 12.5,
-        lineHeight: 1.65,
-        margin: "10px 0 0",
-        padding: 0,
-        listStyle: "none",
-        color: "rgba(20,8,46,0.55)",
-      }}
-    >
-      {items.map((it) => (
-        <li key={it}>{it}</li>
-      ))}
-    </ul>
-  </div>
-);
-
-const ConvergeLines = () => (
-  <svg
-    aria-hidden
-    width="840"
-    height="96"
-    viewBox="0 0 840 96"
-    fill="none"
-    style={{ display: "block", maxWidth: "100%" }}
-  >
-    <path
-      className="tl-dash-flow"
-      d="M148 0 C148 46, 260 44, 386 76"
-      stroke="#7C5BC7"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeDasharray="8 8"
-      fill="none"
-    />
-    <path
-      className="tl-dash-flow"
-      d="M420 0 L420 78"
-      stroke="#7C5BC7"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeDasharray="8 8"
-      fill="none"
-    />
-    <path
-      className="tl-dash-flow"
-      d="M692 0 C692 46, 580 44, 454 76"
-      stroke="#7C5BC7"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeDasharray="8 8"
-      fill="none"
-    />
-    <path d="M389 86 L381 74 L396 71 Z" fill={C.purple} />
-    <path d="M420 90 L414.5 79 L425.5 79 Z" fill={C.purple} />
-    <path d="M451 86 L444 71 L459 74 Z" fill={C.purple} />
-  </svg>
-);
-
 const CAPABILITY_PILLS = [
   "Pattern recognition",
   "Predictive intelligence",
@@ -693,8 +577,191 @@ const capPillBase: React.CSSProperties = {
   whiteSpace: "nowrap",
 };
 
+const SOURCE_CLUSTERS = [
+  {
+    title: "Agency CRM",
+    descriptor: "the workforce record",
+    items: ["Names", "Skills", "Certifications", "Pay rates"],
+    more: true,
+  },
+  {
+    title: "Time & Attendance",
+    descriptor: "who, where, when",
+    items: ["Clock events", "Locations", "Hours"],
+    more: false,
+  },
+  {
+    title: "Emails & phone calls",
+    descriptor: "the unrecorded layer",
+    items: ["Requests", "Approvals", "Exceptions"],
+    more: true,
+  },
+];
+
+const smallPill: React.CSSProperties = {
+  fontFamily: body,
+  fontSize: 13,
+  fontWeight: 400,
+  lineHeight: 1.2,
+  padding: "7px 14px",
+  borderRadius: 999,
+  whiteSpace: "nowrap",
+};
+
+const SourceCluster = ({
+  title,
+  descriptor,
+  items,
+  more,
+}: {
+  title: string;
+  descriptor: string;
+  items: string[];
+  more: boolean;
+}) => (
+  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+    <div style={{ fontFamily: body, fontSize: 15, fontWeight: 500, lineHeight: 1.2, color: C.indigo }}>
+      {title}
+    </div>
+    <div
+      style={{
+        fontFamily: body,
+        fontSize: 12.5,
+        fontStyle: "italic",
+        lineHeight: 1.3,
+        marginTop: 3,
+        color: "rgba(20,8,46,0.45)",
+      }}
+    >
+      {descriptor}
+    </div>
+    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 8, marginTop: 12 }}>
+      {items.map((it) => (
+        <span
+          key={it}
+          style={{ ...smallPill, background: C.lightPurple, border: `1px solid ${C.violetShadow}`, color: C.indigo }}
+        >
+          {it}
+        </span>
+      ))}
+      {more && (
+        <span style={{ ...smallPill, background: C.purple, border: `1px solid ${C.purple}`, color: C.white }}>
+          + more
+        </span>
+      )}
+    </div>
+  </div>
+);
+
+const ConvergeLines = () => (
+  <svg
+    aria-hidden
+    width="960"
+    height="92"
+    viewBox="0 0 960 92"
+    fill="none"
+    style={{ display: "block", maxWidth: "100%" }}
+  >
+    <path
+      className="tl-dash-flow"
+      d="M160 0 C160 44, 128 40, 112 72"
+      stroke="#7C5BC7"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeDasharray="8 8"
+      fill="none"
+    />
+    <path
+      className="tl-dash-flow"
+      d="M480 0 C480 46, 220 34, 122 72"
+      stroke="#7C5BC7"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeDasharray="8 8"
+      fill="none"
+    />
+    <path
+      className="tl-dash-flow"
+      d="M800 0 C800 52, 300 30, 134 74"
+      stroke="#7C5BC7"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeDasharray="8 8"
+      fill="none"
+    />
+    <path d="M110 84 L104 71 L118 73 Z" fill={C.purple} />
+    <path d="M121 84 L114.5 72 L128 74 Z" fill={C.purple} />
+    <path d="M133 86 L127 74 L140 77 Z" fill={C.purple} />
+  </svg>
+);
+
+const nodeBase: React.CSSProperties = {
+  width: 200,
+  minHeight: 96,
+  borderRadius: 24,
+  padding: "20px 22px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  textAlign: "left",
+  boxSizing: "border-box",
+};
+
+const nodeTitle: React.CSSProperties = {
+  fontFamily: body,
+  fontSize: 18,
+  fontWeight: 500,
+  lineHeight: 1.2,
+};
+
+const nodeStatus: React.CSSProperties = {
+  fontFamily: body,
+  fontSize: 15,
+  fontStyle: "italic",
+  fontWeight: 400,
+  lineHeight: 1.2,
+  marginTop: 4,
+};
+
+const DataNode = () => (
+  <div className="tl-node-sm" style={{ ...nodeBase, background: C.white, border: `1px solid ${C.violetShadow}` }}>
+    <div style={{ ...nodeTitle, color: C.indigo }}>Data</div>
+    <div style={{ ...nodeStatus, color: C.purple }}>Connected.</div>
+  </div>
+);
+
+const MLNode = () => (
+  <div className="tl-node-sm" style={{ ...nodeBase, background: C.indigo }}>
+    <div style={{ ...nodeTitle, color: C.white }}>Machine learning</div>
+    <div style={{ ...nodeStatus, color: C.lavender }}>Compounding.</div>
+  </div>
+);
+
+const Connector = ({ flip = false }: { flip?: boolean }) => (
+  <svg
+    width="104"
+    height="16"
+    viewBox="0 0 104 16"
+    fill="none"
+    style={{ transform: flip ? "scaleX(-1)" : undefined, flexShrink: 0 }}
+  >
+    <line
+      className="tl-dash-flow"
+      x1="0"
+      y1="8"
+      x2="86"
+      y2="8"
+      stroke="#7C5BC7"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeDasharray="8 8"
+    />
+    <path d="M96 8 L84 2.5 L84 13.5 Z" fill={C.purple} />
+  </svg>
+);
+
 const CenterPill = () => (
-  <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+  <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
     {[
       { inset: -20, color: "#9C8FE0", delay: "0s" },
       { inset: -42, color: "#B3A8E8", delay: "0.8s" },
@@ -731,21 +798,9 @@ const CenterPill = () => (
         TempLedger
       </span>
     </div>
-    <div
-      style={{
-        position: "relative",
-        marginTop: 12,
-        fontFamily: body,
-        fontSize: 14,
-        lineHeight: 1.3,
-        whiteSpace: "nowrap",
-      }}
-    >
-      <span style={{ color: C.indigo, fontWeight: 500 }}>Machine learning.</span>{" "}
-      <span style={{ color: C.purple, fontStyle: "italic" }}>Compounding.</span>
-    </div>
   </div>
 );
+
 
 const DownArrow = ({ height = 56 }: { height?: number }) => (
   <svg width="16" height={height} viewBox={`0 0 16 ${height}`} fill="none">
@@ -833,27 +888,43 @@ const Reveal = () => (
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          margin: "88px 0 0",
+          margin: "80px 0 0",
           width: "100%",
         }}
       >
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 240px)",
-            gap: 32,
-            justifyContent: "center",
-            width: 840,
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: 24,
+            alignItems: "start",
+            width: 960,
             maxWidth: "100%",
           }}
         >
-          {SOURCE_CARDS.map((c) => (
-            <SourceCard key={c.title} {...c} />
+          {SOURCE_CLUSTERS.map((c) => (
+            <SourceCluster key={c.title} {...c} />
           ))}
         </div>
+
         <ConvergeLines />
-        <div style={{ marginTop: 24 }}>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 0,
+            width: 960,
+            maxWidth: "100%",
+            marginTop: 4,
+          }}
+        >
+          <DataNode />
+          <Connector />
           <CenterPill />
+          <Connector flip />
+          <MLNode />
         </div>
       </div>
 
@@ -869,18 +940,23 @@ const Reveal = () => (
           width: "100%",
         }}
       >
-        {SOURCE_CARDS.map((c, i) => (
+        {SOURCE_CLUSTERS.map((c) => (
           <React.Fragment key={c.title}>
-            <div style={{ width: "min(100%, 300px)" }}>
-              <SourceCard {...c} />
+            <div style={{ width: "min(100%, 320px)" }}>
+              <SourceCluster {...c} />
             </div>
-            <DashedDownArrow height={i === SOURCE_CARDS.length - 1 ? 44 : 30} />
+            <DashedDownArrow height={30} />
           </React.Fragment>
         ))}
-        <div style={{ marginTop: 44 }}>
+        <DataNode />
+        <DashedDownArrow height={44} />
+        <div style={{ margin: "44px 0" }}>
           <CenterPill />
         </div>
+        <DashedDownArrow height={44} />
+        <MLNode />
       </div>
+
 
       <div style={{ marginTop: 72 }}>
         <DownArrow height={56} />
