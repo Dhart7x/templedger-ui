@@ -834,7 +834,7 @@ const DashedDownArrow = ({ height = 56 }: { height?: number }) => (
 const FALL_DURATION = 900;
 const FALL_INTERVAL = 1350;
 
-type Flyer = { id: number; label: string; x: number; y: number; dx: number; dy: number };
+type Flyer = { id: number; label: string; text: string; isMore: boolean; x: number; y: number; dx: number; dy: number };
 
 const useFallingData = () => {
   const stageRef = useRef<HTMLDivElement | null>(null);
