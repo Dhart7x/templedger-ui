@@ -5,6 +5,16 @@ const LIST_ID = "5e0fffa2-0b50-455a-bd47-c16d3c1010cf";
 
 const key = () => Deno.env.get("ATTIO_API_KEY") ?? "";
 
+// Custom columns created on the Attio list so form answers are visible as data.
+const LIST_ATTRS: Record<string, string> = {
+  company: "Company",
+  job_title: "Job title",
+  region: "Region",
+  annual_agency_spend: "Annual agency spend",
+  agency_workforce_size: "Agency workforce size",
+  source: "Source",
+};
+
 async function attio(path: string, init: RequestInit = {}) {
   const res = await fetch(`${ATTIO_API}${path}`, {
     ...init,
