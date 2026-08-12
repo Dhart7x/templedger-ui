@@ -241,9 +241,12 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
         >
           Manage your contingent workforce on{" "}
           <span style={{ display: "inline-grid", position: "relative", whiteSpace: "nowrap" }}>
-            {/* Ghost text reserves the widest of both strings from the first frame */}
-            <span style={{ visibility: "hidden", gridArea: "1 / 1" }}>{OLD_TEXT}</span>
-            <span style={{ visibility: "hidden", gridArea: "1 / 1" }}>{TYPED_TEXT}</span>
+            {/* Ghost text sizes the slot to whichever string is on screen.
+                The swap happens only while the slot is empty (start of typing). */}
+            <span style={{ visibility: "hidden", gridArea: "1 / 1" }}>
+              {phase === "typing" || phase === "done" ? TYPED_TEXT : OLD_TEXT}
+            </span>
+
 
             {/* Struck word layer — drops within its own space */}
             {wordMounted && (
