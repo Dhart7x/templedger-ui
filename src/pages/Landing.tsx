@@ -629,12 +629,16 @@ const SourceCluster = ({
   items,
   more,
   registerPill,
+  hidden,
+  cycleKey,
 }: {
   title: string;
   descriptor: string;
   items: string[];
   more: boolean;
   registerPill?: (label: string, el: HTMLElement | null) => void;
+  hidden?: Set<string>;
+  cycleKey?: number;
 }) => (
   <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
     <div style={{ fontFamily: body, fontSize: 15, fontWeight: 500, lineHeight: 1.2, color: C.indigo }}>
@@ -655,9 +659,16 @@ const SourceCluster = ({
     <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 7, marginTop: 12 }}>
       {items.map((it) => (
         <span
-          key={it}
+          key={`${it}-${cycleKey ?? 0}`}
           ref={registerPill ? (el) => registerPill(it, el) : undefined}
-          style={{ ...smallPill, background: C.lightPurple, border: `1px solid ${C.violetShadow}`, color: C.indigo }}
+          style={{
+            ...smallPill,
+            background: C.lightPurple,
+            border: `1px solid ${C.violetShadow}`,
+            color: C.indigo,
+            visibility: hidden?.has(it) ? "hidden" : "visible",
+            animation: hidden?.has(it) ? undefined : "tl-cluster-in 500ms ease-out both",
+          }}
         >
           {it}
         </span>
@@ -670,6 +681,7 @@ const SourceCluster = ({
     </div>
   </div>
 );
+
 
 const nodeBase: React.CSSProperties = {
   width: 160,
