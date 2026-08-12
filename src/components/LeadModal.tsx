@@ -84,11 +84,15 @@ export interface LeadModalProps {
   successTitle: string;
   successBody: string;
   successExtra?: React.ReactNode;
+  /** When set, submissions are recorded in the CRM with this source label. */
+  attioSource?: string;
 }
 
-const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBody, successExtra }: LeadModalProps) => {
+const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBody, successExtra, attioSource }: LeadModalProps) => {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   // "form" -> submitted; an optional scheduling step can be inserted between them later.
   const [step, setStep] = useState<"form" | "success">("form");
 
@@ -96,6 +100,8 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
     if (open) {
       setForm(emptyForm);
       setErrors({});
+      setSubmitting(false);
+      setSubmitError("");
       setStep("form");
     }
   }, [open]);
