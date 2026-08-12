@@ -1,86 +1,48 @@
 import { useEffect, useState } from "react";
+import {
+  C,
+  Eyebrow,
+  PrimaryButton,
+  Reveal,
+  SecondaryButton,
+  mono,
+} from "@/components/landing/shared";
+import {
+  Footer,
+  FoundingSection,
+  HowItWorksSection,
+  IntelligenceSection,
+  PlatformSection,
+} from "@/components/landing/sections";
 
-const C = {
-  purple: "#4C1D95",
-  purpleDark: "#3B1578",
-  indigo: "#14082E",
-  beige: "#FAFAF8",
-  lavender: "#AFA9EC",
-  violetShadow: "#E4DFF5",
-  lightPurple: "#F0EBFA",
-  white: "#FFFFFF",
-  black: "#000000",
-};
+const NAV_LINKS = [
+  { label: "Platform", href: "#platform" },
+  { label: "Intelligence", href: "#intelligence" },
+  { label: "How it works", href: "#how-it-works" },
+];
 
-const mono: React.CSSProperties = {
-  fontFamily: "'JetBrains Mono', monospace",
-  textTransform: "uppercase",
-  letterSpacing: "0.1em",
-};
-
-const Eyebrow = ({ children }: { children: React.ReactNode }) => (
-  <div
-    style={{
-      ...mono,
-      fontSize: 11,
-      fontWeight: 500,
-      color: C.purple,
-      display: "inline-flex",
-      alignItems: "center",
-      gap: 10,
-    }}
-  >
-    <span style={{ width: 18, height: 1, background: C.purple, display: "inline-block" }} />
-    {children}
-  </div>
+const ResponsiveStyles = () => (
+  <style>{`
+    @media (max-width: 900px) {
+      .tl-nav-links { display: none !important; }
+      .tl-nav-secondary { display: none !important; }
+      .tl-menu-button { display: inline-flex !important; }
+      .tl-cols-3, .tl-cols-4, .tl-cols-2, .tl-cols-stats { grid-template-columns: 1fr !important; }
+      .tl-feature-row { grid-template-columns: 1fr !important; gap: 32px !important; }
+      .tl-feature-row > div { order: 0 !important; }
+      .tl-section { padding: 80px 20px !important; }
+      .tl-footer-top { flex-direction: column !important; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition-duration: 1ms !important; }
+    }
+  `}</style>
 );
 
-const PrimaryButton = ({ children }: { children: React.ReactNode }) => (
-  <button
-    type="button"
-    style={{
-      background: C.purple,
-      color: C.white,
-      border: "none",
-      borderRadius: 8,
-      padding: "12px 22px",
-      fontFamily: "'Inter', system-ui, sans-serif",
-      fontSize: 14,
-      fontWeight: 500,
-      cursor: "pointer",
-      transition: "background 160ms ease",
-    }}
-    onMouseEnter={(e) => (e.currentTarget.style.background = C.purpleDark)}
-    onMouseLeave={(e) => (e.currentTarget.style.background = C.purple)}
-  >
-    {children}
-  </button>
-);
-
-const SecondaryButton = ({ children }: { children: React.ReactNode }) => (
-  <button
-    type="button"
-    style={{
-      background: C.white,
-      color: C.indigo,
-      border: `1px solid ${C.violetShadow}`,
-      borderRadius: 8,
-      padding: "12px 22px",
-      fontFamily: "'Inter', system-ui, sans-serif",
-      fontSize: 14,
-      fontWeight: 500,
-      cursor: "pointer",
-      transition: "border-color 160ms ease, background 160ms ease",
-    }}
-    onMouseEnter={(e) => (e.currentTarget.style.borderColor = C.lavender)}
-    onMouseLeave={(e) => (e.currentTarget.style.borderColor = C.violetShadow)}
-  >
-    {children}
-  </button>
-);
 
 const Nav = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -88,6 +50,8 @@ const Nav = () => {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const solid = scrolled || menuOpen;
 
   return (
     <header
@@ -97,8 +61,8 @@ const Nav = () => {
         left: 0,
         right: 0,
         zIndex: 50,
-        background: scrolled ? C.beige : "transparent",
-        borderBottom: `1px solid ${scrolled ? C.violetShadow : "transparent"}`,
+        background: solid ? C.beige : "transparent",
+        borderBottom: `1px solid ${solid ? C.violetShadow : "transparent"}`,
         transition: "background 220ms ease, border-color 220ms ease",
       }}
     >
@@ -141,11 +105,11 @@ const Nav = () => {
           </span>
         </a>
 
-        <nav style={{ display: "flex", gap: 32 }}>
-          {["Platform", "Intelligence", "How it works"].map((item) => (
+        <nav className="tl-nav-links" style={{ display: "flex", gap: 32 }}>
+          {NAV_LINKS.map((item) => (
             <a
-              key={item}
-              href="#"
+              key={item.label}
+              href={item.href}
               style={{
                 fontFamily: "'Inter', system-ui, sans-serif",
                 fontSize: 14,
@@ -156,19 +120,76 @@ const Nav = () => {
               onMouseEnter={(e) => (e.currentTarget.style.color = C.indigo)}
               onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(20, 8, 46, 0.7)")}
             >
-              {item}
+              {item.label}
             </a>
           ))}
         </nav>
 
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <SecondaryButton>Join Waitlist</SecondaryButton>
+          <button
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            className="tl-menu-button"
+            onClick={() => setMenuOpen((v) => !v)}
+            style={{
+              display: "none",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 38,
+              height: 38,
+              borderRadius: 8,
+              border: `1px solid ${C.violetShadow}`,
+              background: C.white,
+              cursor: "pointer",
+            }}
+          >
+            <span style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+              {[0, 1, 2].map((i) => (
+                <span key={i} style={{ width: 15, height: 1.5, background: C.indigo }} />
+              ))}
+            </span>
+          </button>
+          <span className="tl-nav-secondary">
+            <SecondaryButton>Join Waitlist</SecondaryButton>
+          </span>
           <PrimaryButton>Book Demo</PrimaryButton>
         </div>
       </div>
+
+      {menuOpen && (
+        <div
+          style={{
+            borderTop: `1px solid ${C.violetShadow}`,
+            background: C.beige,
+            padding: "18px 20px 24px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+          }}
+        >
+          {NAV_LINKS.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              onClick={() => setMenuOpen(false)}
+              style={{
+                fontFamily: "'Inter', system-ui, sans-serif",
+                fontSize: 15,
+                color: C.indigo,
+                textDecoration: "none",
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
+          <SecondaryButton>Join Waitlist</SecondaryButton>
+        </div>
+      )}
     </header>
   );
 };
+
 
 const DashboardFrame = () => (
   <div
@@ -333,6 +354,7 @@ const Landing = () => {
   return (
     <div style={{ background: C.beige, minHeight: "100vh", overflowX: "hidden" }}>
       <Nav />
+      <ResponsiveStyles />
 
       <section
         style={{
@@ -443,6 +465,7 @@ const Landing = () => {
 
       {/* Problem section */}
       <section
+        className="tl-section"
         style={{
           position: "relative",
           background: C.indigo,
@@ -473,50 +496,53 @@ const Landing = () => {
             margin: "0 auto",
           }}
         >
+          <Reveal>
+            <div
+              style={{
+                ...mono,
+                fontSize: 11,
+                fontWeight: 500,
+                color: C.lavender,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 10,
+              }}
+            >
+              <span style={{ width: 18, height: 1, background: C.lavender, display: "inline-block" }} />
+              The Problem
+            </div>
+
+            <h2
+              style={{
+                fontFamily: "'IBM Plex Sans', system-ui, sans-serif",
+                fontWeight: 600,
+                fontSize: "clamp(30px, 3.6vw, 44px)",
+                lineHeight: 1.12,
+                letterSpacing: "-0.025em",
+                color: C.white,
+                margin: "22px 0 0",
+                maxWidth: 720,
+              }}
+            >
+              Labor is your biggest controllable cost. It is also your least visible.
+            </h2>
+
+            <p
+              style={{
+                fontFamily: "'Inter', system-ui, sans-serif",
+                fontSize: 17,
+                lineHeight: 1.7,
+                color: "rgba(255, 255, 255, 0.65)",
+                margin: "20px 0 0",
+                maxWidth: 640,
+              }}
+            >
+              Agency labor data lives across staffing providers, timekeeping systems, spreadsheets, and payroll files. By the time finance sees the cost, the shift is worked, the invoice is sent, and the money is gone.
+            </p>
+          </Reveal>
+
           <div
-            style={{
-              ...mono,
-              fontSize: 11,
-              fontWeight: 500,
-              color: C.lavender,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 10,
-            }}
-          >
-            <span style={{ width: 18, height: 1, background: C.lavender, display: "inline-block" }} />
-            The Problem
-          </div>
-
-          <h2
-            style={{
-              fontFamily: "'IBM Plex Sans', system-ui, sans-serif",
-              fontWeight: 600,
-              fontSize: "clamp(30px, 3.6vw, 44px)",
-              lineHeight: 1.12,
-              letterSpacing: "-0.025em",
-              color: C.white,
-              margin: "22px 0 0",
-              maxWidth: 720,
-            }}
-          >
-            Labor is your biggest controllable cost. It is also your least visible.
-          </h2>
-
-          <p
-            style={{
-              fontFamily: "'Inter', system-ui, sans-serif",
-              fontSize: 17,
-              lineHeight: 1.7,
-              color: "rgba(255, 255, 255, 0.65)",
-              margin: "20px 0 0",
-              maxWidth: 640,
-            }}
-          >
-            Agency labor data lives across staffing providers, timekeeping systems, spreadsheets, and payroll files. By the time finance sees the cost, the shift is worked, the invoice is sent, and the money is gone.
-          </p>
-
-          <div
+            className="tl-cols-stats"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
@@ -528,44 +554,53 @@ const Landing = () => {
               { number: "5+", label: "disconnected systems holding your workforce data" },
               { number: "30 days", label: "typical lag between hours worked and cost visibility" },
               { number: "0", label: "platforms built to control agency labor cost as it happens" },
-            ].map((stat) => (
-              <div
-                key={stat.number}
-                style={{
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                  borderRadius: 10,
-                  padding: "32px",
-                }}
-              >
+            ].map((stat, i) => (
+              <Reveal key={stat.number} delay={i * 60}>
                 <div
                   style={{
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: "clamp(32px, 3vw, 42px)",
-                    fontWeight: 500,
-                    color: C.white,
-                    letterSpacing: "-0.02em",
+                    height: "100%",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    borderRadius: 10,
+                    padding: "32px",
                   }}
                 >
-                  {stat.number}
+                  <div
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "clamp(32px, 3vw, 42px)",
+                      fontWeight: 500,
+                      color: C.white,
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
+                    {stat.number}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "'Inter', system-ui, sans-serif",
+                      fontSize: 15,
+                      lineHeight: 1.55,
+                      color: "rgba(255, 255, 255, 0.65)",
+                      marginTop: 14,
+                    }}
+                  >
+                    {stat.label}
+                  </div>
                 </div>
-                <div
-                  style={{
-                    fontFamily: "'Inter', system-ui, sans-serif",
-                    fontSize: 15,
-                    lineHeight: 1.55,
-                    color: "rgba(255, 255, 255, 0.65)",
-                    marginTop: 14,
-                  }}
-                >
-                  {stat.label}
-                </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
+
+      <PlatformSection />
+      <IntelligenceSection />
+      <HowItWorksSection />
+      <FoundingSection />
+      <Footer />
     </div>
   );
 };
 
 export default Landing;
+
