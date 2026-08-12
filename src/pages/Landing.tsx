@@ -62,10 +62,25 @@ const PageStyles = () => (
       100% { transform: scale(1); opacity: 1; }
     }
     .tl-ring { animation: tl-ring-pulse 4s ease-in-out infinite; }
+    @keyframes tl-fly-x { from { transform: translateX(0); } to { transform: translateX(var(--tl-dx, 0px)); } }
+    @keyframes tl-fly-y {
+      from { transform: translateY(0) scale(1); opacity: 0.95; }
+      70% { opacity: 0.8; }
+      to { transform: translateY(var(--tl-dy, 0px)) scale(0.5); opacity: 0; }
+    }
+    .tl-fly-x { animation: tl-fly-x var(--tl-dur, 900ms) linear forwards; }
+    .tl-fly-y { animation: tl-fly-y var(--tl-dur, 900ms) cubic-bezier(0.45, 0, 0.75, 1) forwards; }
+    @keyframes tl-ingest {
+      0% { transform: scale(1); }
+      45% { transform: scale(0.945); }
+      100% { transform: scale(1); }
+    }
+    .tl-ingest { animation: tl-ingest 150ms ease-out; }
     @media (prefers-reduced-motion: reduce) {
       .tl-scroll-cue { animation: none; opacity: 0.45; }
-      .tl-dash-flow, .tl-ring { animation: none !important; }
+      .tl-dash-flow, .tl-ring, .tl-fly-x, .tl-fly-y, .tl-ingest { animation: none !important; }
     }
+
     @media (max-width: 720px) {
       .tl-h1 { font-size: 36px !important; line-height: 1.12 !important; }
       .tl-br-desktop { display: none; }
