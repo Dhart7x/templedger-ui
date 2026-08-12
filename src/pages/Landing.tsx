@@ -40,6 +40,18 @@ const PageStyles = () => (
       vertical-align: baseline;
       animation: tl-caret-blink 1s step-end infinite;
     }
+    @keyframes tl-scroll-cue {
+      0% { opacity: 1; transform: translateY(0); }
+      65% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 0; transform: translateY(8px); }
+    }
+    .tl-scroll-cue {
+      opacity: 0.3;
+      animation: tl-scroll-cue 2.8s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .tl-scroll-cue { animation: none; opacity: 0.3; }
+    }
     @media (max-width: 720px) {
       .tl-h1 { font-size: 40px !important; line-height: 1.1 !important; }
       .tl-problem-h2 { font-size: 30px !important; }
