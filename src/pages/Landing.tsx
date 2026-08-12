@@ -65,6 +65,7 @@ const PageStyles = () => (
       .tl-hero-actions > button { width: 100%; }
       .tl-nav-inner { padding: 0 20px !important; }
       .tl-nav-secondary { display: none !important; }
+      .tl-equation-line { display: block; }
     }
   `}</style>
 );
