@@ -870,27 +870,43 @@ const Reveal = () => (
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          margin: "88px 0 0",
+          margin: "80px 0 0",
           width: "100%",
         }}
       >
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 240px)",
-            gap: 32,
-            justifyContent: "center",
-            width: 840,
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: 24,
+            alignItems: "start",
+            width: 960,
             maxWidth: "100%",
           }}
         >
-          {SOURCE_CARDS.map((c) => (
-            <SourceCard key={c.title} {...c} />
+          {SOURCE_CLUSTERS.map((c) => (
+            <SourceCluster key={c.title} {...c} />
           ))}
         </div>
+
         <ConvergeLines />
-        <div style={{ marginTop: 24 }}>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 0,
+            width: 960,
+            maxWidth: "100%",
+            marginTop: 4,
+          }}
+        >
+          <DataNode />
+          <Connector />
           <CenterPill />
+          <Connector flip />
+          <MLNode />
         </div>
       </div>
 
@@ -906,18 +922,23 @@ const Reveal = () => (
           width: "100%",
         }}
       >
-        {SOURCE_CARDS.map((c, i) => (
+        {SOURCE_CLUSTERS.map((c) => (
           <React.Fragment key={c.title}>
-            <div style={{ width: "min(100%, 300px)" }}>
-              <SourceCard {...c} />
+            <div style={{ width: "min(100%, 320px)" }}>
+              <SourceCluster {...c} />
             </div>
-            <DashedDownArrow height={i === SOURCE_CARDS.length - 1 ? 44 : 30} />
+            <DashedDownArrow height={30} />
           </React.Fragment>
         ))}
-        <div style={{ marginTop: 44 }}>
+        <DataNode />
+        <DashedDownArrow height={44} />
+        <div style={{ margin: "44px 0" }}>
           <CenterPill />
         </div>
+        <DashedDownArrow height={44} />
+        <MLNode />
       </div>
+
 
       <div style={{ marginTop: 72 }}>
         <DownArrow height={56} />
