@@ -87,9 +87,13 @@ export interface LeadModalProps {
   successExtra?: React.ReactNode;
   /** When set, submissions are recorded in the CRM with this source label. */
   attioSource?: string;
+  /** Which CRM list the submission is added to. */
+  attioList?: "waitlist" | "demo";
+  /** When set, opens this URL in a new tab shortly after a successful submission. */
+  redirectUrl?: string;
 }
 
-const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBody, successExtra, attioSource }: LeadModalProps) => {
+const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBody, successExtra, attioSource, attioList, redirectUrl }: LeadModalProps) => {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -149,8 +153,15 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
     setErrors(e);
     if (Object.keys(e).length) return;
 
-    if (!attioSource) {
+    const goSuccess = () => {
       setStep("success");
+      if (redirectUrl) {
+        window.setTimeout(() => window.open(redirectUrl, "_blank", "noopener,noreferrer"), 1200);
+      }
+    };
+
+    if (!attioSource) {
+      goSuccess();
       return;
     }
 
@@ -158,10 +169,10 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
     setSubmitError("");
     try {
       const { error } = await supabase.functions.invoke("attio-waitlist", {
-        body: { ...form, source: attioSource },
+        body: { ...form, source: attioSource, list: attioList ?? "waitlist" },
       });
       if (error) throw error;
-      setStep("success");
+      goSuccess();
     } catch (err) {
       console.error("Lead submission failed", err);
       setSubmitError("Something went wrong. Please try again.");

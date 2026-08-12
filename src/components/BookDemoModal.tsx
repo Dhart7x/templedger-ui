@@ -37,6 +37,9 @@ const BookDemoModal = ({ open, onClose }: Props) => (
     onClose={onClose}
     title="Book a demo"
     submitLabel="Book Demo"
+    attioSource="Website demo booking"
+    attioList="demo"
+    redirectUrl="https://calendly.com/m-gadsby/meeting-with-michael-gadsby"
     successTitle="You're in."
     successBody="Thank you for booking a demo with TempLedger."
     successExtra={spinner}

@@ -1,7 +1,10 @@
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors'
 
 const ATTIO_API = "https://api.attio.com/v2";
-const LIST_ID = "5e0fffa2-0b50-455a-bd47-c16d3c1010cf";
+const LISTS: Record<string, string> = {
+  waitlist: "5e0fffa2-0b50-455a-bd47-c16d3c1010cf",
+  demo: "738f5137-33c4-4dbe-a584-0f88c7de121c",
+};
 
 const key = () => Deno.env.get("ATTIO_API_KEY") ?? "";
 
@@ -32,6 +35,30 @@ Deno.serve(async (req) => {
 
   if (!key()) return json({ error: "Attio API key not configured" }, 500);
 
+  const url = new URL(req.url);
+  const setup = url.searchParams.get("setup");
+  if (req.method === "GET" && setup && LISTS[setup]) {
+    const attrs = [
+      ["Company", "company", "Company name from the website form"],
+      ["Job title", "job_title", "Job title from the website form"],
+      ["Region", "region", "Region selected on the website form"],
+      ["Annual agency spend", "annual_agency_spend", "Annual agency spend from the website form"],
+      ["Agency workforce size", "agency_workforce_size", "Agency workforce size from the website form"],
+      ["Source", "source", "Which website form was submitted"],
+    ];
+    const results: unknown[] = [];
+    for (const [title, api_slug, description] of attrs) {
+      const r = await attio(`/lists/${LISTS[setup]}/attributes`, {
+        method: "POST",
+        body: JSON.stringify({
+          data: { title, api_slug, description, type: "text", is_multiselect: false, is_required: false, is_unique: false, config: {} },
+        }),
+      });
+      results.push({ api_slug, ok: r.ok, status: r.status });
+    }
+    return json({ setup, results });
+  }
+
   if (req.method !== "POST") return json({ error: "Method not allowed" }, 405);
 
   let body: Record<string, unknown>;
@@ -51,6 +78,8 @@ Deno.serve(async (req) => {
   const spend = str(body.spend, 60);
   const workforce = str(body.workforce, 60);
   const source = str(body.source, 60) || "Website";
+  const listKey = str(body.list, 20) === "demo" ? "demo" : "waitlist";
+  const LIST_ID = LISTS[listKey];
 
   if (!name || !company || !jobTitle || !region || !workforce) {
     return json({ error: "Missing required fields" }, 400);
