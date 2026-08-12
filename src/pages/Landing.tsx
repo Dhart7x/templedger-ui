@@ -145,6 +145,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
   const [phase, setPhase] = useState<Phase>(prefersReducedMotion() ? "done" : "initial");
   const [typedIndex, setTypedIndex] = useState(prefersReducedMotion() ? TYPED_TEXT.length : 0);
   const [caretVisible, setCaretVisible] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
