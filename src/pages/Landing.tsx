@@ -120,16 +120,18 @@ const Nav = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWai
   );
 };
 
-const TYPED_TEXT = " compounding data.";
+const DELETE_TEXT = "relationships.";
+const TYPED_TEXT = "compounding data.";
 
 const prefersReducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWaitlist: () => void }) => {
   const [reducedMotion, setReducedMotion] = useState(prefersReducedMotion);
-  const [phase, setPhase] = useState<"initial" | "striking" | "struck" | "typing" | "done">(
+  const [phase, setPhase] = useState<"initial" | "deleting" | "pause" | "typing" | "done">(
     prefersReducedMotion() ? "done" : "initial"
   );
+  const [deleteIndex, setDeleteIndex] = useState(prefersReducedMotion() ? 0 : DELETE_TEXT.length);
   const [typedIndex, setTypedIndex] = useState(prefersReducedMotion() ? TYPED_TEXT.length : 0);
   const [caretVisible, setCaretVisible] = useState(false);
 
@@ -143,6 +145,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
   useEffect(() => {
     if (reducedMotion) {
       setPhase("done");
+      setDeleteIndex(0);
       setTypedIndex(TYPED_TEXT.length);
       setCaretVisible(false);
       return;
@@ -150,46 +153,52 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
 
     const timers: number[] = [];
 
-    // 0ms: initial state already rendered
-    // 900ms: start drawing the strikethrough
-    timers.push(window.setTimeout(() => setPhase("striking"), 900));
-
-    // 1300ms: strike complete, relationships fades to muted
-    timers.push(window.setTimeout(() => setPhase("struck"), 1300));
-
-    // 1600ms: pause 300ms, then start typing
+    // 1000ms hold, then backspace the word over ~700ms
     timers.push(
       window.setTimeout(() => {
-        setPhase("typing");
+        setPhase("deleting");
         setCaretVisible(true);
-        let index = 0;
+        let remaining = DELETE_TEXT.length;
+        const step = 700 / DELETE_TEXT.length;
 
-        const typeNext = () => {
-          if (index < TYPED_TEXT.length) {
-            setTypedIndex(index + 1);
-            index++;
-            // Natural variance: 60–130ms per character
-            const delay = 60 + Math.random() * 70;
-            timers.push(window.setTimeout(typeNext, delay));
+        const deleteNext = () => {
+          if (remaining > 0) {
+            remaining -= 1;
+            setDeleteIndex(remaining);
+            timers.push(window.setTimeout(deleteNext, step));
           } else {
-            // Last character typed; fade caret over 500ms
-            setPhase("done");
-            timers.push(window.setTimeout(() => setCaretVisible(false), 500));
+            // ~250ms pause with blinking caret, then type
+            setPhase("pause");
+            timers.push(
+              window.setTimeout(() => {
+                setPhase("typing");
+                let index = 0;
+                const typeNext = () => {
+                  if (index < TYPED_TEXT.length) {
+                    setTypedIndex(index + 1);
+                    index++;
+                    timers.push(window.setTimeout(typeNext, 50 + Math.random() * 45));
+                  } else {
+                    setPhase("done");
+                    timers.push(window.setTimeout(() => setCaretVisible(false), 500));
+                  }
+                };
+                typeNext();
+              }, 250)
+            );
           }
         };
 
-        typeNext();
-      }, 1600)
+        timers.push(window.setTimeout(deleteNext, step));
+      }, 1000)
     );
 
     return () => timers.forEach(window.clearTimeout);
   }, [reducedMotion]);
 
-  const showPeriod = phase === "initial" || phase === "striking" || phase === "struck";
-  const isStruck = phase === "struck" || phase === "typing" || phase === "done";
-  const showTyped = phase === "typing" || phase === "done";
-  const caretMounted = phase === "typing" || phase === "done";
-  const caretOpacity = phase === "typing" || (phase === "done" && caretVisible) ? 1 : 0;
+  const caretMounted = !reducedMotion && phase !== "initial" && (phase !== "done" || caretVisible);
+  const caretOpacity = caretVisible ? 1 : 0;
+
 
   return (
     <section
