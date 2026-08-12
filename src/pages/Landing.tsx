@@ -326,7 +326,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           }}
         >
           Cut costs and boost productivity with real-time and predictive insights.
-        </div>
+        </p>
 
         <div
           className="tl-hero-actions"
