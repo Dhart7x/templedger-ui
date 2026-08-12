@@ -1013,7 +1013,7 @@ const Reveal = () => {
             alignItems: "center",
             justifyContent: "center",
             gap: 0,
-            width: 960,
+            width: "min(1140px, 100%)",
             maxWidth: "100%",
             marginTop: 76,
           }}
