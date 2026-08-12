@@ -120,118 +120,219 @@ const Nav = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWai
   );
 };
 
-const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWaitlist: () => void }) => (
-  <section
-    style={{
-      position: "relative",
-      minHeight: "100vh",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      background: C.beige,
-      overflow: "hidden",
-      padding: "120px 32px 120px",
-    }}
-  >
-    {/* Soft radial light wash */}
-    <div
-      aria-hidden
-      style={{
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: "min(1600px, 140vw)",
-        height: "min(1200px, 115vh)",
-        background: `radial-gradient(ellipse at center, ${C.lavender}40 0%, ${C.lightPurple}50 35%, ${C.violetShadow}20 60%, rgba(250,250,248,0) 82%)`,
-        filter: "blur(70px)",
-        pointerEvents: "none",
-      }}
-    />
+const TYPED_TEXT = " compounding data.";
 
-    <div
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWaitlist: () => void }) => {
+  const [reducedMotion, setReducedMotion] = useState(prefersReducedMotion);
+  const [phase, setPhase] = useState<"initial" | "striking" | "struck" | "typing" | "done">(
+    prefersReducedMotion() ? "done" : "initial"
+  );
+  const [typedIndex, setTypedIndex] = useState(prefersReducedMotion() ? TYPED_TEXT.length : 0);
+  const [caretVisible, setCaretVisible] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion) {
+      setPhase("done");
+      setTypedIndex(TYPED_TEXT.length);
+      setCaretVisible(false);
+      return;
+    }
+
+    const timers: number[] = [];
+
+    // 0ms: initial state already rendered
+    // 900ms: start drawing the strikethrough
+    timers.push(window.setTimeout(() => setPhase("striking"), 900));
+
+    // 1300ms: strike complete, relationships fades to muted
+    timers.push(window.setTimeout(() => setPhase("struck"), 1300));
+
+    // 1600ms: pause 300ms, then start typing
+    timers.push(
+      window.setTimeout(() => {
+        setPhase("typing");
+        setCaretVisible(true);
+        let index = 0;
+
+        const typeNext = () => {
+          if (index < TYPED_TEXT.length) {
+            setTypedIndex(index + 1);
+            index++;
+            // Natural variance: 60–130ms per character
+            const delay = 60 + Math.random() * 70;
+            timers.push(window.setTimeout(typeNext, delay));
+          } else {
+            // Last character typed; fade caret over 500ms
+            setPhase("done");
+            timers.push(window.setTimeout(() => setCaretVisible(false), 500));
+          }
+        };
+
+        typeNext();
+      }, 1600)
+    );
+
+    return () => timers.forEach(window.clearTimeout);
+  }, [reducedMotion]);
+
+  const showPeriod = phase === "initial" || phase === "striking" || phase === "struck";
+  const isStruck = phase === "struck" || phase === "typing" || phase === "done";
+  const showTyped = phase === "typing" || phase === "done";
+  const caretMounted = phase === "typing" || phase === "done";
+  const caretOpacity = phase === "typing" || (phase === "done" && caretVisible) ? 1 : 0;
+
+  return (
+    <section
       style={{
         position: "relative",
-        zIndex: 1,
-        maxWidth: 1200,
-        width: "100%",
+        minHeight: "100vh",
         display: "flex",
-        flexDirection: "column",
         alignItems: "center",
-        textAlign: "center",
+        justifyContent: "center",
+        background: C.beige,
+        overflow: "hidden",
+        padding: "120px 32px 120px",
       }}
     >
-      <h1
-        className="tl-h1"
+      {/* Soft radial light wash */}
+      <div
+        aria-hidden
         style={{
-          fontFamily: sans,
-          fontWeight: 600,
-          fontSize: "clamp(40px, 5.6vw, 72px)",
-          lineHeight: 1.05,
-          letterSpacing: "-0.03em",
-          color: C.indigo,
-          maxWidth: 940,
-          margin: 0,
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "min(1600px, 140vw)",
+          height: "min(1200px, 115vh)",
+          background: `radial-gradient(ellipse at center, ${C.lavender}40 0%, ${C.lightPurple}50 35%, ${C.violetShadow}20 60%, rgba(250,250,248,0) 82%)`,
+          filter: "blur(70px)",
+          pointerEvents: "none",
         }}
-      >
-        Manage your contingent workforce on{" "}
-        <span style={{ whiteSpace: "nowrap" }}>
-          <span style={{ position: "relative", color: C.indigo, opacity: 0.35 }}>
-            relationships
-            <span
-              aria-hidden
-              style={{
-                position: "absolute",
-                left: 0,
-                right: 0,
-                top: "50%",
-                height: 2,
-                background: C.indigo,
-                opacity: 0.35,
-                transform: "translateY(-50%)",
-                pointerEvents: "none",
-              }}
-            />
-          </span>
-          {"\u00A0"}
-          <span style={{ color: C.purple }}>compounding data.</span>
-        </span>
-      </h1>
-
-      <p
-        className="tl-sub"
-        style={{
-          fontFamily: body,
-          fontSize: 19,
-          fontWeight: 400,
-          lineHeight: 1.65,
-          color: C.indigo,
-          opacity: 0.7,
-          maxWidth: 620,
-          margin: "26px 0 0",
-        }}
-      >
-        Cut costs and boost productivity with real-time and predictive insights.
-      </p>
+      />
 
       <div
-        className="tl-hero-actions"
-        style={{ display: "flex", gap: 12, marginTop: 40, justifyContent: "center" }}
+        style={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: 1200,
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          textAlign: "center",
+        }}
       >
-        <button
-          className="tl-btn-primary"
-          style={{ ...buttonBase, padding: "14px 26px", fontSize: 16 }}
-          onClick={onBookDemo}
+        <h1
+          className="tl-h1"
+          style={{
+            fontFamily: sans,
+            fontWeight: 600,
+            fontSize: "clamp(40px, 5.6vw, 72px)",
+            lineHeight: 1.05,
+            letterSpacing: "-0.03em",
+            color: C.indigo,
+            maxWidth: 940,
+            margin: 0,
+          }}
         >
-          Book Demo
-        </button>
-        <button className="tl-btn-secondary" style={{ ...buttonBase, padding: "14px 26px", fontSize: 16 }} onClick={onJoinWaitlist}>
-          Join Waitlist
-        </button>
+          Manage your contingent workforce on{" "}
+          <span style={{ display: "inline-block", position: "relative" }}>
+            {/* Ghost text reserves the full final width from the first frame */}
+            <span style={{ visibility: "hidden" }}>{`relationships${TYPED_TEXT}`}</span>
+
+            {/* Animated layer positioned over the ghost */}
+            <span style={{ position: "absolute", left: 0, top: 0, width: "100%" }}>
+              <span
+                style={{
+                  color: C.indigo,
+                  opacity: isStruck ? 0.35 : 1,
+                  transition: reducedMotion ? "none" : "opacity 400ms ease-out",
+                  position: "relative",
+                }}
+              >
+                relationships
+                <span
+                  aria-hidden
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    top: "50%",
+                    height: 2,
+                    background: C.indigo,
+                    opacity: isStruck ? 0.35 : 0,
+                    width: isStruck ? "100%" : "0%",
+                    transform: "translateY(-50%)",
+                    transition: reducedMotion ? "none" : "width 400ms ease-out, opacity 400ms ease-out",
+                    pointerEvents: "none",
+                  }}
+                />
+              </span>
+
+              {showPeriod && <span style={{ color: C.indigo }}>.</span>}
+
+              {showTyped && (
+                <span style={{ color: C.purple }}>{TYPED_TEXT.slice(0, typedIndex)}</span>
+              )}
+
+              {caretMounted && (
+                <span
+                  className="tl-caret"
+                  style={{
+                    opacity: caretOpacity,
+                    transition: reducedMotion ? "none" : "opacity 500ms ease-out",
+                    animation: phase === "done" ? "none" : undefined,
+                  }}
+                />
+              )}
+            </span>
+          </span>
+        </h1>
+
+        <p
+          className="tl-sub"
+          style={{
+            fontFamily: body,
+            fontSize: 19,
+            fontWeight: 400,
+            lineHeight: 1.65,
+            color: C.indigo,
+            opacity: 0.7,
+            maxWidth: 620,
+            margin: "26px 0 0",
+          }}
+        >
+          Cut costs and boost productivity with real-time and predictive insights.
+        </p>
+
+        <div
+          className="tl-hero-actions"
+          style={{ display: "flex", gap: 12, marginTop: 40, justifyContent: "center" }}
+        >
+          <button
+            className="tl-btn-primary"
+            style={{ ...buttonBase, padding: "14px 26px", fontSize: 16 }}
+            onClick={onBookDemo}
+          >
+            Book Demo
+          </button>
+          <button className="tl-btn-secondary" style={{ ...buttonBase, padding: "14px 26px", fontSize: 16 }} onClick={onJoinWaitlist}>
+            Join Waitlist
+          </button>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const Landing = () => {
   const [demoOpen, setDemoOpen] = useState(false);
