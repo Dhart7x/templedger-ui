@@ -232,20 +232,22 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           style={{
             position: "relative",
             width: "100%",
-            display: "flex",
+            display: "grid",
+            justifyItems: "center",
             alignItems: "center",
-            justifyContent: "center",
           }}
         >
           <h1
             aria-hidden
             className="tl-h1"
             style={{
+              gridArea: "1 / 1",
               fontFamily: sans,
               fontWeight: 600,
               fontSize: "clamp(40px, 5.6vw, 72px)",
               lineHeight: 1.05,
               letterSpacing: "-0.03em",
+              width: "100%",
               maxWidth: 940,
               margin: 0,
               visibility: "hidden",
@@ -257,10 +259,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
         <h1
           className="tl-h1"
           style={{
-            position: "absolute",
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%, -50%)",
+            gridArea: "1 / 1",
             width: "100%",
             fontFamily: sans,
             fontWeight: 600,
@@ -272,6 +271,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
             margin: 0,
           }}
         >
+
 
           Manage your contingent workforce on{" "}
           <span style={{ display: "inline-grid", position: "relative", whiteSpace: "nowrap" }}>
@@ -321,19 +321,25 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
 
             {/* Typed layer */}
             <span style={{ gridArea: "1 / 1", textAlign: "left" }}>
-              <span style={{ color: C.purple }}>{TYPED_TEXT.slice(0, typedIndex)}</span>
+              <span style={{ color: C.purple, position: "relative" }}>
+                {TYPED_TEXT.slice(0, typedIndex)}
 
-              {caretMounted && (
-                <span
-                  className="tl-caret"
-                  style={{
-                    opacity: caretOpacity,
-                    transition: reducedMotion ? "none" : "opacity 500ms ease-out",
-                    animation: phase === "done" ? "none" : undefined,
-                  }}
-                />
-              )}
+                {caretMounted && (
+                  <span
+                    className="tl-caret"
+                    style={{
+                      position: "absolute",
+                      left: "100%",
+                      bottom: 0,
+                      opacity: caretOpacity,
+                      transition: reducedMotion ? "none" : "opacity 500ms ease-out",
+                      animation: phase === "done" ? "none" : undefined,
+                    }}
+                  />
+                )}
+              </span>
             </span>
+
           </span>
 
 
