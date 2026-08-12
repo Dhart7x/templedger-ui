@@ -78,6 +78,8 @@ Deno.serve(async (req) => {
   const spend = str(body.spend, 60);
   const workforce = str(body.workforce, 60);
   const source = str(body.source, 60) || "Website";
+  const listKey = str(body.list, 20) === "demo" ? "demo" : "waitlist";
+  const LIST_ID = LISTS[listKey];
 
   if (!name || !company || !jobTitle || !region || !workforce) {
     return json({ error: "Missing required fields" }, 400);
