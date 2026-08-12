@@ -40,6 +40,18 @@ const PageStyles = () => (
       vertical-align: baseline;
       animation: tl-caret-blink 1s step-end infinite;
     }
+    @keyframes tl-scroll-cue {
+      0% { opacity: 1; transform: translateY(0); }
+      65% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 0; transform: translateY(8px); }
+    }
+    .tl-scroll-cue {
+      opacity: 0.3;
+      animation: tl-scroll-cue 2.8s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .tl-scroll-cue { animation: none; opacity: 0.3; }
+    }
     @media (max-width: 720px) {
       .tl-h1 { font-size: 40px !important; line-height: 1.1 !important; }
       .tl-problem-h2 { font-size: 30px !important; }
@@ -133,12 +145,20 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
   const [phase, setPhase] = useState<Phase>(prefersReducedMotion() ? "done" : "initial");
   const [typedIndex, setTypedIndex] = useState(prefersReducedMotion() ? TYPED_TEXT.length : 0);
   const [caretVisible, setCaretVisible] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setPastHero(window.scrollY > 100);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -194,7 +214,8 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
         justifyContent: "center",
         background: C.beige,
         overflow: "hidden",
-        padding: "120px 32px 48px",
+        minHeight: "100vh",
+        padding: "120px 32px",
       }}
     >
       {/* Soft radial light wash */}
@@ -378,6 +399,42 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           </button>
         </div>
       </div>
+
+      <button
+        aria-label="Scroll to problem section"
+        onClick={() => {
+          const el = document.getElementById("problem");
+          if (el) el.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
+        }}
+        style={{
+          position: "absolute",
+          bottom: 40,
+          left: "50%",
+          transform: "translateX(-50%)",
+          background: "transparent",
+          border: "none",
+          padding: 0,
+          cursor: "pointer",
+          opacity: pastHero ? 0 : 1,
+          transition: "opacity 300ms ease",
+          pointerEvents: pastHero ? "none" : "auto",
+        }}
+      >
+        <span className="tl-scroll-cue" style={{ color: C.indigo, display: "block", lineHeight: 0 }}>
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </span>
+      </button>
     </section>
   );
 };
@@ -411,6 +468,7 @@ const pillBase: React.CSSProperties = {
 
 const Problem = () => (
   <section
+    id="problem"
     style={{
       position: "relative",
       background: "transparent",
