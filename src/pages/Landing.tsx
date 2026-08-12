@@ -253,7 +253,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
                   gridArea: "1 / 1",
                   textAlign: "left",
                   color: C.indigo,
-                  opacity: dropped ? 0 : struck ? 0.35 : 1,
+                  opacity: dropped ? 0 : phase === "struck" ? 0.35 : phase === "striking" ? 0.6 : 1,
                   transform: dropped ? "translateY(24px)" : "translateY(0)",
                   transition: reducedMotion
                     ? "none"
@@ -272,7 +272,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
                       top: "48%",
                       height: 3,
                       background: C.indigo,
-                      opacity: struck || dropped ? 0.6 : 0,
+                      opacity: struck || dropped ? 1 : 0,
                       width: struck || dropped ? "100%" : "0%",
                       transform: "translateY(-50%)",
                       transition: reducedMotion ? "none" : "width 400ms ease-out, opacity 200ms ease-out",
