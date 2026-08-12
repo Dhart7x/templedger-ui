@@ -806,8 +806,8 @@ const Reveal = () => (
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
-          gap: 10,
-          maxWidth: 560,
+          gap: 14,
+          maxWidth: 760,
           margin: "28px 0 0",
         }}
       >
