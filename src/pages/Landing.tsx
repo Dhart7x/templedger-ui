@@ -53,7 +53,7 @@ const PageStyles = () => (
       .tl-scroll-cue { animation: none; opacity: 0.3; }
     }
     @media (max-width: 720px) {
-      .tl-h1 { font-size: 40px !important; line-height: 1.1 !important; }
+      .tl-h1 { font-size: 32px !important; line-height: 1.12 !important; }
       .tl-br-desktop { display: none; }
       .tl-problem-h2 { font-size: 30px !important; }
       .tl-sub { font-size: 16px !important; }
