@@ -84,10 +84,14 @@
     scroll-behavior: smooth;
   }
 
+  body {
+    background: #FAFAF8;
+  }
+
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
-    font-weight: 800;
-    letter-spacing: -0.025em;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.03em;
   }
 }
 
