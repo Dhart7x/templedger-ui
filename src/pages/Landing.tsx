@@ -847,6 +847,7 @@ const Landing = () => {
       <Nav onBookDemo={openDemo} onJoinWaitlist={openWaitlist} />
       <Hero onBookDemo={openDemo} onJoinWaitlist={openWaitlist} />
       <Problem />
+      <Reveal />
       <BookDemoModal open={demoOpen} onClose={() => setDemoOpen(false)} />
       <JoinWaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
     </main>
