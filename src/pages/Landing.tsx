@@ -1118,7 +1118,7 @@ const Reveal = () => {
       </div>
     </div>
   </section>
-  );
+);
 };
 
 
