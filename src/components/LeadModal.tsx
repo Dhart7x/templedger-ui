@@ -48,6 +48,10 @@ const labelStyle: React.CSSProperties = {
   marginBottom: 6,
 };
 
+const Req = () => (
+  <span style={{ color: "#B4595C", marginLeft: 3, fontSize: 10 }} aria-hidden="true">*</span>
+);
+
 const fieldStyle: React.CSSProperties = {
   width: "100%",
   background: C.beige,
@@ -287,7 +291,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
 
                 <form onSubmit={handleSubmit} noValidate>
                   <div style={{ marginBottom: 16 }}>
-                    <label style={labelStyle} htmlFor="tl-name">Full name</label>
+                    <label style={labelStyle} htmlFor="tl-name">Full name<Req /></label>
                     <input
                       id="tl-name"
                       type="text"
@@ -299,7 +303,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                   </div>
 
                   <div style={{ marginBottom: 16 }}>
-                    <label style={labelStyle} htmlFor="tl-company">Company</label>
+                    <label style={labelStyle} htmlFor="tl-company">Company<Req /></label>
                     <input
                       id="tl-company"
                       type="text"
@@ -311,7 +315,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                   </div>
 
                   <div style={{ marginBottom: 16 }}>
-                    <label style={labelStyle} htmlFor="tl-title">Job title</label>
+                    <label style={labelStyle} htmlFor="tl-title">Job title<Req /></label>
                     <input
                       id="tl-title"
                       type="text"
@@ -323,7 +327,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                   </div>
 
                   <div style={{ marginBottom: 16 }}>
-                    <span style={labelStyle}>Region</span>
+                    <span style={labelStyle}>Region<Req /></span>
                     <div style={{ display: "flex", gap: 22, marginTop: 2 }}>
                       {(["USA", "UK"] as const).map((r) => {
                         const active = form.region === r;
@@ -367,7 +371,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
 
                   <div style={{ marginBottom: 16 }}>
                     <label style={labelStyle} htmlFor="tl-spend">
-                      Annual agency spend (optional)
+                      Annual agency spend <span style={{ opacity: 0.6 }}>(optional)</span>
                     </label>
                     <select
                       id="tl-spend"
@@ -385,7 +389,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                   </div>
 
                   <div style={{ marginBottom: 24 }}>
-                    <label style={labelStyle} htmlFor="tl-workforce">Agency workforce size</label>
+                    <label style={labelStyle} htmlFor="tl-workforce">Agency workforce size<Req /></label>
                     <select
                       id="tl-workforce"
                       className="tl-select"
