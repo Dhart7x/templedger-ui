@@ -259,8 +259,11 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           <span style={{ whiteSpace: "nowrap" }}>
             on{" "}
             <span style={{ display: "inline-grid", justifyItems: "start", verticalAlign: "bottom" }}>
-              <span aria-hidden style={{ gridArea: "1 / 1", visibility: "hidden" }}>
+              <span aria-hidden style={{ gridArea: "1 / 1", visibility: "hidden", whiteSpace: "pre" }}>
                 {OLD_WORD}
+              </span>
+              <span aria-hidden style={{ gridArea: "1 / 1", visibility: "hidden", whiteSpace: "pre" }}>
+                {NEW_WORD}
               </span>
               <span style={{ gridArea: "1 / 1", position: "relative", whiteSpace: "pre" }}>
                 {phase === "typing" || phase === "done" ? (
