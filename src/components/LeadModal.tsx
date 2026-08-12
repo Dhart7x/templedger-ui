@@ -104,7 +104,7 @@ export interface LeadModalProps {
   redirectUrl?: string;
 }
 
-const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBody, successExtra, attioSource, attioList, redirectUrl }: LeadModalProps) => {
+const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBody, successExtra, minimalSuccess, attioSource, attioList, redirectUrl }: LeadModalProps) => {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -283,11 +283,15 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
           />
 
           <div style={{ position: "relative" }}>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <img src={symbolUrl} alt="" style={{ width: 40, height: 40, display: "block" }} />
-            </div>
+            {!(step === "success" && minimalSuccess) && (
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <img src={symbolUrl} alt="" style={{ width: 40, height: 40, display: "block" }} />
+              </div>
+            )}
 
-            {step === "success" ? (
+            {step === "success" && minimalSuccess ? (
+              <div style={{ textAlign: "center", padding: "56px 6px" }}>{successExtra}</div>
+            ) : step === "success" ? (
               <div style={{ textAlign: "center", padding: "18px 6px 6px" }}>
                 <h2
                   style={{
