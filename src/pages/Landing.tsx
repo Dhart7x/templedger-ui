@@ -559,6 +559,25 @@ const Problem = () => (
 );
 
 
+const CAPABILITY_PILLS = [
+  "Pattern recognition",
+  "Predictive intelligence",
+  "Real-time insights",
+  "Anomaly detection",
+  "Continuous reconciliation",
+  "Automated verification",
+];
+
+const capPillBase: React.CSSProperties = {
+  fontFamily: body,
+  fontSize: 18,
+  fontWeight: 400,
+  lineHeight: 1.2,
+  padding: "12px 24px",
+  borderRadius: 999,
+  whiteSpace: "nowrap",
+};
+
 const SOURCE_CLUSTERS = [
   {
     title: "Agency CRM",
