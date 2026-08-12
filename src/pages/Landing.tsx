@@ -321,19 +321,25 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
 
             {/* Typed layer */}
             <span style={{ gridArea: "1 / 1", textAlign: "left" }}>
-              <span style={{ color: C.purple }}>{TYPED_TEXT.slice(0, typedIndex)}</span>
+              <span style={{ color: C.purple, position: "relative" }}>
+                {TYPED_TEXT.slice(0, typedIndex)}
 
-              {caretMounted && (
-                <span
-                  className="tl-caret"
-                  style={{
-                    opacity: caretOpacity,
-                    transition: reducedMotion ? "none" : "opacity 500ms ease-out",
-                    animation: phase === "done" ? "none" : undefined,
-                  }}
-                />
-              )}
+                {caretMounted && (
+                  <span
+                    className="tl-caret"
+                    style={{
+                      position: "absolute",
+                      left: "100%",
+                      bottom: 0,
+                      opacity: caretOpacity,
+                      transition: reducedMotion ? "none" : "opacity 500ms ease-out",
+                      animation: phase === "done" ? "none" : undefined,
+                    }}
+                  />
+                )}
+              </span>
             </span>
+
           </span>
 
 
