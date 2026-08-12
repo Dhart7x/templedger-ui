@@ -156,7 +156,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
   // Hero word swap: "relationships." -> "intelligence."
   const OLD_WORD = "relationships.";
   const NEW_WORD = "intelligence.";
-  const [phase, setPhase] = useState<"hold" | "striking" | "deleting" | "typing" | "done">("hold");
+  const [phase, setPhase] = useState<"hold" | "striking" | "struck" | "deleting" | "typing" | "done">("hold");
   const [oldLen, setOldLen] = useState(OLD_WORD.length);
   const [newLen, setNewLen] = useState(0);
 
@@ -168,8 +168,9 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
       return;
     }
     const timers: number[] = [];
-    timers.push(window.setTimeout(() => setPhase("striking"), 1200));
-    timers.push(window.setTimeout(() => setPhase("deleting"), 1600));
+    timers.push(window.setTimeout(() => setPhase("striking"), 1000));   // hold 1s
+    timers.push(window.setTimeout(() => setPhase("struck"), 1400));     // strike 0.4s
+    timers.push(window.setTimeout(() => setPhase("deleting"), 2600));    // struck 1.2s
     return () => timers.forEach(clearTimeout);
   }, [reducedMotion]);
 
@@ -258,8 +259,11 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           <span style={{ whiteSpace: "nowrap" }}>
             on{" "}
             <span style={{ display: "inline-grid", justifyItems: "start", verticalAlign: "bottom" }}>
-              <span aria-hidden style={{ gridArea: "1 / 1", visibility: "hidden" }}>
+              <span aria-hidden style={{ gridArea: "1 / 1", visibility: "hidden", whiteSpace: "pre" }}>
                 {OLD_WORD}
+              </span>
+              <span aria-hidden style={{ gridArea: "1 / 1", visibility: "hidden", whiteSpace: "pre" }}>
+                {NEW_WORD}
               </span>
               <span style={{ gridArea: "1 / 1", position: "relative", whiteSpace: "pre" }}>
                 {phase === "typing" || phase === "done" ? (
