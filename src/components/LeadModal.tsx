@@ -142,12 +142,31 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
     return e;
   };
 
-  const handleSubmit = (ev: FormEvent) => {
+  const handleSubmit = async (ev: FormEvent) => {
     ev.preventDefault();
     const e = validate();
     setErrors(e);
     if (Object.keys(e).length) return;
-    setStep("success");
+
+    if (!attioSource) {
+      setStep("success");
+      return;
+    }
+
+    setSubmitting(true);
+    setSubmitError("");
+    try {
+      const { error } = await supabase.functions.invoke("attio-waitlist", {
+        body: { ...form, source: attioSource },
+      });
+      if (error) throw error;
+      setStep("success");
+    } catch (err) {
+      console.error("Lead submission failed", err);
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const inputProps = (k: keyof FormState) => ({
