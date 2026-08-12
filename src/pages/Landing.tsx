@@ -242,12 +242,48 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           Manage your contingent workforce on{" "}
           <span style={{ display: "inline-grid", position: "relative", whiteSpace: "nowrap" }}>
             {/* Ghost text reserves the widest of both strings from the first frame */}
-            <span style={{ visibility: "hidden", gridArea: "1 / 1" }}>{DELETE_TEXT}</span>
+            <span style={{ visibility: "hidden", gridArea: "1 / 1" }}>{OLD_TEXT}</span>
             <span style={{ visibility: "hidden", gridArea: "1 / 1" }}>{TYPED_TEXT}</span>
 
-            {/* Animated layer */}
+            {/* Struck word layer — drops within its own space */}
+            {wordMounted && (
+              <span
+                aria-hidden
+                style={{
+                  gridArea: "1 / 1",
+                  textAlign: "left",
+                  color: C.indigo,
+                  opacity: dropped ? 0 : struck ? 0.35 : 1,
+                  transform: dropped ? "translateY(24px)" : "translateY(0)",
+                  transition: reducedMotion
+                    ? "none"
+                    : dropped
+                      ? "opacity 350ms ease-in, transform 350ms ease-in"
+                      : "opacity 400ms ease-out",
+                  pointerEvents: "none",
+                }}
+              >
+                <span style={{ position: "relative", display: "inline-block" }}>
+                  {OLD_TEXT}
+                  <span
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      top: "52%",
+                      height: 3,
+                      background: C.indigo,
+                      opacity: struck || dropped ? 0.45 : 0,
+                      width: struck || dropped ? "100%" : "0%",
+                      transform: "translateY(-50%)",
+                      transition: reducedMotion ? "none" : "width 400ms ease-out, opacity 200ms ease-out",
+                    }}
+                  />
+                </span>
+              </span>
+            )}
+
+            {/* Typed layer */}
             <span style={{ gridArea: "1 / 1", textAlign: "left" }}>
-              <span style={{ color: C.indigo }}>{DELETE_TEXT.slice(0, deleteIndex)}</span>
               <span style={{ color: C.purple }}>{TYPED_TEXT.slice(0, typedIndex)}</span>
 
               {caretMounted && (
@@ -262,6 +298,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
               )}
             </span>
           </span>
+
 
         </h1>
 
