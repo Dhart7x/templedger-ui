@@ -120,18 +120,17 @@ const Nav = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWai
   );
 };
 
-const DELETE_TEXT = "relationships.";
+const OLD_TEXT = "relationships.";
 const TYPED_TEXT = "compounding data.";
 
 const prefersReducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+type Phase = "initial" | "striking" | "struck" | "dropping" | "typing" | "done";
+
 const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWaitlist: () => void }) => {
   const [reducedMotion, setReducedMotion] = useState(prefersReducedMotion);
-  const [phase, setPhase] = useState<"initial" | "deleting" | "pause" | "typing" | "done">(
-    prefersReducedMotion() ? "done" : "initial"
-  );
-  const [deleteIndex, setDeleteIndex] = useState(prefersReducedMotion() ? 0 : DELETE_TEXT.length);
+  const [phase, setPhase] = useState<Phase>(prefersReducedMotion() ? "done" : "initial");
   const [typedIndex, setTypedIndex] = useState(prefersReducedMotion() ? TYPED_TEXT.length : 0);
   const [caretVisible, setCaretVisible] = useState(false);
 
@@ -145,7 +144,6 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
   useEffect(() => {
     if (reducedMotion) {
       setPhase("done");
-      setDeleteIndex(0);
       setTypedIndex(TYPED_TEXT.length);
       setCaretVisible(false);
       return;
@@ -153,51 +151,38 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
 
     const timers: number[] = [];
 
-    // 1000ms hold, then backspace the word over ~700ms
+    // 1000ms hold → strike draws (400ms) → hold (400ms) → drop (350ms) → type
+    timers.push(window.setTimeout(() => setPhase("striking"), 1000));
+    timers.push(window.setTimeout(() => setPhase("struck"), 1400));
+    timers.push(window.setTimeout(() => setPhase("dropping"), 1800));
     timers.push(
       window.setTimeout(() => {
-        setPhase("deleting");
+        setPhase("typing");
         setCaretVisible(true);
-        let remaining = DELETE_TEXT.length;
-        const step = 700 / DELETE_TEXT.length;
-
-        const deleteNext = () => {
-          if (remaining > 0) {
-            remaining -= 1;
-            setDeleteIndex(remaining);
-            timers.push(window.setTimeout(deleteNext, step));
+        let index = 0;
+        const typeNext = () => {
+          if (index < TYPED_TEXT.length) {
+            setTypedIndex(index + 1);
+            index++;
+            timers.push(window.setTimeout(typeNext, 50 + Math.random() * 45));
           } else {
-            // ~250ms pause with blinking caret, then type
-            setPhase("pause");
-            timers.push(
-              window.setTimeout(() => {
-                setPhase("typing");
-                let index = 0;
-                const typeNext = () => {
-                  if (index < TYPED_TEXT.length) {
-                    setTypedIndex(index + 1);
-                    index++;
-                    timers.push(window.setTimeout(typeNext, 50 + Math.random() * 45));
-                  } else {
-                    setPhase("done");
-                    timers.push(window.setTimeout(() => setCaretVisible(false), 500));
-                  }
-                };
-                typeNext();
-              }, 250)
-            );
+            setPhase("done");
+            timers.push(window.setTimeout(() => setCaretVisible(false), 500));
           }
         };
-
-        timers.push(window.setTimeout(deleteNext, step));
-      }, 1000)
+        typeNext();
+      }, 2150)
     );
 
     return () => timers.forEach(window.clearTimeout);
   }, [reducedMotion]);
 
-  const caretMounted = !reducedMotion && phase !== "initial" && (phase !== "done" || caretVisible);
+  const struck = phase === "striking" || phase === "struck" || phase === "dropping";
+  const dropped = phase === "dropping" || phase === "typing" || phase === "done";
+  const wordMounted = phase !== "typing" && phase !== "done";
+  const caretMounted = !reducedMotion && (phase === "typing" || (phase === "done" && caretVisible));
   const caretOpacity = caretVisible ? 1 : 0;
+
 
 
   return (
@@ -257,12 +242,48 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           Manage your contingent workforce on{" "}
           <span style={{ display: "inline-grid", position: "relative", whiteSpace: "nowrap" }}>
             {/* Ghost text reserves the widest of both strings from the first frame */}
-            <span style={{ visibility: "hidden", gridArea: "1 / 1" }}>{DELETE_TEXT}</span>
+            <span style={{ visibility: "hidden", gridArea: "1 / 1" }}>{OLD_TEXT}</span>
             <span style={{ visibility: "hidden", gridArea: "1 / 1" }}>{TYPED_TEXT}</span>
 
-            {/* Animated layer */}
+            {/* Struck word layer — drops within its own space */}
+            {wordMounted && (
+              <span
+                aria-hidden
+                style={{
+                  gridArea: "1 / 1",
+                  textAlign: "left",
+                  color: C.indigo,
+                  opacity: dropped ? 0 : phase === "struck" ? 0.35 : phase === "striking" ? 0.6 : 1,
+                  transform: dropped ? "translateY(24px)" : "translateY(0)",
+                  transition: reducedMotion
+                    ? "none"
+                    : dropped
+                      ? "opacity 350ms ease-in, transform 350ms ease-in"
+                      : "opacity 400ms ease-out",
+                  pointerEvents: "none",
+                }}
+              >
+                <span style={{ position: "relative", display: "inline-block" }}>
+                  {OLD_TEXT}
+                  <span
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                      top: "48%",
+                      height: 3,
+                      background: C.indigo,
+                      opacity: struck || dropped ? 1 : 0,
+                      width: struck || dropped ? "100%" : "0%",
+                      transform: "translateY(-50%)",
+                      transition: reducedMotion ? "none" : "width 400ms ease-out, opacity 200ms ease-out",
+                    }}
+                  />
+                </span>
+              </span>
+            )}
+
+            {/* Typed layer */}
             <span style={{ gridArea: "1 / 1", textAlign: "left" }}>
-              <span style={{ color: C.indigo }}>{DELETE_TEXT.slice(0, deleteIndex)}</span>
               <span style={{ color: C.purple }}>{TYPED_TEXT.slice(0, typedIndex)}</span>
 
               {caretMounted && (
@@ -277,6 +298,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
               )}
             </span>
           </span>
+
 
         </h1>
 
