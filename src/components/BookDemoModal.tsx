@@ -1,12 +1,18 @@
 import LeadModal from "@/components/LeadModal";
+import symbolUrl from "@/assets/templedger-symbol.png";
 
 interface Props {
   open: boolean;
   onClose: () => void;
 }
 
-const spinner = (
+const demoSuccess = (
   <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+    <img
+      src={symbolUrl}
+      alt=""
+      style={{ width: 40, height: 40, display: "block", marginBottom: 24 }}
+    />
     <div
       style={{
         width: 28,
@@ -42,7 +48,7 @@ const BookDemoModal = ({ open, onClose }: Props) => (
     redirectUrl="https://calendly.com/m-gadsby/meeting-with-michael-gadsby"
     successTitle=""
     successBody=""
-    successExtra={spinner}
+    successExtra={demoSuccess}
     minimalSuccess
   />
 );
