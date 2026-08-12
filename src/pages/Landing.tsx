@@ -897,7 +897,8 @@ const useFallingData = () => {
       const dx = t.left + t.width / 2 - (p.left + p.width / 2);
       const dy = t.top + t.height / 2 - (p.top + p.height / 2);
       const id = ++idCounter;
-      setFlyer({ id, label, x, y, dx, dy });
+      const isMore = label.startsWith("+more:");
+      setFlyer({ id, label, text: isMore ? "+ more" : label, isMore, x, y, dx, dy });
       setHidden((h) => new Set(h).add(label));
       later(() => {
         setFlyer((f) => (f && f.id === id ? null : f));
