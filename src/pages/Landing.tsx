@@ -904,7 +904,7 @@ const useFallingData = () => {
 
 
 const Reveal = () => {
-  const { stageRef, dataRef, registerPill, flyer, ingest } = useFallingData();
+  const { stageRef, dataRef, registerPill, flyer, ingest, hidden, cycleKey } = useFallingData();
 
   return (
   <section
