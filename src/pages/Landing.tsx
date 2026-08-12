@@ -330,7 +330,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
 
         <div
           className="tl-hero-actions"
-          style={{ display: "flex", gap: 12, marginTop: 26, justifyContent: "center" }}
+          style={{ display: "flex", gap: 12, marginTop: 48, justifyContent: "center" }}
         >
           <button
             className="tl-btn-primary"
