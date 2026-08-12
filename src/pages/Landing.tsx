@@ -354,6 +354,7 @@ const Landing = () => {
   return (
     <div style={{ background: C.beige, minHeight: "100vh", overflowX: "hidden" }}>
       <Nav />
+      <ResponsiveStyles />
 
       <section
         style={{
@@ -464,6 +465,7 @@ const Landing = () => {
 
       {/* Problem section */}
       <section
+        className="tl-section"
         style={{
           position: "relative",
           background: C.indigo,

@@ -192,6 +192,7 @@ const FEATURES = [
 export const PlatformSection = () => (
   <section
     id="platform"
+    className="tl-section"
     style={{ position: "relative", background: C.beige, padding: "120px 32px", overflow: "hidden" }}
   >
     <div
@@ -302,6 +303,7 @@ const INSIGHTS = [
 export const IntelligenceSection = () => (
   <section
     id="intelligence"
+    className="tl-section"
     style={{ position: "relative", background: C.beige, padding: "120px 32px", overflow: "hidden" }}
   >
     <div
@@ -416,6 +418,7 @@ const STEPS = [
 export const HowItWorksSection = () => (
   <section
     id="how-it-works"
+    className="tl-section"
     style={{ position: "relative", background: C.indigo, padding: "120px 32px", overflow: "hidden" }}
   >
     <div
@@ -510,6 +513,7 @@ export const FoundingSection = () => {
   return (
     <section
       id="founding"
+    className="tl-section"
       style={{
         position: "relative",
         background: C.beige,
