@@ -116,26 +116,42 @@ Deno.serve(async (req) => {
 
   const recordId = (person.json as any)?.data?.id?.record_id;
 
-  // 2. Add the person to the waitlist list, with notes captured on the entry.
+  // 2. Add the person to the waitlist list with the form answers as entry values.
   const notes = [
     `Company: ${company}`,
     `Job title: ${jobTitle}`,
     `Region: ${region}`,
-    spend ? `Annual agency spend: ${spend}` : `Annual agency spend: not provided`,
+    `Annual agency spend: ${spend || "not provided"}`,
     `Agency workforce size: ${workforce}`,
     `Source: ${source}`,
   ].join("\n");
 
-  const entry = await attio(`/lists/${LIST_ID}/entries`, {
+  const entryValues: Record<string, string> = {
+    company,
+    job_title: jobTitle,
+    region,
+    annual_agency_spend: spend || "Not provided",
+    agency_workforce_size: workforce,
+    source,
+  };
+
+  let entry = await attio(`/lists/${LIST_ID}/entries`, {
     method: "POST",
     body: JSON.stringify({
-      data: {
-        parent_record_id: recordId,
-        parent_object: "people",
-        entry_values: {},
-      },
+      data: { parent_record_id: recordId, parent_object: "people", entry_values: entryValues },
     }),
   });
+
+  // If the list columns are missing, still add the person to the list.
+  if (!entry.ok) {
+    console.error("Attio entry with values failed", entry.status, JSON.stringify(entry.json));
+    entry = await attio(`/lists/${LIST_ID}/entries`, {
+      method: "POST",
+      body: JSON.stringify({
+        data: { parent_record_id: recordId, parent_object: "people", entry_values: {} },
+      }),
+    });
+  }
 
   if (!entry.ok) {
     console.error("Attio list entry failed", entry.status, JSON.stringify(entry.json));
