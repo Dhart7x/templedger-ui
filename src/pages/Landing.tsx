@@ -1110,9 +1110,10 @@ const Reveal = () => {
             key={label}
             style={{
               ...capPillBase,
+              fontWeight: 500,
               background: C.white,
-              border: "1px solid #CECBF6",
-              color: C.indigo,
+              border: "1px solid #AFA9EC",
+              color: C.purple,
             }}
           >
             {label}
