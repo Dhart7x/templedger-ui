@@ -348,8 +348,11 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
       <button
         aria-label="Scroll to problem section"
         onClick={() => {
-          const el = document.getElementById("problem");
-          if (el) el.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
+          const heading = document.querySelector<HTMLElement>("#problem .tl-problem-h2");
+          const el = heading ?? document.getElementById("problem");
+          if (!el) return;
+          const top = el.getBoundingClientRect().top + window.scrollY - (72 + 96);
+          window.scrollTo({ top, behavior: reducedMotion ? "auto" : "smooth" });
         }}
         style={{
           position: "absolute",
