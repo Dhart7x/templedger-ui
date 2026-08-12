@@ -626,6 +626,7 @@ const SourceCluster = ({
   title,
   descriptor,
   items,
+  rows,
   registerPill,
   hidden,
   cycleKey,
@@ -633,46 +634,64 @@ const SourceCluster = ({
   title: string;
   descriptor: string;
   items: string[];
+  rows?: number[];
   registerPill?: (label: string, el: HTMLElement | null) => void;
   hidden?: Set<string>;
   cycleKey?: number;
-}) => (
-  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-    <div style={{ fontFamily: body, fontSize: 15, fontWeight: 500, lineHeight: 1.2, color: C.indigo }}>
-      {title}
+}) => {
+  const rowChunks: string[][] = [];
+  if (rows && rows.length > 0) {
+    let cursor = 0;
+    for (const count of rows) {
+      rowChunks.push(items.slice(cursor, cursor + count));
+      cursor += count;
+    }
+  } else {
+    rowChunks.push(items);
+  }
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+      <div style={{ fontFamily: body, fontSize: 15, fontWeight: 500, lineHeight: 1.2, color: C.indigo }}>
+        {title}
+      </div>
+      <div
+        style={{
+          fontFamily: body,
+          fontSize: 12.5,
+          fontStyle: "italic",
+          lineHeight: 1.3,
+          marginTop: 3,
+          color: "rgba(20,8,46,0.45)",
+        }}
+      >
+        {descriptor}
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 7, marginTop: 12 }}>
+        {rowChunks.map((row, rowIndex) => (
+          <div key={rowIndex} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 7 }}>
+            {row.map((it) => (
+              <span
+                key={`${it}-${cycleKey ?? 0}`}
+                ref={registerPill ? (el) => registerPill(it, el) : undefined}
+                style={{
+                  ...smallPill,
+                  background: C.lightPurple,
+                  border: `1px solid ${C.violetShadow}`,
+                  color: C.indigo,
+                  visibility: hidden?.has(it) ? "hidden" : "visible",
+                  animation: hidden?.has(it) ? undefined : "tl-cluster-in 500ms ease-out both",
+                }}
+              >
+                {it}
+              </span>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
-    <div
-      style={{
-        fontFamily: body,
-        fontSize: 12.5,
-        fontStyle: "italic",
-        lineHeight: 1.3,
-        marginTop: 3,
-        color: "rgba(20,8,46,0.45)",
-      }}
-    >
-      {descriptor}
-    </div>
-    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 7, marginTop: 12 }}>
-      {items.map((it) => (
-        <span
-          key={`${it}-${cycleKey ?? 0}`}
-          ref={registerPill ? (el) => registerPill(it, el) : undefined}
-          style={{
-            ...smallPill,
-            background: C.lightPurple,
-            border: `1px solid ${C.violetShadow}`,
-            color: C.indigo,
-            visibility: hidden?.has(it) ? "hidden" : "visible",
-            animation: hidden?.has(it) ? undefined : "tl-cluster-in 500ms ease-out both",
-          }}
-        >
-          {it}
-        </span>
-      ))}
-    </div>
-  </div>
-);
+  );
+};
 
 
 const nodeBase: React.CSSProperties = {
