@@ -52,7 +52,6 @@ const PageStyles = () => (
     @media (prefers-reduced-motion: reduce) {
       .tl-scroll-cue { animation: none; opacity: 0.3; }
     }
-    .tl-h1-group { white-space: nowrap; }
     @media (max-width: 720px) {
       .tl-h1 { font-size: 40px !important; line-height: 1.1 !important; }
       .tl-br-desktop { display: none; }
@@ -62,9 +61,6 @@ const PageStyles = () => (
       .tl-hero-actions > button { width: 100%; }
       .tl-nav-inner { padding: 0 20px !important; }
       .tl-nav-secondary { display: none !important; }
-    }
-    @media (min-width: 721px) {
-      .tl-h1-group { white-space: normal; }
     }
   `}</style>
 );
@@ -226,16 +222,11 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
               pointerEvents: "none",
             }}
           >
-            <span className="tl-h1-group">
-              Manage your contingent
-              <br className="tl-br-desktop" />
-              workforce
-            </span>
-            {" "}
-            <span className="tl-h1-group">
-              <br className="tl-br-desktop" />
-              on intelligence.
-            </span>
+            Manage your contingent
+            <br className="tl-br-desktop" />
+            workforce on&nbsp;
+            <br className="tl-br-desktop" />
+            intelligence.
           </h1>
           <h1
             className="tl-h1"
@@ -252,16 +243,11 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
               margin: 0,
             }}
           >
-            <span className="tl-h1-group">
-              Manage your contingent
-              <br className="tl-br-desktop" />
-              workforce
-            </span>
-            {" "}
-            <span className="tl-h1-group">
-              <br className="tl-br-desktop" />
-              on <span style={{ color: C.purple }}>intelligence.</span>
-            </span>
+            Manage your contingent
+            <br className="tl-br-desktop" />
+            workforce on&nbsp;
+            <br className="tl-br-desktop" />
+            <span style={{ color: C.purple }}>intelligence.</span>
           </h1>
         </div>
 
