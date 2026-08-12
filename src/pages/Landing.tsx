@@ -200,14 +200,17 @@ const Hero = ({ onBookDemo }: { onBookDemo: () => void }) => (
 
 const Landing = () => {
   const [demoOpen, setDemoOpen] = useState(false);
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
   const openDemo = () => setDemoOpen(true);
+  const openWaitlist = () => setWaitlistOpen(true);
 
   return (
     <main style={{ background: C.beige, minHeight: "100vh" }}>
       <PageStyles />
-      <Nav onBookDemo={openDemo} />
-      <Hero onBookDemo={openDemo} />
+      <Nav onBookDemo={openDemo} onJoinWaitlist={openWaitlist} />
+      <Hero onBookDemo={openDemo} onJoinWaitlist={openWaitlist} />
       <BookDemoModal open={demoOpen} onClose={() => setDemoOpen(false)} />
+      <JoinWaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
     </main>
   );
 };
