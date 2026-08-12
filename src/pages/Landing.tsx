@@ -284,7 +284,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
               {showPeriod && <span style={{ color: C.indigo }}>.</span>}
 
               {showTyped && (
-                <span style={{ color: C.purple }}>{TYPED_TEXT.slice(0, typedIndex)}</span>
+                <span style={{ color: C.purple, whiteSpace: "nowrap" }}>{TYPED_TEXT.slice(0, typedIndex)}</span>
               )}
 
               {caretMounted && (
