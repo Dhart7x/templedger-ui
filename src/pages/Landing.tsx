@@ -153,6 +153,49 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Hero word swap: "relationships." -> "intelligence."
+  const OLD_WORD = "relationships.";
+  const NEW_WORD = "intelligence.";
+  const [phase, setPhase] = useState<"hold" | "striking" | "deleting" | "typing" | "done">("hold");
+  const [oldLen, setOldLen] = useState(OLD_WORD.length);
+  const [newLen, setNewLen] = useState(0);
+
+  useEffect(() => {
+    if (reducedMotion) {
+      setPhase("done");
+      setOldLen(0);
+      setNewLen(NEW_WORD.length);
+      return;
+    }
+    const timers: number[] = [];
+    timers.push(window.setTimeout(() => setPhase("striking"), 1200));
+    timers.push(window.setTimeout(() => setPhase("deleting"), 1600));
+    return () => timers.forEach(clearTimeout);
+  }, [reducedMotion]);
+
+  useEffect(() => {
+    if (phase !== "deleting") return;
+    if (oldLen === 0) {
+      const t = window.setTimeout(() => setPhase("typing"), 220);
+      return () => clearTimeout(t);
+    }
+    const t = window.setTimeout(() => setOldLen((n) => n - 1), 45);
+    return () => clearTimeout(t);
+  }, [phase, oldLen]);
+
+  useEffect(() => {
+    if (phase !== "typing") return;
+    if (newLen === NEW_WORD.length) {
+      const t = window.setTimeout(() => setPhase("done"), 500);
+      return () => clearTimeout(t);
+    }
+    const t = window.setTimeout(() => setNewLen((n) => n + 1), 70);
+    return () => clearTimeout(t);
+  }, [phase, newLen]);
+
+  const showCaret = phase === "deleting" || phase === "typing";
+
+
   return (
     <section
       style={{
