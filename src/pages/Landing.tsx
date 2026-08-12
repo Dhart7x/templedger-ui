@@ -484,7 +484,7 @@ const Problem = () => (
           margin: 0,
         }}
       >
-        Third-party labor demands relentless coordination.
+        <span className="tl-equation-line">Multiple agencies</span><span className="tl-equation-line"><EquationPlus /> high volume</span><span className="tl-equation-line"><EquationEquals /> relentless coordination.</span>
       </h2>
 
       <div
