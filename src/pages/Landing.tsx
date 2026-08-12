@@ -335,7 +335,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
         }}
         style={{
           position: "absolute",
-          bottom: 40,
+          bottom: '15vh',
           left: "50%",
           transform: "translateX(-50%)",
           background: "transparent",
