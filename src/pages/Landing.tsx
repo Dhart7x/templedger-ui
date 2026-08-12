@@ -995,7 +995,7 @@ const Reveal = () => {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
+            gridTemplateColumns: "1.25fr 0.75fr 1.25fr",
             gap: "clamp(52px, 5.2vw, 78px)",
             alignItems: "start",
             width: "min(1140px, 100%)",
