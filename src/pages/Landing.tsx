@@ -83,29 +83,13 @@ const Nav = () => {
           justifyContent: "space-between",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div
-            aria-hidden
-            style={{
-              width: 28,
-              height: 28,
-              borderRadius: "50%",
-              background: C.purple,
-              flexShrink: 0,
-            }}
+        <a href="/" style={{ display: "flex", alignItems: "center", lineHeight: 0 }}>
+          <img
+            src={logoAsset.url}
+            alt="TempLedger"
+            style={{ height: 32, width: "auto", display: "block" }}
           />
-          <span
-            style={{
-              fontFamily: sans,
-              fontWeight: 600,
-              fontSize: 19,
-              letterSpacing: "-0.02em",
-              color: C.indigo,
-            }}
-          >
-            TempLedger
-          </span>
-        </div>
+        </a>
 
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <button className="tl-btn-secondary tl-nav-secondary" style={buttonBase}>
