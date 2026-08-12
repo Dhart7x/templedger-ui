@@ -603,8 +603,8 @@ const SOURCE_CLUSTERS: {
   {
     title: "Agency CRM",
     descriptor: "the workforce record",
-    items: ["Profiles", "Availability", "History", "Preferences", "Performance", "Credentials", "Compliance"],
-    rows: [4, 3],
+    items: ["Profiles", "Preferences", "Performance", "History", "Availability", "Credentials", "Compliance", "Skills"],
+    rows: [4, 4],
   },
   {
     title: "Time & Attendance",
@@ -614,7 +614,7 @@ const SOURCE_CLUSTERS: {
   {
     title: "Communications",
     descriptor: "structured / unstructured",
-    items: ["Schedule", "Requests", "Disputes", "Billing", "No-shows", "Replacements", "Queries", "Approvals"],
+    items: ["Schedule", "Replacements", "Disputes", "Billing", "No-shows", "Requests", "Queries", "Approvals"],
     rows: [4, 4],
   },
 ];
