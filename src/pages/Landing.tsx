@@ -617,16 +617,18 @@ const RightNode = () => (
     }}
   >
     <div style={{ ...nodeTitle, color: C.white }}>Machine learning</div>
-    <div style={{ ...nodeSub, color: "rgba(255,255,255,0.55)" }}>learns every shift</div>
+    <div style={{ ...nodeSub, color: "rgba(255,255,255,0.55)" }}>
+      learns every agency, person, shift, department, site
+    </div>
   </div>
 );
 
 const CenterPill = () => (
   <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
     {[
-      { inset: -18, color: "#C9C2EE", delay: "0s" },
-      { inset: -38, color: "#DCD7F3", delay: "0.8s" },
-      { inset: -58, color: C.violetShadow, delay: "1.6s" },
+      { inset: -20, color: "#9C8FE0", delay: "0s" },
+      { inset: -42, color: "#B3A8E8", delay: "0.8s" },
+      { inset: -64, color: "#C9C2EE", delay: "1.6s" },
     ].map((r) => (
       <div
         key={r.inset}
@@ -647,15 +649,15 @@ const CenterPill = () => (
         position: "relative",
         background: C.purple,
         borderRadius: 999,
-        padding: "18px 34px",
+        padding: "26px 48px",
         display: "flex",
         alignItems: "center",
-        gap: 12,
+        gap: 16,
         whiteSpace: "nowrap",
       }}
     >
-      <img src={symbolUrl} alt="" style={{ height: 26, width: "auto", display: "block", filter: "brightness(0) invert(1)" }} />
-      <span style={{ fontFamily: sans, fontWeight: 600, fontSize: 22, color: C.white, letterSpacing: "-0.01em" }}>
+      <img src={symbolUrl} alt="" style={{ height: 38, width: "auto", display: "block", filter: "brightness(0) invert(1)" }} />
+      <span style={{ fontFamily: sans, fontWeight: 600, fontSize: 32, color: C.white, letterSpacing: "-0.01em" }}>
         TempLedger
       </span>
     </div>
