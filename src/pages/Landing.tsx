@@ -561,7 +561,7 @@ const Problem = () => (
           + more
         </span>
       </div>
-
+    </div>
   </section>
 );
 
