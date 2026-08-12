@@ -27,6 +27,19 @@ const PageStyles = () => (
     .tl-btn-primary:hover { background: ${C.purpleHover}; }
     .tl-btn-secondary { background: ${C.white}; color: ${C.indigo}; border: 1px solid ${C.violetShadow}; transition: border-color 180ms ease, background 180ms ease; }
     .tl-btn-secondary:hover { border-color: ${C.lavender}; background: ${C.lightPurple}; }
+    @keyframes tl-caret-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .tl-caret {
+      display: inline-block;
+      width: 2px;
+      height: 0.85em;
+      background: ${C.purple};
+      margin-left: 3px;
+      vertical-align: baseline;
+      animation: tl-caret-blink 1s step-end infinite;
+    }
     @media (max-width: 720px) {
       .tl-h1 { font-size: 40px !important; line-height: 1.1 !important; }
       .tl-eyebrow { font-size: 10px !important; letter-spacing: 0.14em !important; }
