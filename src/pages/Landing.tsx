@@ -98,6 +98,11 @@ const PageStyles = () => (
       .tl-node-sm { width: min(100%, 300px) !important; }
     }
 
+    @media (max-width: 1000px) {
+      .tl-diagram-desktop { display: none !important; }
+      .tl-diagram-mobile { display: flex !important; }
+    }
+
 
   `}</style>
 );
@@ -603,8 +608,8 @@ const SOURCE_CLUSTERS: {
   {
     title: "Agency CRM",
     descriptor: "the workforce record",
-    items: ["Profiles", "Availability", "History", "Preferences", "Performance", "Credentials", "Compliance"],
-    rows: [4, 3],
+    items: ["Profiles", "Preferences", "Performance", "History", "Availability", "Credentials", "Compliance", "Skills"],
+    rows: [4, 4],
   },
   {
     title: "Time & Attendance",
@@ -614,17 +619,17 @@ const SOURCE_CLUSTERS: {
   {
     title: "Communications",
     descriptor: "structured / unstructured",
-    items: ["Schedule", "Requests", "Disputes", "Billing", "No-shows", "Replacements", "Queries", "Approvals"],
+    items: ["Schedule", "Replacements", "Disputes", "Billing", "No-shows", "Requests", "Queries", "Approvals"],
     rows: [4, 4],
   },
 ];
 
 const smallPill: React.CSSProperties = {
   fontFamily: body,
-  fontSize: 12,
+  fontSize: 11,
   fontWeight: 400,
   lineHeight: 1.2,
-  padding: "6px 12px",
+  padding: "5px 10px",
   borderRadius: 999,
   whiteSpace: "nowrap",
 };
@@ -929,7 +934,7 @@ const Reveal = () => {
     style={{
       position: "relative",
       background: "transparent",
-      padding: "80px 32px 96px",
+      padding: "80px 24px 96px",
       display: "flex",
       justifyContent: "center",
       overflow: "hidden",
@@ -955,7 +960,7 @@ const Reveal = () => {
         position: "relative",
         zIndex: 1,
         width: "100%",
-        maxWidth: 1024,
+        maxWidth: 1200,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -995,10 +1000,10 @@ const Reveal = () => {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 28,
+            gridTemplateColumns: "1.25fr 0.75fr 1.25fr",
+            gap: "clamp(60px, 5.2vw, 78px)",
             alignItems: "start",
-            width: 960,
+            width: "min(1140px, 100%)",
             maxWidth: "100%",
           }}
         >
@@ -1013,7 +1018,7 @@ const Reveal = () => {
             alignItems: "center",
             justifyContent: "center",
             gap: 0,
-            width: 960,
+            width: "min(1140px, 100%)",
             maxWidth: "100%",
             marginTop: 76,
           }}
