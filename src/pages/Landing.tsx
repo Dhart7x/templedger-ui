@@ -148,9 +148,9 @@ const Hero = () => (
         width: "65vh",
         height: "65vh",
         borderRadius: "50%",
-        background: C.lavender,
-        opacity: 0.14,
-        filter: "blur(0.5px)",
+        background: `radial-gradient(circle, ${C.lavender} 0%, ${C.lavender} 72%, ${C.lavender}00 100%)`,
+        opacity: 0.16,
+        filter: "blur(6px)",
         pointerEvents: "none",
       }}
     />
