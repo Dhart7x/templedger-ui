@@ -594,11 +594,17 @@ const capPillBase: React.CSSProperties = {
   whiteSpace: "nowrap",
 };
 
-const SOURCE_CLUSTERS = [
+const SOURCE_CLUSTERS: {
+  title: string;
+  descriptor: string;
+  items: string[];
+  rows?: number[];
+}[] = [
   {
     title: "Agency CRM",
     descriptor: "the workforce record",
     items: ["Profiles", "Availability", "History", "Preferences", "Performance", "Credentials", "Compliance"],
+    rows: [4, 3],
   },
   {
     title: "Time & Attendance",
@@ -609,6 +615,7 @@ const SOURCE_CLUSTERS = [
     title: "Communications",
     descriptor: "structured / unstructured",
     items: ["Schedule", "Requests", "Disputes", "Billing", "No-shows", "Replacements", "Queries", "Approvals"],
+    rows: [4, 4],
   },
 ];
 
