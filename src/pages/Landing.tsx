@@ -598,20 +598,17 @@ const SOURCE_CLUSTERS = [
   {
     title: "Agency CRM",
     descriptor: "the workforce record",
-    items: ["Names", "Skills", "Certifications", "Shift preferences", "Pay rates", "Performance", "Contracts"],
-    more: true,
+    items: ["Profiles", "Availability", "History", "Preferences", "Performance", "Credentials", "Compliance"],
   },
   {
     title: "Time & Attendance",
     descriptor: "who, where, when",
     items: ["Who", "Where", "When"],
-    more: false,
   },
   {
-    title: "Emails & phone calls",
-    descriptor: "the unrecorded layer",
-    items: ["Staffing requests", "Replacements", "No-shows", "Approvals", "Pay queries", "Exceptions"],
-    more: true,
+    title: "Communications",
+    descriptor: "structured / unstructured",
+    items: ["Schedule", "Requests", "Disputes", "Billing", "No-shows", "Replacements", "Queries", "Approvals"],
   },
 ];
 
