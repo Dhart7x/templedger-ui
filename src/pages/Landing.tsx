@@ -468,6 +468,7 @@ const pillBase: React.CSSProperties = {
 
 const Problem = () => (
   <section
+    id="problem"
     style={{
       position: "relative",
       background: "transparent",
