@@ -322,15 +322,15 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
             color: C.indigo,
             opacity: 0.7,
             maxWidth: 620,
-            margin: "26px 0 0",
+            margin: "18px 0 0",
           }}
         >
           Cut costs and boost productivity with real-time and predictive insights.
-        </p>
+        </div>
 
         <div
           className="tl-hero-actions"
-          style={{ display: "flex", gap: 12, marginTop: 40, justifyContent: "center" }}
+          style={{ display: "flex", gap: 12, marginTop: 26, justifyContent: "center" }}
         >
           <button
             className="tl-btn-primary"
