@@ -699,17 +699,16 @@ const nodeStatus: React.CSSProperties = {
   marginTop: 4,
 };
 
-const DataNode = React.forwardRef<HTMLDivElement>((_props, ref) => (
+const DataNode = ({ innerRef }: { innerRef?: React.Ref<HTMLDivElement> }) => (
   <div
-    ref={ref}
+    ref={innerRef}
     className="tl-node-sm"
     style={{ ...nodeBase, background: C.white, border: `1px solid ${C.violetShadow}` }}
   >
     <div style={{ ...nodeTitle, color: C.indigo }}>Data</div>
     <div style={{ ...nodeStatus, color: C.purple }}>Connected.</div>
   </div>
-));
-DataNode.displayName = "DataNode";
+);
 
 const MLNode = () => (
   <div className="tl-node-sm" style={{ ...nodeBase, background: C.indigo }}>
@@ -968,7 +967,7 @@ const Reveal = () => {
           }}
         >
           <div key={ingest} className="tl-ingest">
-            <DataNode ref={dataRef} />
+            <DataNode innerRef={dataRef} />
           </div>
           <Connector />
           <CenterPill />
