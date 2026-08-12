@@ -51,6 +51,13 @@ const labelStyle: React.CSSProperties = {
   marginBottom: 6,
 };
 
+const spendOptions = (cur: string) => [
+  `Under ${cur}5M`,
+  `${cur}5M to ${cur}10M`,
+  `${cur}10M to ${cur}25M`,
+  `${cur}25M+`,
+];
+
 const Req = () => (
   <span style={{ color: "#B4595C", marginLeft: 3, fontSize: 10 }} aria-hidden="true">*</span>
 );
@@ -439,15 +446,14 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                       {...inputProps("spend")}
                     >
                       <option value="">Select</option>
-                      <option>Under $5M</option>
-                      <option>$5M to $10M</option>
-                      <option>$10M to $25M</option>
-                      <option>$25M+</option>
+                      {spendOptions(cur).map((o) => (
+                        <option key={o}>{o}</option>
+                      ))}
                     </select>
                   </div>
 
                   <div style={{ marginBottom: 24 }}>
-                    <label style={labelStyle} htmlFor="tl-workforce">Agency workforce size<Req /></label>
+                    <label style={labelStyle} htmlFor="tl-workforce">Agency Staff Headcount<Req /></label>
                     <select
                       id="tl-workforce"
                       className="tl-select"
