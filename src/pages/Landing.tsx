@@ -42,6 +42,7 @@ const ResponsiveStyles = () => (
 
 const Nav = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -49,6 +50,8 @@ const Nav = () => {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const solid = scrolled || menuOpen;
 
   return (
     <header
@@ -58,8 +61,8 @@ const Nav = () => {
         left: 0,
         right: 0,
         zIndex: 50,
-        background: scrolled ? C.beige : "transparent",
-        borderBottom: `1px solid ${scrolled ? C.violetShadow : "transparent"}`,
+        background: solid ? C.beige : "transparent",
+        borderBottom: `1px solid ${solid ? C.violetShadow : "transparent"}`,
         transition: "background 220ms ease, border-color 220ms ease",
       }}
     >
@@ -102,11 +105,11 @@ const Nav = () => {
           </span>
         </a>
 
-        <nav style={{ display: "flex", gap: 32 }}>
-          {["Platform", "Intelligence", "How it works"].map((item) => (
+        <nav className="tl-nav-links" style={{ display: "flex", gap: 32 }}>
+          {NAV_LINKS.map((item) => (
             <a
-              key={item}
-              href="#"
+              key={item.label}
+              href={item.href}
               style={{
                 fontFamily: "'Inter', system-ui, sans-serif",
                 fontSize: 14,
@@ -117,19 +120,76 @@ const Nav = () => {
               onMouseEnter={(e) => (e.currentTarget.style.color = C.indigo)}
               onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(20, 8, 46, 0.7)")}
             >
-              {item}
+              {item.label}
             </a>
           ))}
         </nav>
 
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <SecondaryButton>Join Waitlist</SecondaryButton>
+          <button
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            className="tl-menu-button"
+            onClick={() => setMenuOpen((v) => !v)}
+            style={{
+              display: "none",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 38,
+              height: 38,
+              borderRadius: 8,
+              border: `1px solid ${C.violetShadow}`,
+              background: C.white,
+              cursor: "pointer",
+            }}
+          >
+            <span style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+              {[0, 1, 2].map((i) => (
+                <span key={i} style={{ width: 15, height: 1.5, background: C.indigo }} />
+              ))}
+            </span>
+          </button>
+          <span className="tl-nav-secondary">
+            <SecondaryButton>Join Waitlist</SecondaryButton>
+          </span>
           <PrimaryButton>Book Demo</PrimaryButton>
         </div>
       </div>
+
+      {menuOpen && (
+        <div
+          style={{
+            borderTop: `1px solid ${C.violetShadow}`,
+            background: C.beige,
+            padding: "18px 20px 24px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+          }}
+        >
+          {NAV_LINKS.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              onClick={() => setMenuOpen(false)}
+              style={{
+                fontFamily: "'Inter', system-ui, sans-serif",
+                fontSize: 15,
+                color: C.indigo,
+                textDecoration: "none",
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
+          <SecondaryButton>Join Waitlist</SecondaryButton>
+        </div>
+      )}
     </header>
   );
 };
+
 
 const DashboardFrame = () => (
   <div
