@@ -676,7 +676,18 @@ const SourceCluster = ({
         </span>
       ))}
       {more && (
-        <span style={{ ...smallPill, background: C.purple, border: `1px solid ${C.purple}`, color: C.white }}>
+        <span
+          key={`more-${title}-${cycleKey ?? 0}`}
+          ref={registerPill ? (el) => registerPill(`+more:${title}`, el) : undefined}
+          style={{
+            ...smallPill,
+            background: C.purple,
+            border: `1px solid ${C.purple}`,
+            color: C.white,
+            visibility: hidden?.has(`+more:${title}`) ? "hidden" : "visible",
+            animation: hidden?.has(`+more:${title}`) ? undefined : "tl-cluster-in 500ms ease-out both",
+          }}
+        >
           + more
         </span>
       )}
@@ -823,7 +834,7 @@ const DashedDownArrow = ({ height = 56 }: { height?: number }) => (
 const FALL_DURATION = 900;
 const FALL_INTERVAL = 1350;
 
-type Flyer = { id: number; label: string; x: number; y: number; dx: number; dy: number };
+type Flyer = { id: number; label: string; text: string; isMore: boolean; x: number; y: number; dx: number; dy: number };
 
 const useFallingData = () => {
   const stageRef = useRef<HTMLDivElement | null>(null);
@@ -840,7 +851,7 @@ const useFallingData = () => {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const labels = SOURCE_CLUSTERS.flatMap((c) => c.items);
+    const labels = SOURCE_CLUSTERS.flatMap((c) => [...c.items, ...(c.more ? [`+more:${c.title}`] : [])]);
     let i = 0;
     let idCounter = 0;
     const timers: number[] = [];
@@ -886,7 +897,8 @@ const useFallingData = () => {
       const dx = t.left + t.width / 2 - (p.left + p.width / 2);
       const dy = t.top + t.height / 2 - (p.top + p.height / 2);
       const id = ++idCounter;
-      setFlyer({ id, label, x, y, dx, dy });
+      const isMore = label.startsWith("+more:");
+      setFlyer({ id, label, text: isMore ? "+ more" : label, isMore, x, y, dx, dy });
       setHidden((h) => new Set(h).add(label));
       later(() => {
         setFlyer((f) => (f && f.id === id ? null : f));
@@ -1030,14 +1042,14 @@ const Reveal = () => {
               style={{
                 display: "inline-block",
                 ...smallPill,
-                background: C.lightPurple,
-                border: `1px solid ${C.violetShadow}`,
-                color: C.indigo,
+                background: flyer.isMore ? C.purple : C.lightPurple,
+                border: `1px solid ${flyer.isMore ? C.purple : C.violetShadow}`,
+                color: flyer.isMore ? C.white : C.indigo,
                 ["--tl-dy" as string]: `${flyer.dy}px`,
                 ["--tl-dur" as string]: `${FALL_DURATION}ms`,
               }}
             >
-              {flyer.label}
+              {flyer.text}
             </span>
           </div>
         )}
