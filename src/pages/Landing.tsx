@@ -105,7 +105,7 @@ const Nav = ({ onBookDemo }: { onBookDemo: () => void }) => {
   );
 };
 
-const Hero = () => (
+const Hero = ({ onBookDemo }: { onBookDemo: () => void }) => (
   <section
     style={{
       position: "relative",
@@ -115,7 +115,7 @@ const Hero = () => (
       justifyContent: "center",
       background: C.beige,
       overflow: "hidden",
-      padding: "120px 32px 80px",
+      padding: "120px 32px 120px",
     }}
   >
     {/* Soft radial light wash */}
@@ -123,7 +123,7 @@ const Hero = () => (
       aria-hidden
       style={{
         position: "absolute",
-        top: "48%",
+        top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
         width: "min(1600px, 140vw)",
@@ -146,20 +146,6 @@ const Hero = () => (
         textAlign: "center",
       }}
     >
-      <span
-        className="tl-eyebrow"
-        style={{
-          fontFamily: mono,
-          fontSize: 11,
-          fontWeight: 500,
-          textTransform: "uppercase",
-          letterSpacing: "0.1em",
-          color: C.purple,
-        }}
-      >
-        The financial system of record for agency labor
-      </span>
-
       <h1
         className="tl-h1"
         style={{
@@ -170,7 +156,7 @@ const Hero = () => (
           letterSpacing: "-0.03em",
           color: C.indigo,
           maxWidth: 940,
-          margin: "28px 0 0",
+          margin: 0,
         }}
       >
         Manage your contingent workforce on compounding data.
@@ -186,7 +172,7 @@ const Hero = () => (
           color: C.indigo,
           opacity: 0.7,
           maxWidth: 620,
-          margin: "24px 0 0",
+          margin: "26px 0 0",
         }}
       >
         Cut costs and boost productivity with real-time and predictive insights.
@@ -196,7 +182,11 @@ const Hero = () => (
         className="tl-hero-actions"
         style={{ display: "flex", gap: 12, marginTop: 40, justifyContent: "center" }}
       >
-        <button className="tl-btn-primary" style={{ ...buttonBase, padding: "14px 26px", fontSize: 16 }}>
+        <button
+          className="tl-btn-primary"
+          style={{ ...buttonBase, padding: "14px 26px", fontSize: 16 }}
+          onClick={onBookDemo}
+        >
           Book Demo
         </button>
         <button className="tl-btn-secondary" style={{ ...buttonBase, padding: "14px 26px", fontSize: 16 }}>
@@ -207,12 +197,18 @@ const Hero = () => (
   </section>
 );
 
-const Landing = () => (
-  <main style={{ background: C.beige, minHeight: "100vh" }}>
-    <PageStyles />
-    <Nav />
-    <Hero />
-  </main>
-);
+const Landing = () => {
+  const [demoOpen, setDemoOpen] = useState(false);
+  const openDemo = () => setDemoOpen(true);
+
+  return (
+    <main style={{ background: C.beige, minHeight: "100vh" }}>
+      <PageStyles />
+      <Nav onBookDemo={openDemo} />
+      <Hero onBookDemo={openDemo} />
+      <BookDemoModal open={demoOpen} onClose={() => setDemoOpen(false)} />
+    </main>
+  );
+};
 
 export default Landing;
