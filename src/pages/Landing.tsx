@@ -49,7 +49,7 @@ const buttonBase: React.CSSProperties = {
   whiteSpace: "nowrap",
 };
 
-const Nav = () => {
+const Nav = ({ onBookDemo }: { onBookDemo: () => void }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
