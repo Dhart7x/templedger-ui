@@ -94,6 +94,8 @@ export interface LeadModalProps {
   successTitle: string;
   successBody: string;
   successExtra?: React.ReactNode;
+  /** When true, the success state shows only successExtra — no symbol, headline, body or close button. */
+  minimalSuccess?: boolean;
   /** When set, submissions are recorded in the CRM with this source label. */
   attioSource?: string;
   /** Which CRM list the submission is added to. */
@@ -136,8 +138,17 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
 
   if (!open) return null;
 
+  const cur = form.region === "UK" ? "£" : "$";
+
   const set = (k: keyof FormState, v: string) => {
-    setForm((f) => ({ ...f, [k]: v }));
+    setForm((f) => {
+      const next = { ...f, [k]: v } as FormState;
+      if (k === "region" && f.spend) {
+        const nextCur = v === "UK" ? "£" : "$";
+        next.spend = f.spend.replace(/[$£]/g, nextCur);
+      }
+      return next;
+    });
     setErrors((e) => {
       if (!e[k]) return e;
       const next = { ...e };
