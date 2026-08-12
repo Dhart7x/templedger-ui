@@ -399,6 +399,42 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           </button>
         </div>
       </div>
+
+      <button
+        aria-label="Scroll to problem section"
+        onClick={() => {
+          const el = document.getElementById("problem");
+          if (el) el.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
+        }}
+        style={{
+          position: "absolute",
+          bottom: 40,
+          left: "50%",
+          transform: "translateX(-50%)",
+          background: "transparent",
+          border: "none",
+          padding: 0,
+          cursor: "pointer",
+          opacity: pastHero ? 0 : 1,
+          transition: "opacity 300ms ease",
+          pointerEvents: pastHero ? "none" : "auto",
+        }}
+      >
+        <span className="tl-scroll-cue" style={{ color: C.indigo, display: "block", lineHeight: 0 }}>
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </span>
+      </button>
     </section>
   );
 };
