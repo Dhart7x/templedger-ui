@@ -53,7 +53,7 @@ const PageStyles = () => (
       .tl-scroll-cue { animation: none; opacity: 0.3; }
     }
     @media (max-width: 720px) {
-      .tl-h1 { font-size: 40px !important; line-height: 1.1 !important; }
+      .tl-h1 { font-size: 32px !important; line-height: 1.12 !important; }
       .tl-br-desktop { display: none; }
       .tl-problem-h2 { font-size: 30px !important; }
       .tl-sub { font-size: 16px !important; }
@@ -153,6 +153,49 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Hero word swap: "relationships." -> "intelligence."
+  const OLD_WORD = "relationships.";
+  const NEW_WORD = "intelligence.";
+  const [phase, setPhase] = useState<"hold" | "striking" | "deleting" | "typing" | "done">("hold");
+  const [oldLen, setOldLen] = useState(OLD_WORD.length);
+  const [newLen, setNewLen] = useState(0);
+
+  useEffect(() => {
+    if (reducedMotion) {
+      setPhase("done");
+      setOldLen(0);
+      setNewLen(NEW_WORD.length);
+      return;
+    }
+    const timers: number[] = [];
+    timers.push(window.setTimeout(() => setPhase("striking"), 1200));
+    timers.push(window.setTimeout(() => setPhase("deleting"), 1600));
+    return () => timers.forEach(clearTimeout);
+  }, [reducedMotion]);
+
+  useEffect(() => {
+    if (phase !== "deleting") return;
+    if (oldLen === 0) {
+      const t = window.setTimeout(() => setPhase("typing"), 220);
+      return () => clearTimeout(t);
+    }
+    const t = window.setTimeout(() => setOldLen((n) => n - 1), 45);
+    return () => clearTimeout(t);
+  }, [phase, oldLen]);
+
+  useEffect(() => {
+    if (phase !== "typing") return;
+    if (newLen === NEW_WORD.length) {
+      const t = window.setTimeout(() => setPhase("done"), 500);
+      return () => clearTimeout(t);
+    }
+    const t = window.setTimeout(() => setNewLen((n) => n + 1), 70);
+    return () => clearTimeout(t);
+  }, [phase, newLen]);
+
+  const showCaret = phase === "deleting" || phase === "typing";
+
+
   return (
     <section
       style={{
@@ -194,62 +237,56 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           textAlign: "center",
         }}
       >
-        {/* Fixed-height slot: sized by a hidden clone of the headline so
-            the subheader and buttons never move. */}
-        <div
+        <h1
+          className="tl-h1"
           style={{
-            position: "relative",
+            fontFamily: sans,
+            fontWeight: 600,
+            fontSize: "clamp(34px, 4.9vw, 64px)",
+            lineHeight: 1.08,
+            letterSpacing: "-0.03em",
+            color: C.indigo,
             width: "100%",
-            display: "grid",
-            justifyItems: "center",
-            alignItems: "center",
+            maxWidth: 1040,
+            margin: 0,
           }}
         >
-          <h1
-            aria-hidden
-            className="tl-h1"
-            style={{
-              gridArea: "1 / 1",
-              fontFamily: sans,
-              fontWeight: 600,
-              fontSize: "clamp(40px, 5.6vw, 72px)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.03em",
-              width: "100%",
-              maxWidth: 940,
-              margin: 0,
-              visibility: "hidden",
-              pointerEvents: "none",
-            }}
-          >
-            Manage your contingent
-            <br className="tl-br-desktop" />{" "}
-            workforce on&nbsp;
-            <br className="tl-br-desktop" />
-            intelligence.
-          </h1>
-          <h1
-            className="tl-h1"
-            style={{
-              gridArea: "1 / 1",
-              width: "100%",
-              fontFamily: sans,
-              fontWeight: 600,
-              fontSize: "clamp(40px, 5.6vw, 72px)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.03em",
-              color: C.indigo,
-              maxWidth: 940,
-              margin: 0,
-            }}
-          >
-            Manage your contingent
-            <br className="tl-br-desktop" />{" "}
-            workforce on&nbsp;
-            <br className="tl-br-desktop" />
-            <span style={{ color: C.purple }}>intelligence.</span>
-          </h1>
-        </div>
+          <span style={{ whiteSpace: "nowrap" }}>Run your contingent workforce</span>
+          <br className="tl-br-desktop" />{" "}
+          <span style={{ whiteSpace: "nowrap" }}>
+            on{" "}
+            <span style={{ display: "inline-grid", justifyItems: "start", verticalAlign: "bottom" }}>
+              <span aria-hidden style={{ gridArea: "1 / 1", visibility: "hidden" }}>
+                {OLD_WORD}
+              </span>
+              <span style={{ gridArea: "1 / 1", position: "relative", whiteSpace: "pre" }}>
+                {phase === "typing" || phase === "done" ? (
+                  <span style={{ color: C.purple }}>{NEW_WORD.slice(0, newLen)}</span>
+                ) : (
+                  <span style={{ position: "relative" }}>
+                    {OLD_WORD.slice(0, oldLen)}
+                    <span
+                      aria-hidden
+                      style={{
+                        position: "absolute",
+                        left: 0,
+                        top: "52%",
+                        height: 3,
+                        background: C.indigo,
+                        opacity: 0.7,
+                        width: phase === "hold" ? "0%" : "100%",
+                        transition: "width 400ms linear",
+                        pointerEvents: "none",
+                      }}
+                    />
+                  </span>
+                )}
+                {showCaret && <span className="tl-caret" />}
+              </span>
+            </span>
+          </span>
+        </h1>
+
 
         <p
           className="tl-sub"
