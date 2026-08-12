@@ -42,7 +42,7 @@ const PageStyles = () => (
     }
     @media (max-width: 720px) {
       .tl-h1 { font-size: 40px !important; line-height: 1.1 !important; }
-      .tl-eyebrow { font-size: 10px !important; letter-spacing: 0.14em !important; }
+      .tl-problem-h2 { font-size: 30px !important; }
       .tl-sub { font-size: 16px !important; }
       .tl-hero-actions { flex-direction: column !important; width: 100%; }
       .tl-hero-actions > button { width: 100%; }
@@ -383,6 +383,125 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
   );
 };
 
+const PROBLEM_PILLS = [
+  "Lateness",
+  "No-shows",
+  "Replacements",
+  "Overtime",
+  "Attrition",
+  "Approvals",
+  "Onboarding",
+  "Training",
+  "Disputes",
+  "Compliance",
+  "Billing",
+  "Reconciling",
+  "Chasing",
+  "Bookings",
+];
+
+const pillBase: React.CSSProperties = {
+  fontFamily: body,
+  fontSize: 15,
+  fontWeight: 400,
+  lineHeight: 1.2,
+  padding: "9px 18px",
+  borderRadius: 999,
+  whiteSpace: "nowrap",
+};
+
+const Problem = () => (
+  <section
+    style={{
+      position: "relative",
+      background: "transparent",
+      padding: "40px 32px 160px",
+      display: "flex",
+      justifyContent: "center",
+    }}
+  >
+    {/* Continuation of the hero wash — fades to fully transparent, so no seam */}
+    <div
+      aria-hidden
+      style={{
+        position: "absolute",
+        top: "-30%",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "min(1500px, 135vw)",
+        height: "130%",
+        background: `radial-gradient(ellipse at center, ${C.lightPurple}40 0%, ${C.violetShadow}22 45%, rgba(250,250,248,0) 78%)`,
+        filter: "blur(70px)",
+        pointerEvents: "none",
+      }}
+    />
+
+    <div
+      style={{
+        position: "relative",
+        zIndex: 1,
+        width: "100%",
+        maxWidth: 900,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+      }}
+    >
+      <h2
+        className="tl-problem-h2"
+        style={{
+          fontFamily: sans,
+          fontWeight: 600,
+          fontSize: "clamp(30px, 4.1vw, 52px)",
+          lineHeight: 1.08,
+          letterSpacing: "-0.03em",
+          color: C.indigo,
+          maxWidth: 760,
+          margin: 0,
+        }}
+      >
+        Third-party labor demands relentless coordination.
+      </h2>
+
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: 10,
+          maxWidth: 620,
+          margin: "40px 0 0",
+        }}
+      >
+        {PROBLEM_PILLS.map((label) => (
+          <span
+            key={label}
+            style={{
+              ...pillBase,
+              background: C.lightPurple,
+              border: `1px solid ${C.violetShadow}`,
+              color: C.indigo,
+            }}
+          >
+            {label}
+          </span>
+        ))}
+        <span
+          style={{
+            ...pillBase,
+            background: C.purple,
+            border: `1px solid ${C.purple}`,
+            color: C.white,
+          }}
+        >
+          + more
+        </span>
+      </div>
+    </div>
+  </section>
+);
+
 const Landing = () => {
   const [demoOpen, setDemoOpen] = useState(false);
   const [waitlistOpen, setWaitlistOpen] = useState(false);
@@ -394,10 +513,12 @@ const Landing = () => {
       <PageStyles />
       <Nav onBookDemo={openDemo} onJoinWaitlist={openWaitlist} />
       <Hero onBookDemo={openDemo} onJoinWaitlist={openWaitlist} />
+      <Problem />
       <BookDemoModal open={demoOpen} onClose={() => setDemoOpen(false)} />
       <JoinWaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
     </main>
   );
 };
+
 
 export default Landing;
