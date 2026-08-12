@@ -54,6 +54,7 @@ const PageStyles = () => (
     }
     @media (max-width: 720px) {
       .tl-h1 { font-size: 40px !important; line-height: 1.1 !important; }
+      .tl-br-desktop { display: none; }
       .tl-problem-h2 { font-size: 30px !important; }
       .tl-sub { font-size: 16px !important; }
       .tl-hero-actions { flex-direction: column !important; width: 100%; }
@@ -132,19 +133,10 @@ const Nav = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWai
   );
 };
 
-const OLD_TEXT = "relationships.";
-const TYPED_TEXT = "compounding data.";
-
-const prefersReducedMotion = () =>
-  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-type Phase = "initial" | "striking" | "struck" | "dropping" | "typing" | "done";
-
 const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWaitlist: () => void }) => {
-  const [reducedMotion, setReducedMotion] = useState(prefersReducedMotion);
-  const [phase, setPhase] = useState<Phase>(prefersReducedMotion() ? "done" : "initial");
-  const [typedIndex, setTypedIndex] = useState(prefersReducedMotion() ? TYPED_TEXT.length : 0);
-  const [caretVisible, setCaretVisible] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(() =>
+    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
   const [pastHero, setPastHero] = useState(false);
 
   useEffect(() => {
@@ -160,50 +152,6 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    if (reducedMotion) {
-      setPhase("done");
-      setTypedIndex(TYPED_TEXT.length);
-      setCaretVisible(false);
-      return;
-    }
-
-    const timers: number[] = [];
-
-    // 2000ms hold → strike draws (400ms) → hold (400ms) → drop (350ms) → type
-    timers.push(window.setTimeout(() => setPhase("striking"), 2000));
-    timers.push(window.setTimeout(() => setPhase("struck"), 2400));
-    timers.push(window.setTimeout(() => setPhase("dropping"), 2800));
-    timers.push(
-      window.setTimeout(() => {
-        setPhase("typing");
-        setCaretVisible(true);
-        let index = 0;
-        const typeNext = () => {
-          if (index < TYPED_TEXT.length) {
-            setTypedIndex(index + 1);
-            index++;
-            timers.push(window.setTimeout(typeNext, 50 + Math.random() * 45));
-          } else {
-            setPhase("done");
-            timers.push(window.setTimeout(() => setCaretVisible(false), 500));
-          }
-        };
-        typeNext();
-      }, 3150)
-    );
-
-    return () => timers.forEach(window.clearTimeout);
-  }, [reducedMotion]);
-
-  const struck = phase === "striking" || phase === "struck" || phase === "dropping";
-  const dropped = phase === "dropping" || phase === "typing" || phase === "done";
-  const wordMounted = phase !== "typing" && phase !== "done";
-  const caretMounted = !reducedMotion && (phase === "typing" || (phase === "done" && caretVisible));
-  const caretOpacity = caretVisible ? 1 : 0;
-
-
 
   return (
     <section
@@ -246,8 +194,8 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           textAlign: "center",
         }}
       >
-        {/* Fixed-height slot: sized by a hidden clone of the final headline so
-            the subheader and buttons never move as the line count changes. */}
+        {/* Fixed-height slot: sized by a hidden clone of the headline so
+            the subheader and buttons never move. */}
         <div
           style={{
             position: "relative",
@@ -274,98 +222,34 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
               pointerEvents: "none",
             }}
           >
-            Manage your contingent workforce on {TYPED_TEXT}
+            Manage your contingent
+            <br className="tl-br-desktop" />{" "}
+            workforce on&nbsp;
+            <br className="tl-br-desktop" />
+            intelligence.
           </h1>
-        <h1
-          className="tl-h1"
-          style={{
-            gridArea: "1 / 1",
-            width: "100%",
-            fontFamily: sans,
-            fontWeight: 600,
-            fontSize: "clamp(40px, 5.6vw, 72px)",
-            lineHeight: 1.05,
-            letterSpacing: "-0.03em",
-            color: C.indigo,
-            maxWidth: 940,
-            margin: 0,
-          }}
-        >
-
-
-          Manage your contingent workforce on{" "}
-          <span style={{ display: "inline-grid", position: "relative", whiteSpace: "nowrap" }}>
-            {/* Ghost text sizes the slot to whichever string is on screen.
-                The swap happens only while the slot is empty (start of typing). */}
-            <span style={{ visibility: "hidden", gridArea: "1 / 1" }}>
-              {phase === "typing" || phase === "done" ? TYPED_TEXT : OLD_TEXT}
-            </span>
-
-
-            {/* Struck word layer — drops within its own space */}
-            {wordMounted && (
-              <span
-                aria-hidden
-                style={{
-                  gridArea: "1 / 1",
-                  textAlign: "left",
-                  color: C.indigo,
-                  opacity: dropped ? 0 : phase === "struck" ? 0.35 : phase === "striking" ? 0.6 : 1,
-                  transform: dropped ? "translateY(24px)" : "translateY(0)",
-                  transition: reducedMotion
-                    ? "none"
-                    : dropped
-                      ? "opacity 350ms ease-in, transform 350ms ease-in"
-                      : "opacity 400ms ease-out",
-                  pointerEvents: "none",
-                }}
-              >
-                <span style={{ position: "relative", display: "inline-block" }}>
-                  {OLD_TEXT}
-                  <span
-                    style={{
-                      position: "absolute",
-                      left: 0,
-                      top: "48%",
-                      height: 3,
-                      background: C.indigo,
-                      opacity: struck || dropped ? 1 : 0,
-                      width: struck || dropped ? "100%" : "0%",
-                      transform: "translateY(-50%)",
-                      transition: reducedMotion ? "none" : "width 400ms ease-out, opacity 200ms ease-out",
-                    }}
-                  />
-                </span>
-              </span>
-            )}
-
-            {/* Typed layer */}
-            <span style={{ gridArea: "1 / 1", textAlign: "left" }}>
-              <span style={{ color: C.purple, position: "relative" }}>
-                {TYPED_TEXT.slice(0, typedIndex)}
-
-                {caretMounted && (
-                  <span
-                    className="tl-caret"
-                    style={{
-                      position: "absolute",
-                      left: "100%",
-                      bottom: 0,
-                      opacity: caretOpacity,
-                      transition: reducedMotion ? "none" : "opacity 500ms ease-out",
-                      animation: phase === "done" ? "none" : undefined,
-                    }}
-                  />
-                )}
-              </span>
-            </span>
-
-          </span>
-
-
-        </h1>
+          <h1
+            className="tl-h1"
+            style={{
+              gridArea: "1 / 1",
+              width: "100%",
+              fontFamily: sans,
+              fontWeight: 600,
+              fontSize: "clamp(40px, 5.6vw, 72px)",
+              lineHeight: 1.05,
+              letterSpacing: "-0.03em",
+              color: C.indigo,
+              maxWidth: 940,
+              margin: 0,
+            }}
+          >
+            Manage your contingent
+            <br className="tl-br-desktop" />{" "}
+            workforce on&nbsp;
+            <br className="tl-br-desktop" />
+            <span style={{ color: C.purple }}>intelligence.</span>
+          </h1>
         </div>
-
 
         <p
           className="tl-sub"
