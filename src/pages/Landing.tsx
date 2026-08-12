@@ -263,7 +263,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
           style={{
             fontFamily: sans,
             fontWeight: 600,
-            fontSize: "clamp(34px, 4.9vw, 64px)",
+            fontSize: "clamp(38px, 5.5vw, 72px)",
             lineHeight: 1.08,
             letterSpacing: "-0.03em",
             color: C.indigo,
