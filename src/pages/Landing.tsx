@@ -76,9 +76,11 @@ const PageStyles = () => (
       100% { transform: scale(1); }
     }
     .tl-ingest { animation: tl-ingest 150ms ease-out; }
+    @keyframes tl-cluster-in { from { opacity: 0; } to { opacity: 1; } }
     @media (prefers-reduced-motion: reduce) {
       .tl-scroll-cue { animation: none; opacity: 0.45; }
       .tl-dash-flow, .tl-ring, .tl-fly-x, .tl-fly-y, .tl-ingest { animation: none !important; }
+      [style*="tl-cluster-in"] { animation: none !important; }
     }
 
     @media (max-width: 720px) {
@@ -339,7 +341,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
             color: C.indigo,
             opacity: 0.7,
             maxWidth: 620,
-            margin: "28px 0 0",
+            margin: "24px 0 0",
           }}
         >
           Cut costs and boost productivity with real-time and predictive insights.
@@ -584,10 +586,10 @@ const CAPABILITY_PILLS = [
 
 const capPillBase: React.CSSProperties = {
   fontFamily: body,
-  fontSize: 15,
+  fontSize: 13.5,
   fontWeight: 400,
   lineHeight: 1.2,
-  padding: "10px 20px",
+  padding: "8px 17px",
   borderRadius: 999,
   whiteSpace: "nowrap",
 };
@@ -602,7 +604,7 @@ const SOURCE_CLUSTERS = [
   {
     title: "Time & Attendance",
     descriptor: "who, where, when",
-    items: ["Clock events", "Locations", "Hours", "Breaks", "Overtime"],
+    items: ["Who", "Where", "When"],
     more: false,
   },
   {
@@ -629,12 +631,16 @@ const SourceCluster = ({
   items,
   more,
   registerPill,
+  hidden,
+  cycleKey,
 }: {
   title: string;
   descriptor: string;
   items: string[];
   more: boolean;
   registerPill?: (label: string, el: HTMLElement | null) => void;
+  hidden?: Set<string>;
+  cycleKey?: number;
 }) => (
   <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
     <div style={{ fontFamily: body, fontSize: 15, fontWeight: 500, lineHeight: 1.2, color: C.indigo }}>
@@ -655,9 +661,16 @@ const SourceCluster = ({
     <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 7, marginTop: 12 }}>
       {items.map((it) => (
         <span
-          key={it}
+          key={`${it}-${cycleKey ?? 0}`}
           ref={registerPill ? (el) => registerPill(it, el) : undefined}
-          style={{ ...smallPill, background: C.lightPurple, border: `1px solid ${C.violetShadow}`, color: C.indigo }}
+          style={{
+            ...smallPill,
+            background: C.lightPurple,
+            border: `1px solid ${C.violetShadow}`,
+            color: C.indigo,
+            visibility: hidden?.has(it) ? "hidden" : "visible",
+            animation: hidden?.has(it) ? undefined : "tl-cluster-in 500ms ease-out both",
+          }}
         >
           {it}
         </span>
@@ -670,6 +683,7 @@ const SourceCluster = ({
     </div>
   </div>
 );
+
 
 const nodeBase: React.CSSProperties = {
   width: 160,
@@ -817,10 +831,11 @@ const useFallingData = () => {
   const pillsRef = useRef<Map<string, HTMLElement>>(new Map());
   const [flyer, setFlyer] = useState<Flyer | null>(null);
   const [ingest, setIngest] = useState(0);
+  const [hidden, setHidden] = useState<Set<string>>(new Set());
+  const [cycleKey, setCycleKey] = useState(0);
 
   const registerPill = (label: string, el: HTMLElement | null) => {
     if (el) pillsRef.current.set(label, el);
-    else pillsRef.current.delete(label);
   };
 
   useEffect(() => {
@@ -829,55 +844,76 @@ const useFallingData = () => {
     let i = 0;
     let idCounter = 0;
     const timers: number[] = [];
+    const later = (fn: () => void, ms: number) => {
+      timers.push(window.setTimeout(fn, ms));
+    };
 
     const step = () => {
       const stage = stageRef.current;
       const target = dataRef.current;
-      if (!stage || !target) return;
-      // rotate across clusters: interleave for visual variety
-      const label = labels[i % labels.length];
+      if (!stage || !target) {
+        later(step, FALL_INTERVAL);
+        return;
+      }
+
+      if (i >= labels.length) {
+        // all pills ingested: pause, then repopulate and restart
+        later(() => {
+          setHidden(new Set());
+          setCycleKey((n) => n + 1);
+          i = 0;
+          later(step, 900);
+        }, 900);
+        return;
+      }
+
+      const label = labels[i];
       i += 1;
       const el = pillsRef.current.get(label);
-      if (!el) return;
+      if (!el) {
+        later(step, FALL_INTERVAL);
+        return;
+      }
       const s = stage.getBoundingClientRect();
       const p = el.getBoundingClientRect();
       const t = target.getBoundingClientRect();
-      if (p.width === 0 || t.width === 0) return;
+      if (p.width === 0 || t.width === 0) {
+        later(step, FALL_INTERVAL);
+        return;
+      }
       const x = p.left - s.left;
       const y = p.top - s.top;
       const dx = t.left + t.width / 2 - (p.left + p.width / 2);
       const dy = t.top + t.height / 2 - (p.top + p.height / 2);
       const id = ++idCounter;
       setFlyer({ id, label, x, y, dx, dy });
-      timers.push(
-        window.setTimeout(() => {
-          setFlyer((f) => (f && f.id === id ? null : f));
-          setIngest((n) => n + 1);
-        }, FALL_DURATION),
-      );
+      setHidden((h) => new Set(h).add(label));
+      later(() => {
+        setFlyer((f) => (f && f.id === id ? null : f));
+        setIngest((n) => n + 1);
+      }, FALL_DURATION);
+      later(step, FALL_INTERVAL);
     };
 
-    const kick = window.setTimeout(step, 600);
-    const interval = window.setInterval(step, FALL_INTERVAL);
+    later(step, 600);
     return () => {
-      window.clearTimeout(kick);
-      window.clearInterval(interval);
       timers.forEach((t) => window.clearTimeout(t));
     };
   }, []);
 
-  return { stageRef, dataRef, registerPill, flyer, ingest };
+  return { stageRef, dataRef, registerPill, flyer, ingest, hidden, cycleKey };
 };
 
+
 const Reveal = () => {
-  const { stageRef, dataRef, registerPill, flyer, ingest } = useFallingData();
+  const { stageRef, dataRef, registerPill, flyer, ingest, hidden, cycleKey } = useFallingData();
 
   return (
   <section
     style={{
       position: "relative",
       background: "transparent",
-      padding: "96px 32px 120px",
+      padding: "80px 32px 96px",
       display: "flex",
       justifyContent: "center",
       overflow: "hidden",
@@ -936,7 +972,7 @@ const Reveal = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          margin: "72px 0 0",
+          margin: "56px 0 0",
           width: "100%",
         }}
       >
@@ -951,7 +987,7 @@ const Reveal = () => {
           }}
         >
           {SOURCE_CLUSTERS.map((c) => (
-            <SourceCluster key={c.title} {...c} registerPill={registerPill} />
+            <SourceCluster key={c.title} {...c} registerPill={registerPill} hidden={hidden} cycleKey={cycleKey} />
           ))}
         </div>
 
@@ -963,7 +999,7 @@ const Reveal = () => {
             gap: 0,
             width: 960,
             maxWidth: "100%",
-            marginTop: 96,
+            marginTop: 76,
           }}
         >
           <div key={ingest} className="tl-ingest">
@@ -1034,8 +1070,8 @@ const Reveal = () => {
       </div>
 
 
-      <div style={{ marginTop: 72 }}>
-        <DownArrow height={56} />
+      <div style={{ marginTop: 44 }}>
+        <DownArrow height={28} />
       </div>
 
       <div
