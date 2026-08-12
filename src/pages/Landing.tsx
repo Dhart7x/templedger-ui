@@ -1020,9 +1020,9 @@ const Reveal = () => {
               style={{
                 display: "inline-block",
                 ...smallPill,
-                background: flyer.isMore ? C.purple : C.lightPurple,
-                border: `1px solid ${flyer.isMore ? C.purple : C.violetShadow}`,
-                color: flyer.isMore ? C.white : C.indigo,
+                background: C.lightPurple,
+                border: `1px solid ${C.violetShadow}`,
+                color: C.indigo,
                 ["--tl-dy" as string]: `${flyer.dy}px`,
                 ["--tl-dur" as string]: `${FALL_DURATION}ms`,
               }}
