@@ -484,7 +484,7 @@ const Problem = () => (
           margin: 0,
         }}
       >
-        <span className="tl-equation-line">Multiple agencies</span><span className="tl-equation-line"><EquationPlus /> high volume</span><span className="tl-equation-line"><EquationEquals /> relentless coordination.</span>
+        <span className="tl-equation-line">Agency staffing</span><span className="tl-equation-line"><EquationPlus /> high volume</span><span className="tl-equation-line"><EquationEquals /> relentless coordination.</span>
       </h2>
 
       <div
