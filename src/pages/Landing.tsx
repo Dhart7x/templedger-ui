@@ -398,6 +398,40 @@ const pillBase: React.CSSProperties = {
   whiteSpace: "nowrap",
 };
 
+const EquationPlus = () => (
+  <svg
+    width="0.8em"
+    height="0.8em"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke={C.purple}
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    vectorEffect="non-scaling-stroke"
+    style={{ display: "inline-block", verticalAlign: "middle", margin: "0 10px" }}
+  >
+    <line x1="12" y1="4" x2="12" y2="20" />
+    <line x1="4" y1="12" x2="20" y2="12" />
+  </svg>
+);
+
+const EquationEquals = () => (
+  <svg
+    width="0.8em"
+    height="0.8em"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke={C.purple}
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    vectorEffect="non-scaling-stroke"
+    style={{ display: "inline-block", verticalAlign: "middle", margin: "0 10px" }}
+  >
+    <line x1="4" y1="9" x2="20" y2="9" />
+    <line x1="4" y1="15" x2="20" y2="15" />
+  </svg>
+);
+
 const Problem = () => (
   <section
     id="problem"
