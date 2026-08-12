@@ -189,13 +189,12 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
     <section
       style={{
         position: "relative",
-        minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         background: C.beige,
         overflow: "hidden",
-        padding: "120px 32px 120px",
+        padding: "120px 32px 48px",
       }}
     >
       {/* Soft radial light wash */}
@@ -415,7 +414,7 @@ const Problem = () => (
     style={{
       position: "relative",
       background: "transparent",
-      padding: "40px 32px 160px",
+      padding: "80px 32px 120px",
       display: "flex",
       justifyContent: "center",
     }}
