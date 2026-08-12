@@ -96,7 +96,7 @@ const Nav = ({ onBookDemo }: { onBookDemo: () => void }) => {
           <button className="tl-btn-secondary tl-nav-secondary" style={buttonBase}>
             Join Waitlist
           </button>
-          <button className="tl-btn-primary" style={buttonBase}>
+          <button className="tl-btn-primary" style={buttonBase} onClick={onBookDemo}>
             Book Demo
           </button>
         </div>
