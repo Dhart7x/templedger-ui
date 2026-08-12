@@ -1,7 +1,10 @@
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors'
 
 const ATTIO_API = "https://api.attio.com/v2";
-const LIST_ID = "5e0fffa2-0b50-455a-bd47-c16d3c1010cf";
+const LISTS: Record<string, string> = {
+  waitlist: "5e0fffa2-0b50-455a-bd47-c16d3c1010cf",
+  demo: "738f5137-33c4-4dbe-a584-0f88c7de121c",
+};
 
 const key = () => Deno.env.get("ATTIO_API_KEY") ?? "";
 
