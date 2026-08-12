@@ -1,5 +1,6 @@
 import { useEffect, useState, FormEvent } from "react";
 import symbolUrl from "@/assets/templedger-symbol.png";
+import { supabase } from "@/integrations/supabase/client";
 
 const C = {
   purple: "#4C1D95",
@@ -84,11 +85,15 @@ export interface LeadModalProps {
   successTitle: string;
   successBody: string;
   successExtra?: React.ReactNode;
+  /** When set, submissions are recorded in the CRM with this source label. */
+  attioSource?: string;
 }
 
-const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBody, successExtra }: LeadModalProps) => {
+const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBody, successExtra, attioSource }: LeadModalProps) => {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   // "form" -> submitted; an optional scheduling step can be inserted between them later.
   const [step, setStep] = useState<"form" | "success">("form");
 
@@ -96,6 +101,8 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
     if (open) {
       setForm(emptyForm);
       setErrors({});
+      setSubmitting(false);
+      setSubmitError("");
       setStep("form");
     }
   }, [open]);
@@ -136,12 +143,31 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
     return e;
   };
 
-  const handleSubmit = (ev: FormEvent) => {
+  const handleSubmit = async (ev: FormEvent) => {
     ev.preventDefault();
     const e = validate();
     setErrors(e);
     if (Object.keys(e).length) return;
-    setStep("success");
+
+    if (!attioSource) {
+      setStep("success");
+      return;
+    }
+
+    setSubmitting(true);
+    setSubmitError("");
+    try {
+      const { error } = await supabase.functions.invoke("attio-waitlist", {
+        body: { ...form, source: attioSource },
+      });
+      if (error) throw error;
+      setStep("success");
+    } catch (err) {
+      console.error("Lead submission failed", err);
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const inputProps = (k: keyof FormState) => ({
@@ -408,8 +434,13 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                     {errors.workforce && <div style={errorTextStyle}>{errors.workforce}</div>}
                   </div>
 
+                  {submitError && (
+                    <div style={{ ...errorTextStyle, marginBottom: 12, textAlign: "center" }}>{submitError}</div>
+                  )}
+
                   <button
                     type="submit"
+                    disabled={submitting}
                     style={{
                       width: "100%",
                       background: C.purple,
@@ -420,13 +451,14 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                       fontFamily: body,
                       fontSize: 15,
                       fontWeight: 500,
-                      cursor: "pointer",
-                      transition: "background 180ms ease",
+                      cursor: submitting ? "default" : "pointer",
+                      opacity: submitting ? 0.7 : 1,
+                      transition: "background 180ms ease, opacity 180ms ease",
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.background = C.purpleHover; }}
+                    onMouseEnter={(e) => { if (!submitting) e.currentTarget.style.background = C.purpleHover; }}
                     onMouseLeave={(e) => { e.currentTarget.style.background = C.purple; }}
                   >
-                    {submitLabel}
+                    {submitting ? "Submitting..." : submitLabel}
                   </button>
                 </form>
               </>
