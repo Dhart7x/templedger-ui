@@ -399,7 +399,7 @@ const Problem = () => (
     style={{
       position: "relative",
       background: "transparent",
-      padding: "96px 32px",
+      padding: "48px 32px 96px",
       display: "flex",
       justifyContent: "center",
     }}
