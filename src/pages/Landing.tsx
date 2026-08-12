@@ -223,7 +223,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
             }}
           >
             Manage your contingent
-            <br className="tl-br-desktop" />
+            <br className="tl-br-desktop" />{" "}
             workforce on&nbsp;
             <br className="tl-br-desktop" />
             intelligence.
@@ -244,7 +244,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
             }}
           >
             Manage your contingent
-            <br className="tl-br-desktop" />
+            <br className="tl-br-desktop" />{" "}
             workforce on&nbsp;
             <br className="tl-br-desktop" />
             <span style={{ color: C.purple }}>intelligence.</span>
