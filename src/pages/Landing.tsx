@@ -598,20 +598,17 @@ const SOURCE_CLUSTERS = [
   {
     title: "Agency CRM",
     descriptor: "the workforce record",
-    items: ["Names", "Skills", "Certifications", "Shift preferences", "Pay rates", "Performance", "Contracts"],
-    more: true,
+    items: ["Profiles", "Availability", "History", "Preferences", "Performance", "Credentials", "Compliance"],
   },
   {
     title: "Time & Attendance",
     descriptor: "who, where, when",
     items: ["Who", "Where", "When"],
-    more: false,
   },
   {
-    title: "Emails & phone calls",
-    descriptor: "the unrecorded layer",
-    items: ["Staffing requests", "Replacements", "No-shows", "Approvals", "Pay queries", "Exceptions"],
-    more: true,
+    title: "Communications",
+    descriptor: "structured / unstructured",
+    items: ["Schedule", "Requests", "Disputes", "Billing", "No-shows", "Replacements", "Queries", "Approvals"],
   },
 ];
 
@@ -629,7 +626,6 @@ const SourceCluster = ({
   title,
   descriptor,
   items,
-  more,
   registerPill,
   hidden,
   cycleKey,
@@ -637,7 +633,6 @@ const SourceCluster = ({
   title: string;
   descriptor: string;
   items: string[];
-  more: boolean;
   registerPill?: (label: string, el: HTMLElement | null) => void;
   hidden?: Set<string>;
   cycleKey?: number;
@@ -675,22 +670,6 @@ const SourceCluster = ({
           {it}
         </span>
       ))}
-      {more && (
-        <span
-          key={`more-${title}-${cycleKey ?? 0}`}
-          ref={registerPill ? (el) => registerPill(`+more:${title}`, el) : undefined}
-          style={{
-            ...smallPill,
-            background: C.purple,
-            border: `1px solid ${C.purple}`,
-            color: C.white,
-            visibility: hidden?.has(`+more:${title}`) ? "hidden" : "visible",
-            animation: hidden?.has(`+more:${title}`) ? undefined : "tl-cluster-in 500ms ease-out both",
-          }}
-        >
-          + more
-        </span>
-      )}
     </div>
   </div>
 );
@@ -834,7 +813,7 @@ const DashedDownArrow = ({ height = 56 }: { height?: number }) => (
 const FALL_DURATION = 900;
 const FALL_INTERVAL = 1350;
 
-type Flyer = { id: number; label: string; text: string; isMore: boolean; x: number; y: number; dx: number; dy: number };
+type Flyer = { id: number; label: string; text: string; x: number; y: number; dx: number; dy: number };
 
 const useFallingData = () => {
   const stageRef = useRef<HTMLDivElement | null>(null);
@@ -851,7 +830,7 @@ const useFallingData = () => {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const labels = SOURCE_CLUSTERS.flatMap((c) => [...c.items, ...(c.more ? [`+more:${c.title}`] : [])]);
+    const labels = SOURCE_CLUSTERS.flatMap((c) => c.items);
     let i = 0;
     let idCounter = 0;
     const timers: number[] = [];
@@ -897,8 +876,7 @@ const useFallingData = () => {
       const dx = t.left + t.width / 2 - (p.left + p.width / 2);
       const dy = t.top + t.height / 2 - (p.top + p.height / 2);
       const id = ++idCounter;
-      const isMore = label.startsWith("+more:");
-      setFlyer({ id, label, text: isMore ? "+ more" : label, isMore, x, y, dx, dy });
+      setFlyer({ id, label, text: label, x, y, dx, dy });
       setHidden((h) => new Set(h).add(label));
       later(() => {
         setFlyer((f) => (f && f.id === id ? null : f));
@@ -1042,9 +1020,9 @@ const Reveal = () => {
               style={{
                 display: "inline-block",
                 ...smallPill,
-                background: flyer.isMore ? C.purple : C.lightPurple,
-                border: `1px solid ${flyer.isMore ? C.purple : C.violetShadow}`,
-                color: flyer.isMore ? C.white : C.indigo,
+                background: C.lightPurple,
+                border: `1px solid ${C.violetShadow}`,
+                color: C.indigo,
                 ["--tl-dy" as string]: `${flyer.dy}px`,
                 ["--tl-dur" as string]: `${FALL_DURATION}ms`,
               }}
