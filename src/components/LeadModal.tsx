@@ -434,8 +434,13 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                     {errors.workforce && <div style={errorTextStyle}>{errors.workforce}</div>}
                   </div>
 
+                  {submitError && (
+                    <div style={{ ...errorTextStyle, marginBottom: 12, textAlign: "center" }}>{submitError}</div>
+                  )}
+
                   <button
                     type="submit"
+                    disabled={submitting}
                     style={{
                       width: "100%",
                       background: C.purple,
@@ -446,13 +451,14 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                       fontFamily: body,
                       fontSize: 15,
                       fontWeight: 500,
-                      cursor: "pointer",
-                      transition: "background 180ms ease",
+                      cursor: submitting ? "default" : "pointer",
+                      opacity: submitting ? 0.7 : 1,
+                      transition: "background 180ms ease, opacity 180ms ease",
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.background = C.purpleHover; }}
+                    onMouseEnter={(e) => { if (!submitting) e.currentTarget.style.background = C.purpleHover; }}
                     onMouseLeave={(e) => { e.currentTarget.style.background = C.purple; }}
                   >
-                    {submitLabel}
+                    {submitting ? "Submitting..." : submitLabel}
                   </button>
                 </form>
               </>
