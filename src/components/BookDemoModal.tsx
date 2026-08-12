@@ -6,7 +6,7 @@ interface Props {
 }
 
 const spinner = (
-  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: 22 }}>
+  <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
     <div
       style={{
         width: 28,
@@ -20,13 +20,13 @@ const spinner = (
     <style>{`@keyframes tl-spin { to { transform: rotate(360deg); } }`}</style>
     <p
       style={{
-        margin: "12px 0 0",
+        margin: "22px 0 0",
         fontFamily: "'Inter', system-ui, sans-serif",
-        fontSize: 13,
+        fontSize: 15,
         color: "#55456C",
       }}
     >
-      Taking you to scheduling...
+      Taking you to scheduling
     </p>
   </div>
 );
@@ -40,9 +40,10 @@ const BookDemoModal = ({ open, onClose }: Props) => (
     attioSource="Website demo booking"
     attioList="demo"
     redirectUrl="https://calendly.com/m-gadsby/meeting-with-michael-gadsby"
-    successTitle="You're in."
-    successBody="Thank you for booking a demo with TempLedger."
+    successTitle=""
+    successBody=""
     successExtra={spinner}
+    minimalSuccess
   />
 );
 

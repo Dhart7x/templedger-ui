@@ -51,6 +51,13 @@ const labelStyle: React.CSSProperties = {
   marginBottom: 6,
 };
 
+const spendOptions = (cur: string) => [
+  `Under ${cur}5M`,
+  `${cur}5M to ${cur}10M`,
+  `${cur}10M to ${cur}25M`,
+  `${cur}25M+`,
+];
+
 const Req = () => (
   <span style={{ color: "#B4595C", marginLeft: 3, fontSize: 10 }} aria-hidden="true">*</span>
 );
@@ -87,6 +94,8 @@ export interface LeadModalProps {
   successTitle: string;
   successBody: string;
   successExtra?: React.ReactNode;
+  /** When true, the success state shows only successExtra — no symbol, headline, body or close button. */
+  minimalSuccess?: boolean;
   /** When set, submissions are recorded in the CRM with this source label. */
   attioSource?: string;
   /** Which CRM list the submission is added to. */
@@ -95,7 +104,7 @@ export interface LeadModalProps {
   redirectUrl?: string;
 }
 
-const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBody, successExtra, attioSource, attioList, redirectUrl }: LeadModalProps) => {
+const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBody, successExtra, minimalSuccess, attioSource, attioList, redirectUrl }: LeadModalProps) => {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -129,8 +138,17 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
 
   if (!open) return null;
 
+  const cur = form.region === "UK" ? "£" : "$";
+
   const set = (k: keyof FormState, v: string) => {
-    setForm((f) => ({ ...f, [k]: v }));
+    setForm((f) => {
+      const next = { ...f, [k]: v } as FormState;
+      if (k === "region" && f.spend) {
+        const nextCur = v === "UK" ? "£" : "$";
+        next.spend = f.spend.replace(/[$£]/g, nextCur);
+      }
+      return next;
+    });
     setErrors((e) => {
       if (!e[k]) return e;
       const next = { ...e };
@@ -265,11 +283,15 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
           />
 
           <div style={{ position: "relative" }}>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <img src={symbolUrl} alt="" style={{ width: 40, height: 40, display: "block" }} />
-            </div>
+            {!(step === "success" && minimalSuccess) && (
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <img src={symbolUrl} alt="" style={{ width: 40, height: 40, display: "block" }} />
+              </div>
+            )}
 
-            {step === "success" ? (
+            {step === "success" && minimalSuccess ? (
+              <div style={{ textAlign: "center", padding: "56px 6px" }}>{successExtra}</div>
+            ) : step === "success" ? (
               <div style={{ textAlign: "center", padding: "18px 6px 6px" }}>
                 <h2
                   style={{
@@ -439,15 +461,14 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                       {...inputProps("spend")}
                     >
                       <option value="">Select</option>
-                      <option>Under $5M</option>
-                      <option>$5M to $10M</option>
-                      <option>$10M to $25M</option>
-                      <option>$25M+</option>
+                      {spendOptions(cur).map((o) => (
+                        <option key={o}>{o}</option>
+                      ))}
                     </select>
                   </div>
 
                   <div style={{ marginBottom: 24 }}>
-                    <label style={labelStyle} htmlFor="tl-workforce">Agency workforce size<Req /></label>
+                    <label style={labelStyle} htmlFor="tl-workforce">Agency Staff Headcount<Req /></label>
                     <select
                       id="tl-workforce"
                       className="tl-select"
