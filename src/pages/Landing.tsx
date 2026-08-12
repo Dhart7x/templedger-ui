@@ -851,7 +851,7 @@ const useFallingData = () => {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const labels = SOURCE_CLUSTERS.flatMap((c) => c.items);
+    const labels = SOURCE_CLUSTERS.flatMap((c) => [...c.items, ...(c.more ? [`+more:${c.title}`] : [])]);
     let i = 0;
     let idCounter = 0;
     const timers: number[] = [];
