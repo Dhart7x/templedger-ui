@@ -96,13 +96,17 @@ Deno.serve(async (req) => {
     return json({ error: "Missing required fields" }, 400);
   }
 
+  const nameParts = name.split(/\s+/);
+  const firstName = nameParts[0];
+  const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "";
+
   // 1. Create the person record in Attio.
   const person = await attio(`/objects/people/records`, {
     method: "POST",
     body: JSON.stringify({
       data: {
         values: {
-          name: [{ full_name: name }],
+          name: [{ first_name: firstName, last_name: lastName, full_name: name }],
           job_title: jobTitle,
           description: `${source} signup — ${company} (${region})`,
         },
