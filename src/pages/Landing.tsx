@@ -42,7 +42,7 @@ const PageStyles = () => (
     }
     @media (max-width: 720px) {
       .tl-h1 { font-size: 40px !important; line-height: 1.1 !important; }
-      .tl-eyebrow { font-size: 10px !important; letter-spacing: 0.14em !important; }
+      .tl-problem-h2 { font-size: 30px !important; }
       .tl-sub { font-size: 16px !important; }
       .tl-hero-actions { flex-direction: column !important; width: 100%; }
       .tl-hero-actions > button { width: 100%; }
