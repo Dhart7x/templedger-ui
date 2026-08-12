@@ -370,8 +370,8 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
       >
         <span className="tl-scroll-cue" style={{ color: C.indigo, display: "block", lineHeight: 0 }}>
           <svg
-            width="28"
-            height="28"
+            width="34"
+            height="34"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
