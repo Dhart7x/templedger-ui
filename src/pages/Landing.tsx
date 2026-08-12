@@ -533,9 +533,306 @@ const Problem = () => (
           + more
         </span>
       </div>
+
+      <p
+        style={{
+          fontFamily: sans,
+          fontWeight: 600,
+          fontSize: 22,
+          lineHeight: 1.4,
+          letterSpacing: "-0.01em",
+          color: C.indigo,
+          margin: "64px 0 0",
+        }}
+      >
+        Effort doesn't fix structural problems.
+      </p>
     </div>
   </section>
 );
+
+const CAPABILITY_PILLS = [
+  "Pattern recognition",
+  "Predictive intelligence",
+  "Real-time insights",
+  "Anomaly detection",
+  "Continuous reconciliation",
+  "Automated verification",
+];
+
+const capPillBase: React.CSSProperties = {
+  fontFamily: body,
+  fontSize: 15,
+  fontWeight: 400,
+  lineHeight: 1.2,
+  padding: "10px 20px",
+  borderRadius: 999,
+  whiteSpace: "nowrap",
+};
+
+const nodeTitle: React.CSSProperties = {
+  fontFamily: body,
+  fontSize: 16,
+  fontWeight: 500,
+  lineHeight: 1.3,
+};
+
+const nodeSub: React.CSSProperties = {
+  fontFamily: body,
+  fontSize: 13,
+  fontStyle: "italic",
+  fontWeight: 400,
+  lineHeight: 1.4,
+  marginTop: 4,
+};
+
+const LeftNode = () => (
+  <div
+    style={{
+      background: C.white,
+      border: `1px solid ${C.violetShadow}`,
+      borderRadius: 999,
+      padding: "18px 30px",
+      textAlign: "center",
+      maxWidth: 260,
+    }}
+  >
+    <div style={{ ...nodeTitle, color: C.indigo }}>Your workforce data</div>
+    <div style={{ ...nodeSub, color: "#8A8698" }}>scattered across agencies and systems</div>
+  </div>
+);
+
+const RightNode = () => (
+  <div
+    style={{
+      background: C.indigo,
+      borderRadius: 999,
+      padding: "18px 30px",
+      textAlign: "center",
+      maxWidth: 260,
+    }}
+  >
+    <div style={{ ...nodeTitle, color: C.white }}>Machine learning</div>
+    <div style={{ ...nodeSub, color: "rgba(255,255,255,0.55)" }}>learns every shift</div>
+  </div>
+);
+
+const CenterPill = () => (
+  <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    {[
+      { inset: -18, color: "#C9C2EE", delay: "0s" },
+      { inset: -38, color: "#DCD7F3", delay: "0.8s" },
+      { inset: -58, color: C.violetShadow, delay: "1.6s" },
+    ].map((r) => (
+      <div
+        key={r.inset}
+        aria-hidden
+        className="tl-ring"
+        style={{
+          position: "absolute",
+          inset: r.inset,
+          border: `1px solid ${r.color}`,
+          borderRadius: 999,
+          pointerEvents: "none",
+          animationDelay: r.delay,
+        }}
+      />
+    ))}
+    <div
+      style={{
+        position: "relative",
+        background: C.purple,
+        borderRadius: 999,
+        padding: "18px 34px",
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+        whiteSpace: "nowrap",
+      }}
+    >
+      <img src={symbolUrl} alt="" style={{ height: 26, width: "auto", display: "block", filter: "brightness(0) invert(1)" }} />
+      <span style={{ fontFamily: sans, fontWeight: 600, fontSize: 22, color: C.white, letterSpacing: "-0.01em" }}>
+        TempLedger
+      </span>
+    </div>
+  </div>
+);
+
+const Connector = ({ flip = false }: { flip?: boolean }) => (
+  <svg width="140" height="16" viewBox="0 0 140 16" fill="none" style={{ transform: flip ? "scaleX(-1)" : undefined, overflow: "visible" }}>
+    <line
+      className="tl-dash-flow"
+      x1="0"
+      y1="8"
+      x2="120"
+      y2="8"
+      stroke="#7C5BC7"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeDasharray="9 9"
+    />
+    <path d="M124 8 L112 2.5 L112 13.5 Z" fill={C.purple} />
+  </svg>
+);
+
+const DownArrow = ({ height = 56 }: { height?: number }) => (
+  <svg width="16" height={height} viewBox={`0 0 16 ${height}`} fill="none">
+    <line x1="8" y1="0" x2="8" y2={height - 10} stroke={C.purple} strokeWidth="2" strokeLinecap="round" />
+    <path d={`M8 ${height} L2.5 ${height - 11} L13.5 ${height - 11} Z`} fill={C.purple} />
+  </svg>
+);
+
+const DashedDownArrow = ({ height = 56 }: { height?: number }) => (
+  <svg width="16" height={height} viewBox={`0 0 16 ${height}`} fill="none">
+    <line
+      className="tl-dash-flow"
+      x1="8"
+      y1="0"
+      x2="8"
+      y2={height - 12}
+      stroke="#7C5BC7"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeDasharray="9 9"
+    />
+    <path d={`M8 ${height} L2.5 ${height - 11} L13.5 ${height - 11} Z`} fill={C.purple} />
+  </svg>
+);
+
+const Reveal = () => (
+  <section
+    style={{
+      position: "relative",
+      background: "transparent",
+      padding: "96px 32px 120px",
+      display: "flex",
+      justifyContent: "center",
+      overflow: "hidden",
+    }}
+  >
+    <div
+      aria-hidden
+      style={{
+        position: "absolute",
+        top: "12%",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "min(1400px, 130vw)",
+        height: "110%",
+        background: `radial-gradient(ellipse at center, ${C.lavender}38 0%, ${C.lightPurple}45 38%, rgba(250,250,248,0) 78%)`,
+        filter: "blur(70px)",
+        pointerEvents: "none",
+      }}
+    />
+
+    <div
+      style={{
+        position: "relative",
+        zIndex: 1,
+        width: "100%",
+        maxWidth: 1024,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+      }}
+    >
+      <h2
+        className="tl-problem-h2"
+        style={{
+          fontFamily: sans,
+          fontWeight: 600,
+          fontSize: "clamp(30px, 4.1vw, 52px)",
+          lineHeight: 1.08,
+          letterSpacing: "-0.03em",
+          color: C.indigo,
+          maxWidth: 860,
+          margin: 0,
+        }}
+      >
+        TempLedger is the intelligent workspace for{" "}
+        <span style={{ color: C.purple }}>agency-staffed operations.</span>
+      </h2>
+
+      {/* Desktop diagram */}
+      <div
+        className="tl-diagram-desktop"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 8,
+          margin: "104px 0 0",
+          width: "100%",
+        }}
+      >
+        <LeftNode />
+        <Connector />
+        <CenterPill />
+        <Connector flip />
+        <RightNode />
+      </div>
+
+      {/* Mobile diagram */}
+      <div
+        className="tl-diagram-mobile"
+        style={{
+          display: "none",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 12,
+          margin: "64px 0 0",
+        }}
+      >
+        <LeftNode />
+        <DashedDownArrow height={48} />
+        <CenterPill />
+        <DashedDownArrow height={48} />
+        <RightNode />
+      </div>
+
+      <div style={{ marginTop: 40 }}>
+        <DownArrow height={56} />
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: 10,
+          maxWidth: 560,
+          margin: "28px 0 0",
+        }}
+      >
+        {CAPABILITY_PILLS.map((label) => (
+          <span
+            key={label}
+            style={{
+              ...capPillBase,
+              background: C.white,
+              border: "1px solid #CECBF6",
+              color: C.indigo,
+            }}
+          >
+            {label}
+          </span>
+        ))}
+        <span
+          style={{
+            ...capPillBase,
+            background: C.purple,
+            border: `1px solid ${C.purple}`,
+            color: C.white,
+          }}
+        >
+          + more
+        </span>
+      </div>
+    </div>
+  </section>
+);
+
 
 const Landing = () => {
   const [demoOpen, setDemoOpen] = useState(false);
