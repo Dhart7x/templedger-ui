@@ -602,7 +602,7 @@ const SOURCE_CLUSTERS = [
   {
     title: "Time & Attendance",
     descriptor: "who, where, when",
-    items: ["Clock events", "Locations", "Hours", "Breaks", "Overtime"],
+    items: ["Who", "Where", "When"],
     more: false,
   },
   {
