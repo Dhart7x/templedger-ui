@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import logoAsset from "@/assets/templedger-logo.png.asset.json";
 
 const C = {
   purple: "#4C1D95",
