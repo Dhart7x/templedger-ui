@@ -76,9 +76,11 @@ const PageStyles = () => (
       100% { transform: scale(1); }
     }
     .tl-ingest { animation: tl-ingest 150ms ease-out; }
+    @keyframes tl-cluster-in { from { opacity: 0; } to { opacity: 1; } }
     @media (prefers-reduced-motion: reduce) {
       .tl-scroll-cue { animation: none; opacity: 0.45; }
       .tl-dash-flow, .tl-ring, .tl-fly-x, .tl-fly-y, .tl-ingest { animation: none !important; }
+      [style*="tl-cluster-in"] { animation: none !important; }
     }
 
     @media (max-width: 720px) {
@@ -339,7 +341,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
             color: C.indigo,
             opacity: 0.7,
             maxWidth: 620,
-            margin: "28px 0 0",
+            margin: "24px 0 0",
           }}
         >
           Cut costs and boost productivity with real-time and predictive insights.
@@ -584,10 +586,10 @@ const CAPABILITY_PILLS = [
 
 const capPillBase: React.CSSProperties = {
   fontFamily: body,
-  fontSize: 15,
+  fontSize: 13.5,
   fontWeight: 400,
   lineHeight: 1.2,
-  padding: "10px 20px",
+  padding: "8px 17px",
   borderRadius: 999,
   whiteSpace: "nowrap",
 };
@@ -911,7 +913,7 @@ const Reveal = () => {
     style={{
       position: "relative",
       background: "transparent",
-      padding: "96px 32px 120px",
+      padding: "80px 32px 96px",
       display: "flex",
       justifyContent: "center",
       overflow: "hidden",
@@ -970,7 +972,7 @@ const Reveal = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          margin: "72px 0 0",
+          margin: "56px 0 0",
           width: "100%",
         }}
       >
@@ -997,7 +999,7 @@ const Reveal = () => {
             gap: 0,
             width: 960,
             maxWidth: "100%",
-            marginTop: 96,
+            marginTop: 76,
           }}
         >
           <div key={ingest} className="tl-ingest">
