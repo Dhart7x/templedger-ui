@@ -225,9 +225,18 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
         .tl-modal-card { animation: tl-modal-in 260ms cubic-bezier(0.16,1,0.3,1); }
         .tl-modal-overlay { animation: tl-overlay-in 200ms ease; }
         .tl-select { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1.5L6 6.5L11 1.5' stroke='%2314082E' stroke-opacity='0.5' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>"); background-repeat: no-repeat; background-position: right 13px center; padding-right: 34px !important; }
-        @media (max-width: 640px) {
-          .tl-modal-card { width: calc(100vw - 24px) !important; padding: 28px 20px 24px !important; }
+        @media (max-width: 720px) {
+          .tl-modal-overlay { padding: 16px !important; align-items: flex-start !important; }
+          .tl-modal-card {
+            width: 100% !important;
+            padding: 28px 20px 26px !important;
+            border-radius: 14px !important;
+            max-height: calc(100vh - 32px);
+            overflow-y: auto !important;
+            -webkit-overflow-scrolling: touch;
+          }
           .tl-modal-grid { grid-template-columns: 1fr !important; }
+          .tl-modal-close { min-height: 48px; }
         }
       `}</style>
       <div
@@ -321,6 +330,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                 </p>
                 {successExtra}
                 <button
+                  className="tl-modal-close"
                   onClick={onClose}
                   style={{
                     marginTop: 26,

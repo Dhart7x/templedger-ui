@@ -196,6 +196,7 @@ const InlineLeadForm = () => {
 
   return (
     <div
+      className="tl-inline-card"
       style={{
         position: "relative",
         width: "100%",
@@ -212,7 +213,10 @@ const InlineLeadForm = () => {
       <style>{`
         @keyframes tl-inline-spin { to { transform: rotate(360deg); } }
         .tl-inline-select { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1.5L6 6.5L11 1.5' stroke='%2314082E' stroke-opacity='0.5' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>"); background-repeat: no-repeat; background-position: right 13px center; padding-right: 34px !important; }
-        @media (max-width: 640px) { .tl-inline-card-inner { padding: 0 !important; } }
+        @media (max-width: 720px) {
+          .tl-inline-card { padding: 28px 20px 26px !important; border-radius: 14px !important; }
+          .tl-seg-btn { min-height: 44px; }
+        }
       `}</style>
 
       <div
@@ -248,10 +252,10 @@ const InlineLeadForm = () => {
             borderRadius: 10,
           }}
         >
-          <button type="button" role="tab" aria-selected={mode === "demo"} onClick={() => switchMode("demo")} style={segStyle(mode === "demo")}>
+          <button type="button" role="tab" aria-selected={mode === "demo"} className="tl-seg-btn" onClick={() => switchMode("demo")} style={segStyle(mode === "demo")}>
             Book a demo
           </button>
-          <button type="button" role="tab" aria-selected={mode === "waitlist"} onClick={() => switchMode("waitlist")} style={segStyle(mode === "waitlist")}>
+          <button type="button" role="tab" aria-selected={mode === "waitlist"} className="tl-seg-btn" onClick={() => switchMode("waitlist")} style={segStyle(mode === "waitlist")}>
             Join the waitlist
           </button>
         </div>
