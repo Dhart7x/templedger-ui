@@ -4,6 +4,7 @@ import BookDemoModal from "@/components/BookDemoModal";
 import JoinWaitlistModal from "@/components/JoinWaitlistModal";
 import InlineLeadForm from "@/components/InlineLeadForm";
 import { Nav, Footer } from "@/components/MarketingLayout";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import BookDemoModal from "@/components/BookDemoModal";
 import { Nav, Footer } from "@/components/MarketingLayout";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const C = {
   indigo: "#14082E",
@@ -13,6 +14,12 @@ const body = "'Inter', system-ui, sans-serif";
 
 const Privacy = () => {
   const [demoOpen, setDemoOpen] = useState(false);
+
+  usePageMeta({
+    title: "Privacy Policy — TempLedger",
+    description: "How TempLedger collects, uses and protects personal data across its workforce orchestration platform and website.",
+    path: "/privacy",
+  });
 
   return (
     <div style={{ background: C.beige, minHeight: "100vh", display: "flex", flexDirection: "column" }}>
