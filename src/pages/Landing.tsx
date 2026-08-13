@@ -1514,6 +1514,7 @@ const EarlyAccess = () => (
       }}
     >
       <h2
+        data-rise
         style={{
           fontFamily: sans,
           fontWeight: 600,
@@ -1530,6 +1531,7 @@ const EarlyAccess = () => (
         <span style={{ color: C.purple }}>limited by design.</span>
       </h2>
       <p
+        data-rise
         style={{
           fontFamily: body,
           fontSize: 16,
@@ -1538,11 +1540,15 @@ const EarlyAccess = () => (
           textAlign: "center",
           margin: "20px 0 0",
           maxWidth: 720,
+          transitionDelay: "80ms",
         }}
       >
         We onboard a small number of operations at a time, deployed white glove. Your data starts compounding from day one.
       </p>
-      <div style={{ marginTop: 44, width: "100%", display: "flex", justifyContent: "center" }}>
+      <div
+        data-rise
+        style={{ marginTop: 44, width: "100%", display: "flex", justifyContent: "center", transitionDelay: "160ms" }}
+      >
         <InlineLeadForm />
       </div>
     </div>
