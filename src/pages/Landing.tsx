@@ -1573,6 +1573,8 @@ const useRiseObserver = () => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
             e.target.classList.add("tl-in");
+            const el = e.target as HTMLElement;
+            window.setTimeout(() => el.classList.add("tl-settled"), 900);
             io.unobserve(e.target);
           }
         });
