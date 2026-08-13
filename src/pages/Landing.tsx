@@ -1500,11 +1500,37 @@ const EarlyAccess = () => (
 );
 
 
+const useRiseObserver = () => {
+  useEffect(() => {
+    const els = Array.from(document.querySelectorAll<HTMLElement>("[data-rise]"));
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || typeof IntersectionObserver === "undefined") {
+      els.forEach((el) => el.classList.add("tl-in"));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("tl-in");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.05 }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+};
+
 const Landing = () => {
   const [demoOpen, setDemoOpen] = useState(false);
   const [waitlistOpen, setWaitlistOpen] = useState(false);
   const openDemo = () => setDemoOpen(true);
   const openWaitlist = () => setWaitlistOpen(true);
+  useRiseObserver();
+
 
   return (
     <main style={{ background: C.beige, minHeight: "100vh" }}>
