@@ -1347,6 +1347,77 @@ const SeeControlPredict = () => (
   </section>
 );
 
+const EarlyAccess = () => (
+  <section
+    style={{
+      position: "relative",
+      background: C.beige,
+      padding: "96px 24px 120px",
+      display: "flex",
+      justifyContent: "center",
+    }}
+  >
+    <div
+      aria-hidden
+      style={{
+        position: "absolute",
+        top: "6%",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "min(1200px, 130vw)",
+        height: "100%",
+        background: `radial-gradient(ellipse at center, ${C.lavender}35 0%, ${C.lightPurple}40 40%, rgba(250,250,248,0) 78%)`,
+        filter: "blur(70px)",
+        pointerEvents: "none",
+      }}
+    />
+    <div
+      style={{
+        position: "relative",
+        zIndex: 1,
+        width: "100%",
+        maxWidth: 900,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <h2
+        style={{
+          fontFamily: sans,
+          fontWeight: 600,
+          fontSize: "clamp(30px, 4.1vw, 52px)",
+          lineHeight: 1.08,
+          letterSpacing: "-0.03em",
+          color: C.indigo,
+          maxWidth: 860,
+          margin: 0,
+          textAlign: "center",
+        }}
+      >
+        Take control sooner with early access,{" "}
+        <span style={{ color: C.purple }}>limited by design.</span>
+      </h2>
+      <p
+        style={{
+          fontFamily: body,
+          fontSize: 16,
+          lineHeight: 1.6,
+          color: "rgba(20,8,46,0.78)",
+          textAlign: "center",
+          margin: "20px 0 0",
+          maxWidth: 720,
+        }}
+      >
+        We onboard a small number of operations at a time, deployed white glove. Your data starts compounding from day one.
+      </p>
+      <div style={{ marginTop: 44, width: "100%", display: "flex", justifyContent: "center" }}>
+        <InlineLeadForm />
+      </div>
+    </div>
+  </section>
+);
+
 const Landing = () => {
   const [demoOpen, setDemoOpen] = useState(false);
   const [waitlistOpen, setWaitlistOpen] = useState(false);
@@ -1361,6 +1432,8 @@ const Landing = () => {
       <Problem />
       <Reveal />
       <SeeControlPredict />
+      <EarlyAccess />
+
       <BookDemoModal open={demoOpen} onClose={() => setDemoOpen(false)} />
       <JoinWaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
     </main>
