@@ -479,6 +479,7 @@ const EquationEquals = () => (
 const Problem = () => (
   <section
     id="problem"
+    className="tl-problem"
     style={{
       position: "relative",
       background: "transparent",
@@ -546,6 +547,7 @@ const Problem = () => (
         {PROBLEM_PILLS.map((label) => (
           <span
             key={label}
+            className="tl-pill"
             style={{
               ...pillBase,
               background: C.lightPurple,
@@ -557,6 +559,7 @@ const Problem = () => (
           </span>
         ))}
         <span
+          className="tl-pill"
           style={{
             ...pillBase,
             background: C.purple,
@@ -676,6 +679,7 @@ const SourceCluster = ({
           <div key={rowIndex} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 7 }}>
             {row.map((it) => (
               <span
+                className="tl-src-pill"
                 key={`${it}-${cycleKey ?? 0}`}
                 ref={registerPill ? (el) => registerPill(it, el) : undefined}
                 style={{
@@ -923,6 +927,7 @@ const Reveal = () => {
 
   return (
   <section
+    className="tl-reveal"
     style={{
       position: "relative",
       background: "transparent",
@@ -1039,7 +1044,7 @@ const Reveal = () => {
             }}
           >
             <span
-              className="tl-fly-y"
+              className="tl-fly-y tl-src-pill"
               style={{
                 display: "inline-block",
                 ...smallPill,
@@ -1100,6 +1105,7 @@ const Reveal = () => {
         {CAPABILITY_PILLS.map((label) => (
           <span
             key={label}
+            className="tl-cap-pill"
             style={{
               ...capPillBase,
               fontWeight: 500,
@@ -1112,6 +1118,7 @@ const Reveal = () => {
           </span>
         ))}
         <span
+          className="tl-cap-pill"
           style={{
             ...capPillBase,
             background: C.purple,
@@ -1171,6 +1178,7 @@ const SCOPE_CARDS = [
 
 const SeeControlPredict = () => (
   <section
+    className="tl-scp"
     style={{
       position: "relative",
       background: C.beige,
@@ -1307,6 +1315,7 @@ const SeeControlPredict = () => (
         {SCOPE_CARDS.map((c) => (
           <div
             key={c.name}
+            className="tl-scp-card"
             style={{
               background: c.bg,
               border: c.border,
@@ -1351,6 +1360,7 @@ const SeeControlPredict = () => (
 
 const EarlyAccess = () => (
   <section
+    className="tl-early"
     style={{
       position: "relative",
       background: C.beige,
