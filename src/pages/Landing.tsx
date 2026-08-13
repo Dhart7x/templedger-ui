@@ -1038,6 +1038,7 @@ const Reveal = () => {
     >
       <h2
         className="tl-problem-h2"
+        data-rise
         style={{
           fontFamily: sans,
           fontWeight: 600,
