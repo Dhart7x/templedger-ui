@@ -119,7 +119,7 @@ const PageStyles = () => (
       .tl-chevron-btn svg { width: 26px !important; height: 26px !important; }
 
       /* Problem */
-      .tl-problem { padding: 98px 20px !important; }
+      .tl-problem { min-height: calc(100vh - 60px) !important; padding: 80px 20px !important; box-sizing: border-box !important; }
       .tl-problem-h2 { font-size: clamp(24px, 7vw, 30px) !important; hyphens: none !important; }
       .tl-equation-line { display: block; white-space: normal; }
       .tl-pill { font-size: 13.5px !important; padding: 10px 16px !important; }
