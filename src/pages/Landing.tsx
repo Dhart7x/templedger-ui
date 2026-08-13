@@ -493,10 +493,13 @@ const Problem = () => (
     style={{
       position: "relative",
       background: "transparent",
-      padding: "140px 32px",
+      minHeight: "calc(100vh - 72px)",
+      padding: "80px 32px",
       display: "flex",
+      flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
+      boxSizing: "border-box",
     }}
   >
     {/* Continuation of the hero wash — fades to fully transparent, so no seam */}
