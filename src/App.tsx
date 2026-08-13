@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Landing from "./pages/Landing";
+import Privacy from "./pages/Privacy";
 import SalesDeck from "./pages/SalesDeck";
 import NotFound from "./pages/NotFound";
 import AccessGate from "./components/AccessGate";
@@ -19,6 +20,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route
             path="/demo"
             element={

@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import logoUrl from "@/assets/templedger-logo.png";
 import symbolUrl from "@/assets/templedger-symbol.png";
 import BookDemoModal from "@/components/BookDemoModal";
 import JoinWaitlistModal from "@/components/JoinWaitlistModal";
 import InlineLeadForm from "@/components/InlineLeadForm";
+import { Nav, Footer } from "@/components/MarketingLayout";
+
+
 
 
 const C = {
@@ -145,7 +147,9 @@ const PageStyles = () => (
       .tl-footer-wordmark { font-size: 18px !important; margin-left: 8px !important; }
       .tl-footer-tagline { font-size: 13px !important; margin-top: 12px !important; }
       .tl-footer-divider { margin-top: 28px !important; }
-      .tl-footer-copyright { font-size: 12px !important; margin-top: 18px !important; }
+      .tl-footer-bottom { flex-direction: column; align-items: flex-start !important; gap: 14px !important; margin-top: 18px !important; }
+      .tl-footer-copyright { margin-top: 0 !important; }
+      .tl-footer-privacy { margin-top: 0 !important; }
 
       /* Forms — keep type legible and taps comfortable */
       .tl-flabel { font-size: 12px !important; }
@@ -156,9 +160,15 @@ const PageStyles = () => (
       .tl-submit-btn { min-height: 48px; }
     }
 
+    .tl-footer-privacy:hover {
+      text-decoration: underline !important;
+      color: rgba(255,255,255,0.75) !important;
+    }
+
     @media (max-width: 720px) and (prefers-reduced-motion: reduce) {
       .tl-scroll-cue { animation: none; }
     }
+
 
 
   `}</style>
@@ -176,59 +186,6 @@ const buttonBase: React.CSSProperties = {
   whiteSpace: "nowrap",
 };
 
-const Nav = ({ onBookDemo }: { onBookDemo: () => void }) => {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  return (
-    <header
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        background: scrolled ? C.beige : "transparent",
-        borderBottom: `1px solid ${scrolled ? C.violetShadow : "transparent"}`,
-        transition: "background 260ms ease, border-color 260ms ease",
-      }}
-    >
-      <div
-        className="tl-nav-inner"
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "0 32px",
-          height: 72,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <a href="/" style={{ display: "flex", alignItems: "center", lineHeight: 0 }}>
-          <img
-            className="tl-nav-logo"
-            src={logoUrl}
-            alt="TempLedger"
-            style={{ height: 32, width: "auto", display: "block" }}
-          />
-        </a>
-
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <button className="tl-btn-primary tl-nav-cta" style={buttonBase} onClick={onBookDemo}>
-            Book Demo
-          </button>
-        </div>
-      </div>
-    </header>
-  );
-};
 
 const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWaitlist: () => void }) => {
   const [reducedMotion, setReducedMotion] = useState(() =>
@@ -1483,84 +1440,6 @@ const EarlyAccess = () => (
   </section>
 );
 
-const Footer = () => (
-  <footer
-    className="tl-footer"
-    style={{
-      background: C.indigo,
-      width: "100%",
-    }}
-  >
-    <div
-      className="tl-footer-inner"
-      style={{
-        maxWidth: 1200,
-        margin: "0 auto",
-        padding: "56px 32px",
-      }}
-    >
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <img
-          className="tl-footer-symbol"
-          src={symbolUrl}
-          alt="TempLedger"
-          style={{
-            height: 32,
-            width: "auto",
-            display: "block",
-            filter: "brightness(0) invert(1)",
-          }}
-        />
-        <span
-          className="tl-footer-wordmark"
-          style={{
-            fontFamily: sans,
-            fontSize: 22,
-            fontWeight: 600,
-            lineHeight: 1,
-            color: C.white,
-            marginLeft: 10,
-          }}
-        >
-          TempLedger
-        </span>
-      </div>
-      <p
-        className="tl-footer-tagline"
-        style={{
-          fontFamily: body,
-          fontSize: 14,
-          lineHeight: 1.5,
-          color: "rgba(255,255,255,0.6)",
-          margin: "16px 0 0",
-          maxWidth: 320,
-        }}
-      >
-        The intelligent workspace for agency-staffed operations.
-      </p>
-      <div
-        className="tl-footer-divider"
-        style={{
-          height: 1,
-          background: "rgba(255,255,255,0.1)",
-          marginTop: 40,
-        }}
-      />
-      <p
-        className="tl-footer-copyright"
-        style={{
-          fontFamily: body,
-          fontSize: 13,
-          lineHeight: 1,
-          color: "rgba(255,255,255,0.5)",
-          margin: "24px 0 0",
-        }}
-      >
-        © 2026 TempLedger, Inc.
-      </p>
-    </div>
-  </footer>
-);
 
 const Landing = () => {
   const [demoOpen, setDemoOpen] = useState(false);
