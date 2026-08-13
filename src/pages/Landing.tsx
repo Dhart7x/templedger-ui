@@ -160,6 +160,7 @@ const Nav = ({ onBookDemo }: { onBookDemo: () => void }) => {
       >
         <a href="/" style={{ display: "flex", alignItems: "center", lineHeight: 0 }}>
           <img
+            className="tl-nav-logo"
             src={logoUrl}
             alt="TempLedger"
             style={{ height: 32, width: "auto", display: "block" }}
@@ -167,7 +168,7 @@ const Nav = ({ onBookDemo }: { onBookDemo: () => void }) => {
         </a>
 
         <div style={{ display: "flex", alignItems: "center" }}>
-          <button className="tl-btn-primary" style={buttonBase} onClick={onBookDemo}>
+          <button className="tl-btn-primary tl-nav-cta" style={buttonBase} onClick={onBookDemo}>
             Book Demo
           </button>
         </div>
@@ -242,6 +243,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
 
   return (
     <section
+      className="tl-hero"
       style={{
         position: "relative",
         display: "flex",
@@ -297,9 +299,9 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
             margin: 0,
           }}
         >
-          <span style={{ whiteSpace: "nowrap" }}>Run your contingent workforce</span>
+          <span className="tl-nw" style={{ whiteSpace: "nowrap" }}>Run your contingent workforce</span>
           <br className="tl-br-desktop" />{" "}
-          <span style={{ whiteSpace: "nowrap" }}>
+          <span className="tl-nw" style={{ whiteSpace: "nowrap" }}>
             on{" "}
             <span style={{ display: "inline-grid", justifyItems: "start", verticalAlign: "bottom" }}>
               <span aria-hidden style={{ gridArea: "1 / 1", visibility: "hidden", whiteSpace: "pre" }}>
@@ -371,6 +373,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
       </div>
 
       <button
+        className="tl-chevron-btn"
         aria-label="Scroll to problem section"
         onClick={() => {
           const heading = document.querySelector<HTMLElement>("#problem .tl-problem-h2");
