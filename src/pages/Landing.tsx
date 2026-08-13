@@ -96,6 +96,8 @@ const PageStyles = () => (
       .tl-diagram-desktop { display: none !important; }
       .tl-diagram-mobile { display: flex !important; }
       .tl-node-sm { width: min(100%, 300px) !important; }
+      .scp-desktop { display: none !important; }
+      .scp-mobile { display: flex !important; }
     }
 
     @media (max-width: 1000px) {
@@ -1118,11 +1120,230 @@ const Reveal = () => {
       </div>
     </div>
   </section>
-);
+  );
 };
 
+const SCOPE_CARDS = [
+  {
+    name: "See",
+    titleColor: C.indigo,
+    bg: C.white,
+    border: `1px solid ${C.violetShadow}`,
+    textColor: "rgba(20,8,46,0.85)",
+    lines: [
+      "Who's on site, where, and why, as it happens",
+      "No-shows, lateness, overtime, and compliance failures, live",
+      "Watch future shifts fill in real time, step in before the gaps",
+      "Agency performance and spend, continuously reconciled",
+    ],
+  },
+  {
+    name: "Control",
+    titleColor: C.purple,
+    bg: C.white,
+    border: "1px solid #CECBF6",
+    textColor: "rgba(20,8,46,0.85)",
+    lines: [
+      "Bookings routed to the optimal worker, by your criteria",
+      "Five-gate billing reconciliation, running continuously",
+      "User permissions mapped before deployment, enforced after",
+      "Temp-to-perm conversion pipeline, tracked in the system",
+    ],
+  },
+  {
+    name: "Predict",
+    titleColor: C.white,
+    bg: C.indigo,
+    border: "none",
+    textColor: "rgba(255,255,255,0.78)",
+    lines: [
+      "No-show and attrition risk by worker, shift, and department",
+      "Shift gaps forecast before the shift runs short",
+      "Cost signals caught early: rate drift, overtime, overbooking",
+      "Productivity patterns surfaced before they compound",
+    ],
+  },
+];
 
+const SeeControlPredict = () => (
+  <section
+    style={{
+      position: "relative",
+      background: C.beige,
+      padding: "80px 24px 96px",
+      display: "flex",
+      justifyContent: "center",
+    }}
+  >
+    <div
+      aria-hidden
+      style={{
+        position: "absolute",
+        top: "0%",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "min(1400px, 130vw)",
+        height: "110%",
+        background: `radial-gradient(ellipse at center, ${C.lavender}35 0%, ${C.lightPurple}40 40%, rgba(250,250,248,0) 78%)`,
+        filter: "blur(70px)",
+        pointerEvents: "none",
+      }}
+    />
 
+    <div
+      style={{
+        position: "relative",
+        zIndex: 1,
+        width: "100%",
+        maxWidth: 1050,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <h2
+        className="tl-problem-h2"
+        style={{
+          fontFamily: sans,
+          fontWeight: 600,
+          fontSize: "clamp(30px, 4.1vw, 52px)",
+          lineHeight: 1.08,
+          letterSpacing: "-0.03em",
+          color: C.indigo,
+          maxWidth: 860,
+          margin: 0,
+          textAlign: "center",
+        }}
+      >
+        See what's happening.{" "}
+        <span style={{ color: C.purple }}>Know what's coming.</span>
+      </h2>
+
+      <div
+        className="scp-desktop"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+          gridTemplateRows: "auto repeat(4, auto)",
+          gap: "0 16px",
+          width: "100%",
+          maxWidth: 1050,
+          marginTop: 56,
+          alignItems: "center",
+        }}
+      >
+        {SCOPE_CARDS.map((c, i) => (
+          <div
+            key={`bg-${c.name}`}
+            style={{
+              gridColumn: i + 1,
+              gridRow: "1 / -1",
+              background: c.bg,
+              border: c.border,
+              borderRadius: 18,
+              zIndex: 0,
+            }}
+          />
+        ))}
+
+        {SCOPE_CARDS.map((c, i) => (
+          <React.Fragment key={c.name}>
+            <div
+              style={{
+                gridColumn: i + 1,
+                gridRow: 1,
+                padding: "32px 32px 12px",
+                fontFamily: sans,
+                fontSize: 24,
+                fontWeight: 600,
+                lineHeight: 1.2,
+                color: c.titleColor,
+                background: c.bg,
+                zIndex: 1,
+              }}
+            >
+              {c.name}
+            </div>
+            {c.lines.map((line, li) => {
+              const isLastLine = li === c.lines.length - 1;
+              return (
+                <div
+                  key={li}
+                  style={{
+                    gridColumn: i + 1,
+                    gridRow: li + 2,
+                    padding: isLastLine ? "12px 32px 32px" : "12px 32px",
+                    fontFamily: body,
+                    fontSize: 14.5,
+                    fontWeight: 400,
+                    lineHeight: 1.55,
+                    color: c.textColor,
+                    background: c.bg,
+                    zIndex: 1,
+                  }}
+                >
+                  {line}
+                </div>
+              );
+            })}
+          </React.Fragment>
+        ))}
+      </div>
+
+      <div
+        className="scp-mobile"
+        style={{
+          display: "none",
+          flexDirection: "column",
+          gap: 16,
+          width: "100%",
+          marginTop: 56,
+        }}
+      >
+        {SCOPE_CARDS.map((c) => (
+          <div
+            key={c.name}
+            style={{
+              background: c.bg,
+              border: c.border,
+              borderRadius: 18,
+              padding: "32px",
+              width: "100%",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: sans,
+                fontSize: 24,
+                fontWeight: 600,
+                lineHeight: 1.2,
+                color: c.titleColor,
+                marginBottom: 16,
+              }}
+            >
+              {c.name}
+            </div>
+            {c.lines.map((line, li) => (
+              <div
+                key={li}
+                style={{
+                  fontFamily: body,
+                  fontSize: 14.5,
+                  fontWeight: 400,
+                  lineHeight: 1.55,
+                  color: c.textColor,
+                  padding: "12px 0",
+                }}
+              >
+                {line}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
 
 const Landing = () => {
   const [demoOpen, setDemoOpen] = useState(false);
@@ -1137,6 +1358,7 @@ const Landing = () => {
       <Hero onBookDemo={openDemo} onJoinWaitlist={openWaitlist} />
       <Problem />
       <Reveal />
+      <SeeControlPredict />
       <BookDemoModal open={demoOpen} onClose={() => setDemoOpen(false)} />
       <JoinWaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
     </main>
