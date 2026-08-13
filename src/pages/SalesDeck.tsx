@@ -1,7 +1,16 @@
 import { useEffect } from "react";
 import SlideDemo from "@/components/presentation/SlideDemo";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const SalesDeck = () => {
+  usePageMeta({
+    title: "Demo Environment — TempLedger",
+    description:
+      "A private, access-controlled walkthrough of the TempLedger workforce orchestration platform: bookings, live snapshot, exceptions, payroll and billing.",
+    path: "/demo",
+    noindex: true,
+  });
+
   useEffect(() => {
     document.body.classList.add("demo-theme");
     return () => document.body.classList.remove("demo-theme");

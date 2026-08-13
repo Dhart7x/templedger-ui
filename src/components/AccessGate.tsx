@@ -144,6 +144,7 @@ const AccessGate = ({ children }: AccessGateProps) => {
           </div>
           <input
             ref={inputRef}
+            aria-label="Access code"
             type="password"
             autoFocus
             value={code}
