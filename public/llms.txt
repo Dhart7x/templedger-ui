@@ -1,0 +1,10 @@
+# TempLedger
+
+> Intelligent workforce orchestration for businesses running agency workers at scale — verified payroll, live compliance, and complete visibility.
+
+TempLedger gives employers control over third-party labor: bookings, attendance, exceptions, payroll verification and billing are held in one enforced execution chain, so cost and compliance are provable rather than trusted.
+
+## Pages
+
+- [Home](/): What TempLedger does, how it works, and early-access sign-up.
+- [Privacy Policy](/privacy): How TempLedger handles personal data.
