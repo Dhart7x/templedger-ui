@@ -385,10 +385,11 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
         className="tl-chevron-btn"
         aria-label="Scroll to problem section"
         onClick={() => {
-          const heading = document.querySelector<HTMLElement>("#problem .tl-problem-h2");
-          const el = heading ?? document.getElementById("problem");
+        const el = document.getElementById("problem");
           if (!el) return;
-          const top = el.getBoundingClientRect().top + window.scrollY - (72 + 96);
+          const nav = document.querySelector("header");
+          const navHeight = nav ? nav.offsetHeight : 72;
+          const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
           window.scrollTo({ top, behavior: reducedMotion ? "auto" : "smooth" });
         }}
         style={{
