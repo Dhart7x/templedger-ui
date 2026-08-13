@@ -147,7 +147,9 @@ const PageStyles = () => (
       .tl-footer-wordmark { font-size: 18px !important; margin-left: 8px !important; }
       .tl-footer-tagline { font-size: 13px !important; margin-top: 12px !important; }
       .tl-footer-divider { margin-top: 28px !important; }
-      .tl-footer-copyright { font-size: 12px !important; margin-top: 18px !important; }
+      .tl-footer-bottom { flex-direction: column; align-items: flex-start !important; gap: 14px !important; margin-top: 18px !important; }
+      .tl-footer-copyright { margin-top: 0 !important; }
+      .tl-footer-privacy { margin-top: 0 !important; }
 
       /* Forms — keep type legible and taps comfortable */
       .tl-flabel { font-size: 12px !important; }
@@ -158,9 +160,15 @@ const PageStyles = () => (
       .tl-submit-btn { min-height: 48px; }
     }
 
+    .tl-footer-privacy:hover {
+      text-decoration: underline !important;
+      color: rgba(255,255,255,0.75) !important;
+    }
+
     @media (max-width: 720px) and (prefers-reduced-motion: reduce) {
       .tl-scroll-cue { animation: none; }
     }
+
 
 
   `}</style>
