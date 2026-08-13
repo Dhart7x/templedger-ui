@@ -123,7 +123,7 @@ const buttonBase: React.CSSProperties = {
   whiteSpace: "nowrap",
 };
 
-const Nav = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWaitlist: () => void }) => {
+const Nav = ({ onBookDemo }: { onBookDemo: () => void }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -166,10 +166,7 @@ const Nav = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWai
           />
         </a>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <button className="tl-btn-secondary tl-nav-secondary" style={buttonBase} onClick={onJoinWaitlist}>
-            Join Waitlist
-          </button>
+        <div style={{ display: "flex", alignItems: "center" }}>
           <button className="tl-btn-primary" style={buttonBase} onClick={onBookDemo}>
             Book Demo
           </button>
