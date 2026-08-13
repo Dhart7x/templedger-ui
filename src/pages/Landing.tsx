@@ -1146,8 +1146,8 @@ const SCOPE_CARDS = [
     lines: [
       "Bookings routed to the optimal worker, by your criteria",
       "Five-gate billing reconciliation, running continuously",
-      "User permissions mapped before deployment, enforced after",
-      "Temp-to-perm conversion pipeline, tracked in the system",
+      "Who can book, who can approve hours, who can request replacements only",
+      "Direct hire conversion pipeline, tracked in the system",
     ],
   },
   {
@@ -1157,10 +1157,10 @@ const SCOPE_CARDS = [
     border: "none",
     textColor: "rgba(255,255,255,0.78)",
     lines: [
-      "No-show and attrition risk by worker, shift, and department",
-      "Shift gaps forecast before the shift runs short",
-      "Cost signals caught early: rate drift, overtime, overbooking",
-      "Productivity patterns surfaced before they compound",
+      "No-show and attrition risk by worker, shift, department, and date",
+      "Gaps forecast before the shift runs short",
+      "Volume spikes anticipated from your own shift history",
+      "Price new contracts on actual staffing costs, not estimates",
     ],
   },
 ];
