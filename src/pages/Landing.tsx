@@ -1428,11 +1428,13 @@ const SeeControlPredict = () => {
           marginTop: 56,
         }}
       >
-        {SCOPE_CARDS.map((c) => (
+        {SCOPE_CARDS.map((c, i) => (
           <div
             key={c.name}
-            className="tl-scp-card"
+            className="tl-scp-card tl-surface-card"
+            data-rise
             style={{
+              transitionDelay: `${i * 100}ms`,
               background: c.bg,
               border: c.border,
               borderRadius: 18,
