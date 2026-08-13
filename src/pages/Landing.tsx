@@ -216,6 +216,10 @@ const PageStyles = () => (
       opacity: 1;
       transform: none;
     }
+    [data-rise].tl-settled {
+      transition: opacity 200ms ease-out, transform 200ms ease-out, box-shadow 200ms ease-out, border-color 200ms ease-out;
+      transition-delay: 0ms !important;
+    }
 
     @media (prefers-reduced-motion: reduce) {
       .tl-surface-card:hover,
