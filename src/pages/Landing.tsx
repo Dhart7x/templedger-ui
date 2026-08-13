@@ -139,6 +139,14 @@ const PageStyles = () => (
       .tl-early h2 { font-size: clamp(24px, 7vw, 30px) !important; hyphens: none !important; }
       .tl-early p { font-size: 15px !important; }
 
+      /* Footer */
+      .tl-footer-inner { padding: 36px 20px !important; }
+      .tl-footer-symbol { height: 26px !important; }
+      .tl-footer-wordmark { font-size: 18px !important; margin-left: 8px !important; }
+      .tl-footer-tagline { font-size: 13px !important; margin-top: 12px !important; }
+      .tl-footer-divider { margin-top: 28px !important; }
+      .tl-footer-copyright { font-size: 12px !important; margin-top: 18px !important; }
+
       /* Forms — keep type legible and taps comfortable */
       .tl-flabel { font-size: 12px !important; }
       .tl-ferr { font-size: 12px !important; }
@@ -1475,6 +1483,85 @@ const EarlyAccess = () => (
   </section>
 );
 
+const Footer = () => (
+  <footer
+    className="tl-footer"
+    style={{
+      background: C.indigo,
+      width: "100%",
+    }}
+  >
+    <div
+      className="tl-footer-inner"
+      style={{
+        maxWidth: 1200,
+        margin: "0 auto",
+        padding: "56px 32px",
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <img
+          className="tl-footer-symbol"
+          src={symbolUrl}
+          alt="TempLedger"
+          style={{
+            height: 32,
+            width: "auto",
+            display: "block",
+            filter: "brightness(0) invert(1)",
+          }}
+        />
+        <span
+          className="tl-footer-wordmark"
+          style={{
+            fontFamily: sans,
+            fontSize: 22,
+            fontWeight: 600,
+            lineHeight: 1,
+            color: C.white,
+            marginLeft: 10,
+          }}
+        >
+          TempLedger
+        </span>
+      </div>
+      <p
+        className="tl-footer-tagline"
+        style={{
+          fontFamily: body,
+          fontSize: 14,
+          lineHeight: 1.5,
+          color: "rgba(255,255,255,0.6)",
+          margin: "16px 0 0",
+          maxWidth: 320,
+        }}
+      >
+        The intelligent workspace for agency-staffed operations.
+      </p>
+      <div
+        className="tl-footer-divider"
+        style={{
+          height: 1,
+          background: "rgba(255,255,255,0.1)",
+          marginTop: 40,
+        }}
+      />
+      <p
+        className="tl-footer-copyright"
+        style={{
+          fontFamily: body,
+          fontSize: 13,
+          lineHeight: 1,
+          color: "rgba(255,255,255,0.5)",
+          margin: "24px 0 0",
+        }}
+      >
+        © 2026 TempLedger, Inc.
+      </p>
+    </div>
+  </footer>
+);
+
 const Landing = () => {
   const [demoOpen, setDemoOpen] = useState(false);
   const [waitlistOpen, setWaitlistOpen] = useState(false);
@@ -1490,6 +1577,7 @@ const Landing = () => {
       <Reveal />
       <SeeControlPredict />
       <EarlyAccess />
+      <Footer />
 
       <BookDemoModal open={demoOpen} onClose={() => setDemoOpen(false)} />
       <JoinWaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
