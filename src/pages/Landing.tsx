@@ -28,9 +28,9 @@ const mono = "'JetBrains Mono', ui-monospace, monospace";
 const PageStyles = () => (
   <style>{`
     html, body, #root { background: ${C.beige}; }
-    .tl-btn-primary { background: ${C.purple}; color: ${C.white}; transition: background 180ms ease; }
+    .tl-btn-primary { background: ${C.purple}; color: ${C.white}; transition: background 200ms ease-out, border-color 200ms ease-out; }
     .tl-btn-primary:hover { background: ${C.purpleHover}; }
-    .tl-btn-secondary { background: ${C.white}; color: ${C.indigo}; border: 1px solid ${C.violetShadow}; transition: border-color 180ms ease, background 180ms ease; }
+    .tl-btn-secondary { background: ${C.white}; color: ${C.indigo}; border: 1px solid ${C.violetShadow}; transition: border-color 200ms ease-out, background 200ms ease-out; }
     .tl-btn-secondary:hover { border-color: ${C.lavender}; background: ${C.lightPurple}; }
     @keyframes tl-caret-blink {
       0%, 100% { opacity: 1; }
@@ -169,8 +169,69 @@ const PageStyles = () => (
       .tl-scroll-cue { animation: none; }
     }
 
+    /* ---------- Interaction polish: hover ---------- */
+    .tl-surface-card {
+      transition: transform 200ms ease-out, box-shadow 200ms ease-out, border-color 200ms ease-out;
+      will-change: transform;
+    }
+    .tl-pill, .tl-cap-pill, .tl-src-pill {
+      transition: transform 200ms ease-out, background-color 200ms ease-out, border-color 200ms ease-out;
+    }
 
+    @media (hover: hover) and (pointer: fine) {
+      .tl-surface-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 34px rgba(20, 8, 46, 0.07);
+        border-color: ${C.lavender} !important;
+      }
+      .tl-pill.tl-pill-soft:hover {
+        background: ${C.violetShadow} !important;
+        border-color: ${C.lavender} !important;
+        transform: translateY(-2px);
+      }
+      .tl-pill.tl-pill-solid:hover,
+      .tl-cap-pill.tl-pill-solid:hover {
+        background: ${C.purpleHover} !important;
+        border-color: ${C.purpleHover} !important;
+        transform: translateY(-2px);
+      }
+      .tl-cap-pill.tl-pill-outline:hover {
+        background: ${C.lightPurple} !important;
+        transform: translateY(-2px);
+      }
+      .tl-src-pill:not(.tl-fly-y):not(.tl-fly-x):hover {
+        background: ${C.violetShadow} !important;
+        border-color: ${C.lavender} !important;
+        transform: translateY(-1px);
+      }
+    }
 
+    /* ---------- Interaction polish: scroll entrance ---------- */
+    [data-rise] {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 450ms ease-out, transform 450ms ease-out;
+    }
+    [data-rise].tl-in {
+      opacity: 1;
+      transform: none;
+    }
+    [data-rise].tl-settled {
+      transition: opacity 200ms ease-out, transform 200ms ease-out, box-shadow 200ms ease-out, border-color 200ms ease-out;
+      transition-delay: 0ms !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tl-surface-card:hover,
+      .tl-pill:hover,
+      .tl-cap-pill:hover,
+      .tl-src-pill:hover { transform: none !important; box-shadow: none !important; }
+      [data-rise], [data-rise].tl-in {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
   `}</style>
 );
 
@@ -532,6 +593,7 @@ const Problem = () => (
     >
       <h2
         className="tl-problem-h2"
+        data-rise
         style={{
           fontFamily: sans,
           fontWeight: 600,
@@ -547,6 +609,7 @@ const Problem = () => (
       </h2>
 
       <div
+        data-rise
         style={{
           display: "flex",
           flexWrap: "wrap",
@@ -554,12 +617,13 @@ const Problem = () => (
           gap: 12,
           maxWidth: 1024,
           margin: "40px 0 0",
+          transitionDelay: "80ms",
         }}
       >
         {PROBLEM_PILLS.map((label) => (
           <span
             key={label}
-            className="tl-pill"
+            className="tl-pill tl-pill-soft"
             style={{
               ...pillBase,
               background: C.lightPurple,
@@ -571,7 +635,7 @@ const Problem = () => (
           </span>
         ))}
         <span
-          className="tl-pill"
+          className="tl-pill tl-pill-solid"
           style={{
             ...pillBase,
             background: C.purple,
@@ -978,6 +1042,7 @@ const Reveal = () => {
     >
       <h2
         className="tl-problem-h2"
+        data-rise
         style={{
           fontFamily: sans,
           fontWeight: 600,
@@ -1105,6 +1170,7 @@ const Reveal = () => {
       </div>
 
       <div
+        data-rise
         style={{
           display: "flex",
           flexWrap: "wrap",
@@ -1117,7 +1183,7 @@ const Reveal = () => {
         {CAPABILITY_PILLS.map((label) => (
           <span
             key={label}
-            className="tl-cap-pill"
+            className="tl-cap-pill tl-pill-outline"
             style={{
               ...capPillBase,
               fontWeight: 500,
@@ -1130,7 +1196,7 @@ const Reveal = () => {
           </span>
         ))}
         <span
-          className="tl-cap-pill"
+          className="tl-cap-pill tl-pill-solid"
           style={{
             ...capPillBase,
             background: C.purple,
@@ -1188,7 +1254,33 @@ const SCOPE_CARDS = [
   },
 ];
 
-const SeeControlPredict = () => (
+const SeeControlPredict = () => {
+  const [hoverCol, setHoverCol] = useState<number | null>(null);
+  const [touchedCols, setTouchedCols] = useState<number[]>([]);
+  const canHover =
+    typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  const colProps = (i: number) =>
+    canHover
+      ? {
+          onMouseEnter: () => {
+            setHoverCol(i);
+            setTouchedCols((t) => (t.includes(i) ? t : [...t, i]));
+          },
+          onMouseLeave: () => setHoverCol((h) => (h === i ? null : h)),
+        }
+      : {};
+
+  const colStyle = (i: number): React.CSSProperties => {
+    if (!canHover || !touchedCols.includes(i)) return {};
+    return {
+      transition:
+        "transform 200ms ease-out, box-shadow 200ms ease-out, border-color 200ms ease-out, opacity 450ms ease-out",
+      transform: hoverCol === i ? "translateY(-4px)" : "translateY(0)",
+    };
+  };
+
+  return (
   <section
     className="tl-scp"
     style={{
@@ -1227,6 +1319,7 @@ const SeeControlPredict = () => (
     >
       <h2
         className="tl-problem-h2"
+        data-rise
         style={{
           fontFamily: sans,
           fontWeight: 600,
@@ -1259,6 +1352,8 @@ const SeeControlPredict = () => (
         {SCOPE_CARDS.map((c, i) => (
           <div
             key={`bg-${c.name}`}
+            data-rise
+            {...colProps(i)}
             style={{
               gridColumn: i + 1,
               gridRow: "1 / -1",
@@ -1266,6 +1361,11 @@ const SeeControlPredict = () => (
               border: c.border,
               borderRadius: 18,
               zIndex: 0,
+              transitionDelay: `${i * 100}ms`,
+              ...colStyle(i),
+              ...(hoverCol === i
+                ? { boxShadow: "0 14px 34px rgba(20, 8, 46, 0.07)", borderColor: C.lavender }
+                : null),
             }}
           />
         ))}
@@ -1273,6 +1373,8 @@ const SeeControlPredict = () => (
         {SCOPE_CARDS.map((c, i) => (
           <React.Fragment key={c.name}>
             <div
+              data-rise
+              {...colProps(i)}
               style={{
                 gridColumn: i + 1,
                 gridRow: 1,
@@ -1284,6 +1386,8 @@ const SeeControlPredict = () => (
                 color: c.titleColor,
                 background: c.bg,
                 zIndex: 1,
+                transitionDelay: `${i * 100}ms`,
+                ...colStyle(i),
               }}
             >
               {c.name}
@@ -1293,6 +1397,8 @@ const SeeControlPredict = () => (
               return (
                 <div
                   key={li}
+                  data-rise
+                  {...colProps(i)}
                   style={{
                     gridColumn: i + 1,
                     gridRow: li + 2,
@@ -1304,6 +1410,8 @@ const SeeControlPredict = () => (
                     color: c.textColor,
                     background: c.bg,
                     zIndex: 1,
+                    transitionDelay: `${i * 100}ms`,
+                    ...colStyle(i),
                   }}
                 >
                   {line}
@@ -1324,11 +1432,13 @@ const SeeControlPredict = () => (
           marginTop: 56,
         }}
       >
-        {SCOPE_CARDS.map((c) => (
+        {SCOPE_CARDS.map((c, i) => (
           <div
             key={c.name}
-            className="tl-scp-card"
+            className="tl-scp-card tl-surface-card"
+            data-rise
             style={{
+              transitionDelay: `${i * 100}ms`,
               background: c.bg,
               border: c.border,
               borderRadius: 18,
@@ -1368,7 +1478,8 @@ const SeeControlPredict = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 const EarlyAccess = () => (
   <section
@@ -1407,6 +1518,7 @@ const EarlyAccess = () => (
       }}
     >
       <h2
+        data-rise
         style={{
           fontFamily: sans,
           fontWeight: 600,
@@ -1423,6 +1535,7 @@ const EarlyAccess = () => (
         <span style={{ color: C.purple }}>limited by design.</span>
       </h2>
       <p
+        data-rise
         style={{
           fontFamily: body,
           fontSize: 16,
@@ -1431,11 +1544,15 @@ const EarlyAccess = () => (
           textAlign: "center",
           margin: "20px 0 0",
           maxWidth: 720,
+          transitionDelay: "80ms",
         }}
       >
         We onboard a small number of operations at a time, deployed white glove. Your data starts compounding from day one.
       </p>
-      <div style={{ marginTop: 44, width: "100%", display: "flex", justifyContent: "center" }}>
+      <div
+        data-rise
+        style={{ marginTop: 44, width: "100%", display: "flex", justifyContent: "center", transitionDelay: "160ms" }}
+      >
         <InlineLeadForm />
       </div>
     </div>
@@ -1443,11 +1560,39 @@ const EarlyAccess = () => (
 );
 
 
+const useRiseObserver = () => {
+  useEffect(() => {
+    const els = Array.from(document.querySelectorAll<HTMLElement>("[data-rise]"));
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || typeof IntersectionObserver === "undefined") {
+      els.forEach((el) => el.classList.add("tl-in"));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("tl-in");
+            const el = e.target as HTMLElement;
+            window.setTimeout(() => el.classList.add("tl-settled"), 900);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.05 }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+};
+
 const Landing = () => {
   const [demoOpen, setDemoOpen] = useState(false);
   const [waitlistOpen, setWaitlistOpen] = useState(false);
   const openDemo = () => setDemoOpen(true);
   const openWaitlist = () => setWaitlistOpen(true);
+  useRiseObserver();
+
 
   return (
     <main style={{ background: C.beige, minHeight: "100vh" }}>
