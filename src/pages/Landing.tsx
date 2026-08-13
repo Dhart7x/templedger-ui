@@ -924,7 +924,7 @@ const Reveal = () => {
     style={{
       position: "relative",
       background: "transparent",
-      padding: "80px 24px 96px",
+      padding: "150px 24px 96px",
       display: "flex",
       justifyContent: "center",
       overflow: "hidden",
