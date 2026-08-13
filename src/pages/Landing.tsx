@@ -1474,7 +1474,8 @@ const SeeControlPredict = () => {
       </div>
     </div>
   </section>
-);
+  );
+};
 
 const EarlyAccess = () => (
   <section
