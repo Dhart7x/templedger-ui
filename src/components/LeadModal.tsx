@@ -225,9 +225,18 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
         .tl-modal-card { animation: tl-modal-in 260ms cubic-bezier(0.16,1,0.3,1); }
         .tl-modal-overlay { animation: tl-overlay-in 200ms ease; }
         .tl-select { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1.5L6 6.5L11 1.5' stroke='%2314082E' stroke-opacity='0.5' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>"); background-repeat: no-repeat; background-position: right 13px center; padding-right: 34px !important; }
-        @media (max-width: 640px) {
-          .tl-modal-card { width: calc(100vw - 24px) !important; padding: 28px 20px 24px !important; }
+        @media (max-width: 720px) {
+          .tl-modal-overlay { padding: 16px !important; align-items: flex-start !important; }
+          .tl-modal-card {
+            width: 100% !important;
+            padding: 28px 20px 26px !important;
+            border-radius: 14px !important;
+            max-height: calc(100vh - 32px);
+            overflow-y: auto !important;
+            -webkit-overflow-scrolling: touch;
+          }
           .tl-modal-grid { grid-template-columns: 1fr !important; }
+          .tl-modal-close { min-height: 48px; }
         }
       `}</style>
       <div
@@ -321,6 +330,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                 </p>
                 {successExtra}
                 <button
+                  className="tl-modal-close"
                   onClick={onClose}
                   style={{
                     marginTop: 26,
@@ -357,20 +367,22 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
 
                 <form onSubmit={handleSubmit} noValidate>
                   <div style={{ marginBottom: 16 }}>
-                    <label style={labelStyle} htmlFor="tl-name">Full name<Req /></label>
+                    <label className="tl-flabel" style={labelStyle} htmlFor="tl-name">Full name<Req /></label>
                     <input
+                      className="tl-form-field"
                       id="tl-name"
                       type="text"
                       value={form.name}
                       onChange={(e) => set("name", e.target.value)}
                       {...inputProps("name")}
                     />
-                    {errors.name && <div style={errorTextStyle}>{errors.name}</div>}
+                    {errors.name && <div className="tl-ferr" style={errorTextStyle}>{errors.name}</div>}
                   </div>
 
                   <div style={{ marginBottom: 16 }}>
-                    <label style={labelStyle} htmlFor="tl-email">Work email<Req /></label>
+                    <label className="tl-flabel" style={labelStyle} htmlFor="tl-email">Work email<Req /></label>
                     <input
+                      className="tl-form-field"
                       id="tl-email"
                       type="email"
                       autoComplete="email"
@@ -379,41 +391,44 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                       onChange={(e) => set("email", e.target.value)}
                       {...inputProps("email")}
                     />
-                    {errors.email && <div style={errorTextStyle}>{errors.email}</div>}
+                    {errors.email && <div className="tl-ferr" style={errorTextStyle}>{errors.email}</div>}
                   </div>
 
                   <div style={{ marginBottom: 16 }}>
-                    <label style={labelStyle} htmlFor="tl-company">Company<Req /></label>
+                    <label className="tl-flabel" style={labelStyle} htmlFor="tl-company">Company<Req /></label>
                     <input
+                      className="tl-form-field"
                       id="tl-company"
                       type="text"
                       value={form.company}
                       onChange={(e) => set("company", e.target.value)}
                       {...inputProps("company")}
                     />
-                    {errors.company && <div style={errorTextStyle}>{errors.company}</div>}
+                    {errors.company && <div className="tl-ferr" style={errorTextStyle}>{errors.company}</div>}
                   </div>
 
                   <div style={{ marginBottom: 16 }}>
-                    <label style={labelStyle} htmlFor="tl-title">Job title<Req /></label>
+                    <label className="tl-flabel" style={labelStyle} htmlFor="tl-title">Job title<Req /></label>
                     <input
+                      className="tl-form-field"
                       id="tl-title"
                       type="text"
                       value={form.jobTitle}
                       onChange={(e) => set("jobTitle", e.target.value)}
                       {...inputProps("jobTitle")}
                     />
-                    {errors.jobTitle && <div style={errorTextStyle}>{errors.jobTitle}</div>}
+                    {errors.jobTitle && <div className="tl-ferr" style={errorTextStyle}>{errors.jobTitle}</div>}
                   </div>
 
                   <div style={{ marginBottom: 16 }}>
-                    <span style={labelStyle}>Region<Req /></span>
+                    <span className="tl-flabel" style={labelStyle}>Region<Req /></span>
                     <div style={{ display: "flex", gap: 22, marginTop: 2 }}>
                       {(["USA", "UK"] as const).map((r) => {
                         const active = form.region === r;
                         return (
                           <button
                             key={r}
+                            className="tl-radio-btn"
                             type="button"
                             onClick={() => set("region", r)}
                             style={{
@@ -446,16 +461,16 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                         );
                       })}
                     </div>
-                    {errors.region && <div style={errorTextStyle}>{errors.region}</div>}
+                    {errors.region && <div className="tl-ferr" style={errorTextStyle}>{errors.region}</div>}
                   </div>
 
                   <div style={{ marginBottom: 16 }}>
-                    <label style={labelStyle} htmlFor="tl-spend">
+                    <label className="tl-flabel" style={labelStyle} htmlFor="tl-spend">
                       Annual agency spend <span style={{ opacity: 0.6 }}>(optional)</span>
                     </label>
                     <select
                       id="tl-spend"
-                      className="tl-select"
+                      className="tl-select tl-form-field"
                       value={form.spend}
                       onChange={(e) => set("spend", e.target.value)}
                       {...inputProps("spend")}
@@ -468,10 +483,10 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                   </div>
 
                   <div style={{ marginBottom: 24 }}>
-                    <label style={labelStyle} htmlFor="tl-workforce">Agency Staff Headcount<Req /></label>
+                    <label className="tl-flabel" style={labelStyle} htmlFor="tl-workforce">Agency Staff Headcount<Req /></label>
                     <select
                       id="tl-workforce"
-                      className="tl-select"
+                      className="tl-select tl-form-field"
                       value={form.workforce}
                       onChange={(e) => set("workforce", e.target.value)}
                       {...inputProps("workforce")}
@@ -482,7 +497,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                       <option>500 to 750</option>
                       <option>750+</option>
                     </select>
-                    {errors.workforce && <div style={errorTextStyle}>{errors.workforce}</div>}
+                    {errors.workforce && <div className="tl-ferr" style={errorTextStyle}>{errors.workforce}</div>}
                   </div>
 
                   {submitError && (
@@ -490,6 +505,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                   )}
 
                   <button
+                    className="tl-submit-btn"
                     type="submit"
                     disabled={submitting}
                     style={{
