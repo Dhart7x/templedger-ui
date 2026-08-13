@@ -85,26 +85,71 @@ const PageStyles = () => (
       [style*="tl-cluster-in"] { animation: none !important; }
     }
 
-    @media (max-width: 720px) {
-      .tl-h1 { font-size: 36px !important; line-height: 1.12 !important; }
-      .tl-br-desktop { display: none; }
-      .tl-problem-h2 { font-size: 30px !important; }
-      .tl-sub { font-size: 16px !important; }
-      .tl-hero-actions { flex-direction: column !important; width: 100%; }
-      .tl-hero-actions > button { width: 100%; }
-      .tl-nav-inner { padding: 0 20px !important; }
-      .tl-nav-secondary { display: none !important; }
-      .tl-equation-line { display: block; }
-      .tl-diagram-desktop { display: none !important; }
-      .tl-diagram-mobile { display: flex !important; }
-      .tl-node-sm { width: min(100%, 300px) !important; }
-      .scp-desktop { display: none !important; }
-      .scp-mobile { display: flex !important; }
-    }
-
     @media (max-width: 1000px) {
       .tl-diagram-desktop { display: none !important; }
       .tl-diagram-mobile { display: flex !important; }
+    }
+
+    /* ---------- Mobile (<=720px) ---------- */
+    @media (max-width: 720px) {
+      html, body { overflow-x: hidden; max-width: 100%; }
+
+      /* Nav */
+      .tl-nav-inner { padding: 0 16px !important; height: 60px !important; }
+      .tl-nav-logo { height: 26px !important; }
+      .tl-nav-cta { padding: 11px 16px !important; font-size: 14px !important; min-height: 44px; }
+      .tl-nav-secondary { display: none !important; }
+
+      /* Hero */
+      .tl-hero { padding: 0 24px 56px !important; }
+      .tl-h1 {
+        font-size: clamp(26px, 8.1vw, 36px) !important;
+        line-height: 1.14 !important;
+        letter-spacing: -0.02em !important;
+        hyphens: none !important;
+      }
+      .tl-h1 .tl-nw { white-space: normal !important; }
+      .tl-br-desktop { display: none; }
+      .tl-sub { font-size: 15.5px !important; margin-top: 20px !important; max-width: 92% !important; }
+      .tl-hero-actions { flex-direction: column !important; width: 100%; max-width: 340px; margin-top: 34px !important; }
+      .tl-hero-actions > button { width: 100%; min-height: 48px; }
+      .tl-chevron-btn { bottom: 8vh !important; }
+      .tl-chevron-btn svg { width: 26px !important; height: 26px !important; }
+
+      /* Problem */
+      .tl-problem { min-height: 0 !important; padding: 64px 20px !important; }
+      .tl-problem-h2 { font-size: clamp(24px, 7vw, 30px) !important; hyphens: none !important; }
+      .tl-equation-line { display: block; white-space: normal; }
+      .tl-pill { font-size: 13.5px !important; padding: 10px 16px !important; }
+
+      /* Reveal */
+      .tl-reveal { padding: 84px 20px 64px !important; }
+      .tl-node-sm { width: min(100%, 300px) !important; }
+      .tl-src-pill { font-size: 12px !important; padding: 6px 11px !important; }
+      .tl-cap-pill { font-size: 12.5px !important; padding: 8px 14px !important; }
+
+      /* See / Control / Predict */
+      .tl-scp { padding: 56px 20px 64px !important; }
+      .scp-desktop { display: none !important; }
+      .scp-mobile { display: flex !important; }
+      .tl-scp-card { padding: 26px 22px !important; }
+
+      /* Closing */
+      .tl-early { padding: 64px 16px 80px !important; }
+      .tl-early h2 { font-size: clamp(24px, 7vw, 30px) !important; hyphens: none !important; }
+      .tl-early p { font-size: 15px !important; }
+
+      /* Forms — keep type legible and taps comfortable */
+      .tl-flabel { font-size: 12px !important; }
+      .tl-ferr { font-size: 12px !important; }
+      .tl-form-field { font-size: 16px !important; min-height: 46px; padding: 12px 13px !important; }
+      .tl-radio-btn { min-height: 44px; padding: 10px 0 !important; }
+      .tl-seg-btn { min-height: 44px; }
+      .tl-submit-btn { min-height: 48px; }
+    }
+
+    @media (max-width: 720px) and (prefers-reduced-motion: reduce) {
+      .tl-scroll-cue { animation: none; }
     }
 
 
