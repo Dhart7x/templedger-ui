@@ -1120,7 +1120,7 @@ const Reveal = () => {
       >
         {SOURCE_CLUSTERS.map((c) => (
           <div key={c.title} style={{ width: "min(100%, 320px)", marginBottom: 22 }}>
-            <SourceCluster {...c} />
+            <SourceCluster {...c} rows={c.items.length === 8 ? [3, 3, 2] : c.rows} />
           </div>
         ))}
         <DataNode />
