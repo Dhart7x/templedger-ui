@@ -359,6 +359,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                   <div style={{ marginBottom: 16 }}>
                     <label className="tl-flabel" style={labelStyle} htmlFor="tl-name">Full name<Req /></label>
                     <input
+                      className="tl-form-field"
                       id="tl-name"
                       type="text"
                       value={form.name}
@@ -371,6 +372,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                   <div style={{ marginBottom: 16 }}>
                     <label className="tl-flabel" style={labelStyle} htmlFor="tl-email">Work email<Req /></label>
                     <input
+                      className="tl-form-field"
                       id="tl-email"
                       type="email"
                       autoComplete="email"
@@ -385,6 +387,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                   <div style={{ marginBottom: 16 }}>
                     <label className="tl-flabel" style={labelStyle} htmlFor="tl-company">Company<Req /></label>
                     <input
+                      className="tl-form-field"
                       id="tl-company"
                       type="text"
                       value={form.company}
@@ -397,6 +400,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                   <div style={{ marginBottom: 16 }}>
                     <label className="tl-flabel" style={labelStyle} htmlFor="tl-title">Job title<Req /></label>
                     <input
+                      className="tl-form-field"
                       id="tl-title"
                       type="text"
                       value={form.jobTitle}
@@ -414,6 +418,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                         return (
                           <button
                             key={r}
+                            className="tl-radio-btn"
                             type="button"
                             onClick={() => set("region", r)}
                             style={{
@@ -455,7 +460,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                     </label>
                     <select
                       id="tl-spend"
-                      className="tl-select"
+                      className="tl-select tl-form-field"
                       value={form.spend}
                       onChange={(e) => set("spend", e.target.value)}
                       {...inputProps("spend")}
@@ -471,7 +476,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                     <label className="tl-flabel" style={labelStyle} htmlFor="tl-workforce">Agency Staff Headcount<Req /></label>
                     <select
                       id="tl-workforce"
-                      className="tl-select"
+                      className="tl-select tl-form-field"
                       value={form.workforce}
                       onChange={(e) => set("workforce", e.target.value)}
                       {...inputProps("workforce")}
@@ -490,6 +495,7 @@ const LeadModal = ({ open, onClose, title, submitLabel, successTitle, successBod
                   )}
 
                   <button
+                    className="tl-submit-btn"
                     type="submit"
                     disabled={submitting}
                     style={{

@@ -304,25 +304,25 @@ const InlineLeadForm = () => {
           <form onSubmit={handleSubmit} noValidate style={{ marginTop: 26 }}>
             <div style={{ marginBottom: 16 }}>
               <label className="tl-flabel" style={labelStyle} htmlFor="tli-name">Full name<Req /></label>
-              <input id="tli-name" type="text" value={form.name} onChange={(e) => set("name", e.target.value)} {...inputProps("name")} />
+              <input className="tl-form-field" id="tli-name" type="text" value={form.name} onChange={(e) => set("name", e.target.value)} {...inputProps("name")} />
               {errors.name && <div className="tl-ferr" style={errorTextStyle}>{errors.name}</div>}
             </div>
 
             <div style={{ marginBottom: 16 }}>
               <label className="tl-flabel" style={labelStyle} htmlFor="tli-email">Work email<Req /></label>
-              <input id="tli-email" type="email" autoComplete="email" maxLength={255} value={form.email} onChange={(e) => set("email", e.target.value)} {...inputProps("email")} />
+              <input className="tl-form-field" id="tli-email" type="email" autoComplete="email" maxLength={255} value={form.email} onChange={(e) => set("email", e.target.value)} {...inputProps("email")} />
               {errors.email && <div className="tl-ferr" style={errorTextStyle}>{errors.email}</div>}
             </div>
 
             <div style={{ marginBottom: 16 }}>
               <label className="tl-flabel" style={labelStyle} htmlFor="tli-company">Company<Req /></label>
-              <input id="tli-company" type="text" value={form.company} onChange={(e) => set("company", e.target.value)} {...inputProps("company")} />
+              <input className="tl-form-field" id="tli-company" type="text" value={form.company} onChange={(e) => set("company", e.target.value)} {...inputProps("company")} />
               {errors.company && <div className="tl-ferr" style={errorTextStyle}>{errors.company}</div>}
             </div>
 
             <div style={{ marginBottom: 16 }}>
               <label className="tl-flabel" style={labelStyle} htmlFor="tli-title">Job title<Req /></label>
-              <input id="tli-title" type="text" value={form.jobTitle} onChange={(e) => set("jobTitle", e.target.value)} {...inputProps("jobTitle")} />
+              <input className="tl-form-field" id="tli-title" type="text" value={form.jobTitle} onChange={(e) => set("jobTitle", e.target.value)} {...inputProps("jobTitle")} />
               {errors.jobTitle && <div className="tl-ferr" style={errorTextStyle}>{errors.jobTitle}</div>}
             </div>
 
@@ -334,6 +334,7 @@ const InlineLeadForm = () => {
                   return (
                     <button
                       key={r}
+                      className="tl-radio-btn"
                       type="button"
                       onClick={() => set("region", r)}
                       style={{
@@ -373,7 +374,7 @@ const InlineLeadForm = () => {
               <label className="tl-flabel" style={labelStyle} htmlFor="tli-spend">
                 Annual agency spend <span style={{ opacity: 0.6 }}>(optional)</span>
               </label>
-              <select id="tli-spend" className="tl-inline-select" value={form.spend} onChange={(e) => set("spend", e.target.value)} {...inputProps("spend")}>
+              <select id="tli-spend" className="tl-inline-select tl-form-field" value={form.spend} onChange={(e) => set("spend", e.target.value)} {...inputProps("spend")}>
                 <option value="">Select</option>
                 {spendOptions(cur).map((o) => (
                   <option key={o}>{o}</option>
@@ -383,7 +384,7 @@ const InlineLeadForm = () => {
 
             <div style={{ marginBottom: 24 }}>
               <label className="tl-flabel" style={labelStyle} htmlFor="tli-workforce">Agency Staff Headcount<Req /></label>
-              <select id="tli-workforce" className="tl-inline-select" value={form.workforce} onChange={(e) => set("workforce", e.target.value)} {...inputProps("workforce")}>
+              <select id="tli-workforce" className="tl-inline-select tl-form-field" value={form.workforce} onChange={(e) => set("workforce", e.target.value)} {...inputProps("workforce")}>
                 <option value="">Select</option>
                 <option>100 to 250</option>
                 <option>250 to 500</option>
@@ -396,6 +397,7 @@ const InlineLeadForm = () => {
             {submitError && <div style={{ ...errorTextStyle, marginBottom: 12, textAlign: "center" }}>{submitError}</div>}
 
             <button
+              className="tl-submit-btn"
               type="submit"
               disabled={submitting}
               style={{
