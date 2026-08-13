@@ -1258,6 +1258,7 @@ const SeeControlPredict = () => (
                 fontWeight: 600,
                 lineHeight: 1.2,
                 color: c.titleColor,
+                background: c.bg,
                 zIndex: 1,
               }}
             >
@@ -1277,6 +1278,7 @@ const SeeControlPredict = () => (
                     fontWeight: 400,
                     lineHeight: 1.55,
                     color: c.textColor,
+                    background: c.bg,
                     zIndex: 1,
                   }}
                 >
