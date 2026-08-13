@@ -196,7 +196,7 @@ const InlineLeadForm = () => {
 
   return (
     <div
-      className="tl-inline-card"
+      className="tl-inline-card tl-surface-card"
       style={{
         position: "relative",
         width: "100%",
