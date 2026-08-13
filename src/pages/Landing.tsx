@@ -1348,6 +1348,8 @@ const SeeControlPredict = () => {
         {SCOPE_CARDS.map((c, i) => (
           <div
             key={`bg-${c.name}`}
+            data-rise
+            {...colProps(i)}
             style={{
               gridColumn: i + 1,
               gridRow: "1 / -1",
@@ -1355,6 +1357,11 @@ const SeeControlPredict = () => {
               border: c.border,
               borderRadius: 18,
               zIndex: 0,
+              transitionDelay: `${i * 100}ms`,
+              ...colStyle(i),
+              ...(hoverCol === i
+                ? { boxShadow: "0 14px 34px rgba(20, 8, 46, 0.07)", borderColor: C.lavender }
+                : null),
             }}
           />
         ))}
@@ -1362,6 +1369,8 @@ const SeeControlPredict = () => {
         {SCOPE_CARDS.map((c, i) => (
           <React.Fragment key={c.name}>
             <div
+              data-rise
+              {...colProps(i)}
               style={{
                 gridColumn: i + 1,
                 gridRow: 1,
@@ -1373,6 +1382,8 @@ const SeeControlPredict = () => {
                 color: c.titleColor,
                 background: c.bg,
                 zIndex: 1,
+                transitionDelay: `${i * 100}ms`,
+                ...colStyle(i),
               }}
             >
               {c.name}
@@ -1382,6 +1393,8 @@ const SeeControlPredict = () => {
               return (
                 <div
                   key={li}
+                  data-rise
+                  {...colProps(i)}
                   style={{
                     gridColumn: i + 1,
                     gridRow: li + 2,
@@ -1393,6 +1406,8 @@ const SeeControlPredict = () => {
                     color: c.textColor,
                     background: c.bg,
                     zIndex: 1,
+                    transitionDelay: `${i * 100}ms`,
+                    ...colStyle(i),
                   }}
                 >
                   {line}
