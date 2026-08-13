@@ -589,6 +589,7 @@ const Problem = () => (
     >
       <h2
         className="tl-problem-h2"
+        data-rise
         style={{
           fontFamily: sans,
           fontWeight: 600,
@@ -604,6 +605,7 @@ const Problem = () => (
       </h2>
 
       <div
+        data-rise
         style={{
           display: "flex",
           flexWrap: "wrap",
@@ -611,12 +613,13 @@ const Problem = () => (
           gap: 12,
           maxWidth: 1024,
           margin: "40px 0 0",
+          transitionDelay: "80ms",
         }}
       >
         {PROBLEM_PILLS.map((label) => (
           <span
             key={label}
-            className="tl-pill"
+            className="tl-pill tl-pill-soft"
             style={{
               ...pillBase,
               background: C.lightPurple,
@@ -628,7 +631,7 @@ const Problem = () => (
           </span>
         ))}
         <span
-          className="tl-pill"
+          className="tl-pill tl-pill-solid"
           style={{
             ...pillBase,
             background: C.purple,
