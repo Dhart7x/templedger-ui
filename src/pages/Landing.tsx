@@ -1426,7 +1426,7 @@ const Landing = () => {
   return (
     <main style={{ background: C.beige, minHeight: "100vh" }}>
       <PageStyles />
-      <Nav onBookDemo={openDemo} onJoinWaitlist={openWaitlist} />
+      <Nav onBookDemo={openDemo} />
       <Hero onBookDemo={openDemo} onJoinWaitlist={openWaitlist} />
       <Problem />
       <Reveal />
