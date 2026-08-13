@@ -1593,6 +1593,12 @@ const Landing = () => {
   const openDemo = () => setDemoOpen(true);
   const openWaitlist = () => setWaitlistOpen(true);
   useRiseObserver();
+  usePageMeta({
+    title: "TempLedger — Intelligent Workforce Orchestration",
+    description:
+      "Intelligent workforce orchestration for businesses running agency workers at scale: verified payroll, live compliance and complete visibility.",
+    path: "/",
+  });
 
 
   return (
