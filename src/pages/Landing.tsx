@@ -28,9 +28,9 @@ const mono = "'JetBrains Mono', ui-monospace, monospace";
 const PageStyles = () => (
   <style>{`
     html, body, #root { background: ${C.beige}; }
-    .tl-btn-primary { background: ${C.purple}; color: ${C.white}; transition: background 180ms ease; }
+    .tl-btn-primary { background: ${C.purple}; color: ${C.white}; transition: background 200ms ease-out, border-color 200ms ease-out; }
     .tl-btn-primary:hover { background: ${C.purpleHover}; }
-    .tl-btn-secondary { background: ${C.white}; color: ${C.indigo}; border: 1px solid ${C.violetShadow}; transition: border-color 180ms ease, background 180ms ease; }
+    .tl-btn-secondary { background: ${C.white}; color: ${C.indigo}; border: 1px solid ${C.violetShadow}; transition: border-color 200ms ease-out, background 200ms ease-out; }
     .tl-btn-secondary:hover { border-color: ${C.lavender}; background: ${C.lightPurple}; }
     @keyframes tl-caret-blink {
       0%, 100% { opacity: 1; }
