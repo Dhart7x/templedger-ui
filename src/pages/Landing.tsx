@@ -480,8 +480,10 @@ const Problem = () => (
     style={{
       position: "relative",
       background: "transparent",
-      padding: "48px 32px 48px",
+      minHeight: "90vh",
+      padding: "48px 32px",
       display: "flex",
+      alignItems: "center",
       justifyContent: "center",
     }}
   >
