@@ -139,6 +139,14 @@ const PageStyles = () => (
       .tl-early h2 { font-size: clamp(24px, 7vw, 30px) !important; hyphens: none !important; }
       .tl-early p { font-size: 15px !important; }
 
+      /* Footer */
+      .tl-footer-inner { padding: 36px 20px !important; }
+      .tl-footer-symbol { height: 26px !important; }
+      .tl-footer-wordmark { font-size: 18px !important; margin-left: 8px !important; }
+      .tl-footer-tagline { font-size: 13px !important; margin-top: 12px !important; }
+      .tl-footer-divider { margin-top: 28px !important; }
+      .tl-footer-copyright { font-size: 12px !important; margin-top: 18px !important; }
+
       /* Forms — keep type legible and taps comfortable */
       .tl-flabel { font-size: 12px !important; }
       .tl-ferr { font-size: 12px !important; }
