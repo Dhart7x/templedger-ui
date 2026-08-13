@@ -1166,6 +1166,7 @@ const Reveal = () => {
       </div>
 
       <div
+        data-rise
         style={{
           display: "flex",
           flexWrap: "wrap",
@@ -1178,7 +1179,7 @@ const Reveal = () => {
         {CAPABILITY_PILLS.map((label) => (
           <span
             key={label}
-            className="tl-cap-pill"
+            className="tl-cap-pill tl-pill-outline"
             style={{
               ...capPillBase,
               fontWeight: 500,
@@ -1191,7 +1192,7 @@ const Reveal = () => {
           </span>
         ))}
         <span
-          className="tl-cap-pill"
+          className="tl-cap-pill tl-pill-solid"
           style={{
             ...capPillBase,
             background: C.purple,
