@@ -1250,7 +1250,33 @@ const SCOPE_CARDS = [
   },
 ];
 
-const SeeControlPredict = () => (
+const SeeControlPredict = () => {
+  const [hoverCol, setHoverCol] = useState<number | null>(null);
+  const [touchedCols, setTouchedCols] = useState<number[]>([]);
+  const canHover =
+    typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  const colProps = (i: number) =>
+    canHover
+      ? {
+          onMouseEnter: () => {
+            setHoverCol(i);
+            setTouchedCols((t) => (t.includes(i) ? t : [...t, i]));
+          },
+          onMouseLeave: () => setHoverCol((h) => (h === i ? null : h)),
+        }
+      : {};
+
+  const colStyle = (i: number): React.CSSProperties => {
+    if (!canHover || !touchedCols.includes(i)) return {};
+    return {
+      transition:
+        "transform 200ms ease-out, box-shadow 200ms ease-out, border-color 200ms ease-out, opacity 450ms ease-out",
+      transform: hoverCol === i ? "translateY(-4px)" : "translateY(0)",
+    };
+  };
+
+  return (
   <section
     className="tl-scp"
     style={{
