@@ -103,7 +103,7 @@ const PageStyles = () => (
       .tl-nav-secondary { display: none !important; }
 
       /* Hero */
-      .tl-hero { padding: 0 24px 56px !important; }
+      .tl-hero { padding: 0 24px !important; }
       .tl-h1 {
         font-size: clamp(26px, 8.1vw, 36px) !important;
         line-height: 1.14 !important;
@@ -119,13 +119,13 @@ const PageStyles = () => (
       .tl-chevron-btn svg { width: 26px !important; height: 26px !important; }
 
       /* Problem */
-      .tl-problem { min-height: 0 !important; padding: 64px 20px !important; }
+      .tl-problem { padding: 98px 20px !important; }
       .tl-problem-h2 { font-size: clamp(24px, 7vw, 30px) !important; hyphens: none !important; }
       .tl-equation-line { display: block; white-space: normal; }
       .tl-pill { font-size: 13.5px !important; padding: 10px 16px !important; }
 
       /* Reveal */
-      .tl-reveal { padding: 84px 20px 64px !important; }
+      .tl-reveal { padding: 0 20px 84px !important; }
       .tl-node-sm { width: min(100%, 300px) !important; }
       .tl-src-pill { font-size: 12px !important; padding: 6px 11px !important; }
       .tl-cap-pill { font-size: 12.5px !important; padding: 8px 14px !important; }
@@ -263,8 +263,7 @@ const Hero = ({ onBookDemo, onJoinWaitlist }: { onBookDemo: () => void; onJoinWa
         overflow: "hidden",
         height: "100vh",
         boxSizing: "border-box",
-        padding: "0 32px 72px",
-
+        padding: "0 32px",
       }}
     >
       {/* Soft radial light wash */}
@@ -493,8 +492,7 @@ const Problem = () => (
     style={{
       position: "relative",
       background: "transparent",
-      minHeight: "90vh",
-      padding: "48px 32px",
+      padding: "140px 32px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -941,7 +939,7 @@ const Reveal = () => {
     style={{
       position: "relative",
       background: "transparent",
-      padding: "150px 24px 96px",
+      padding: "0 24px 120px",
       display: "flex",
       justifyContent: "center",
       overflow: "hidden",
