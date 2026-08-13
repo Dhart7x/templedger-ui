@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import logoUrl from "@/assets/templedger-logo.png";
-import symbolUrl from "@/assets/templedger-symbol.png";
 import BookDemoModal from "@/components/BookDemoModal";
 import JoinWaitlistModal from "@/components/JoinWaitlistModal";
 import InlineLeadForm from "@/components/InlineLeadForm";
+import { Nav, Footer } from "@/components/MarketingLayout";
+
 
 
 const C = {
