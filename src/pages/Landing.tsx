@@ -169,8 +169,65 @@ const PageStyles = () => (
       .tl-scroll-cue { animation: none; }
     }
 
+    /* ---------- Interaction polish: hover ---------- */
+    .tl-surface-card {
+      transition: transform 200ms ease-out, box-shadow 200ms ease-out, border-color 200ms ease-out;
+      will-change: transform;
+    }
+    .tl-pill, .tl-cap-pill, .tl-src-pill {
+      transition: transform 200ms ease-out, background-color 200ms ease-out, border-color 200ms ease-out;
+    }
 
+    @media (hover: hover) and (pointer: fine) {
+      .tl-surface-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 34px rgba(20, 8, 46, 0.07);
+        border-color: ${C.lavender} !important;
+      }
+      .tl-pill.tl-pill-soft:hover {
+        background: ${C.violetShadow} !important;
+        border-color: ${C.lavender} !important;
+        transform: translateY(-2px);
+      }
+      .tl-pill.tl-pill-solid:hover,
+      .tl-cap-pill.tl-pill-solid:hover {
+        background: ${C.purpleHover} !important;
+        border-color: ${C.purpleHover} !important;
+        transform: translateY(-2px);
+      }
+      .tl-cap-pill.tl-pill-outline:hover {
+        background: ${C.lightPurple} !important;
+        transform: translateY(-2px);
+      }
+      .tl-src-pill:not(.tl-fly-y):not(.tl-fly-x):hover {
+        background: ${C.violetShadow} !important;
+        border-color: ${C.lavender} !important;
+        transform: translateY(-1px);
+      }
+    }
 
+    /* ---------- Interaction polish: scroll entrance ---------- */
+    [data-rise] {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 450ms ease-out, transform 450ms ease-out;
+    }
+    [data-rise].tl-in {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tl-surface-card:hover,
+      .tl-pill:hover,
+      .tl-cap-pill:hover,
+      .tl-src-pill:hover { transform: none !important; box-shadow: none !important; }
+      [data-rise], [data-rise].tl-in {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
   `}</style>
 );
 
