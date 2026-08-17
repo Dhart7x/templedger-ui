@@ -1365,84 +1365,62 @@ const SeeControlPredict = () => {
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-          gridTemplateRows: "auto repeat(4, auto)",
           gap: "0 16px",
           width: "100%",
           maxWidth: 1050,
           marginTop: 56,
-          alignItems: "center",
+          alignItems: "stretch",
         }}
       >
         {SCOPE_CARDS.map((c, i) => (
           <div
-            key={`bg-${c.name}`}
+            key={c.name}
             data-rise
+            className="tl-surface-card"
             {...colProps(i)}
             style={{
-              gridColumn: i + 1,
-              gridRow: "1 / -1",
               background: c.bg,
               border: c.border,
               borderRadius: 18,
-              zIndex: 0,
+              padding: "32px",
+              display: "flex",
+              flexDirection: "column",
+              zIndex: 1,
               transitionDelay: `${i * 100}ms`,
               ...colStyle(i),
               ...(hoverCol === i
                 ? { boxShadow: "0 14px 34px rgba(20, 8, 46, 0.07)", borderColor: C.lavender }
                 : null),
             }}
-          />
-        ))}
-
-        {SCOPE_CARDS.map((c, i) => (
-          <React.Fragment key={c.name}>
+          >
             <div
-              data-rise
-              {...colProps(i)}
               style={{
-                gridColumn: i + 1,
-                gridRow: 1,
-                padding: "32px 32px 12px",
                 fontFamily: sans,
                 fontSize: 24,
                 fontWeight: 600,
                 lineHeight: 1.2,
                 color: c.titleColor,
-                background: c.bg,
-                zIndex: 1,
-                transitionDelay: `${i * 100}ms`,
-                ...colStyle(i),
+                marginBottom: 16,
               }}
             >
               {c.name}
             </div>
-            {c.lines.map((line, li) => {
-              const isLastLine = li === c.lines.length - 1;
-              return (
-                <div
-                  key={li}
-                  data-rise
-                  {...colProps(i)}
-                  style={{
-                    gridColumn: i + 1,
-                    gridRow: li + 2,
-                    padding: isLastLine ? "12px 32px 32px" : "12px 32px",
-                    fontFamily: body,
-                    fontSize: 14.5,
-                    fontWeight: 400,
-                    lineHeight: 1.55,
-                    color: c.textColor,
-                    background: c.bg,
-                    zIndex: 1,
-                    transitionDelay: `${i * 100}ms`,
-                    ...colStyle(i),
-                  }}
-                >
-                  {line}
-                </div>
-              );
-            })}
-          </React.Fragment>
+            {c.lines.map((line, li) => (
+              <div
+                key={li}
+                style={{
+                  fontFamily: body,
+                  fontSize: 14.5,
+                  fontWeight: 400,
+                  lineHeight: 1.55,
+                  color: c.textColor,
+                  padding: "12px 0",
+                }}
+              >
+                {line}
+              </div>
+            ))}
+          </div>
         ))}
       </div>
 
