@@ -1018,7 +1018,8 @@ const useFallingData = () => {
     return () => {
       timers.forEach((t) => window.clearTimeout(t));
     };
-  }, []);
+  }, [started]);
+
 
   return { stageRef, dataRef, registerPill, flyer, ingest, hidden, cycleKey };
 };
