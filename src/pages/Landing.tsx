@@ -927,13 +927,38 @@ const useFallingData = () => {
   const [ingest, setIngest] = useState(0);
   const [hidden, setHidden] = useState<Set<string>>(new Set());
   const [cycleKey, setCycleKey] = useState(0);
+  const [started, setStarted] = useState(false);
 
   const registerPill = (label: string, el: HTMLElement | null) => {
     if (el) pillsRef.current.set(label, el);
   };
 
+  // Only begin the falling sequence once ~40% of the diagram is in view.
   useEffect(() => {
+    if (started) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setStarted(true);
+      return;
+    }
+    const stage = stageRef.current;
+    if (!stage) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting && e.intersectionRatio >= 0.4)) {
+          setStarted(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: [0, 0.4, 1] }
+    );
+    obs.observe(stage);
+    return () => obs.disconnect();
+  }, [started]);
+
+  useEffect(() => {
+    if (!started) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const labels = SOURCE_CLUSTERS.flatMap((c) => c.items);
     let i = 0;
     let idCounter = 0;
@@ -993,7 +1018,8 @@ const useFallingData = () => {
     return () => {
       timers.forEach((t) => window.clearTimeout(t));
     };
-  }, []);
+  }, [started]);
+
 
   return { stageRef, dataRef, registerPill, flyer, ingest, hidden, cycleKey };
 };
