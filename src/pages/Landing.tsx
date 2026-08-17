@@ -1248,8 +1248,9 @@ const SCOPE_CARDS = [
     textColor: "rgba(20,8,46,0.85)",
     lines: [
       "Who's on site, where, and why, as it happens",
-      "Issues that need attention, surfaced live, before they become operational burden, cost, or payroll and billing queries",
+      "Issues needing attention surfaced live, before they become operational burden, cost, or payroll and billing queries",
       "Future shifts filling in real time, gaps visible while there's still time to act",
+      "Agency spend and performance, at a depth that wasn't possible before",
     ],
   },
   {
@@ -1261,7 +1262,8 @@ const SCOPE_CARDS = [
     lines: [
       "Bookings routed to the optimal worker, by your criteria",
       "Five-gate billing reconciliation, running continuously",
-      "Who can book, who can approve hours, who can request replacements only",
+      "Site policy on who can book, approve hours, request replacements, enforced",
+      "Compliance structurally guaranteed: documents held in the system, verified at every clock-in",
     ],
   },
   {
@@ -1271,9 +1273,10 @@ const SCOPE_CARDS = [
     border: "none",
     textColor: "rgba(255,255,255,0.78)",
     lines: [
-      "Attrition, no-shows, lateness, and overtime, forecast before they happen",
-      "Across workers, agencies, sites, departments, and shifts",
-      "Price new contracts on actual staffing costs, not estimates",
+      "Attrition, no-shows, lateness, overtime, forecast with reliable pattern recognition",
+      "Filter across workers, agencies, sites, departments, and shifts",
+      "Volume spikes anticipated from your own shift history",
+      "Cost vs volume trends, every line backed by an audit trail",
     ],
   },
 ];
