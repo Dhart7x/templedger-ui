@@ -1222,9 +1222,8 @@ const SCOPE_CARDS = [
     textColor: "rgba(20,8,46,0.85)",
     lines: [
       "Who's on site, where, and why, as it happens",
-      "No-shows, lateness, overtime, and compliance failures, live",
-      "Watch future shifts fill in real time, step in before the gaps",
-      "Agency performance and spend, continuously reconciled",
+      "Issues that need attention, surfaced live, before they become operational burden, cost, or payroll and billing queries",
+      "Future shifts filling in real time, gaps visible while there's still time to act",
     ],
   },
   {
@@ -1237,7 +1236,6 @@ const SCOPE_CARDS = [
       "Bookings routed to the optimal worker, by your criteria",
       "Five-gate billing reconciliation, running continuously",
       "Who can book, who can approve hours, who can request replacements only",
-      "Direct hire conversion pipeline, tracked in the system",
     ],
   },
   {
@@ -1247,9 +1245,8 @@ const SCOPE_CARDS = [
     border: "none",
     textColor: "rgba(255,255,255,0.78)",
     lines: [
-      "No-show and attrition risk by worker, shift, department, and date",
-      "Gaps forecast before the shift runs short",
-      "Volume spikes anticipated from your own shift history",
+      "Attrition, no-shows, lateness, and overtime, forecast before they happen",
+      "Across workers, agencies, sites, departments, and shifts",
       "Price new contracts on actual staffing costs, not estimates",
     ],
   },
